@@ -1,0 +1,5 @@
+.Tile {
+    display: block;
+    text-align: center;
+    z-index: 0;
+}

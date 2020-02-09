@@ -1,0 +1,9 @@
+[ignore]
+[untyped]
+[include]
+[libs]
+./flow-typed
+[options]
+module.name_mapper.extension='bmp' -> '<PROJECT_ROOT>/flow-stubs/empty.js'
+[lints]
+all = error

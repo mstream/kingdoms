@@ -9,7 +9,7 @@ import {AppComponent} from './components/App';
 import {Provider} from 'react-redux';
 // $FlowFixMe
 import * as serviceWorker from './serviceWorker';
-import {store} from './store';
+import {store} from './state/store';
 
 const rootElement = document.getElementById('root');
 

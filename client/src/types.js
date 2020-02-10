@@ -3,7 +3,6 @@
  */
 
 export type GeometryStyle = {
-    position: 'absolute',
     height: number,
     width: number,
     marginTop: number,
@@ -12,32 +11,40 @@ export type GeometryStyle = {
 
 export type Vector = {
     x: number,
-    y: number
+    y: number,
 }
 
 export type TileType = 'PLAINS';
 
 export type Tile = {
+    geometry: Geometry,
     index: Vector,
-    location: Vector,
-    type: TileType
-}
+    type: TileType,
+};
 
 export type Geometry = {
     location: Vector,
     size: Vector
-}
+};
 
 export type Camera = {
+    debugColor: string,
     geometry: Geometry,
     movementSpeed: Vector,
     zoomingSpeed: Vector,
-}
+};
+
+export type City = {
+    geometry: Geometry,
+    id: string,
+    name: string,
+};
 
 export type World = {
+    cities: $ReadOnlyArray<City>,
+    debugColor: string,
+    tiles: $ReadOnlyArray<Tile>,
     tileSize: Vector,
-    worldSize: Vector,
-    tiles: $ReadOnlyArray<Tile>
 };
 
 export type WorldMap = {

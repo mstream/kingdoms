@@ -44,7 +44,10 @@ for (let y = -halfHeight; y <= halfHeight; y++) {
     for (let x = -halfWidth; x <= halfWidth; x++) {
         tiles.push({
             index: {x, y},
-            location: {x: x * tileSize.x, y: y * tileSize.y},
+            geometry: {
+                location: {x: x * tileSize.x, y: y * tileSize.y},
+                size: tileSize
+            },
             type: 'PLAINS'
         });
     }
@@ -76,7 +79,32 @@ const initialState = Object.freeze({
             },
             world: {
                 debugColor: 'rgba(0,0,255,0.5)',
-                tileSize,
+                cities: [
+                    {
+                        id: '1',
+                        name: 'city1',
+                        geometry: {
+                            location: {x: 0 * tileSize.x, y: 0 * tileSize.y},
+                            size: tileSize
+                        },
+                    },
+                    {
+                        id: '2',
+                        name: 'city2',
+                        geometry: {
+                            location: {x: -3 * tileSize.x, y: -3 * tileSize.y},
+                            size: tileSize
+                        },
+                    },
+                    {
+                        id: '3',
+                        name: 'city3',
+                        geometry: {
+                            location: {x: 3 * tileSize.x, y: 3 * tileSize.y},
+                            size: tileSize
+                        },
+                    },
+                ],
                 tiles
             }
         }

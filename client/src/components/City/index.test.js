@@ -4,14 +4,12 @@
 
 import React from 'react';
 import {render} from '@testing-library/react';
-import {TileComponent} from '.';
+import {CityComponent} from '.';
 
 test('renders', () => {
-    const tile = {
-        index: {
-            x: 1,
-            y: 2
-        },
+    const city = {
+        id: 'id',
+        name: 'name',
         geometry: {
             location: {
                 x: 64,
@@ -22,7 +20,6 @@ test('renders', () => {
                 y: 32
             }
         },
-        type: 'PLAINS',
     };
-    render(<TileComponent debugColor="rgba(0,0,0,0)" tile={tile}/>);
+    render(<CityComponent city={city}/>);
 });

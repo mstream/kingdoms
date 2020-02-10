@@ -4,18 +4,12 @@
 
 import type {Geometry, GeometryStyle, Vector} from './types';
 
-export const createGeometryStyle = ({debugColor, geometry}: { debugColor?: string, geometry: Geometry }): GeometryStyle => {
-    const style = {
-        position: 'absolute',
+export const createGeometryStyle = ({geometry}: { geometry: Geometry }): GeometryStyle => {
+    return  {
         height: geometry.size.y,
         width: geometry.size.x,
         marginTop: geometry.location.y - geometry.size.y / 2,
         marginLeft: geometry.location.x - geometry.size.x / 2,
-    };
-    return debugColor == null ? style : {
-        ...style,
-        borderStyle: 'solid',
-        borderColor: debugColor
     };
 };
 

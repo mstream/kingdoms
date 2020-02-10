@@ -4,15 +4,17 @@
 
 import React from 'react';
 import './style.css';
-import type {Geometry, Tile} from '../../types';
+import type {Tile} from '../../types';
 import {createGeometryStyle} from '../../util';
 import plains from '../../assets/images/terrain/plains.bmp';
 
-const Component = ({debugColor, geometry, tile}: { debugColor: string, geometry: Geometry, tile: Tile }) => {
+const Component = ({debugColor, tile}: { debugColor: string, tile: Tile }) => {
 
     const style = {
-        ...createGeometryStyle({debugColor, geometry}),
+        ...createGeometryStyle({geometry: tile.geometry}),
         backgroundImage: `url(${plains})`,
+        borderStyle: 'solid',
+        borderColor: debugColor
     };
 
     return (

@@ -1,6 +1,6 @@
-.Tile {
+.City {
     display: block;
     position: absolute;
     text-align: center;
-    z-index: -2;
+    z-index: -1;
 }

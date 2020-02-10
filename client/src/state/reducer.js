@@ -54,6 +54,7 @@ const initialState = Object.freeze({
     ui: {
         worldMap: {
             camera: {
+                debugColor: 'rgba(255,0,0,0.5)',
                 geometry: {
                     location: {
                         x: 0,
@@ -74,6 +75,7 @@ const initialState = Object.freeze({
                 }
             },
             world: {
+                debugColor: 'rgba(0,0,255,0.5)',
                 tileSize,
                 tiles
             }

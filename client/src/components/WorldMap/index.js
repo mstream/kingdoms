@@ -157,6 +157,7 @@ const Component = ({worldMap, moveCameraUp, moveCameraDown, moveCameraLeft, move
         return (
             <TileComponent
                 key={`${tile.index.x}-${tile.index.y}`}
+                debugColor={worldMap.world.debugColor}
                 geometry={{
                     location: zoomedLocation,
                     size: tileWindowGeometry.size,
@@ -168,7 +169,7 @@ const Component = ({worldMap, moveCameraUp, moveCameraDown, moveCameraLeft, move
 
     const style = {
         ...createGeometryStyle({
-            debugColor: 'rgba(255,0,0,0.5)',
+            debugColor: worldMap.camera.debugColor,
             geometry: cameraWindowGeometry
         }),
         zIndex: 1

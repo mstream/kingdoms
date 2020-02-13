@@ -41,10 +41,10 @@ export type City = {
 };
 
 export type World = {
+    sizeInTiles: Vector,
     cities: $ReadOnlyArray<City>,
     debugColor: string,
     tiles: $ReadOnlyArray<Tile>,
-    tileSize: Vector,
 };
 
 export type WorldMap = {
@@ -52,10 +52,17 @@ export type WorldMap = {
     world: World
 };
 
+export type ServerState = { cities: $ReadOnlyArray<{ id: string, name: string, location: Vector }>, worldSizeInTiles: Vector }
+
 export type State = {
     ui: {
-        worldMap: WorldMap
-    }
+        worldMap: ?WorldMap
+    },
+}
+
+export type ServerStateUpdated = {
+    type: 'SERVER_STATE_UPDATED',
+    payload: ServerState
 }
 
 export type CameraMovedAction = {
@@ -69,4 +76,4 @@ export type CameraZoomedAction = {
 }
 
 
-export type Action = CameraMovedAction | CameraZoomedAction
+export type Action = ServerStateUpdated | CameraMovedAction | CameraZoomedAction

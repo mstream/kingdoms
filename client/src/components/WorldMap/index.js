@@ -34,7 +34,7 @@ import {
 } from '../../util';
 
 type OwnProps = {};
-type StateProps = { worldMap: WorldMap };
+type StateProps = {  worldMap: ?WorldMap };
 type DispatchProps = {
     moveCameraUp: () => mixed,
     moveCameraDown: () => mixed,
@@ -59,7 +59,7 @@ const cullObjects = <T: { geometry: Geometry, ... }>({objects, camera}: { object
     });
 };
 
-const transformObjectGeometries = <T: { geometry: Geometry }>({objects, cameraWindowGeometry, cameraLocationToWindowCenterLocationVector, desiredCameraSizeToWorldCameraSizeRatioVector}: { objects: $ReadOnlyArray<T>, cameraWindowGeometry: Geometry, cameraLocationToWindowCenterLocationVector: Vector, desiredCameraSizeToWorldCameraSizeRatioVector: Vector }): $ReadOnlyArray<T> => {
+const transformObjectGeometries = <T: { geometry: Geometry, ... }>({objects, cameraWindowGeometry, cameraLocationToWindowCenterLocationVector, desiredCameraSizeToWorldCameraSizeRatioVector}: { objects: $ReadOnlyArray<T>, cameraWindowGeometry: Geometry, cameraLocationToWindowCenterLocationVector: Vector, desiredCameraSizeToWorldCameraSizeRatioVector: Vector }): $ReadOnlyArray<T> => {
     return objects.map(object => {
         const windowGeometry = {
             location: translateLocation({
@@ -135,6 +135,10 @@ const Component = ({worldMap, moveCameraUp, moveCameraDown, moveCameraLeft, move
         ]
     );
 
+    if (worldMap == null) {
+        return <div>loading world map...</div>;
+    }
+
     const windowSize = {
         x: window.innerWidth,
         y: window.innerHeight
@@ -148,8 +152,8 @@ const Component = ({worldMap, moveCameraUp, moveCameraDown, moveCameraLeft, move
     });
 
     const desiredCameraSizeToWorldCameraSizeRatioVector = {
-        x: window.innerWidth / worldMap.camera.geometry.size.x * 0.75,
-        y: window.innerHeight / worldMap.camera.geometry.size.y * 0.75,
+        x: window.innerWidth / worldMap.camera.geometry.size.x * 0.5,
+        y: window.innerHeight / worldMap.camera.geometry.size.y * 0.5,
     };
 
     const visibleTiles = cullObjects({
@@ -212,6 +216,7 @@ const Component = ({worldMap, moveCameraUp, moveCameraDown, moveCameraLeft, move
         }),
         borderStyle: 'solid',
         borderColor: worldMap.camera.debugColor,
+        position: 'absolute',
         zIndex: 2
     };
 

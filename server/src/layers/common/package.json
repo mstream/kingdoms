@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "aws-sdk": "2.615.0",
+    "ioredis": "4.14.1"
+  },
+  "scripts": {
+    "build": "npm install && mkdir -p nodejs && mv node_modules nodejs/node_modules && zip -r common-layer.zip nodejs && rm -rf nodejs",
+    "publish": "aws lambda publish-layer-version --layer-name common --zip-file fileb://common-layer.zip --content S3Bucket=com-github-mstream-kingdoms,S3Key=common-layer.zip --compatible-runtimes nodejs12.x"
+  }
+}

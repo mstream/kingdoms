@@ -2,9 +2,12 @@
 *.suo
 *.sublime-project
 *.sublime-workspace
+*.zip
 dist/
 node_modules/
+.aws-sam
 .idea
+.vscode
 .DS_Store
 npm-debug.log
 Thumbs.db

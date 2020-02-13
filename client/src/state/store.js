@@ -3,11 +3,17 @@
  */
 
 import type {Dispatch} from 'redux';
-import {createStore} from 'redux';
+import {applyMiddleware, compose, createStore} from 'redux';
 import type {Action, State} from '../types';
-import {root} from './reducer';
+import {rootReducer} from './reducers/root';
+import {websocketMiddleware} from './middleware/websocket';
 
 export const store = createStore<State, Action, Dispatch<Action>>(
-    root,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    rootReducer,
+    compose(
+        applyMiddleware(
+            websocketMiddleware({url: 'wss://m6jxq9whdl.execute-api.eu-west-1.amazonaws.com/Prod'})
+        ),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    )
 );

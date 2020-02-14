@@ -3,9 +3,8 @@
  */
 
 import AWS from 'aws-sdk';
-
-import Redis from 'ioredis';
 import type {APIGatewayProxyHandler} from '../types';
+import {createClient} from '../redis';
 
 const initialState = {
     cities: [
@@ -40,10 +39,7 @@ const initialState = {
     }
 };
 
-const redis = new Redis({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-});
+const redis = createClient();
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {
     const {connectionId, domainName, stage} = event.requestContext;

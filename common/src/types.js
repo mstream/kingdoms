@@ -12,6 +12,11 @@ export type Geometry = {
     size: Vector
 };
 
+export type Boundary = {
+    min: Vector,
+    max: Vector,
+};
+
 type City = {
     id: string, name: string, location: Vector
 };

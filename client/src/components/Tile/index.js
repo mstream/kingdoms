@@ -4,17 +4,17 @@
 
 import React from 'react';
 import './style.css';
-import type {Tile} from '../../types';
-import {createGeometryStyle} from '../../util';
 import plains from '../../assets/images/terrain/plains.bmp';
+import {createGeometryStyle} from '../../util';
+import type {ClientStateTile} from '../../state/types';
 
-const Component = ({debugColor, tile}: { debugColor: string, tile: Tile }) => {
+const Component = ({tile}: { tile: ClientStateTile }) => {
 
     const style = {
         ...createGeometryStyle({geometry: tile.geometry}),
         backgroundImage: `url(${plains})`,
         borderStyle: 'solid',
-        borderColor: debugColor
+        borderColor: 'rgba(0,0,255,1.0)'
     };
 
     return (

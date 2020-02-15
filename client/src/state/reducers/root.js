@@ -4,10 +4,21 @@
 
 import type {Reducer} from 'redux';
 import {combineReducers} from 'redux';
-import {worldMapReducer} from './world-map';
-import type {Action, State} from '../../types';
+import type {Action} from '../../types';
+import type {ClientState} from '../types';
+import {tilesReducer} from './tiles';
+import {cameraReducer} from './camera';
+import {citiesReducer} from './cities';
+import {menuReducer} from './menus';
 
+export const tileSize = {
+    x: 64,
+    y: 64
+};
 
-const uiReducer = combineReducers({worldMap: worldMapReducer});
-
-export const rootReducer: Reducer<State, Action> = combineReducers({ui: uiReducer});
+export const rootReducer: Reducer<ClientState, Action> = combineReducers({
+    camera: cameraReducer,
+    citiesById: citiesReducer,
+    menu: menuReducer,
+    tiles: tilesReducer
+});

@@ -32,3 +32,10 @@ export const divideVectors = ({vector1, vector2}: { vector1: Vector, vector2: Ve
         y: vector1.y / vector2.y
     };
 };
+
+export const negateVector = ({vector}: { vector: Vector }): Vector => {
+    return {
+        x: -vector.x,
+        y: -vector.y
+    };
+};

@@ -4,11 +4,12 @@
 
 import type {Dispatch} from 'redux';
 import {applyMiddleware, compose, createStore} from 'redux';
-import type {Action, State} from '../types';
+import type {Action} from '../types';
 import {rootReducer} from './reducers/root';
 import {websocketMiddleware} from './middleware/websocket';
+import type {ClientState} from './types';
 
-export const store = createStore<State, Action, Dispatch<Action>>(
+export const store = createStore<ClientState, Action, Dispatch<Action>>(
     rootReducer,
     compose(
         applyMiddleware(

@@ -10,6 +10,7 @@ import type {Dispatch} from 'redux';
 import type {Action} from '../../types';
 import {closeCityView} from '../../actions';
 import {connect} from 'react-redux';
+import {ResourcesComponent} from '../resources';
 
 type OwnProps = {
     city: ClientStateCity
@@ -39,9 +40,7 @@ const Component = ({city, closeCityView}: Props) => {
                 <div className="font-bold text-xl mb-2">
                     <p className="text-center">{city.name}</p>
                 </div>
-                <p className="text-gray-700 text-base">
-                    *** CITY INFO HERE ***
-                </p>
+                <ResourcesComponent resources={city.resources}/>
             </div>
         </div>
     );

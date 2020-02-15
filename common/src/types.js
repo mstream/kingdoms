@@ -17,8 +17,15 @@ export type Boundary = {
     max: Vector,
 };
 
+export type ResourceType = 'FOOD' | 'WOOD'
+
+type Resource = {
+    type: ResourceType,
+    quantity: number
+};
+
 type City = {
-    id: string, name: string, location: Vector
+    id: string, name: string, location: Vector, resources: $ReadOnlyArray<Resource>
 };
 
 export type ServerState = {

@@ -18,8 +18,9 @@ test('renders', () => {
             size: {
                 x: 32,
                 y: 32
-            }
+            },
         },
+        resources: []
     };
     render(<CityViewComponent city={city}/>);
 });

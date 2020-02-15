@@ -14,19 +14,23 @@ export const citiesReducer: Reducer<{ [string]: ClientStateCity }, Action> = (st
     switch (action.type) {
         case 'SERVER_STATE_UPDATED': {
             return action.payload.cities.reduce((citiesById, city) => {
+
+                    const clientStateCity: ClientStateCity = {
+                        id: city.id,
+                        name: city.name,
+                        geometry: {
+                            location: multipleVectors({
+                                vector1: city.location,
+                                vector2: tileSize
+                            }),
+                            size: tileSize
+                        },
+                        resources: city.resources
+                    };
+
                     return {
                         ...citiesById,
-                        [city.id]: {
-                            id: city.id,
-                            name: city.name,
-                            geometry: {
-                                location: multipleVectors({
-                                    vector1: city.location,
-                                    vector2: tileSize
-                                }),
-                                size: tileSize
-                            }
-                        }
+                        [city.id]: clientStateCity
                     };
                 },
                 EMPTY_OBJECT

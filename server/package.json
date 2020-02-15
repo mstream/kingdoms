@@ -5,6 +5,7 @@
     "build": "webpack-cli",
     "clean": "rimraf .aws-sam .vscode",
     "deploy": "sam validate && npm run build && sam deploy",
+    "destroy": "aws cloudformation delete-stack --stack-name kingdoms",
     "prebuild": "rimraf .aws-sam .vscode"
   },
   "devDependencies": {

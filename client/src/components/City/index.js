@@ -6,17 +6,17 @@ import React from 'react';
 import './style.css';
 import {createGeometryStyle} from '../../util';
 import type {ClientState, ClientStateCity} from '../../state/types';
-import {Dispatch} from 'redux';
+import type {Dispatch} from 'redux';
 import type {Action} from '../../types';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import {connect} from 'react-redux';
 import {openCityView} from '../../actions';
 
-type OwnProps = {};
-
-type StateProps = {
+type OwnProps = {
     city: ClientStateCity
 };
+
+type StateProps = {};
 
 type DispatchProps = {
     openCityView: ({ cityId: string }) => mixed

@@ -5,8 +5,9 @@
 import AWS from 'aws-sdk';
 import type {APIGatewayProxyHandler} from '../types';
 import {createClient} from '../redis';
+import type {ServerState} from '../../../../common/src/types';
 
-const initialState = {
+const initialState: ServerState = {
     cities: [
         {
             id: '1',
@@ -15,6 +16,16 @@ const initialState = {
                 x: 0,
                 y: 0,
             },
+            resources: [
+                {
+                    type: 'FOOD',
+                    quantity: 100
+                },
+                {
+                    type: 'WOOD',
+                    quantity: 200
+                },
+            ]
         },
         {
             id: '2',
@@ -22,7 +33,17 @@ const initialState = {
             location: {
                 x: -3,
                 y: -3,
-            }
+            },
+            resources: [
+                {
+                    type: 'FOOD',
+                    quantity: 50
+                },
+                {
+                    type: 'WOOD',
+                    quantity: 100
+                },
+            ]
         },
         {
             id: '3',
@@ -30,7 +51,17 @@ const initialState = {
             location: {
                 x: 3,
                 y: 3,
-            }
+            },
+            resources: [
+                {
+                    type: 'FOOD',
+                    quantity: 25
+                },
+                {
+                    type: 'WOOD',
+                    quantity: 50
+                },
+            ]
         },
     ],
     worldSizeInTiles: {

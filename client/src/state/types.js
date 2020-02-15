@@ -2,7 +2,7 @@
  * @flow
  */
 
-import type {Boundary, Geometry, Vector} from '../../../common/src/types';
+import type {Boundary, Geometry, ResourceType, Vector} from '../../../common/src/types';
 
 export type ClientStateCamera = {
     locationLimit: Boundary,
@@ -17,9 +17,16 @@ export type ClientStateEntity = {
     ...
 };
 
+
+export type ClientStateResource = {
+    type: ResourceType,
+    quantity: number
+};
+
 export type ClientStateCity = ClientStateEntity & {
     geometry: Geometry,
     name: string,
+    resources: $ReadOnlyArray<ClientStateResource>,
     ...
 };
 

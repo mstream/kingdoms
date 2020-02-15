@@ -6,7 +6,7 @@ import React from 'react';
 import './style.css';
 import plains from '../../assets/images/terrain/plains.png';
 import {createGeometryStyle} from '../../util';
-import type {ClientStateTile} from '../../state/types';
+import type {ClientStateTile} from '../../state/reducers/tiles';
 
 const Component = ({tile}: { tile: ClientStateTile }) => {
 

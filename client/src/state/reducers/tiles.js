@@ -2,13 +2,23 @@
  * @flow
  */
 import type {Reducer} from 'redux';
-import type {Action} from '../../types';
-import type {ClientStateTile} from '../types';
 import {tileSize} from './root';
+import type {Geometry, Vector} from '../../../../common/src/types';
+import type {ClientAction} from '../../actions';
 
-const initialState: $ReadOnlyArray<ClientStateTile> = [];
+export type TileType = 'PLAINS';
 
-export const tilesReducer: Reducer<$ReadOnlyArray<ClientStateTile>, Action> = (state = initialState, action) => {
+export type ClientStateTile = {
+    geometry: Geometry,
+    index: Vector,
+    type: TileType,
+};
+
+export type ClientStateTiles = $ReadOnlyArray<ClientStateTile>;
+
+const initialState: ClientStateTiles = [];
+
+export const tilesReducer: Reducer<ClientStateTiles, ClientAction> = (state = initialState, action) => {
     switch (action.type) {
         case 'SERVER_STATE_UPDATED': {
             const newTiles = [];

@@ -2,19 +2,25 @@
  * @flow
  */
 import type {Reducer} from 'redux';
-import type {Action} from '../../types';
-import type {ClientStateCity} from '../types';
-import {multipleVectors} from '../../../../common/src/vector';
-import {tileSize} from './root';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
+import {multipleVectors} from '../../../../../common/src/vector';
+import {tileSize} from '../root';
+import {EMPTY_OBJECT} from '../../../../../common/src/util';
+import type {
+    ClientStateCities,
+    ClientStateCitiesById,
+    ClientStateCity
+} from './index';
+import type {ClientAction} from '../../../actions';
 
-const initialState: { [string]: ClientStateCity } = EMPTY_OBJECT;
+const initialState: ClientStateCities = {
+    byId: EMPTY_OBJECT,
+    byOwnerId: EMPTY_OBJECT
+};
 
-export const citiesReducer: Reducer<{ [string]: ClientStateCity }, Action> = (state = initialState, action) => {
+export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (state = initialState, action) => {
     switch (action.type) {
         case 'SERVER_STATE_UPDATED': {
-            return action.payload.cities.reduce((citiesById, city) => {
-
+            const citiesById: ClientStateCitiesById = action.payload.cities.reduce((citiesById, city) => {
                     const clientStateCity: ClientStateCity = {
                         id: city.id,
                         name: city.name,
@@ -25,6 +31,7 @@ export const citiesReducer: Reducer<{ [string]: ClientStateCity }, Action> = (st
                             }),
                             size: tileSize
                         },
+                        ownerId: city.ownerId,
                         resources: city.resources
                     };
 
@@ -35,6 +42,11 @@ export const citiesReducer: Reducer<{ [string]: ClientStateCity }, Action> = (st
                 },
                 EMPTY_OBJECT
             );
+
+            return {
+                ...state,
+                byId: citiesById
+            };
         }
         default: {
             return state;

@@ -5,11 +5,11 @@
 export type Vector = {
     x: number,
     y: number,
-}
+};
 
 export type Geometry = {
     location: Vector,
-    size: Vector
+    size: Vector,
 };
 
 export type Boundary = {
@@ -17,18 +17,22 @@ export type Boundary = {
     max: Vector,
 };
 
-export type ResourceType = 'FOOD' | 'WOOD'
+export type ResourceType = 'FOOD' | 'WOOD';
 
 type Resource = {
     type: ResourceType,
-    quantity: number
+    quantity: number,
 };
 
 type City = {
-    id: string, name: string, location: Vector, resources: $ReadOnlyArray<Resource>
+    id: string,
+    location: Vector,
+    name: string,
+    ownerId: string,
+    resources: $ReadOnlyArray<Resource>,
 };
 
 export type ServerState = {
     cities: $ReadOnlyArray<City>,
-    worldSizeInTiles: Vector
-}
+    worldSizeInTiles: Vector,
+};

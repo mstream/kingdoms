@@ -13,6 +13,7 @@ export const initialState: ServerState = {
                 x: 0,
                 y: 0,
             },
+            ownerId: '1',
             resources: [
                 {
                     type: 'FOOD',
@@ -31,6 +32,7 @@ export const initialState: ServerState = {
                 x: -3,
                 y: -3,
             },
+            ownerId: '1',
             resources: [
                 {
                     type: 'FOOD',
@@ -49,6 +51,7 @@ export const initialState: ServerState = {
                 x: 3,
                 y: 3,
             },
+            ownerId: '1',
             resources: [
                 {
                     type: 'FOOD',

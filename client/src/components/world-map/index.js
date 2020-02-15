@@ -6,7 +6,6 @@ import React, {useEffect} from 'react';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import './style.css';
-import type {Action} from '../../types';
 import {TileComponent} from '../tile';
 import {CityComponent} from '../city';
 import {
@@ -24,12 +23,12 @@ import {
 } from '../../../../common/src/vector';
 import type {Geometry, Vector} from '../../../../common/src/types';
 import {checkIfIntersect} from '../../../../common/src/geometry';
-import type {
-    ClientState,
-    ClientStateCamera,
-    ClientStateCity,
-    ClientStateTile
-} from '../../state/types';
+import type {ClientStateCamera} from '../../state/reducers/camera';
+import type {ClientStateTile} from '../../state/reducers/tiles';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientStateCity} from '../../state/reducers/cities';
+import type {ClientAction} from '../../actions';
+
 
 type OwnProps = {
     windowSize: Vector
@@ -239,12 +238,12 @@ const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCam
 const mapStateToProps = (state: ClientState): StateProps => {
     return {
         camera: state.camera,
-        cities: Object.keys(state.citiesById).map(cityId => state.citiesById[cityId]),
+        cities: Object.keys(state.cities.byId).map(cityId => state.cities.byId[cityId]),
         tiles: state.tiles
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch<ClientAction>): DispatchProps => {
     return {
         moveCameraUp: () => dispatch(moveCameraUp()),
         moveCameraDown: () => dispatch(moveCameraDown()),
@@ -255,4 +254,4 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => {
     };
 };
 
-export const WorldMapComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<Action>>(mapStateToProps, mapDispatchToProps)(Component);
+export const WorldMapComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>>(mapStateToProps, mapDispatchToProps)(Component);

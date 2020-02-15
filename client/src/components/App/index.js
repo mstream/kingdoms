@@ -6,12 +6,12 @@ import React, {useEffect, useState} from 'react';
 import './style.css';
 import {WorldMapComponent} from '../world-map';
 import {connect} from 'react-redux';
-import type {ClientState, ClientStateCity} from '../../state/types';
 import type {Dispatch} from 'redux';
-import type {Action} from '../../types';
 import {CityViewComponent} from '../city-view';
-import type {Vector} from '../../../../common/src/types';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientStateCity} from '../../state/reducers/cities';
+import type {ClientAction} from '../../actions';
 
 type OwnProps = {};
 
@@ -57,12 +57,12 @@ const Component = ({viewedCity}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return {
-        viewedCity: state.menu.viewedCityId == null ? null : state.citiesById[state.menu.viewedCityId]
+        viewedCity: state.menu.viewedCityId == null ? null : state.cities.byId[state.menu.viewedCityId]
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch<ClientAction>): DispatchProps => {
     return EMPTY_OBJECT;
 };
 
-export const AppComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<Action>>(mapStateToProps, mapDispatchToProps)(Component);
+export const AppComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>>(mapStateToProps, mapDispatchToProps)(Component);

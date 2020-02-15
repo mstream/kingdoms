@@ -2,13 +2,50 @@
  * @flow
  */
 
-import type {
-    CameraMovedAction,
-    CameraZoomedAction,
-    CityViewClosedAction,
-    CityViewOpenedAction
-} from './types';
-import type {Vector} from '../../common/src/types';
+import type {ServerState, Vector} from '../../common/src/types';
+
+export type ServerStateUpdated = {
+    type: 'SERVER_STATE_UPDATED',
+    payload: ServerState
+}
+
+export type CameraMovedAction = {
+    type: 'CAMERA_MOVED',
+    payload: Vector
+}
+
+export type CameraZoomedAction = {
+    type: 'CAMERA_ZOOMED',
+    payload: Vector
+}
+
+export type CityViewOpenedAction = {
+    type: 'CITY_VIEW_OPENED',
+    payload: string
+}
+
+export type CityViewClosedAction = {
+    type: 'CITY_VIEW_CLOSED'
+}
+
+export type NavigatedToNextCityAction = {
+    type: 'NAVIGATED_TO_NEXT_CITY',
+    payload: string
+}
+
+export type NavigatedToPreviousCityAction = {
+    type: 'NAVIGATED_TO_PREVIOUS_CITY',
+    payload: string
+}
+
+export type ClientAction =
+    ServerStateUpdated
+    | CameraMovedAction
+    | CameraZoomedAction
+    | CityViewOpenedAction
+    | CityViewClosedAction
+    | NavigatedToNextCityAction
+    | NavigatedToPreviousCityAction
 
 const moveCamera = ({direction}: { direction: Vector }): CameraMovedAction => {
     return {
@@ -88,5 +125,19 @@ export const openCityView = ({cityId}: { cityId: string }): CityViewOpenedAction
 export const closeCityView = (): CityViewClosedAction => {
     return {
         type: 'CITY_VIEW_CLOSED'
+    };
+};
+
+export const navigateToNextCity = ({currentCityId}: { currentCityId: string }) => {
+    return {
+        type: 'NAVIGATED_TO_NEXT_CITY',
+        payload: currentCityId
+    };
+};
+
+export const navigateToPreviousCity = ({currentCityId}: { currentCityId: string }) => {
+    return {
+        type: 'NAVIGATED_TO_PREVIOUS_CITY',
+        payload: currentCityId
     };
 };

@@ -4,13 +4,14 @@
 
 import React from 'react';
 import './style.css';
-import type {ClientState, ClientStateResource} from '../../state/types';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
-import type {Action} from '../../types';
 import {connect} from 'react-redux';
 import foodResourceImage from '../../assets/images/resources/food.png';
 import woodResourceImage from '../../assets/images/resources/wood.png';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientStateResource} from '../../state/reducers/cities';
+import type {ClientAction} from '../../actions';
 
 const resourceImages = {
     'FOOD': foodResourceImage,
@@ -60,8 +61,8 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch<ClientAction>): DispatchProps => {
     return EMPTY_OBJECT;
 };
 
-export const ResourcesComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<Action>>(mapStateToProps, mapDispatchToProps)(Component);
+export const ResourcesComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>>(mapStateToProps, mapDispatchToProps)(Component);

@@ -4,9 +4,9 @@
 
 import Socket from 'simple-websocket';
 import {store} from '../store';
-import type {Action} from '../../types';
 import type {Middleware} from 'redux';
-import type {ClientState} from '../types';
+import type {ClientState} from '../reducers/root';
+import type {ClientAction} from '../../actions';
 
 export const websocketMiddleware = ({url}: { url: string }) => {
     const socket = new Socket(url);
@@ -48,7 +48,7 @@ export const websocketMiddleware = ({url}: { url: string }) => {
         }
     });
 
-    const middleware: Middleware<ClientState, Action> =
+    const middleware: Middleware<ClientState, ClientAction> =
         (store) => {
             return (next) => {
                 return (action) => {

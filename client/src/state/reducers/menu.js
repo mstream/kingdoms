@@ -2,14 +2,17 @@
  * @flow
  */
 import type {Reducer} from 'redux';
-import type {Action} from '../../types';
-import type {ClientStateMenu} from '../types';
+import type {ClientAction} from '../../actions';
+
+export type ClientStateMenu = {
+    viewedCityId: ?string
+}
 
 const initialState: ClientStateMenu = {
     viewedCityId: null
 };
 
-export const menuReducer: Reducer<ClientStateMenu, Action> = (state = initialState, action) => {
+export const menuReducer: Reducer<ClientStateMenu, ClientAction> = (state = initialState, action) => {
     switch (action.type) {
         case 'CITY_VIEW_OPENED': {
             return {

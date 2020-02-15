@@ -5,12 +5,13 @@
 import React from 'react';
 import './style.css';
 import {createGeometryStyle} from '../../util';
-import type {ClientState, ClientStateCity} from '../../state/types';
 import type {Dispatch} from 'redux';
-import type {Action} from '../../types';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import {connect} from 'react-redux';
 import {openCityView} from '../../actions';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientStateCity} from '../../state/reducers/cities';
+import type {ClientAction} from '../../actions';
 
 type OwnProps = {
     city: ClientStateCity
@@ -48,10 +49,10 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<Action>): DispatchProps => {
+const mapDispatchToProps = (dispatch: Dispatch<ClientAction>): DispatchProps => {
     return {
         openCityView: ({cityId}: { cityId: string }) => dispatch(openCityView({cityId}))
     };
 };
 
-export const CityComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<Action>>(mapStateToProps, mapDispatchToProps)(Component);
+export const CityComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>>(mapStateToProps, mapDispatchToProps)(Component);

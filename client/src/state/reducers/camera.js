@@ -2,8 +2,6 @@
  * @flow
  */
 import type {Reducer} from 'redux';
-import type {Action} from '../../types';
-import type {ClientStateCamera} from '../types';
 import {
     addVectors,
     divideVectors,
@@ -12,6 +10,16 @@ import {
 } from '../../../../common/src/vector';
 import {clipToBoundary} from '../../../../common/src/boundary';
 import {tileSize} from './root';
+import type {Boundary, Geometry, Vector} from '../../../../common/src/types';
+import type {ClientAction} from '../../actions';
+
+export type ClientStateCamera = {
+    locationLimit: Boundary,
+    geometry: Geometry,
+    movementSpeed: Vector,
+    sizeLimit: Boundary,
+    zoomingSpeed: Vector,
+};
 
 const initialState: ClientStateCamera = {
     locationLimit: {
@@ -30,7 +38,7 @@ const initialState: ClientStateCamera = {
     zoomingSpeed: {x: 0, y: 0},
 };
 
-export const cameraReducer: Reducer<ClientStateCamera, Action> = (state = initialState, action) => {
+export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = initialState, action) => {
     switch (action.type) {
         case 'CAMERA_MOVED': {
             const newCameraLocation = clipToBoundary({

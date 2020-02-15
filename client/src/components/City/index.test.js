@@ -20,6 +20,7 @@ test('renders', () => {
                 y: 32
             }
         },
+        resources: []
     };
     render(<CityComponent city={city}/>);
 });

@@ -122,6 +122,17 @@ export interface Context {
     succeed(message: string, object: mixed): void;
 }
 
+export interface ScheduledEvent {
+    account: string;
+    region: string;
+    detail: mixed;
+    ['detail-type']: string;
+    source: string;
+    time: string;
+    id: string;
+    resources: string[];
+}
+
 export type Callback<TResult = mixed> = (error?: Error | null | string, result?: TResult) => void;
 
 export type Handler<TEvent = mixed, TResult = mixed> = (
@@ -131,3 +142,5 @@ export type Handler<TEvent = mixed, TResult = mixed> = (
 ) => void | Promise<TResult>;
 
 export type APIGatewayProxyHandler = Handler<APIGatewayProxyEvent, APIGatewayProxyResult>;
+
+export type ScheduledHandler = Handler<ScheduledEvent, void>;

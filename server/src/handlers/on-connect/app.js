@@ -2,10 +2,10 @@
  * @flow
  */
 
-import type {APIGatewayProxyHandler} from '../types';
-import {createClient} from '../redis';
+import type {APIGatewayProxyHandler} from '../../types';
+import {createRedisClient} from '../../services/redis';
 
-const redis = createClient();
+const redis = createRedisClient();
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {
     const {connectionId} = event.requestContext;

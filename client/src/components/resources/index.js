@@ -9,8 +9,8 @@ import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import type {Action} from '../../types';
 import {connect} from 'react-redux';
-import foodResourceImage from '../../assets/images/resources/food.bmp';
-import woodResourceImage from '../../assets/images/resources/wood.bmp';
+import foodResourceImage from '../../assets/images/resources/food.png';
+import woodResourceImage from '../../assets/images/resources/wood.png';
 
 const resourceImages = {
     'FOOD': foodResourceImage,

@@ -5,6 +5,9 @@ Parameters:
   StageName:
     Type: "String"
     Default: "Prod"
+  DomainName:
+    Type: "String"
+    Default: "www.maciej-laciak.com"
 
 Resources:
   Vpc:
@@ -352,7 +355,24 @@ Resources:
       DeploymentId: !Ref "Deployment"
       ApiId: !Ref "WebSocket"
 
+  WebsiteBucket:
+    Type: "AWS::S3::Bucket"
+    DeletionPolicy: "Delete"
+    Properties:
+      BucketName: !Ref "DomainName"
+      AccessControl: "PublicRead"
+      WebsiteConfiguration:
+        ErrorDocument: "error.html"
+        IndexDocument: "index.html"
+      Tags:
+        - Key: "Name"
+          Value: !Sub "${AWS::StackName}-website"
+
 Outputs:
   WebSocketURI:
     Description: "The WSS Protocol URI to connect to"
     Value: !Sub "wss://${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${Stage}"
+  WebsiteURI:
+    Description: "The website URI"
+    Value: !Sub "http://${DomainName}.s3-website.${AWS::Region}.amazonaws.com"
+

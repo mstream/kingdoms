@@ -28,7 +28,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.bmp$/,
+                test: /\.png$/,
                 exclude: /node_modules/,
                 loader: 'file-loader'
             }
@@ -36,8 +36,12 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: './public/index.html',
+            template: './src/assets/html/index.html',
             filename: './index.html'
+        }),
+        new HtmlWebPackPlugin({
+            template: './src/assets/html/error.html',
+            filename: './error.html'
         })
     ]
 };

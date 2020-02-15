@@ -26,13 +26,18 @@ export type CameraZoomedAction = {
     payload: Vector
 }
 
-export type CitySelectedAction = {
+export type CityViewOpenedAction = {
     type: 'CITY_VIEW_OPENED',
     payload: string
+}
+
+export type CityViewClosedAction = {
+    type: 'CITY_VIEW_CLOSED'
 }
 
 export type Action =
     ServerStateUpdated
     | CameraMovedAction
     | CameraZoomedAction
-    | CitySelectedAction
+    | CityViewOpenedAction
+    | CityViewClosedAction

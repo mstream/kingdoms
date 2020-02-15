@@ -31,7 +31,9 @@ import type {
     ClientStateTile
 } from '../../state/types';
 
-type OwnProps = {};
+type OwnProps = {
+    windowSize: Vector
+};
 type StateProps = { camera: ClientStateCamera, cities: $ReadOnlyArray<ClientStateCity>, tiles: $ReadOnlyArray<ClientStateTile> };
 type DispatchProps = {
     moveCameraUp: () => mixed,
@@ -89,7 +91,7 @@ const transformObjectGeometries = <T: { geometry: Geometry, ... }>({objects, cam
     });
 };
 
-const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCameraLeft, moveCameraRight, zoomCameraIn, zoomCameraOut}: Props) => {
+const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCameraLeft, moveCameraRight, windowSize, zoomCameraIn, zoomCameraOut}: Props) => {
     useEffect(
         () => {
             window.addEventListener('keydown', (event) => {
@@ -137,11 +139,6 @@ const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCam
         return <div>loading world map...</div>;
     }
 
-    const windowSize = {
-        x: window.innerWidth,
-        y: window.innerHeight
-    };
-
     const windowCenterLocation = multipleVectors({
         vector1: windowSize,
         vector2: {x: 0.5, y: 0.5}
@@ -152,9 +149,14 @@ const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCam
         vector2: camera.geometry.location
     });
 
+    const desiredDimensionRatio = Math.max(
+        windowSize.x / camera.geometry.size.x,
+        windowSize.y / camera.geometry.size.y
+    );
+
     const desiredCameraSizeToWorldCameraSizeRatioVector = {
-        x: window.innerWidth / camera.geometry.size.x * 0.5,
-        y: window.innerHeight / camera.geometry.size.y * 0.5,
+        x: desiredDimensionRatio,
+        y: desiredDimensionRatio,
     };
 
     const visibleTiles = cullObjects({

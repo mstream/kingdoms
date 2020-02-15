@@ -7,5 +7,5 @@ import {render} from '@testing-library/react';
 import {WorldMapComponent} from '.';
 
 test('renders', () => {
-    render(<WorldMapComponent/>);
+    render(<WorldMapComponent windowSize={{x: 100, y: 100}}/>);
 });

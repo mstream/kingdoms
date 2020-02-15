@@ -6,7 +6,7 @@ import React from 'react';
 import './style.css';
 import type {ClientState, ClientStateCity} from '../../state/types';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
-import {Dispatch} from 'redux';
+import type {Dispatch} from 'redux';
 import type {Action} from '../../types';
 import {closeCityView} from '../../actions';
 import {connect} from 'react-redux';

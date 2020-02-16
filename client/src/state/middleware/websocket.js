@@ -3,31 +3,33 @@
  */
 
 import Socket from 'simple-websocket';
-import {store} from '../store';
-import type {Middleware} from 'redux';
-import type {ClientState} from '../reducers/root';
-import type {ClientAction} from '../../actions';
+import { store } from '../store';
+import type { Middleware } from 'redux';
+import type { ClientState } from '../reducers/root';
+import type { ClientAction } from '../actions';
 
-export const websocketMiddleware = ({url}: { url: string }) => {
+export const websocketMiddleware = ({ url }: { url: string }) => {
     const socket = new Socket(url);
 
     socket.on('connect', () => {
         console.log(`ws connection established: ${url}`);
-        socket.send(JSON.stringify({
-            message: 'sendmessage',
-            data: {type: 'STATE_UPDATE_REQUEST'}
-        }));
+        socket.send(
+            JSON.stringify({
+                message: 'sendmessage',
+                data: { type: 'STATE_UPDATE_REQUEST' },
+            })
+        );
     });
 
     socket.on('close', () => {
         console.log(`ws connection closed: ${url}`);
     });
 
-    socket.on('error', (error) => {
+    socket.on('error', error => {
         console.error(error.stack);
     });
 
-    socket.on('data', (rawData) => {
+    socket.on('data', rawData => {
         const dataString = rawData.toString();
 
         console.log('ws data received: ' + dataString);
@@ -38,25 +40,25 @@ export const websocketMiddleware = ({url}: { url: string }) => {
             case 'STATE_UPDATE': {
                 store.dispatch({
                     type: 'SERVER_STATE_UPDATED',
-                    payload: data.payload
+                    payload: data.payload,
                 });
                 return;
             }
             default: {
-                console.error(`unknown data type received from server: ${data.type}`);
+                console.error(
+                    `unknown data type received from server: ${data.type}`
+                );
             }
         }
     });
 
-    const middleware: Middleware<ClientState, ClientAction> =
-        (store) => {
-            return (next) => {
-                return (action) => {
-                    return next(action);
-                };
+    const middleware: Middleware<ClientState, ClientAction> = store => {
+        return next => {
+            return action => {
+                return next(action);
             };
         };
+    };
 
     return middleware;
 };
-

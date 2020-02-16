@@ -1,43 +1,47 @@
 /**
  * @flow
  */
-import type {Reducer} from 'redux';
-import {multipleVectors} from '../../../../../common/src/vector';
-import {tileSize} from '../root';
-import {EMPTY_OBJECT} from '../../../../../common/src/util';
+import type { Reducer } from 'redux';
+import { multipleVectors } from '../../../../../common/src/vector';
+import { tileSize } from '../root';
+import { EMPTY_OBJECT } from '../../../../../common/src/util';
 import type {
     ClientStateCities,
     ClientStateCitiesById,
-    ClientStateCity
+    ClientStateCity,
 } from './index';
-import type {ClientAction} from '../../../actions';
+import type { ClientAction } from '../../actions';
 
 const initialState: ClientStateCities = {
     byId: EMPTY_OBJECT,
-    byOwnerId: EMPTY_OBJECT
+    byOwnerId: EMPTY_OBJECT,
 };
 
-export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (state = initialState, action) => {
+export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
+    state = initialState,
+    action
+) => {
     switch (action.type) {
         case 'SERVER_STATE_UPDATED': {
-            const citiesById: ClientStateCitiesById = action.payload.cities.reduce((citiesById, city) => {
+            const citiesById: ClientStateCitiesById = action.payload.cities.reduce(
+                (citiesById, city) => {
                     const clientStateCity: ClientStateCity = {
                         id: city.id,
                         name: city.name,
                         geometry: {
                             location: multipleVectors({
                                 vector1: city.location,
-                                vector2: tileSize
+                                vector2: tileSize,
                             }),
-                            size: tileSize
+                            size: tileSize,
                         },
                         ownerId: city.ownerId,
-                        resources: city.resources
+                        resources: city.resources,
                     };
 
                     return {
                         ...citiesById,
-                        [city.id]: clientStateCity
+                        [city.id]: clientStateCity,
                     };
                 },
                 EMPTY_OBJECT
@@ -45,7 +49,7 @@ export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (stat
 
             return {
                 ...state,
-                byId: citiesById
+                byId: citiesById,
             };
         }
         default: {

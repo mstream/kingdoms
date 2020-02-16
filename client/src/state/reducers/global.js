@@ -1,11 +1,14 @@
 /**
  * @flow
  */
-import type {Reducer} from 'redux';
-import type {ClientAction} from '../../actions';
-import type {ClientState} from './root';
+import type { Reducer } from 'redux';
+import type { ClientAction } from '../actions';
+import type { ClientState } from './root';
 
-export const globalReducer: Reducer<?ClientState, ClientAction> = (state, action) => {
+export const globalReducer: Reducer<?ClientState, ClientAction> = (
+    state,
+    action
+) => {
     if (state == null) {
         return state;
     }
@@ -24,15 +27,20 @@ export const globalReducer: Reducer<?ClientState, ClientAction> = (state, action
                 return cityId === action.payload;
             });
             if (currentCityIndex === -1) {
-                console.error(`city ${action.payload} does not belong to the player`);
+                console.error(
+                    `city ${action.payload} does not belong to the player`
+                );
                 return state;
             }
-            const nextCityId = currentCityIndex === cityIds.length - 1 ? cityIds[0] : cityIds[currentCityIndex + 1];
+            const nextCityId =
+                currentCityIndex === cityIds.length - 1
+                    ? cityIds[0]
+                    : cityIds[currentCityIndex + 1];
             return {
                 ...state,
                 menu: {
-                    viewedCityId: nextCityId
-                }
+                    viewedCityId: nextCityId,
+                },
             };
         }
         case 'NAVIGATED_TO_PREVIOUS_CITY': {
@@ -49,15 +57,20 @@ export const globalReducer: Reducer<?ClientState, ClientAction> = (state, action
                 return cityId === action.payload;
             });
             if (currentCityIndex === -1) {
-                console.error(`city ${action.payload} does not belong to the player`);
+                console.error(
+                    `city ${action.payload} does not belong to the player`
+                );
                 return state;
             }
-            const nextCityId = currentCityIndex === 0 ? cityIds[cityIds.length - 1] : cityIds[currentCityIndex - 1];
+            const nextCityId =
+                currentCityIndex === 0
+                    ? cityIds[cityIds.length - 1]
+                    : cityIds[currentCityIndex - 1];
             return {
                 ...state,
                 menu: {
-                    viewedCityId: nextCityId
-                }
+                    viewedCityId: nextCityId,
+                },
             };
         }
         default: {
@@ -65,6 +78,3 @@ export const globalReducer: Reducer<?ClientState, ClientAction> = (state, action
         }
     }
 };
-
-
-

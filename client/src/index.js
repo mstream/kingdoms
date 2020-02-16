@@ -5,11 +5,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {AppComponent} from './components/app';
-import {Provider} from 'react-redux';
+import { AppComponent } from './components/app';
+import { Provider } from 'react-redux';
 // $FlowFixMe
 import * as serviceWorker from './serviceWorker';
-import {store} from './state/store';
+import { store } from './state/store';
 
 const rootElement = document.getElementById('root');
 
@@ -19,7 +19,7 @@ if (rootElement == null) {
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppComponent/>
+        <AppComponent />
     </Provider>,
     rootElement
 );

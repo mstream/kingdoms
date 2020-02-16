@@ -34,5 +34,6 @@ type City = {
 
 export type ServerState = {
     cities: $ReadOnlyArray<City>,
+    time: ?string,
     worldSizeInTiles: Vector,
 };

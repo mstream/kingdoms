@@ -2,38 +2,41 @@
  * @flow
  */
 
-import React, {useEffect} from 'react';
-import type {Dispatch} from 'redux';
-import {connect} from 'react-redux';
+import React, { useEffect } from 'react';
+import type { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import './style.css';
-import {TileComponent} from '../tile';
-import {CityComponent} from '../city';
+import { TileComponent } from '../tile';
+import { CityComponent } from '../city';
 import {
     moveCameraDown,
     moveCameraLeft,
     moveCameraRight,
     moveCameraUp,
     zoomCameraIn,
-    zoomCameraOut
-} from '../../actions';
+    zoomCameraOut,
+} from '../../state/actions';
 import {
     addVectors,
     multipleVectors,
     subtractVectors,
 } from '../../../../common/src/vector';
-import type {Geometry, Vector} from '../../../../common/src/types';
-import {checkIfIntersect} from '../../../../common/src/geometry';
-import type {ClientStateCamera} from '../../state/reducers/camera';
-import type {ClientStateTile} from '../../state/reducers/tiles';
-import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateCity} from '../../state/reducers/cities';
-import type {ClientAction} from '../../actions';
-
+import type { Geometry, Vector } from '../../../../common/src/types';
+import { checkIfIntersect } from '../../../../common/src/geometry';
+import type { ClientStateCamera } from '../../state/reducers/camera';
+import type { ClientStateTile } from '../../state/reducers/tiles';
+import type { ClientState } from '../../state/reducers/root';
+import type { ClientStateCity } from '../../state/reducers/cities';
+import type { ClientAction } from '../../state/actions';
 
 type OwnProps = {
-    windowSize: Vector
+    windowSize: Vector,
 };
-type StateProps = { camera: ClientStateCamera, cities: $ReadOnlyArray<ClientStateCity>, tiles: $ReadOnlyArray<ClientStateTile> };
+type StateProps = {
+    camera: ClientStateCamera,
+    cities: $ReadOnlyArray<ClientStateCity>,
+    tiles: $ReadOnlyArray<ClientStateTile>,
+};
 type DispatchProps = {
     moveCameraUp: () => mixed,
     moveCameraDown: () => mixed,
@@ -46,106 +49,136 @@ type DispatchProps = {
 type Props = {
     ...OwnProps,
     ...StateProps,
-    ...DispatchProps
-}
+    ...DispatchProps,
+};
 
-const cullObjects = <T: { geometry: Geometry, ... }>({objects, camera}: { objects: $ReadOnlyArray<T>, camera: ClientStateCamera }): $ReadOnlyArray<T> => {
+const cullObjects = <T: { geometry: Geometry, ... }>({
+    objects,
+    cameraGeometry,
+}: {
+    objects: $ReadOnlyArray<T>,
+    cameraGeometry: Geometry,
+}): $ReadOnlyArray<T> => {
     return objects.filter(object => {
         return checkIfIntersect({
             geometry1: object.geometry,
-            geometry2: camera.geometry,
+            geometry2: cameraGeometry,
         });
     });
 };
 
-const transformObjectGeometries = <T: { geometry: Geometry, ... }>({objects, cameraWindowGeometry, cameraLocationToWindowCenterLocationVector, desiredCameraSizeToWorldCameraSizeRatioVector}: { objects: $ReadOnlyArray<T>, cameraWindowGeometry: Geometry, cameraLocationToWindowCenterLocationVector: Vector, desiredCameraSizeToWorldCameraSizeRatioVector: Vector }): $ReadOnlyArray<T> => {
+const transformObjectGeometries = <T: { geometry: Geometry, ... }>({
+    objects,
+    cameraWindowGeometry,
+    cameraLocationToWindowCenterLocationVector,
+    desiredCameraSizeToWorldCameraSizeRatioVector,
+}: {
+    objects: $ReadOnlyArray<T>,
+    cameraWindowGeometry: Geometry,
+    cameraLocationToWindowCenterLocationVector: Vector,
+    desiredCameraSizeToWorldCameraSizeRatioVector: Vector,
+}): $ReadOnlyArray<T> => {
     return objects.map(object => {
         const windowGeometry = {
             location: addVectors({
                 vector1: object.geometry.location,
-                vector2: cameraLocationToWindowCenterLocationVector
+                vector2: cameraLocationToWindowCenterLocationVector,
             }),
             size: multipleVectors({
                 vector1: object.geometry.size,
-                vector2: desiredCameraSizeToWorldCameraSizeRatioVector
+                vector2: desiredCameraSizeToWorldCameraSizeRatioVector,
             }),
         };
 
         const distanceFromWindowCameraCenter = subtractVectors({
             vector1: windowGeometry.location,
-            vector2: cameraWindowGeometry.location
+            vector2: cameraWindowGeometry.location,
         });
 
         const zoomedLocation = {
-            x: cameraWindowGeometry.location.x + distanceFromWindowCameraCenter.x * desiredCameraSizeToWorldCameraSizeRatioVector.x,
-            y: cameraWindowGeometry.location.y + distanceFromWindowCameraCenter.y * desiredCameraSizeToWorldCameraSizeRatioVector.y,
+            x:
+                cameraWindowGeometry.location.x +
+                distanceFromWindowCameraCenter.x *
+                    desiredCameraSizeToWorldCameraSizeRatioVector.x,
+            y:
+                cameraWindowGeometry.location.y +
+                distanceFromWindowCameraCenter.y *
+                    desiredCameraSizeToWorldCameraSizeRatioVector.y,
         };
         return {
             ...object,
             geometry: {
                 location: zoomedLocation,
                 size: windowGeometry.size,
-            }
+            },
         };
     });
 };
 
-const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCameraLeft, moveCameraRight, windowSize, zoomCameraIn, zoomCameraOut}: Props) => {
-    useEffect(
-        () => {
-            window.addEventListener('keydown', (event) => {
-                switch (event.key) {
-                    case 'ArrowUp': {
-                        moveCameraUp();
-                        break;
-                    }
-                    case 'ArrowDown': {
-                        moveCameraDown();
-                        break;
-                    }
-                    case 'ArrowLeft': {
-                        moveCameraLeft();
-                        break;
-                    }
-                    case 'ArrowRight': {
-                        moveCameraRight();
-                        break;
-                    }
-                    case '[': {
-                        zoomCameraOut();
-                        break;
-                    }
-                    case ']': {
-                        zoomCameraIn();
-                        break;
-                    }
-                    default: {
-                    }
+const Component = ({
+    camera,
+    cities,
+    tiles,
+    moveCameraUp,
+    moveCameraDown,
+    moveCameraLeft,
+    moveCameraRight,
+    windowSize,
+    zoomCameraIn,
+    zoomCameraOut,
+}: Props) => {
+    useEffect(() => {
+        window.addEventListener('keydown', event => {
+            switch (event.key) {
+                case 'ArrowUp': {
+                    moveCameraUp();
+                    break;
                 }
-            });
-        },
-        [
-            moveCameraUp,
-            moveCameraDown,
-            moveCameraLeft,
-            moveCameraRight,
-            zoomCameraIn,
-            zoomCameraOut
-        ]
-    );
+                case 'ArrowDown': {
+                    moveCameraDown();
+                    break;
+                }
+                case 'ArrowLeft': {
+                    moveCameraLeft();
+                    break;
+                }
+                case 'ArrowRight': {
+                    moveCameraRight();
+                    break;
+                }
+                case '[': {
+                    zoomCameraOut();
+                    break;
+                }
+                case ']': {
+                    zoomCameraIn();
+                    break;
+                }
+                default: {
+                }
+            }
+        });
+    }, [
+        moveCameraUp,
+        moveCameraDown,
+        moveCameraLeft,
+        moveCameraRight,
+        zoomCameraIn,
+        zoomCameraOut,
+    ]);
 
-    if (tiles.length === 0) {
+    if (camera == null || tiles.length === 0) {
         return <div>loading world map...</div>;
     }
 
     const windowCenterLocation = multipleVectors({
         vector1: windowSize,
-        vector2: {x: 0.5, y: 0.5}
+        vector2: { x: 0.5, y: 0.5 },
     });
 
     const cameraLocationToWindowCenterLocationVector = subtractVectors({
         vector1: windowCenterLocation,
-        vector2: camera.geometry.location
+        vector2: camera.geometry.location,
     });
 
     const desiredDimensionRatio = Math.max(
@@ -159,23 +192,23 @@ const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCam
     };
 
     const visibleTiles = cullObjects({
-        camera: camera,
+        cameraGeometry: camera.geometry,
         objects: tiles,
     });
 
     const visibleCities = cullObjects({
-        camera: camera,
+        cameraGeometry: camera.geometry,
         objects: cities,
     });
 
     const cameraWindowGeometry = {
         location: addVectors({
             vector1: camera.geometry.location,
-            vector2: cameraLocationToWindowCenterLocationVector
+            vector2: cameraLocationToWindowCenterLocationVector,
         }),
         size: multipleVectors({
             vector1: camera.geometry.size,
-            vector2: desiredCameraSizeToWorldCameraSizeRatioVector
+            vector2: desiredCameraSizeToWorldCameraSizeRatioVector,
         }),
     };
 
@@ -183,14 +216,14 @@ const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCam
         objects: visibleTiles,
         desiredCameraSizeToWorldCameraSizeRatioVector,
         cameraWindowGeometry,
-        cameraLocationToWindowCenterLocationVector
+        cameraLocationToWindowCenterLocationVector,
     });
 
     const transformedVisibleCities = transformObjectGeometries({
         objects: visibleCities,
         desiredCameraSizeToWorldCameraSizeRatioVector,
         cameraWindowGeometry,
-        cameraLocationToWindowCenterLocationVector
+        cameraLocationToWindowCenterLocationVector,
     });
 
     const tileComponents = transformedVisibleTiles.map(tile => {
@@ -203,28 +236,8 @@ const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCam
     });
 
     const cityComponents = transformedVisibleCities.map(city => {
-        return (
-            <CityComponent
-                key={city.id}
-                city={city}
-            />
-        );
+        return <CityComponent key={city.id} city={city} />;
     });
-
-    // const style = {
-    //     ...createGeometryStyle({
-    //         geometry: cameraWindowGeometry
-    //     }),
-    //     borderStyle: 'solid',
-    //     borderColor: 'rgba(255,0,0,1.0)',
-    //     position: 'absolute',
-    //     zIndex: -1
-    // };
-    //
-    // const cameraComponent = (
-    //     <div style={style}>
-    //     </div>
-    // );
 
     return (
         <div className="App">
@@ -238,12 +251,16 @@ const Component = ({camera, cities, tiles, moveCameraUp, moveCameraDown, moveCam
 const mapStateToProps = (state: ClientState): StateProps => {
     return {
         camera: state.camera,
-        cities: Object.keys(state.cities.byId).map(cityId => state.cities.byId[cityId]),
-        tiles: state.tiles
+        cities: Object.keys(state.cities.byId).map(
+            cityId => state.cities.byId[cityId]
+        ),
+        tiles: state.tiles,
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ClientAction>): DispatchProps => {
+const mapDispatchToProps = (
+    dispatch: Dispatch<ClientAction>
+): DispatchProps => {
     return {
         moveCameraUp: () => dispatch(moveCameraUp()),
         moveCameraDown: () => dispatch(moveCameraDown()),
@@ -254,4 +271,14 @@ const mapDispatchToProps = (dispatch: Dispatch<ClientAction>): DispatchProps => 
     };
 };
 
-export const WorldMapComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>>(mapStateToProps, mapDispatchToProps)(Component);
+export const WorldMapComponent = connect<
+    Props,
+    OwnProps,
+    StateProps,
+    DispatchProps,
+    ClientState,
+    Dispatch<ClientAction>
+>(
+    mapStateToProps,
+    mapDispatchToProps
+)(Component);

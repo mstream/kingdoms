@@ -1,17 +1,17 @@
 /**
  * @flow
  */
-import type {Reducer} from 'redux';
+import type { Reducer } from 'redux';
 import {
     addVectors,
     divideVectors,
     multipleVectors,
-    negateVector
+    negateVector,
 } from '../../../../common/src/vector';
-import {clipToBoundary} from '../../../../common/src/boundary';
-import {tileSize} from './root';
-import type {Boundary, Geometry, Vector} from '../../../../common/src/types';
-import type {ClientAction} from '../../actions';
+import { clipToBoundary } from '../../../../common/src/boundary';
+import { tileSize } from './root';
+import type { Boundary, Geometry, Vector } from '../../../../common/src/types';
+import type { ClientAction } from '../actions';
 
 export type ClientStateCamera = ?{
     locationLimit: Boundary,
@@ -23,7 +23,10 @@ export type ClientStateCamera = ?{
 
 const initialState: ClientStateCamera = null;
 
-export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = initialState, action) => {
+export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (
+    state = initialState,
+    action
+) => {
     switch (action.type) {
         case 'CAMERA_MOVED': {
             if (state == null) {
@@ -36,11 +39,11 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = 
                         vector1: state.geometry.size,
                         vector2: multipleVectors({
                             vector1: state.movementSpeed,
-                            vector2: action.payload
-                        })
-                    })
+                            vector2: action.payload,
+                        }),
+                    }),
                 }),
-                boundary: state.locationLimit
+                boundary: state.locationLimit,
             });
 
             return {
@@ -48,27 +51,30 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = 
                 geometry: {
                     ...state.geometry,
                     location: newCameraLocation,
-                }
+                },
             };
         }
         case 'CAMERA_ZOOMED': {
+            if (state == null) {
+                return state;
+            }
             const newCameraSize = clipToBoundary({
                 vector: addVectors({
                     vector1: state.geometry.size,
                     vector2: multipleVectors({
                         vector1: state.zoomingSpeed,
-                        vector2: action.payload
-                    })
+                        vector2: action.payload,
+                    }),
                 }),
-                boundary: state.sizeLimit
+                boundary: state.sizeLimit,
             });
 
             return {
                 ...state,
                 geometry: {
                     ...state.geometry,
-                    size: newCameraSize
-                }
+                    size: newCameraSize,
+                },
             };
         }
         case 'SERVER_STATE_UPDATED': {
@@ -77,25 +83,25 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = 
             }
             const halfWorldSizeInTiles = divideVectors({
                 vector1: action.payload.worldSizeInTiles,
-                vector2: {x: 2, y: 2}
+                vector2: { x: 2, y: 2 },
             });
             const halfWorldSize = multipleVectors({
                 vector1: halfWorldSizeInTiles,
-                vector2: tileSize
+                vector2: tileSize,
             });
             return {
                 geometry: {
                     location: {
                         x: 0,
-                        y: 0
+                        y: 0,
                     },
                     size: {
                         x: 1280,
-                        y: 800
-                    }
+                        y: 800,
+                    },
                 },
                 locationLimit: {
-                    min: negateVector({vector: halfWorldSize}),
+                    min: negateVector({ vector: halfWorldSize }),
                     max: halfWorldSize,
                 },
                 movementSpeed: {
@@ -103,13 +109,13 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = 
                     y: 0.1,
                 },
                 sizeLimit: {
-                    min: {x: 640, y: 400},
-                    max: {x: 3200, y: 2000},
+                    min: { x: 640, y: 400 },
+                    max: { x: 3200, y: 2000 },
                 },
                 zoomingSpeed: {
                     x: 100,
-                    y: 100
-                }
+                    y: 100,
+                },
             };
         }
         default: {

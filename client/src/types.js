@@ -8,4 +8,3 @@ export type GeometryStyle = {
     marginTop: number,
     marginLeft: number,
 };
-

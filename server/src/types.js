@@ -18,20 +18,20 @@ export interface APIGatewayEventRequestContext {
     extendedRequestId?: string;
     httpMethod: string;
     identity: {
-        accessKey: string | null;
-        accountId: string | null;
-        apiKey: string | null;
-        apiKeyId: string | null;
-        caller: string | null;
-        cognitoAuthenticationProvider: string | null;
-        cognitoAuthenticationType: string | null;
-        cognitoIdentityId: string | null;
-        cognitoIdentityPoolId: string | null;
-        principalOrgId: string | null;
-        sourceIp: string;
-        user: string | null;
-        userAgent: string | null;
-        userArn: string | null;
+        accessKey: string | null,
+        accountId: string | null,
+        apiKey: string | null,
+        apiKeyId: string | null,
+        caller: string | null,
+        cognitoAuthenticationProvider: string | null,
+        cognitoAuthenticationType: string | null,
+        cognitoIdentityId: string | null,
+        cognitoIdentityPoolId: string | null,
+        principalOrgId: string | null,
+        sourceIp: string,
+        user: string | null,
+        userAgent: string | null,
+        userArn: string | null,
     };
     messageDirection?: string;
     messageId?: string | null;
@@ -63,10 +63,10 @@ export interface APIGatewayProxyEvent {
 export interface APIGatewayProxyResult {
     statusCode: number;
     headers?: {
-        [header: string]: boolean | number | string;
+        [header: string]: boolean | number | string,
     };
     multiValueHeaders?: {
-        [header: string]: Array<boolean | number | string>;
+        [header: string]: Array<boolean | number | string>,
     };
     body: string;
     isBase64Encoded?: boolean;
@@ -133,14 +133,20 @@ export interface ScheduledEvent {
     resources: string[];
 }
 
-export type Callback<TResult = mixed> = (error?: Error | null | string, result?: TResult) => void;
+export type Callback<TResult = mixed> = (
+    error?: Error | null | string,
+    result?: TResult
+) => void;
 
 export type Handler<TEvent = mixed, TResult = mixed> = (
     event: TEvent,
     context: Context,
-    callback: Callback<TResult>,
+    callback: Callback<TResult>
 ) => void | Promise<TResult>;
 
-export type APIGatewayProxyHandler = Handler<APIGatewayProxyEvent, APIGatewayProxyResult>;
+export type APIGatewayProxyHandler = Handler<
+    APIGatewayProxyEvent,
+    APIGatewayProxyResult
+>;
 
 export type ScheduledHandler = Handler<ScheduledEvent, void>;

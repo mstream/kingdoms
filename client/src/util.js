@@ -2,10 +2,14 @@
  * @flow
  */
 
-import type {Geometry} from '../../common/src/types';
-import type {GeometryStyle} from './types';
+import type { Geometry } from '../../common/src/types';
+import type { GeometryStyle } from './types';
 
-export const createGeometryStyle = ({geometry}: { geometry: Geometry }): GeometryStyle => {
+export const createGeometryStyle = ({
+    geometry,
+}: {
+    geometry: Geometry,
+}): GeometryStyle => {
     return {
         height: geometry.size.y,
         width: geometry.size.x,

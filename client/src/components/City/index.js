@@ -12,6 +12,7 @@ import {openCityView} from '../../actions';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCity} from '../../state/reducers/cities';
 import type {ClientAction} from '../../actions';
+import cityImage from '../../assets/images/cities/city.png';
 
 type OwnProps = {
     city: ClientStateCity
@@ -36,10 +37,11 @@ const Component = ({city, openCityView}: Props) => {
     };
 
     return (
-        <div className="City"
+        <div className="City text-white font-medium"
              style={style}
              onClick={() => openCityView({cityId: city.id})}
         >
+            <img src={cityImage} className="h-full w-full" alt="city"/>
             {city.name}
         </div>
     );

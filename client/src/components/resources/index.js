@@ -36,7 +36,7 @@ const ResourceComponent = ({resource}: { resource: ClientStateResource }) => {
     const resourceImage = resourceImages[resource.type];
     return (
         <div className="flex items-center">
-            <img className="w-10 h-10 rounded-full mr-4" src={resourceImage}/>
+            <img src={resourceImage}/>
             <div className="text-sm">
                 <p className="text-gray-900 leading-none">{resource.quantity}</p>
             </div>

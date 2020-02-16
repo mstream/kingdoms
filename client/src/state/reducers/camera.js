@@ -13,7 +13,7 @@ import {tileSize} from './root';
 import type {Boundary, Geometry, Vector} from '../../../../common/src/types';
 import type {ClientAction} from '../../actions';
 
-export type ClientStateCamera = {
+export type ClientStateCamera = ?{
     locationLimit: Boundary,
     geometry: Geometry,
     movementSpeed: Vector,
@@ -21,26 +21,14 @@ export type ClientStateCamera = {
     zoomingSpeed: Vector,
 };
 
-const initialState: ClientStateCamera = {
-    locationLimit: {
-        min: {x: 0, y: 0},
-        max: {x: 0, y: 0},
-    },
-    geometry: {
-        location: {x: 0, y: 0},
-        size: {x: 0, y: 0}
-    },
-    movementSpeed: {x: 0, y: 0},
-    sizeLimit: {
-        min: {x: 0, y: 0},
-        max: {x: 0, y: 0}
-    },
-    zoomingSpeed: {x: 0, y: 0},
-};
+const initialState: ClientStateCamera = null;
 
 export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = initialState, action) => {
     switch (action.type) {
         case 'CAMERA_MOVED': {
+            if (state == null) {
+                return state;
+            }
             const newCameraLocation = clipToBoundary({
                 vector: addVectors({
                     vector1: state.geometry.location,
@@ -84,6 +72,9 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = 
             };
         }
         case 'SERVER_STATE_UPDATED': {
+            if (state != null) {
+                return state;
+            }
             const halfWorldSizeInTiles = divideVectors({
                 vector1: action.payload.worldSizeInTiles,
                 vector2: {x: 2, y: 2}
@@ -99,8 +90,8 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = 
                         y: 0
                     },
                     size: {
-                        x: 400,
-                        y: 300
+                        x: 1280,
+                        y: 800
                     }
                 },
                 locationLimit: {
@@ -112,7 +103,7 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (state = 
                     y: 0.1,
                 },
                 sizeLimit: {
-                    min: {x: 320, y: 200},
+                    min: {x: 640, y: 400},
                     max: {x: 3200, y: 2000},
                 },
                 zoomingSpeed: {

@@ -12,6 +12,7 @@ import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateBuilding} from '../../state/reducers/cities';
 import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
+import romanDecimalConverter from 'roman-decimal';
 
 const buildingVisuals = {
     LUMBER_MILL: {
@@ -45,6 +46,7 @@ const Component = ({buildings}: Props) => {
             <div
                 key={building.type}
                 className="flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm bg-gray-100 shadow-2xs">
+                <p className="text-xs text-center font-medium text-gray-900">{romanDecimalConverter.roman(building.tier)}</p>
                 <img src={buildingVisual.image} alt="building"/>
                 <p className="text-xs text-center text-gray-900">{buildingVisual.name}</p>
             </div>

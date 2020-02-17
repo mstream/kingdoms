@@ -125,21 +125,35 @@ const combinedReducer: Reducer<ServerState, ServerAction> = (state = initialStat
                 };
             }
 
-            const timeDelta = Date.parse(action.payload) - Date.parse(stateTime);
+            const timeDelta = (Date.parse(action.payload) - Date.parse(stateTime)) / 1000;
 
             if (timeDelta <= 0) {
                 console.error(`the time from action ${action.payload} is not past the time from the state ${stateTime}`);
                 return state;
             }
 
-            const resourceIncrease = Math.floor(timeDelta / 1000);
+            const resourceIncreaseRate = 1;
+            const unitFoodDemand = 0.0001;
 
             const newCities = state.cities.map(city => {
                 const newResources = city.resources.map(resource => {
-                    return {
-                        ...resource,
-                        quantity: resource.quantity + resourceIncrease,
-                    };
+                    switch (resource.type) {
+                        case 'FOOD': {
+                            const decreaseRate = city.citizens[0].quantity * unitFoodDemand;
+                            const delta = timeDelta * (resourceIncreaseRate - decreaseRate);
+                            return {
+                                ...resource,
+                                quantity: resource.quantity + delta
+                            };
+                        }
+                        default: {
+                            const delta = timeDelta * resourceIncreaseRate;
+                            return {
+                                ...resource,
+                                quantity: resource.quantity + delta,
+                            };
+                        }
+                    }
                 });
                 return {
                     ...city,

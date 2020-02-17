@@ -155,8 +155,27 @@ const combinedReducer: Reducer<ServerState, ServerAction> = (state = initialStat
                         }
                     }
                 });
+
+                const newCitizens = city.citizens.map(citizen => {
+                    switch (citizen.type) {
+                        case 'PEASANT': {
+                            const cityCapacity = 10000;
+                            const populationGrowthCoefficient = 0.0001;
+                            const delta = timeDelta * populationGrowthCoefficient * citizen.quantity * (1 - (citizen.quantity / cityCapacity));
+                            return {
+                                ...citizen,
+                                quantity: citizen.quantity + Math.floor(delta),
+                            };
+                        }
+                        default: {
+                            return citizen;
+                        }
+                    }
+                });
+
                 return {
                     ...city,
+                    citizens: newCitizens,
                     resources: newResources,
                 };
             });

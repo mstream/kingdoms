@@ -81,7 +81,7 @@ describe('rootReducer', () => {
                     citizens: [
                         {
                             type: 'PEASANT',
-                            quantity: 1000,
+                            quantity: 1009,
                         }
                     ],
                     id: '1',
@@ -107,7 +107,7 @@ describe('rootReducer', () => {
                     citizens: [
                         {
                             type: 'PEASANT',
-                            quantity: 500,
+                            quantity: 504,
                         }
                     ],
                     id: '2',

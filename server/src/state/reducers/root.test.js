@@ -17,7 +17,16 @@ describe('rootReducer', () => {
         const previousState = {
             cities: [
                 {
-                    buildings: [],
+                    buildings: [
+                        {
+                            type: 'LUMBER_MILL',
+                            tier: 1,
+                        },
+                        {
+                            type: 'PASTURE',
+                            tier: 1
+                        }
+                    ],
                     citizens: [
                         {
                             type: 'PEASANT',
@@ -43,7 +52,16 @@ describe('rootReducer', () => {
                     ]
                 },
                 {
-                    buildings: [],
+                    buildings:  [
+                        {
+                            type: 'LUMBER_MILL',
+                            tier: 2,
+                        },
+                        {
+                            type: 'PASTURE',
+                            tier: 1
+                        }
+                    ],
                     citizens: [
                         {
                             type: 'PEASANT',
@@ -77,7 +95,16 @@ describe('rootReducer', () => {
         const expected = {
             cities: [
                 {
-                    buildings: [],
+                    buildings: [
+                        {
+                            type: 'LUMBER_MILL',
+                            tier: 1,
+                        },
+                        {
+                            type: 'PASTURE',
+                            tier: 1
+                        }
+                    ],
                     citizens: [
                         {
                             type: 'PEASANT',
@@ -103,7 +130,16 @@ describe('rootReducer', () => {
                     ]
                 },
                 {
-                    buildings: [],
+                    buildings: [
+                        {
+                            type: 'LUMBER_MILL',
+                            tier: 2,
+                        },
+                        {
+                            type: 'PASTURE',
+                            tier: 1
+                        }
+                    ],
                     citizens: [
                         {
                             type: 'PEASANT',
@@ -124,7 +160,7 @@ describe('rootReducer', () => {
                         },
                         {
                             type: 'WOOD',
-                            quantity: 100,
+                            quantity: 200,
                         }
                     ]
                 },

@@ -136,22 +136,33 @@ const combinedReducer: Reducer<ServerState, ServerAction> = (state = initialStat
             const unitFoodDemand = 0.0001;
 
             const newCities = state.cities.map(city => {
+                const pasture = city.buildings.find(building => building.type === 'PASTURE');
+                const lumberMill = city.buildings.find(building => building.type === 'LUMBER_MILL');
                 const newResources = city.resources.map(resource => {
                     switch (resource.type) {
                         case 'FOOD': {
+                            const pastureTier = pasture != null ? pasture.tier : 0;
+                            const increaseRate = resourceIncreaseRate * pastureTier;
                             const decreaseRate = city.citizens[0].quantity * unitFoodDemand;
-                            const delta = timeDelta * (resourceIncreaseRate - decreaseRate);
+                            const delta = timeDelta * (increaseRate - decreaseRate);
+                            return {
+                                ...resource,
+                                quantity: resource.quantity + delta
+                            };
+                        }
+                        case 'WOOD': {
+                            const lumberMillTier = lumberMill != null ? lumberMill.tier : 0;
+                            const increaseRate = resourceIncreaseRate * lumberMillTier;
+                            const decreaseRate = 0;
+                            const delta = timeDelta * (increaseRate - decreaseRate);
                             return {
                                 ...resource,
                                 quantity: resource.quantity + delta
                             };
                         }
                         default: {
-                            const delta = timeDelta * resourceIncreaseRate;
-                            return {
-                                ...resource,
-                                quantity: resource.quantity + delta,
-                            };
+                            console.error(`unsupported resource type: ${resource.type}`);
+                            return resource;
                         }
                     }
                 });

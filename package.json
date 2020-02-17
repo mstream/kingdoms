@@ -6,6 +6,7 @@
     "@icon/icofont": "1.0.1-alpha.1",
     "aws-sam-webpack-plugin": "0.5.1",
     "flow-bin": "0.118.0",
+    "jest": "24.9.0",
     "@babel/core": "7.8.4",
     "@babel/preset-env": "7.8.4",
     "@babel/preset-flow": "7.8.3",

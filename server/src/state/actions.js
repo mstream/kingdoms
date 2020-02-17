@@ -3,25 +3,25 @@
  */
 
 export type DummyAction = {
-    type: 'DUMMY'
+    type: 'STATE_RESET'
 }
 
-export type StateUpdateScheduledAction = {
-    type: 'STATE_UPDATE_SCHEDULED',
+export type StateUpdatedAction = {
+    type: 'STATE_UPDATED',
     payload: string
 };
 
-export type ServerAction = DummyAction | StateUpdateScheduledAction;
+export type ServerAction = DummyAction | StateUpdatedAction;
 
-export const dummy = (): DummyAction => {
+export const resetState = (): DummyAction => {
     return {
-        type: 'DUMMY'
+        type: 'STATE_RESET'
     };
 };
 
-export const scheduleStateUpdate = ({time}: { time: string }): StateUpdateScheduledAction => {
+export const updateState = ({time}: { time: string }): StateUpdatedAction => {
     return {
-        type: 'STATE_UPDATE_SCHEDULED',
+        type: 'STATE_UPDATED',
         payload: time
     };
 };

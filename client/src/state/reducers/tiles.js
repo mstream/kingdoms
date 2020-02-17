@@ -3,8 +3,9 @@
  */
 import type { Reducer } from 'redux';
 import { tileSize } from './root';
-import type { Geometry, Vector } from '../../../../common/src/types';
 import type { ClientAction } from '../actions';
+import type {Vector} from '../../../../common/src/vector';
+import type {Geometry} from '../../../../common/src/geometry';
 
 export type TileType = 'PLAINS';
 

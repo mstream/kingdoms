@@ -2,7 +2,12 @@
  * @flow
  */
 
-import type {Boundary, Vector} from './types';
+import type {Vector} from './vector';
+
+export type Boundary = {
+    min: Vector,
+    max: Vector,
+};
 
 export const clipToBoundary = ({vector, boundary}: { vector: Vector, boundary: Boundary }): Vector => {
     return {

@@ -1,16 +1,16 @@
 /**
  * @flow
  */
-import type { Reducer } from 'redux';
-import { multipleVectors } from '../../../../../common/src/vector';
-import { tileSize } from '../root';
-import { EMPTY_OBJECT } from '../../../../../common/src/util';
+import type {Reducer} from 'redux';
+import {multipleVectors} from '../../../../../common/src/vector';
+import {tileSize} from '../root';
+import {EMPTY_OBJECT} from '../../../../../common/src/util';
 import type {
     ClientStateCities,
     ClientStateCitiesById,
     ClientStateCity,
 } from './index';
-import type { ClientAction } from '../../actions';
+import type {ClientAction} from '../../actions';
 
 const initialState: ClientStateCities = {
     byId: EMPTY_OBJECT,
@@ -26,6 +26,8 @@ export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
             const citiesById: ClientStateCitiesById = action.payload.cities.reduce(
                 (citiesById, city) => {
                     const clientStateCity: ClientStateCity = {
+                        buildings: city.buildings,
+                        citizens: city.citizens,
                         id: city.id,
                         name: city.name,
                         geometry: {

@@ -2,8 +2,10 @@
  * @flow
  */
 
-import type {Vector} from './types';
-
+export type Vector = {
+    x: number,
+    y: number,
+};
 
 export const addVectors = ({vector1, vector2}: { vector1: Vector, vector2: Vector }): Vector => {
     return {

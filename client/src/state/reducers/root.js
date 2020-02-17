@@ -21,7 +21,7 @@ export type ClientStateEntity = {
     ...
 };
 
-export type ClientState = {
+export type ClientState = ?{
     camera: ClientStateCamera,
     cities: ClientStateCities,
     menu: ClientStateMenu,

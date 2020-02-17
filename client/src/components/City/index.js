@@ -3,16 +3,16 @@
  */
 
 import React from 'react';
-import './style.css';
-import { createGeometryStyle } from '../../util';
-import type { Dispatch } from 'redux';
-import { EMPTY_OBJECT } from '../../../../common/src/util';
-import { connect } from 'react-redux';
-import { openCityView } from '../../state/actions';
-import type { ClientState } from '../../state/reducers/root';
-import type { ClientStateCity } from '../../state/reducers/cities';
-import type { ClientAction } from '../../state/actions';
+import {createGeometryStyle} from '../../util';
+import type {Dispatch} from 'redux';
+import {EMPTY_OBJECT} from '../../../../common/src/util';
+import {connect} from 'react-redux';
+import type {ClientAction} from '../../state/actions';
+import {openCityView} from '../../state/actions';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientStateCity} from '../../state/reducers/cities';
 import cityImage from '../../assets/images/cities/city.png';
+import {ImageComponent} from '../image';
 
 type OwnProps = {
     city: ClientStateCity,
@@ -30,19 +30,19 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({ city, openCityView }: Props) => {
+const Component = ({city, openCityView}: Props) => {
     const style = {
-        ...createGeometryStyle({ geometry: city.geometry }),
+        ...createGeometryStyle({geometry: city.geometry}),
     };
 
     return (
         <div
-            className="City text-white font-medium"
+            className="absolute z-10 cursor-pointer text-white font-medium"
             style={style}
-            onClick={() => openCityView({ cityId: city.id })}
+            onClick={() => openCityView({cityId: city.id})}
         >
-            <img src={cityImage} className="h-full w-full" alt="city" />
-            {city.name}
+            <ImageComponent image={cityImage} ratio="100%"/>
+            <p className="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm text-center text-gray-100">{city.name}</p>
         </div>
     );
 };
@@ -55,19 +55,17 @@ const mapDispatchToProps = (
     dispatch: Dispatch<ClientAction>
 ): DispatchProps => {
     return {
-        openCityView: ({ cityId }: { cityId: string }) =>
-            dispatch(openCityView({ cityId })),
+        openCityView: ({cityId}: { cityId: string }) =>
+            dispatch(openCityView({cityId})),
     };
 };
 
-export const CityComponent = connect<
-    Props,
+export const CityComponent = connect<Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>
->(
+    Dispatch<ClientAction>>(
     mapStateToProps,
     mapDispatchToProps
 )(Component);

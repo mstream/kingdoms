@@ -3,19 +3,27 @@
  */
 
 import React from 'react';
-import './style.css';
-import { EMPTY_OBJECT } from '../../../../common/src/util';
-import type { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import foodResourceImage from '../../assets/images/resources/food.png';
-import woodResourceImage from '../../assets/images/resources/wood.png';
-import type { ClientState } from '../../state/reducers/root';
-import type { ClientStateResource } from '../../state/reducers/cities';
-import type { ClientAction } from '../../state/actions';
+import {EMPTY_OBJECT} from '../../../../common/src/util';
+import type {Dispatch} from 'redux';
+import {connect} from 'react-redux';
+import foodImage from '../../assets/images/resources/food.png';
+import woodImage from '../../assets/images/resources/wood.png';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientStateResource} from '../../state/reducers/cities';
+import type {ClientAction} from '../../state/actions';
+import {ImageComponent} from '../image';
+import {numberToQuantityString} from '../../util';
+import {CityItemsListComponent} from '../city-items-list';
 
-const resourceImages = {
-    FOOD: foodResourceImage,
-    WOOD: woodResourceImage,
+const resourceVisuals = {
+    FOOD: {
+        name: 'Food',
+        image: foodImage
+    },
+    WOOD: {
+        name: 'Wood',
+        image: woodImage
+    },
 };
 
 type OwnProps = {
@@ -32,31 +40,26 @@ type Props = {
     ...DispatchProps,
 };
 
-// <div className="flex items-center">
-//     <img src={resourceImage}/>
-//     <div className="text-sm">
-//         <p className="text-gray-900 leading-none">{resource.quantity}</p>
-//     </div>
-// </div>
+const ResourceComponent = ({resource}: { resource: ClientStateResource }) => {
 
-const ResourceComponent = ({ resource }: { resource: ClientStateResource }) => {
-    const resourceImage = resourceImages[resource.type];
-    return (
-        <div className="inline-block mb-6 rounded-full bg-gray-300 pr-5 h-16">
-            <img
-                className="rounded-full float-left h-full"
-                src={resourceImage}
-            />
-            <span className="ml-3">{resource.quantity}</span>
-        </div>
-    );
 };
 
-const Component = ({ resources }: Props) => {
-    const components = resources.map(resource => {
-        return <ResourceComponent key={resource.type} resource={resource} />;
+const Component = ({resources}: Props) => {
+    const resourceComponents = resources.map(resource => {
+        const resourceVisual = resourceVisuals[resource.type];
+        return (
+            <div
+                key={resource.type}
+                className="flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm bg-gray-100 shadow-2xs">
+                <p className="text-xs text-center font-medium text-gray-900">{numberToQuantityString({value: resource.quantity})}</p>
+                <ImageComponent image={resourceVisual.image} ratio="100%"/>
+                <p className="text-xs text-center text-gray-900">{resourceVisual.name}</p>
+            </div>
+        );
     });
-    return <div>{components}</div>;
+    return (
+        <CityItemsListComponent>{resourceComponents}</CityItemsListComponent>
+    );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
@@ -69,14 +72,12 @@ const mapDispatchToProps = (
     return EMPTY_OBJECT;
 };
 
-export const ResourcesComponent = connect<
-    Props,
+export const ResourcesComponent = connect<Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>
->(
+    Dispatch<ClientAction>>(
     mapStateToProps,
     mapDispatchToProps
 )(Component);

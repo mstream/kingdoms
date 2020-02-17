@@ -6,8 +6,6 @@ import type {APIGatewayProxyHandler} from '../../types';
 import {createRedisClient} from '../../services/redis';
 import {createApiGatewayClient} from '../../services/apiGateway';
 import {sendStatusUpdate} from '../../utils';
-import {rootReducer} from '../../state/reducers/root';
-import {dummy} from '../../state/actions';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient();
@@ -19,11 +17,15 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
     }
     try {
         const state = JSON.parse(await redis.get('state'));
+        if (state == null) {
+            console.error('state is not initialized');
+            return {statusCode: 500, body: 'Message send error.'};
+        }
         await sendStatusUpdate({
             apiGateway,
             redis,
             connectionId,
-            state: rootReducer(state, dummy())
+            state
         });
     } catch (error) {
         return {statusCode: 500, body: 'Message send error.'};

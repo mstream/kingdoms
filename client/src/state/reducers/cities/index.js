@@ -1,13 +1,18 @@
 /**
  * @flow
  */
-import type { ClientStateEntity } from '../root';
-import type { Geometry, ResourceType } from '../../../../../common/src/types';
-import { citiesByOwnerIdReducer } from './by-owner-id';
-import { citiesByIdReducer } from './by-id';
-import type { Reducer } from 'redux';
+import type {ClientStateEntity} from '../root';
+import type {
+    BuildingType,
+    CitizenType,
+    ResourceType
+} from '../../../../../common/src/types';
+import {citiesByOwnerIdReducer} from './by-owner-id';
+import {citiesByIdReducer} from './by-id';
+import type {Reducer} from 'redux';
 import reduceReducers from 'reduce-reducers';
-import type { ClientAction } from '../../actions';
+import type {ClientAction} from '../../actions';
+import type {Geometry} from '../../../../../common/src/geometry';
 
 export type ClientStateCitiesById = { [string]: ClientStateCity };
 
@@ -18,7 +23,19 @@ export type ClientStateResource = {
     quantity: number,
 };
 
+export type ClientStateBuilding = {
+    type: BuildingType,
+    tier: number,
+};
+
+export type ClientStateCitizen = {
+    type: CitizenType,
+    quantity: number,
+};
+
 export type ClientStateCity = ClientStateEntity & {
+    buildings: $ReadOnlyArray<ClientStateBuilding>,
+    citizens: $ReadOnlyArray<ClientStateCitizen>,
     geometry: Geometry,
     name: string,
     ownerId: string,
@@ -31,7 +48,5 @@ export type ClientStateCities = {
     byOwnerId: ClientStateCitiesByOwnerId,
 };
 
-export const citiesReducer: Reducer<
-    ClientStateCities,
-    ClientAction
-> = reduceReducers(citiesByIdReducer, citiesByOwnerIdReducer);
+export const citiesReducer: Reducer<ClientStateCities,
+    ClientAction> = reduceReducers(citiesByIdReducer, citiesByOwnerIdReducer);

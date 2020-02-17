@@ -11,6 +11,22 @@ import {globalReducer} from '../../../../client/src/state/reducers/global';
 export const initialState: ServerState = {
     cities: [
         {
+            buildings: [
+                {
+                    type: 'PASTURE',
+                    tier: 2,
+                },
+                {
+                    type: 'LUMBER_MILL',
+                    tier: 1,
+                }
+            ],
+            citizens: [
+                {
+                    type: 'PEASANT',
+                    quantity: 3000
+                }
+            ],
             id: '1',
             name: 'city1',
             location: {
@@ -30,6 +46,18 @@ export const initialState: ServerState = {
             ],
         },
         {
+            buildings: [
+                {
+                    type: 'PASTURE',
+                    tier: 1,
+                }
+            ],
+            citizens: [
+                {
+                    type: 'PEASANT',
+                    quantity: 2000
+                }
+            ],
             id: '2',
             name: 'city2',
             location: {
@@ -49,6 +77,13 @@ export const initialState: ServerState = {
             ],
         },
         {
+            buildings: [],
+            citizens: [
+                {
+                    type: 'PEASANT',
+                    quantity: 1000
+                }
+            ],
             id: '3',
             name: 'city3',
             location: {
@@ -77,7 +112,10 @@ export const initialState: ServerState = {
 
 const combinedReducer: Reducer<ServerState, ServerAction> = (state = initialState, action) => {
     switch (action.type) {
-        case 'STATE_UPDATE_SCHEDULED': {
+        case 'STATE_RESET': {
+            return initialState;
+        }
+        case 'STATE_UPDATED': {
             const stateTime = state.time;
 
             if (stateTime == null) {
@@ -111,6 +149,7 @@ const combinedReducer: Reducer<ServerState, ServerAction> = (state = initialStat
             return {
                 ...state,
                 cities: newCities,
+                time: action.payload
             };
         }
         default: {

@@ -3,19 +3,20 @@
  */
 
 import React from 'react';
-import './style.css';
-import { EMPTY_OBJECT } from '../../../../common/src/util';
-import type { Dispatch } from 'redux';
+import {EMPTY_OBJECT} from '../../../../common/src/util';
+import type {Dispatch} from 'redux';
+import type {ClientAction} from '../../state/actions';
 import {
     closeCityView,
     navigateToNextCity,
     navigateToPreviousCity,
 } from '../../state/actions';
-import { connect } from 'react-redux';
-import { ResourcesComponent } from '../resources';
-import type { ClientState } from '../../state/reducers/root';
-import type { ClientStateCity } from '../../state/reducers/cities';
-import type { ClientAction } from '../../state/actions';
+import {connect} from 'react-redux';
+import {ResourcesComponent} from '../resources';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientStateCity} from '../../state/reducers/cities';
+import {BuildingsComponent} from '../buildings';
+import {CitizensComponent} from '../citizens';
 
 type OwnProps = {
     city: ClientStateCity,
@@ -36,45 +37,54 @@ type Props = {
 };
 
 const Component = ({
-    city,
-    closeCityView,
-    navigateToNextCity: navigateToNextCity,
-    navigateToPreviousCity: navigateToPreviousCity,
-}: Props) => {
+                       city,
+                       closeCityView,
+                       navigateToNextCity: navigateToNextCity,
+                       navigateToPreviousCity: navigateToPreviousCity,
+                   }: Props) => {
     return (
-        <div className="CityView modal absolute top-0 left-0  w-full h-full flex items-center justify-center rounded-t">
+        <div
+            className="z-30 modal absolute top-0 left-0 w-full h-full flex items-center justify-center rounded-t">
             <div
                 onClick={() => closeCityView()}
                 className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"
             />
-            <div className="absolute w-9/12 h-32 bg-white rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl">
-                <div className="flex w-full">
+            <div
+                className="absolute w-9/12 bg-white rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl">
+                <div
+                    className="flex flex-row items-stretch flex-none justify-between w-full">
                     <button
                         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                         onClick={() =>
-                            navigateToPreviousCity({ currentCityId: city.id })
+                            navigateToPreviousCity({currentCityId: city.id})
                         }
                     >
                         <div className="w-1/12">
-                            <i className="icofont icofont-arrow-left" />
+                            <i className="icofont icofont-arrow-left"/>
                         </div>
                     </button>
 
-                    <div className="w-10/12 font-bold text-xl mb-2">
-                        <p className="text-center">{city.name}</p>
+                    <div className="flex flex-row items-center justify-center">
+                        <p
+                            className="font-bold text-2xl text-center text-gray-900">
+                            {city.name}
+                        </p>
                     </div>
+
                     <button
                         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                         onClick={() =>
-                            navigateToNextCity({ currentCityId: city.id })
+                            navigateToNextCity({currentCityId: city.id})
                         }
                     >
                         <div className="w-1/12">
-                            <i className="icofont icofont-arrow-right" />
+                            <i className="icofont icofont-arrow-right"/>
                         </div>
                     </button>
                 </div>
-                <ResourcesComponent resources={city.resources} />
+                <CitizensComponent citizens={city.citizens}/>
+                <ResourcesComponent resources={city.resources}/>
+                <BuildingsComponent buildings={city.buildings}/>
             </div>
         </div>
     );
@@ -89,24 +99,22 @@ const mapDispatchToProps = (
 ): DispatchProps => {
     return {
         closeCityView: () => dispatch(closeCityView()),
-        navigateToNextCity: ({ currentCityId }: { currentCityId: string }) =>
-            dispatch(navigateToNextCity({ currentCityId })),
+        navigateToNextCity: ({currentCityId}: { currentCityId: string }) =>
+            dispatch(navigateToNextCity({currentCityId})),
         navigateToPreviousCity: ({
-            currentCityId,
-        }: {
+                                     currentCityId,
+                                 }: {
             currentCityId: string,
-        }) => dispatch(navigateToPreviousCity({ currentCityId })),
+        }) => dispatch(navigateToPreviousCity({currentCityId})),
     };
 };
 
-export const CityViewComponent = connect<
-    Props,
+export const CityViewComponent = connect<Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>
->(
+    Dispatch<ClientAction>>(
     mapStateToProps,
     mapDispatchToProps
 )(Component);

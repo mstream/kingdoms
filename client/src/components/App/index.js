@@ -2,21 +2,19 @@
  * @flow
  */
 
-import React, { useEffect, useState } from 'react';
-import './style.css';
-import { WorldMapComponent } from '../world-map';
-import { connect } from 'react-redux';
-import type { Dispatch } from 'redux';
-import { CityViewComponent } from '../city-view';
-import { EMPTY_OBJECT } from '../../../../common/src/util';
-import type { ClientState } from '../../state/reducers/root';
-import type { ClientStateCity } from '../../state/reducers/cities';
-import type { ClientAction } from '../../state/actions';
+import React, {useEffect, useState} from 'react';
+import {WorldMapComponent} from '../world-map';
+import {connect} from 'react-redux';
+import type {Dispatch} from 'redux';
+import {CityViewComponent} from '../city-view';
+import {EMPTY_OBJECT} from '../../../../common/src/util';
+import type {ClientState} from '../../state/reducers/root';
+import type {ClientAction} from '../../state/actions';
 
 type OwnProps = {};
 
 type StateProps = {
-    viewedCity: ?ClientStateCity,
+    state: ClientState
 };
 
 type DispatchProps = {};
@@ -27,7 +25,7 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({ viewedCity }: Props) => {
+const Component = ({state}: Props) => {
     const [, setState] = useState(true);
 
     const handleWindowResize = () => {
@@ -42,22 +40,28 @@ const Component = ({ viewedCity }: Props) => {
         };
     }, []);
 
-    return (
+    const windowSize = {x: window.innerWidth, y: window.innerHeight};
+
+    return state != null ? (
         <div>
             <WorldMapComponent
-                windowSize={{ x: window.innerWidth, y: window.innerHeight }}
+                camera={state.camera}
+                cities={Object.keys(state.cities.byId).map(id => state.cities.byId[id])}
+                tiles={state.tiles}
+                windowSize={windowSize}
             />
-            {viewedCity != null && <CityViewComponent city={viewedCity} />}
+            {state.menu.viewedCityId != null &&
+            <CityViewComponent
+                city={state.cities.byId[state.menu.viewedCityId]}/>}
         </div>
+    ) : (
+        <div>loading...</div>
     );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return {
-        viewedCity:
-            state.menu.viewedCityId == null
-                ? null
-                : state.cities.byId[state.menu.viewedCityId],
+        state
     };
 };
 
@@ -67,14 +71,12 @@ const mapDispatchToProps = (
     return EMPTY_OBJECT;
 };
 
-export const AppComponent = connect<
-    Props,
+export const AppComponent = connect<Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>
->(
+    Dispatch<ClientAction>>(
     mapStateToProps,
     mapDispatchToProps
 )(Component);

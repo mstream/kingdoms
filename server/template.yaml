@@ -8,6 +8,9 @@ Parameters:
   DomainName:
     Type: "String"
     Default: "www.maciej-laciak.com"
+  LayerArn:
+    Type: "String"
+    Default: "arn:aws:lambda:eu-west-1:235338379175:layer:common:1"
 
 Resources:
   Vpc:
@@ -21,7 +24,7 @@ Resources:
   PrivateSubnet:
     Type: "AWS::EC2::Subnet"
     Properties:
-      VpcId: !Ref "Vpc"
+      VpcId: !Sub "${Vpc}"
       AvailabilityZone: "eu-west-1a"
       CidrBlock: "10.0.0.0/24"
       Tags:
@@ -31,7 +34,7 @@ Resources:
   PublicSubnet:
     Type: "AWS::EC2::Subnet"
     Properties:
-      VpcId: !Ref "Vpc"
+      VpcId: !Sub "${Vpc}"
       AvailabilityZone: "eu-west-1a"
       CidrBlock: "10.0.1.0/24"
       Tags:
@@ -48,8 +51,8 @@ Resources:
   VpcInternetGatewayAttachment:
     Type: "AWS::EC2::VPCGatewayAttachment"
     Properties:
-      InternetGatewayId: !Ref "InternetGateway"
-      VpcId: !Ref "Vpc"
+      InternetGatewayId: !Sub "${InternetGateway}"
+      VpcId: !Sub "${Vpc}"
 
   NatPublicIpAddress:
     Type: "AWS::EC2::EIP"
@@ -64,8 +67,8 @@ Resources:
   NatGateway:
     Type: "AWS::EC2::NatGateway"
     Properties:
-      AllocationId: !GetAtt "NatPublicIpAddress.AllocationId"
-      SubnetId: !Ref "PublicSubnet"
+      AllocationId: !Sub "${NatPublicIpAddress.AllocationId}"
+      SubnetId: !Sub "${PublicSubnet}"
       Tags:
         - Key: "Name"
           Value: !Sub "${AWS::StackName}"
@@ -73,7 +76,7 @@ Resources:
   PrivateRouteTable:
     Type: "AWS::EC2::RouteTable"
     Properties:
-      VpcId: !Ref "Vpc"
+      VpcId: !Sub "${Vpc}"
       Tags:
         - Key: "Name"
           Value: !Sub "${AWS::StackName}-private"
@@ -81,7 +84,7 @@ Resources:
   PublicRouteTable:
     Type: "AWS::EC2::RouteTable"
     Properties:
-      VpcId: !Ref Vpc
+      VpcId: !Sub "${Vpc}"
       Tags:
         - Key: "Name"
           Value: !Sub "${AWS::StackName}-public"
@@ -89,35 +92,35 @@ Resources:
   PrivateRouteTableAssociation:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      RouteTableId: !Ref "PrivateRouteTable"
-      SubnetId: !Ref "PrivateSubnet"
+      RouteTableId: !Sub "${PrivateRouteTable}"
+      SubnetId: !Sub "${PrivateSubnet}"
 
   PublicRouteTableAssociation:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
-      RouteTableId: !Ref "PublicRouteTable"
-      SubnetId: !Ref "PublicSubnet"
+      RouteTableId: !Sub "${PublicRouteTable}"
+      SubnetId: !Sub "${PublicSubnet}"
 
   PrivateRoute:
     Type: "AWS::EC2::Route"
     Properties:
-      RouteTableId: !Ref "PrivateRouteTable"
+      RouteTableId: !Sub "${PrivateRouteTable}"
       DestinationCidrBlock: "0.0.0.0/0"
-      NatGatewayId: !Ref "NatGateway"
+      NatGatewayId: !Sub "${NatGateway}"
 
   PublicRoute:
     Type: "AWS::EC2::Route"
     Properties:
-      RouteTableId: !Ref "PublicRouteTable"
+      RouteTableId: !Sub "${PublicRouteTable}"
       DestinationCidrBlock: "0.0.0.0/0"
-      GatewayId: !Ref "InternetGateway"
+      GatewayId: !Sub "${InternetGateway}"
 
   FunctionSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
       GroupName: "function"
       GroupDescription: "Function Security Group"
-      VpcId: !Ref "Vpc"
+      VpcId: !Sub "${Vpc}"
       Tags:
         - Key: "Name"
           Value: !Sub "${AWS::StackName}-function"
@@ -127,12 +130,12 @@ Resources:
     Properties:
       GroupName: "redis"
       GroupDescription: "Redis security group"
-      VpcId: !Ref "Vpc"
+      VpcId: !Sub "${Vpc}"
       SecurityGroupIngress:
         - IpProtocol: "tcp"
           FromPort: 6379
           ToPort: 6379
-          SourceSecurityGroupId: !GetAtt "FunctionSecurityGroup.GroupId"
+          SourceSecurityGroupId: !Sub "${FunctionSecurityGroup.GroupId}"
       Tags:
         - Key: "Name"
           Value: !Sub "${AWS::StackName}-redis"
@@ -143,7 +146,7 @@ Resources:
       CacheSubnetGroupName: "redis"
       Description: "Redis Subnet Group"
       SubnetIds:
-        - !Ref "PrivateSubnet"
+        - !Sub "${PrivateSubnet}"
 
   RedisCluster:
     Type: "AWS::ElastiCache::CacheCluster"
@@ -154,7 +157,7 @@ Resources:
       NumCacheNodes: 1
       Engine: "redis"
       VpcSecurityGroupIds:
-        - !GetAtt "RedisSecurityGroup.GroupId"
+        - !Sub "${RedisSecurityGroup.GroupId}"
 
   WebSocket:
     Type: "AWS::ApiGatewayV2::Api"
@@ -171,16 +174,16 @@ Resources:
       MemorySize: 256
       Runtime: "nodejs12.x"
       Layers:
-        - "arn:aws:lambda:eu-west-1:235338379175:layer:common:1"
+        - !Sub "${LayerArn}"
       VpcConfig:
         SecurityGroupIds:
-          - !GetAtt "FunctionSecurityGroup.GroupId"
+          - !Sub "${FunctionSecurityGroup.GroupId}"
         SubnetIds:
-          - !Ref "PrivateSubnet"
+          - !Sub "${PrivateSubnet}"
       Environment:
         Variables:
-          REDIS_HOST: !GetAtt "RedisCluster.RedisEndpoint.Address"
-          REDIS_PORT: !GetAtt "RedisCluster.RedisEndpoint.Port"
+          REDIS_HOST: !Sub "${RedisCluster.RedisEndpoint.Address}"
+          REDIS_PORT: !Sub "${RedisCluster.RedisEndpoint.Port}"
 
   OnDisconnectFunction:
     Type: "AWS::Serverless::Function"
@@ -190,16 +193,16 @@ Resources:
       MemorySize: 256
       Runtime: "nodejs12.x"
       Layers:
-        - "arn:aws:lambda:eu-west-1:235338379175:layer:common:1"
+        - !Sub "${LayerArn}"
       VpcConfig:
         SecurityGroupIds:
-          - !GetAtt "FunctionSecurityGroup.GroupId"
+          - !Sub "${FunctionSecurityGroup.GroupId}"
         SubnetIds:
-          - !Ref "PrivateSubnet"
+          - !Sub "${PrivateSubnet}"
       Environment:
         Variables:
-          REDIS_HOST: !GetAtt "RedisCluster.RedisEndpoint.Address"
-          REDIS_PORT: !GetAtt "RedisCluster.RedisEndpoint.Port"
+          REDIS_HOST: !Sub "${RedisCluster.RedisEndpoint.Address}"
+          REDIS_PORT: !Sub "${RedisCluster.RedisEndpoint.Port}"
 
   SendMessageFunction:
     Type: "AWS::Serverless::Function"
@@ -209,17 +212,17 @@ Resources:
       MemorySize: 256
       Runtime: "nodejs12.x"
       Layers:
-        - "arn:aws:lambda:eu-west-1:235338379175:layer:common:1"
+        - !Sub "${LayerArn}"
       VpcConfig:
         SecurityGroupIds:
-          - !GetAtt "FunctionSecurityGroup.GroupId"
+          - !Sub "${FunctionSecurityGroup.GroupId}"
         SubnetIds:
-          - !Ref "PrivateSubnet"
+          - !Sub "${PrivateSubnet}"
       Environment:
         Variables:
           API_GATEWAY_ENDPOINT: !Sub "${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}"
-          REDIS_HOST: !GetAtt "RedisCluster.RedisEndpoint.Address"
-          REDIS_PORT: !GetAtt "RedisCluster.RedisEndpoint.Port"
+          REDIS_HOST: !Sub "${RedisCluster.RedisEndpoint.Address}"
+          REDIS_PORT: !Sub "${RedisCluster.RedisEndpoint.Port}"
       Policies:
         - Statement:
             - Effect: "Allow"
@@ -239,9 +242,9 @@ Resources:
         - "arn:aws:lambda:eu-west-1:235338379175:layer:common:1"
       VpcConfig:
         SecurityGroupIds:
-          - !GetAtt "FunctionSecurityGroup.GroupId"
+          - !Sub "${FunctionSecurityGroup.GroupId}"
         SubnetIds:
-          - !Ref "PrivateSubnet"
+          - !Sub "${PrivateSubnet}"
       Events:
         StateUpdateScheduledEvent:
           Type: "Schedule"
@@ -250,8 +253,8 @@ Resources:
       Environment:
         Variables:
           API_GATEWAY_ENDPOINT: !Sub "${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}"
-          REDIS_HOST: !GetAtt "RedisCluster.RedisEndpoint.Address"
-          REDIS_PORT: !GetAtt "RedisCluster.RedisEndpoint.Port"
+          REDIS_HOST: !Sub "${RedisCluster.RedisEndpoint.Address}"
+          REDIS_PORT: !Sub "${RedisCluster.RedisEndpoint.Port}"
       Policies:
         - Statement:
             - Effect: "Allow"
@@ -260,13 +263,32 @@ Resources:
               Resource:
                 - !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*"
 
+  ResetStateFunction:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      CodeUri: "src/handlers/reset-state/"
+      Handler: "app.handler"
+      MemorySize: 256
+      Runtime: "nodejs12.x"
+      Layers:
+        - !Sub "${LayerArn}"
+      VpcConfig:
+        SecurityGroupIds:
+          - !Sub "${FunctionSecurityGroup.GroupId}"
+        SubnetIds:
+          - !Sub "${PrivateSubnet}"
+      Environment:
+        Variables:
+          REDIS_HOST: !Sub "${RedisCluster.RedisEndpoint.Address}"
+          REDIS_PORT: !Sub "${RedisCluster.RedisEndpoint.Port}"
+
   OnConnectPermission:
     Type: "AWS::Lambda::Permission"
     DependsOn:
       - "WebSocket"
     Properties:
       Action: "lambda:InvokeFunction"
-      FunctionName: !Ref "OnConnectFunction"
+      FunctionName: !Sub "${OnConnectFunction}"
       Principal: "apigateway.amazonaws.com"
 
   OnDisconnectPermission:
@@ -275,7 +297,7 @@ Resources:
       - "WebSocket"
     Properties:
       Action: "lambda:InvokeFunction"
-      FunctionName: !Ref "OnDisconnectFunction"
+      FunctionName: !Sub "${OnDisconnectFunction}"
       Principal: "apigateway.amazonaws.com"
 
   SendMessagePermission:
@@ -284,13 +306,13 @@ Resources:
       - "WebSocket"
     Properties:
       Action: "lambda:InvokeFunction"
-      FunctionName: !Ref "SendMessageFunction"
+      FunctionName: !Sub "${SendMessageFunction}"
       Principal: "apigateway.amazonaws.com"
 
   ConnectIntegration:
     Type: "AWS::ApiGatewayV2::Integration"
     Properties:
-      ApiId: !Ref "WebSocket"
+      ApiId: !Sub "${WebSocket}"
       Description: "Connect Integration"
       IntegrationType: "AWS_PROXY"
       IntegrationUri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${OnConnectFunction.Arn}/invocations"
@@ -298,7 +320,7 @@ Resources:
   DisconnectIntegration:
     Type: "AWS::ApiGatewayV2::Integration"
     Properties:
-      ApiId: !Ref "WebSocket"
+      ApiId: !Sub "${WebSocket}"
       Description: "Disconnect Integration"
       IntegrationType: "AWS_PROXY"
       IntegrationUri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${OnDisconnectFunction.Arn}/invocations"
@@ -306,7 +328,7 @@ Resources:
   SendIntegration:
     Type: "AWS::ApiGatewayV2::Integration"
     Properties:
-      ApiId: !Ref "WebSocket"
+      ApiId: !Sub "${WebSocket}"
       Description: "Send Integration"
       IntegrationType: "AWS_PROXY"
       IntegrationUri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SendMessageFunction.Arn}/invocations"
@@ -314,7 +336,7 @@ Resources:
   ConnectRoute:
     Type: "AWS::ApiGatewayV2::Route"
     Properties:
-      ApiId: !Ref "WebSocket"
+      ApiId: !Sub "${WebSocket}"
       RouteKey: "$connect"
       AuthorizationType: "NONE"
       OperationName: "ConnectRoute"
@@ -323,7 +345,7 @@ Resources:
   DisconnectRoute:
     Type: "AWS::ApiGatewayV2::Route"
     Properties:
-      ApiId: !Ref "WebSocket"
+      ApiId: !Sub "${WebSocket}"
       RouteKey: "$disconnect"
       AuthorizationType: "NONE"
       OperationName: "DisconnectRoute"
@@ -332,7 +354,7 @@ Resources:
   SendRoute:
     Type: "AWS::ApiGatewayV2::Route"
     Properties:
-      ApiId: !Ref "WebSocket"
+      ApiId: !Sub "${WebSocket}"
       RouteKey: "sendmessage"
       AuthorizationType: "NONE"
       OperationName: "SendRoute"
@@ -345,21 +367,21 @@ Resources:
       - "DisconnectRoute"
       - "SendRoute"
     Properties:
-      ApiId: !Ref "WebSocket"
+      ApiId: !Sub "${WebSocket}"
 
   Stage:
     Type: "AWS::ApiGatewayV2::Stage"
     Properties:
-      StageName: !Ref "StageName"
+      StageName: !Sub "${StageName}"
       Description: !Sub "${StageName} Stage"
-      DeploymentId: !Ref "Deployment"
-      ApiId: !Ref "WebSocket"
+      DeploymentId: !Sub "${Deployment}"
+      ApiId: !Sub "${WebSocket}"
 
   WebsiteBucket:
     Type: "AWS::S3::Bucket"
     DeletionPolicy: "Delete"
     Properties:
-      BucketName: !Ref "DomainName"
+      BucketName: !Sub "${DomainName}"
       AccessControl: "PublicRead"
       WebsiteConfiguration:
         ErrorDocument: "error.html"

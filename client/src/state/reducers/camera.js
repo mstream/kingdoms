@@ -10,8 +10,10 @@ import {
 } from '../../../../common/src/vector';
 import { clipToBoundary } from '../../../../common/src/boundary';
 import { tileSize } from './root';
-import type { Boundary, Geometry, Vector } from '../../../../common/src/types';
 import type { ClientAction } from '../actions';
+import type {Vector} from '../../../../common/src/vector';
+import type {Boundary} from '../../../../common/src/boundary';
+import type {Geometry} from '../../../../common/src/geometry';
 
 export type ClientStateCamera = ?{
     locationLimit: Boundary,

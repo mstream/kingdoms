@@ -5,7 +5,7 @@ import type { Reducer } from 'redux';
 import type { ClientAction } from '../actions';
 import type { ClientState } from './root';
 
-export const globalReducer: Reducer<?ClientState, ClientAction> = (
+export const globalReducer: Reducer<ClientState, ClientAction> = (
     state,
     action
 ) => {
@@ -14,6 +14,9 @@ export const globalReducer: Reducer<?ClientState, ClientAction> = (
     }
     switch (action.type) {
         case 'NAVIGATED_TO_NEXT_CITY': {
+            if (state == null) {
+                return state;
+            }
             const playerId = '1';
             const cityIds = state.cities.byOwnerId[playerId];
             if (cityIds == null) {
@@ -44,6 +47,9 @@ export const globalReducer: Reducer<?ClientState, ClientAction> = (
             };
         }
         case 'NAVIGATED_TO_PREVIOUS_CITY': {
+            if (state == null) {
+                return state;
+            }
             const playerId = '1';
             const cityIds = state.cities.byOwnerId[playerId];
             if (cityIds == null) {

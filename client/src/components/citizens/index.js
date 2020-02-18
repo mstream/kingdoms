@@ -8,20 +8,23 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import peasantImage from '../../assets/images/units/peasant.png';
 import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateCitizen} from '../../state/reducers/cities';
+import type {
+    ClientStateCitizens
+} from '../../state/reducers/cities';
 import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import {numberToQuantityString} from '../../util';
+import {ImageComponent} from '../image';
 
 const citizenVisuals = {
-    PEASANT: {
+    peasant: {
         name: 'Peasant',
-        image: peasantImage
+        image: peasantImage,
     }
 };
 
 type OwnProps = {
-    citizens: $ReadOnlyArray<ClientStateCitizen>,
+    citizens: ClientStateCitizens,
 };
 
 type StateProps = {};
@@ -35,14 +38,15 @@ type Props = {
 };
 
 const Component = ({citizens}: Props) => {
-    const citizenComponents = citizens.map(citizen => {
-        const citizenVisual = citizenVisuals[citizen.type];
+    const citizenComponents = Object.keys(citizens).map(citizenType => {
+        const citizen = citizens[citizenType];
+        const citizenVisual = citizenVisuals[citizenType];
         return (
             <div
-                key={citizen.type}
+                key={citizenType}
                 className="flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm bg-gray-100 shadow-2xs">
                 <p className="text-xs text-center font-medium text-gray-900">{numberToQuantityString({value: citizen.quantity})}</p>
-                <img src={citizenVisual.image} alt="citizen"/>
+                <ImageComponent image={citizenVisual.image} ratio="250%"/>
                 <p className="text-xs text-center text-gray-900">{citizenVisual.name}</p>
             </div>
         );

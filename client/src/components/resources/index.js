@@ -9,25 +9,28 @@ import {connect} from 'react-redux';
 import foodImage from '../../assets/images/resources/food.png';
 import woodImage from '../../assets/images/resources/wood.png';
 import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateResource} from '../../state/reducers/cities';
+import type {
+    ClientStateResource,
+    ClientStateResources
+} from '../../state/reducers/cities';
 import type {ClientAction} from '../../state/actions';
 import {ImageComponent} from '../image';
 import {numberToQuantityString} from '../../util';
 import {CityItemsListComponent} from '../city-items-list';
 
 const resourceVisuals = {
-    FOOD: {
+    food: {
         name: 'Food',
         image: foodImage
     },
-    WOOD: {
+    wood: {
         name: 'Wood',
         image: woodImage
     },
 };
 
 type OwnProps = {
-    resources: $ReadOnlyArray<ClientStateResource>,
+    resources: ClientStateResources,
 };
 
 type StateProps = {};
@@ -40,16 +43,13 @@ type Props = {
     ...DispatchProps,
 };
 
-const ResourceComponent = ({resource}: { resource: ClientStateResource }) => {
-
-};
-
 const Component = ({resources}: Props) => {
-    const resourceComponents = resources.map(resource => {
-        const resourceVisual = resourceVisuals[resource.type];
+    const resourceComponents = Object.keys(resources).map(resourceType => {
+        const resource = resources[resourceType];
+        const resourceVisual = resourceVisuals[resourceType];
         return (
             <div
-                key={resource.type}
+                key={resourceType}
                 className="flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm bg-gray-100 shadow-2xs">
                 <p className="text-xs text-center font-medium text-gray-900">{numberToQuantityString({value: resource.quantity})}</p>
                 <ImageComponent image={resourceVisual.image} ratio="100%"/>

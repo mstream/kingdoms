@@ -2,7 +2,7 @@
  * @flow
  */
 
-import type {ServerState} from '../../common/src/types';
+import type {ServerState} from '../../common/src/state';
 
 export const sendStatusUpdate = async ({
                                            apiGateway,

@@ -2,7 +2,7 @@
  * @flow
  */
 
-import type { ServerState} from '../../../common/src/types';
+import type { ServerState} from '../../../common/src/state';
 import type {Vector} from '../../../common/src/vector';
 
 export type ServerStateUpdated = {

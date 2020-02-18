@@ -9,24 +9,26 @@ import {connect} from 'react-redux';
 import lumberMillImage from '../../assets/images/buildings/lumber-mill.png';
 import pastureImage from '../../assets/images/buildings/pasture.png';
 import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateBuilding} from '../../state/reducers/cities';
+import type {ClientStateBuildings} from '../../state/reducers/cities';
 import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import romanDecimalConverter from 'roman-decimal';
+import {ImageComponent} from '../image';
+import classNames from 'classnames';
 
 const buildingVisuals = {
-    LUMBER_MILL: {
+    lumberMill: {
         name: 'Lumber Mill',
         image: lumberMillImage
     },
-    PASTURE: {
+    pasture: {
         name: 'Pasture',
         image: pastureImage
     },
 };
 
 type OwnProps = {
-    buildings: $ReadOnlyArray<ClientStateBuilding>,
+    buildings: ClientStateBuildings,
 };
 
 type StateProps = {};
@@ -40,14 +42,23 @@ type Props = {
 };
 
 const Component = ({buildings}: Props) => {
-    const buildingComponents = buildings.map(building => {
-        const buildingVisual = buildingVisuals[building.type];
+    const buildingComponents = Object.keys(buildings).map(buildingType => {
+        const building = buildings[buildingType];
+        const buildingVisual = buildingVisuals[buildingType];
+        const isDisabled = building.tier === 0;
+        const className = classNames(
+            'flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm bg-gray-100 shadow-2xs',
+            {
+                'opacity-25': isDisabled,
+                'opacity-100': !isDisabled
+            }
+        );
         return (
             <div
-                key={building.type}
-                className="flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm bg-gray-100 shadow-2xs">
+                key={buildingType}
+                className={className}>
                 <p className="text-xs text-center font-medium text-gray-900">{romanDecimalConverter.roman(building.tier)}</p>
-                <img src={buildingVisual.image} alt="building"/>
+                <ImageComponent image={buildingVisual.image} ratio="100%"/>
                 <p className="text-xs text-center text-gray-900">{buildingVisual.name}</p>
             </div>
         );

@@ -2,8 +2,9 @@
  * @flow
  */
 
-import {initialState, rootReducer} from './root';
+import {rootReducer} from './root';
 import {resetState, updateState} from '../actions';
+import {initialState} from './state';
 
 describe('rootReducer', () => {
     it('handles reset state action', () => {
@@ -17,22 +18,19 @@ describe('rootReducer', () => {
         const previousState = {
             cities: [
                 {
-                    buildings: [
-                        {
-                            type: 'LUMBER_MILL',
+                    buildings: {
+                        lumberMill: {
                             tier: 1,
                         },
-                        {
-                            type: 'PASTURE',
+                        pasture: {
                             tier: 1
                         }
-                    ],
-                    citizens: [
-                        {
-                            type: 'PEASANT',
+                    },
+                    citizens: {
+                        peasant: {
                             quantity: 1000,
                         }
-                    ],
+                    },
                     id: '1',
                     location: {
                         x: 1,
@@ -40,34 +38,29 @@ describe('rootReducer', () => {
                     },
                     name: 'city1',
                     ownerId: '1',
-                    resources: [
-                        {
-                            type: 'FOOD',
+                    resources: {
+                        food: {
                             quantity: 20,
                         },
-                        {
-                            type: 'WOOD',
+                        wood: {
                             quantity: 10,
                         }
-                    ]
+                    }
                 },
                 {
-                    buildings:  [
-                        {
-                            type: 'LUMBER_MILL',
+                    buildings: {
+                        lumberMill: {
                             tier: 2,
                         },
-                        {
-                            type: 'PASTURE',
+                        pasture: {
                             tier: 1
                         }
-                    ],
-                    citizens: [
-                        {
-                            type: 'PEASANT',
+                    },
+                    citizens: {
+                        peasant: {
                             quantity: 500,
                         }
-                    ],
+                    },
                     id: '2',
                     location: {
                         x: 2,
@@ -75,16 +68,14 @@ describe('rootReducer', () => {
                     },
                     name: 'city2',
                     ownerId: '2',
-                    resources: [
-                        {
-                            type: 'FOOD',
+                    resources: {
+                        food: {
                             quantity: 10,
                         },
-                        {
-                            type: 'WOOD',
+                        wood: {
                             quantity: 0,
                         }
-                    ]
+                    }
                 },
             ],
             time: '2000-01-01T00:00:00Z',
@@ -95,22 +86,19 @@ describe('rootReducer', () => {
         const expected = {
             cities: [
                 {
-                    buildings: [
-                        {
-                            type: 'LUMBER_MILL',
+                    buildings: {
+                        lumberMill: {
                             tier: 1,
                         },
-                        {
-                            type: 'PASTURE',
+                        pasture: {
                             tier: 1
                         }
-                    ],
-                    citizens: [
-                        {
-                            type: 'PEASANT',
+                    },
+                    citizens: {
+                        peasant: {
                             quantity: 1009,
                         }
-                    ],
+                    },
                     id: '1',
                     location: {
                         x: 1,
@@ -118,34 +106,29 @@ describe('rootReducer', () => {
                     },
                     name: 'city1',
                     ownerId: '1',
-                    resources: [
-                        {
-                            type: 'FOOD',
+                    resources: {
+                        food: {
                             quantity: 110,
                         },
-                        {
-                            type: 'WOOD',
+                        wood: {
                             quantity: 110,
                         }
-                    ]
+                    }
                 },
                 {
-                    buildings: [
-                        {
-                            type: 'LUMBER_MILL',
+                    buildings: {
+                        lumberMill: {
                             tier: 2,
                         },
-                        {
-                            type: 'PASTURE',
+                        pasture: {
                             tier: 1
                         }
-                    ],
-                    citizens: [
-                        {
-                            type: 'PEASANT',
+                    },
+                    citizens: {
+                        peasant: {
                             quantity: 504,
                         }
-                    ],
+                    },
                     id: '2',
                     location: {
                         x: 2,
@@ -153,16 +136,14 @@ describe('rootReducer', () => {
                     },
                     name: 'city2',
                     ownerId: '2',
-                    resources: [
-                        {
-                            type: 'FOOD',
+                    resources: {
+                        food: {
                             quantity: 105,
                         },
-                        {
-                            type: 'WOOD',
+                        wood: {
                             quantity: 200,
                         }
-                    ]
+                    }
                 },
             ],
             time: updateTime,

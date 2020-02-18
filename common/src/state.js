@@ -4,40 +4,49 @@
 
 import type {Vector} from './vector';
 
-type ServerStateBuilding = {
-    tier: number,
-};
+export type ChangeInfo = { [string]: number, ... };
 
-type ServerStateCitizen = {
-    quantity: number
-};
-
-type ServerStateResource = {
+type Dynamic = {
+    changeInfo: ChangeInfo,
     quantity: number,
 };
 
-type ServerStateBuildings = {
-    lumberMill: ServerStateBuilding,
-    pasture: ServerStateBuilding
+export type CommonStateBuilding = {
+    tier: number,
+};
+
+export type CommonStateCitizen = Dynamic & {
+    quantity: number,
+    ...
+};
+
+export type CommonStateResource = Dynamic & {
+    quantity: number,
+    ...
+};
+
+export type CommonStateBuildings = {
+    lumberMill: CommonStateBuilding,
+    pasture: CommonStateBuilding
 }
 
-type ServerStateCitizens = {
-    peasant: ServerStateCitizen
+export type CommonStateCitizens = {
+    peasant: CommonStateCitizen
 }
 
-type ServerStateResources = {
-    food: ServerStateResource,
-    wood: ServerStateResource
+export type CommonStateResources = {
+    food: CommonStateResource,
+    wood: CommonStateResource
 }
 
 type ServerStateCity = {
-    buildings: ServerStateBuildings,
-    citizens: ServerStateCitizens,
+    buildings: CommonStateBuildings,
+    citizens: CommonStateCitizens,
     id: string,
     location: Vector,
     name: string,
     ownerId: string,
-    resources: ServerStateResources,
+    resources: CommonStateResources,
 };
 
 export type ServerStateCities = $ReadOnlyArray<ServerStateCity>;

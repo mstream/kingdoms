@@ -9,12 +9,12 @@ import {connect} from 'react-redux';
 import lumberMillImage from '../../assets/images/buildings/lumber-mill.png';
 import pastureImage from '../../assets/images/buildings/pasture.png';
 import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateBuildings} from '../../state/reducers/cities';
 import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import romanDecimalConverter from 'roman-decimal';
 import {ImageComponent} from '../image';
 import classNames from 'classnames';
+import type {CommonStateBuildings} from '../../../../common/src/state';
 
 const buildingVisuals = {
     lumberMill: {
@@ -28,7 +28,7 @@ const buildingVisuals = {
 };
 
 type OwnProps = {
-    buildings: ClientStateBuildings,
+    buildings: CommonStateBuildings,
 };
 
 type StateProps = {};

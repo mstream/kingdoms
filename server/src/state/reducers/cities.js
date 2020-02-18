@@ -4,28 +4,45 @@
 
 import type {Reducer} from 'redux';
 import type {ServerAction} from '../actions';
-import type {ServerState} from '../../../../common/src/state';
+import type {ChangeInfo, ServerState} from '../../../../common/src/state';
 import {initialState} from './state';
 
-const resourceIncreaseRateCoefficient = 1;
-const unitFoodDemand = 0.0001;
+const resourceIncreaseChangeRateCoefficient = 10000;
+const unitFoodDemand = 1;
 const cityCapacity = 10000;
-const populationGrowthRateCoefficient = 0.0001;
+const populationGrowthChangeRateCoefficient = 1;
 
-const calculateFoodChangeRate = ({citizensQuantity, pastureTier}) => {
-    const increaseRate = resourceIncreaseRateCoefficient * pastureTier;
-    const decreaseRate = citizensQuantity * unitFoodDemand;
-    return increaseRate - decreaseRate;
+const convertChangeInfoToChangeRate = ({changeInfo}: { changeInfo: ChangeInfo }): number => {
+    return Object
+        .keys(changeInfo)
+        .map(changeType => changeInfo[changeType])
+        .reduce(
+            (changeRate, partialChangeRate) => {
+                return changeRate + partialChangeRate;
+            },
+            0
+        );
 };
 
-const calculateWoodChangeRate = ({lumberMillTier}) => {
-    const increaseRate = resourceIncreaseRateCoefficient * lumberMillTier;
-    const decreaseRate = 0;
-    return increaseRate - decreaseRate;
+const convertChangeRateToDelta = ({changeRate, timeDelta}: { changeRate: number, timeDelta: number }): number => {
+    return (changeRate / 3600) * timeDelta;
+};
+
+const createFoodChangeInfo = ({citizensQuantity, pastureTier}: { citizensQuantity: number, pastureTier: number }): ChangeInfo => {
+    return {
+        'pasture production': resourceIncreaseChangeRateCoefficient * pastureTier,
+        'citizens maintenance': -citizensQuantity * unitFoodDemand
+    };
+};
+
+const createWoodChangeInfo = ({lumberMillTier}: { lumberMillTier: number }): ChangeInfo => {
+    return {
+        'lumber mill production': resourceIncreaseChangeRateCoefficient * lumberMillTier,
+    };
 };
 
 const calculatePeasantChangeRate = ({citizensQuantity}) => {
-    return populationGrowthRateCoefficient * citizensQuantity * (1 - (citizensQuantity / cityCapacity));
+    return populationGrowthChangeRateCoefficient * citizensQuantity * (1 - (citizensQuantity / cityCapacity));
 };
 
 export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initialState, action) => {
@@ -52,31 +69,42 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
                 const newCitiesState = citiesState.map(city => {
                         const citizens = city.citizens;
                         const resources = city.resources;
+
+                        const foodChangeInfo = createFoodChangeInfo({
+                            citizensQuantity: citizens.peasant.quantity,
+                            pastureTier: city.buildings.pasture.tier
+                        });
+
+                        const woodChangeInfo = createWoodChangeInfo({
+                            lumberMillTier: city.buildings.lumberMill.tier
+                        });
+
                         const newResourcesState = {
                             food: {
                                 ...resources.food,
-                                quantity: Math.max(
-                                    0,
-                                    resources.food.quantity + timeDelta * calculateFoodChangeRate({
-                                        citizensQuantity: city.citizens.peasant.quantity,
-                                        pastureTier: city.buildings.pasture.tier
-                                    })
-                                )
+                                changeInfo: foodChangeInfo,
+                                quantity: Math.max(0, resources.food.quantity + convertChangeRateToDelta({
+                                    changeRate: convertChangeInfoToChangeRate({changeInfo: foodChangeInfo}),
+                                    timeDelta
+                                }))
                             },
                             wood: {
                                 ...resources.wood,
-                                quantity: resources.wood.quantity + timeDelta * calculateWoodChangeRate({
-                                    lumberMillTier: city.buildings.lumberMill.tier
-                                }),
+                                changeInfo: woodChangeInfo,
+                                quantity: Math.max(0, resources.wood.quantity + convertChangeRateToDelta({
+                                    changeRate: convertChangeInfoToChangeRate({changeInfo: woodChangeInfo}),
+                                    timeDelta
+                                }))
                             }
                         };
 
                         const newCitizensState = {
                             peasant: {
                                 ...citizens.peasant,
-                                quantity: citizens.peasant.quantity + Math.floor(timeDelta * calculatePeasantChangeRate({
-                                    citizensQuantity: citizens.peasant.quantity
-                                }))
+                                quantity: Math.max(0, citizens.peasant.quantity + Math.floor(convertChangeRateToDelta({
+                                    changeRate: calculatePeasantChangeRate({citizensQuantity: citizens.peasant.quantity}),
+                                    timeDelta
+                                })))
                             }
                         };
 

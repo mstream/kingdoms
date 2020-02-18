@@ -8,45 +8,24 @@ import type {Reducer} from 'redux';
 import reduceReducers from 'reduce-reducers';
 import type {ClientAction} from '../../actions';
 import type {Geometry} from '../../../../../common/src/geometry';
+import type {
+    CommonStateBuildings,
+    CommonStateCitizens,
+    CommonStateResources
+} from '../../../../../common/src/state';
 
 export type ClientStateCitiesById = { [string]: ClientStateCity };
 
 export type ClientStateCitiesByOwnerId = { [string]: $ReadOnlyArray<string> };
 
-export type ClientStateResource = {
-    quantity: number,
-};
-
-export type ClientStateBuilding = {
-    tier: number,
-};
-
-export type ClientStateCitizen = {
-    quantity: number,
-};
-
-export type ClientStateBuildings = {
-    lumberMill: ClientStateBuilding,
-    pasture: ClientStateBuilding
-};
-
-export type ClientStateCitizens = {
-    peasant: ClientStateCitizen
-};
-
-export type ClientStateResources = {
-    food: ClientStateResource,
-    wood: ClientStateResource
-};
-
 export type ClientStateCity = ClientStateEntity & {
-    buildings: ClientStateBuildings,
-    citizens: ClientStateCitizens,
+    buildings: CommonStateBuildings,
+    citizens: CommonStateCitizens,
     geometry: Geometry,
     id: string,
     name: string,
     ownerId: string,
-    resources: ClientStateResources,
+    resources: CommonStateResources,
 };
 
 export type ClientStateCities = {

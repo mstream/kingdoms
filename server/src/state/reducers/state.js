@@ -17,6 +17,7 @@ export const initialState: ServerState = {
             },
             citizens: {
                 peasant: {
+                    changeInfo: {},
                     quantity: 3000
                 }
             },
@@ -30,10 +31,12 @@ export const initialState: ServerState = {
             resources: {
                 food:
                     {
+                        changeInfo: {},
                         quantity: 100,
                     },
                 wood:
                     {
+                        changeInfo: {},
                         quantity: 200,
                     },
             },
@@ -49,7 +52,8 @@ export const initialState: ServerState = {
             },
             citizens: {
                 peasant: {
-                    quantity: 2000
+                    changeInfo: {},
+                    quantity: 2000,
                 }
             },
             id: '2',
@@ -62,10 +66,12 @@ export const initialState: ServerState = {
             resources: {
                 food:
                     {
+                        changeInfo: {},
                         quantity: 50,
                     },
                 wood:
                     {
+                        changeInfo: {},
                         quantity: 100,
                     },
             },
@@ -81,6 +87,7 @@ export const initialState: ServerState = {
             },
             citizens: {
                 peasant: {
+                    changeInfo: {},
                     quantity: 1000
                 }
             },
@@ -94,10 +101,12 @@ export const initialState: ServerState = {
             resources: {
                 food:
                     {
+                        changeInfo: {},
                         quantity: 25,
                     },
                 wood:
                     {
+                        changeInfo: {},
                         quantity: 50,
                     },
             },

@@ -9,14 +9,11 @@ import {connect} from 'react-redux';
 import foodImage from '../../assets/images/resources/food.png';
 import woodImage from '../../assets/images/resources/wood.png';
 import type {ClientState} from '../../state/reducers/root';
-import type {
-    ClientStateResource,
-    ClientStateResources
-} from '../../state/reducers/cities';
 import type {ClientAction} from '../../state/actions';
 import {ImageComponent} from '../image';
 import {numberToQuantityString} from '../../util';
 import {CityItemsListComponent} from '../city-items-list';
+import type {CommonStateResources} from '../../../../common/src/state';
 
 const resourceVisuals = {
     food: {
@@ -30,7 +27,7 @@ const resourceVisuals = {
 };
 
 type OwnProps = {
-    resources: ClientStateResources,
+    resources: CommonStateResources,
 };
 
 type StateProps = {};

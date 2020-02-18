@@ -8,13 +8,11 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import peasantImage from '../../assets/images/units/peasant.png';
 import type {ClientState} from '../../state/reducers/root';
-import type {
-    ClientStateCitizens
-} from '../../state/reducers/cities';
 import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import {numberToQuantityString} from '../../util';
 import {ImageComponent} from '../image';
+import type {CommonStateCitizens} from '../../../../common/src/state';
 
 const citizenVisuals = {
     peasant: {
@@ -24,7 +22,7 @@ const citizenVisuals = {
 };
 
 type OwnProps = {
-    citizens: ClientStateCitizens,
+    citizens: CommonStateCitizens,
 };
 
 type StateProps = {};

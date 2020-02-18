@@ -40,10 +40,10 @@ describe('rootReducer', () => {
                     ownerId: '1',
                     resources: {
                         food: {
-                            quantity: 20,
+                            quantity: 2000,
                         },
                         wood: {
-                            quantity: 10,
+                            quantity: 1000,
                         }
                     }
                 },
@@ -70,7 +70,7 @@ describe('rootReducer', () => {
                     ownerId: '2',
                     resources: {
                         food: {
-                            quantity: 10,
+                            quantity: 1000,
                         },
                         wood: {
                             quantity: 0,
@@ -100,10 +100,10 @@ describe('rootReducer', () => {
                     ownerId: '3',
                     resources: {
                         food: {
-                            quantity: 10,
+                            quantity: 1000,
                         },
                         wood: {
-                            quantity: 10,
+                            quantity: 1000,
                         }
                     }
                 },
@@ -111,7 +111,7 @@ describe('rootReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSizeInTiles: {x: 10, y: 10}
         };
-        const updateTime = '2000-01-01T00:01:40Z';
+        const updateTime = '2000-01-01T01:00:00Z';
         const action = updateState({time: updateTime});
         const expected = {
             cities: [
@@ -126,7 +126,7 @@ describe('rootReducer', () => {
                     },
                     citizens: {
                         peasant: {
-                            quantity: 1009,
+                            quantity: 1900,
                         }
                     },
                     id: '1',
@@ -138,10 +138,17 @@ describe('rootReducer', () => {
                     ownerId: '1',
                     resources: {
                         food: {
-                            quantity: 110,
+                            changeInfo: {
+                                'pasture production': 10000,
+                                'citizens maintenance': -1000,
+                            },
+                            quantity: 11000,
                         },
                         wood: {
-                            quantity: 110,
+                            changeInfo: {
+                                'lumber mill production': 10000,
+                            },
+                            quantity: 11000,
                         }
                     }
                 },
@@ -156,7 +163,7 @@ describe('rootReducer', () => {
                     },
                     citizens: {
                         peasant: {
-                            quantity: 504,
+                            quantity: 975,
                         }
                     },
                     id: '2',
@@ -168,10 +175,17 @@ describe('rootReducer', () => {
                     ownerId: '2',
                     resources: {
                         food: {
-                            quantity: 105,
+                            changeInfo: {
+                                'pasture production': 10000,
+                                'citizens maintenance': -500,
+                            },
+                            quantity: 10500,
                         },
                         wood: {
-                            quantity: 200,
+                            changeInfo: {
+                                'lumber mill production': 20000,
+                            },
+                            quantity: 20000,
                         }
                     }
                 },
@@ -198,10 +212,17 @@ describe('rootReducer', () => {
                     ownerId: '3',
                     resources: {
                         food: {
+                            changeInfo: {
+                                'pasture production': 0,
+                                'citizens maintenance': -10000,
+                            },
                             quantity: 0,
                         },
                         wood: {
-                            quantity: 10,
+                            changeInfo: {
+                                'lumber mill production': 0,
+                            },
+                            quantity: 1000,
                         }
                     }
                 },

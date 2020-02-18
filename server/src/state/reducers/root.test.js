@@ -77,6 +77,36 @@ describe('rootReducer', () => {
                         }
                     }
                 },
+                {
+                    buildings: {
+                        lumberMill: {
+                            tier: 0,
+                        },
+                        pasture: {
+                            tier: 0
+                        }
+                    },
+                    citizens: {
+                        peasant: {
+                            quantity: 10000,
+                        }
+                    },
+                    id: '3',
+                    location: {
+                        x: 2,
+                        y: 2,
+                    },
+                    name: 'city3',
+                    ownerId: '3',
+                    resources: {
+                        food: {
+                            quantity: 10,
+                        },
+                        wood: {
+                            quantity: 10,
+                        }
+                    }
+                },
             ],
             time: '2000-01-01T00:00:00Z',
             worldSizeInTiles: {x: 10, y: 10}
@@ -142,6 +172,36 @@ describe('rootReducer', () => {
                         },
                         wood: {
                             quantity: 200,
+                        }
+                    }
+                },
+                {
+                    buildings: {
+                        lumberMill: {
+                            tier: 0,
+                        },
+                        pasture: {
+                            tier: 0
+                        }
+                    },
+                    citizens: {
+                        peasant: {
+                            quantity: 10000,
+                        }
+                    },
+                    id: '3',
+                    location: {
+                        x: 2,
+                        y: 2,
+                    },
+                    name: 'city3',
+                    ownerId: '3',
+                    resources: {
+                        food: {
+                            quantity: 0,
+                        },
+                        wood: {
+                            quantity: 10,
                         }
                     }
                 },

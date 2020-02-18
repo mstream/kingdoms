@@ -55,10 +55,13 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
                         const newResourcesState = {
                             food: {
                                 ...resources.food,
-                                quantity: resources.food.quantity + timeDelta * calculateFoodChangeRate({
-                                    citizensQuantity: city.citizens.peasant.quantity,
-                                    pastureTier: city.buildings.pasture.tier
-                                })
+                                quantity: Math.max(
+                                    0,
+                                    resources.food.quantity + timeDelta * calculateFoodChangeRate({
+                                        citizensQuantity: city.citizens.peasant.quantity,
+                                        pastureTier: city.buildings.pasture.tier
+                                    })
+                                )
                             },
                             wood: {
                                 ...resources.wood,

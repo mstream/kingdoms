@@ -14,6 +14,7 @@ import {ImageComponent} from '../image';
 import {numberToQuantityString} from '../../util';
 import {CityItemsListComponent} from '../city-items-list';
 import type {CommonStateResources} from '../../../../common/src/state';
+import {ChangeInfoComponent} from '../change-info';
 
 const resourceVisuals = {
     food: {
@@ -47,8 +48,12 @@ const Component = ({resources}: Props) => {
         return (
             <div
                 key={resourceType}
-                className="flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm bg-gray-100 shadow-2xs">
-                <p className="text-xs text-center font-medium text-gray-900">{numberToQuantityString({value: resource.quantity})}</p>
+                className="relative group flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm bg-gray-100 shadow-2xs">
+                <p className="text-sm text-center font-medium text-gray-900">{numberToQuantityString({value: resource.quantity})}</p>
+                <div
+                    className="absolute invisible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 group-hover:visible cursor-default pointer-events-none">
+                    <ChangeInfoComponent changeInfo={resource.changeInfo}/>
+                </div>
                 <ImageComponent image={resourceVisual.image} ratio="100%"/>
                 <p className="text-xs text-center text-gray-900">{resourceVisual.name}</p>
             </div>

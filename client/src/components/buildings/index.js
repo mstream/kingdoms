@@ -57,7 +57,7 @@ const Component = ({buildings}: Props) => {
             <div
                 key={buildingType}
                 className={className}>
-                <p className="text-xs text-center font-medium text-gray-900">{romanDecimalConverter.roman(building.tier)}</p>
+                <p className="text-sm text-center font-medium text-gray-900">{romanDecimalConverter.roman(building.tier)}</p>
                 <ImageComponent image={buildingVisual.image} ratio="100%"/>
                 <p className="text-xs text-center text-gray-900">{buildingVisual.name}</p>
             </div>

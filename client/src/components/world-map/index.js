@@ -111,7 +111,10 @@ const transformObjectGeometries = <T: { geometry: Geometry, ... }>({
             ...object,
             geometry: {
                 location: zoomedLocation,
-                size: windowGeometry.size,
+                size: {
+                    x: Math.ceil(windowGeometry.size.x),
+                    y: Math.ceil(windowGeometry.size.y),
+                },
             },
         };
     });

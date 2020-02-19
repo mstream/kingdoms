@@ -3,3 +3,6 @@
 @import 'tailwindcss/utilities';
 @import '~@icon/icofont/icofont.css';
 
+body {
+    background: rgba(0, 0, 0, 1);
+}

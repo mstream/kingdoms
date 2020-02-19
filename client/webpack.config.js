@@ -1,13 +1,13 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const tailwindcssPlugin = require('tailwindcss');
-const path = require('path')
-const glob = require('glob')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const PurgecssPlugin = require('purgecss-webpack-plugin')
+const path = require('path');
+const glob = require('glob');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
 
 const PATHS = {
     src: path.join(__dirname, 'src')
-}
+};
 
 module.exports = {
     module: {
@@ -51,11 +51,11 @@ module.exports = {
             filename: './error.html'
         }),
         new MiniCssExtractPlugin({
-            filename: "[name].css",
+            filename: '[name].css',
         }),
         new PurgecssPlugin({
             defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-            paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+            paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true}),
         }),
     ]
 };

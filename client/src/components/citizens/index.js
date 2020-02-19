@@ -13,6 +13,7 @@ import {CityItemsListComponent} from '../city-items-list';
 import {numberToQuantityString} from '../../util';
 import {ImageComponent} from '../image';
 import type {CommonStateCitizens} from '../../../../common/src/state';
+import {ChangeInfoComponent} from '../change-info';
 
 const citizenVisuals = {
     peasant: {
@@ -42,8 +43,12 @@ const Component = ({citizens}: Props) => {
         return (
             <div
                 key={citizenType}
-                className="flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm bg-gray-100 shadow-2xs">
+                className="relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm bg-gray-100 shadow-2xs">
                 <p className="text-sm text-center font-medium text-gray-900">{numberToQuantityString({value: citizen.quantity})}</p>
+                <div
+                    className="absolute invisible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 group-hover:visible cursor-default pointer-events-none">
+                    <ChangeInfoComponent changeInfo={citizen.changeInfo}/>
+                </div>
                 <ImageComponent image={citizenVisual.image} ratio="250%"/>
                 <p className="text-xs text-center text-gray-900">{citizenVisual.name}</p>
             </div>

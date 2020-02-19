@@ -84,7 +84,7 @@ const Component = ({
                 </div>
                 <CitizensComponent citizens={city.citizens}/>
                 <ResourcesComponent resources={city.resources}/>
-                <BuildingsComponent buildings={city.buildings}/>
+                <BuildingsComponent buildings={city.buildings} resources={city.resources}/>
             </div>
         </div>
     );

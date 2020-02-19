@@ -2,6 +2,7 @@
  * @flow
  */
 
+import type {Node} from 'react';
 import React from 'react';
 import type {ClientState} from '../../state/reducers/root';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
@@ -10,7 +11,7 @@ import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 
 
-type OwnProps = { image: string, ratio: string };
+type OwnProps = { children: Node, image: string, ratio: string };
 
 type StateProps = {};
 
@@ -22,7 +23,7 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({image, ratio}: Props) => {
+const Component = ({children, image, ratio}: Props) => {
     const style = {
         paddingBottom: ratio
     };
@@ -36,6 +37,7 @@ const Component = ({image, ratio}: Props) => {
                 src={image}
                 alt="image"
             />
+            {children}
         </div>
     );
 };

@@ -1,8 +1,10 @@
+/* purgecss start ignore */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
+/* purgecss end ignore */
 @import 'tailwindcss/utilities';
 @import '~@icon/icofont/icofont.css';
 
 body {
-    background: rgba(0, 0, 0, 1);
+    background: rgba(0, 0, 0, 1.0);
 }

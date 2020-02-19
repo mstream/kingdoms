@@ -1,5 +1,13 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const tailwindcssPlugin = require('tailwindcss');
+const path = require('path')
+const glob = require('glob')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const PurgecssPlugin = require('purgecss-webpack-plugin')
+
+const PATHS = {
+    src: path.join(__dirname, 'src')
+}
 
 module.exports = {
     module: {
@@ -16,7 +24,7 @@ module.exports = {
                 test: /\.css$/,
                 exclude: /node_modules/,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     'css-loader',
                     {
                         loader: 'postcss-loader',
@@ -41,6 +49,13 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: './src/assets/html/error.html',
             filename: './error.html'
-        })
+        }),
+        new MiniCssExtractPlugin({
+            filename: "[name].css",
+        }),
+        new PurgecssPlugin({
+            defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+            paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+        }),
     ]
 };

@@ -6,24 +6,26 @@ import type {Vector} from './vector';
 
 export type ChangeInfo = { [string]: number, ... };
 
+export type UpgradeCost = {
+    food?: number,
+    wood?: number,
+};
+
 type Dynamic = {
     changeInfo: ChangeInfo,
     quantity: number,
 };
 
-export type CommonStateBuilding = {
+type Upgradeable = {
     tier: number,
+    upgradeCost: UpgradeCost,
 };
 
-export type CommonStateCitizen = Dynamic & {
-    quantity: number,
-    ...
-};
+export type CommonStateBuilding = Upgradeable;
 
-export type CommonStateResource = Dynamic & {
-    quantity: number,
-    ...
-};
+export type CommonStateCitizen = Dynamic;
+
+export type CommonStateResource = Dynamic;
 
 export type CommonStateBuildings = {
     lumberMill: CommonStateBuilding,
@@ -51,8 +53,24 @@ export type ServerStateCity = {
 
 export type ServerStateCities = $ReadOnlyArray<ServerStateCity>;
 
+export type ServerStateBuildingUpgradeCosts = {
+    lumberMill: UpgradeCost,
+    pasture: UpgradeCost,
+};
+
+export type ServerStateRules = {
+    baseCityCapacity: number,
+    buildingUpgradeCoefficient: number,
+    buildingUpgradeCosts: ServerStateBuildingUpgradeCosts,
+    populationGrowthChangeRateCoefficient: number,
+    resourceIncreaseChangeRateCoefficient: number,
+    unitFoodDemand: number,
+    unitStarvingCoefficient: number,
+};
+
 export type ServerState = {
     cities: ServerStateCities,
+    rules: ServerStateRules,
     time: ?string,
     worldSizeInTiles: Vector,
 };

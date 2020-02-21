@@ -6,16 +6,12 @@ import type {Reducer} from 'redux';
 import type {
     ChangeInfo,
     ServerState,
-    ServerStateCity
+    ServerStateCity,
+    ServerStateRules,
+    UpgradeCost
 } from '../../../../common/src/state';
 import {initialState} from './state';
 import type {ServerAction} from '../../../../common/src/actions';
-
-const resourceIncreaseChangeRateCoefficient = 10000;
-const unitFoodDemand = 1;
-const unitStarvingCoefficient = 0.2;
-const baseCityCapacity = 1000;
-const populationGrowthChangeRateCoefficient = 1;
 
 const convertChangeInfoToChangeRate = ({changeInfo}: { changeInfo: ChangeInfo }): number => {
     return Object
@@ -33,25 +29,34 @@ const convertChangeRateToDelta = ({changeRate, timeDelta}: { changeRate: number,
     return (changeRate / 3600) * timeDelta;
 };
 
-const createFoodChangeInfo = ({citizensQuantity, pastureTier}: { citizensQuantity: number, pastureTier: number }): ChangeInfo => {
+const createFoodChangeInfo = ({citizensQuantity, pastureTier, rules}: { citizensQuantity: number, pastureTier: number, rules: ServerStateRules }): ChangeInfo => {
     return {
-        'pasture production': resourceIncreaseChangeRateCoefficient * pastureTier,
-        'citizens maintenance': -citizensQuantity * unitFoodDemand
+        'pasture production': rules.resourceIncreaseChangeRateCoefficient * pastureTier,
+        'citizens maintenance': -citizensQuantity * rules.unitFoodDemand
     };
 };
 
-const createWoodChangeInfo = ({lumberMillTier}: { lumberMillTier: number }): ChangeInfo => {
+const createWoodChangeInfo = ({lumberMillTier, rules}: { lumberMillTier: number, rules: ServerStateRules }): ChangeInfo => {
     return {
-        'lumber mill production': resourceIncreaseChangeRateCoefficient * lumberMillTier,
+        'lumber mill production': rules.resourceIncreaseChangeRateCoefficient * lumberMillTier,
     };
 };
 
-const createPeasantChangeInfo = ({buildingTiersSum, citizensQuantity, food, foodChangeRate}: { buildingTiersSum: number, citizensQuantity: number, food: number, foodChangeRate: number }) => {
-    const starvingPeopleQuantity = food > 0 || foodChangeRate > 0 ? 0 : Math.abs(foodChangeRate * unitFoodDemand);
-    const cityCapacity = baseCityCapacity + Math.max(0, baseCityCapacity * buildingTiersSum - starvingPeopleQuantity * unitStarvingCoefficient);
-    const growthFactorChange = populationGrowthChangeRateCoefficient * citizensQuantity * (1 - (citizensQuantity / cityCapacity));
+const createPeasantChangeInfo = ({buildingTiersSum, citizensQuantity, food, foodChangeRate, rules}: { buildingTiersSum: number, citizensQuantity: number, food: number, foodChangeRate: number, rules: ServerStateRules }) => {
+    const starvingPeopleQuantity = food > 0 || foodChangeRate > 0 ? 0 : Math.abs(foodChangeRate * rules.unitFoodDemand);
+    const cityCapacity = rules.baseCityCapacity + Math.max(0, rules.baseCityCapacity * buildingTiersSum - starvingPeopleQuantity * rules.unitStarvingCoefficient);
+    const growthFactorChange = rules.populationGrowthChangeRateCoefficient * citizensQuantity * (1 - (citizensQuantity / cityCapacity));
     return {
         'growth rate': growthFactorChange
+    };
+};
+
+const calculateBuildingUpgradeCost = ({buildingType, rules, tier}: { buildingType: string, rules: ServerStateRules, tier: number }): UpgradeCost => {
+    const baseUpgradeCost = rules.buildingUpgradeCosts[buildingType];
+    const factor = 1 + tier * rules.buildingUpgradeCoefficient;
+    return {
+        food: baseUpgradeCost.food * factor,
+        wood: baseUpgradeCost.wood * factor,
     };
 };
 
@@ -80,7 +85,7 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
             return {
                 ...state,
                 cities: newCities
-            }
+            };
         }
         case 'EXECUTE_TIME_STEP': {
             const stateTime = state.time;
@@ -102,16 +107,36 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
             const citiesState = state.cities;
 
             const newCitiesState = citiesState.map<ServerStateCity>((city) => {
-                    const citizens = city.citizens;
-                    const resources = city.resources;
+                    const {buildings, citizens, resources} = city;
+
+                    const newBuildingsState = {
+                        lumberMill: {
+                            ...buildings.lumberMill,
+                            upgradeCost: calculateBuildingUpgradeCost({
+                                buildingType: 'lumberMill',
+                                rules: state.rules,
+                                tier: buildings.lumberMill.tier
+                            })
+                        },
+                        pasture: {
+                            ...buildings.pasture,
+                            upgradeCost: calculateBuildingUpgradeCost({
+                                buildingType: 'pasture',
+                                rules: state.rules,
+                                tier: buildings.lumberMill.tier
+                            })
+                        }
+                    };
 
                     const foodChangeInfo = createFoodChangeInfo({
                         citizensQuantity: citizens.peasant.quantity,
-                        pastureTier: city.buildings.pasture.tier
+                        pastureTier: city.buildings.pasture.tier,
+                        rules: state.rules,
                     });
 
                     const woodChangeInfo = createWoodChangeInfo({
-                        lumberMillTier: city.buildings.lumberMill.tier
+                        lumberMillTier: city.buildings.lumberMill.tier,
+                        rules: state.rules,
                     });
 
                     const foodChangeRate = convertChangeInfoToChangeRate({changeInfo: foodChangeInfo});
@@ -154,7 +179,8 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
                         buildingTiersSum,
                         citizensQuantity: citizens.peasant.quantity,
                         food: newFoodQuantity,
-                        foodChangeRate
+                        foodChangeRate,
+                        rules: state.rules
                     });
 
                     const newPeasantsQuantity = Math.max(0, citizens.peasant.quantity + Math.floor(convertChangeRateToDelta({
@@ -172,6 +198,7 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
 
                     return {
                         ...city,
+                        buildings: newBuildingsState,
                         citizens: newCitizensState,
                         resources: newResourcesState,
                     };

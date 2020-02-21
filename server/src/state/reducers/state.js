@@ -9,10 +9,12 @@ export const initialState: ServerState = {
         {
             buildings: {
                 pasture: {
-                    tier: 2
+                    tier: 2,
+                    upgradeCost: {},
                 },
                 lumberMill: {
-                    tier: 1
+                    tier: 1,
+                    upgradeCost: {},
                 }
             },
             citizens: {
@@ -44,10 +46,12 @@ export const initialState: ServerState = {
         {
             buildings: {
                 pasture: {
-                    tier: 2
+                    tier: 2,
+                    upgradeCost: {},
                 },
                 lumberMill: {
-                    tier: 0
+                    tier: 0,
+                    upgradeCost: {},
                 }
             },
             citizens: {
@@ -79,10 +83,12 @@ export const initialState: ServerState = {
         {
             buildings: {
                 pasture: {
-                    tier: 0
+                    tier: 0,
+                    upgradeCost: {},
                 },
                 lumberMill: {
-                    tier: 0
+                    tier: 0,
+                    upgradeCost: {},
                 }
             },
             citizens: {
@@ -112,6 +118,24 @@ export const initialState: ServerState = {
             },
         },
     ],
+    rules: {
+        baseCityCapacity: 1000,
+        buildingUpgradeCoefficient: 0.5,
+        buildingUpgradeCosts: {
+            lumberMill: {
+                food: 0,
+                wood: 100,
+            },
+            pasture: {
+                food: 0,
+                wood: 50,
+            },
+        },
+        populationGrowthChangeRateCoefficient: 1,
+        resourceIncreaseChangeRateCoefficient: 10000,
+        unitFoodDemand: 1,
+        unitStarvingCoefficient: 0.2,
+    },
     time: null,
     worldSizeInTiles: {
         x: 30,

@@ -53,7 +53,8 @@ const Component = ({resources, upgradeCostInfo}: Props) => {
         });
     return (
         <div
-            className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{lineComponents}</div>
+            className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{lineComponents}
+        </div>
     );
 };
 

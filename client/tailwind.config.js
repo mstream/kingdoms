@@ -7,7 +7,16 @@ module.exports = {
         },
         inset: {
             '1/2': '50%',
+            'full': '100%',
         },
+        opacity: {
+            '0': '0',
+            '25': '.25',
+            '50': '.5',
+            '75': '.75',
+            '90': '.9',
+            '100': '1',
+        }
     },
     variants: {
         'visibility': ['hover', 'group-hover'],

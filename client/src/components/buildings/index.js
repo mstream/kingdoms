@@ -81,7 +81,7 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
         return (
             <div
                 key={buildingType}
-                className="relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
+                className="relative group opacity-90 hover:opacity-100 flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
                 <button className={buttonClassName}
                         onClick={() => requestBuildingUpgrade({
                             cityId,
@@ -97,7 +97,7 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
                     <p className="text-xs text-center text-gray-100 cursor-default">{buildingVisual.name}</p>
                 </div>
                 <div
-                    className="absolute invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 cursor-default pointer-events-none">
+                    className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 cursor-default pointer-events-none">
                     <UpgradeCostInfoComponent
                         resources={resources}
                         upgradeCostInfo={building.upgradeCostInfo}

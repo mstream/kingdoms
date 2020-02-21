@@ -5,6 +5,7 @@
 import type {ApiGateway, Redis} from './types';
 import {rootReducer} from './state/reducers/root';
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
+import {upgradeBuildingActionValidator} from './state/action-validators/upgrade-building';
 
 const optimisticLockingAttempts = 3;
 
@@ -52,6 +53,32 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
         if (state == null) {
             throw Error('state is not initialized');
         }
+
+        const errors = [];
+
+        switch (action.type) {
+            case 'UPGRADE_BUILDING': {
+                errors.push(...upgradeBuildingActionValidator({action, state}));
+                break;
+            }
+            case 'EXECUTE_TIME_STEP':
+            case 'GET_CURRENT_STATE':
+            case 'RESET_STATE': {
+                break;
+            }
+            default: {
+                throw Error(`no validator for ${action.type} action type`);
+            }
+        }
+
+        if (errors.length > 0) {
+            return {
+                request: action,
+                errors,
+                state,
+            };
+        }
+
         const newState = rootReducer(state, action);
         // $FlowFixMe
         const result = await redis.multi().set('state', JSON.stringify(newState)).exec();

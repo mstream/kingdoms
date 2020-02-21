@@ -3,11 +3,11 @@
  */
 
 import {rootReducer} from './root';
-import {resetState, updateState} from '../actions';
 import {initialState} from './state';
+import {executeTimeStep, resetState} from '../../../../common/src/actions';
 
 describe('rootReducer', () => {
-    it('handles reset state action 1', () => {
+    it('handles reset state action', () => {
         const previousState = undefined;
         const action = resetState();
         const expected = initialState;
@@ -15,7 +15,7 @@ describe('rootReducer', () => {
         expect(actual).toEqual(expected);
     });
 
-    it('handles update state action', () => {
+    it('handles execute time step action 1', () => {
         const previousState = {
             cities: [
                 {
@@ -53,7 +53,7 @@ describe('rootReducer', () => {
             worldSizeInTiles: {x: 10, y: 10}
         };
         const updateTime = '2000-01-01T01:00:00Z';
-        const action = updateState({time: updateTime});
+        const action = executeTimeStep({time: updateTime});
         const expected = {
             cities: [
                 {
@@ -104,7 +104,7 @@ describe('rootReducer', () => {
         expect(actual).toEqual(expected);
     });
 
-    it('handles update state action 2', () => {
+    it('handles execute time step action 2', () => {
         const previousState = {
             cities: [
                 {
@@ -142,7 +142,7 @@ describe('rootReducer', () => {
             worldSizeInTiles: {x: 10, y: 10}
         };
         const updateTime = '2000-01-01T01:00:00Z';
-        const action = updateState({time: updateTime});
+        const action = executeTimeStep({time: updateTime});
         const expected = {
             cities: [
                 {
@@ -193,7 +193,7 @@ describe('rootReducer', () => {
         expect(actual).toEqual(expected);
     });
 
-    it('handles update state action 3', () => {
+    it('handles execute time step action 3', () => {
         const previousState = {
             cities: [
                 {
@@ -231,7 +231,7 @@ describe('rootReducer', () => {
             worldSizeInTiles: {x: 10, y: 10}
         };
         const updateTime = '2000-01-01T01:00:00Z';
-        const action = updateState({time: updateTime});
+        const action = executeTimeStep({time: updateTime});
         const expected = {
             cities: [
                 {

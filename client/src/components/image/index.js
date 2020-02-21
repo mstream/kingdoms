@@ -11,7 +11,7 @@ import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 
 
-type OwnProps = { children: Node, image: string, ratio: string };
+type OwnProps = { children?: Node, image: string, ratio: string };
 
 type StateProps = {};
 
@@ -46,11 +46,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return EMPTY_OBJECT;
-};
+const actionCreators: DispatchProps = EMPTY_OBJECT;
 
 export const ImageComponent = connect<Props,
     OwnProps,
@@ -59,5 +55,6 @@ export const ImageComponent = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMe
+    actionCreators
 )(Component);

@@ -7,9 +7,9 @@ import {WorldMapComponent} from '../world-map';
 import {connect} from 'react-redux';
 import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
+import {EMPTY_OBJECT} from '../../../../common/src/util';
 
 type OwnProps = {};
 
@@ -65,11 +65,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     };
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return EMPTY_OBJECT;
-};
+const actionCreators: DispatchProps = EMPTY_OBJECT;
 
 export const AppComponent = connect<Props,
     OwnProps,
@@ -78,5 +74,6 @@ export const AppComponent = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMe
+    actionCreators
 )(Component);

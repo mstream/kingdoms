@@ -2,25 +2,29 @@
  * @flow
  */
 
-import type {ServerState} from '../../common/src/state';
+import type {ApiGateway, Redis} from './types';
+import {rootReducer} from './state/reducers/root';
+import type {ServerAction, ServerResponse} from '../../common/src/actions';
 
-export const sendStatusUpdate = async ({
-                                           apiGateway,
-                                           redis,
-                                           connectionId,
-                                           state,
-                                       }: {
-    apiGateway: mixed,
-    redis: mixed,
+const optimisticLockingAttempts = 3;
+
+export const sendResponse = async ({
+                                       apiGateway,
+                                       redis,
+                                       connectionId,
+                                       response,
+                                   }: {
+    apiGateway: ApiGateway,
+    redis: Redis,
     connectionId: string,
-    state: ServerState,
+    response: ServerResponse,
 }): Promise<void> => {
     try {
         // $FlowFixMe
         await apiGateway
             .postToConnection({
                 ConnectionId: connectionId,
-                Data: JSON.stringify({type: 'STATE_UPDATE', payload: state}),
+                Data: JSON.stringify(response),
             })
             .promise();
     } catch (error) {
@@ -37,4 +41,27 @@ export const sendStatusUpdate = async ({
         }
         throw error;
     }
+};
+
+export const executeAction = async ({action, redis}: { action: ServerAction, redis: Redis }): Promise<ServerResponse> => {
+    for (let i = 0; i < optimisticLockingAttempts; i++) {
+        // $FlowFixMe
+        await redis.watch('state');
+        // $FlowFixMe
+        const state = JSON.parse(await redis.get('state'));
+        if (state == null) {
+            throw Error('state is not initialized');
+        }
+        const newState = rootReducer(state, action);
+        // $FlowFixMe
+        const result = await redis.multi().set('state', JSON.stringify(newState)).exec();
+        if (result != null) {
+            return {
+                request: action,
+                errors: [],
+                state: newState,
+            };
+        }
+    }
+    throw Error(`optimistic locking failed after ${optimisticLockingAttempts} attempts`);
 };

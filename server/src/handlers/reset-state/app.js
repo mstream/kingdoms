@@ -3,18 +3,28 @@
  */
 
 import {createRedisClient} from '../../services/redis';
-import {rootReducer} from '../../state/reducers/root';
-import {resetState} from '../../state/actions';
+import {executeAction} from '../../utils';
+import {resetState} from '../../../../common/src/actions';
+import {initialState} from '../../state/reducers/state';
 
 const redis = createRedisClient();
 
+const stateResetSuccess = {statusCode: 200, body: 'State reset.'};
+
+
 export const handler = async () => {
     try {
-        const state = rootReducer(undefined, resetState());
-        await redis.set('state', JSON.stringify(state));
+        await executeAction({action: resetState(), redis});
     } catch (error) {
         console.error(error.stack);
+        try {
+            console.log('forcing state reset');
+            await redis.set('state', JSON.stringify(initialState));
+        } catch (error) {
+            console.error(error.stack);
+            return stateResetSuccess;
+        }
         return {statusCode: 500, body: 'State reset error.'};
     }
-    return {statusCode: 200, body: 'State reset.'};
+    return stateResetSuccess;
 };

@@ -39,7 +39,7 @@ export type CommonStateResources = {
     wood: CommonStateResource
 }
 
-type ServerStateCity = {
+export type ServerStateCity = {
     buildings: CommonStateBuildings,
     citizens: CommonStateCitizens,
     id: string,

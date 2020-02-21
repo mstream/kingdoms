@@ -30,7 +30,7 @@ const Component = ({changeInfo}: Props) => {
     const lineComponents = Object
         .keys(changeInfo)
         .sort((changeType1, changeType2) => {
-            return changeInfo[changeType1] > changeInfo[changeType2];
+            return changeInfo[changeType1] - changeInfo[changeType2];
         }).map(changeType => {
             const partialRate = changeInfo[changeType];
             const className = classNames({
@@ -54,11 +54,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return EMPTY_OBJECT;
-};
+const actionCreators: DispatchProps = EMPTY_OBJECT;
 
 export const ChangeInfoComponent = connect<Props,
     OwnProps,
@@ -67,5 +63,6 @@ export const ChangeInfoComponent = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMe
+    actionCreators
 )(Component);

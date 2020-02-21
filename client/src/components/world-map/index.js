@@ -7,7 +7,11 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {TileComponent} from '../tile';
 import {CityComponent} from '../city';
-import type {ClientAction} from '../../state/actions';
+import type {
+    ClientAction,
+    ClientMoveCameraActionCreator,
+    ClientZoomCameraActionCreator
+} from '../../state/actions';
 import {
     moveCameraDown,
     moveCameraLeft,
@@ -16,19 +20,19 @@ import {
     zoomCameraIn,
     zoomCameraOut,
 } from '../../state/actions';
+import type {Vector} from '../../../../common/src/vector';
 import {
     addVectors,
     multipleVectors,
     subtractVectors,
 } from '../../../../common/src/vector';
+import type {Geometry} from '../../../../common/src/geometry';
 import {checkIfIntersect} from '../../../../common/src/geometry';
 import type {ClientStateCamera} from '../../state/reducers/camera';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCity} from '../../state/reducers/cities';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
-import type {Vector} from '../../../../common/src/vector';
-import type {Geometry} from '../../../../common/src/geometry';
 
 type OwnProps = {
     camera: ClientStateCamera,
@@ -40,12 +44,12 @@ type OwnProps = {
 type StateProps = {};
 
 type DispatchProps = {
-    moveCameraUp: () => mixed,
-    moveCameraDown: () => mixed,
-    moveCameraLeft: () => mixed,
-    moveCameraRight: () => mixed,
-    zoomCameraIn: () => mixed,
-    zoomCameraOut: () => mixed,
+    moveCameraUp: ClientMoveCameraActionCreator,
+    moveCameraDown: ClientMoveCameraActionCreator,
+    moveCameraLeft: ClientMoveCameraActionCreator,
+    moveCameraRight: ClientMoveCameraActionCreator,
+    zoomCameraIn: ClientZoomCameraActionCreator,
+    zoomCameraOut: ClientZoomCameraActionCreator,
 };
 
 type Props = {
@@ -256,17 +260,13 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return {
-        moveCameraUp: () => dispatch(moveCameraUp()),
-        moveCameraDown: () => dispatch(moveCameraDown()),
-        moveCameraLeft: () => dispatch(moveCameraLeft()),
-        moveCameraRight: () => dispatch(moveCameraRight()),
-        zoomCameraIn: () => dispatch(zoomCameraIn()),
-        zoomCameraOut: () => dispatch(zoomCameraOut()),
-    };
+const actionCreators: DispatchProps = {
+    moveCameraUp,
+    moveCameraDown,
+    moveCameraLeft,
+    moveCameraRight,
+    zoomCameraIn,
+    zoomCameraOut,
 };
 
 export const WorldMapComponent = connect<Props,
@@ -276,5 +276,6 @@ export const WorldMapComponent = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMe
+    actionCreators
 )(Component);

@@ -1,27 +1,27 @@
 /**
  * @flow
  */
-import type { Reducer } from 'redux';
+import type {Reducer} from 'redux';
 import type {
     ClientStateCities,
     ClientStateCitiesByOwnerId,
     ClientStateCity,
 } from './index';
-import { EMPTY_OBJECT } from '../../../../../common/src/util';
-import { openCityView } from '../../actions';
-import type { ClientAction } from '../../actions';
+import {EMPTY_OBJECT} from '../../../../../common/src/util';
+import type {ClientAction} from '../../actions';
 
 const initialState: ClientStateCities = {
     byId: EMPTY_OBJECT,
     byOwnerId: EMPTY_OBJECT,
 };
 
-export const citiesByOwnerIdReducer: Reducer<
-    ClientStateCities,
-    ClientAction
-> = (state = initialState, action) => {
+export const citiesByOwnerIdReducer: Reducer<ClientStateCities,
+    ClientAction> = (
+    state = initialState,
+    action: ClientAction
+) => {
     switch (action.type) {
-        case 'SERVER_STATE_UPDATED': {
+        case 'UPDATE_STATE': {
             const citiesInNameOrder: $ReadOnlyArray<ClientStateCity> = Object.keys(
                 state.byId
             )

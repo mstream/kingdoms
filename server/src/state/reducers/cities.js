@@ -3,9 +3,13 @@
  */
 
 import type {Reducer} from 'redux';
-import type {ServerAction} from '../actions';
-import type {ChangeInfo, ServerState} from '../../../../common/src/state';
+import type {
+    ChangeInfo,
+    ServerState,
+    ServerStateCity
+} from '../../../../common/src/state';
 import {initialState} from './state';
+import type {ServerAction} from '../../../../common/src/actions';
 
 const resourceIncreaseChangeRateCoefficient = 10000;
 const unitFoodDemand = 1;
@@ -51,9 +55,34 @@ const createPeasantChangeInfo = ({buildingTiersSum, citizensQuantity, food, food
     };
 };
 
-export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initialState, action) => {
+export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initialState, action: ServerAction) => {
     switch (action.type) {
-        case 'STATE_UPDATED': {
+        case 'RESET_STATE': {
+            return initialState;
+        }
+        case 'UPGRADE_BUILDING': {
+            const newCities = state.cities.map<ServerStateCity>((city) => {
+                if (city.id !== action.payload.cityId) {
+                    return city;
+                }
+                const buildingType = action.payload.buildingType;
+                return {
+                    ...city,
+                    buildings: {
+                        ...city.buildings,
+                        [buildingType]: {
+                            ...city.buildings[buildingType],
+                            tier: city.buildings[buildingType].tier + 1
+                        }
+                    }
+                };
+            });
+            return {
+                ...state,
+                cities: newCities
+            }
+        }
+        case 'EXECUTE_TIME_STEP': {
             const stateTime = state.time;
 
             if (stateTime == null) {
@@ -72,7 +101,7 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
 
             const citiesState = state.cities;
 
-            const newCitiesState = citiesState.map(city => {
+            const newCitiesState = citiesState.map<ServerStateCity>((city) => {
                     const citizens = city.citizens;
                     const resources = city.resources;
 

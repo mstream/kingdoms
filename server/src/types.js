@@ -150,3 +150,6 @@ export type APIGatewayProxyHandler = Handler<
 >;
 
 export type ScheduledHandler = Handler<ScheduledEvent, void>;
+
+export type ApiGateway = mixed
+export type Redis = mixed

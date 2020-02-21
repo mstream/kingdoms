@@ -9,7 +9,11 @@ import {connect} from 'react-redux';
 import lumberMillImage from '../../assets/images/buildings/lumber-mill.png';
 import pastureImage from '../../assets/images/buildings/pasture.png';
 import type {ClientState} from '../../state/reducers/root';
-import type {ClientAction} from '../../state/actions';
+import type {
+    ClientAction,
+    ClientRequestBuildingUpgradeActionCreator
+} from '../../state/actions';
+import {requestBuildingUpgrade} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import romanDecimalConverter from 'roman-decimal';
 import {ImageComponent} from '../image';
@@ -32,12 +36,15 @@ const buildingVisuals = {
 
 type OwnProps = {
     buildings: CommonStateBuildings,
+    cityId: string,
     resources: CommonStateResources,
 };
 
 type StateProps = {};
 
-type DispatchProps = {};
+type DispatchProps = {
+    requestBuildingUpgrade: ClientRequestBuildingUpgradeActionCreator
+};
 
 type Props = {
     ...OwnProps,
@@ -45,12 +52,13 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({buildings, resources}: Props) => {
+const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props) => {
     const buildingComponents = Object.keys(buildings).map(buildingType => {
         const building = buildings[buildingType];
         const buildingVisual = buildingVisuals[buildingType];
         const isDisabled = building.tier === 0;
-        const canBeUpgraded = resources.wood.quantity > 1000;
+        // check requirements for the upgrade
+        const canBeUpgraded = true;
         const bodyClassName = classNames(
             {
                 'filter-grayscale': isDisabled,
@@ -72,8 +80,11 @@ const Component = ({buildings, resources}: Props) => {
             <div
                 key={buildingType}
                 className="flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 overflow-hidden m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
-                <button
-                    className={buttonClassName}>{building.tier === 0 ? 'build' : 'upgrade'}</button>
+                <button className={buttonClassName}
+                        onClick={() => requestBuildingUpgrade({
+                            cityId,
+                            buildingType
+                        })}>{building.tier === 0 ? 'build' : 'upgrade'}</button>
                 <div className={bodyClassName}>
                     <ImageComponent image={buildingVisual.image} ratio="100%">
                         <div
@@ -95,10 +106,8 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return EMPTY_OBJECT;
+const actionCreators: DispatchProps = {
+    requestBuildingUpgrade
 };
 
 export const BuildingsComponent = connect<Props,
@@ -108,5 +117,6 @@ export const BuildingsComponent = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMe
+    actionCreators
 )(Component);

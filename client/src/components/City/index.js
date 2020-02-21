@@ -51,13 +51,8 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return {
-        openCityView: ({cityId}: { cityId: string }) =>
-            dispatch(openCityView({cityId})),
-    };
+const actionCreators: DispatchProps = {
+    openCityView
 };
 
 export const CityComponent = connect<Props,
@@ -67,5 +62,6 @@ export const CityComponent = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMe
+    actionCreators
 )(Component);

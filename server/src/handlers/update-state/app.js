@@ -2,12 +2,11 @@
  * @flow
  */
 
-import {sendStatusUpdate} from '../../utils';
+import {executeAction, sendResponse} from '../../utils';
 import {createApiGatewayClient} from '../../services/apiGateway';
 import {createRedisClient} from '../../services/redis';
 import type {ScheduledHandler} from '../../types';
-import {updateState} from '../../state/actions';
-import {rootReducer} from '../../state/reducers/root';
+import {executeTimeStep} from '../../../../common/src/actions';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient();
@@ -15,21 +14,24 @@ const redis = createRedisClient();
 export const handler: ScheduledHandler = async (event, context) => {
     try {
         const state = JSON.parse(await redis.get('state'));
+
         if (state == null) {
             console.error('state is not initialized');
             return;
         }
-        const newState = rootReducer(state, updateState({time: new Date().toISOString()}));
-        await redis.set('state', JSON.stringify(newState));
+
+        const response = await executeAction({action: executeTimeStep({time: new Date().toISOString()}), redis});
         const connectionIds = await redis.smembers('connection-ids');
+
         const sendStatueUpdatePromises = connectionIds.map(connectionId => {
-            return sendStatusUpdate({
+            return sendResponse({
                 apiGateway,
                 redis,
                 connectionId,
-                state: newState,
+                response
             });
         });
+
         await Promise.all(sendStatueUpdatePromises);
     } catch (error) {
         console.error(error.stack);

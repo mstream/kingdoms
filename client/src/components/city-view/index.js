@@ -4,8 +4,12 @@
 
 import React from 'react';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
-import type {Dispatch} from 'redux';
-import type {ClientAction} from '../../state/actions';
+import type {
+    ClientAction,
+    ClientCloseCityViewActionCreator,
+    ClientNavigateToNextCityActionCreator,
+    ClientNavigateToPreviousCityActionCreator
+} from '../../state/actions';
 import {
     closeCityView,
     navigateToNextCity,
@@ -17,6 +21,7 @@ import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCity} from '../../state/reducers/cities';
 import {BuildingsComponent} from '../buildings';
 import {CitizensComponent} from '../citizens';
+import type {Dispatch} from 'redux';
 
 type OwnProps = {
     city: ClientStateCity,
@@ -25,9 +30,9 @@ type OwnProps = {
 type StateProps = {};
 
 type DispatchProps = {
-    closeCityView: () => mixed,
-    navigateToNextCity: ({ currentCityId: string }) => mixed,
-    navigateToPreviousCity: ({ currentCityId: string }) => mixed,
+    closeCityView: ClientCloseCityViewActionCreator,
+    navigateToNextCity: ClientNavigateToNextCityActionCreator,
+    navigateToPreviousCity: ClientNavigateToPreviousCityActionCreator,
 };
 
 type Props = {
@@ -56,7 +61,7 @@ const Component = ({
                     <button
                         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                         onClick={() =>
-                            navigateToPreviousCity({currentCityId: city.id})
+                            navigateToPreviousCity()
                         }
                     >
                         <div className="w-1/12">
@@ -74,7 +79,7 @@ const Component = ({
                     <button
                         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                         onClick={() =>
-                            navigateToNextCity({currentCityId: city.id})
+                            navigateToNextCity()
                         }
                     >
                         <div className="w-1/12">
@@ -84,7 +89,11 @@ const Component = ({
                 </div>
                 <CitizensComponent citizens={city.citizens}/>
                 <ResourcesComponent resources={city.resources}/>
-                <BuildingsComponent buildings={city.buildings} resources={city.resources}/>
+                <BuildingsComponent
+                    buildings={city.buildings}
+                    cityId={city.id}
+                    resources={city.resources}
+                />
             </div>
         </div>
     );
@@ -94,27 +103,14 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return {
-        closeCityView: () => dispatch(closeCityView()),
-        navigateToNextCity: ({currentCityId}: { currentCityId: string }) =>
-            dispatch(navigateToNextCity({currentCityId})),
-        navigateToPreviousCity: ({
-                                     currentCityId,
-                                 }: {
-            currentCityId: string,
-        }) => dispatch(navigateToPreviousCity({currentCityId})),
-    };
+const actionCreators: DispatchProps = {
+    closeCityView,
+    navigateToNextCity,
+    navigateToPreviousCity,
 };
 
-export const CityViewComponent = connect<Props,
-    OwnProps,
-    StateProps,
-    DispatchProps,
-    ClientState,
-    Dispatch<ClientAction>>(
+export const CityViewComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMes
+    actionCreators,
 )(Component);

@@ -3,16 +3,16 @@
  */
 
 import type {Reducer} from 'redux';
-import type {ServerAction} from '../actions';
 import type {ServerState} from '../../../../common/src/state';
 import {initialState} from './state';
+import type {ServerAction} from '../../../../common/src/actions';
 
-export const timeReducer: Reducer<ServerState, ServerAction> = (state = initialState, action) => {
+export const timeReducer: Reducer<ServerState, ServerAction> = (state = initialState, action: ServerAction) => {
     switch (action.type) {
-        case 'STATE_RESET': {
+        case 'RESET_STATE': {
             return initialState;
         }
-        case 'STATE_UPDATED': {
+        case 'EXECUTE_TIME_STEP': {
             const newTimeState = action.payload;
             return {
                 ...state,

@@ -19,11 +19,11 @@ const initialState: ClientStateCities = {
 
 export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
     state = initialState,
-    action
+    action: ClientAction
 ) => {
     switch (action.type) {
-        case 'SERVER_STATE_UPDATED': {
-            const citiesById: ClientStateCitiesById = action.payload.cities.reduce(
+        case 'UPDATE_STATE': {
+            const citiesById: ClientStateCitiesById = action.payload.serverState.cities.reduce(
                 (citiesById, city) => {
                     const clientStateCity: ClientStateCity = {
                         buildings: city.buildings,

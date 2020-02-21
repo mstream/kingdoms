@@ -14,16 +14,16 @@ const initialState: ClientStateMenu = {
 
 export const menuReducer: Reducer<ClientStateMenu, ClientAction> = (
     state = initialState,
-    action
+    action: ClientAction
 ) => {
     switch (action.type) {
-        case 'CITY_VIEW_OPENED': {
+        case 'OPEN_CITY_VIEW': {
             return {
                 ...state,
-                viewedCityId: action.payload,
+                viewedCityId: action.payload.cityId,
             };
         }
-        case 'CITY_VIEW_CLOSED': {
+        case 'CLOSE_CITY_VIEW': {
             return {
                 ...state,
                 viewedCityId: null,

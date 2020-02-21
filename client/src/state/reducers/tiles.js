@@ -21,15 +21,15 @@ const initialState: ClientStateTiles = [];
 
 export const tilesReducer: Reducer<ClientStateTiles, ClientAction> = (
     state = initialState,
-    action
+    action: ClientAction
 ) => {
     switch (action.type) {
-        case 'SERVER_STATE_UPDATED': {
+        case 'UPDATE_STATE': {
             const newTiles = [];
 
-            const halfWidth = Math.floor(action.payload.worldSizeInTiles.x / 2);
+            const halfWidth = Math.floor(action.payload.serverState.worldSizeInTiles.x / 2);
             const halfHeight = Math.floor(
-                action.payload.worldSizeInTiles.y / 2
+                action.payload.serverState.worldSizeInTiles.y / 2
             );
 
             for (let y = -halfHeight; y <= halfHeight; y++) {

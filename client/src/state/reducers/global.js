@@ -7,13 +7,13 @@ import type { ClientState } from './root';
 
 export const globalReducer: Reducer<ClientState, ClientAction> = (
     state,
-    action
+    action: ClientAction
 ) => {
     if (state == null) {
         return state;
     }
     switch (action.type) {
-        case 'NAVIGATED_TO_NEXT_CITY': {
+        case 'NAVIGATE_TO_NEXT_CITY': {
             if (state == null) {
                 return state;
             }
@@ -27,12 +27,9 @@ export const globalReducer: Reducer<ClientState, ClientAction> = (
                 return state;
             }
             const currentCityIndex = cityIds.findIndex(cityId => {
-                return cityId === action.payload;
+                return cityId === state.menu.viewedCityId;
             });
             if (currentCityIndex === -1) {
-                console.error(
-                    `city ${action.payload} does not belong to the player`
-                );
                 return state;
             }
             const nextCityId =
@@ -46,7 +43,7 @@ export const globalReducer: Reducer<ClientState, ClientAction> = (
                 },
             };
         }
-        case 'NAVIGATED_TO_PREVIOUS_CITY': {
+        case 'NAVIGATE_TO_PREVIOUS_CITY': {
             if (state == null) {
                 return state;
             }
@@ -60,12 +57,9 @@ export const globalReducer: Reducer<ClientState, ClientAction> = (
                 return state;
             }
             const currentCityIndex = cityIds.findIndex(cityId => {
-                return cityId === action.payload;
+                return cityId === state.menu.viewedCityId;
             });
             if (currentCityIndex === -1) {
-                console.error(
-                    `city ${action.payload} does not belong to the player`
-                );
                 return state;
             }
             const nextCityId =

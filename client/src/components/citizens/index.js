@@ -63,11 +63,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return EMPTY_OBJECT;
 };
 
-const mapDispatchToProps = (
-    dispatch: Dispatch<ClientAction>
-): DispatchProps => {
-    return EMPTY_OBJECT;
-};
+const actionCreators: DispatchProps = EMPTY_OBJECT;
 
 export const CitizensComponent = connect<Props,
     OwnProps,
@@ -76,5 +72,6 @@ export const CitizensComponent = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    mapDispatchToProps
+    // $FlowFixMe
+    actionCreators
 )(Component);

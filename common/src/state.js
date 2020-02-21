@@ -75,7 +75,7 @@ export type ServerState = {
     worldSizeInTiles: Vector,
 };
 
-export const calculateMissingResources = ({available, required}: { available: { [string]: number }, required: { [string]: number } }) => {
+export const calculateMissingResources = ({available, required}: { available: { [string]: number, ... }, required: { [string]: number, ... } }) => {
     return Object.keys(required).reduce((missingResources, resourceType) => {
             const requiredResourceQuantity = required[resourceType] != null ? required[resourceType] : 0;
             const actualResourceQuantity = available[resourceType] != null ? available[resourceType] : 0;

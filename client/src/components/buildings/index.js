@@ -22,6 +22,7 @@ import type {
     CommonStateBuildings,
     CommonStateResources
 } from '../../../../common/src/state';
+import {calculateMissingResources} from '../../../../common/src/state';
 import {UpgradeCostInfoComponent} from '../upgrade-cost-info';
 
 const buildingVisuals = {
@@ -58,8 +59,23 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
         const building = buildings[buildingType];
         const buildingVisual = buildingVisuals[buildingType];
         const isDisabled = building.tier === 0;
-        // check requirements for the upgrade
-        const canBeUpgraded = true;
+
+        const availableResources = Object.keys(resources).reduce((availableResources, resourceType: string) => {
+                return {
+                    ...availableResources,
+                    [resourceType]: resources[resourceType].quantity
+                };
+            },
+            EMPTY_OBJECT
+        );
+
+        const missingResources = calculateMissingResources({
+            available: availableResources,
+            required: building.upgradeCostInfo
+        });
+
+        const canBeUpgraded = Object.keys(missingResources).length === 0;
+
         const bodyClassName = classNames(
             {
                 'filter-grayscale': isDisabled,
@@ -67,6 +83,7 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
                 'opacity-100': !isDisabled
             }
         );
+
         const buttonClassName = classNames(
             'relative group bg-green-500 text-sm text-gray-100 rounded-t-lg',
             {

@@ -22,6 +22,7 @@ import type {
     CommonStateBuildings,
     CommonStateResources
 } from '../../../../common/src/state';
+import {UpgradeCostInfoComponent} from '../upgrade-cost-info';
 
 const buildingVisuals = {
     lumberMill: {
@@ -67,7 +68,7 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
             }
         );
         const buttonClassName = classNames(
-            'relative bg-green-500 text-sm text-gray-100',
+            'relative group bg-green-500 text-sm text-gray-100 rounded-t-lg',
             {
                 'cursor-pointer': canBeUpgraded,
                 'cursor-not-allowed': !canBeUpgraded,
@@ -76,10 +77,11 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
                 'hover:bg-green-700': canBeUpgraded,
             }
         );
+
         return (
             <div
                 key={buildingType}
-                className="flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 overflow-hidden m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
+                className="relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
                 <button className={buttonClassName}
                         onClick={() => requestBuildingUpgrade({
                             cityId,
@@ -93,6 +95,13 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
                         </div>
                     </ImageComponent>
                     <p className="text-xs text-center text-gray-100 cursor-default">{buildingVisual.name}</p>
+                </div>
+                <div
+                    className="absolute invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 cursor-default pointer-events-none">
+                    <UpgradeCostInfoComponent
+                        resources={resources}
+                        upgradeCostInfo={building.upgradeCostInfo}
+                    />
                 </div>
             </div>
         );

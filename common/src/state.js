@@ -6,7 +6,7 @@ import type {Vector} from './vector';
 
 export type ChangeInfo = { [string]: number, ... };
 
-export type UpgradeCost = {
+export type UpgradeCostInfo = {
     food?: number,
     wood?: number,
 };
@@ -18,7 +18,7 @@ type Dynamic = {
 
 type Upgradeable = {
     tier: number,
-    upgradeCost: UpgradeCost,
+    upgradeCostInfo: UpgradeCostInfo,
 };
 
 export type CommonStateBuilding = Upgradeable;
@@ -54,8 +54,8 @@ export type ServerStateCity = {
 export type ServerStateCities = $ReadOnlyArray<ServerStateCity>;
 
 export type ServerStateBuildingUpgradeCosts = {
-    lumberMill: UpgradeCost,
-    pasture: UpgradeCost,
+    lumberMill: UpgradeCostInfo,
+    pasture: UpgradeCostInfo,
 };
 
 export type ServerStateRules = {

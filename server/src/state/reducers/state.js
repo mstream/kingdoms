@@ -10,11 +10,11 @@ export const initialState: ServerState = {
             buildings: {
                 pasture: {
                     tier: 2,
-                    upgradeCost: {},
+                    upgradeCostInfo: {},
                 },
                 lumberMill: {
                     tier: 1,
-                    upgradeCost: {},
+                    upgradeCostInfo: {},
                 }
             },
             citizens: {
@@ -47,11 +47,11 @@ export const initialState: ServerState = {
             buildings: {
                 pasture: {
                     tier: 2,
-                    upgradeCost: {},
+                    upgradeCostInfo: {},
                 },
                 lumberMill: {
                     tier: 0,
-                    upgradeCost: {},
+                    upgradeCostInfo: {},
                 }
             },
             citizens: {
@@ -84,11 +84,11 @@ export const initialState: ServerState = {
             buildings: {
                 pasture: {
                     tier: 0,
-                    upgradeCost: {},
+                    upgradeCostInfo: {},
                 },
                 lumberMill: {
                     tier: 0,
-                    upgradeCost: {},
+                    upgradeCostInfo: {},
                 }
             },
             citizens: {

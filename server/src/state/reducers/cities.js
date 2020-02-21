@@ -8,7 +8,7 @@ import type {
     ServerState,
     ServerStateCity,
     ServerStateRules,
-    UpgradeCost
+    UpgradeCostInfo
 } from '../../../../common/src/state';
 import {initialState} from './state';
 import type {ServerAction} from '../../../../common/src/actions';
@@ -51,7 +51,7 @@ const createPeasantChangeInfo = ({buildingTiersSum, citizensQuantity, food, food
     };
 };
 
-const calculateBuildingUpgradeCost = ({buildingType, rules, tier}: { buildingType: string, rules: ServerStateRules, tier: number }): UpgradeCost => {
+const calculateBuildingUpgradeCost = ({buildingType, rules, tier}: { buildingType: string, rules: ServerStateRules, tier: number }): UpgradeCostInfo => {
     const baseUpgradeCost = rules.buildingUpgradeCosts[buildingType];
     const factor = 1 + tier * rules.buildingUpgradeCoefficient;
     return {
@@ -112,7 +112,7 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
                     const newBuildingsState = {
                         lumberMill: {
                             ...buildings.lumberMill,
-                            upgradeCost: calculateBuildingUpgradeCost({
+                            upgradeCostInfo: calculateBuildingUpgradeCost({
                                 buildingType: 'lumberMill',
                                 rules: state.rules,
                                 tier: buildings.lumberMill.tier
@@ -120,7 +120,7 @@ export const citiesReducer: Reducer<ServerState, ServerAction> = (state = initia
                         },
                         pasture: {
                             ...buildings.pasture,
-                            upgradeCost: calculateBuildingUpgradeCost({
+                            upgradeCostInfo: calculateBuildingUpgradeCost({
                                 buildingType: 'pasture',
                                 rules: state.rules,
                                 tier: buildings.lumberMill.tier

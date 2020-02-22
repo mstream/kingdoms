@@ -26,10 +26,7 @@ export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
             const citiesById: ClientStateCitiesById = action.payload.serverState.cities.reduce(
                 (citiesById, city) => {
                     const clientStateCity: ClientStateCity = {
-                        buildings: city.buildings,
-                        citizens: city.citizens,
-                        id: city.id,
-                        name: city.name,
+                        ...city,
                         geometry: {
                             location: multipleVectors({
                                 vector1: city.location,
@@ -37,8 +34,6 @@ export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
                             }),
                             size: tileSize,
                         },
-                        ownerId: city.ownerId,
-                        resources: city.resources,
                     };
 
                     return {

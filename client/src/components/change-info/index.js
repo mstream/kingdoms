@@ -9,16 +9,17 @@ import {connect} from 'react-redux';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {numberToQuantityString} from '../../util';
-import type {ChangeInfo} from '../../../../common/src/state';
 import classNames from 'classnames';
+import type {Quantities} from '../../../../common/src/quantity';
+import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {
-    changeInfo: ChangeInfo,
-};
+type OwnProps = {|
+    changeInfo: Quantities,
+|};
 
-type StateProps = {};
+type StateProps = EmptyObject;
 
-type DispatchProps = {};
+type DispatchProps = EmptyObject;
 
 type Props = {
     ...OwnProps,
@@ -27,7 +28,7 @@ type Props = {
 };
 
 const Component = ({changeInfo}: Props) => {
-    const lineComponents = Object
+    const changeComponents = Object
         .keys(changeInfo)
         .sort((changeType1, changeType2) => {
             return changeInfo[changeType1] - changeInfo[changeType2];
@@ -46,7 +47,7 @@ const Component = ({changeInfo}: Props) => {
             );
         });
     return (
-        <div className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{lineComponents}</div>
+        <div className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{changeComponents}</div>
     );
 };
 

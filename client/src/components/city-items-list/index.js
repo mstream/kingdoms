@@ -9,14 +9,15 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
+import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {
+type OwnProps = {|
     children: Node,
-};
+|};
 
-type StateProps = {};
+type StateProps = EmptyObject;
 
-type DispatchProps = {};
+type DispatchProps = EmptyObject;
 
 type Props = {
     ...OwnProps,

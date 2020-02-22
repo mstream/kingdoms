@@ -4,7 +4,6 @@
 [libs]
 ./flow-typed
 [options]
-exact_by_default=true
 module.name_mapper.extension='bmp' -> '<PROJECT_ROOT>/flow-stubs/empty.js'
 [lints]
 all = error

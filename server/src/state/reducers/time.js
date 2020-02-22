@@ -2,25 +2,20 @@
  * @flow
  */
 
-import type {Reducer} from 'redux';
-import type {ServerState} from '../../../../common/src/state';
-import {initialState} from './state';
-import type {ServerAction} from '../../../../common/src/actions';
+import type {CommonStateTime} from '../../../../common/src/state';
+import type {ServerStateReducer} from './root';
+import {initialState} from '../state';
 
-export const timeReducer: Reducer<ServerState, ServerAction> = (state = initialState, action: ServerAction) => {
+export const timeReducer: ServerStateReducer<CommonStateTime> = ({action, state}) => {
     switch (action.type) {
         case 'RESET_STATE': {
-            return initialState;
+            return initialState.time;
         }
         case 'EXECUTE_TIME_STEP': {
-            const newTimeState = action.payload;
-            return {
-                ...state,
-                time: newTimeState
-            };
+            return action.payload;
         }
         default: {
-            return state;
+            return state.time;
         }
     }
 };

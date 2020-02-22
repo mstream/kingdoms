@@ -13,8 +13,13 @@ import type {ClientAction} from '../../state/actions';
 import {ImageComponent} from '../image';
 import {numberToQuantityString} from '../../util';
 import {CityItemsListComponent} from '../city-items-list';
-import type {CommonStateResources} from '../../../../common/src/state';
+import type {
+    CommonStateCity,
+    CommonStateRules
+} from '../../../../common/src/state';
+import {calculateResourceChangeInfo} from '../../../../common/src/state';
 import {ChangeInfoComponent} from '../change-info';
+import type {EmptyObject} from '../../../../common/src/util';
 
 const resourceVisuals = {
     food: {
@@ -27,13 +32,15 @@ const resourceVisuals = {
     },
 };
 
-type OwnProps = {
-    resources: CommonStateResources,
-};
+type OwnProps = {|
+    city: CommonStateCity,
+|};
 
-type StateProps = {};
+type StateProps = {|
+    rules: ?CommonStateRules,
+|};
 
-type DispatchProps = {};
+type DispatchProps = EmptyObject;
 
 type Props = {
     ...OwnProps,
@@ -41,18 +48,26 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({resources}: Props) => {
-    const resourceComponents = Object.keys(resources).map(resourceType => {
-        const resource = resources[resourceType];
+const Component = ({city, rules}: Props) => {
+    if (rules == null) {
+        return (<div/>)
+    }
+    const resourceComponents = Object.keys(city.resources).map(resourceType => {
+        const resource = city.resources[resourceType];
         const resourceVisual = resourceVisuals[resourceType];
+        const changeInfo = calculateResourceChangeInfo({
+            city,
+            resourceType,
+            rules,
+        });
         return (
             <div
                 key={resourceType}
                 className="relative group opacity-90 hover:opacity-100 flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm rounded-t-lg rounded-b-lg bg-gray-100 shadow-2xs bg-gray-800">
-                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: resource.quantity})}</p>
+                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: resource})}</p>
                 <div
                     className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 cursor-default pointer-events-none">
-                    <ChangeInfoComponent changeInfo={resource.changeInfo}/>
+                    <ChangeInfoComponent changeInfo={changeInfo}/>
                 </div>
                 <ImageComponent image={resourceVisual.image} ratio="100%"/>
                 <p className="text-xs text-center text-gray-100">{resourceVisual.name}</p>
@@ -65,7 +80,9 @@ const Component = ({resources}: Props) => {
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return {
+        rules: state == null ? null : state.rules,
+    };
 };
 
 const actionCreators: DispatchProps = EMPTY_OBJECT;

@@ -10,14 +10,15 @@ import {CityViewComponent} from '../city-view';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
+import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {};
+type OwnProps = EmptyObject;
 
-type StateProps = {
+type StateProps = {|
     state: ClientState
-};
+|};
 
-type DispatchProps = {};
+type DispatchProps = EmptyObject;
 
 type Props = {
     ...OwnProps,

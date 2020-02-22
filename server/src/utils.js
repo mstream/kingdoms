@@ -5,7 +5,7 @@
 import type {ApiGateway, Redis} from './types';
 import {rootReducer} from './state/reducers/root';
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
-import {upgradeBuildingActionValidator} from './state/action-validators/upgrade-building';
+import {validateUpgradeBuildingAction} from './state/action-validators/upgrade-building';
 
 const optimisticLockingAttempts = 3;
 
@@ -58,7 +58,7 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
 
         switch (action.type) {
             case 'UPGRADE_BUILDING': {
-                errors.push(...upgradeBuildingActionValidator({action, state}));
+                errors.push(...validateUpgradeBuildingAction({action, state}));
                 break;
             }
             case 'EXECUTE_TIME_STEP':
@@ -79,7 +79,7 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
             };
         }
 
-        const newState = rootReducer(state, action);
+        const newState = rootReducer({action, state});
         // $FlowFixMe
         const result = await redis.multi().set('state', JSON.stringify(newState)).exec();
         if (result != null) {

@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import lumberMillImage from '../../assets/images/buildings/lumber-mill.png';
@@ -20,10 +19,14 @@ import {ImageComponent} from '../image';
 import classNames from 'classnames';
 import type {
     CommonStateBuildings,
-    CommonStateResources
+    CommonStateCity,
+    CommonStateResources,
+    CommonStateRules
 } from '../../../../common/src/state';
-import {calculateMissingResources} from '../../../../common/src/state';
-import {UpgradeCostInfoComponent} from '../upgrade-cost-info';
+import {calculateBuildingsUpgradeCost} from '../../../../common/src/state';
+import {CostInfoComponent} from '../cost-info';
+import {convertQuantitiesToResources} from '../../../../common/src/resource';
+import {subtractQuantities} from '../../../../common/src/quantity';
 
 const buildingVisuals = {
     lumberMill: {
@@ -36,17 +39,17 @@ const buildingVisuals = {
     },
 };
 
-type OwnProps = {
-    buildings: CommonStateBuildings,
-    cityId: string,
-    resources: CommonStateResources,
-};
+type OwnProps = {|
+    city: CommonStateCity,
+|};
 
-type StateProps = {};
+type StateProps = {|
+    rules: ?CommonStateRules
+|};
 
-type DispatchProps = {
+type DispatchProps = {|
     requestBuildingUpgrade: ClientRequestBuildingUpgradeActionCreator
-};
+|};
 
 type Props = {
     ...OwnProps,
@@ -54,27 +57,34 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props) => {
+const Component = ({city, requestBuildingUpgrade, rules}: Props) => {
+    if (rules == null) {
+        return (<div/>);
+    }
+    const {buildings, resources} = city;
     const buildingComponents = Object.keys(buildings).map(buildingType => {
         const building = buildings[buildingType];
         const buildingVisual = buildingVisuals[buildingType];
         const isDisabled = building.tier === 0;
 
-        const availableResources = Object.keys(resources).reduce((availableResources, resourceType: string) => {
-                return {
-                    ...availableResources,
-                    [resourceType]: resources[resourceType].quantity
-                };
-            },
-            EMPTY_OBJECT
-        );
-
-        const missingResources = calculateMissingResources({
-            available: availableResources,
-            required: building.upgradeCostInfo
+        const requiredResources = calculateBuildingsUpgradeCost({
+            buildingTier: building.tier,
+            buildingType,
+            city,
+            rules
         });
 
-        const canBeUpgraded = Object.keys(missingResources).length === 0;
+        const availableResourcesAfter = convertQuantitiesToResources({
+            quantities: subtractQuantities({
+                quantities1: resources,
+                quantities2: requiredResources,
+            })
+        });
+
+        const canBeUpgraded = !Object
+            .keys(availableResourcesAfter)
+            .map(resourceType => availableResourcesAfter[resourceType])
+            .some(quantity => quantity < 0);
 
         const bodyClassName = classNames(
             {
@@ -101,7 +111,7 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
                 className="relative group opacity-90 hover:opacity-100 flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
                 <button className={buttonClassName}
                         onClick={() => requestBuildingUpgrade({
-                            cityId,
+                            cityId: city.id,
                             buildingType
                         })}>{building.tier === 0 ? 'build' : 'upgrade'}</button>
                 <div className={bodyClassName}>
@@ -115,9 +125,9 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
                 </div>
                 <div
                     className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 cursor-default pointer-events-none">
-                    <UpgradeCostInfoComponent
-                        resources={resources}
-                        upgradeCostInfo={building.upgradeCostInfo}
+                    <CostInfoComponent
+                        availableResources={resources}
+                        requiredResources={requiredResources}
                     />
                 </div>
             </div>
@@ -129,7 +139,9 @@ const Component = ({buildings, cityId, requestBuildingUpgrade, resources}: Props
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return {
+        rules: state == null ? null : state.rules
+    };
 };
 
 const actionCreators: DispatchProps = {

@@ -32,25 +32,26 @@ import type {ClientStateCamera} from '../../state/reducers/camera';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCity} from '../../state/reducers/cities';
+import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 
-type OwnProps = {
+type OwnProps = {|
     camera: ClientStateCamera,
     cities: $ReadOnlyArray<ClientStateCity>,
     tiles: $ReadOnlyArray<ClientStateTile>,
     windowSize: Vector,
-};
+|};
 
-type StateProps = {};
+type StateProps = EmptyObject;
 
-type DispatchProps = {
+type DispatchProps = {|
     moveCameraUp: ClientMoveCameraActionCreator,
     moveCameraDown: ClientMoveCameraActionCreator,
     moveCameraLeft: ClientMoveCameraActionCreator,
     moveCameraRight: ClientMoveCameraActionCreator,
     zoomCameraIn: ClientZoomCameraActionCreator,
     zoomCameraOut: ClientZoomCameraActionCreator,
-};
+|};
 
 type Props = {
     ...OwnProps,
@@ -58,10 +59,10 @@ type Props = {
     ...DispatchProps,
 };
 
-const cullObjects = <T: { geometry: Geometry, ... }>({
-                                                         objects,
-                                                         cameraGeometry,
-                                                     }: {
+const cullObjects = <T: { geometry: Geometry }>({
+                                                    objects,
+                                                    cameraGeometry,
+                                                }: {
     objects: $ReadOnlyArray<T>,
     cameraGeometry: Geometry,
 }): $ReadOnlyArray<T> => {
@@ -73,12 +74,12 @@ const cullObjects = <T: { geometry: Geometry, ... }>({
     });
 };
 
-const transformObjectGeometries = <T: { geometry: Geometry, ... }>({
-                                                                       objects,
-                                                                       cameraWindowGeometry,
-                                                                       cameraLocationToWindowCenterLocationVector,
-                                                                       desiredCameraSizeToWorldCameraSizeRatioVector,
-                                                                   }: {
+const transformObjectGeometries = <T: { geometry: Geometry }>({
+                                                                  objects,
+                                                                  cameraWindowGeometry,
+                                                                  cameraLocationToWindowCenterLocationVector,
+                                                                  desiredCameraSizeToWorldCameraSizeRatioVector,
+                                                              }: {
     objects: $ReadOnlyArray<T>,
     cameraWindowGeometry: Geometry,
     cameraLocationToWindowCenterLocationVector: Vector,

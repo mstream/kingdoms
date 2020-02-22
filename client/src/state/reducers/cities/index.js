@@ -1,7 +1,6 @@
 /**
  * @flow
  */
-import type {ClientStateEntity} from '../root';
 import {citiesByOwnerIdReducer} from './by-owner-id';
 import {citiesByIdReducer} from './by-id';
 import type {Reducer} from 'redux';
@@ -13,16 +12,18 @@ import type {
     CommonStateCitizens,
     CommonStateResources
 } from '../../../../../common/src/state';
+import type {Vector} from '../../../../../common/src/vector';
 
 export type ClientStateCitiesById = { [string]: ClientStateCity };
 
 export type ClientStateCitiesByOwnerId = { [string]: $ReadOnlyArray<string> };
 
-export type ClientStateCity = ClientStateEntity & {
+export type ClientStateCity = {
     buildings: CommonStateBuildings,
     citizens: CommonStateCitizens,
     geometry: Geometry,
     id: string,
+    location: Vector,
     name: string,
     ownerId: string,
     resources: CommonStateResources,

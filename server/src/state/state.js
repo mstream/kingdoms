@@ -1,27 +1,21 @@
 /**
  * @flow
  */
-
-import type {ServerState} from '../../../../common/src/state';
+import type {ServerState} from '../../../common/src/state';
 
 export const initialState: ServerState = {
     cities: [
         {
             buildings: {
                 pasture: {
-                    tier: 2,
-                    upgradeCostInfo: {},
+                    tier: 2
                 },
                 lumberMill: {
-                    tier: 1,
-                    upgradeCostInfo: {},
+                    tier: 1
                 }
             },
             citizens: {
-                peasant: {
-                    changeInfo: {},
-                    quantity: 3000
-                }
+                peasant: 3000
             },
             id: '1',
             name: 'city1',
@@ -31,34 +25,21 @@ export const initialState: ServerState = {
             },
             ownerId: '1',
             resources: {
-                food:
-                    {
-                        changeInfo: {},
-                        quantity: 100,
-                    },
-                wood:
-                    {
-                        changeInfo: {},
-                        quantity: 200,
-                    },
-            },
+                food: 100,
+                wood: 200,
+            }
         },
         {
             buildings: {
                 pasture: {
                     tier: 2,
-                    upgradeCostInfo: {},
                 },
                 lumberMill: {
                     tier: 0,
-                    upgradeCostInfo: {},
                 }
             },
             citizens: {
-                peasant: {
-                    changeInfo: {},
-                    quantity: 2000,
-                }
+                peasant: 2000
             },
             id: '2',
             name: 'city2',
@@ -68,34 +49,21 @@ export const initialState: ServerState = {
             },
             ownerId: '1',
             resources: {
-                food:
-                    {
-                        changeInfo: {},
-                        quantity: 50,
-                    },
-                wood:
-                    {
-                        changeInfo: {},
-                        quantity: 100,
-                    },
+                food: 50,
+                wood: 100,
             },
         },
         {
             buildings: {
                 pasture: {
                     tier: 0,
-                    upgradeCostInfo: {},
                 },
                 lumberMill: {
                     tier: 0,
-                    upgradeCostInfo: {},
                 }
             },
             citizens: {
-                peasant: {
-                    changeInfo: {},
-                    quantity: 1000
-                }
+                peasant: 1000,
             },
             id: '3',
             name: 'city3',
@@ -105,16 +73,8 @@ export const initialState: ServerState = {
             },
             ownerId: '1',
             resources: {
-                food:
-                    {
-                        changeInfo: {},
-                        quantity: 25,
-                    },
-                wood:
-                    {
-                        changeInfo: {},
-                        quantity: 50,
-                    },
+                food: 25,
+                wood: 50,
             },
         },
     ],
@@ -137,8 +97,5 @@ export const initialState: ServerState = {
         unitStarvingCoefficient: 0.2,
     },
     time: null,
-    worldSizeInTiles: {
-        x: 30,
-        y: 30,
-    },
+    worldSize: {x: 32, y: 32},
 };

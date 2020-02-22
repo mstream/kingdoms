@@ -84,7 +84,7 @@ export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (
                 return state;
             }
             const halfWorldSizeInTiles = divideVectors({
-                vector1: action.payload.serverState.worldSizeInTiles,
+                vector1: action.payload.serverState.worldSize,
                 vector2: {x: 2, y: 2},
             });
             const halfWorldSize = multipleVectors({

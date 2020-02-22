@@ -5,7 +5,7 @@
 import {createRedisClient} from '../../services/redis';
 import {executeAction} from '../../utils';
 import {resetState} from '../../../../common/src/actions';
-import {initialState} from '../../state/reducers/state';
+import {initialState} from '../../state/state';
 
 const redis = createRedisClient();
 

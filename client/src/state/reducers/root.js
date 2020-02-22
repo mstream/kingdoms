@@ -15,16 +15,13 @@ import { citiesReducer } from './cities';
 import type { ClientAction } from '../actions';
 import reduceReducers from 'reduce-reducers';
 import { globalReducer } from './global';
-
-export type ClientStateEntity = {
-    id: string,
-    ...
-};
+import type {CommonStateRules} from '../../../../common/src/state';
 
 export type ClientState = ?{
     camera: ClientStateCamera,
     cities: ClientStateCities,
     menu: ClientStateMenu,
+    rules: CommonStateRules,
     tiles: ClientStateTiles,
 };
 

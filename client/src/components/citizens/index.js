@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
@@ -12,7 +13,15 @@ import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import {numberToQuantityString} from '../../util';
 import {ImageComponent} from '../image';
-import type {CommonStateCitizens} from '../../../../common/src/state';
+import type {
+    CommonStateCity,
+    CommonStateRules
+} from '../../../../common/src/state';
+import {
+    calculatePeasantChangeInfo,
+    calculateResourceChangeInfo,
+    convertChangeInfoToChangeRate
+} from '../../../../common/src/state';
 import {ChangeInfoComponent} from '../change-info';
 
 const citizenVisuals = {
@@ -22,13 +31,15 @@ const citizenVisuals = {
     }
 };
 
-type OwnProps = {
-    citizens: CommonStateCitizens,
-};
+type OwnProps = {|
+    city: CommonStateCity,
+|};
 
-type StateProps = {};
+type StateProps = {|
+    rules: ?CommonStateRules,
+|};
 
-type DispatchProps = {};
+type DispatchProps = EmptyObject;
 
 type Props = {
     ...OwnProps,
@@ -36,18 +47,41 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({citizens}: Props) => {
-    const citizenComponents = Object.keys(citizens).map(citizenType => {
-        const citizen = citizens[citizenType];
+const Component = ({city, rules}: Props) => {
+    if (rules == null) {
+        return (<div/>);
+    }
+    const citizenComponents = Object.keys(city.citizens).map(citizenType => {
+        const citizensQuantity = city.citizens[citizenType];
         const citizenVisual = citizenVisuals[citizenType];
+        const buildingTiersSum = Object.keys(city.buildings).reduce(
+            (sum, buildingType) => {
+                return sum + city.buildings[buildingType].tier;
+            },
+            0);
+        const foodChangeRate = convertChangeInfoToChangeRate({
+            changeInfo: calculateResourceChangeInfo({
+                city,
+                resourceType: 'food',
+                rules,
+            })
+        });
+
+        const changeInfo = calculatePeasantChangeInfo({
+            buildingTiersSum,
+            citizensQuantity,
+            food: city.resources.food,
+            foodChangeRate,
+            rules,
+        });
         return (
             <div
                 key={citizenType}
                 className="relative group opacity-90 hover:opacity-100 flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-t-lg rounded-b-lg rounded-sm bg-gray-100 shadow-2xs bg-gray-800">
-                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: citizen.quantity})}</p>
+                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: citizensQuantity})}</p>
                 <div
                     className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 cursor-default pointer-events-none">
-                    <ChangeInfoComponent changeInfo={citizen.changeInfo}/>
+                    <ChangeInfoComponent changeInfo={changeInfo}/>
                 </div>
                 <ImageComponent image={citizenVisual.image} ratio="250%"/>
                 <p className="text-xs text-center text-gray-100">{citizenVisual.name}</p>
@@ -60,7 +94,9 @@ const Component = ({citizens}: Props) => {
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return {
+        rules: state == null ? null : state.rules,
+    };
 };
 
 const actionCreators: DispatchProps = EMPTY_OBJECT;

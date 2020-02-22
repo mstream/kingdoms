@@ -3,20 +3,14 @@
  */
 
 import {rootReducer} from './root';
-import {initialState} from './state';
-import {executeTimeStep, resetState} from '../../../../common/src/actions';
+import {executeTimeStep, upgradeBuilding} from '../../../../common/src/actions';
+import type {ServerState} from '../../../../common/src/state';
+
+// TODO reset state action test
 
 describe('rootReducer', () => {
-    it('handles reset state action', () => {
-        const previousState = undefined;
-        const action = resetState();
-        const expected = initialState;
-        const actual = rootReducer(previousState, action);
-        expect(actual).toEqual(expected);
-    });
-
     it('handles execute time step action 1', () => {
-        const previousState = {
+        const previousState: ServerState = {
             cities: [
                 {
                     buildings: {
@@ -28,9 +22,7 @@ describe('rootReducer', () => {
                         }
                     },
                     citizens: {
-                        peasant: {
-                            quantity: 1000,
-                        }
+                        peasant: 1000,
                     },
                     id: '1',
                     location: {
@@ -40,21 +32,35 @@ describe('rootReducer', () => {
                     name: 'city1',
                     ownerId: '1',
                     resources: {
-                        food: {
-                            quantity: 2000,
-                        },
-                        wood: {
-                            quantity: 1000,
-                        }
+                        food: 2000,
+                        wood: 1000,
                     }
                 },
             ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
             time: '2000-01-01T00:00:00Z',
-            worldSizeInTiles: {x: 10, y: 10}
+            worldSize: {x: 10, y: 10}
         };
         const updateTime = '2000-01-01T01:00:00Z';
         const action = executeTimeStep({time: updateTime});
-        const expected = {
+        const expected: ServerState = {
             cities: [
                 {
                     buildings: {
@@ -66,12 +72,7 @@ describe('rootReducer', () => {
                         }
                     },
                     citizens: {
-                        peasant: {
-                            changeInfo: {
-                                'growth rate': 666.6666666666667
-                            },
-                            quantity: 1666,
-                        }
+                        peasant: 1666,
                     },
                     id: '1',
                     location: {
@@ -81,26 +82,33 @@ describe('rootReducer', () => {
                     name: 'city1',
                     ownerId: '1',
                     resources: {
-                        food: {
-                            changeInfo: {
-                                'pasture production': 10000,
-                                'citizens maintenance': -1000,
-                            },
-                            quantity: 11000,
-                        },
-                        wood: {
-                            changeInfo: {
-                                'lumber mill production': 10000,
-                            },
-                            quantity: 11000,
-                        }
+                        food: 11000,
+                        wood: 11000,
                     }
                 }
             ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
             time: updateTime,
-            worldSizeInTiles: {x: 10, y: 10}
+            worldSize: {x: 10, y: 10}
         };
-        const actual = rootReducer(previousState, action);
+        const actual = rootReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
 
@@ -117,9 +125,7 @@ describe('rootReducer', () => {
                         }
                     },
                     citizens: {
-                        peasant: {
-                            quantity: 500,
-                        }
+                        peasant: 500,
                     },
                     id: '2',
                     location: {
@@ -129,17 +135,31 @@ describe('rootReducer', () => {
                     name: 'city2',
                     ownerId: '2',
                     resources: {
-                        food: {
-                            quantity: 1000,
-                        },
-                        wood: {
-                            quantity: 0,
-                        }
+                        food: 1000,
+                        wood: 0,
                     }
                 },
             ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
             time: '2000-01-01T00:00:00Z',
-            worldSizeInTiles: {x: 10, y: 10}
+            worldSize: {x: 10, y: 10}
         };
         const updateTime = '2000-01-01T01:00:00Z';
         const action = executeTimeStep({time: updateTime});
@@ -155,12 +175,7 @@ describe('rootReducer', () => {
                         }
                     },
                     citizens: {
-                        peasant: {
-                            changeInfo: {
-                                'growth rate': 437.5
-                            },
-                            quantity: 937,
-                        }
+                        peasant: 937
                     },
                     id: '2',
                     location: {
@@ -170,26 +185,33 @@ describe('rootReducer', () => {
                     name: 'city2',
                     ownerId: '2',
                     resources: {
-                        food: {
-                            changeInfo: {
-                                'pasture production': 10000,
-                                'citizens maintenance': -500,
-                            },
-                            quantity: 10500,
-                        },
-                        wood: {
-                            changeInfo: {
-                                'lumber mill production': 20000,
-                            },
-                            quantity: 20000,
-                        }
+                        food: 10500,
+                        wood: 20000,
                     }
                 },
             ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
             time: updateTime,
-            worldSizeInTiles: {x: 10, y: 10}
+            worldSize: {x: 10, y: 10}
         };
-        const actual = rootReducer(previousState, action);
+        const actual = rootReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
 
@@ -206,9 +228,7 @@ describe('rootReducer', () => {
                         }
                     },
                     citizens: {
-                        peasant: {
-                            quantity: 2000,
-                        }
+                        peasant: 2000,
                     },
                     id: '3',
                     location: {
@@ -218,17 +238,31 @@ describe('rootReducer', () => {
                     name: 'city3',
                     ownerId: '3',
                     resources: {
-                        food: {
-                            quantity: 1000,
-                        },
-                        wood: {
-                            quantity: 1000,
-                        }
+                        food: 1000,
+                        wood: 1000,
                     }
                 },
             ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
             time: '2000-01-01T00:00:00Z',
-            worldSizeInTiles: {x: 10, y: 10}
+            worldSize: {x: 10, y: 10}
         };
         const updateTime = '2000-01-01T01:00:00Z';
         const action = executeTimeStep({time: updateTime});
@@ -244,12 +278,7 @@ describe('rootReducer', () => {
                         }
                     },
                     citizens: {
-                        peasant: {
-                            changeInfo: {
-                                'growth rate': -500
-                            },
-                            quantity: 1500,
-                        }
+                        peasant: 1500,
                     },
                     id: '3',
                     location: {
@@ -259,26 +288,141 @@ describe('rootReducer', () => {
                     name: 'city3',
                     ownerId: '3',
                     resources: {
-                        food: {
-                            changeInfo: {
-                                'pasture production': 0,
-                                'citizens maintenance': -2000,
-                            },
-                            quantity: 0,
-                        },
-                        wood: {
-                            changeInfo: {
-                                'lumber mill production': 10000,
-                            },
-                            quantity: 11000,
-                        }
+                        food: 0,
+                        wood: 11000,
                     }
                 },
             ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
             time: updateTime,
-            worldSizeInTiles: {x: 10, y: 10}
+            worldSize: {x: 10, y: 10}
         };
-        const actual = rootReducer(previousState, action);
+        const actual = rootReducer({action, state: previousState});
+        expect(actual).toEqual(expected);
+    });
+
+    it('handles building upgrade action', () => {
+        const previousState = {
+            cities: [
+                {
+                    buildings: {
+                        lumberMill: {
+                            tier: 0,
+                        },
+                        pasture: {
+                            tier: 0,
+                            upgradeCostInfo: {
+                                wood: 100
+                            }
+                        }
+                    },
+                    citizens: {
+                        peasant: 0,
+                    },
+                    id: '1',
+                    location: {
+                        x: 0,
+                        y: 0,
+                    },
+                    name: 'city1',
+                    ownerId: '1',
+                    resources: {
+                        food: 1000,
+                        wood: 1000,
+                    }
+                },
+            ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
+            time: null,
+            worldSize: {x: 10, y: 10}
+        };
+        const action = upgradeBuilding({buildingType: 'pasture', cityId: '1'});
+        const expected = {
+            cities: [
+                {
+                    buildings: {
+                        lumberMill: {
+                            tier: 0,
+                        },
+                        pasture: {
+                            tier: 1,
+                            upgradeCostInfo: {
+                                wood: 100
+                            }
+                        }
+                    },
+                    citizens: {
+                        peasant: 0,
+                    },
+                    id: '1',
+                    location: {
+                        x: 0,
+                        y: 0,
+                    },
+                    name: 'city1',
+                    ownerId: '1',
+                    resources: {
+                        food: 1000,
+                        wood: 900,
+                    }
+                },
+            ],
+            rules: {
+                baseCityCapacity: 1000,
+                buildingUpgradeCoefficient: 0.5,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 100,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 50,
+                    },
+                },
+                populationGrowthChangeRateCoefficient: 1,
+                resourceIncreaseChangeRateCoefficient: 10000,
+                unitFoodDemand: 1,
+                unitStarvingCoefficient: 0.2,
+            },
+            time: null,
+            worldSize: {x: 10, y: 10}
+        };
+        const actual = rootReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
 });

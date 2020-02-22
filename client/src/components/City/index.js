@@ -13,16 +13,17 @@ import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCity} from '../../state/reducers/cities';
 import cityImage from '../../assets/images/cities/city.png';
 import {ImageComponent} from '../image';
+import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {
+type OwnProps = {|
     city: ClientStateCity,
-};
+|};
 
-type StateProps = {};
+type StateProps = EmptyObject;
 
-type DispatchProps = {
+type DispatchProps = {|
     openCityView: ({ cityId: string }) => mixed,
-};
+|};
 
 type Props = {
     ...OwnProps,

@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {
     ClientAction,
@@ -23,17 +24,17 @@ import {BuildingsComponent} from '../buildings';
 import {CitizensComponent} from '../citizens';
 import type {Dispatch} from 'redux';
 
-type OwnProps = {
+type OwnProps = {|
     city: ClientStateCity,
-};
+|};
 
-type StateProps = {};
+type StateProps = EmptyObject;
 
-type DispatchProps = {
+type DispatchProps = {|
     closeCityView: ClientCloseCityViewActionCreator,
     navigateToNextCity: ClientNavigateToNextCityActionCreator,
     navigateToPreviousCity: ClientNavigateToPreviousCityActionCreator,
-};
+|};
 
 type Props = {
     ...OwnProps,
@@ -87,13 +88,9 @@ const Component = ({
                         </div>
                     </button>
                 </div>
-                <CitizensComponent citizens={city.citizens}/>
-                <ResourcesComponent resources={city.resources}/>
-                <BuildingsComponent
-                    buildings={city.buildings}
-                    cityId={city.id}
-                    resources={city.resources}
-                />
+                <CitizensComponent city={city}/>
+                <ResourcesComponent city={city}/>
+                <BuildingsComponent city={city}/>
             </div>
         </div>
     );

@@ -5,23 +5,28 @@
 import type {Node} from 'react';
 import React from 'react';
 import type {ClientState} from '../../state/reducers/root';
+import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 
 
-type OwnProps = { children?: Node, image: string, ratio: string };
+type OwnProps = {|
+    children?: Node,
+    image: string,
+    ratio: string
+|};
 
-type StateProps = {};
+type StateProps = EmptyObject;
 
-type DispatchProps = {};
+type DispatchProps = EmptyObject;
 
-type Props = {
+type Props = {|
     ...OwnProps,
     ...StateProps,
     ...DispatchProps,
-};
+|};
 
 const Component = ({children, image, ratio}: Props) => {
     const style = {

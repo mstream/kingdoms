@@ -2,13 +2,17 @@
  * @flow
  */
 
-import {rootReducer} from './root';
+import {initialState} from '../state';
+import {timeReducer} from './time';
 import type {
+    CommonStateTime,
+    CommonStateWorldSize,
     ServerState
 } from '../../../../common/src/state';
-import {initialState} from '../state';
+import {worldSizeReducer} from './world-size';
+import {executeTimeStep} from '../../../../common/src/actions';
 
-describe('rootReducer', () => {
+describe('worldSizeReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
@@ -36,8 +40,8 @@ describe('rootReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: ServerState = initialState;
-        const actual = rootReducer({action, state: previousState});
+        const expected: CommonStateTime = initialState.time;
+        const actual = timeReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
     it('returns the current state on unsupported action', () => {
@@ -67,8 +71,37 @@ describe('rootReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: ServerState = previousState;
-        const actual = rootReducer({action, state: previousState});
+        const expected: CommonStateTime = previousState.time;
+        const actual = timeReducer({action, state: previousState});
+        expect(actual).toEqual(expected);
+    });
+    it('updates time on execute time step action', () => {
+        const action = executeTimeStep({time: 'NEW_TIME'});
+        const previousState: ServerState = {
+            cities: [],
+            rules: {
+                baseCityCapacity: 0,
+                buildingUpgradeCoefficient: 0,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 0,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 0,
+                    }
+                },
+                populationGrowthChangeRateCoefficient: 0,
+                resourceIncreaseChangeRateCoefficient: 0,
+                unitFoodDemand: 0,
+                unitStarvingCoefficient: 0,
+            },
+            time: '2000-01-01T00:00:00Z',
+            worldSize: {x: 10, y: 10},
+        };
+        const expected: CommonStateTime = 'NEW_TIME';
+        const actual = timeReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
 });

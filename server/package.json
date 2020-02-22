@@ -7,7 +7,7 @@
     "deploy": "sam validate && npm run build && sam deploy",
     "destroy": "aws cloudformation delete-stack --stack-name kingdoms",
     "prebuild": "rimraf .aws-sam .vscode",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "rimraf": "3.0.2",

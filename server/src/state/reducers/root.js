@@ -6,7 +6,7 @@ import type {ServerState} from '../../../../common/src/state';
 import type {ServerAction} from '../../../../common/src/actions';
 import {citiesReducer} from './cities';
 import {timeReducer} from './time';
-import {worldSizeReducer} from './worldSize';
+import {worldSizeReducer} from './world-size';
 import {rulesReducer} from './rules';
 
 export type ServerStateReducer<S> = ({ action: ServerAction, state: ServerState }) => S

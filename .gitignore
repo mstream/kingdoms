@@ -3,6 +3,7 @@
 *.sublime-project
 *.sublime-workspace
 *.zip
+coverage
 dist/
 node_modules/
 .aws-sam

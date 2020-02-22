@@ -58,7 +58,7 @@ export type CommonStateRules = {
     unitStarvingCoefficient: number,
 };
 
-export type CommonStateTime = ?string;
+export type CommonStateTime = string;
 
 export type CommonStateWorldSize = Vector;
 

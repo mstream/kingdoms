@@ -3,13 +3,16 @@
  */
 import type {ServerState} from './state';
 
+export type ServerDummyAction = {
+    type: '_DUMMY_',
+};
 
 export type ServerGetCurrentStateAction = {
-    type: 'GET_CURRENT_STATE'
+    type: 'GET_CURRENT_STATE',
 }
 
 export type ServerResetStateAction = {
-    type: 'RESET_STATE'
+    type: 'RESET_STATE',
 }
 
 export type ServerExecuteTimeStepAction = {
@@ -26,6 +29,7 @@ export type ServerUpgradeBuildingAction = {
 };
 
 export type ServerAction =
+    | ServerDummyAction
     | ServerGetCurrentStateAction
     | ServerResetStateAction
     | ServerExecuteTimeStepAction

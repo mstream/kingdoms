@@ -2,13 +2,15 @@
  * @flow
  */
 
-import {rootReducer} from './root';
+import {rulesReducer} from './rules';
+import {initialState} from '../state';
 import type {
+    CommonStateRules,
     ServerState
 } from '../../../../common/src/state';
-import {initialState} from '../state';
+import {worldSizeReducer} from './world-size';
 
-describe('rootReducer', () => {
+describe('worldSizeReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
@@ -36,8 +38,8 @@ describe('rootReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: ServerState = initialState;
-        const actual = rootReducer({action, state: previousState});
+        const expected: CommonStateRules = initialState.rules;
+        const actual = rulesReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
     it('returns the current state on unsupported action', () => {
@@ -67,8 +69,8 @@ describe('rootReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: ServerState = previousState;
-        const actual = rootReducer({action, state: previousState});
+        const expected: CommonStateRules = previousState.rules;
+        const actual = rulesReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
 });

@@ -96,6 +96,6 @@ export const initialState: ServerState = {
         unitFoodDemand: 1,
         unitStarvingCoefficient: 0.2,
     },
-    time: null,
+    time: new Date().toISOString(),
     worldSize: {x: 32, y: 32},
 };

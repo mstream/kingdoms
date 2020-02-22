@@ -24,7 +24,7 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
             return initialState.cities;
         }
         case 'UPGRADE_BUILDING': {
-            const newState = state.cities.map<CommonStateCity>((city) => {
+            return state.cities.map<CommonStateCity>((city) => {
                 if (city.id !== action.payload.cityId) {
                     return city;
                 }
@@ -60,14 +60,9 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
                     resources: newResources
                 };
             });
-            return newState;
         }
         case 'EXECUTE_TIME_STEP': {
             const stateTime = state.time;
-
-            if (stateTime == null) {
-                return state.cities;
-            }
 
             const timeDelta = (Date.parse(action.payload) - Date.parse(stateTime)) / 1000;
 

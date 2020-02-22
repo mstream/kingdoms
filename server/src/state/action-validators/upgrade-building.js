@@ -18,9 +18,6 @@ export const validateUpgradeBuildingAction = ({action, state}: { action: ServerU
     const {buildings, resources} = city;
     const upgradingBuilding = buildings[buildingType];
     const requiredResources = calculateBuildingsUpgradeCost({buildingTier: upgradingBuilding.tier,buildingType, rules: state.rules});
-    if (Object.keys(requiredResources).length === 0) {
-        return [];
-    }
 
     const availableResources = Object.keys(resources).reduce((availableResources, resourceType: string) => {
             return {

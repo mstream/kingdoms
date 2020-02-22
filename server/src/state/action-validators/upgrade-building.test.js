@@ -33,7 +33,7 @@ describe('upgradeBuildingActionValidator', () => {
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
-            time: null,
+            time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
         const expected = ['city 1 does not exist'];
@@ -92,7 +92,7 @@ describe('upgradeBuildingActionValidator', () => {
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
-            time: null,
+            time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
         const expected = [];
@@ -151,7 +151,7 @@ describe('upgradeBuildingActionValidator', () => {
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
-            time: null,
+            time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
         const expected = ['insufficient wood'];

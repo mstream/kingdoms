@@ -12,6 +12,7 @@ export type ServerAbandonCityAction = {
     type: 'ABANDON_CITY',
     payload: {
         cityId: string,
+        playerId: string,
     },
 }
 
@@ -33,6 +34,7 @@ export type ServerUpgradeBuildingAction = {
     payload: {
         buildingType: string,
         cityId: string,
+        playerId: string,
     }
 };
 
@@ -41,6 +43,7 @@ export type ServerChangeCityNameAction = {
     payload: {
         cityId: string,
         name: string,
+        playerId: string,
     }
 };
 
@@ -53,21 +56,23 @@ export type ServerAction =
     | ServerExecuteTimeStepAction
     | ServerUpgradeBuildingAction;
 
-export const changeCityName = ({cityId, name}: { cityId: string, name: string }): ServerChangeCityNameAction => {
+export const changeCityName = ({cityId, name, playerId}: { cityId: string, name: string, playerId: string }): ServerChangeCityNameAction => {
     return {
         type: 'CHANGE_CITY_NAME',
         payload: {
             cityId,
             name,
+            playerId,
         }
     };
 };
 
-export const abandonCity = ({cityId}: { cityId: string }): ServerAbandonCityAction => {
+export const abandonCity = ({cityId, playerId}: { cityId: string, playerId: string }): ServerAbandonCityAction => {
     return {
         type: 'ABANDON_CITY',
         payload: {
             cityId,
+            playerId,
         },
     };
 };
@@ -92,12 +97,13 @@ export const executeTimeStep = ({time}: { time: string }): ServerExecuteTimeStep
     };
 };
 
-export const upgradeBuilding = ({cityId, buildingType}: { cityId: string, buildingType: string }): ServerUpgradeBuildingAction => {
+export const upgradeBuilding = ({cityId, buildingType, playerId}: { cityId: string, buildingType: string, playerId: string }): ServerUpgradeBuildingAction => {
     return {
         type: 'UPGRADE_BUILDING',
         payload: {
-            cityId,
             buildingType,
+            cityId,
+            playerId,
         }
     };
 };

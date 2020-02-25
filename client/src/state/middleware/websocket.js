@@ -70,7 +70,8 @@ export const websocketMiddleware = ({url}: { url: string }) => {
                         send({
                             action: upgradeBuilding({
                                 buildingType: action.payload.buildingType,
-                                cityId: action.payload.cityId
+                                cityId: action.payload.cityId,
+                                playerId: '1',
                             }), socket
                         });
                     }

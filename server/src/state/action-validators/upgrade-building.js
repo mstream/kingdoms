@@ -3,21 +3,28 @@
  */
 
 import type {ServerState} from '../../../../common/src/state';
+import {calculateBuildingsUpgradeCost} from '../../../../common/src/state';
 import type {ServerUpgradeBuildingAction} from '../../../../common/src/actions';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import {subtractQuantities} from '../../../../common/src/quantity';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
-import {calculateBuildingsUpgradeCost} from '../../../../common/src/state';
 
 export const validateUpgradeBuildingAction = ({action, state}: { action: ServerUpgradeBuildingAction, state: ServerState }): $ReadOnlyArray<string> => {
-    const {cityId, buildingType} = action.payload;
+    const {buildingType, cityId, playerId} = action.payload;
     const city = state.cities.find(city => city.id === cityId);
     if (city == null) {
         return [`city ${cityId} does not exist`];
     }
-    const {buildings, resources} = city;
+    const {buildings, ownerId, resources} = city;
+    if (playerId !== ownerId) {
+        return [`city ${cityId} does not belong to player ${playerId}`];
+    }
     const upgradingBuilding = buildings[buildingType];
-    const requiredResources = calculateBuildingsUpgradeCost({buildingTier: upgradingBuilding.tier,buildingType, rules: state.rules});
+    const requiredResources = calculateBuildingsUpgradeCost({
+        buildingTier: upgradingBuilding.tier,
+        buildingType,
+        rules: state.rules
+    });
 
     const availableResources = Object.keys(resources).reduce((availableResources, resourceType: string) => {
             return {

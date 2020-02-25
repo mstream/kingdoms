@@ -442,9 +442,13 @@ describe('citiesReducer', () => {
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            worldSize: {x: 10, y: 10},
         };
-        const action = upgradeBuilding({buildingType: 'pasture', cityId: '1'});
+        const action = upgradeBuilding({
+            buildingType: 'pasture',
+            cityId: '1',
+            playerId: '1'
+        });
         const expected: CommonStateCities = [
             {
                 buildings: {
@@ -572,7 +576,11 @@ describe('citiesReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10}
         };
-        const action = changeCityName({cityId: '1', name: 'newCity1'});
+        const action = changeCityName({
+            cityId: '1',
+            name: 'newCity1',
+            playerId: '1'
+        });
         const expected: CommonStateCities = [
             {
                 buildings: {
@@ -700,7 +708,7 @@ describe('citiesReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10}
         };
-        const action = abandonCity({cityId: '1'});
+        const action = abandonCity({cityId: '1', playerId: '1'});
         const expected: CommonStateCities = [
             {
                 buildings: {

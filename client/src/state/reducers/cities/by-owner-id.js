@@ -38,6 +38,10 @@ export const citiesByOwnerIdReducer: Reducer<ClientStateCities,
 
             const citiesByOwnerId: ClientStateCitiesByOwnerId = citiesInNameOrder.reduce(
                 (citiesByOwnerId, city) => {
+                    if (city.ownerId == null) {
+                        return citiesByOwnerId;
+                    }
+
                     return {
                         ...citiesByOwnerId,
                         [city.ownerId]: [

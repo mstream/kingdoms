@@ -7,6 +7,7 @@ import type {
     CommonStateCity,
 } from '../../../../common/src/state';
 import {
+    calculateBuildingsUpgradeCost,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
@@ -22,6 +23,17 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
     switch (action.type) {
         case 'RESET_STATE': {
             return initialState.cities;
+        }
+        case 'ABANDON_CITY': {
+            return state.cities.map<CommonStateCity>((city) => {
+                if (city.id !== action.payload.cityId) {
+                    return city;
+                }
+                return {
+                    ...city,
+                    ownerId: null,
+                };
+            });
         }
         case 'CHANGE_CITY_NAME': {
             return state.cities.map<CommonStateCity>((city) => {
@@ -50,7 +62,7 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
                     EMPTY_OBJECT
                 );
 
-                const requiredResources = city.buildings[buildingType].upgradeCostInfo;
+                const requiredResources = calculateBuildingsUpgradeCost({buildingTier: city.buildings[buildingType].tier, buildingType, rules: state.rules});
 
                 const newResources = convertQuantitiesToResources({
                     quantities: subtractQuantities({

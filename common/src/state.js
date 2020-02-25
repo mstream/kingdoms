@@ -37,7 +37,7 @@ export type CommonStateCity = {
     id: string,
     location: Vector,
     name: string,
-    ownerId: string,
+    ownerId: ?string,
     resources: CommonStateResources,
 };
 
@@ -68,51 +68,6 @@ export type ServerState = {
     time: CommonStateTime,
     worldSize: CommonStateWorldSize,
 };
-//
-// export const ServerStateSchema = t.object({
-//     cities: t.arrayOf(t.object({
-//         buildings: t.object({
-//             tier: t.number,
-//         }),
-//         citizens: t.object({
-//             peasant: t.number,
-//         }),
-//         id: t.string,
-//         location: t.object({
-//             x: t.number,
-//             y: t.number,
-//         }),
-//         name: t.string,
-//         ownerId: t.string,
-//         resources: t.object({
-//             food: t.number,
-//             wood: t.number,
-//         }),
-//     })),
-//     rules: t.object({
-//         baseCityCapacity: t.number,
-//         buildingUpgradeCoefficient: t.number,
-//         buildingUpgradeCosts: t.object({
-//             lumberMill: t.object({
-//                 food: t.number,
-//                 wood: t.number,
-//             }),
-//             pasture: t.object({
-//                 food: t.number,
-//                 wood: t.number,
-//             }),
-//         }),
-//         populationGrowthChangeRateCoefficient: t.number,
-//         resourceIncreaseChangeRateCoefficient: t.number,
-//         unitFoodDemand: t.number,
-//         unitStarvingCoefficient: t.number,
-//     }),
-//     time: t.string,
-//     worldSize: t.object({
-//         x: t.number,
-//         y: t.number,
-//     }),
-// });
 
 export const calculateBuildingsUpgradeCost = ({buildingTier, buildingType, rules}: { buildingTier: number, buildingType: string, rules: CommonStateRules }): CommonStateResources => {
     const costFactor = 1 + buildingTier * rules.buildingUpgradeCoefficient;

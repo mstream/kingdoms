@@ -8,6 +8,13 @@ export type ServerDummyAction = {
     type: '_DUMMY_',
 };
 
+export type ServerAbandonCityAction = {
+    type: 'ABANDON_CITY',
+    payload: {
+        cityId: string,
+    },
+}
+
 export type ServerGetCurrentStateAction = {
     type: 'GET_CURRENT_STATE',
 }
@@ -38,6 +45,7 @@ export type ServerChangeCityNameAction = {
 };
 
 export type ServerAction =
+    | ServerAbandonCityAction
     | ServerChangeCityNameAction
     | ServerDummyAction
     | ServerGetCurrentStateAction
@@ -55,6 +63,14 @@ export const changeCityName = ({cityId, name}: { cityId: string, name: string })
     };
 };
 
+export const abandonCity = ({cityId}: { cityId: string }): ServerAbandonCityAction => {
+    return {
+        type: 'ABANDON_CITY',
+        payload: {
+            cityId,
+        },
+    };
+};
 
 export const getCurrentState = (): ServerGetCurrentStateAction => {
     return {

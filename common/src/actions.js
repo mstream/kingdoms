@@ -1,6 +1,7 @@
 /**
  * @flow
  */
+
 import type {ServerState} from './state';
 
 export type ServerDummyAction = {
@@ -28,12 +29,32 @@ export type ServerUpgradeBuildingAction = {
     }
 };
 
+export type ServerChangeCityNameAction = {
+    type: 'CHANGE_CITY_NAME',
+    payload: {
+        cityId: string,
+        name: string,
+    }
+};
+
 export type ServerAction =
+    | ServerChangeCityNameAction
     | ServerDummyAction
     | ServerGetCurrentStateAction
     | ServerResetStateAction
     | ServerExecuteTimeStepAction
     | ServerUpgradeBuildingAction;
+
+export const changeCityName = ({cityId, name}: { cityId: string, name: string }): ServerChangeCityNameAction => {
+    return {
+        type: 'CHANGE_CITY_NAME',
+        payload: {
+            cityId,
+            name,
+        }
+    };
+};
+
 
 export const getCurrentState = (): ServerGetCurrentStateAction => {
     return {
@@ -72,3 +93,4 @@ export type ServerResponse = {
     errors: $ReadOnlyArray<string>,
     state: ServerState,
 }
+

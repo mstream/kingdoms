@@ -3,16 +3,11 @@
  */
 
 import {validateUpgradeBuildingAction} from './upgrade-building';
+import {upgradeBuilding} from '../../../../common/src/actions';
 
-describe('upgradeBuildingActionValidator', () => {
+describe('validateUpgradeBuildingAction', () => {
     it('returns error if city with given id does not exist', () => {
-        const action = {
-            type: 'UPGRADE_BUILDING',
-            payload: {
-                buildingType: 'pasture',
-                cityId: '1',
-            }
-        };
+        const action = upgradeBuilding({buildingType: 'pasture', cityId: '1'});
         const state = {
             cities: [],
             rules: {
@@ -43,13 +38,7 @@ describe('upgradeBuildingActionValidator', () => {
     });
 
     it('returns no errors when all availableResources are sufficient', () => {
-        const action = {
-            type: 'UPGRADE_BUILDING',
-            payload: {
-                buildingType: 'pasture',
-                cityId: '1',
-            }
-        };
+        const action = upgradeBuilding({buildingType: 'pasture', cityId: '1'});
         const state = {
             cities: [
                 {
@@ -102,13 +91,7 @@ describe('upgradeBuildingActionValidator', () => {
     });
 
     it('returns error for every insufficient resource', () => {
-        const action = {
-            type: 'UPGRADE_BUILDING',
-            payload: {
-                buildingType: 'pasture',
-                cityId: '1',
-            }
-        };
+        const action = upgradeBuilding({buildingType: 'pasture', cityId: '1'});
         const state = {
             cities: [
                 {

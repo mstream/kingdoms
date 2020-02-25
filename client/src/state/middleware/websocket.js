@@ -8,8 +8,12 @@ import type {Middleware} from 'redux';
 import type {ClientState} from '../reducers/root';
 import type {ClientAction} from '../actions';
 import {updateState} from '../actions';
-import type {ServerAction} from '../../../../common/src/actions';
+import type {
+    ServerAction,
+    ServerResponse
+} from '../../../../common/src/actions';
 import {getCurrentState, upgradeBuilding} from '../../../../common/src/actions';
+
 
 const send = ({action, socket}: { action: ServerAction, socket: Socket }): void => {
     socket.send(
@@ -41,18 +45,18 @@ export const websocketMiddleware = ({url}: { url: string }) => {
 
         console.log('ws data received: ' + dataString);
 
-        const data = JSON.parse(dataString);
+        const serverResponse: ServerResponse = JSON.parse(dataString);
 
-        switch (data.request.type) {
+        switch (serverResponse.request.type) {
             case 'GET_CURRENT_STATE':
             case 'EXECUTE_TIME_STEP':
             case 'UPGRADE_BUILDING': {
-                store.dispatch(updateState({serverState: data.state}));
+                store.dispatch(updateState({serverState: serverResponse.state}));
                 return;
             }
             default: {
                 console.error(
-                    `unknown data type received from server: ${data.request.type}`
+                    `unsupported response type received from server: ${serverResponse.request.type}`
                 );
             }
         }

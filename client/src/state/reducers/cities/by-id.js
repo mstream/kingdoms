@@ -3,7 +3,7 @@
  */
 import type {Reducer} from 'redux';
 import {multipleVectors} from '../../../../../common/src/vector';
-import {tileSize} from '../root';
+import {tileSize} from '../tiles';
 import {EMPTY_OBJECT} from '../../../../../common/src/util';
 import type {
     ClientStateCities,

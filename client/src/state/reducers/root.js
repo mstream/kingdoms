@@ -5,7 +5,6 @@
 import type { Reducer } from 'redux';
 import { combineReducers } from 'redux';
 import type { ClientStateTiles } from './tiles';
-import { tilesReducer } from './tiles';
 import type { ClientStateCamera } from './camera';
 import { cameraReducer } from './camera';
 import type { ClientStateMenu } from './menu';
@@ -16,6 +15,7 @@ import type { ClientAction } from '../actions';
 import reduceReducers from 'reduce-reducers';
 import { globalReducer } from './global';
 import type {CommonStateRules} from '../../../../common/src/state';
+import {tilesReducer} from './tiles';
 
 export type ClientState = ?{
     camera: ClientStateCamera,
@@ -25,10 +25,7 @@ export type ClientState = ?{
     tiles: ClientStateTiles,
 };
 
-export const tileSize = {
-    x: 64,
-    y: 64,
-};
+
 
 export const rootReducer: Reducer<ClientState, ClientAction> = reduceReducers(
     combineReducers({

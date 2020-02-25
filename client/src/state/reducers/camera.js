@@ -11,7 +11,7 @@ import {
 } from '../../../../common/src/vector';
 import type {Boundary} from '../../../../common/src/boundary';
 import {clipToBoundary} from '../../../../common/src/boundary';
-import {tileSize} from './root';
+import {tileSize} from './tiles';
 import type {ClientAction} from '../actions';
 import type {Geometry} from '../../../../common/src/geometry';
 

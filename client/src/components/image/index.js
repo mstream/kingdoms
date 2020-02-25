@@ -11,7 +11,6 @@ import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 
-
 type OwnProps = {|
     children?: Node,
     image: string,
@@ -29,6 +28,7 @@ type Props = {|
 |};
 
 const Component = ({children, image, ratio}: Props) => {
+
     const style = {
         paddingBottom: ratio
     };

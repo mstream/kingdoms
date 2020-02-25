@@ -2,7 +2,6 @@
  * @flow
  */
 import type { Reducer } from 'redux';
-import { tileSize } from './root';
 import type { ClientAction } from '../actions';
 import type {Vector} from '../../../../common/src/vector';
 import type {Geometry} from '../../../../common/src/geometry';
@@ -16,6 +15,11 @@ export type ClientStateTile = {
 };
 
 export type ClientStateTiles = $ReadOnlyArray<ClientStateTile>;
+
+export const tileSize = {
+    x: 64,
+    y: 64,
+};
 
 const initialState: ClientStateTiles = [];
 

@@ -23,6 +23,17 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
         case 'RESET_STATE': {
             return initialState.cities;
         }
+        case 'CHANGE_CITY_NAME': {
+            return state.cities.map<CommonStateCity>((city) => {
+                if (city.id !== action.payload.cityId) {
+                    return city;
+                }
+                return {
+                    ...city,
+                    name: action.payload.name,
+                };
+            });
+        }
         case 'UPGRADE_BUILDING': {
             return state.cities.map<CommonStateCity>((city) => {
                 if (city.id !== action.payload.cityId) {

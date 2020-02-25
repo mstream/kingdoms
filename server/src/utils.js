@@ -6,6 +6,7 @@ import type {ApiGateway, Redis} from './types';
 import {rootReducer} from './state/reducers/root';
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
 import {validateUpgradeBuildingAction} from './state/action-validators/upgrade-building';
+import {validateChangeCityNameAction} from './state/action-validators/change-city-name';
 
 const optimisticLockingAttempts = 3;
 
@@ -57,6 +58,10 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
         const errors = [];
 
         switch (action.type) {
+            case 'CHANGE_CITY_NAME': {
+                errors.push(...validateChangeCityNameAction({action, state}));
+                break;
+            }
             case 'UPGRADE_BUILDING': {
                 errors.push(...validateUpgradeBuildingAction({action, state}));
                 break;

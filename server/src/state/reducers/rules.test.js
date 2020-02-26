@@ -4,11 +4,9 @@
 
 import {rulesReducer} from './rules';
 import {initialState} from '../state';
-import type {
-    CommonStateRules,
-    ServerState
-} from '../../../../common/src/state';
+import type {CommonStateRules, ServerState} from '../../../../common/src/state';
 import {worldSizeReducer} from './world-size';
+import type {ServerStateReducerResult} from './root';
 
 describe('worldSizeReducer', () => {
     it('returns the default state on reset state action', () => {
@@ -38,7 +36,10 @@ describe('worldSizeReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: CommonStateRules = initialState.rules;
+        const expected: ServerStateReducerResult<CommonStateRules> = {
+            errors: [],
+            state: initialState.rules,
+        };
         const actual = rulesReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
@@ -69,7 +70,28 @@ describe('worldSizeReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: CommonStateRules = previousState.rules;
+        const expected: ServerStateReducerResult<CommonStateRules> = {
+            errors: [],
+            state: {
+                baseCityCapacity: 0,
+                buildingUpgradeCoefficient: 0,
+                buildingUpgradeCosts: {
+                    lumberMill: {
+                        food: 0,
+                        wood: 0,
+                    },
+                    pasture: {
+                        food: 0,
+                        wood: 0,
+                    }
+                },
+                populationGrowthChangeRateCoefficient: 0,
+                resourceIncreaseChangeRateCoefficient: 0,
+                unitFoodDemand: 0,
+                unitStarvingCoefficient: 0,
+            }
+        };
+
         const actual = rulesReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });

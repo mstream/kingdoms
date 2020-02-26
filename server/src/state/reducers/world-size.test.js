@@ -8,6 +8,8 @@ import type {
     CommonStateWorldSize,
     ServerState
 } from '../../../../common/src/state';
+import type {ServerStateReducerResult} from './root';
+import {success} from './root';
 
 describe('worldSizeReducer', () => {
     it('returns the default state on reset state action', () => {
@@ -35,9 +37,12 @@ describe('worldSizeReducer', () => {
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10},
+            worldSize: {x: 20, y: 20},
         };
-        const expected: CommonStateWorldSize = initialState.worldSize;
+        const expected: ServerStateReducerResult<CommonStateWorldSize> = {
+            errors: [],
+            state: initialState.worldSize,
+        };
         const actual = worldSizeReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
@@ -66,10 +71,14 @@ describe('worldSizeReducer', () => {
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10},
+            worldSize: {x: 20, y: 20},
         };
-        const expected: CommonStateWorldSize = previousState.worldSize;
+        success({state: previousState.worldSize});
         const actual = worldSizeReducer({action, state: previousState});
+        const expected: ServerStateReducerResult<CommonStateWorldSize> = {
+            errors: [],
+            state: {x: 20, y: 20}
+        };
         expect(actual).toEqual(expected);
     });
 });

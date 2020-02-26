@@ -4,13 +4,10 @@
 
 import {initialState} from '../state';
 import {timeReducer} from './time';
-import type {
-    CommonStateTime,
-    CommonStateWorldSize,
-    ServerState
-} from '../../../../common/src/state';
+import type {CommonStateTime, ServerState} from '../../../../common/src/state';
 import {worldSizeReducer} from './world-size';
 import {executeTimeStep} from '../../../../common/src/actions';
+import type {ServerStateReducerResult} from './root';
 
 describe('worldSizeReducer', () => {
     it('returns the default state on reset state action', () => {
@@ -40,7 +37,10 @@ describe('worldSizeReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: CommonStateTime = initialState.time;
+        const expected: ServerStateReducerResult<CommonStateTime> = {
+            errors: [],
+            state: initialState.time,
+        };
         const actual = timeReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
@@ -71,7 +71,10 @@ describe('worldSizeReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: CommonStateTime = previousState.time;
+        const expected: ServerStateReducerResult<CommonStateTime> = {
+            errors: [],
+            state: '2000-01-01T00:00:00Z',
+        };
         const actual = timeReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
@@ -100,7 +103,10 @@ describe('worldSizeReducer', () => {
             time: '2000-01-01T00:00:00Z',
             worldSize: {x: 10, y: 10},
         };
-        const expected: CommonStateTime = 'NEW_TIME';
+        const expected: ServerStateReducerResult<CommonStateTime> = {
+            errors: [],
+            state: 'NEW_TIME',
+        };
         const actual = timeReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });

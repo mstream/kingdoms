@@ -18,7 +18,7 @@ export const initialState: ServerState = {
                 peasant: 3000
             },
             id: '1',
-            name: 'city1',
+            name: 'Aaa',
             location: {
                 x: 0,
                 y: 0,
@@ -42,7 +42,7 @@ export const initialState: ServerState = {
                 peasant: 2000
             },
             id: '2',
-            name: 'city2',
+            name: 'Bbb',
             location: {
                 x: -3,
                 y: -3,
@@ -66,7 +66,7 @@ export const initialState: ServerState = {
                 peasant: 1000,
             },
             id: '3',
-            name: 'city3',
+            name: 'Ccc',
             location: {
                 x: 3,
                 y: 3,

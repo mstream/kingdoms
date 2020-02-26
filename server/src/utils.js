@@ -5,8 +5,6 @@
 import type {ApiGateway, Redis} from './types';
 import {rootReducer} from './state/reducers/root';
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
-import {validateUpgradeBuildingAction} from './state/action-validators/upgrade-building';
-import {validateChangeCityNameAction} from './state/action-validators/change-city-name';
 
 const optimisticLockingAttempts = 3;
 
@@ -55,45 +53,19 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
             throw Error('state is not initialized');
         }
 
-        const errors = [];
+        const reducerResult = rootReducer({action, state});
 
-        switch (action.type) {
-            case 'CHANGE_CITY_NAME': {
-                errors.push(...validateChangeCityNameAction({action, state}));
-                break;
-            }
-            case 'UPGRADE_BUILDING': {
-                errors.push(...validateUpgradeBuildingAction({action, state}));
-                break;
-            }
-            case 'EXECUTE_TIME_STEP':
-            case 'GET_CURRENT_STATE':
-            case 'RESET_STATE': {
-                break;
-            }
-            default: {
-                throw Error(`no validator for ${action.type} action type`);
-            }
-        }
-
-        if (errors.length > 0) {
-            return {
-                request: action,
-                errors,
-                state,
-            };
-        }
-
-        const newState = rootReducer({action, state});
         // $FlowFixMe
-        const result = await redis.multi().set('state', JSON.stringify(newState)).exec();
+        const result = await redis.multi().set('state', JSON.stringify(reducerResult.result)).exec();
+
         if (result != null) {
             return {
+                state: reducerResult.state != null ? reducerResult.state : state,
+                errors: reducerResult.errors,
                 request: action,
-                errors: [],
-                state: newState,
             };
         }
+
     }
     throw Error(`optimistic locking failed after ${optimisticLockingAttempts} attempts`);
 };

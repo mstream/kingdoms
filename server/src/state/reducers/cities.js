@@ -17,15 +17,16 @@ import {EMPTY_OBJECT} from '../../../../common/src/util';
 import {subtractQuantities} from '../../../../common/src/quantity';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
 import type {ServerStateReducer} from './root';
+import {failure, success} from './root';
 import {initialState} from '../state';
 
 export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, state}) => {
     switch (action.type) {
         case 'RESET_STATE': {
-            return initialState.cities;
+            return success({state: initialState.cities});
         }
         case 'ABANDON_CITY': {
-            return state.cities.map<CommonStateCity>((city) => {
+            const newState = state.cities.map<CommonStateCity>((city) => {
                 if (city.id !== action.payload.cityId) {
                     return city;
                 }
@@ -34,9 +35,30 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
                     ownerId: null,
                 };
             });
+
+            return success({state: newState});
         }
         case 'CHANGE_CITY_NAME': {
-            return state.cities.map<CommonStateCity>((city) => {
+
+            const {cityId, name, playerId} = action.payload;
+            const city = state.cities.find(city => city.id === cityId);
+            if (city == null) {
+                return failure({errors: [`city ${cityId} does not exist`]});
+            }
+            if (playerId !== city.ownerId) {
+                return failure({errors: [`city ${cityId} does not belong to player ${playerId}`]});
+            }
+            if (name.length < 3) {
+                return failure({errors: ['city name is too short']});
+            }
+            if (name.length > 20) {
+                return failure({errors: ['city name is too long']});
+            }
+            if (name.match(/^[A-Z][a-z]+$/) == null) {
+                return failure({errors: ['city name does not follow the convention']});
+            }
+
+            const newState = state.cities.map<CommonStateCity>((city) => {
                 if (city.id !== action.payload.cityId) {
                     return city;
                 }
@@ -45,9 +67,52 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
                     name: action.payload.name,
                 };
             });
+
+            return success({state: newState});
         }
         case 'UPGRADE_BUILDING': {
-            return state.cities.map<CommonStateCity>((city) => {
+            const {buildingType, cityId, playerId} = action.payload;
+            const city = state.cities.find(city => city.id === cityId);
+            if (city == null) {
+                return failure({errors: [`city ${cityId} does not exist`]});
+            }
+            const {buildings, ownerId, resources} = city;
+            if (playerId !== ownerId) {
+                return failure({errors: [`city ${cityId} does not belong to player ${playerId}`]});
+            }
+            const upgradingBuilding = buildings[buildingType];
+            const requiredResources = calculateBuildingsUpgradeCost({
+                buildingTier: upgradingBuilding.tier,
+                buildingType,
+                rules: state.rules
+            });
+
+            const availableResources = Object.keys(resources).reduce((availableResources, resourceType: string) => {
+                    return {
+                        ...availableResources,
+                        [resourceType]: resources[resourceType]
+                    };
+                },
+                EMPTY_OBJECT
+            );
+
+            const resourcesAfter = convertQuantitiesToResources({
+                quantities: subtractQuantities({
+                    quantities1: availableResources,
+                    quantities2: requiredResources,
+                })
+            });
+
+            const insufficientResourcesErrorMessages = Object.keys(resourcesAfter)
+                .filter(resourceType => resourcesAfter[resourceType] < 0)
+                .map(resourceType => `insufficient ${resourceType}`);
+
+            if (insufficientResourcesErrorMessages.length > 0) {
+                return failure({errors: insufficientResourcesErrorMessages});
+                }
+
+
+            const newState = state.cities.map<CommonStateCity>((city) => {
                 if (city.id !== action.payload.cityId) {
                     return city;
                 }
@@ -62,7 +127,11 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
                     EMPTY_OBJECT
                 );
 
-                const requiredResources = calculateBuildingsUpgradeCost({buildingTier: city.buildings[buildingType].tier, buildingType, rules: state.rules});
+                const requiredResources = calculateBuildingsUpgradeCost({
+                    buildingTier: city.buildings[buildingType].tier,
+                    buildingType,
+                    rules: state.rules
+                });
 
                 const newResources = convertQuantitiesToResources({
                     quantities: subtractQuantities({
@@ -83,6 +152,8 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
                     resources: newResources
                 };
             });
+
+            return success({state: newState});
         }
         case 'EXECUTE_TIME_STEP': {
             const stateTime = state.time;
@@ -90,13 +161,14 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
             const timeDelta = (Date.parse(action.payload) - Date.parse(stateTime)) / 1000;
 
             if (timeDelta <= 0) {
-                console.error(`the time from action ${action.payload} is not past the time from the state ${stateTime}`);
-                return state.cities;
+                const errorMessage = `the time from action ${action.payload} is not past the time from the state ${stateTime}`;
+                console.error(errorMessage);
+                return failure({state: state.cities, errors: [errorMessage]});
             }
 
             const citiesState = state.cities;
 
-            return citiesState.map<CommonStateCity>((city) => {
+            const newState = citiesState.map<CommonStateCity>((city) => {
                     const {citizens, resources} = city;
 
                     const foodChangeRate = convertChangeInfoToChangeRate({
@@ -165,9 +237,12 @@ export const citiesReducer: ServerStateReducer<CommonStateCities> = ({action, st
                     };
                 }
             );
+
+            return success({state: newState});
+
         }
         default: {
-            return state.cities;
+            return success({state: state.cities});
         }
     }
 };

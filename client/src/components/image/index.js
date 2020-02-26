@@ -11,21 +11,21 @@ import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 
-type OwnProps = {|
+type OwnProps = {
     children?: Node,
     image: string,
     ratio: string
-|};
+};
 
 type StateProps = EmptyObject;
 
 type DispatchProps = EmptyObject;
 
-type Props = {|
+type Props = {
     ...OwnProps,
     ...StateProps,
     ...DispatchProps,
-|};
+};
 
 const Component = ({children, image, ratio}: Props) => {
 

@@ -37,18 +37,18 @@ const buildingVisuals = {
     },
 };
 
-type OwnProps = {|
+type OwnProps = {
     city: CommonStateCity,
     cityId: string,
-|};
+};
 
-type StateProps = {|
+type StateProps = {
     rules: ?CommonStateRules
-|};
+};
 
-type DispatchProps = {|
+type DispatchProps = {
     requestBuildingUpgrade: ClientRequestBuildingUpgradeActionCreator
-|};
+};
 
 type Props = {
     ...OwnProps,
@@ -69,7 +69,6 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
         const requiredResources = calculateBuildingsUpgradeCost({
             buildingTier: building.tier,
             buildingType,
-            city,
             rules
         });
 

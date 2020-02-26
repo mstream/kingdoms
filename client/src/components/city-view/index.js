@@ -24,18 +24,18 @@ import {BuildingsComponent} from '../buildings';
 import {CitizensComponent} from '../citizens';
 import type {Dispatch} from 'redux';
 
-type OwnProps = {|
+type OwnProps = {
     city: ClientStateCity,
     cityId: string,
-|};
+};
 
 type StateProps = EmptyObject;
 
-type DispatchProps = {|
+type DispatchProps = {
     closeCityView: ClientCloseCityViewActionCreator,
     navigateToNextCity: ClientNavigateToNextCityActionCreator,
     navigateToPreviousCity: ClientNavigateToPreviousCityActionCreator,
-|};
+};
 
 type Props = {
     ...OwnProps,

@@ -4,7 +4,7 @@
 
 import {EMPTY_OBJECT} from './util';
 
-export type Quantities = { [string]: number }
+export type Quantities = { [string]: number, ... }
 
 export const addQuantities = ({quantities1, quantities2}: { quantities1: Quantities, quantities2: Quantities }) => {
     return [...Object.keys(quantities1), ...Object.keys(quantities2)].reduce((result, key) => {

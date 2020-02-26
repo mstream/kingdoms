@@ -14,9 +14,9 @@ import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 import {ImageComponent} from '../image';
 
-type OwnProps = {|
+type OwnProps = {
     tile: ClientStateTile
-|};
+};
 
 type StateProps = EmptyObject;
 

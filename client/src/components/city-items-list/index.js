@@ -11,9 +11,9 @@ import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {|
+type OwnProps = {
     children: Node,
-|};
+};
 
 type StateProps = EmptyObject;
 

@@ -32,13 +32,13 @@ const resourceVisuals = {
     },
 };
 
-type OwnProps = {|
+type OwnProps = {
     city: CommonStateCity,
-|};
+};
 
-type StateProps = {|
+type StateProps = {
     rules: ?CommonStateRules,
-|};
+};
 
 type DispatchProps = EmptyObject;
 

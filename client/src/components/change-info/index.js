@@ -13,9 +13,9 @@ import classNames from 'classnames';
 import type {Quantities} from '../../../../common/src/quantity';
 import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {|
+type OwnProps = {
     changeInfo: Quantities,
-|};
+};
 
 type StateProps = EmptyObject;
 

@@ -15,10 +15,10 @@ import {subtractQuantities} from '../../../../common/src/quantity';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
 import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {|
+type OwnProps = {
     availableResources: CommonStateResources,
     requiredResources: CommonStateResources,
-|};
+};
 
 type StateProps = EmptyObject;
 

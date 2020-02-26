@@ -5,6 +5,7 @@
 import React from 'react';
 import {createGeometryStyle} from '../../util';
 import type {Dispatch} from 'redux';
+import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import {connect} from 'react-redux';
 import type {ClientAction} from '../../state/actions';
@@ -13,17 +14,16 @@ import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCity} from '../../state/reducers/cities';
 import cityImage from '../../assets/images/cities/city.png';
 import {ImageComponent} from '../image';
-import type {EmptyObject} from '../../../../common/src/util';
 
-type OwnProps = {|
-    city: {id: string} & ClientStateCity,
-|};
+type OwnProps = {
+    city: { id: string, ... } & ClientStateCity,
+};
 
 type StateProps = EmptyObject;
 
-type DispatchProps = {|
+type DispatchProps = {
     openCityView: ({ cityId: string }) => mixed,
-|};
+};
 
 type Props = {
     ...OwnProps,

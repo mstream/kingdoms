@@ -26,6 +26,7 @@ export type ClientStateCity = {
     name: string,
     ownerId: ?string,
     resources: CommonStateResources,
+    ...
 };
 
 export type ClientStateCities = {

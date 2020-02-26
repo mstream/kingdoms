@@ -31,13 +31,13 @@ const citizenVisuals = {
     }
 };
 
-type OwnProps = {|
+type OwnProps = {
     city: CommonStateCity,
-|};
+};
 
-type StateProps = {|
+type StateProps = {
     rules: ?CommonStateRules,
-|};
+};
 
 type DispatchProps = EmptyObject;
 

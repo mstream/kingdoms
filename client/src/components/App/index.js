@@ -14,9 +14,9 @@ import {EMPTY_OBJECT} from '../../../../common/src/util';
 
 type OwnProps = EmptyObject;
 
-type StateProps = {|
+type StateProps = {
     state: ClientState
-|};
+};
 
 type DispatchProps = EmptyObject;
 

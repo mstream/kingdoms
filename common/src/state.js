@@ -38,9 +38,10 @@ export type CommonStateCity = {
     name: string,
     ownerId: ?string,
     resources: CommonStateResources,
+    ...
 };
 
-export type CommonStateCities = { [string]: CommonStateCity };
+export type CommonStateCities = { [string]: CommonStateCity, ... };
 
 export type CommonStateBuildingUpgradeCosts = {
     lumberMill: CommonStateResources,

@@ -11,8 +11,8 @@ describe('resetStateCitiesReducer', () => {
     it('returns the initial state', () => {
         const action = resetState();
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -24,7 +24,6 @@ describe('resetStateCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -36,31 +35,7 @@ describe('resetStateCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,

@@ -14,7 +14,7 @@ describe('worldSizeReducer', () => {
             type: 'RESET_STATE',
         };
         const previousState: ServerState = {
-            cities: [],
+            cities: {},
             rules: {
                 baseCityCapacity: 0,
                 buildingUpgradeCoefficient: 0,
@@ -48,7 +48,7 @@ describe('worldSizeReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            cities: [],
+            cities: {},
             rules: {
                 baseCityCapacity: 0,
                 buildingUpgradeCoefficient: 0,

@@ -16,7 +16,7 @@ import {ImageComponent} from '../image';
 import type {EmptyObject} from '../../../../common/src/util';
 
 type OwnProps = {|
-    city: ClientStateCity,
+    city: {id: string} & ClientStateCity,
 |};
 
 type StateProps = EmptyObject;

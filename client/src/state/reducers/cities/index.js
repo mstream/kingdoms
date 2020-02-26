@@ -22,7 +22,6 @@ export type ClientStateCity = {
     buildings: CommonStateBuildings,
     citizens: CommonStateCitizens,
     geometry: Geometry,
-    id: string,
     location: Vector,
     name: string,
     ownerId: ?string,

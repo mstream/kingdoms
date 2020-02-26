@@ -9,8 +9,8 @@ import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {EmptyObject} from '../../../../common/src/util';
+import {EMPTY_OBJECT} from '../../../../common/src/util';
 
 type OwnProps = EmptyObject;
 
@@ -47,13 +47,17 @@ const Component = ({state}: Props) => {
         <div>
             <WorldMapComponent
                 camera={state.camera}
-                cities={Object.keys(state.cities.byId).map(id => state.cities.byId[id])}
+                citiesById={state.cities.byId}
                 tiles={state.tiles}
                 windowSize={windowSize}
             />
-            {state.menu.viewedCityId != null &&
-            <CityViewComponent
-                city={state.cities.byId[state.menu.viewedCityId]}/>}
+            {
+                state.menu.viewedCityId != null &&
+                <CityViewComponent
+                    city={state.cities.byId[state.menu.viewedCityId]}
+                    cityId={state.menu.viewedCityId}
+                />
+            }
         </div>
     ) : (
         <div>loading...</div>

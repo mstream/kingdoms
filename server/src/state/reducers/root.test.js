@@ -13,7 +13,7 @@ describe('rootReducer', () => {
             type: 'RESET_STATE',
         };
         const previousState: ServerState = {
-            cities: [],
+            cities: {},
             rules: {
                 baseCityCapacity: 0,
                 buildingUpgradeCoefficient: 0,
@@ -47,7 +47,7 @@ describe('rootReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            cities: [],
+            cities: {},
             rules: {
                 baseCityCapacity: 0,
                 buildingUpgradeCoefficient: 0,
@@ -72,7 +72,7 @@ describe('rootReducer', () => {
         const expected: ServerStateReducerResult<ServerState> = {
             errors: [],
             state: {
-                cities: [],
+                cities: {},
                 rules: {
                     baseCityCapacity: 0,
                     buildingUpgradeCoefficient: 0,

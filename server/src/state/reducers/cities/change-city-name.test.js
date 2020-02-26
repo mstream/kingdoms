@@ -9,61 +9,12 @@ import {changeCityNameCitiesReducer} from './change-city-name';
 describe('changeCityNameCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = changeCityName({
-            cityId: '3',
+            cityId: '1',
             name: 'Newaaa',
             playerId: '1'
         });
         const previousState: ServerState = {
-            cities: [
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '1',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            cities: {},
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -100,8 +51,8 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: '2'
         });
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -113,7 +64,6 @@ describe('changeCityNameCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -125,31 +75,7 @@ describe('changeCityNameCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -182,8 +108,8 @@ describe('changeCityNameCitiesReducer', () => {
     it('fails when the name is too short', () => {
         const action = changeCityName({cityId: '1', name: 'Ne', playerId: '1'});
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -195,7 +121,6 @@ describe('changeCityNameCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -207,31 +132,7 @@ describe('changeCityNameCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -268,8 +169,8 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: '1'
         });
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -281,7 +182,6 @@ describe('changeCityNameCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -293,31 +193,7 @@ describe('changeCityNameCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -357,8 +233,8 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: '1'
         });
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -370,7 +246,6 @@ describe('changeCityNameCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -382,31 +257,7 @@ describe('changeCityNameCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -446,8 +297,8 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: '1'
         });
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -459,7 +310,6 @@ describe('changeCityNameCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -471,31 +321,7 @@ describe('changeCityNameCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -519,8 +345,8 @@ describe('changeCityNameCitiesReducer', () => {
         };
         const expected = {
             errors: [],
-            state: [
-                {
+            state: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -532,7 +358,6 @@ describe('changeCityNameCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -544,31 +369,7 @@ describe('changeCityNameCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
         };
         const actual = changeCityNameCitiesReducer({
             action,

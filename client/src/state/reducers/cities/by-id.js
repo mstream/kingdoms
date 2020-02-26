@@ -23,8 +23,9 @@ export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
 ) => {
     switch (action.type) {
         case 'UPDATE_STATE': {
-            const citiesById: ClientStateCitiesById = action.payload.serverState.cities.reduce(
-                (citiesById, city) => {
+            const citiesById: ClientStateCitiesById = Object.keys(action.payload.serverState.cities).reduce(
+                (citiesById, cityId) => {
+                    const city = action.payload.serverState.cities[cityId];
                     const clientStateCity: ClientStateCity = {
                         ...city,
                         geometry: {
@@ -38,7 +39,7 @@ export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
 
                     return {
                         ...citiesById,
-                        [city.id]: clientStateCity,
+                        [cityId]: clientStateCity,
                     };
                 },
                 EMPTY_OBJECT

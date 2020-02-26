@@ -2,44 +2,30 @@
  * @flow
  */
 
+import type {ServerExecuteTimeStepAction} from '../../../../../common/src/actions';
 import type {
-    ServerAbandonCityAction,
-    ServerChangeCityNameAction,
-    ServerExecuteTimeStepAction,
-    ServerResetStateAction,
-    ServerUpgradeBuildingAction
-} from '../../../../../common/src/actions';
-import type {
-    CommonStateCities, CommonStateCity,
+    CommonStateCities,
     ServerState
 } from '../../../../../common/src/state';
-import type {ServerStateReducerResult} from '../root';
-import {failure, success} from '../root';
-import {initialState} from '../../state';
 import {
-    calculateBuildingsUpgradeCost,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
     convertChangeRateToDelta
 } from '../../../../../common/src/state';
-import {convertQuantitiesToResources} from '../../../../../common/src/resource';
-import {subtractQuantities} from '../../../../../common/src/quantity';
-import {EMPTY_OBJECT} from '../../../../../common/src/util';
+import type {ServerStateReducerResult} from '../root';
+import {failure, success} from '../root';
 
 export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerExecuteTimeStepAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
-    const stateTime = state.time;
-
-    const timeDelta = (Date.parse(action.payload) - Date.parse(stateTime)) / 1000;
+    const timeDelta = (Date.parse(action.payload) - Date.parse(state.time)) / 1000;
 
     if (timeDelta <= 0) {
         return failure({errors: [`the time from the action is not past the time from the state`]});
     }
 
-    const citiesState = state.cities;
-
-    const newState = citiesState.map<CommonStateCity>((city) => {
-            const {citizens, resources} = city;
+    const newState = Object.keys(state.cities).reduce(
+        (newState, cityId) => {
+            const city = state.cities[cityId];
 
             const foodChangeRate = convertChangeInfoToChangeRate({
                 changeInfo: calculateResourceChangeInfo({
@@ -57,12 +43,12 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
                 })
             });
 
-            const newFood = Math.max(0, resources.food + convertChangeRateToDelta({
+            const newFood = Math.max(0, city.resources.food + convertChangeRateToDelta({
                 changeRate: foodChangeRate,
                 timeDelta
             }));
 
-            const newWood = Math.max(0, resources.wood + convertChangeRateToDelta({
+            const newWood = Math.max(0, city.resources.wood + convertChangeRateToDelta({
                 changeRate: woodChangeRate,
                 timeDelta
             }));
@@ -85,13 +71,13 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
 
             const peasantsChange = calculatePeasantChangeInfo({
                 buildingTiersSum,
-                citizensQuantity: citizens.peasant,
+                citizensQuantity: city.citizens.peasant,
                 food: newFood,
                 foodChangeRate,
                 rules: state.rules
             });
 
-            const newPeasants = Math.max(0, citizens.peasant + Math.floor(convertChangeRateToDelta({
+            const newPeasants = Math.max(0, city.citizens.peasant + Math.floor(convertChangeRateToDelta({
                 changeRate: convertChangeInfoToChangeRate({changeInfo: peasantsChange}),
                 timeDelta
             })));
@@ -100,13 +86,21 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
                 peasant: newPeasants
             };
 
-            return {
+            const newCityState = {
                 ...city,
                 citizens: newCitizensState,
                 resources: newResourcesState,
             };
-        }
+
+            return {
+                ...newState,
+                [cityId]: newCityState,
+            }
+        },
+        {}
     );
 
     return success({state: newState});
 };
+
+

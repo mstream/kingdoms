@@ -26,6 +26,7 @@ import type {Dispatch} from 'redux';
 
 type OwnProps = {|
     city: ClientStateCity,
+    cityId: string,
 |};
 
 type StateProps = EmptyObject;
@@ -44,6 +45,7 @@ type Props = {
 
 const Component = ({
                        city,
+                       cityId,
                        closeCityView,
                        navigateToNextCity: navigateToNextCity,
                        navigateToPreviousCity: navigateToPreviousCity,
@@ -90,7 +92,7 @@ const Component = ({
                 </div>
                 <CitizensComponent city={city}/>
                 <ResourcesComponent city={city}/>
-                <BuildingsComponent city={city}/>
+                <BuildingsComponent city={city} cityId={cityId}/>
             </div>
         </div>
     );

@@ -12,14 +12,6 @@ import type {
     ClientMoveCameraActionCreator,
     ClientZoomCameraActionCreator
 } from '../../state/actions';
-import {
-    moveCameraDown,
-    moveCameraLeft,
-    moveCameraRight,
-    moveCameraUp,
-    zoomCameraIn,
-    zoomCameraOut,
-} from '../../state/actions';
 import type {Vector} from '../../../../common/src/vector';
 import {
     addVectors,
@@ -31,13 +23,18 @@ import {checkIfIntersect} from '../../../../common/src/geometry';
 import type {ClientStateCamera} from '../../state/reducers/camera';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateCity} from '../../state/reducers/cities';
 import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
+import type {ClientStateCitiesById} from '../../state/reducers/cities';
+import {
+    moveCameraDown,
+    moveCameraLeft, moveCameraRight,
+    moveCameraUp, zoomCameraIn, zoomCameraOut
+} from '../../state/actions';
 
 type OwnProps = {|
     camera: ClientStateCamera,
-    cities: $ReadOnlyArray<ClientStateCity>,
+    citiesById: ClientStateCitiesById,
     tiles: $ReadOnlyArray<ClientStateTile>,
     windowSize: Vector,
 |};
@@ -127,7 +124,7 @@ const transformObjectGeometries = <T: { geometry: Geometry }>({
 
 const Component = ({
                        camera,
-                       cities,
+                       citiesById,
                        tiles,
                        moveCameraUp,
                        moveCameraDown,
@@ -206,9 +203,16 @@ const Component = ({
         objects: tiles,
     });
 
+    const citiesWithId = Object.keys(citiesById).map((cityId) => {
+        return {
+            ...citiesById[cityId],
+            id: cityId,
+        }
+    });
+
     const visibleCities = cullObjects({
         cameraGeometry: camera.geometry,
-        objects: cities,
+        objects: citiesWithId,
     });
 
     const cameraWindowGeometry = {

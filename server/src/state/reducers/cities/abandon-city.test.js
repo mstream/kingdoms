@@ -2,66 +2,15 @@
  * @flow
  */
 
-import {abandonCity, resetState} from '../../../../../common/src/actions';
-import {initialState} from '../../state';
-import {resetStateCitiesReducer} from './reset-state';
+import {abandonCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {abandonCityCitiesReducer} from './abandon-city';
 
 describe('abandonCityCitiesReducer', () => {
     it('fails when city does not exist', () => {
-        const action = abandonCity({cityId: '3', playerId: '1'});
+        const action = abandonCity({cityId: '1', playerId: '1'});
         const previousState: ServerState = {
-            cities: [
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '1',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            cities: {},
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -94,8 +43,8 @@ describe('abandonCityCitiesReducer', () => {
     it('fails when city does not belong to the player', () => {
         const action = abandonCity({cityId: '1', playerId: '2'});
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -107,7 +56,6 @@ describe('abandonCityCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -119,31 +67,7 @@ describe('abandonCityCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -176,8 +100,8 @@ describe('abandonCityCitiesReducer', () => {
     it('removes the ownership', () => {
         const action = abandonCity({cityId: '1', playerId: '1'});
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -189,7 +113,6 @@ describe('abandonCityCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -201,31 +124,7 @@ describe('abandonCityCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -249,8 +148,8 @@ describe('abandonCityCitiesReducer', () => {
         };
         const expected = {
             errors: [],
-            state: [
-                {
+            state: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -262,7 +161,6 @@ describe('abandonCityCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -274,31 +172,7 @@ describe('abandonCityCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
         };
         const actual = abandonCityCitiesReducer({action, state: previousState});
         expect(actual).toEqual(expected);

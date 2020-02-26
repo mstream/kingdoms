@@ -15,7 +15,7 @@ describe('worldSizeReducer', () => {
             type: 'RESET_STATE',
         };
         const previousState: ServerState = {
-            cities: [],
+            cities: {},
             rules: {
                 baseCityCapacity: 0,
                 buildingUpgradeCoefficient: 0,
@@ -49,7 +49,7 @@ describe('worldSizeReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            cities: [],
+            cities: {},
             rules: {
                 baseCityCapacity: 0,
                 buildingUpgradeCoefficient: 0,
@@ -81,7 +81,7 @@ describe('worldSizeReducer', () => {
     it('updates time on execute time step action', () => {
         const action = executeTimeStep({time: 'NEW_TIME'});
         const previousState: ServerState = {
-            cities: [],
+            cities: {},
             rules: {
                 baseCityCapacity: 0,
                 buildingUpgradeCoefficient: 0,

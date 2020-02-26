@@ -34,14 +34,13 @@ export type CommonStateResources = {
 export type CommonStateCity = {
     buildings: CommonStateBuildings,
     citizens: CommonStateCitizens,
-    id: string,
     location: Vector,
     name: string,
     ownerId: ?string,
     resources: CommonStateResources,
 };
 
-export type CommonStateCities = $ReadOnlyArray<CommonStateCity>;
+export type CommonStateCities = { [string]: CommonStateCity };
 
 export type CommonStateBuildingUpgradeCosts = {
     lumberMill: CommonStateResources,

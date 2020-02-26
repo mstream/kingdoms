@@ -10,60 +10,11 @@ describe('upgradeBuildingCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = upgradeBuilding({
             buildingType: 'pasture',
-            cityId: '3',
+            cityId: '1',
             playerId: '1'
         });
         const previousState: ServerState = {
-            cities: [
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '1',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            cities: {},
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -103,8 +54,8 @@ describe('upgradeBuildingCitiesReducer', () => {
             playerId: '2'
         });
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -116,7 +67,6 @@ describe('upgradeBuildingCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -128,31 +78,7 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -192,8 +118,8 @@ describe('upgradeBuildingCitiesReducer', () => {
             playerId: '1',
         });
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -205,7 +131,6 @@ describe('upgradeBuildingCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -217,31 +142,7 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 100,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 100,
-                        wood: 100,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -281,8 +182,8 @@ describe('upgradeBuildingCitiesReducer', () => {
             playerId: '1'
         });
         const previousState: ServerState = {
-            cities: [
-                {
+            cities: {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -294,7 +195,6 @@ describe('upgradeBuildingCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -306,31 +206,7 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 1000,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            },
             rules: {
                 baseCityCapacity: 1000,
                 buildingUpgradeCoefficient: 0.5,
@@ -354,8 +230,8 @@ describe('upgradeBuildingCitiesReducer', () => {
         };
         const expected = {
             errors: [],
-            state:  [
-                {
+            state:  {
+                '1': {
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -367,7 +243,6 @@ describe('upgradeBuildingCitiesReducer', () => {
                     citizens: {
                         peasant: 0,
                     },
-                    id: '1',
                     location: {
                         x: 0,
                         y: 0,
@@ -379,31 +254,7 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 700,
                     }
                 },
-                {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    id: '2',
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Bbb',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            ],
+            }
         };
         const actual = upgradeBuildingCitiesReducer({
             action,

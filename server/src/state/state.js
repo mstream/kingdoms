@@ -4,8 +4,8 @@
 import type {ServerState} from '../../../common/src/state';
 
 export const initialState: ServerState = {
-    cities: [
-        {
+    cities: {
+        '1': {
             buildings: {
                 pasture: {
                     tier: 2
@@ -17,7 +17,6 @@ export const initialState: ServerState = {
             citizens: {
                 peasant: 3000
             },
-            id: '1',
             name: 'Aaa',
             location: {
                 x: 0,
@@ -29,7 +28,7 @@ export const initialState: ServerState = {
                 wood: 200,
             }
         },
-        {
+        '2': {
             buildings: {
                 pasture: {
                     tier: 2,
@@ -41,7 +40,6 @@ export const initialState: ServerState = {
             citizens: {
                 peasant: 2000
             },
-            id: '2',
             name: 'Bbb',
             location: {
                 x: -3,
@@ -53,7 +51,7 @@ export const initialState: ServerState = {
                 wood: 100,
             },
         },
-        {
+        '3': {
             buildings: {
                 pasture: {
                     tier: 0,
@@ -65,7 +63,6 @@ export const initialState: ServerState = {
             citizens: {
                 peasant: 1000,
             },
-            id: '3',
             name: 'Ccc',
             location: {
                 x: 3,
@@ -77,7 +74,7 @@ export const initialState: ServerState = {
                 wood: 50,
             },
         },
-    ],
+    },
     rules: {
         baseCityCapacity: 1000,
         buildingUpgradeCoefficient: 0.5,

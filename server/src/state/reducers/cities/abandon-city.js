@@ -2,37 +2,35 @@
  * @flow
  */
 
+import type {ServerAbandonCityAction} from '../../../../../common/src/actions';
 import type {
-    ServerAbandonCityAction,
-    ServerResetStateAction
-} from '../../../../../common/src/actions';
-import type {
-    CommonStateCities, CommonStateCity,
+    CommonStateCities,
     ServerState
 } from '../../../../../common/src/state';
 import type {ServerStateReducerResult} from '../root';
 import {failure, success} from '../root';
-import {initialState} from '../../state';
 
 export const abandonCityCitiesReducer = ({action, state}: { action: ServerAbandonCityAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
     const {cityId, playerId} = action.payload;
-    const city = state.cities.find(city => city.id === cityId);
+    const city = state.cities[cityId];
+
     if (city == null) {
         return failure({errors: [`the city does not exist`]});
     }
+
     if (playerId !== city.ownerId) {
         return failure({errors: [`the city does not belong to the player`]});
     }
 
-    const newState = state.cities.map<CommonStateCity>((city) => {
-        if (city.id !== action.payload.cityId) {
-            return city;
-        }
-        return {
-            ...city,
-            ownerId: null,
-        };
-    });
+    const newCityState = {
+        ...city,
+        ownerId: null,
+    };
+
+    const newState = {
+        ...state.cities,
+        [cityId]: newCityState,
+    };
 
     return success({state: newState});
 };

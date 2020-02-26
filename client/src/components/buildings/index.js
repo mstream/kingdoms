@@ -18,9 +18,7 @@ import romanDecimalConverter from 'roman-decimal';
 import {ImageComponent} from '../image';
 import classNames from 'classnames';
 import type {
-    CommonStateBuildings,
     CommonStateCity,
-    CommonStateResources,
     CommonStateRules
 } from '../../../../common/src/state';
 import {calculateBuildingsUpgradeCost} from '../../../../common/src/state';
@@ -41,6 +39,7 @@ const buildingVisuals = {
 
 type OwnProps = {|
     city: CommonStateCity,
+    cityId: string,
 |};
 
 type StateProps = {|
@@ -57,7 +56,7 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({city, requestBuildingUpgrade, rules}: Props) => {
+const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
     if (rules == null) {
         return (<div/>);
     }
@@ -111,7 +110,7 @@ const Component = ({city, requestBuildingUpgrade, rules}: Props) => {
                 className="relative group opacity-90 hover:opacity-100 flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
                 <button className={buttonClassName}
                         onClick={() => requestBuildingUpgrade({
-                            cityId: city.id,
+                            cityId: cityId,
                             buildingType
                         })}>{building.tier === 0 ? 'build' : 'upgrade'}</button>
                 <div className={bodyClassName}>

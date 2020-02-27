@@ -38,7 +38,8 @@
     "reduce-reducers": "1.0.4",
     "redux": "4.0.5",
     "roman-decimal": "1.0.1",
-    "simple-websocket": "8.1.1"
+    "simple-websocket": "8.1.1",
+    "tumult": "3.0.14"
   },
   "scripts": {
     "flow": "flow check"

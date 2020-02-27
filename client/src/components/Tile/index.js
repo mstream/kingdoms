@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import plains from '../../assets/images/terrain/plains.png';
 import {createGeometryStyle} from '../../util';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
@@ -11,6 +10,7 @@ import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 import {ImageComponent} from '../image';
+import {surfaceImages} from '../../assets/images/terrain';
 
 type OwnProps = {
     tile: ClientStateTile
@@ -32,7 +32,7 @@ const Component = ({tile}: Props) => {
     };
 
     return <div className="absolute z-0" style={style}>
-        <ImageComponent image={plains} ratio="100%"/>
+        <ImageComponent image={surfaceImages[tile.textureIndex]} ratio="100%"/>
     </div>;
 };
 
@@ -40,7 +40,8 @@ const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({});
 };
 
-const actionCreators: DispatchProps = Object.freeze({});;
+const actionCreators: DispatchProps = Object.freeze({});
+;
 
 export const TileComponent = connect<Props,
     OwnProps,

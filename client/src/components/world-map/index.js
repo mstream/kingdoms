@@ -32,6 +32,7 @@ import type {ClientStateCamera} from '../../state/reducers/camera';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCitiesById} from '../../state/reducers/cities';
+import {LoaderComponent} from '../loader';
 
 type OwnProps = {
     camera: ClientStateCamera,
@@ -176,7 +177,9 @@ const Component = ({
     ]);
 
     if (camera == null || tiles.length === 0) {
-        return <div>loading world map...</div>;
+        return (
+            <LoaderComponent/>
+        );
     }
 
     const windowCenterLocation = multipleVectors({
@@ -263,7 +266,8 @@ const Component = ({
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});;
+    return Object.freeze({});
+    ;
 };
 
 const actionCreators: DispatchProps = {

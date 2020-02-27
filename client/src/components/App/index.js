@@ -13,7 +13,7 @@ import type {ClientAction} from '../../state/actions';
 type OwnProps = {};
 
 type StateProps = {
-    state: ClientState
+    state: ?ClientState
 };
 
 type DispatchProps = {};
@@ -42,7 +42,7 @@ const Component = ({state}: Props) => {
     const windowSize = {x: window.innerWidth, y: window.innerHeight};
 
     return state != null ? (
-        <div>
+        <div className="h-screen w-screen">
             <WorldMapComponent
                 camera={state.camera}
                 citiesById={state.cities.byId}
@@ -58,7 +58,7 @@ const Component = ({state}: Props) => {
             }
         </div>
     ) : (
-        <div>loading...</div>
+        <div/>
     );
 };
 
@@ -68,7 +68,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     };
 };
 
-const actionCreators: DispatchProps = Object.freeze({});;
+const actionCreators: DispatchProps = Object.freeze({});
 
 export const AppComponent = connect<Props,
     OwnProps,

@@ -7,7 +7,6 @@ import plains from '../../assets/images/terrain/plains.png';
 import {createGeometryStyle} from '../../util';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
-import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
@@ -18,9 +17,9 @@ type OwnProps = {
     tile: ClientStateTile
 };
 
-type StateProps = EmptyObject;
+type StateProps = {};
 
-type DispatchProps = EmptyObject;
+type DispatchProps = {};
 
 type Props = {
     ...OwnProps,

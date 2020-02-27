@@ -9,16 +9,15 @@ import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
-import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 
-type OwnProps = EmptyObject;
+type OwnProps = {};
 
 type StateProps = {
     state: ClientState
 };
 
-type DispatchProps = EmptyObject;
+type DispatchProps = {};
 
 type Props = {
     ...OwnProps,

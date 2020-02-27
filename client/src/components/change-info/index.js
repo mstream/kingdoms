@@ -11,15 +11,14 @@ import type {ClientAction} from '../../state/actions';
 import {numberToQuantityString} from '../../util';
 import classNames from 'classnames';
 import type {Quantities} from '../../../../common/src/quantity';
-import type {EmptyObject} from '../../../../common/src/util';
 
 type OwnProps = {
     changeInfo: Quantities,
 };
 
-type StateProps = EmptyObject;
+type StateProps = {};
 
-type DispatchProps = EmptyObject;
+type DispatchProps = {};
 
 type Props = {
     ...OwnProps,

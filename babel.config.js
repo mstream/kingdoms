@@ -1,5 +1,6 @@
 module.exports = {
     babelrcRoots: ['.', 'client', 'common', 'server'],
+    plugins: ['flow-runtime'],
     presets: [
         '@babel/preset-env',
         '@babel/preset-flow',

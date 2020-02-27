@@ -31,7 +31,6 @@ import {checkIfIntersect} from '../../../../common/src/geometry';
 import type {ClientStateCamera} from '../../state/reducers/camera';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
-import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {ClientStateCitiesById} from '../../state/reducers/cities';
 
@@ -42,7 +41,7 @@ type OwnProps = {
     windowSize: Vector,
 };
 
-type StateProps = EmptyObject;
+type StateProps = {};
 
 type DispatchProps = {
     moveCameraUp: ClientMoveCameraActionCreator,

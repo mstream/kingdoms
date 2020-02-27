@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {
     ClientAction,
@@ -29,7 +28,7 @@ type OwnProps = {
     cityId: string,
 };
 
-type StateProps = EmptyObject;
+type StateProps = {};
 
 type DispatchProps = {
     closeCityView: ClientCloseCityViewActionCreator,

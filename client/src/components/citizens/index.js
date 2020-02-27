@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
@@ -39,7 +38,7 @@ type StateProps = {
     rules: ?CommonStateRules,
 };
 
-type DispatchProps = EmptyObject;
+type DispatchProps = {};
 
 type Props = {
     ...OwnProps,

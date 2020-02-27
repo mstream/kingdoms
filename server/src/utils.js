@@ -5,6 +5,7 @@
 import type {ApiGateway, Redis} from './types';
 import {rootReducer} from './state/reducers/root';
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
+import type {ServerState} from '../../common/src/state';
 
 const optimisticLockingAttempts = 3;
 
@@ -43,6 +44,10 @@ export const sendResponse = async ({
     }
 };
 
+const serializeState = ({state}: { state: ServerState }): string => {
+    return JSON.stringify(state);
+};
+
 export const executeAction = async ({action, redis}: { action: ServerAction, redis: Redis }): Promise<ServerResponse> => {
     for (let i = 0; i < optimisticLockingAttempts; i++) {
         // $FlowFixMe
@@ -55,17 +60,28 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
 
         const reducerResult = rootReducer({action, state});
 
-        // $FlowFixMe
-        const result = await redis.multi().set('state', JSON.stringify(reducerResult.result)).exec();
+        const newState = reducerResult.state != null ? reducerResult.state : state;
 
-        if (result != null) {
+        if (reducerResult.errors.length > 0) {
             return {
-                state: reducerResult.state != null ? reducerResult.state : state,
+                state: newState,
                 errors: reducerResult.errors,
                 request: action,
             };
         }
 
+        const serializedState: string = serializeState({state: newState});
+
+        // $FlowFixMe
+        const result = await redis.multi().set('state', serializedState).exec();
+
+        if (result != null) {
+            return {
+                state: newState,
+                errors: [],
+                request: action,
+            };
+        }
     }
     throw Error(`optimistic locking failed after ${optimisticLockingAttempts} attempts`);
 };

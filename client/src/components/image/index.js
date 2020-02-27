@@ -5,7 +5,6 @@
 import type {Node} from 'react';
 import React from 'react';
 import type {ClientState} from '../../state/reducers/root';
-import type {EmptyObject} from '../../../../common/src/util';
 import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
@@ -17,9 +16,9 @@ type OwnProps = {
     ratio: string
 };
 
-type StateProps = EmptyObject;
+type StateProps = {};
 
-type DispatchProps = EmptyObject;
+type DispatchProps = {};
 
 type Props = {
     ...OwnProps,

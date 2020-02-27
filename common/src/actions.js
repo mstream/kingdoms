@@ -3,6 +3,9 @@
  */
 
 import type {ServerState} from './state';
+import {parseJson} from './util';
+import type {Type} from 'flow-runtime';
+import {reify} from 'flow-runtime';
 
 export type ServerDummyAction = {
     type: '_DUMMY_',
@@ -115,4 +118,11 @@ export type ServerResponse = {
     errors: $ReadOnlyArray<string>,
     state: ServerState,
 }
+
+const ServerResponseType = (reify: Type<ServerResponse>);
+
+export const parseServerResponse = ({json}: { json: string }): ServerResponse => {
+    const object = parseJson({json});
+    return ServerResponseType.assert(object);
+};
 

@@ -12,7 +12,11 @@ import type {
     ServerAction,
     ServerResponse
 } from '../../../../common/src/actions';
-import {getCurrentState, upgradeBuilding} from '../../../../common/src/actions';
+import {
+    getCurrentState,
+    parseServerResponse,
+    upgradeBuilding
+} from '../../../../common/src/actions';
 
 
 const send = ({action, socket}: { action: ServerAction, socket: Socket }): void => {
@@ -45,7 +49,7 @@ export const websocketMiddleware = ({url}: { url: string }) => {
 
         console.log('ws data received: ' + dataString);
 
-        const serverResponse: ServerResponse = JSON.parse(dataString);
+        const serverResponse: ServerResponse = parseServerResponse({json: dataString});
 
         switch (serverResponse.request.type) {
             case 'GET_CURRENT_STATE':

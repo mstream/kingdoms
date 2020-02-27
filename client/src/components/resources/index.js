@@ -19,7 +19,6 @@ import type {
 } from '../../../../common/src/state';
 import {calculateResourceChangeInfo} from '../../../../common/src/state';
 import {ChangeInfoComponent} from '../change-info';
-import type {EmptyObject} from '../../../../common/src/util';
 
 const resourceVisuals = {
     food: {
@@ -40,7 +39,7 @@ type StateProps = {
     rules: ?CommonStateRules,
 };
 
-type DispatchProps = EmptyObject;
+type DispatchProps = {};
 
 type Props = {
     ...OwnProps,

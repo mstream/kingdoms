@@ -15,14 +15,15 @@ import {citiesReducer} from './cities';
 import type {ClientAction} from '../actions';
 import reduceReducers from 'reduce-reducers';
 import {globalReducer} from './global';
-import type {CommonStateRules} from '../../../../common/src/state';
-import {rulesReducer} from './rules';
+import type {CommonStateRules, ServerState} from '../../../../common/src/state';
+import {serverStateReducer} from './server-state';
 
 export type ClientState = ?{
     camera: ClientStateCamera,
     cities: ClientStateCities,
     menu: ClientStateMenu,
     rules: CommonStateRules,
+    serverState: ?ServerState,
     tiles: ClientStateTiles,
 };
 
@@ -32,7 +33,7 @@ export const rootReducer: Reducer<ClientState, ClientAction> = reduceReducers(
         camera: cameraReducer,
         cities: citiesReducer,
         menu: menuReducer,
-        rules: rulesReducer,
+        serverState: serverStateReducer,
         tiles: tilesReducer,
     }),
     globalReducer

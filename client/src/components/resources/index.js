@@ -79,7 +79,7 @@ const Component = ({city, rules}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return {
-        rules: state == null ? null : state.rules,
+        rules: state == null ? null : (state.serverState == null ? null : state.serverState.rules),
     };
 };
 

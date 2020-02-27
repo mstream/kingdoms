@@ -1,4 +1,6 @@
 module.exports = {
+    babelrcRoots: ['.', 'common', 'server'],
+    plugins: ['flow-runtime', '@babel/plugin-transform-block-scoping'],
     presets: [
         [
             '@babel/preset-env',
@@ -9,5 +11,5 @@ module.exports = {
             },
         ],
         '@babel/preset-flow',
-    ]
+    ],
 };

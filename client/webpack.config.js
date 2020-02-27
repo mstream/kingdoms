@@ -17,7 +17,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 options: {
-                    rootMode: 'upward'
+                    configFile: '../babel-client.config.js',
                 }
             },
             {

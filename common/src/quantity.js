@@ -2,7 +2,6 @@
  * @flow
  */
 
-import {EMPTY_OBJECT} from './util';
 
 export type Quantities = { [string]: number, ... }
 
@@ -15,7 +14,7 @@ export const addQuantities = ({quantities1, quantities2}: { quantities1: Quantit
                 [key]: quantity1 + quantity2
             };
         },
-        EMPTY_OBJECT
+        {}
     );
 };
 
@@ -28,7 +27,7 @@ export const subtractQuantities = ({quantities1, quantities2}: { quantities1: Qu
                 [key]: quantity1 - quantity2
             };
         },
-        EMPTY_OBJECT
+        {}
     );
 };
 
@@ -41,7 +40,7 @@ export const multipleQuantities = ({quantities1, quantities2}: { quantities1: Qu
                 [key]: quantity1 * quantity2
             };
         },
-        EMPTY_OBJECT
+        {}
     );
 };
 
@@ -53,7 +52,7 @@ export const multipleQuantitiesByScalar = ({quantities, scalar}: { quantities: Q
                 [key]: quantity * scalar
             };
         },
-        EMPTY_OBJECT
+        {}
     );
 };
 
@@ -66,6 +65,6 @@ export const divideQuantities = ({quantities1, quantities2}: { quantities1: Quan
                 [key]: quantity1 / quantity2
             };
         },
-        EMPTY_OBJECT
+        {}
     );
 };

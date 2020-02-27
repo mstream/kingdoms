@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import foodImage from '../../assets/images/resources/food.png';
@@ -84,7 +83,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     };
 };
 
-const actionCreators: DispatchProps = EMPTY_OBJECT;
+const actionCreators: DispatchProps = Object.freeze({});;
 
 export const ResourcesComponent = connect<Props,
     OwnProps,

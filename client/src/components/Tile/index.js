@@ -7,7 +7,6 @@ import plains from '../../assets/images/terrain/plains.png';
 import {createGeometryStyle} from '../../util';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
@@ -38,10 +37,10 @@ const Component = ({tile}: Props) => {
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return Object.freeze({});
 };
 
-const actionCreators: DispatchProps = EMPTY_OBJECT;
+const actionCreators: DispatchProps = Object.freeze({});;
 
 export const TileComponent = connect<Props,
     OwnProps,

@@ -113,6 +113,8 @@ export const upgradeBuilding = ({cityId, buildingType, playerId}: { cityId: stri
 
 export type ServerRequest = ServerAction
 
+export const ServerRequestType = (reify: Type<ServerRequest>);
+
 export type ServerResponse = {
     request: ServerAction,
     errors: $ReadOnlyArray<string>,

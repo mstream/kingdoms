@@ -12,7 +12,6 @@ import type {ServerStateReducerResult} from '../root';
 import {failure, success} from '../root';
 import {convertQuantitiesToResources} from '../../../../../common/src/resource';
 import {subtractQuantities} from '../../../../../common/src/quantity';
-import {EMPTY_OBJECT} from '../../../../../common/src/util';
 
 export const upgradeBuildingCitiesReducer = ({action, state}: { action: ServerUpgradeBuildingAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
     const {buildingType, cityId, playerId} = action.payload;
@@ -41,7 +40,7 @@ export const upgradeBuildingCitiesReducer = ({action, state}: { action: ServerUp
                 [resourceType]: resources[resourceType]
             };
         },
-        EMPTY_OBJECT
+        {}
     );
 
     const resourcesAfter = convertQuantitiesToResources({

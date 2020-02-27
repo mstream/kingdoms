@@ -10,6 +10,8 @@ import type {
     ServerRequest,
     ServerResponse
 } from '../../../../common/src/actions';
+import {parseJson} from '../../../../common/src/util';
+import {ServerRequestType} from '../../../../common/src/actions';
 
 
 const apiGateway = createApiGatewayClient();
@@ -23,21 +25,18 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
         console.error('invalid api gateway body received');
         return null;
     }
-    const body = JSON.parse(bodyString);
-    if (body.data == null || typeof body.data !== 'object') {
+    const body = parseJson({json: bodyString});
+    if (typeof body !== 'object' || body == null || body.data == null || typeof body.data !== 'object') {
         console.error('invalid api gateway body received');
         return null;
     }
-    const request = body.data;
-    if (request == null || typeof request !== 'object') {
-        console.error('invalid request received');
+
+    try {
+        return ServerRequestType.assert(body.data);
+    } catch (error) {
+        console.log(error.message);
         return null;
     }
-    if (request.type == null || typeof request.type !== 'string') {
-        console.error('invalid request type received');
-        return null;
-    }
-    return request;
 };
 
 export const handler: APIGatewayProxyHandler = async (event, context) => {

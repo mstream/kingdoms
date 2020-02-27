@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {
     ClientAction,
     ClientCloseCityViewActionCreator,
@@ -98,7 +97,7 @@ const Component = ({
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return Object.freeze({});;
 };
 
 const actionCreators: DispatchProps = {

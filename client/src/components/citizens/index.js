@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import peasantImage from '../../assets/images/units/peasant.png';
@@ -98,7 +97,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     };
 };
 
-const actionCreators: DispatchProps = EMPTY_OBJECT;
+const actionCreators: DispatchProps = Object.freeze({});;
 
 export const CitizensComponent = connect<Props,
     OwnProps,

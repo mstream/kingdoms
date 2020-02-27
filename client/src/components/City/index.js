@@ -5,7 +5,6 @@
 import React from 'react';
 import {createGeometryStyle} from '../../util';
 import type {Dispatch} from 'redux';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import {connect} from 'react-redux';
 import type {ClientAction} from '../../state/actions';
 import {openCityView} from '../../state/actions';
@@ -48,7 +47,7 @@ const Component = ({city, openCityView}: Props) => {
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return Object.freeze({});;
 };
 
 const actionCreators: DispatchProps = {

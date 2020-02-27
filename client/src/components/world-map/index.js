@@ -31,7 +31,6 @@ import {checkIfIntersect} from '../../../../common/src/geometry';
 import type {ClientStateCamera} from '../../state/reducers/camera';
 import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {ClientStateCitiesById} from '../../state/reducers/cities';
 
 type OwnProps = {
@@ -264,7 +263,7 @@ const Component = ({
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return Object.freeze({});;
 };
 
 const actionCreators: DispatchProps = {

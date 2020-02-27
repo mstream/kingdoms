@@ -4,7 +4,6 @@
 import type {Reducer} from 'redux';
 import {multipleVectors} from '../../../../../common/src/vector';
 import {tileSize} from '../tiles';
-import {EMPTY_OBJECT} from '../../../../../common/src/util';
 import type {
     ClientStateCities,
     ClientStateCitiesById,
@@ -13,8 +12,8 @@ import type {
 import type {ClientAction} from '../../actions';
 
 const initialState: ClientStateCities = {
-    byId: EMPTY_OBJECT,
-    byOwnerId: EMPTY_OBJECT,
+    byId: {},
+    byOwnerId: {},
 };
 
 export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
@@ -42,7 +41,7 @@ export const citiesByIdReducer: Reducer<ClientStateCities, ClientAction> = (
                         [cityId]: clientStateCity,
                     };
                 },
-                EMPTY_OBJECT
+                Object.freeze({})
             );
 
             return {

@@ -3,7 +3,6 @@
  */
 
 import React from 'react';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import type {ClientState} from '../../state/reducers/root';
@@ -51,10 +50,10 @@ const Component = ({changeInfo}: Props) => {
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return EMPTY_OBJECT;
+    return Object.freeze({});;
 };
 
-const actionCreators: DispatchProps = EMPTY_OBJECT;
+const actionCreators: DispatchProps = Object.freeze({});;
 
 export const ChangeInfoComponent = connect<Props,
     OwnProps,

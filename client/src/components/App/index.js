@@ -9,7 +9,6 @@ import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
-import {EMPTY_OBJECT} from '../../../../common/src/util';
 
 type OwnProps = {};
 
@@ -69,7 +68,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     };
 };
 
-const actionCreators: DispatchProps = EMPTY_OBJECT;
+const actionCreators: DispatchProps = Object.freeze({});;
 
 export const AppComponent = connect<Props,
     OwnProps,

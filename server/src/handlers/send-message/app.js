@@ -10,8 +10,8 @@ import type {
     ServerRequest,
     ServerResponse
 } from '../../../../common/src/actions';
-import {parseJson} from '../../../../common/src/util';
 import {ServerRequestType} from '../../../../common/src/actions';
+import {parseJson} from '../../../../common/src/util';
 
 
 const apiGateway = createApiGatewayClient();
@@ -25,7 +25,9 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
         console.error('invalid api gateway body received');
         return null;
     }
+    console.log(`received body string: ${bodyString}`);
     const body = parseJson({json: bodyString});
+
     if (typeof body !== 'object' || body == null || body.data == null || typeof body.data !== 'object') {
         console.error('invalid api gateway body received');
         return null;
@@ -42,7 +44,7 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
 export const handler: APIGatewayProxyHandler = async (event, context) => {
     const {connectionId} = event.requestContext;
     if (connectionId == null) {
-        console.error('state is not initialized');
+        console.error('connectionId is missing');
         return requestExecutionError;
     }
     try {
@@ -72,7 +74,8 @@ export const handler: APIGatewayProxyHandler = async (event, context) => {
                 });
                 return requestAccepted;
             }
-            case 'UPGRADE_BUILDING': {
+            case 'UPGRADE_BUILDING':
+            case 'CHANGE_CITY_NAME': {
                 const response = await executeAction({action: request, redis});
                 await sendResponseBackToClient({response});
                 return requestAccepted;

@@ -13,6 +13,7 @@ import type {
     ServerResponse
 } from '../../../../common/src/actions';
 import {
+    changeCityName,
     getCurrentState,
     parseServerResponse,
     upgradeBuilding
@@ -54,7 +55,8 @@ export const websocketMiddleware = ({url}: { url: string }) => {
         switch (serverResponse.request.type) {
             case 'GET_CURRENT_STATE':
             case 'EXECUTE_TIME_STEP':
-            case 'UPGRADE_BUILDING': {
+            case 'UPGRADE_BUILDING':
+            case 'CHANGE_CITY_NAME': {
                 store.dispatch(updateState({serverState: serverResponse.state}));
                 return;
             }
@@ -78,6 +80,17 @@ export const websocketMiddleware = ({url}: { url: string }) => {
                                 playerId: '1',
                             }), socket
                         });
+                        break;
+                    }
+                    case 'REQUEST_CITY_NAME_CHANGE': {
+                        send({
+                            action: changeCityName({
+                                cityId: action.payload.cityId,
+                                name: action.payload.name,
+                                playerId: '1',
+                            }), socket
+                        });
+                        break;
                     }
                 }
                 return next(action);

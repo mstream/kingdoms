@@ -64,6 +64,16 @@ export type ClientRequestBuildingUpgradeAction = {
     payload: ClientRequestBuildingUpgradeActionPayload,
 };
 
+export type ClientRequestCityNameChangeActionPayload = {
+    cityId: string,
+    name: string,
+}
+
+export type ClientRequestCityNameChangeAction = {
+    type: 'REQUEST_CITY_NAME_CHANGE',
+    payload: ClientRequestCityNameChangeActionPayload,
+};
+
 export type ClientSucceedBuildingUpgradePayload = {
     cityId: string,
     buildingType: string,
@@ -105,6 +115,7 @@ export type ClientCloseCityViewActionCreator = ActionCreator<ClientCloseCityView
 export type ClientNavigateToNextCityActionCreator = ActionCreator<ClientNavigateToNextCityAction>
 export type ClientNavigateToPreviousCityActionCreator = ActionCreator<ClientNavigateToPreviousCityAction>
 export type ClientRequestBuildingUpgradeActionCreator = PayloadActionCreator<ClientRequestBuildingUpgradeAction, ClientRequestBuildingUpgradeActionPayload>
+export type ClientRequestCityNameChangeActionCreator = PayloadActionCreator<ClientRequestCityNameChangeAction, ClientRequestCityNameChangeActionPayload>
 
 export const updateState: ClientUpdateStateActionCreator = (payload) => {
     return {
@@ -209,6 +220,13 @@ export const navigateToPreviousCity: ClientNavigateToPreviousCityActionCreator =
 export const requestBuildingUpgrade: ClientRequestBuildingUpgradeActionCreator = (payload) => {
     return {
         type: 'REQUEST_BUILDING_UPGRADE',
+        payload,
+    };
+};
+
+export const requestCityNameChange: ClientRequestCityNameChangeActionCreator = (payload) => {
+    return {
+        type: 'REQUEST_CITY_NAME_CHANGE',
         payload,
     };
 };

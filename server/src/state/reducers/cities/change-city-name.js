@@ -5,7 +5,6 @@
 import type {ServerChangeCityNameAction} from '../../../../../common/src/actions';
 import type {
     CommonStateCities,
-    CommonStateCity,
     ServerState
 } from '../../../../../common/src/state';
 import type {ServerStateReducerResult} from '../root';

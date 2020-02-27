@@ -60,14 +60,18 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
 
         const reducerResult = rootReducer({action, state});
 
-        const newState = reducerResult.state != null ? reducerResult.state : state;
-
         if (reducerResult.errors.length > 0) {
             return {
-                state: newState,
+                state,
                 errors: reducerResult.errors,
                 request: action,
             };
+        }
+
+        const newState = reducerResult.state;
+
+        if (newState == null) {
+            throw Error('new state missing');
         }
 
         const serializedState: string = serializeState({state: newState});

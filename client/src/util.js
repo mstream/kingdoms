@@ -41,3 +41,10 @@ export const numberToQuantityString = ({value}: { value: number }): string => {
     );
     return `${quantity.value.toString().substring(0, 4)}${quantity.suffix != null ? quantity.suffix : ''}`;
 };
+
+export const getRefValue = <T>({ref}: { ref: { current: ?T, ... } }): T => {
+    if (ref.current == null) {
+        throw Error('ref value not set');
+    }
+    return ref.current;
+};

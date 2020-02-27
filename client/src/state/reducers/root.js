@@ -16,6 +16,7 @@ import type {ClientAction} from '../actions';
 import reduceReducers from 'reduce-reducers';
 import {globalReducer} from './global';
 import type {CommonStateRules} from '../../../../common/src/state';
+import {rulesReducer} from './rules';
 
 export type ClientState = ?{
     camera: ClientStateCamera,
@@ -31,6 +32,7 @@ export const rootReducer: Reducer<ClientState, ClientAction> = reduceReducers(
         camera: cameraReducer,
         cities: citiesReducer,
         menu: menuReducer,
+        rules: rulesReducer,
         tiles: tilesReducer,
     }),
     globalReducer

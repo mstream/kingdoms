@@ -41,12 +41,18 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
 };
 
 export const handler: ProxyHandler = async (event, context) => {
-    const connectionId = event.requestContext.connectionId;
+    const {authorizer, connectionId} = event.requestContext;
+
+    if (authorizer == null) {
+        console.error('authorizer is missing');
+        return requestExecutionError;
+    }
 
     if (connectionId == null) {
         console.error('connectionId is missing');
         return requestExecutionError;
     }
+
     try {
         const request = extractRequestFromBody({bodyString: event.body});
 
@@ -61,7 +67,7 @@ export const handler: ProxyHandler = async (event, context) => {
             response,
         });
 
-        // request validation
+        // TODO action authorization
 
         switch (request.type) {
             case 'GET_CURRENT_STATE': {

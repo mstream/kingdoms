@@ -12,8 +12,9 @@ import queryString from 'query-string';
 
 
 const authUrl = `https://kingdoms.auth.eu-west-1.amazoncognito.com/login?client_id=5ujsbhm0e966tcue4cca3dkmut&response_type=token&scope=email+openid&redirect_uri=${window.location.origin}`;
+const wsUrl = `wss://fyl4du2353.execute-api.eu-west-1.amazonaws.com/Prod`;
 
-const getWebsocketUrl = (): string => {
+const getIdToken = (): string => {
     const locationHash = queryString.parse(window.location.hash);
     const idToken = locationHash['id_token'];
     if (typeof idToken !== 'string') {
@@ -21,7 +22,7 @@ const getWebsocketUrl = (): string => {
         window.location.replace(authUrl);
         return '';
     } else {
-        return `wss://fyl4du2353.execute-api.eu-west-1.amazonaws.com/Prod?token=${idToken}`;
+        return idToken;
     }
 };
 
@@ -32,10 +33,13 @@ export const store = createStore<ClientState,
     compose(
         applyMiddleware(
             websocketMiddleware({
-                url: getWebsocketUrl(),
+                token: getIdToken(),
+                url: wsUrl,
             })
         ),
         window.__REDUX_DEVTOOLS_EXTENSION__ &&
         window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
+
+

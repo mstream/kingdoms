@@ -2,7 +2,6 @@
  * @flow
  */
 
-import type {APIGatewayProxyHandler} from '../../types';
 import {createRedisClient} from '../../services/redis';
 import {createApiGatewayClient} from '../../services/apiGateway';
 import {executeAction, sendResponse} from '../../utils';
@@ -12,7 +11,7 @@ import type {
 } from '../../../../common/src/actions';
 import {ServerRequestType} from '../../../../common/src/actions';
 import {parseJson} from '../../../../common/src/util';
-
+import type {ProxyHandler} from '../../types';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient();
@@ -41,8 +40,9 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
     }
 };
 
-export const handler: APIGatewayProxyHandler = async (event, context) => {
-    const {connectionId} = event.requestContext;
+export const handler: ProxyHandler = async (event, context) => {
+    const connectionId = event.requestContext.connectionId;
+
     if (connectionId == null) {
         console.error('connectionId is missing');
         return requestExecutionError;

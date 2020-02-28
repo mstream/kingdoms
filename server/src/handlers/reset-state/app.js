@@ -6,13 +6,14 @@ import {createRedisClient} from '../../services/redis';
 import {executeAction} from '../../utils';
 import {resetState} from '../../../../common/src/actions';
 import {initialState} from '../../state/state';
+import type {ProxyHandler} from '../../types';
 
 const redis = createRedisClient();
 
 const stateResetSuccess = {statusCode: 200, body: 'State reset.'};
 
 
-export const handler = async () => {
+export const handler: ProxyHandler = async () => {
     try {
         await executeAction({action: resetState(), redis});
     } catch (error) {

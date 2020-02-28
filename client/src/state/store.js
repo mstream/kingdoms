@@ -8,8 +8,22 @@ import type {ClientState} from './reducers/root';
 import {rootReducer} from './reducers/root';
 import {websocketMiddleware} from './middleware/websocket';
 import type {ClientAction} from './actions';
+import queryString from 'query-string';
 
-const websocketUrl = 'wss://fyl4du2353.execute-api.eu-west-1.amazonaws.com/Prod?token=validToken';
+
+const authUrl = `https://kingdoms.auth.eu-west-1.amazoncognito.com/login?client_id=5ujsbhm0e966tcue4cca3dkmut&response_type=token&scope=email+openid&redirect_uri=${window.location.origin}`;
+
+const getWebsocketUrl = (): string => {
+    const locationHash = queryString.parse(window.location.hash);
+    const idToken = locationHash['id_token'];
+    if (typeof idToken !== 'string') {
+        console.log('no id token: redirecting to the authentication website');
+        window.location.replace(authUrl);
+        return '';
+    } else {
+        return `wss://fyl4du2353.execute-api.eu-west-1.amazonaws.com/Prod?token=${idToken}`;
+    }
+};
 
 export const store = createStore<ClientState,
     ClientAction,
@@ -18,7 +32,7 @@ export const store = createStore<ClientState,
     compose(
         applyMiddleware(
             websocketMiddleware({
-                url: websocketUrl,
+                url: getWebsocketUrl(),
             })
         ),
         window.__REDUX_DEVTOOLS_EXTENSION__ &&

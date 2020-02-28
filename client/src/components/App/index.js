@@ -9,6 +9,7 @@ import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
+import queryString from 'query-string';
 
 type OwnProps = {};
 

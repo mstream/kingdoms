@@ -2,37 +2,28 @@
  * @flow
  */
 
-import type {APIGatewayProxyHandler} from '../../types';
+import type {CustomAuthorizerHandler} from '../../types';
 
-const generatePolicy = ({principalId, effect, resource}: { principalId: string, effect: string, resource: string }) => {
-    return {
-        principalId,
-        policyDocument: {
-            Version: '2012-10-17',
-            Statement: [
-                {
-                    Action: 'execute-api:Invoke',
-                    Effect: effect,
-                    Resource: resource,
-                }
-            ]
-        }
-    };
-};
+export const handler: CustomAuthorizerHandler = async (event, context) => {
+    const queryParams = event.queryStringParameters;
 
-export const handler: APIGatewayProxyHandler = async (event, context) => {
-    const methodArn = event.methodArn;
-    const token = event.queryStringParameters.token;
+    if (queryParams != null && queryParams.token != null) {
+        console.log(`authentication token: ${queryParams.token}`);
 
-    if (token != null && token === 'validToken') {
-        context.succeed(
-            generatePolicy({
-                effect: 'Allow',
-                principalId: 'user',
-                resource: methodArn
-            })
-        );
+        return {
+            principalId: 'user',
+            policyDocument: {
+                Version: '2012-10-17',
+                Statement: [
+                    {
+                        Action: 'execute-api:Invoke',
+                        Effect: 'Allow',
+                        Resource: event.methodArn,
+                    }
+                ]
+            }
+        };
     } else {
-        context.fail('Unauthorized');
+        throw Error('Unauthorized');
     }
 };

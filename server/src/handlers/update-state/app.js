@@ -5,8 +5,8 @@
 import {executeAction, sendResponse} from '../../utils';
 import {createApiGatewayClient} from '../../services/apiGateway';
 import {createRedisClient} from '../../services/redis';
-import type {ScheduledHandler} from '../../types';
 import {executeTimeStep} from '../../../../common/src/actions';
+import type {ScheduledHandler} from '../../types';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient();

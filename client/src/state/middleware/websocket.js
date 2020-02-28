@@ -30,73 +30,87 @@ const send = ({action, socket}: { action: ServerAction, socket: Socket }): void 
 };
 
 export const websocketMiddleware = ({url}: { url: string }) => {
-    const socket = new Socket(url);
+    try {
+        const socket = new Socket(url);
 
-    socket.on('connect', () => {
-        console.log(`ws connection established: ${url}`);
-        send({action: getCurrentState(), socket});
-    });
+        socket.on('connect', () => {
+            console.log(`ws connection established: ${url}`);
+            send({action: getCurrentState(), socket});
+        });
 
-    socket.on('close', () => {
-        console.log(`ws connection closed: ${url}`);
-    });
+        socket.on('close', () => {
+            console.log(`ws connection closed: ${url}`);
+        });
 
-    socket.on('error', error => {
-        console.error(error.stack);
-    });
+        socket.on('error', error => {
+            console.error('ws error: ' + error.message);
+            console.error(error.stack);
+        });
 
-    socket.on('data', rawData => {
-        const dataString = rawData.toString();
+        socket.on('data', rawData => {
+            const dataString = rawData.toString();
 
-        console.log('ws data received: ' + dataString);
+            console.log('ws data received: ' + dataString);
 
-        const serverResponse: ServerResponse = parseServerResponse({json: dataString});
+            const serverResponse: ServerResponse = parseServerResponse({json: dataString});
 
-        switch (serverResponse.request.type) {
-            case 'GET_CURRENT_STATE':
-            case 'EXECUTE_TIME_STEP':
-            case 'UPGRADE_BUILDING':
-            case 'CHANGE_CITY_NAME': {
-                store.dispatch(updateState({serverState: serverResponse.state}));
-                return;
-            }
-            default: {
-                console.error(
-                    `unsupported response type received from server: ${serverResponse.request.type}`
-                );
-            }
-        }
-    });
-
-    const middleware: Middleware<ClientState, ClientAction> = store => {
-        return next => {
-            return action => {
-                switch (action.type) {
-                    case 'REQUEST_BUILDING_UPGRADE': {
-                        send({
-                            action: upgradeBuilding({
-                                buildingType: action.payload.buildingType,
-                                cityId: action.payload.cityId,
-                                playerId: '1',
-                            }), socket
-                        });
-                        break;
-                    }
-                    case 'REQUEST_CITY_NAME_CHANGE': {
-                        send({
-                            action: changeCityName({
-                                cityId: action.payload.cityId,
-                                name: action.payload.name,
-                                playerId: '1',
-                            }), socket
-                        });
-                        break;
-                    }
+            switch (serverResponse.request.type) {
+                case 'GET_CURRENT_STATE':
+                case 'EXECUTE_TIME_STEP':
+                case 'UPGRADE_BUILDING':
+                case 'CHANGE_CITY_NAME': {
+                    store.dispatch(updateState({serverState: serverResponse.state}));
+                    return;
                 }
-                return next(action);
+                default: {
+                    console.error(
+                        `unsupported response type received from server: ${serverResponse.request.type}`
+                    );
+                }
+            }
+        });
+
+        const middleware: Middleware<ClientState, ClientAction> = store => {
+            return next => {
+                return action => {
+                    switch (action.type) {
+                        case 'REQUEST_BUILDING_UPGRADE': {
+                            send({
+                                action: upgradeBuilding({
+                                    buildingType: action.payload.buildingType,
+                                    cityId: action.payload.cityId,
+                                    playerId: '1',
+                                }), socket
+                            });
+                            break;
+                        }
+                        case 'REQUEST_CITY_NAME_CHANGE': {
+                            send({
+                                action: changeCityName({
+                                    cityId: action.payload.cityId,
+                                    name: action.payload.name,
+                                    playerId: '1',
+                                }), socket
+                            });
+                            break;
+                        }
+                    }
+                    return next(action);
+                };
             };
         };
-    };
 
-    return middleware;
+        return middleware;
+    } catch (error) {
+        console.error('could not initialize the websocket middleware');
+        const dummyMiddleware: Middleware<ClientState, ClientAction> = store => {
+            return next => {
+                return action => {
+                    return next(action);
+                };
+            };
+        };
+
+        return dummyMiddleware;
+    }
 };

@@ -150,6 +150,8 @@ Resources:
 
   RedisCluster:
     Type: "AWS::ElastiCache::CacheCluster"
+    DependsOn:
+      - "RedisSubnetGroup"
     Properties:
       ClusterName: "redis"
       CacheSubnetGroupName: "redis"
@@ -159,12 +161,20 @@ Resources:
       VpcSecurityGroupIds:
         - !Sub "${RedisSecurityGroup.GroupId}"
 
-  WebSocket:
-    Type: "AWS::ApiGatewayV2::Api"
+  AuthenticateFunction:
+    Type: "AWS::Serverless::Function"
     Properties:
-      Name: "WebSocket"
-      ProtocolType: "WEBSOCKET"
-      RouteSelectionExpression: "$request.body.message"
+      CodeUri: "src/handlers/authenticate/"
+      Handler: "app.handler"
+      MemorySize: 256
+      Runtime: "nodejs12.x"
+      Layers:
+        - !Sub "${LayerArn}"
+      VpcConfig:
+        SecurityGroupIds:
+          - !Sub "${FunctionSecurityGroup.GroupId}"
+        SubnetIds:
+          - !Sub "${PrivateSubnet}"
 
   OnConnectFunction:
     Type: "AWS::Serverless::Function"
@@ -282,6 +292,43 @@ Resources:
           REDIS_HOST: !Sub "${RedisCluster.RedisEndpoint.Address}"
           REDIS_PORT: !Sub "${RedisCluster.RedisEndpoint.Port}"
 
+  #  UserPool:
+  #    Type: "AWS::Cognito::UserPool"
+  #    Properties:
+  #      UserPoolName: !Sub "${AWS::StackName}"
+  #
+  #  UserPoolClient:
+  #    Type: "AWS::Cognito::UserPoolClient"
+  #    Properties:
+  #      UserPoolId: !Sub "${UserPool}"
+
+  WebSocket:
+    Type: "AWS::ApiGatewayV2::Api"
+    Properties:
+      Name: "WebSocket"
+      ProtocolType: "WEBSOCKET"
+      RouteSelectionExpression: "$request.body.message"
+
+  WebSocketAuthorizer:
+    Type: "AWS::ApiGatewayV2::Authorizer"
+    Properties:
+      Name: !Sub "${AWS::StackName}"
+      ApiId: !Sub "${WebSocket}"
+      AuthorizerType: "REQUEST"
+      AuthorizerUri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AuthenticateFunction.Arn}/invocations"
+      IdentitySource:
+        - "route.request.querystring.token"
+
+  AuthenticatePermission:
+    Type: "AWS::Lambda::Permission"
+    DependsOn:
+      - "WebSocket"
+    Properties:
+      Action: "lambda:InvokeFunction"
+      FunctionName: !Sub "${AuthenticateFunction}"
+      Principal: "apigateway.amazonaws.com"
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/authorizers/${WebSocketAuthorizer}"
+
   OnConnectPermission:
     Type: "AWS::Lambda::Permission"
     DependsOn:
@@ -338,7 +385,8 @@ Resources:
     Properties:
       ApiId: !Sub "${WebSocket}"
       RouteKey: "$connect"
-      AuthorizationType: "NONE"
+      AuthorizationType: "CUSTOM"
+      AuthorizerId: !Sub "${WebSocketAuthorizer}"
       OperationName: "ConnectRoute"
       Target: !Sub "integrations/${ConnectIntegration}"
 

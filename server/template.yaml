@@ -292,16 +292,6 @@ Resources:
           REDIS_HOST: !Sub "${RedisCluster.RedisEndpoint.Address}"
           REDIS_PORT: !Sub "${RedisCluster.RedisEndpoint.Port}"
 
-  #  UserPool:
-  #    Type: "AWS::Cognito::UserPool"
-  #    Properties:
-  #      UserPoolName: !Sub "${AWS::StackName}"
-  #
-  #  UserPoolClient:
-  #    Type: "AWS::Cognito::UserPoolClient"
-  #    Properties:
-  #      UserPoolId: !Sub "${UserPool}"
-
   WebSocket:
     Type: "AWS::ApiGatewayV2::Api"
     Properties:
@@ -438,11 +428,66 @@ Resources:
         - Key: "Name"
           Value: !Sub "${AWS::StackName}-website"
 
+  OriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: "origin access identity for the website bucket"
+
+  WebsiteDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: "true"
+        PriceClass: "PriceClass_100"
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: "true"
+        DefaultRootObject: index.html
+        DefaultCacheBehavior:
+          Compress: "true"
+          ForwardedValues:
+            QueryString: true
+          TargetOriginId: "s3-origin"
+          ViewerProtocolPolicy: "redirect-to-https"
+        Origins:
+          - Id: "s3-origin"
+            DomainName: !Sub "${WebsiteBucket}.s3.amazonaws.com"
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub "origin-access-identity/cloudfront/${OriginAccessIdentity}"
+
+  UserPool:
+    Type: "AWS::Cognito::UserPool"
+    Properties:
+      UserPoolName: !Sub "${AWS::StackName}"
+
+  UserPoolClient:
+    Type: "AWS::Cognito::UserPoolClient"
+    Properties:
+      ClientName: !Sub "${AWS::StackName}"
+      UserPoolId: !Sub "${UserPool}"
+      AllowedOAuthFlowsUserPoolClient: "true"
+      SupportedIdentityProviders:
+        - "COGNITO"
+      AllowedOAuthFlows:
+        - "implicit"
+      AllowedOAuthScopes:
+        - "openid"
+        - "email"
+      CallbackURLs:
+        - !Sub "https://${WebsiteDistribution.DomainName}"
+        - "http://localhost:8080"
+      DefaultRedirectURI: !Sub "https://${WebsiteDistribution.DomainName}"
+
+  UserPoolDomain:
+    Type: "AWS::Cognito::UserPoolDomain"
+    Properties:
+      UserPoolId: !Sub "${UserPool}"
+      Domain: !Sub "${AWS::StackName}"
+
 Outputs:
   WebSocketURI:
     Description: "The WSS Protocol URI to connect to"
     Value: !Sub "wss://${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${Stage}"
   WebsiteURI:
     Description: "The website URI"
-    Value: !Sub "http://${DomainName}.s3-website.${AWS::Region}.amazonaws.com"
-
+    Value: !Sub "https://${WebsiteDistribution.DomainName}"

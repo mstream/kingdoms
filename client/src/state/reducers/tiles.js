@@ -54,7 +54,12 @@ export const tilesReducer: Reducer<ClientStateTiles, ClientAction> = (
                             location: {x: x * tileSize.x, y: y * tileSize.y},
                             size: tileSize,
                         },
-                        textureIndex: calculateTextureIndex({index}),
+                        textureIndex: calculateTextureIndex({
+                            index: {
+                                x: index.x + action.payload.serverState.worldSize.x,
+                                y: index.y + action.payload.serverState.worldSize.y
+                            }
+                        }),
                         type: 'PLAINS',
                     });
                 }

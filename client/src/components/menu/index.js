@@ -25,7 +25,7 @@ type Props = {
 
 const Component = ({player}: Props) => {
     return (
-        <div className="relative h-20 h-full w-full z-10 bg-gray-500">
+        <div className="wallpaper-bg relative h-20 h-full w-full z-10 shadow-lg bg-gray-500 text-gray-100">
             <div>
                 <i className="icofont icofont-ui-user"/>
                 {player.name}

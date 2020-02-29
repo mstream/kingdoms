@@ -61,7 +61,7 @@ const Component = ({city, rules}: Props) => {
         return (
             <div
                 key={resourceType}
-                className="relative group opacity-90 hover:opacity-100 flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm rounded-t-lg rounded-b-lg bg-gray-100 shadow-2xs bg-gray-800">
+                className="parchment-bg relative group flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-400 hover:bg-gray-300">
                 <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: resource})}</p>
                 <div
                     className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-10 opacity-75 cursor-default pointer-events-none">

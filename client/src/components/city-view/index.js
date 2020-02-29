@@ -78,11 +78,11 @@ const Component = ({
                 className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"
             />
             <div
-                className="absolute w-9/12 bg-white rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl">
+                className="bricks-bg absolute w-9/12 rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl bg-gray-800">
                 <div
-                    className="flex flex-row items-stretch flex-none justify-between w-full">
+                    className="wood-bg flex flex-row items-stretch flex-none justify-between w-full bg-orange-800">
                     <button
-                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                        className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
                         onClick={() =>
                             navigateToPreviousCity()
                         }
@@ -123,7 +123,7 @@ const Component = ({
                             :
                             (
                                 <p
-                                    className="font-bold text-2xl text-center text-gray-900"
+                                    className="font-bold text-2xl text-center text-gray-100"
                                     onClick={() => {
                                         setNameDraft(city.name);
                                         setNameBeingEdited(true);
@@ -136,7 +136,7 @@ const Component = ({
                     </div>
 
                     <button
-                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                        className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tr inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
                         onClick={() =>
                             navigateToNextCity()
                         }

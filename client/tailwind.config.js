@@ -12,6 +12,9 @@ module.exports = {
         filter: {
             'grayscale': 'grayscale(1)',
         },
+        fontFamily: {
+            'gothic': ['NanumGothicCoding']
+        },
         inset: {
             '1/2': '50%',
             'full': '100%',

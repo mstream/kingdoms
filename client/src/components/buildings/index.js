@@ -93,25 +93,27 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
         );
 
         const buttonClassName = classNames(
-            'relative group bg-green-500 text-sm text-gray-100 rounded-t-lg',
+            'relative group bg-green-600 text-sm text-gray-100 rounded-t-lg focus:outline-none',
             {
                 'cursor-pointer': canBeUpgraded,
                 'cursor-not-allowed': !canBeUpgraded,
                 'opacity-25': !canBeUpgraded,
                 'opacity-100': canBeUpgraded,
-                'hover:bg-green-700': canBeUpgraded,
+                'hover:bg-green-400': canBeUpgraded,
             }
         );
 
         return (
             <div
                 key={buildingType}
-                className="relative group opacity-90 hover:opacity-100 flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-800">
+                className="parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-400 hover:bg-gray-300">
                 <button className={buttonClassName}
                         onClick={() => requestBuildingUpgrade({
                             cityId: cityId,
                             buildingType
-                        })}>{building.tier === 0 ? 'build' : 'upgrade'}</button>
+                        })}>
+                    {building.tier === 0 ? 'build' : 'upgrade'}
+                </button>
                 <div className={bodyClassName}>
                     <ImageComponent image={buildingVisual.image} ratio="100%">
                         <div

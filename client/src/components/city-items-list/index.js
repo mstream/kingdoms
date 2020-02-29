@@ -26,17 +26,17 @@ type Props = {
 const Component = ({children}: Props) => {
     return (
         <div
-            className="flex flex-row flex-wrap flex-none items-stretch content-center justify-center w-full p-1 shadow-inner bg-gray-500">
+            className="flex flex-row flex-wrap flex-none items-stretch content-center justify-center w-full p-1 shadow-inner">
             {children}
         </div>
     );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});;
+    return Object.freeze({});
 };
 
-const actionCreators: DispatchProps = Object.freeze({});;
+const actionCreators: DispatchProps = Object.freeze({});
 
 export const CityItemsListComponent = connect<Props,
     OwnProps,

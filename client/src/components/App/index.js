@@ -43,7 +43,7 @@ const Component = ({state}: Props) => {
     const windowSize = {x: window.innerWidth, y: window.innerHeight};
 
     return state != null ? (
-        <div className="grid grid-rows-12 grid-flow-col h-screen w-screen">
+        <div className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
             <div className="row-span-1">
                 <MenuComponent/>
             </div>

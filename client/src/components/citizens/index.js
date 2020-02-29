@@ -75,7 +75,7 @@ const Component = ({city, rules}: Props) => {
         return (
             <div
                 key={citizenType}
-                className="relative group opacity-90 hover:opacity-100 flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-t-lg rounded-b-lg rounded-sm bg-gray-100 shadow-2xs bg-gray-800">
+                className="parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-t-lg rounded-b-lg rounded-sm shadow-2xs bg-gray-400 hover:bg-gray-300">
                 <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: citizensQuantity})}</p>
                 <div
                     className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-10 opacity-75 cursor-default pointer-events-none">
@@ -97,7 +97,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     };
 };
 
-const actionCreators: DispatchProps = Object.freeze({});;
+const actionCreators: DispatchProps = Object.freeze({});
 
 export const CitizensComponent = connect<Props,
     OwnProps,

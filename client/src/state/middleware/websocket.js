@@ -6,7 +6,7 @@ import Socket from 'simple-websocket';
 import type {Middleware} from 'redux';
 import type {ClientState} from '../reducers/root';
 import type {ClientAction} from '../actions';
-import {updateState} from '../actions';
+import {loadPlayer, updateState} from '../actions';
 import type {
     ServerAction,
     ServerResponse
@@ -65,13 +65,13 @@ export const websocketMiddleware = ({token, url}: { token: string, url: string }
 
     const username = userInfo['cognito:username'];
 
-    console.log(`username: ${username}`);
-
     const middleware: Middleware<ClientState, ClientAction> = store => {
         const socket = new Socket(`${url}?token=${token}`);
+
         socket.on('connect', () => {
             console.log(`ws connection established: ${url}`);
             send({action: getCurrentState(), socket});
+            store.dispatch(loadPlayer({name: username}));
         });
 
         socket.on('close', () => {

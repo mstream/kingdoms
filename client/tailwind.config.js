@@ -1,7 +1,14 @@
 module.exports = {
     theme: {
         alphaColors: ['gray.100'],
-        extend: {},
+        extend: {
+            gridRow: {
+                'span-11': 'span 11 / span 11',
+            },
+            gridTemplateRows: {
+                '12': 'repeat(12, minmax(0, 1fr))',
+            },
+        },
         filter: {
             'grayscale': 'grayscale(1)',
         },

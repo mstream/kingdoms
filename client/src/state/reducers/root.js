@@ -17,22 +17,25 @@ import reduceReducers from 'reduce-reducers';
 import {globalReducer} from './global';
 import type {CommonStateRules, ServerState} from '../../../../common/src/state';
 import {serverStateReducer} from './server-state';
+import type {ClientStatePlayer} from './player';
+import {playerReducer} from './player';
 
 export type ClientState = ?{
     camera: ClientStateCamera,
     cities: ClientStateCities,
     menu: ClientStateMenu,
+    player: ClientStatePlayer,
     rules: CommonStateRules,
     serverState: ?ServerState,
     tiles: ClientStateTiles,
 };
-
 
 export const rootReducer: Reducer<ClientState, ClientAction> = reduceReducers(
     combineReducers({
         camera: cameraReducer,
         cities: citiesReducer,
         menu: menuReducer,
+        player: playerReducer,
         serverState: serverStateReducer,
         tiles: tilesReducer,
     }),

@@ -36,7 +36,7 @@ const Component = ({city, openCityView}: Props) => {
 
     return (
         <div
-            className="absolute z-10 cursor-pointer text-white font-medium"
+            className="absolute cursor-pointer text-white font-medium"
             style={style}
             onClick={() => openCityView({cityId: city.id})}
         >

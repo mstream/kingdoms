@@ -122,7 +122,7 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
                     <p className="text-xs text-center text-gray-100 cursor-default">{buildingVisual.name}</p>
                 </div>
                 <div
-                    className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-50 opacity-75 cursor-default pointer-events-none">
+                    className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-10 opacity-75 cursor-default pointer-events-none">
                     <CostInfoComponent
                         availableResources={resources}
                         requiredResources={requiredResources}

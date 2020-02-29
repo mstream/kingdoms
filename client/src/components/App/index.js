@@ -9,7 +9,7 @@ import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
-import queryString from 'query-string';
+import {MenuComponent} from '../menu';
 
 type OwnProps = {};
 
@@ -43,20 +43,25 @@ const Component = ({state}: Props) => {
     const windowSize = {x: window.innerWidth, y: window.innerHeight};
 
     return state != null ? (
-        <div className="h-screen w-screen">
-            <WorldMapComponent
-                camera={state.camera}
-                citiesById={state.cities.byId}
-                tiles={state.tiles}
-                windowSize={windowSize}
-            />
-            {
-                state.menu.viewedCityId != null &&
-                <CityViewComponent
-                    city={state.cities.byId[state.menu.viewedCityId]}
-                    cityId={state.menu.viewedCityId}
+        <div className="grid grid-rows-12 grid-flow-col h-screen w-screen">
+            <div className="row-span-1">
+                <MenuComponent/>
+            </div>
+            <div className="row-span-11">
+                <WorldMapComponent
+                    camera={state.camera}
+                    citiesById={state.cities.byId}
+                    tiles={state.tiles}
+                    windowSize={windowSize}
                 />
-            }
+                {
+                    state.menu.viewedCityId != null &&
+                    <CityViewComponent
+                        city={state.cities.byId[state.menu.viewedCityId]}
+                        cityId={state.menu.viewedCityId}
+                    />
+                }
+            </div>
         </div>
     ) : (
         <div/>

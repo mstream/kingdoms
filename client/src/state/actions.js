@@ -5,6 +5,14 @@
 import type {ServerState} from '../../../common/src/state';
 import type {Vector} from '../../../common/src/vector';
 
+export type ClientLoadPlayerActionPayload = {
+    name: string
+};
+
+export type ClientLoadPlayerAction = {
+    type: 'LOAD_PLAYER',
+    payload: ClientLoadPlayerActionPayload,
+};
 
 export type ClientUpdateStateActionPayload = {
     serverState: ServerState
@@ -93,6 +101,7 @@ export type ClientFailBuildingUpgrade = {
 
 
 export type ClientAction =
+    | ClientLoadPlayerAction
     | ClientUpdateStateAction
     | ClientMoveCameraAction
     | ClientZoomCameraAction
@@ -107,6 +116,7 @@ export type ClientAction =
 type ActionCreator<A> = () => A;
 type PayloadActionCreator<A, P> = (P) => A;
 
+export type ClientLoadPlayerActionCreator = PayloadActionCreator<ClientLoadPlayerAction, ClientLoadPlayerActionPayload>
 export type ClientUpdateStateActionCreator = PayloadActionCreator<ClientUpdateStateAction, ClientUpdateStateActionPayload>
 export type ClientMoveCameraActionCreator = ActionCreator<ClientMoveCameraAction>
 export type ClientZoomCameraActionCreator = ActionCreator<ClientZoomCameraAction>
@@ -116,6 +126,13 @@ export type ClientNavigateToNextCityActionCreator = ActionCreator<ClientNavigate
 export type ClientNavigateToPreviousCityActionCreator = ActionCreator<ClientNavigateToPreviousCityAction>
 export type ClientRequestBuildingUpgradeActionCreator = PayloadActionCreator<ClientRequestBuildingUpgradeAction, ClientRequestBuildingUpgradeActionPayload>
 export type ClientRequestCityNameChangeActionCreator = PayloadActionCreator<ClientRequestCityNameChangeAction, ClientRequestCityNameChangeActionPayload>
+
+export const loadPlayer: ClientLoadPlayerActionCreator = (payload) => {
+    return {
+        type: 'LOAD_PLAYER',
+        payload,
+    };
+};
 
 export const updateState: ClientUpdateStateActionCreator = (payload) => {
     return {

@@ -72,7 +72,7 @@ const Component = ({
 
     return (
         <div
-            className="z-30 modal absolute top-0 left-0 w-full h-full flex items-center justify-center rounded-t">
+            className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t">
             <div
                 onClick={() => closeCityView()}
                 className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"

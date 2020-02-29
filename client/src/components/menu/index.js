@@ -3,20 +3,17 @@
  */
 
 import React from 'react';
-import {createGeometryStyle} from '../../util';
-import type {ClientStateTile} from '../../state/reducers/tiles';
 import type {ClientState} from '../../state/reducers/root';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
-import {ImageComponent} from '../image';
-import {surfaceImages} from '../../assets/images/terrain';
+import type {ClientStatePlayer} from '../../state/reducers/player';
 
-type OwnProps = {
-    tile: ClientStateTile
+type OwnProps = {};
+
+type StateProps = {
+    player: ClientStatePlayer,
 };
-
-type StateProps = {};
 
 type DispatchProps = {};
 
@@ -26,24 +23,26 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({tile}: Props) => {
-    const style = {
-        ...createGeometryStyle({geometry: tile.geometry}),
-    };
-
-    return <div className="absolute" style={style}>
-        <ImageComponent image={surfaceImages[tile.textureIndex]} ratio="100%"/>
-    </div>;
+const Component = ({player}: Props) => {
+    return (
+        <div className="relative h-20 h-full w-full z-10 bg-gray-500">
+            <div>
+                <i className="icofont icofont-ui-user"/>
+                {player.name}
+            </div>
+        </div>
+    );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});
+    return Object.freeze({
+        player: state.player,
+    });
 };
 
 const actionCreators: DispatchProps = Object.freeze({});
-;
 
-export const TileComponent = connect<Props,
+export const MenuComponent = connect<Props,
     OwnProps,
     StateProps,
     DispatchProps,
@@ -53,4 +52,3 @@ export const TileComponent = connect<Props,
     // $FlowFixMe
     actionCreators
 )(Component);
-

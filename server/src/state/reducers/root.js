@@ -7,7 +7,7 @@ import type {ServerAction} from '../../../../common/src/actions';
 import {citiesReducer} from './cities';
 import {rulesReducer} from './rules';
 import {timeReducer} from './time';
-import {worldSizeReducer} from './world-size';
+import {worldReducer} from './world';
 
 export type ServerStateReducerResult<S> = {
     errors: $ReadOnlyArray<string>,
@@ -62,6 +62,6 @@ export const rootReducer = combineServerStateReducers({
         cities: citiesReducer,
         rules: rulesReducer,
         time: timeReducer,
-        worldSize: worldSizeReducer,
+        world: worldReducer,
     }
 });

@@ -27,13 +27,17 @@ describe('rootReducer', () => {
                         wood: 0,
                     }
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 0,
                 resourceIncreaseChangeRateCoefficient: 0,
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10},
+            world: {size: {x: 10, y: 10},},
         };
         const expected: ServerStateReducerResult<ServerState> = {
             errors: [],
@@ -61,13 +65,17 @@ describe('rootReducer', () => {
                         wood: 0,
                     }
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 0,
                 resourceIncreaseChangeRateCoefficient: 0,
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10},
+            world: {size: {x: 10, y: 10},},
         };
         const expected: ServerStateReducerResult<ServerState> = {
             errors: [],
@@ -86,13 +94,17 @@ describe('rootReducer', () => {
                             wood: 0,
                         }
                     },
+                    minimalCityMargin: {
+                        x: 3,
+                        y: 3,
+                    },
                     populationGrowthChangeRateCoefficient: 0,
                     resourceIncreaseChangeRateCoefficient: 0,
                     unitFoodDemand: 0,
                     unitStarvingCoefficient: 0,
                 },
                 time: '2000-01-01T00:00:00Z',
-                worldSize: {x: 10, y: 10},
+                world: {size: {x: 10, y: 10},},
             },
         };
         const actual = rootReducer({action, state: previousState});

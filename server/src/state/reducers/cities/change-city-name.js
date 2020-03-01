@@ -9,6 +9,7 @@ import type {
 } from '../../../../../common/src/state';
 import type {ServerStateReducerResult} from '../root';
 import {failure, success} from '../root';
+import {validateCityName} from '../../validators';
 
 export const changeCityNameCitiesReducer = ({action, state}: { action: ServerChangeCityNameAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
     const {cityId, name, playerId} = action.payload;
@@ -22,14 +23,10 @@ export const changeCityNameCitiesReducer = ({action, state}: { action: ServerCha
         return failure({errors: [`the city does not belong to the player`]});
     }
 
-    if (name.length < 3) {
-        return failure({errors: [`the city name is too short`]});
-    }
-    if (name.length > 20) {
-        return failure({errors: [`the city name is too long`]});
-    }
-    if (name.match(/^[A-Z][a-z]+$/) == null) {
-        return failure({errors: [`the city name does not follow the convention`]});
+    const cityValidationErrors = validateCityName({name});
+
+    if (cityValidationErrors.length > 0) {
+        return failure({errors: cityValidationErrors});
     }
 
     const newCityState = {

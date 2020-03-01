@@ -51,13 +51,17 @@ describe('executeTimeStepCitiesReducer', () => {
                         wood: 50,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-02T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const updateTime = '2000-01-01T01:00:00Z';
         const action = executeTimeStep({time: updateTime});
@@ -112,13 +116,17 @@ describe('executeTimeStepCitiesReducer', () => {
                         wood: 50,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const updateTime = '2000-01-01T01:00:00Z';
         const action = executeTimeStep({time: updateTime});
@@ -196,13 +204,17 @@ describe('executeTimeStepCitiesReducer', () => {
                         wood: 50,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const updateTime = '2000-01-01T01:00:00Z';
         const action = executeTimeStep({time: updateTime});
@@ -280,13 +292,17 @@ describe('executeTimeStepCitiesReducer', () => {
                         wood: 50,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const updateTime = '2000-01-01T01:00:00Z';
         const action = executeTimeStep({time: updateTime});

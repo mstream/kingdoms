@@ -2,16 +2,16 @@
  * @flow
  */
 
-import {worldSizeReducer} from './world-size';
+import {worldReducer} from './world';
 import {initialState} from '../state';
 import type {
-    CommonStateWorldSize,
+    CommonStateWorld,
     ServerState
 } from '../../../../common/src/state';
 import type {ServerStateReducerResult} from './root';
 import {success} from './root';
 
-describe('worldSizeReducer', () => {
+describe('worldReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
@@ -31,19 +31,23 @@ describe('worldSizeReducer', () => {
                         wood: 0,
                     }
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 0,
                 resourceIncreaseChangeRateCoefficient: 0,
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 20, y: 20},
+            world: {size: {x: 10, y: 10},},
         };
-        const expected: ServerStateReducerResult<CommonStateWorldSize> = {
+        const expected: ServerStateReducerResult<CommonStateWorld> = {
             errors: [],
-            state: initialState.worldSize,
+            state: initialState.world,
         };
-        const actual = worldSizeReducer({action, state: previousState});
+        const actual = worldReducer({action, state: previousState});
         expect(actual).toEqual(expected);
     });
     it('returns the current state on unsupported action', () => {
@@ -65,19 +69,23 @@ describe('worldSizeReducer', () => {
                         wood: 0,
                     }
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 0,
                 resourceIncreaseChangeRateCoefficient: 0,
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 20, y: 20},
+            world: {size: {x: 10, y: 10},},
         };
-        success({state: previousState.worldSize});
-        const actual = worldSizeReducer({action, state: previousState});
-        const expected: ServerStateReducerResult<CommonStateWorldSize> = {
+        success({state: previousState.world});
+        const actual = worldReducer({action, state: previousState});
+        const expected: ServerStateReducerResult<CommonStateWorld> = {
             errors: [],
-            state: {x: 20, y: 20}
+            state: {size: {x: 10, y: 10},}
         };
         expect(actual).toEqual(expected);
     });

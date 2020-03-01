@@ -81,13 +81,21 @@ export const handler: ProxyHandler = async (event, context) => {
                 return requestAccepted;
             }
             case 'UPGRADE_BUILDING':
-            case 'CHANGE_CITY_NAME': {
+            case 'CHANGE_CITY_NAME':
+            case 'CREATE_CITY': {
                 const response = await executeAction({action: request, redis});
                 await sendResponseBackToClient({response});
                 return requestAccepted;
             }
             default: {
                 console.error(`unsupported request type: ${request.type}`);
+                await sendResponseBackToClient({
+                    response: {
+                        errors: ['unsupported action'],
+                        request,
+                        state: JSON.parse(await redis.get('state')),
+                    }
+                });
                 return {statusCode: 400, body: 'Request rejected.'};
             }
         }

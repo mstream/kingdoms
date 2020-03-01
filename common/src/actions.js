@@ -19,6 +19,15 @@ export type ServerAbandonCityAction = {
     },
 }
 
+export type ServerCreateCityAction = {
+    type: 'CREATE_CITY',
+    payload: {
+        cityId: string,
+        cityName: string,
+        playerId: string,
+    },
+}
+
 export type ServerGetCurrentStateAction = {
     type: 'GET_CURRENT_STATE',
 }
@@ -52,6 +61,7 @@ export type ServerChangeCityNameAction = {
 
 export type ServerAction =
     | ServerAbandonCityAction
+    | ServerCreateCityAction
     | ServerChangeCityNameAction
     | ServerDummyAction
     | ServerGetCurrentStateAction
@@ -64,6 +74,17 @@ export const abandonCity = ({cityId, playerId}: { cityId: string, playerId: stri
         type: 'ABANDON_CITY',
         payload: {
             cityId,
+            playerId,
+        },
+    };
+};
+
+export const createCity = ({cityId, cityName, playerId}: { cityId: string, cityName: string, playerId: string }): ServerCreateCityAction => {
+    return {
+        type: 'CREATE_CITY',
+        payload: {
+            cityId,
+            cityName,
             playerId,
         },
     };

@@ -5,11 +5,11 @@
 import {initialState} from '../state';
 import {timeReducer} from './time';
 import type {CommonStateTime, ServerState} from '../../../../common/src/state';
-import {worldSizeReducer} from './world-size';
+import {worldReducer} from './world';
 import {executeTimeStep} from '../../../../common/src/actions';
 import type {ServerStateReducerResult} from './root';
 
-describe('worldSizeReducer', () => {
+describe('worldReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
@@ -29,13 +29,17 @@ describe('worldSizeReducer', () => {
                         wood: 0,
                     }
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 0,
                 resourceIncreaseChangeRateCoefficient: 0,
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10},
+            world: {size: {x: 10, y: 10},},
         };
         const expected: ServerStateReducerResult<CommonStateTime> = {
             errors: [],
@@ -63,13 +67,17 @@ describe('worldSizeReducer', () => {
                         wood: 0,
                     }
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 0,
                 resourceIncreaseChangeRateCoefficient: 0,
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10},
+            world: {size: {x: 10, y: 10},},
         };
         const expected: ServerStateReducerResult<CommonStateTime> = {
             errors: [],
@@ -95,13 +103,17 @@ describe('worldSizeReducer', () => {
                         wood: 0,
                     }
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 0,
                 resourceIncreaseChangeRateCoefficient: 0,
                 unitFoodDemand: 0,
                 unitStarvingCoefficient: 0,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10},
+            world: {size: {x: 10, y: 10},},
         };
         const expected: ServerStateReducerResult<CommonStateTime> = {
             errors: [],

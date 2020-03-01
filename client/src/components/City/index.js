@@ -40,6 +40,7 @@ const Component = ({city, openCityView}: Props) => {
             style={style}
             onClick={() => openCityView({cityId: city.id})}
         >
+            <p className="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm text-center text-gray-100">{city.ownerId}</p>
             <ImageComponent image={cityImage} ratio="100%"/>
             <p className="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm text-center text-gray-100">{city.name}</p>
         </div>

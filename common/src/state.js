@@ -3,6 +3,7 @@
  */
 
 import type {Vector} from './vector';
+import {addVectors, getDistanceBetweenVectors} from './vector';
 import type {Quantities} from './quantity';
 import {multipleQuantitiesByScalar} from './quantity';
 import {convertQuantitiesToResources} from './resource';
@@ -19,7 +20,7 @@ export type CommonStateResource = number;
 
 export type CommonStateBuildings = {
     lumberMill: CommonStateBuilding,
-    pasture: CommonStateBuilding
+    pasture: CommonStateBuilding,
 }
 
 export type CommonStateCitizens = {
@@ -52,6 +53,7 @@ export type CommonStateRules = {
     baseCityCapacity: number,
     buildingUpgradeCoefficient: number,
     buildingUpgradeCosts: CommonStateBuildingUpgradeCosts,
+    minimalCityMargin: Vector,
     populationGrowthChangeRateCoefficient: number,
     resourceIncreaseChangeRateCoefficient: number,
     unitFoodDemand: number,
@@ -60,13 +62,81 @@ export type CommonStateRules = {
 
 export type CommonStateTime = string;
 
-export type CommonStateWorldSize = Vector;
+export type CommonStateWorld = {
+    size: Vector,
+};
 
 export type ServerState = {
     cities: CommonStateCities,
     rules: CommonStateRules,
     time: CommonStateTime,
-    worldSize: CommonStateWorldSize,
+    world: CommonStateWorld,
+};
+
+export const calculateNextCitySpot = ({minimalCityMargin, takenSpots, worldSize}: { minimalCityMargin: Vector, takenSpots: $ReadOnlyArray<Vector>, worldSize: Vector }): ?Vector => {
+
+    const generateLocationHash = ({location}: { location: Vector }): string => {
+        return `${location.x}_${location.y}`;
+    };
+
+    const isSpotValid = ({location}: { location: Vector }): boolean => {
+        for (let yOffset = -minimalCityMargin.y; yOffset <= minimalCityMargin.y; yOffset++) {
+            for (let xOffset = -minimalCityMargin.x; xOffset <= minimalCityMargin.x; xOffset++) {
+                const offset = {x: xOffset, y: yOffset};
+                const neighbouringTileLocation = addVectors({
+                    vector1: location,
+                    vector2: offset
+                });
+                if (neighbouringTileLocation.x < -worldSize.x) {
+                    return false;
+                }
+                if (neighbouringTileLocation.x > worldSize.x) {
+                    return false;
+                }
+                if (neighbouringTileLocation.y < -worldSize.y) {
+                    return false;
+                }
+                if (neighbouringTileLocation.y > worldSize.y) {
+                    return false;
+                }
+                if (allocation[generateLocationHash({location: neighbouringTileLocation})] === true) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
+    const allocation = takenSpots.reduce(
+        (allocation, location) => {
+            return {
+                ...allocation,
+                [generateLocationHash({location})]: true
+            };
+        },
+        {}
+    );
+
+    const freeSpots = [];
+
+    for (let y = -worldSize.y; y <= worldSize.y; y++) {
+        for (let x = -worldSize.x; x <= worldSize.x; x++) {
+            const location = {x, y};
+            if (isSpotValid({location})) {
+                freeSpots.push(location);
+            }
+        }
+    }
+
+    freeSpots.sort((freeSpotLocation1, freeSpotLocation2) => getDistanceBetweenVectors({
+        vector1: {x: 0, y: 0},
+        vector2: freeSpotLocation1
+    }) - getDistanceBetweenVectors({
+        vector1: {x: 0, y: 0},
+        vector2: freeSpotLocation2
+    }));
+
+    return freeSpots.length > 0 ? freeSpots[0] : null;
 };
 
 export const calculateBuildingsUpgradeCost = ({buildingTier, buildingType, rules}: { buildingTier: number, buildingType: string, rules: CommonStateRules }): CommonStateResources => {

@@ -10,6 +10,7 @@ import {CityViewComponent} from '../city-view';
 import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {MenuComponent} from '../menu';
+import {GameStartComponent} from '../game-start';
 
 type OwnProps = {};
 
@@ -43,7 +44,8 @@ const Component = ({state}: Props) => {
     const windowSize = {x: window.innerWidth, y: window.innerHeight};
 
     return state != null ? (
-        <div className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
+        <div
+            className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
             <div className="row-span-1">
                 <MenuComponent/>
             </div>
@@ -60,6 +62,10 @@ const Component = ({state}: Props) => {
                         city={state.cities.byId[state.menu.viewedCityId]}
                         cityId={state.menu.viewedCityId}
                     />
+                }
+                {
+                    state.player.name != null && state.cities.byOwnerId[state.player.name] == null &&
+                    <GameStartComponent/>
                 }
             </div>
         </div>

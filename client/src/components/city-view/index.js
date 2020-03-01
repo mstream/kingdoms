@@ -57,7 +57,7 @@ const Component = ({
     const nameInputRef = useRef(null);
 
     const [isNameBeingEdited, setNameBeingEdited] = useState(false);
-    const [nameDraft, setNameDraft] = useState(null);
+    const [nameDraft, setNameDraft] = useState('');
 
     useEffect(
         () => {
@@ -100,6 +100,11 @@ const Component = ({
                                     type="text"
                                     defaultValue={nameDraft}
                                     className="text-center"
+                                    onChange={
+                                        (event) => {
+                                            setNameDraft(event.target.value);
+                                        }
+                                    }
                                     onKeyDown={
                                         (event) => {
                                             switch (event.key) {
@@ -107,7 +112,7 @@ const Component = ({
                                                     setNameBeingEdited(false);
                                                     requestCityNameChange({
                                                         cityId,
-                                                        name: getRefValue({ref: nameInputRef}).value
+                                                        name: nameDraft
                                                     });
                                                     break;
                                                 }

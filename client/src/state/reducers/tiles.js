@@ -40,13 +40,8 @@ export const tilesReducer: Reducer<ClientStateTiles, ClientAction> = (
         case 'UPDATE_STATE': {
             const newTiles = [];
 
-            const halfWidth = Math.floor(action.payload.serverState.worldSize.x / 2);
-            const halfHeight = Math.floor(
-                action.payload.serverState.worldSize.y / 2
-            );
-
-            for (let y = -halfHeight; y <= halfHeight; y++) {
-                for (let x = -halfWidth; x <= halfWidth; x++) {
+            for (let y = -action.payload.serverState.world.size.y; y <= action.payload.serverState.world.size.y; y++) {
+                for (let x = -action.payload.serverState.world.size.x; x <= action.payload.serverState.world.size.x; x++) {
                     const index = {x, y};
                     newTiles.push({
                         index,
@@ -56,8 +51,8 @@ export const tilesReducer: Reducer<ClientStateTiles, ClientAction> = (
                         },
                         textureIndex: calculateTextureIndex({
                             index: {
-                                x: index.x + action.payload.serverState.worldSize.x,
-                                y: index.y + action.payload.serverState.worldSize.y
+                                x: index.x + action.payload.serverState.world.size.x,
+                                y: index.y + action.payload.serverState.world.size.y
                             }
                         }),
                         type: 'PLAINS',

@@ -82,6 +82,16 @@ export type ClientRequestCityNameChangeAction = {
     payload: ClientRequestCityNameChangeActionPayload,
 };
 
+export type ClientRequestCityCreationActionPayload = {
+    name: string,
+}
+
+export type ClientRequestCityCreationAction = {
+    type: 'REQUEST_CITY_CREATION',
+    payload: ClientRequestCityCreationActionPayload,
+};
+
+
 export type ClientSucceedBuildingUpgradePayload = {
     cityId: string,
     buildingType: string,
@@ -112,6 +122,7 @@ export type ClientAction =
     | ClientRequestBuildingUpgradeAction
     | ClientSucceedBuildingUpgrade
     | ClientFailBuildingUpgrade
+    | ClientRequestCityCreationAction
 
 type ActionCreator<A> = () => A;
 type PayloadActionCreator<A, P> = (P) => A;
@@ -126,6 +137,7 @@ export type ClientNavigateToNextCityActionCreator = ActionCreator<ClientNavigate
 export type ClientNavigateToPreviousCityActionCreator = ActionCreator<ClientNavigateToPreviousCityAction>
 export type ClientRequestBuildingUpgradeActionCreator = PayloadActionCreator<ClientRequestBuildingUpgradeAction, ClientRequestBuildingUpgradeActionPayload>
 export type ClientRequestCityNameChangeActionCreator = PayloadActionCreator<ClientRequestCityNameChangeAction, ClientRequestCityNameChangeActionPayload>
+export type ClientRequestCityCreationActionCreator = PayloadActionCreator<ClientRequestCityCreationAction, ClientRequestCityCreationActionPayload>
 
 export const loadPlayer: ClientLoadPlayerActionCreator = (payload) => {
     return {
@@ -244,6 +256,13 @@ export const requestBuildingUpgrade: ClientRequestBuildingUpgradeActionCreator =
 export const requestCityNameChange: ClientRequestCityNameChangeActionCreator = (payload) => {
     return {
         type: 'REQUEST_CITY_NAME_CHANGE',
+        payload,
+    };
+};
+
+export const requestCityCreation: ClientRequestCityCreationActionCreator = (payload) => {
+    return {
+        type: 'REQUEST_CITY_CREATION',
         payload,
     };
 };

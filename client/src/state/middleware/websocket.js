@@ -13,11 +13,13 @@ import type {
 } from '../../../../common/src/actions';
 import {
     changeCityName,
+    createCity,
     getCurrentState,
     parseServerResponse,
     upgradeBuilding
 } from '../../../../common/src/actions';
 import jwt from 'jsonwebtoken';
+import {generateId} from '../../../../common/src/util';
 
 
 const send = ({action, socket}: { action: ServerAction, socket: Socket }): void => {
@@ -38,6 +40,7 @@ const createOnDataHandler = (store) => {
         const serverResponse: ServerResponse = parseServerResponse({json: dataString});
 
         switch (serverResponse.request.type) {
+            case 'CREATE_CITY':
             case 'GET_CURRENT_STATE':
             case 'EXECUTE_TIME_STEP':
             case 'UPGRADE_BUILDING':
@@ -93,7 +96,7 @@ export const websocketMiddleware = ({token, url}: { token: string, url: string }
                             action: upgradeBuilding({
                                 buildingType: action.payload.buildingType,
                                 cityId: action.payload.cityId,
-                                playerId: '1',
+                                playerId: username,
                             }), socket
                         });
                         break;
@@ -103,7 +106,17 @@ export const websocketMiddleware = ({token, url}: { token: string, url: string }
                             action: changeCityName({
                                 cityId: action.payload.cityId,
                                 name: action.payload.name,
-                                playerId: '1',
+                                playerId: username,
+                            }), socket
+                        });
+                        break;
+                    }
+                    case 'REQUEST_CITY_CREATION': {
+                        send({
+                            action: createCity({
+                                cityId: generateId(),
+                                cityName: action.payload.name,
+                                playerId: username,
                             }), socket
                         });
                         break;

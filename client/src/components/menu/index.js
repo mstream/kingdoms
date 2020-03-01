@@ -12,7 +12,7 @@ import type {ClientStatePlayer} from '../../state/reducers/player';
 type OwnProps = {};
 
 type StateProps = {
-    player: ClientStatePlayer,
+    player: ?ClientStatePlayer,
 };
 
 type DispatchProps = {};
@@ -24,8 +24,14 @@ type Props = {
 };
 
 const Component = ({player}: Props) => {
+    if (player == null) {
+        return (
+            <div/>
+        );
+    }
     return (
-        <div className="wallpaper-bg relative h-20 h-full w-full z-10 shadow-lg bg-gray-500 text-gray-100">
+        <div
+            className="wallpaper-bg relative h-20 h-full w-full z-10 shadow-lg bg-gray-500 text-gray-100">
             <div>
                 <i className="icofont icofont-ui-user"/>
                 {player.name}
@@ -36,7 +42,7 @@ const Component = ({player}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        player: state.player,
+        player: state != null ? state.player : null,
     });
 };
 

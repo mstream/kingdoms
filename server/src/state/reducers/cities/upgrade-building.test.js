@@ -2,9 +2,9 @@
  * @flow
  */
 
-import type {ServerState} from '../../../../../common/src/state';
 import {upgradeBuildingCitiesReducer} from './upgrade-building';
 import {upgradeBuilding} from '../../../../../common/src/actions';
+import type {ServerState} from '../../../../../common/src/state';
 
 describe('upgradeBuildingCitiesReducer', () => {
     it('fails when city does not exist', () => {
@@ -28,13 +28,17 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 50,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: ['the city does not exist'],
@@ -92,13 +96,17 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 50,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: ['the city does not belong to the player'],
@@ -156,13 +164,17 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 300,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: ['insufficient food', 'insufficient wood'],
@@ -220,13 +232,17 @@ describe('upgradeBuildingCitiesReducer', () => {
                         wood: 300,
                     },
                 },
+                minimalCityMargin: {
+                    x: 3,
+                    y: 3,
+                },
                 populationGrowthChangeRateCoefficient: 1,
                 resourceIncreaseChangeRateCoefficient: 10000,
                 unitFoodDemand: 1,
                 unitStarvingCoefficient: 0.2,
             },
             time: '2000-01-01T00:00:00Z',
-            worldSize: {x: 10, y: 10}
+            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: [],

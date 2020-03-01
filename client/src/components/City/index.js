@@ -12,6 +12,7 @@ import type {ClientState} from '../../state/reducers/root';
 import type {ClientStateCity} from '../../state/reducers/cities';
 import cityImage from '../../assets/images/cities/city.png';
 import {ImageComponent} from '../image';
+import {CityStatusBarComponent} from '../city-status-bar';
 
 type OwnProps = {
     city: { id: string, ... } & ClientStateCity,
@@ -36,19 +37,18 @@ const Component = ({city, openCityView}: Props) => {
 
     return (
         <div
-            className="absolute cursor-pointer text-white font-medium"
+            className="absolute cursor-pointer"
             style={style}
             onClick={() => openCityView({cityId: city.id})}
         >
-            <p className="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm text-center text-gray-100">{city.ownerId}</p>
             <ImageComponent image={cityImage} ratio="100%"/>
-            <p className="text-xs sm:text-sm md:text-sm lg:text-sm xl:text-sm text-center text-gray-100">{city.name}</p>
+            <CityStatusBarComponent city={city}/>
         </div>
     );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});;
+    return Object.freeze({});
 };
 
 const actionCreators: DispatchProps = {

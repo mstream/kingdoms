@@ -1,6 +1,11 @@
 module.exports = {
     theme: {
-        alphaColors: ['gray.100'],
+        alphaColors: [
+            'gray.100',
+            'gray.500',
+            'red.500',
+            'green.500',
+        ],
         extend: {
             gridRow: {
                 'span-11': 'span 11 / span 11',

@@ -106,7 +106,7 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
         return (
             <div
                 key={buildingType}
-                className="parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-400 hover:bg-gray-300">
+                className="parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 rounded-t-lg rounded-b-lg shadow-2xs bg-gray-400 hover:bg-gray-300">
                 <button className={buttonClassName}
                         onClick={() => requestBuildingUpgrade({
                             cityId: cityId,

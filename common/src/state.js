@@ -138,6 +138,15 @@ export const calculateNextCitySpot = ({minimalCityMargin, takenSpots, worldSize}
     return freeSpots.length > 0 ? freeSpots[0] : null;
 };
 
+export const calculateBuildingTierSum = ({buildings}: { buildings: CommonStateBuildings }): number => {
+    return Object.keys(buildings).reduce(
+        (sum, buildingType) => {
+            return sum + buildings[buildingType].tier;
+        },
+        0
+    );
+};
+
 export const calculateBuildingsUpgradeCost = ({buildingTier, buildingType, rules}: { buildingTier: number, buildingType: string, rules: CommonStateRules }): CommonStateResources => {
     const costFactor = 1 + buildingTier * rules.buildingUpgradeCoefficient;
 

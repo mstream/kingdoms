@@ -16,6 +16,7 @@ import type {
     CommonStateRules
 } from '../../../../common/src/state';
 import {
+    calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate
@@ -52,11 +53,7 @@ const Component = ({city, rules}: Props) => {
     const citizenComponents = Object.keys(city.citizens).map(citizenType => {
         const citizensQuantity = city.citizens[citizenType];
         const citizenVisual = citizenVisuals[citizenType];
-        const buildingTiersSum = Object.keys(city.buildings).reduce(
-            (sum, buildingType) => {
-                return sum + city.buildings[buildingType].tier;
-            },
-            0);
+        const buildingTiersSum = calculateBuildingTierSum({buildings: city.buildings});
         const foodChangeRate = convertChangeInfoToChangeRate({
             changeInfo: calculateResourceChangeInfo({
                 city,

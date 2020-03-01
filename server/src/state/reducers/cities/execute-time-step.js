@@ -8,6 +8,7 @@ import type {
     ServerState
 } from '../../../../../common/src/state';
 import {
+    calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
@@ -58,16 +59,7 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
                 wood: newWood,
             };
 
-            const buildingTiersSum = Object
-                .keys(city.buildings)
-                .map((buildingType) => {
-                    return city.buildings[buildingType];
-                })
-                .reduce((buildingTiersSum, building) => {
-                        return buildingTiersSum + building.tier;
-                    },
-                    0
-                );
+            const buildingTiersSum = calculateBuildingTierSum({buildings: city.buildings});
 
             const peasantsChange = calculatePeasantChangeInfo({
                 buildingTiersSum,

@@ -8,4 +8,3 @@ export const convertQuantitiesToResources = ({quantities}: { quantities: Quantit
         wood: quantities.food != null ? quantities.wood : 0,
     }
 };
-

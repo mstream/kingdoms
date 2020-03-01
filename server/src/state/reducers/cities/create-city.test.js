@@ -19,7 +19,7 @@ describe(`createCityCitiesReducer`, () => {
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
-                }
+                },
             },
             world: {
                 size: {

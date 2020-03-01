@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {CommonStateWorld} from '../../../../common/src/state';
 import type {ServerStateReducer} from './root';

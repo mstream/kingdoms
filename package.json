@@ -42,7 +42,8 @@
     "roman-decimal": "1.0.1",
     "simple-websocket": "8.1.1",
     "tumult": "3.0.14",
-    "uuid": "7.0.1"
+    "uuid": "7.0.1",
+    "verror": "1.10.0"
   },
   "scripts": {
     "flow": "flow check"

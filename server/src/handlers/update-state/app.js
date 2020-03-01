@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {executeAction, sendResponse} from '../../utils';
 import {createApiGatewayClient} from '../../services/apiGateway';

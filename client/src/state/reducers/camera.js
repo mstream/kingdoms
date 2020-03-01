@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 import type {Reducer} from 'redux';
 import type {Vector} from '../../../../common/src/vector';
 import {

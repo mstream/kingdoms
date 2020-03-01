@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import React from 'react';
 import type {Dispatch} from 'redux';
@@ -48,7 +46,7 @@ type Props = {
 
 const Component = ({city, rules}: Props) => {
     if (rules == null) {
-        return (<div/>)
+        return (<div/>);
     }
     const resourceComponents = Object.keys(city.resources).map(resourceType => {
         const resource = city.resources[resourceType];
@@ -62,7 +60,7 @@ const Component = ({city, rules}: Props) => {
             <div
                 key={resourceType}
                 className="parchment-bg relative group flex flex-col w-4 sm:w-6 md:w-8 lg:w-10 xl:w-12 m-1 rounded-sm rounded-t-lg rounded-b-lg shadow-2xs bg-gray-400 hover:bg-gray-300">
-                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: resource})}</p>
+                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({value: Math.floor(resource)})}</p>
                 <div
                     className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-10 opacity-75 cursor-default pointer-events-none">
                     <ChangeInfoComponent changeInfo={changeInfo}/>
@@ -83,7 +81,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
     };
 };
 
-const actionCreators: DispatchProps = Object.freeze({});;
+const actionCreators: DispatchProps = Object.freeze({});
 
 export const ResourcesComponent = connect<Props,
     OwnProps,

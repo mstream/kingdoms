@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerChangeCityNameAction} from '../../../../../common/src/actions';
 import type {

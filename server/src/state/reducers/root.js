@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerState} from '../../../../common/src/state';
 import type {ServerAction} from '../../../../common/src/actions';

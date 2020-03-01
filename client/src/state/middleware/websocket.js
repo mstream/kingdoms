@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import Socket from 'simple-websocket';
 import type {Middleware} from 'redux';

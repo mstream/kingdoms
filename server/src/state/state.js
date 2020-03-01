@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 import type {ServerState} from '../../../common/src/state';
 
 const emptyCities = {};
@@ -61,7 +59,7 @@ const initialTime = new Date().toISOString();
 
 const emptyWorld = {size: {x: 0, y: 0}};
 
-const initialWorld = {size: {x: 32, y: 32}};
+const initialWorld = {size: {x: 10, y: 10}};
 
 export const emptyState: ServerState = {
     cities: emptyCities,

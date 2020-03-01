@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 export type Handler<TEvent = mixed, TResult = mixed> = (
     event: TEvent,

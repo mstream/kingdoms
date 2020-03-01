@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 export type GeometryStyle = {
     height: number,

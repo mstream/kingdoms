@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {rulesReducer} from './rules';
 import {emptyState, initialState} from '../state';

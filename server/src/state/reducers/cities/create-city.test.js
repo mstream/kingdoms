@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {createCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
@@ -156,8 +154,12 @@ describe('createCityCitiesReducer', () => {
                 ...previousState.cities,
                 '1': {
                     ...initialCityState,
+                    location: {
+                        x: 0,
+                        y: 0,
+                    },
                     name: 'Name',
-                    ownerId: 'player1'
+                    ownerId: 'player1',
                 }
             },
         };

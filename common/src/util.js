@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {v4} from 'uuid';
 

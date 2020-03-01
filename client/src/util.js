@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {GeometryStyle} from './types';
 import type {Geometry} from '../../common/src/geometry';

@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {worldReducer} from './world';
 import {emptyState, initialState} from '../state';

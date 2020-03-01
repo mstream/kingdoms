@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {Dispatch} from 'redux';
 import {applyMiddleware, compose, createStore} from 'redux';

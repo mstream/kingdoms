@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {calculateNextCitySpot} from './state';
 import {areVectorsEqual} from './vector';

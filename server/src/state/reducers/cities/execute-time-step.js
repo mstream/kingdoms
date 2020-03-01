@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerExecuteTimeStepAction} from '../../../../../common/src/actions';
 import type {
@@ -59,7 +57,9 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
                 wood: newWood,
             };
 
-            const buildingTiersSum = calculateBuildingTierSum({buildings: city.buildings});
+            const buildingTiersSum = calculateBuildingTierSum({
+                buildings: city.buildings
+            });
 
             const peasantsChange = calculatePeasantChangeInfo({
                 buildingTiersSum,
@@ -68,8 +68,6 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
                 foodChangeRate,
                 rules: state.rules
             });
-
-            console.log(JSON.stringify(peasantsChange));
 
             const newPeasants = Math.max(0, city.citizens.peasant + Math.floor(convertChangeRateToDelta({
                 changeRate: convertChangeInfoToChangeRate({changeInfo: peasantsChange}),

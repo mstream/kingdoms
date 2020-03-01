@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {upgradeBuildingCitiesReducer} from './upgrade-building';
 import {upgradeBuilding} from '../../../../../common/src/actions';

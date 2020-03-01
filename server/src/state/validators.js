@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 export const validateCityName = ({name}: { name: string }): $ReadOnlyArray<string> => {
     if (name.length < 3) {

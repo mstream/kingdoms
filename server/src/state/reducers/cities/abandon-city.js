@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerAbandonCityAction} from '../../../../../common/src/actions';
 import type {

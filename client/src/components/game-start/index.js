@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import React, {useState} from 'react';
 import type {

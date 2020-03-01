@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import surface1a from './surface1a.bmp';
 import surface1b from './surface1b.bmp';

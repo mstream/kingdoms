@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {abandonCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';

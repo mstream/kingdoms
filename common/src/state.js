@@ -161,14 +161,16 @@ export const calculateBuildingsUpgradeCost = ({buildingTier, buildingType, rules
 
 const calculateFoodChangeInfo = ({citizensQuantity, pastureTier, rules}: { citizensQuantity: number, pastureTier: number, rules: CommonStateRules }): Quantities => {
     return {
+        'citizens maintenance': -citizensQuantity * rules.unitFoodDemand,
         'pasture production': rules.resourceIncreaseChangeRateCoefficient * pastureTier,
-        'citizens maintenance': -citizensQuantity * rules.unitFoodDemand
+        'peasants production': citizensQuantity * rules.unitFoodDemand,
     };
 };
 
-const calculateWoodChangeInfo = ({lumberMillTier, rules}: { lumberMillTier: number, rules: CommonStateRules }): Quantities => {
+const calculateWoodChangeInfo = ({citizensQuantity, lumberMillTier, rules}: { citizensQuantity: number, lumberMillTier: number, rules: CommonStateRules }): Quantities => {
     return {
         'lumber mill production': rules.resourceIncreaseChangeRateCoefficient * lumberMillTier,
+        'peasants production': citizensQuantity,
     };
 };
 
@@ -183,6 +185,7 @@ export const calculateResourceChangeInfo = ({city, resourceType, rules}: { city:
         }
         case 'wood': {
             return calculateWoodChangeInfo({
+                citizensQuantity: city.citizens.peasant,
                 lumberMillTier: city.buildings.lumberMill.tier,
                 rules
             });
@@ -198,7 +201,8 @@ export const calculatePeasantChangeInfo = ({buildingTiersSum, citizensQuantity, 
     const starvingPeopleQuantity = food > 0 || foodChangeRate > 0 ? 0 : Math.abs(foodChangeRate * rules.unitFoodDemand);
     const cityCapacity = rules.baseCityCapacity + Math.max(0, rules.baseCityCapacity * buildingTiersSum - starvingPeopleQuantity * rules.unitStarvingCoefficient);
     const growthFactorRate = rules.populationGrowthChangeRateCoefficient * citizensQuantity * (1 - (citizensQuantity / cityCapacity));
-    const migrationRate = starvingPeopleQuantity > 0 ? -rules.basePeasantsMigrationRate : rules.basePeasantsMigrationRate;
+    const percentageOfPeopleStarving = citizensQuantity === 0 ? 0 : starvingPeopleQuantity / citizensQuantity;
+    const migrationRate = starvingPeopleQuantity > 0 ? -rules.basePeasantsMigrationRate * percentageOfPeopleStarving : rules.basePeasantsMigrationRate;
     return {
         'growth': growthFactorRate,
         'migration': migrationRate,

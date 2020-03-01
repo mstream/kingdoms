@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {resetState} from '../../../../../common/src/actions';
 import {emptyState, initialState} from '../../state';

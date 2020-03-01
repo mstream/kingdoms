@@ -1,5 +1,3 @@
-/**
- * @flow
- */
+// @flow
 
 export default '';

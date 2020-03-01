@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 import type {Reducer} from 'redux';
 import {multipleVectors} from '../../../../../common/src/vector';
 import {tileSize} from '../tiles';

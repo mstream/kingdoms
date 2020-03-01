@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerUpgradeBuildingAction} from '../../../../../common/src/actions';
 import type {

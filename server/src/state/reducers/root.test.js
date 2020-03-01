@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerStateReducerResult} from './root';
 import {rootReducer} from './root';

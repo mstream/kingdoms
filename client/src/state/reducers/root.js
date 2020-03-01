@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {Reducer} from 'redux';
 import {combineReducers} from 'redux';

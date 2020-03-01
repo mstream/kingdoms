@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 import type {Reducer} from 'redux';
 import type {ClientAction} from '../actions';
 import type {ServerState} from '../../../../common/src/state';

@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {CommonStateRules} from '../../../../common/src/state';
 import type {ServerStateReducer} from './root';

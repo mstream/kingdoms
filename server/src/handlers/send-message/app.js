@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {createRedisClient} from '../../services/redis';
 import {createApiGatewayClient} from '../../services/apiGateway';

@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {executeTimeStep} from '../../../../../common/src/actions';
 import type {

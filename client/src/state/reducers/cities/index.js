@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 import {citiesByOwnerIdReducer} from './by-owner-id';
 import {citiesByIdReducer} from './by-id';
 import type {Reducer} from 'redux';

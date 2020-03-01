@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import React, {useEffect} from 'react';
 import type {Dispatch} from 'redux';

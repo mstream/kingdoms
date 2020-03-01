@@ -219,7 +219,7 @@ Resources:
     Properties:
       CodeUri: "src/handlers/send-message/"
       Handler: "app.handler"
-      MemorySize: 256
+      MemorySize: 1024
       Runtime: "nodejs12.x"
       Layers:
         - !Sub "${LayerArn}"
@@ -246,7 +246,7 @@ Resources:
     Properties:
       CodeUri: "src/handlers/update-state/"
       Handler: "app.handler"
-      MemorySize: 256
+      MemorySize: 1024
       Runtime: "nodejs12.x"
       Layers:
         - "arn:aws:lambda:eu-west-1:235338379175:layer:common:1"

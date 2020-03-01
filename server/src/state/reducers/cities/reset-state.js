@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerResetStateAction} from '../../../../../common/src/actions';
 import type {

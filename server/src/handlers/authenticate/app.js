@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {CustomAuthorizerHandler} from '../../types';
 

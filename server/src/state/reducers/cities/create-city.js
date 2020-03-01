@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import type {ServerCreateCityAction} from '../../../../../common/src/actions';
 import type {

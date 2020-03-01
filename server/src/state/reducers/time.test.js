@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import {emptyState, initialState} from '../state';
 import {timeReducer} from './time';

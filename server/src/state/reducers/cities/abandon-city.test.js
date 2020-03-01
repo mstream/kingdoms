@@ -5,36 +5,13 @@
 import {abandonCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {abandonCityCitiesReducer} from './abandon-city';
+import {emptyCityState, emptyState} from '../../state';
 
 describe('abandonCityCitiesReducer', () => {
     it('fails when city does not exist', () => {
-        const action = abandonCity({cityId: '1', playerId: '1'});
+        const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: ServerState = {
-            cities: {},
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
+            ...emptyState,
         };
         const expected = {
             errors: ['the city does not exist'],
@@ -45,57 +22,15 @@ describe('abandonCityCitiesReducer', () => {
     });
 
     it('fails when city does not belong to the player', () => {
-        const action = abandonCity({cityId: '1', playerId: '2'});
+        const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
+                    ...emptyCityState,
+                    ownerId: 'player2',
+                }
+            }
         };
         const expected = {
             errors: ['the city does not belong to the player'],
@@ -106,84 +41,24 @@ describe('abandonCityCitiesReducer', () => {
     });
 
     it('removes the ownership', () => {
-        const action = abandonCity({cityId: '1', playerId: '1'});
+        const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
+                    ...emptyCityState,
+                    ownerId: 'player1',
+                }
+            }
         };
         const expected = {
             errors: [],
             state: {
+                ...previousState.cities,
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
+                    ...previousState.cities['1'],
                     ownerId: null,
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
+                }
             },
         };
         const actual = abandonCityCitiesReducer({action, state: previousState});

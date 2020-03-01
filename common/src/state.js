@@ -53,6 +53,7 @@ export type CommonStateRules = {
     buildingUpgradeCoefficient: number,
     buildingUpgradeCosts: CommonStateBuildingUpgradeCosts,
     minimalCityMargin: Vector,
+    basePeasantsMigrationRate: number,
     populationGrowthChangeRateCoefficient: number,
     resourceIncreaseChangeRateCoefficient: number,
     unitFoodDemand: number,
@@ -196,9 +197,11 @@ export const calculateResourceChangeInfo = ({city, resourceType, rules}: { city:
 export const calculatePeasantChangeInfo = ({buildingTiersSum, citizensQuantity, food, foodChangeRate, rules}: { buildingTiersSum: number, citizensQuantity: number, food: number, foodChangeRate: number, rules: CommonStateRules }) => {
     const starvingPeopleQuantity = food > 0 || foodChangeRate > 0 ? 0 : Math.abs(foodChangeRate * rules.unitFoodDemand);
     const cityCapacity = rules.baseCityCapacity + Math.max(0, rules.baseCityCapacity * buildingTiersSum - starvingPeopleQuantity * rules.unitStarvingCoefficient);
-    const growthFactorChange = rules.populationGrowthChangeRateCoefficient * citizensQuantity * (1 - (citizensQuantity / cityCapacity));
+    const growthFactorRate = rules.populationGrowthChangeRateCoefficient * citizensQuantity * (1 - (citizensQuantity / cityCapacity));
+    const migrationRate = starvingPeopleQuantity > 0 ? -rules.basePeasantsMigrationRate : rules.basePeasantsMigrationRate;
     return {
-        'growth rate': growthFactorChange
+        'growth': growthFactorRate,
+        'migration': migrationRate,
     };
 };
 

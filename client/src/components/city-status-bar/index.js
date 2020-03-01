@@ -14,10 +14,11 @@ import {calculateBuildingTierSum} from '../../../../common/src/state';
 
 type OwnProps = {
     city: ClientStateCity,
-    player: ClientStatePlayer,
 };
 
-type StateProps = {};
+type StateProps = {
+    player: ?ClientStatePlayer,
+};
 
 type DispatchProps = {};
 
@@ -28,6 +29,12 @@ type Props = {
 };
 
 const Component = ({city, player}: Props) => {
+
+    if (player == null) {
+        return (
+            <div/>
+        );
+    }
 
     const tiersSum = calculateBuildingTierSum({buildings: city.buildings});
 
@@ -57,7 +64,7 @@ const Component = ({city, player}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        player: state.player
+        player: state == null ? null : state.player,
     });
 };
 

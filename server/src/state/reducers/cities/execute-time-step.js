@@ -69,6 +69,8 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
                 rules: state.rules
             });
 
+            console.log(JSON.stringify(peasantsChange));
+
             const newPeasants = Math.max(0, city.citizens.peasant + Math.floor(convertChangeRateToDelta({
                 changeRate: convertChangeInfoToChangeRate({changeInfo: peasantsChange}),
                 timeDelta

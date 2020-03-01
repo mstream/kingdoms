@@ -5,231 +5,96 @@
 import {changeCityName} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {changeCityNameCitiesReducer} from './change-city-name';
+import {emptyCityState, emptyState} from '../../state';
 
 describe('changeCityNameCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = changeCityName({
             cityId: '1',
-            name: 'Newaaa',
-            playerId: '1'
+            name: 'Newname',
+            playerId: 'player1'
         });
-        const previousState: ServerState = {
-            cities: {},
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
-        };
+        const previousState: ServerState = emptyState;
         const expected = {
             errors: ['the city does not exist'],
             state: null,
         };
-        const actual = changeCityNameCitiesReducer({action, state: previousState});
+        const actual = changeCityNameCitiesReducer({
+            action,
+            state: previousState
+        });
         expect(actual).toEqual(expected);
     });
 
     it('fails when city does not belong to the player', () => {
         const action = changeCityName({
             cityId: '1',
-            name: 'Newaaa',
-            playerId: '2'
+            name: 'Newname',
+            playerId: 'player1'
         });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
+                    ...emptyCityState,
+                    name: 'Oldname',
+                    ownerId: 'player2'
+                }
             },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: ['the city does not belong to the player'],
             state: null,
         };
-        const actual = changeCityNameCitiesReducer({action, state: previousState});
+        const actual = changeCityNameCitiesReducer({
+            action,
+            state: previousState
+        });
         expect(actual).toEqual(expected);
     });
 
     it('fails when the name is too short', () => {
-        const action = changeCityName({cityId: '1', name: 'Ne', playerId: '1'});
+        const action = changeCityName({
+            cityId: '1',
+            name: 'Ne',
+            playerId: 'player1'
+        });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
+                    ...emptyCityState,
+                    name: 'Oldname',
+                    ownerId: 'player1'
+                }
             },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: ['the city name is too short'],
             state: null,
         };
-        const actual = changeCityNameCitiesReducer({action, state: previousState});
+        const actual = changeCityNameCitiesReducer({
+            action,
+            state: previousState
+        });
         expect(actual).toEqual(expected);
     });
 
     it('fails when the name is too long', () => {
         const action = changeCityName({
             cityId: '1',
-            name: 'Newaaanewaaanewaaanewaaanewaaa',
-            playerId: '1'
+            name: 'NewnameNewnameNewnameNewnameNewname',
+            playerId: 'player1'
         });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
+                    ...emptyCityState,
+                    name: 'Oldname',
+                    ownerId: 'player1'
+                }
             },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: ['the city name is too long'],
@@ -245,59 +110,18 @@ describe('changeCityNameCitiesReducer', () => {
     it('fails when the name does not follow the convention', () => {
         const action = changeCityName({
             cityId: '1',
-            name: 'newaaa',
-            playerId: '1'
+            name: 'newname',
+            playerId: 'player1'
         });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
+                    ...emptyCityState,
+                    name: 'Oldname',
+                    ownerId: 'player1'
+                }
             },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: ['the city name does not follow the convention'],
@@ -313,87 +137,28 @@ describe('changeCityNameCitiesReducer', () => {
     it('changes the name', () => {
         const action = changeCityName({
             cityId: '1',
-            name: 'Newaaa',
-            playerId: '1'
+            name: 'Newname',
+            playerId: 'player1'
         });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
+                    ...emptyCityState,
+                    name: 'Oldname',
+                    ownerId: 'player1'
+                }
             },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
         };
         const expected = {
             errors: [],
             state: {
+                ...previousState.cities,
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Newaaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
+                    ...previousState.cities['1'],
+                    name: 'Newname',
                 },
-            },
+            }
         };
         const actual = changeCityNameCitiesReducer({
             action,

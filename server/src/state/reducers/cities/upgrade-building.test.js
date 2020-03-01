@@ -5,41 +5,16 @@
 import {upgradeBuildingCitiesReducer} from './upgrade-building';
 import {upgradeBuilding} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
+import {emptyCityState, emptyState} from '../../state';
 
 describe('upgradeBuildingCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = upgradeBuilding({
             buildingType: 'pasture',
             cityId: '1',
-            playerId: '1'
+            playerId: 'player1'
         });
-        const previousState: ServerState = {
-            cities: {},
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
-        };
+        const previousState: ServerState = emptyState;
         const expected = {
             errors: ['the city does not exist'],
             state: null,
@@ -55,58 +30,16 @@ describe('upgradeBuildingCitiesReducer', () => {
         const action = upgradeBuilding({
             buildingType: 'pasture',
             cityId: '1',
-            playerId: '2'
+            playerId: 'player1'
         });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0,
-                        }
-                    },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
-                    resources: {
-                        food: 1000,
-                        wood: 1000,
-                    }
-                },
-            },
-            rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
-                buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 0,
-                        wood: 100,
-                    },
-                    pasture: {
-                        food: 0,
-                        wood: 50,
-                    },
-                },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
+                    ...emptyCityState,
+                    ownerId: 'player2'
+                }
+            }
         };
         const expected = {
             errors: ['the city does not belong to the player'],
@@ -123,11 +56,14 @@ describe('upgradeBuildingCitiesReducer', () => {
         const action = upgradeBuilding({
             buildingType: 'pasture',
             cityId: '1',
-            playerId: '1',
+            playerId: 'player1',
         });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
+                    ...emptyCityState,
+                    ownerId: 'player1',
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -136,45 +72,22 @@ describe('upgradeBuildingCitiesReducer', () => {
                             tier: 0,
                         }
                     },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
                     resources: {
                         food: 100,
                         wood: 100,
                     }
-                },
+                }
             },
             rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
+                ...emptyState.rules,
                 buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 300,
-                        wood: 300,
-                    },
+                    ...emptyState.rules.buildingUpgradeCosts,
                     pasture: {
                         food: 200,
-                        wood: 300,
+                        wood: 200,
                     },
                 },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
+            }
         };
         const expected = {
             errors: ['insufficient food', 'insufficient wood'],
@@ -191,11 +104,14 @@ describe('upgradeBuildingCitiesReducer', () => {
         const action = upgradeBuilding({
             buildingType: 'pasture',
             cityId: '1',
-            playerId: '1'
+            playerId: 'player1'
         });
         const previousState: ServerState = {
+            ...emptyState,
             cities: {
                 '1': {
+                    ...emptyCityState,
+                    ownerId: 'player1',
                     buildings: {
                         lumberMill: {
                             tier: 0,
@@ -204,72 +120,42 @@ describe('upgradeBuildingCitiesReducer', () => {
                             tier: 0,
                         }
                     },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
                     resources: {
-                        food: 1000,
-                        wood: 1000,
+                        food: 400,
+                        wood: 300,
                     }
-                },
+                }
             },
             rules: {
-                baseCityCapacity: 1000,
-                buildingUpgradeCoefficient: 0.5,
+                ...emptyState.rules,
                 buildingUpgradeCosts: {
-                    lumberMill: {
-                        food: 300,
-                        wood: 300,
-                    },
+                    ...emptyState.rules.buildingUpgradeCosts,
                     pasture: {
                         food: 200,
-                        wood: 300,
+                        wood: 200,
                     },
                 },
-                minimalCityMargin: {
-                    x: 3,
-                    y: 3,
-                },
-                populationGrowthChangeRateCoefficient: 1,
-                resourceIncreaseChangeRateCoefficient: 10000,
-                unitFoodDemand: 1,
-                unitStarvingCoefficient: 0.2,
-            },
-            time: '2000-01-01T00:00:00Z',
-            world: {size: {x: 10, y: 10},}
+            }
         };
         const expected = {
             errors: [],
-            state:  {
+            state: {
+                ...previousState.cities,
                 '1': {
+                    ...previousState.cities['1'],
                     buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
+                        ...previousState.cities['1'].buildings,
                         pasture: {
-                            tier: 1,
+                            ...previousState.cities['1'].buildings.pasture,
+                            tier: 1
                         }
                     },
-                    citizens: {
-                        peasant: 0,
-                    },
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    name: 'Aaa',
-                    ownerId: '1',
                     resources: {
-                        food: 800,
-                        wood: 700,
+                        ...previousState.cities['1'].resources,
+                        food: 200,
+                        wood: 100,
                     }
-                },
+                }
             }
         };
         const actual = upgradeBuildingCitiesReducer({

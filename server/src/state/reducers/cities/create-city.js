@@ -20,6 +20,10 @@ export const createCityCitiesReducer = ({action, state}: { action: ServerCreateC
         return failure({errors: cityValidationErrors});
     }
 
+    if (Object.keys(state.cities).find(cityId => state.cities[cityId].ownerId === playerId) != null) {
+        return failure({errors: [`player already owns a city`]});
+    }
+
     const takenSpots = Object.keys(state.cities).map(cityId => state.cities[cityId].location);
 
     const freeCitySpot = calculateNextCitySpot({

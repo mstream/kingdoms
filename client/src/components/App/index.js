@@ -1,6 +1,4 @@
-/**
- * @flow
- */
+// @flow
 
 import React, {useEffect, useState} from 'react';
 import {WorldMapComponent} from '../world-map';

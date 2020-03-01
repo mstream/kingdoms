@@ -1,6 +1,5 @@
-/**
- * @flow
- */
+// @flow
+// @flow-runtime
 
 import type {Vector} from './vector';
 import {addVectors, getDistanceBetweenVectors} from './vector';

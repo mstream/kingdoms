@@ -1,6 +1,5 @@
-/**
- * @flow
- */
+// @flow
+// @flow-runtime
 
 import type {ServerState} from './state';
 import {parseJson} from './util';

@@ -1,7 +1,5 @@
-/**
- * @flow
- */
-
+// @flow
+// @flow-runtime
 
 export type Quantities = { [string]: number, ... }
 

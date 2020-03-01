@@ -1,6 +1,5 @@
-/**
- * @flow
- */
+// @flow
+// @flow-runtime
 
 export type Vector = {
     x: number,

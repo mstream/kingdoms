@@ -7,6 +7,7 @@ import verror from 'verror';
 import type {ApiGateway} from './clients/apiGateway';
 import type {Redis} from './clients/redis';
 import {getState} from './connectors/database';
+import {sendServerResponse} from './connectors/api';
 
 
 const optimisticLockingAttempts = 3;
@@ -24,16 +25,9 @@ export const sendResponse = async ({
 }): Promise<void> => {
     try {
         console.group(`sending response`);
-
         console.info(`sending response back to the api gateway`);
 
-        // $FlowFixMe
-        await apiGateway
-            .postToConnection({
-                ConnectionId: connectionId,
-                Data: JSON.stringify(response),
-            })
-            .promise();
+        await sendServerResponse({apiGateway, connectionId, response});
     } catch (error) {
         if (error.statusCode === 410) {
             console.info(`Found stale connection, deleting ${connectionId}`);

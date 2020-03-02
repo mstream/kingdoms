@@ -7,12 +7,12 @@
 
 @font-face {
     font-family: 'NanumGothicCoding';
-    src: url('assets/fonts/NanumGothicCoding-Regular.ttf');
+    src: url('../fonts/NanumGothicCoding-Regular.ttf');
 }
 
 @font-face {
     font-family: 'NanumGothicCoding';
-    src: url('assets/fonts/NanumGothicCoding-Bold.ttf');
+    src: url('../fonts/NanumGothicCoding-Bold.ttf');
     font-weight: bold;
 }
 
@@ -24,27 +24,32 @@ body {
 
 .bricks-bg {
     background-blend-mode: multiply;
-    background-image: url("assets/images/bricks.png");
+    background-image: url("../images/bricks.png");
 }
 
 .metal-bg {
     background-blend-mode: multiply;
-    background-image: url("assets/images/metal.png");
+    background-image: url("../images/metal.png");
 }
 
 .parchment-bg {
     background-blend-mode: multiply;
-    background-image: url("assets/images/parchment.png");
+    background-image: url("../images/parchment.png");
 }
 
 .wallpaper-bg {
     background-blend-mode: multiply;
-    background-image: url("assets/images/wallpaper.png");
+    background-image: url("../images/wallpaper.png");
+}
+
+.wallpaper2-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/wallpaper2.png");
 }
 
 .wood-bg {
     background-blend-mode: multiply;
-    background-image: url("assets/images/wood.png");
+    background-image: url("../images/wood.png");
 }
 
 .loader div {

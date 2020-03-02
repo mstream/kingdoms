@@ -476,6 +476,9 @@ Resources:
       CallbackURLs:
         - !Sub "https://${WebsiteDistribution.DomainName}"
         - "http://localhost:8080"
+      LogoutURLs:
+        - !Sub "https://${WebsiteDistribution.DomainName}"
+        - "http://localhost:8080"
       DefaultRedirectURI: !Sub "https://${WebsiteDistribution.DomainName}"
 
   UserPoolDomain:

@@ -48,6 +48,7 @@ export const globalReducer: Reducer<ClientState, ClientAction> = (
             return {
                 ...state,
                 menu: {
+                    ...state.menu,
                     viewedCityId: nextCityId,
                 },
             };
@@ -90,6 +91,7 @@ export const globalReducer: Reducer<ClientState, ClientAction> = (
             return {
                 ...state,
                 menu: {
+                    ...state.menu,
                     viewedCityId: nextCityId,
                 },
             };

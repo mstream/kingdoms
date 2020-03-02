@@ -9,10 +9,13 @@ import {requestCityCreation} from '../../state/actions';
 import type {ClientState} from '../../state/reducers/root';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 
 type OwnProps = {};
 
-type StateProps = {};
+type StateProps = {
+    isCityBeingCreated: boolean,
+};
 
 type DispatchProps = {
     requestCityCreation: ClientRequestCityCreationActionCreator
@@ -24,8 +27,18 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({requestCityCreation}: Props) => {
+const Component = ({isCityBeingCreated, requestCityCreation}: Props) => {
     const [nameDraft, setNameDraft] = useState('');
+
+    const buttonClassName = classNames(
+        'text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600 hover:bg-green-400',
+        {
+            'cursor-pointer': !isCityBeingCreated,
+            'cursor-not-allowed': isCityBeingCreated,
+            'opacity-25': isCityBeingCreated,
+            'opacity-100': !isCityBeingCreated,
+        }
+    );
 
     return (
         <div
@@ -69,7 +82,7 @@ const Component = ({requestCityCreation}: Props) => {
                         </div>
                     </div>
                     <button
-                        className="text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600 hover:bg-green-400"
+                        className={buttonClassName}
                         onClick={
                             (event) => {
                                 requestCityCreation({name: nameDraft});
@@ -84,7 +97,9 @@ const Component = ({requestCityCreation}: Props) => {
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});
+    return Object.freeze({
+        isCityBeingCreated: state == null ? false : state.menu.isCityBeingCreated,
+    });
 };
 
 const actionCreators: DispatchProps = Object.freeze({

@@ -1,15 +1,17 @@
 // @flow
 
-import {createRedisClient} from '../../services/redis';
-import {createApiGatewayClient} from '../../services/apiGateway';
+import {createRedisClient} from '../../clients/redis';
+import {createApiGatewayClient} from '../../clients/apiGateway';
 import {executeAction, sendResponse} from '../../utils';
 import type {
     ServerRequest,
     ServerResponse
 } from '../../../../common/src/actions';
 import {ServerRequestType} from '../../../../common/src/actions';
+import {ServerStateType} from '../../../../common/src/state';
 import {parseJson} from '../../../../common/src/util';
-import type {ProxyHandler} from '../../types';
+import type {ProxyHandler} from '../types';
+import {getState} from '../../connectors/database';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient();
@@ -22,7 +24,7 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
         console.error('invalid api gateway body received');
         return null;
     }
-    console.log(`received body string: ${bodyString}`);
+    console.info(`received body string: ${bodyString}`);
     const body = parseJson({json: bodyString});
 
     if (typeof body !== 'object' || body == null || body.data == null || typeof body.data !== 'object') {
@@ -33,7 +35,7 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
     try {
         return ServerRequestType.assert(body.data);
     } catch (error) {
-        console.log(error.message);
+        console.info(error.message);
         return null;
     }
 };
@@ -69,11 +71,12 @@ export const handler: ProxyHandler = async (event, context) => {
 
         switch (request.type) {
             case 'GET_CURRENT_STATE': {
+                const state = await getState({redis});
                 await sendResponseBackToClient({
                     response: {
                         errors: [],
                         request,
-                        state: JSON.parse(await redis.get('state')),
+                        state,
                     }
                 });
                 return requestAccepted;
@@ -87,18 +90,19 @@ export const handler: ProxyHandler = async (event, context) => {
             }
             default: {
                 console.error(`unsupported request type: ${request.type}`);
+                const state = await getState({redis});
                 await sendResponseBackToClient({
                     response: {
                         errors: ['unsupported action'],
                         request,
-                        state: JSON.parse(await redis.get('state')),
+                        state: state,
                     }
                 });
                 return {statusCode: 400, body: 'Request rejected.'};
             }
         }
     } catch (error) {
-        console.log(error.stack);
+        console.info(error.stack);
         return requestExecutionError;
     }
 };

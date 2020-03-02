@@ -12,6 +12,7 @@ describe('rootReducer', () => {
         };
         const previousState: ServerState = {
             ...emptyState,
+            unsupportedProperty: 'unsupportedPropertyValue',
         };
         const expected: ServerStateReducerResult<ServerState> = {
             errors: [],

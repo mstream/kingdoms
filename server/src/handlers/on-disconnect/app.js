@@ -1,14 +1,18 @@
 // @flow
 
-import { createRedisClient } from '../../services/redis';
-import type {ProxyHandler} from '../../types';
+import { createRedisClient } from '../../clients/redis';
+import type {ProxyHandler} from '../types';
 
 const redis = createRedisClient();
 
 export const handler: ProxyHandler = async (event, context) => {
-    const connectionId = event.requestContext.connectionId;
-
     try {
+        const connectionId = event.requestContext.connectionId;
+
+        if (connectionId == null) {
+            throw Error('connectionId is missing');
+        }
+
         await redis.srem('connection-ids', connectionId);
     } catch (error) {
         console.error(error.stack);

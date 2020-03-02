@@ -1,5 +1,9 @@
 module.exports = {
-    babelrcRoots: ['.', 'client', 'common'],
+    babelrcRoots: [
+        '.',
+        'client',
+        'common'
+    ],
     plugins: [
         [
             'flow-runtime',

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style.css';
+import './assets/css/style.css';
 import {AppComponent} from './components/app';
 import {Provider} from 'react-redux';
 // $FlowFixMe

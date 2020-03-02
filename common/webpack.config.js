@@ -1,14 +1,12 @@
 module.exports = {
     devtool: 'source-map',
-
     resolve: {
-        extensions: ['.js']
+        extensions: [
+            '.js'
+        ],
     },
-
     target: 'node',
-
     mode: process.env.NODE_ENV || 'production',
-
     module: {
         rules: [
             {
@@ -19,6 +17,6 @@ module.exports = {
                     configFile: '../babel-server.config.js',
                 }
             },
-        ]
+        ],
     },
 };

@@ -170,6 +170,6 @@ const actionCreators: DispatchProps = {
 
 export const CityViewComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>>(
     mapStateToProps,
-    // $FlowFixMes
+    // $FlowFixMe
     actionCreators,
 )(Component);

@@ -1,6 +1,9 @@
 // @flow
 
-import type {ServerState} from '../../../../common/src/state';
+import type {
+    CommonStateCities, CommonStateRules, CommonStateTime, CommonStateWorld,
+    ServerState
+} from '../../../../common/src/state';
 import type {ServerAction} from '../../../../common/src/actions';
 import {citiesReducer} from './cities';
 import {rulesReducer} from './rules';
@@ -28,8 +31,25 @@ export const failure = <S>({errors}: { errors: $ReadOnlyArray<string> }): Server
     };
 };
 
-const combineServerStateReducers = ({stateToReducersMapping}) => {
+type StateToReducersMapping = {
+    cities: ServerStateReducer<CommonStateCities>,
+    rules: ServerStateReducer<CommonStateRules>,
+    time: ServerStateReducer<CommonStateTime>,
+    world: ServerStateReducer<CommonStateWorld>,
+};
+
+const combineServerStateReducers = ({stateToReducersMapping}: {stateToReducersMapping: StateToReducersMapping}) => {
     const combinedReducer: ServerStateReducer<ServerState> = ({action, state}) => {
+        const reducibleState: ServerState = Object.keys(stateToReducersMapping).reduce(
+            (reducibleState, stateProperty: $Keys<StateToReducersMapping>) => {
+                return {
+                    ...reducibleState,
+                    // $FlowFixMe
+                    [stateProperty]: state[stateProperty],
+                };
+            },
+            {},
+        );
         return Object
             .keys(stateToReducersMapping)
             .reduce((result, stateProperty: string) => {
@@ -47,19 +67,24 @@ const combineServerStateReducers = ({stateToReducersMapping}) => {
                         state: {
                             ...result.state,
                             [stateProperty]: newPropertyReduceResult.state,
-                        }
+                        },
                     };
                 },
-                {errors: [], state});
+                {
+                    errors: [],
+                    state: reducibleState,
+                });
     };
     return combinedReducer;
 };
 
-export const rootReducer = combineServerStateReducers({
-    stateToReducersMapping: {
-        cities: citiesReducer,
-        rules: rulesReducer,
-        time: timeReducer,
-        world: worldReducer,
-    }
-});
+const stateToReducersMapping: StateToReducersMapping =  {
+    cities: citiesReducer,
+    rules: rulesReducer,
+    time: timeReducer,
+    world: worldReducer,
+};
+
+
+
+export const rootReducer = combineServerStateReducers({stateToReducersMapping});

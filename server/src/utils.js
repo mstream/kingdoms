@@ -1,10 +1,13 @@
 // @flow
 
-import type {ApiGateway, Redis} from './types';
 import {rootReducer} from './state/reducers/root';
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
 import type {ServerState} from '../../common/src/state';
 import verror from 'verror';
+import type {ApiGateway} from './clients/apiGateway';
+import type {Redis} from './clients/redis';
+import {getState} from './connectors/database';
+
 
 const optimisticLockingAttempts = 3;
 
@@ -35,7 +38,6 @@ export const sendResponse = async ({
         if (error.statusCode === 410) {
             console.info(`Found stale connection, deleting ${connectionId}`);
             try {
-                // $FlowFixMe
                 await redis.srem(`connection-ids`, connectionId);
             } catch (error) {
                 console.error(error.stack);
@@ -60,15 +62,9 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
             console.group(`optimistic locking attempt ${i + 1}/${optimisticLockingAttempts}`);
             console.info(`watching state`);
 
-            // $FlowFixMe
             await redis.watch(`state`);
 
-            // $FlowFixMe
-            const state = JSON.parse(await redis.get(`state`));
-
-            if (state == null) {
-                throw Error(`state is not initialized`);
-            }
+            const state = await getState({redis});
 
             console.info(`applying action to the state`);
             const reducerResult = rootReducer({action, state});
@@ -93,7 +89,6 @@ export const executeAction = async ({action, redis}: { action: ServerAction, red
 
             console.info(`persisting new state`);
 
-            // $FlowFixMe
             const result = await redis.multi().set(`state`, serializedState).exec();
 
             if (result != null) {

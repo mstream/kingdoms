@@ -93,6 +93,6 @@ const actionCreators: DispatchProps = Object.freeze({
 
 export const GameStartComponent = connect<Props, OwnProps, StateProps, DispatchProps, ClientState, Dispatch<ClientAction>, ClientAction>(
     mapStateToProps,
-    // $FlowFixMes
+    // $FlowFixMe
     actionCreators,
 )(Component);

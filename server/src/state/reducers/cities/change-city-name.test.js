@@ -12,7 +12,9 @@ describe('changeCityNameCitiesReducer', () => {
             name: 'Newname',
             playerId: 'player1'
         });
-        const previousState: ServerState = emptyState;
+        const previousState: ServerState = {
+            ...emptyState,
+        };
         const expected = {
             errors: ['the city does not exist'],
             state: null,

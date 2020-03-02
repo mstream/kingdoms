@@ -21,8 +21,11 @@ export interface Context {
     getRemainingTimeInMillis(): number;
 
     done(error?: Error, result?: mixed): void;
+
     fail(error: Error | string): void;
+
     succeed(messageOrObject: mixed): void;
+
     succeed(message: string, object: mixed): void;
 }
 
@@ -164,6 +167,7 @@ export interface CustomAuthorizerResult {
     context?: AuthResponseContext;
     usageIdentifierKey?: string;
 }
+
 export type AuthResponse = CustomAuthorizerResult;
 
 export interface PolicyDocument {
@@ -180,7 +184,10 @@ export interface Condition {
     [key: string]: string | string[];
 }
 
-export type Statement = BaseStatement & StatementAction & (StatementResource | StatementPrincipal);
+export type Statement =
+    BaseStatement
+    & StatementAction
+    & (StatementResource | StatementPrincipal);
 
 export interface BaseStatement {
     Effect: string;
@@ -188,16 +195,24 @@ export interface BaseStatement {
     Condition?: ConditionBlock;
 }
 
-export type PrincipalValue = { [key: string]: string | string[] } | string | string[];
+export type PrincipalValue =
+    { [key: string]: string | string[] }
+    | string
+    | string[];
+
 export interface MaybeStatementPrincipal {
     Principal?: PrincipalValue;
     NotPrincipal?: PrincipalValue;
 }
+
 export interface MaybeStatementResource {
     Resource?: string | string[];
     NotResource?: string | string[];
 }
-export type StatementAction = { Action: string | string[], ... } | { NotAction: string | string[], ... };
+
+export type StatementAction =
+    { Action: string | string[], ... }
+    | { NotAction: string | string[], ... };
 
 export type StatementResource = MaybeStatementPrincipal &
     ({ Resource: string | string[], ... } | { NotResource: string | string[], ... });
@@ -211,12 +226,11 @@ export interface ScheduledEvent {
     account: string;
     region: string;
     detail: mixed;
+
     ['detail-type']: string;
+
     source: string;
     time: string;
     id: string;
     resources: string[];
 }
-
-export type ApiGateway = mixed
-export type Redis = mixed

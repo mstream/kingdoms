@@ -6,6 +6,9 @@ import {addVectors, getDistanceBetweenVectors} from './vector';
 import type {Quantities} from './quantity';
 import {multipleQuantitiesByScalar} from './quantity';
 import {convertQuantitiesToResources} from './resource';
+import type {Type} from 'flow-runtime';
+import {reify} from 'flow-runtime';
+import type {ServerRequest} from './actions';
 
 type Upgradeable = {
     tier: number,
@@ -71,7 +74,10 @@ export type ServerState = {
     rules: CommonStateRules,
     time: CommonStateTime,
     world: CommonStateWorld,
+    ...
 };
+
+export const ServerStateType = (reify: Type<ServerState>);
 
 export const calculateNextCitySpot = ({minimalCityMargin, takenSpots, worldSize}: { minimalCityMargin: Vector, takenSpots: $ReadOnlyArray<Vector>, worldSize: Vector }): ?Vector => {
 

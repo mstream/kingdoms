@@ -14,6 +14,7 @@ describe('worldReducer', () => {
         };
         const previousState: ServerState = {
             ...emptyState,
+            unsupportedProperty: 'unsupportedPropertyValue',
         };
         const expected: ServerStateReducerResult<CommonStateTime> = {
             errors: [],

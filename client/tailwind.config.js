@@ -18,7 +18,7 @@ module.exports = {
             'grayscale': 'grayscale(1)',
         },
         fontFamily: {
-            'gothic': ['NanumGothicCoding']
+            'gothic': ['NanumGothicCoding'],
         },
         inset: {
             '1/2': '50%',
@@ -31,7 +31,7 @@ module.exports = {
             '75': '.75',
             '90': '.9',
             '100': '1',
-        }
+        },
     },
     variants: {
         'visibility': ['hover', 'group-hover'],

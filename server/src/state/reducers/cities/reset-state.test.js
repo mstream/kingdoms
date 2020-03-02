@@ -8,7 +8,10 @@ import type {ServerState} from '../../../../../common/src/state';
 describe('resetStateCitiesReducer', () => {
     it('returns the initial state', () => {
         const action = resetState();
-        const previousState: ServerState = emptyState;
+        const previousState: ServerState = {
+            ...emptyState,
+            unsupportedProperty: 'unsupportedPropertyValue',
+        };
         const expected = {
             errors: [],
             state: initialState.cities,

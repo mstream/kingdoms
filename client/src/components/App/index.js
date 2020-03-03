@@ -5,15 +5,15 @@ import {WorldMapComponent} from '../world-map';
 import {connect} from 'react-redux';
 import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
-import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {MenuComponent} from '../menu';
 import {GameStartComponent} from '../game-start';
+import type {ClientState} from '../../state/state';
 
 type OwnProps = {};
 
 type StateProps = {
-    state: ?ClientState
+    state: ClientState
 };
 
 type DispatchProps = {};
@@ -32,16 +32,18 @@ const Component = ({state}: Props) => {
     };
 
     useEffect(() => {
-        window.addEventListener('resize', handleWindowResize);
+            window.addEventListener('resize', handleWindowResize);
 
-        return () => {
-            window.removeEventListener('resize', handleWindowResize);
-        };
-    }, []);
+            return () => {
+                window.removeEventListener('resize', handleWindowResize);
+            };
+        },
+        []
+    );
 
     const windowSize = {x: window.innerWidth, y: window.innerHeight};
 
-    return state != null ? (
+    return state.serverState != null ? (
         <div
             className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
             <div className="row-span-1">
@@ -50,19 +52,19 @@ const Component = ({state}: Props) => {
             <div className="row-span-11">
                 <WorldMapComponent
                     camera={state.camera}
-                    citiesById={state.cities.byId}
+                    cities={state.serverState.cities}
                     tiles={state.tiles}
                     windowSize={windowSize}
                 />
                 {
-                    state.menu.viewedCityId != null &&
+                    state.menu.cityView.currentCityId != null &&
                     <CityViewComponent
-                        city={state.cities.byId[state.menu.viewedCityId]}
-                        cityId={state.menu.viewedCityId}
+                        city={state.serverState.cities[state.menu.cityView.currentCityId]}
+                        cityId={state.menu.cityView.currentCityId}
                     />
                 }
                 {
-                    state.player.name != null && state.cities.byOwnerId[state.player.name] == null &&
+                    state.player.name != null && state.serverState.citiesByOwner[state.player.name] == null &&
                     <GameStartComponent/>
                 }
             </div>

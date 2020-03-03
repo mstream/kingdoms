@@ -4,18 +4,17 @@ import React from 'react';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import type {ClientAction} from '../../state/actions';
-import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateCity} from '../../state/reducers/cities';
 import classNames from 'classnames';
-import type {ClientStatePlayer} from '../../state/reducers/player';
+import type {CommonStateCity} from '../../../../common/src/state';
 import {calculateBuildingTierSum} from '../../../../common/src/state';
+import type {ClientState, ClientStatePlayer} from '../../state/state';
 
 type OwnProps = {
-    city: ClientStateCity,
+    city: CommonStateCity,
 };
 
 type StateProps = {
-    player: ?ClientStatePlayer,
+    player: ClientStatePlayer,
 };
 
 type DispatchProps = {};
@@ -62,7 +61,7 @@ const Component = ({city, player}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        player: state == null ? null : state.player,
+        player: state.player,
     });
 };
 

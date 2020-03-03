@@ -2,7 +2,7 @@
 
 import type {ServerState} from '../../../../../common/src/state';
 import {unsupportedActionCitiesReducer} from './unsupported';
-import {emptyState} from '../../state';
+import {emptyServerState} from '../../state';
 
 describe('unsupportedActionCitiesReducer', () => {
     it('returns the current state', () => {
@@ -10,7 +10,7 @@ describe('unsupportedActionCitiesReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         const expected = {
             errors: [],

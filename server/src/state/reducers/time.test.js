@@ -1,24 +1,24 @@
 // @flow
 
-import {emptyState, initialState} from '../state';
+import {emptyServerState, initialServerState} from '../state';
 import {timeReducer} from './time';
 import type {CommonStateTime, ServerState} from '../../../../common/src/state';
 import {worldReducer} from './world';
 import {executeTimeStep} from '../../../../common/src/actions';
 import type {ServerStateReducerResult} from './root';
 
-describe('worldReducer', () => {
+describe('timeReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             unsupportedProperty: 'unsupportedPropertyValue',
         };
         const expected: ServerStateReducerResult<CommonStateTime> = {
             errors: [],
-            state: initialState.time,
+            state: initialServerState.time,
         };
         const actual = timeReducer({action, state: previousState});
         expect(actual).toEqual(expected);
@@ -29,7 +29,7 @@ describe('worldReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         const expected: ServerStateReducerResult<CommonStateTime> = {
             errors: [],
@@ -42,7 +42,7 @@ describe('worldReducer', () => {
     it('updates time on execute time step action', () => {
         const action = executeTimeStep({time: 'NEW_TIME'});
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             time: '2000-01-01T00:00:00Z',
         };
         const expected: ServerStateReducerResult<CommonStateTime> = {

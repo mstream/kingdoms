@@ -3,7 +3,7 @@
 import {upgradeBuildingCitiesReducer} from './upgrade-building';
 import {upgradeBuilding} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
-import {emptyCityState, emptyState} from '../../state';
+import {emptyCityState, emptyServerState} from '../../state';
 
 describe('upgradeBuildingCitiesReducer', () => {
     it('fails when city does not exist', () => {
@@ -13,7 +13,7 @@ describe('upgradeBuildingCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         const expected = {
             errors: ['the city does not exist'],
@@ -33,7 +33,7 @@ describe('upgradeBuildingCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -59,7 +59,7 @@ describe('upgradeBuildingCitiesReducer', () => {
             playerId: 'player1',
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -79,9 +79,9 @@ describe('upgradeBuildingCitiesReducer', () => {
                 }
             },
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 buildingUpgradeCosts: {
-                    ...emptyState.rules.buildingUpgradeCosts,
+                    ...emptyServerState.rules.buildingUpgradeCosts,
                     pasture: {
                         food: 200,
                         wood: 200,
@@ -107,7 +107,7 @@ describe('upgradeBuildingCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -127,9 +127,9 @@ describe('upgradeBuildingCitiesReducer', () => {
                 }
             },
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 buildingUpgradeCosts: {
-                    ...emptyState.rules.buildingUpgradeCosts,
+                    ...emptyServerState.rules.buildingUpgradeCosts,
                     pasture: {
                         food: 200,
                         wood: 200,

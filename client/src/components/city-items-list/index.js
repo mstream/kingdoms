@@ -4,8 +4,8 @@ import type {Node} from 'react';
 import React from 'react';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
+import type {ClientState} from '../../state/state';
 
 type OwnProps = {
     children: Node,

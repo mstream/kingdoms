@@ -16,15 +16,15 @@ import {
 } from '../../state/actions';
 import {connect} from 'react-redux';
 import {ResourcesComponent} from '../resources';
-import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateCity} from '../../state/reducers/cities';
 import {BuildingsComponent} from '../buildings';
 import {CitizensComponent} from '../citizens';
 import type {Dispatch} from 'redux';
 import {getRefValue} from '../../util';
+import type {ClientState} from '../../state/state';
+import type {CommonStateCity} from '../../../../common/src/state';
 
 type OwnProps = {
-    city: ClientStateCity,
+    city: CommonStateCity,
     cityId: string,
 };
 

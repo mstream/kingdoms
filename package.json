@@ -30,6 +30,7 @@
   "dependencies": {
     "aws-sdk": "2.630.0",
     "classnames": "2.2.6",
+    "combine-reducers-global-state": "1.0.1",
     "flow-runtime": "0.17.0",
     "ioredis": "4.16.0",
     "jsonwebtoken": "8.5.1",
@@ -37,8 +38,8 @@
     "react": "16.13.0",
     "react-dom": "16.13.0",
     "react-redux": "7.2.0",
-    "reduce-reducers": "1.0.4",
     "redux": "4.0.5",
+    "redux-devtools-extension": "2.13.8",
     "roman-decimal": "1.0.1",
     "simple-websocket": "8.1.1",
     "tumult": "3.0.14",

@@ -8,7 +8,6 @@ import type {
     ServerResponse
 } from '../../../../common/src/actions';
 import {ServerRequestType} from '../../../../common/src/actions';
-import {ServerStateType} from '../../../../common/src/state';
 import {parseJson} from '../../../../common/src/util';
 import type {ProxyHandler} from '../types';
 import {getState} from '../../connectors/database';

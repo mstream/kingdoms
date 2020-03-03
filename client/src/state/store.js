@@ -1,12 +1,13 @@
 // @flow
 
 import type {Dispatch} from 'redux';
-import {applyMiddleware, compose, createStore} from 'redux';
-import type {ClientState} from './reducers/root';
+import {applyMiddleware, createStore} from 'redux';
 import {rootReducer} from './reducers/root';
 import {websocketMiddleware} from './middleware/websocket';
 import type {ClientAction} from './actions';
 import queryString from 'query-string';
+import type {ClientState} from './state';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
 const clientId = `5ujsbhm0e966tcue4cca3dkmut`;
 const cognitoBaseUrl = `https://kingdoms.auth.eu-west-1.amazoncognito.com`;
@@ -30,19 +31,21 @@ export const signOut = (): void => {
     window.location.replace(signOutUrl);
 };
 
+const composeEnhancers = composeWithDevTools({
+    trace: true,
+});
+
 export const store = createStore<ClientState,
     ClientAction,
     Dispatch<ClientAction>>(
     rootReducer,
-    compose(
+    composeEnhancers(
         applyMiddleware(
             websocketMiddleware({
                 token: getIdToken(),
                 url: wsUrl,
             })
         ),
-        window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
 

@@ -2,13 +2,12 @@
 
 import React from 'react';
 import {createGeometryStyle} from '../../util';
-import type {ClientStateTile} from '../../state/reducers/tiles';
-import type {ClientState} from '../../state/reducers/root';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
 import {ImageComponent} from '../image';
 import {surfaceImages} from '../../assets/images/terrain';
+import type {ClientState, ClientStateTile} from '../../state/state';
 
 type OwnProps = {
     tile: ClientStateTile
@@ -41,7 +40,7 @@ const mapStateToProps = (state: ClientState): StateProps => {
 const actionCreators: DispatchProps = Object.freeze({});
 ;
 
-export const TileComponent = connect<Props,
+export const TerrainTileComponent = connect<Props,
     OwnProps,
     StateProps,
     DispatchProps,

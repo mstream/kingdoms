@@ -5,7 +5,6 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import lumberMillImage from '../../assets/images/buildings/lumber-mill.png';
 import pastureImage from '../../assets/images/buildings/pasture.png';
-import type {ClientState} from '../../state/reducers/root';
 import type {
     ClientAction,
     ClientRequestBuildingUpgradeActionCreator
@@ -23,6 +22,7 @@ import {calculateBuildingsUpgradeCost} from '../../../../common/src/state';
 import {CostInfoComponent} from '../cost-info';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
 import {subtractQuantities} from '../../../../common/src/quantity';
+import type {ClientState} from '../../state/state';
 
 const buildingVisuals = {
     lumberMill: {

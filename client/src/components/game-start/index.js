@@ -6,10 +6,10 @@ import type {
     ClientRequestCityCreationActionCreator
 } from '../../state/actions';
 import {requestCityCreation} from '../../state/actions';
-import type {ClientState} from '../../state/reducers/root';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
+import type {ClientState} from '../../state/state';
 
 type OwnProps = {};
 
@@ -31,12 +31,12 @@ const Component = ({isCityBeingCreated, requestCityCreation}: Props) => {
     const [nameDraft, setNameDraft] = useState('');
 
     const buttonClassName = classNames(
-        'text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600 hover:bg-green-400',
+        'text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600',
         {
+            'spinner': isCityBeingCreated,
             'cursor-pointer': !isCityBeingCreated,
             'cursor-not-allowed': isCityBeingCreated,
-            'opacity-25': isCityBeingCreated,
-            'opacity-100': !isCityBeingCreated,
+            'hover:bg-green-400': !isCityBeingCreated,
         }
     );
 
@@ -69,7 +69,7 @@ const Component = ({isCityBeingCreated, requestCityCreation}: Props) => {
                         <div className="w-2/3">
                             <input
                                 id="new-city-name"
-                                className="appearance-none border-none w-full mx-3 leading-tight focus:outline-none text-gray-900 bg-gray-100"
+                                className="appearance-none border-none w-full leading-tight focus:outline-none text-gray-900 bg-gray-100"
                                 type="text"
                                 placeholder="London"
                                 onChange={
@@ -98,7 +98,7 @@ const Component = ({isCityBeingCreated, requestCityCreation}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        isCityBeingCreated: state == null ? false : state.menu.isCityBeingCreated,
+        isCityBeingCreated: state.menu.newCity.isCityBeingCreated,
     });
 };
 

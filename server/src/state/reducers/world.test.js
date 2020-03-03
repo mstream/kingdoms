@@ -1,7 +1,7 @@
 // @flow
 
 import {worldReducer} from './world';
-import {emptyState, initialState} from '../state';
+import {emptyServerState, initialServerState} from '../state';
 import type {CommonStateWorld, ServerState} from '../../../../common/src/state';
 import type {ServerStateReducerResult} from './root';
 import {success} from './root';
@@ -12,12 +12,12 @@ describe('worldReducer', () => {
             type: 'RESET_STATE',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             unsupportedProperty: 'unsupportedPropertyValue',
         };
         const expected: ServerStateReducerResult<CommonStateWorld> = {
             errors: [],
-            state: initialState.world,
+            state: initialServerState.world,
         };
         const actual = worldReducer({action, state: previousState});
         expect(actual).toEqual(expected);
@@ -28,7 +28,7 @@ describe('worldReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         success({state: previousState.world});
         const actual = worldReducer({action, state: previousState});

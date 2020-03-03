@@ -7,8 +7,8 @@ import type {
 } from '../../../../../common/src/state';
 import type {ServerStateReducerResult} from '../root';
 import {success} from '../root';
-import {initialState} from '../../state';
+import {initialServerState} from '../../state';
 
 export const resetStateCitiesReducer = ({action, state}: { action: ServerResetStateAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
-    return success({state: initialState.cities});
+    return success({state: initialServerState.cities});
 };

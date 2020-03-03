@@ -13,6 +13,6 @@
     "deploy": "npm run build && aws s3 cp --recursive --acl public-read dist/ s3://www.maciej-laciak.com/",
     "prebuild": "rimraf dist",
     "start": "webpack-dev-server --open --mode development",
-    "test": "jest --passWithNoTests"
+    "test": "jest --coverage"
   }
 }

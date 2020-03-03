@@ -1,121 +1,82 @@
 // @flow
-import type {Reducer} from 'redux';
-import type {Vector} from '../../../../common/src/vector';
 import {
     addVectors,
-    divideVectors,
     multipleVectors,
     negateVector,
 } from '../../../../common/src/vector';
-import type {Boundary} from '../../../../common/src/boundary';
 import {clipToBoundary} from '../../../../common/src/boundary';
 import {tileSize} from './tiles';
 import type {ClientAction} from '../actions';
-import type {Geometry} from '../../../../common/src/geometry';
+import type {ClientState, ClientStateCamera} from '../state';
+import {initialClientState} from '../state';
 
-export type ClientStateCamera = ?{
-    locationLimit: Boundary,
-    geometry: Geometry,
-    movementSpeed: Vector,
-    sizeLimit: Boundary,
-    zoomingSpeed: Vector,
-};
-
-const initialState: ClientStateCamera = null;
-
-export const cameraReducer: Reducer<ClientStateCamera, ClientAction> = (
-    state = initialState,
-    action: ClientAction
-) => {
+export const cameraReducer = (
+    localState: ClientStateCamera = initialClientState.camera,
+    action: ClientAction,
+    globalState: ClientState,
+): ClientStateCamera => {
     switch (action.type) {
         case 'MOVE_CAMERA': {
-            if (state == null) {
-                return state;
-            }
             const newCameraLocation = clipToBoundary({
                 vector: addVectors({
-                    vector1: state.geometry.location,
+                    vector1: localState.geometry.location,
                     vector2: multipleVectors({
-                        vector1: state.geometry.size,
+                        vector1: localState.geometry.size,
                         vector2: multipleVectors({
-                            vector1: state.movementSpeed,
+                            vector1: localState.movementSpeed,
                             vector2: action.payload.vector,
                         }),
                     }),
                 }),
-                boundary: state.locationLimit,
+                boundary: localState.locationLimit,
             });
 
             return {
-                ...state,
+                ...localState,
                 geometry: {
-                    ...state.geometry,
+                    ...localState.geometry,
                     location: newCameraLocation,
                 },
             };
         }
         case 'ZOOM_CAMERA': {
-            if (state == null) {
-                return state;
-            }
             const newCameraSize = clipToBoundary({
                 vector: addVectors({
-                    vector1: state.geometry.size,
+                    vector1: localState.geometry.size,
                     vector2: multipleVectors({
-                        vector1: state.zoomingSpeed,
+                        vector1: localState.zoomingSpeed,
                         vector2: action.payload.vector,
                     }),
                 }),
-                boundary: state.sizeLimit,
+                boundary: localState.sizeLimit,
             });
 
             return {
-                ...state,
+                ...localState,
                 geometry: {
-                    ...state.geometry,
+                    ...localState.geometry,
                     size: newCameraSize,
                 },
             };
         }
         case 'UPDATE_STATE': {
-            if (state != null) {
-                return state;
-            }
             const halfWorldSize = multipleVectors({
-                vector1: addVectors({vector1: action.payload.serverState.world.size, vector2: {x: 0.5, y: 0.5}}),
+                vector1: addVectors({
+                    vector1: action.payload.serverState.world.size,
+                    vector2: {x: 0.5, y: 0.5}
+                }),
                 vector2: tileSize,
             });
             return {
-                geometry: {
-                    location: {
-                        x: 0,
-                        y: 0,
-                    },
-                    size: {
-                        x: 1280,
-                        y: 800,
-                    },
-                },
+                ...initialClientState.camera,
                 locationLimit: {
                     min: negateVector({vector: halfWorldSize}),
                     max: halfWorldSize,
                 },
-                movementSpeed: {
-                    x: 0.1,
-                    y: 0.1,
-                },
-                sizeLimit: {
-                    min: {x: 640, y: 400},
-                    max: {x: 3200, y: 2000},
-                },
-                zoomingSpeed: {
-                    x: 100,
-                    y: 100,
-                },
             };
         }
         default: {
-            return state;
+            return localState;
         }
     }
 };

@@ -3,8 +3,8 @@
 import React, {useEffect} from 'react';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import {TileComponent} from '../tile';
-import {CityComponent} from '../city';
+import {TerrainTileComponent} from '../tile';
+import {CityTileComponent} from '../city-tile';
 import type {
     ClientAction,
     ClientMoveCameraActionCreator,
@@ -26,35 +26,15 @@ import {
 } from '../../../../common/src/vector';
 import type {Geometry} from '../../../../common/src/geometry';
 import {checkIfIntersect} from '../../../../common/src/geometry';
-import type {ClientStateCamera} from '../../state/reducers/camera';
-import type {ClientStateTile} from '../../state/reducers/tiles';
-import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateCitiesById} from '../../state/reducers/cities';
 import {LoaderComponent} from '../loader';
+import type {
+    ClientState,
+    ClientStateCamera,
+    ClientStateTile,
+    ClientStateTiles
+} from '../../state/state';
+import type {CommonStateCities} from '../../../../common/src/state';
 
-type OwnProps = {
-    camera: ClientStateCamera,
-    citiesById: ClientStateCitiesById,
-    tiles: $ReadOnlyArray<ClientStateTile>,
-    windowSize: Vector,
-};
-
-type StateProps = {};
-
-type DispatchProps = {
-    moveCameraUp: ClientMoveCameraActionCreator,
-    moveCameraDown: ClientMoveCameraActionCreator,
-    moveCameraLeft: ClientMoveCameraActionCreator,
-    moveCameraRight: ClientMoveCameraActionCreator,
-    zoomCameraIn: ClientZoomCameraActionCreator,
-    zoomCameraOut: ClientZoomCameraActionCreator,
-};
-
-type Props = {
-    ...OwnProps,
-    ...StateProps,
-    ...DispatchProps,
-};
 
 const cullObjects = <T: { geometry: Geometry, ... }>({
                                                          objects,
@@ -122,9 +102,33 @@ const transformObjectGeometries = <T: { geometry: Geometry, ... }>({
     });
 };
 
+type OwnProps = {
+    camera: ClientStateCamera,
+    cities: CommonStateCities,
+    tiles: ClientStateTiles,
+    windowSize: Vector,
+};
+
+type StateProps = {};
+
+type DispatchProps = {
+    moveCameraUp: ClientMoveCameraActionCreator,
+    moveCameraDown: ClientMoveCameraActionCreator,
+    moveCameraLeft: ClientMoveCameraActionCreator,
+    moveCameraRight: ClientMoveCameraActionCreator,
+    zoomCameraIn: ClientZoomCameraActionCreator,
+    zoomCameraOut: ClientZoomCameraActionCreator,
+};
+
+type Props = {
+    ...OwnProps,
+    ...StateProps,
+    ...DispatchProps,
+};
+
 const Component = ({
                        camera,
-                       citiesById,
+                       cities,
                        tiles,
                        moveCameraUp,
                        moveCameraDown,
@@ -174,7 +178,7 @@ const Component = ({
         zoomCameraOut,
     ]);
 
-    if (camera == null || tiles.length === 0) {
+    if (tiles.terrain.length === 0) {
         return (
             <LoaderComponent/>
         );
@@ -200,21 +204,27 @@ const Component = ({
         y: desiredDimensionRatio,
     };
 
-    const visibleTiles = cullObjects({
+    const visibleTerrainTiles = cullObjects({
         cameraGeometry: camera.geometry,
-        objects: tiles,
+        objects: tiles.terrain,
     });
 
-    const citiesWithId = Object.keys(citiesById).map((cityId) => {
-        return {
-            ...citiesById[cityId],
-            id: cityId,
-        };
-    });
+    const visibleCityIds: $ReadOnlyArray<string> = Object.keys(cities).reduce(
+        (visibleCityIds, cityId) => {
+            const tile = tiles.city[cityId];
 
-    const visibleCities = cullObjects({
-        cameraGeometry: camera.geometry,
-        objects: citiesWithId,
+            const isVisible = checkIfIntersect({
+                geometry1: tile.geometry,
+                geometry2: camera.geometry,
+            });
+
+            return [...visibleCityIds, ...(isVisible ? [cityId] : [])];
+        },
+        [],
+    );
+
+    const visibleCityTiles: $ReadOnlyArray<ClientStateTile> = visibleCityIds.map((cityId) => {
+        return tiles.city[cityId];
     });
 
     const cameraWindowGeometry = {
@@ -229,43 +239,47 @@ const Component = ({
     };
 
     const transformedVisibleTiles = transformObjectGeometries({
-        objects: visibleTiles,
+        objects: visibleTerrainTiles,
         desiredCameraSizeToWorldCameraSizeRatioVector,
         cameraWindowGeometry,
         cameraLocationToWindowCenterLocationVector,
     });
 
-    const transformedVisibleCities = transformObjectGeometries({
-        objects: visibleCities,
+    const transformedVisibleCityTiles = transformObjectGeometries({
+        objects: visibleCityTiles,
         desiredCameraSizeToWorldCameraSizeRatioVector,
         cameraWindowGeometry,
         cameraLocationToWindowCenterLocationVector,
     });
 
-    const tileComponents = transformedVisibleTiles.map(tile => {
+    const terrainTileComponents = transformedVisibleTiles.map(tile => {
         return (
-            <TileComponent
+            <TerrainTileComponent
                 key={`${tile.index.x}-${tile.index.y}`}
                 tile={tile}
             />
         );
     });
 
-    const cityComponents = transformedVisibleCities.map(city => {
-        return <CityComponent key={city.id} city={city}/>;
+    const cityTileComponents = visibleCityIds.map((cityId, index) => {
+        return <CityTileComponent
+            key={cityId}
+            city={cities[cityId]}
+            cityId={cityId}
+            cityTile={transformedVisibleCityTiles[index]}
+        />;
     });
 
     return (
-        <div className="">
-            {tileComponents}
-            {cityComponents}
+        <div>
+            {terrainTileComponents}
+            {cityTileComponents}
         </div>
     );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({});
-    ;
 };
 
 const actionCreators: DispatchProps = {

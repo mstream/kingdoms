@@ -3,13 +3,13 @@
 import {abandonCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {abandonCityCitiesReducer} from './abandon-city';
-import {emptyCityState, emptyState} from '../../state';
+import {emptyCityState, emptyServerState} from '../../state';
 
 describe('abandonCityCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         const expected = {
             errors: ['the city does not exist'],
@@ -22,7 +22,7 @@ describe('abandonCityCitiesReducer', () => {
     it('fails when city does not belong to the player', () => {
         const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -41,7 +41,7 @@ describe('abandonCityCitiesReducer', () => {
     it('removes the ownership', () => {
         const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,

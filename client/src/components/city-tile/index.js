@@ -4,22 +4,27 @@ import React from 'react';
 import {createGeometryStyle} from '../../util';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import type {ClientAction} from '../../state/actions';
+import type {
+    ClientAction,
+    ClientOpenCityViewActionCreator
+} from '../../state/actions';
 import {openCityView} from '../../state/actions';
-import type {ClientState} from '../../state/reducers/root';
-import type {ClientStateCity} from '../../state/reducers/cities';
 import cityImage from '../../assets/images/cities/city.png';
 import {ImageComponent} from '../image';
 import {CityStatusBarComponent} from '../city-status-bar';
+import type {ClientState, ClientStateTile} from '../../state/state';
+import type {CommonStateCity} from '../../../../common/src/state';
 
 type OwnProps = {
-    city: { id: string, ... } & ClientStateCity,
+    city: CommonStateCity,
+    cityTile: ClientStateTile,
+    cityId: string,
 };
 
 type StateProps = {};
 
 type DispatchProps = {
-    openCityView: ({ cityId: string }) => mixed,
+    openCityView: ClientOpenCityViewActionCreator,
 };
 
 type Props = {
@@ -28,16 +33,16 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({city, openCityView}: Props) => {
+const Component = ({city, cityId, cityTile, openCityView}: Props) => {
     const style = {
-        ...createGeometryStyle({geometry: city.geometry}),
+        ...createGeometryStyle({geometry: cityTile.geometry}),
     };
 
     return (
         <div
             className="absolute cursor-pointer"
             style={style}
-            onClick={() => openCityView({cityId: city.id})}
+            onClick={() => openCityView({cityId})}
         >
             <ImageComponent image={cityImage} ratio="100%"/>
             <CityStatusBarComponent city={city}/>
@@ -50,10 +55,10 @@ const mapStateToProps = (state: ClientState): StateProps => {
 };
 
 const actionCreators: DispatchProps = {
-    openCityView
+    openCityView,
 };
 
-export const CityComponent = connect<Props,
+export const CityTileComponent = connect<Props,
     OwnProps,
     StateProps,
     DispatchProps,

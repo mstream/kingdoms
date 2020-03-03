@@ -7,12 +7,12 @@ import type {
 } from '../../../../../common/src/state';
 import type {ServerStateReducerResult} from '../root';
 import {executeTimeStepCitiesReducer} from './execute-time-step';
-import {emptyCityState, emptyState} from '../../state';
+import {emptyCityState, emptyServerState} from '../../state';
 
 describe('executeTimeStepCitiesReducer', () => {
     it('previous time newer than the one from action', () => {
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             time: '2000-01-01T02:00:00Z',
         };
         const updateTime = '2000-01-01T01:00:00Z';
@@ -30,7 +30,7 @@ describe('executeTimeStepCitiesReducer', () => {
 
     it('empty city gains peasants because of migration', () => {
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -52,7 +52,7 @@ describe('executeTimeStepCitiesReducer', () => {
                 }
             },
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 baseCityCapacity: 1000,
                 basePeasantsMigrationRate: 100,
                 populationGrowthChangeRateCoefficient: 1,

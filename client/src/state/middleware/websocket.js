@@ -2,7 +2,6 @@
 
 import Socket from 'simple-websocket';
 import type {Middleware} from 'redux';
-import type {ClientState} from '../reducers/root';
 import type {ClientAction} from '../actions';
 import {loadPlayer, updateState} from '../actions';
 import type {
@@ -17,14 +16,17 @@ import {
     upgradeBuilding
 } from '../../../../common/src/actions';
 import jwt from 'jsonwebtoken';
-import {generateId} from '../../../../common/src/util';
+import {generateId, stringifyJson} from '../../../../common/src/util';
+import type {ClientState} from '../state';
 
 
 const send = ({action, socket}: { action: ServerAction, socket: Socket }): void => {
     socket.send(
-        JSON.stringify({
-            message: 'sendmessage',
-            data: action,
+        stringifyJson({
+            value: {
+                message: 'sendmessage',
+                data: action,
+            }
         })
     );
 };
@@ -38,11 +40,11 @@ const createOnDataHandler = (store) => {
         const serverResponse: ServerResponse = parseServerResponse({json: dataString});
 
         switch (serverResponse.request.type) {
+            case 'CHANGE_CITY_NAME':
             case 'CREATE_CITY':
             case 'GET_CURRENT_STATE':
             case 'EXECUTE_TIME_STEP':
-            case 'UPGRADE_BUILDING':
-            case 'CHANGE_CITY_NAME': {
+            case 'UPGRADE_BUILDING': {
                 store.dispatch(updateState({serverState: serverResponse.state}));
                 return;
             }

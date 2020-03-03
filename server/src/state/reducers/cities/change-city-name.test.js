@@ -3,7 +3,7 @@
 import {changeCityName} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {changeCityNameCitiesReducer} from './change-city-name';
-import {emptyCityState, emptyState} from '../../state';
+import {emptyCityState, emptyServerState} from '../../state';
 
 describe('changeCityNameCitiesReducer', () => {
     it('fails when city does not exist', () => {
@@ -13,7 +13,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         const expected = {
             errors: ['the city does not exist'],
@@ -33,7 +33,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -60,7 +60,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -87,7 +87,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -114,7 +114,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -141,7 +141,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
                 '1': {
                     ...emptyCityState,

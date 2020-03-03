@@ -1,20 +1,20 @@
 // @flow
-import type {Reducer} from 'redux';
 import type {ClientAction} from '../actions';
 import type {ServerState} from '../../../../common/src/state';
+import {initialClientState} from '../state';
+import type {ClientState} from '../state';
 
-const initialState: ?ServerState = null;
-
-export const serverStateReducer: Reducer<?ServerState, ClientAction> = (
-    state = initialState,
-    action: ClientAction
-) => {
+export const serverStateReducer = (
+    localState: ?ServerState = initialClientState.serverState,
+    action: ClientAction,
+    globalState: ClientState,
+): ?ServerState => {
     switch (action.type) {
         case 'UPDATE_STATE': {
             return action.payload.serverState;
         }
         default: {
-            return state;
+            return localState;
         }
     }
 };

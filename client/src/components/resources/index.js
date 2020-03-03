@@ -5,7 +5,6 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import foodImage from '../../assets/images/resources/food.png';
 import woodImage from '../../assets/images/resources/wood.png';
-import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {ImageComponent} from '../image';
 import {numberToQuantityString} from '../../util';
@@ -16,6 +15,7 @@ import type {
 } from '../../../../common/src/state';
 import {calculateResourceChangeInfo} from '../../../../common/src/state';
 import {ChangeInfoComponent} from '../change-info';
+import type {ClientState} from '../../state/state';
 
 const resourceVisuals = {
     food: {

@@ -8,7 +8,6 @@ import {multipleQuantitiesByScalar} from './quantity';
 import {convertQuantitiesToResources} from './resource';
 import type {Type} from 'flow-runtime';
 import {reify} from 'flow-runtime';
-import type {ServerRequest} from './actions';
 
 type Upgradeable = {
     tier: number,
@@ -45,6 +44,7 @@ export type CommonStateCity = {
 };
 
 export type CommonStateCities = { [string]: CommonStateCity, ... };
+export type CommonStateCitiesByOwner = { [string]: $ReadOnlyArray<string>, ... };
 
 export type CommonStateBuildingUpgradeCosts = {
     lumberMill: CommonStateResources,
@@ -71,6 +71,7 @@ export type CommonStateWorld = {
 
 export type ServerState = {
     cities: CommonStateCities,
+    citiesByOwner: CommonStateCitiesByOwner,
     rules: CommonStateRules,
     time: CommonStateTime,
     world: CommonStateWorld,

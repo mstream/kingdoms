@@ -1,7 +1,7 @@
 // @flow
 
 import {rulesReducer} from './rules';
-import {emptyState, initialState} from '../state';
+import {emptyServerState, initialServerState} from '../state';
 import type {CommonStateRules, ServerState} from '../../../../common/src/state';
 import {worldReducer} from './world';
 import type {ServerStateReducerResult} from './root';
@@ -12,12 +12,12 @@ describe('worldReducer', () => {
             type: 'RESET_STATE',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             unsupportedProperty: 'unsupportedPropertyValue',
         };
         const expected: ServerStateReducerResult<CommonStateRules> = {
             errors: [],
-            state: initialState.rules,
+            state: initialServerState.rules,
         };
         const actual = rulesReducer({action, state: previousState});
         expect(actual).toEqual(expected);
@@ -28,7 +28,7 @@ describe('worldReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         const expected: ServerStateReducerResult<CommonStateRules> = {
             errors: [],

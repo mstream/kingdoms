@@ -3,11 +3,11 @@
 import React from 'react';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {numberToQuantityString} from '../../util';
 import classNames from 'classnames';
 import type {Quantities} from '../../../../common/src/quantity';
+import type {ClientState} from '../../state/state';
 
 type OwnProps = {
     changeInfo: Quantities,

@@ -1,17 +1,16 @@
 // @flow
 
 import React from 'react';
-import type {ClientState} from '../../state/reducers/root';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
 import {connect} from 'react-redux';
-import type {ClientStatePlayer} from '../../state/reducers/player';
 import {signOut} from '../../state/store';
+import type {ClientState, ClientStatePlayer} from '../../state/state';
 
 type OwnProps = {};
 
 type StateProps = {
-    player: ?ClientStatePlayer,
+    player: ClientStatePlayer,
 };
 
 type DispatchProps = {};
@@ -55,7 +54,7 @@ const Component = ({player}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        player: state != null ? state.player : null,
+        player: state.player,
     });
 };
 

@@ -1,21 +1,11 @@
 // @flow
-import type {Reducer} from 'redux';
 import type {ClientAction} from '../actions';
 import type {Vector} from '../../../../common/src/vector';
-import type {Geometry} from '../../../../common/src/geometry';
+import {multipleVectors} from '../../../../common/src/vector';
 import tumult from 'tumult';
 import {surfaceImages} from '../../assets/images/terrain';
-
-export type TileType = 'PLAINS';
-
-export type ClientStateTile = {
-    geometry: Geometry,
-    index: Vector,
-    textureIndex: number,
-    type: TileType,
-};
-
-export type ClientStateTiles = $ReadOnlyArray<ClientStateTile>;
+import type {ClientState, ClientStateTiles} from '../state';
+import {initialClientState} from '../state';
 
 const perlin2 = new tumult.Simplex2('qwerty');
 
@@ -28,20 +18,45 @@ const calculateTextureIndex = ({index}: { index: Vector }): number => {
     return Math.round(Math.abs(perlin2.gen(Math.abs(index.x), Math.abs(index.y))) * (surfaceImages.length - 1));
 };
 
-const initialState: ClientStateTiles = [];
 
-export const tilesReducer: Reducer<ClientStateTiles, ClientAction> = (
-    state = initialState,
-    action: ClientAction
-) => {
+export const tilesReducer = (
+    localState: ClientStateTiles = initialClientState.tiles,
+    action: ClientAction,
+    globalState: ClientState,
+): ClientStateTiles => {
     switch (action.type) {
         case 'UPDATE_STATE': {
-            const newTiles = [];
+            const newCityTiles = Object.keys(action.payload.serverState.cities).reduce(
+                (newCityTiles, cityId) => {
+                    const city = action.payload.serverState.cities[cityId];
+
+                    const geometry = {
+                        location: multipleVectors({
+                            vector1: city.location,
+                            vector2: tileSize,
+                        }),
+                        size: tileSize,
+                    };
+
+                    return {
+                        ...newCityTiles,
+                        [cityId]: {
+                            geometry,
+                            index: city.location,
+                            textureIndex: 0,
+                            type: 'CITY',
+                        },
+                    };
+                },
+                Object.freeze({}),
+            );
+
+            const newTerrainTiles = [];
 
             for (let y = -action.payload.serverState.world.size.y; y <= action.payload.serverState.world.size.y; y++) {
                 for (let x = -action.payload.serverState.world.size.x; x <= action.payload.serverState.world.size.x; x++) {
                     const index = {x, y};
-                    newTiles.push({
+                    newTerrainTiles.push({
                         index,
                         geometry: {
                             location: {x: x * tileSize.x, y: y * tileSize.y},
@@ -58,10 +73,14 @@ export const tilesReducer: Reducer<ClientStateTiles, ClientAction> = (
                 }
             }
 
-            return newTiles;
+            return {
+                ...localState,
+                city: newCityTiles,
+                terrain: newTerrainTiles,
+            };
         }
         default: {
-            return state;
+            return localState;
         }
     }
 };

@@ -2,8 +2,10 @@
 import type {ServerState} from '../../../common/src/state';
 
 const emptyCities = {};
-
 const initialCities = {};
+
+const emptyCitiesByOwner = {};
+const initialCitiesByOwner = {};
 
 const emptyRules = {
     baseCityCapacity: 0,
@@ -61,15 +63,17 @@ const emptyWorld = {size: {x: 0, y: 0}};
 
 const initialWorld = {size: {x: 10, y: 10}};
 
-export const emptyState: ServerState = {
+export const emptyServerState: ServerState = {
     cities: emptyCities,
+    citiesByOwner: emptyCitiesByOwner,
     rules: emptyRules,
     time: emptyTime,
     world: emptyWorld,
 };
 
-export const initialState: ServerState = {
+export const initialServerState: ServerState = {
     cities: initialCities,
+    citiesByOwner: initialCitiesByOwner,
     rules: initialRules,
     time: initialTime,
     world: initialWorld,

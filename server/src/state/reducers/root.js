@@ -1,7 +1,11 @@
 // @flow
 
 import type {
-    CommonStateCities, CommonStateRules, CommonStateTime, CommonStateWorld,
+    CommonStateCities,
+    CommonStateCitiesByOwner,
+    CommonStateRules,
+    CommonStateTime,
+    CommonStateWorld,
     ServerState
 } from '../../../../common/src/state';
 import type {ServerAction} from '../../../../common/src/actions';
@@ -9,6 +13,7 @@ import {citiesReducer} from './cities';
 import {rulesReducer} from './rules';
 import {timeReducer} from './time';
 import {worldReducer} from './world';
+import {citiesByOwnerReducer} from './cities-by-owner';
 
 export type ServerStateReducerResult<S> = {
     errors: $ReadOnlyArray<string>,
@@ -33,6 +38,7 @@ export const failure = <S>({errors}: { errors: $ReadOnlyArray<string> }): Server
 
 type StateToReducersMapping = {
     cities: ServerStateReducer<CommonStateCities>,
+    citiesByOwner: ServerStateReducer<CommonStateCitiesByOwner>,
     rules: ServerStateReducer<CommonStateRules>,
     time: ServerStateReducer<CommonStateTime>,
     world: ServerStateReducer<CommonStateWorld>,
@@ -80,6 +86,7 @@ const combineServerStateReducers = ({stateToReducersMapping}: {stateToReducersMa
 
 const stateToReducersMapping: StateToReducersMapping =  {
     cities: citiesReducer,
+    citiesByOwner: citiesByOwnerReducer,
     rules: rulesReducer,
     time: timeReducer,
     world: worldReducer,

@@ -1,28 +1,23 @@
 // @flow
-import type { Reducer } from 'redux';
-import type { ClientAction } from '../actions';
 
-export type ClientStatePlayer = {
-    name: ?string,
-};
+import type {ClientAction} from '../actions';
+import type {ClientState, ClientStatePlayer} from '../state';
+import {initialClientState} from '../state';
 
-const initialState: ClientStatePlayer = {
-    name: null,
-};
-
-export const playerReducer: Reducer<ClientStatePlayer, ClientAction> = (
-    state = initialState,
-    action: ClientAction
-) => {
+export const playerReducer = (
+    localState: ClientStatePlayer = initialClientState.player,
+    action: ClientAction,
+    globalState: ClientState,
+): ClientStatePlayer => {
     switch (action.type) {
         case 'LOAD_PLAYER': {
             return {
-                ...state,
+                ...localState,
                 name: action.payload.name,
             };
         }
         default: {
-            return state;
+            return localState;
         }
     }
 };

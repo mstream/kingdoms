@@ -3,7 +3,7 @@
 import {createCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {createCityCitiesReducer} from './create-city';
-import {emptyCityState, emptyState, initialCityState} from '../../state';
+import {emptyCityState, emptyServerState, initialCityState} from '../../state';
 
 describe(`createCityCitiesReducer`, () => {
     it(`fails when there is not enough space for the city`, () => {
@@ -13,9 +13,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -43,9 +43,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -73,9 +73,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -103,9 +103,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -133,9 +133,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             cities: {
-                ...emptyState.cities,
+                ...emptyServerState.cities,
                 '1': {
                     ...emptyCityState,
                     location: {
@@ -146,7 +146,7 @@ describe(`createCityCitiesReducer`, () => {
                 },
             },
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -174,9 +174,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             rules: {
-                ...emptyState.rules,
+                ...emptyServerState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,

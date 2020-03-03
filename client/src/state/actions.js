@@ -3,6 +3,10 @@
 import type {ServerState} from '../../../common/src/state';
 import type {Vector} from '../../../common/src/vector';
 
+export type ClientDummyAction = {
+    type: '_DUMMY_',
+};
+
 export type ClientLoadPlayerActionPayload = {
     name: string
 };
@@ -89,17 +93,6 @@ export type ClientRequestCityCreationAction = {
     payload: ClientRequestCityCreationActionPayload,
 };
 
-
-export type ClientSucceedBuildingUpgradePayload = {
-    cityId: string,
-    buildingType: string,
-}
-
-export type ClientSucceedBuildingUpgrade = {
-    type: 'SUCCEED_BUILDING_UPGRADE',
-    payload: ClientSucceedBuildingUpgradePayload,
-};
-
 export type ClientFailBuildingUpgradePayload = string;
 
 export type ClientFailBuildingUpgrade = {
@@ -109,6 +102,7 @@ export type ClientFailBuildingUpgrade = {
 
 
 export type ClientAction =
+    | ClientDummyAction
     | ClientLoadPlayerAction
     | ClientUpdateStateAction
     | ClientMoveCameraAction
@@ -118,7 +112,6 @@ export type ClientAction =
     | ClientNavigateToNextCityAction
     | ClientNavigateToPreviousCityAction
     | ClientRequestBuildingUpgradeAction
-    | ClientSucceedBuildingUpgrade
     | ClientFailBuildingUpgrade
     | ClientRequestCityCreationAction
 

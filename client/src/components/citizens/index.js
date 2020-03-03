@@ -4,7 +4,6 @@ import React from 'react';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import peasantImage from '../../assets/images/units/peasant.png';
-import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import {numberToQuantityString} from '../../util';
@@ -20,6 +19,7 @@ import {
     convertChangeInfoToChangeRate
 } from '../../../../common/src/state';
 import {ChangeInfoComponent} from '../change-info';
+import type {ClientState} from '../../state/state';
 
 const citizenVisuals = {
     peasant: {
@@ -88,7 +88,7 @@ const Component = ({city, rules}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return {
-        rules: state == null ? null : (state.serverState == null ? null : state.serverState.rules),
+        rules: state.serverState == null ? null : state.serverState.rules,
     };
 };
 

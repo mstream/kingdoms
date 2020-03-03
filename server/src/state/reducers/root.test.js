@@ -3,7 +3,7 @@
 import type {ServerStateReducerResult} from './root';
 import {rootReducer} from './root';
 import type {ServerState} from '../../../../common/src/state';
-import {emptyState, initialState} from '../state';
+import {emptyServerState, initialServerState} from '../state';
 
 describe('rootReducer', () => {
     it('returns the default state on reset state action', () => {
@@ -11,12 +11,12 @@ describe('rootReducer', () => {
             type: 'RESET_STATE',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
             unsupportedProperty: 'unsupportedPropertyValue',
         };
         const expected: ServerStateReducerResult<ServerState> = {
             errors: [],
-            state: initialState,
+            state: initialServerState,
         };
         const actual = rootReducer({action, state: previousState});
         expect(actual).toEqual(expected);
@@ -27,7 +27,7 @@ describe('rootReducer', () => {
             type: '_DUMMY_',
         };
         const previousState: ServerState = {
-            ...emptyState,
+            ...emptyServerState,
         };
         const expected: ServerStateReducerResult<ServerState> = {
             errors: [],

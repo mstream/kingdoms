@@ -3,13 +3,13 @@
 import React from 'react';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
-import type {ClientState} from '../../state/reducers/root';
 import type {ClientAction} from '../../state/actions';
 import {numberToQuantityString} from '../../util';
 import type {CommonStateResources} from '../../../../common/src/state';
 import classNames from 'classnames';
 import {subtractQuantities} from '../../../../common/src/quantity';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
+import type {ClientState} from '../../state/state';
 
 type OwnProps = {
     availableResources: CommonStateResources,

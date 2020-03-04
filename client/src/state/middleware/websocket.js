@@ -68,6 +68,7 @@ export const websocketMiddleware = ({token, url}: { token: string, url: string }
 
     const username = userInfo['cognito:username'];
 
+    // $FlowFixMe
     const middleware: Middleware<ClientState, ClientAction> = store => {
         const socket = new Socket(`${url}?token=${token}`);
 

@@ -5,8 +5,7 @@ import {emptyServerState, initialServerState} from '../state';
 import type {CommonStateWorld, ServerState} from '../../../../common/src/state';
 import type {ServerStateReducerResult} from './root';
 import {success} from './root';
-
-describe('worldReducer', () => {
+import {dummy} from '../../../../common/src/actions';describe('worldReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
@@ -24,9 +23,8 @@ describe('worldReducer', () => {
     });
 
     it('returns the current state on unsupported action', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
+
         const previousState: ServerState = {
             ...emptyServerState,
         };

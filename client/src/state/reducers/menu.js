@@ -4,6 +4,11 @@ import type {ClientAction} from '../actions';
 import type {ClientState, ClientStateMenu} from '../state';
 import {initialClientState} from '../state';
 import type {ServerState} from '../../../../common/src/state';
+import {
+    CLOSE_CITY_VIEW,
+    NAVIGATE_TO_NEXT_CITY,
+    NAVIGATE_TO_PREVIOUS_CITY, OPEN_CITY_VIEW, REQUEST_CITY_CREATION
+} from '../actions';
 
 const calculatePreviousCity = ({currentCityId, cityIds}: { currentCityId: string, cityIds: $ReadOnlyArray<string> }): ?string => {
     if (cityIds.length === 0) {
@@ -79,30 +84,30 @@ export const menuReducer = (
     globalState: ClientState,
 ): ClientStateMenu => {
     switch (action.type) {
-        case `CLOSE_CITY_VIEW`: {
+        case CLOSE_CITY_VIEW: {
             return {
                 ...localState,
                 cityView: initialClientState.menu.cityView,
             };
         }
-        case `NAVIGATE_TO_NEXT_CITY`: {
+        case NAVIGATE_TO_NEXT_CITY: {
             if (localState.cityView.nextCityId == null) {
                 console.warn(`navigating to missing next city`);
                 return localState;
             }
             return openCityView({cityId: localState.cityView.nextCityId, localState, globalState});
         }
-        case `NAVIGATE_TO_PREVIOUS_CITY`: {
+        case NAVIGATE_TO_PREVIOUS_CITY: {
             if (localState.cityView.previousCityId == null) {
                 console.warn(`navigating to missing previous city`);
                 return localState;
             }
             return openCityView({cityId: localState.cityView.previousCityId, localState, globalState});
         }
-        case `OPEN_CITY_VIEW`: {
+        case OPEN_CITY_VIEW: {
             return openCityView({cityId: action.payload.cityId, localState, globalState});
         }
-        case `REQUEST_CITY_CREATION`: {
+        case REQUEST_CITY_CREATION: {
             return {
                 ...localState,
                 newCity: {

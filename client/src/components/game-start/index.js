@@ -3,7 +3,6 @@
 import React, {useState} from 'react';
 import type {
     ClientAction,
-    ClientRequestCityCreationActionCreator
 } from '../../state/actions';
 import {requestCityCreation} from '../../state/actions';
 import type {Dispatch} from 'redux';
@@ -18,7 +17,7 @@ type StateProps = {
 };
 
 type DispatchProps = {
-    requestCityCreation: ClientRequestCityCreationActionCreator
+    requestCityCreation: typeof requestCityCreation,
 };
 
 type Props = {

@@ -1,6 +1,6 @@
 // @flow
 
-import {updateState} from '../actions';
+import {dummy, updateState} from '../actions';
 import type {ClientState} from '../state';
 import {emptyClientState, initialClientState} from '../state';
 import {initialServerState} from '../../../../server/src/state/state';
@@ -9,9 +9,7 @@ import type {ServerState} from '../../../../common/src/state';
 
 describe('serverStateReducer', () => {
     it('initializes its state', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,

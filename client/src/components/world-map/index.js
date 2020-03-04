@@ -5,11 +5,7 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import {TerrainTileComponent} from '../tile';
 import {CityTileComponent} from '../city-tile';
-import type {
-    ClientAction,
-    ClientMoveCameraActionCreator,
-    ClientZoomCameraActionCreator
-} from '../../state/actions';
+import type {ClientAction} from '../../state/actions';
 import {
     moveCameraDown,
     moveCameraLeft,
@@ -36,13 +32,14 @@ import type {
 import type {CommonStateCities} from '../../../../common/src/state';
 
 
-const cullObjects = <T: { geometry: Geometry, ... }>({
-                                                         objects,
-                                                         cameraGeometry,
-                                                     }: {
-    objects: $ReadOnlyArray<T>,
-    cameraGeometry: Geometry,
-}): $ReadOnlyArray<T> => {
+const cullObjects = <T: $ReadOnly<{ geometry: Geometry, ... }>>(
+    {
+        objects,
+        cameraGeometry,
+    }: {
+        objects: $ReadOnlyArray<T>,
+        cameraGeometry: Geometry,
+    }): $ReadOnlyArray<T> => {
     return objects.filter(object => {
         return checkIfIntersect({
             geometry1: object.geometry,
@@ -51,17 +48,18 @@ const cullObjects = <T: { geometry: Geometry, ... }>({
     });
 };
 
-const transformObjectGeometries = <T: { geometry: Geometry, ... }>({
-                                                                       objects,
-                                                                       cameraWindowGeometry,
-                                                                       cameraLocationToWindowCenterLocationVector,
-                                                                       desiredCameraSizeToWorldCameraSizeRatioVector,
-                                                                   }: {
-    objects: $ReadOnlyArray<T>,
-    cameraWindowGeometry: Geometry,
-    cameraLocationToWindowCenterLocationVector: Vector,
-    desiredCameraSizeToWorldCameraSizeRatioVector: Vector,
-}): $ReadOnlyArray<T> => {
+const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry, ... }>>(
+    {
+        objects,
+        cameraWindowGeometry,
+        cameraLocationToWindowCenterLocationVector,
+        desiredCameraSizeToWorldCameraSizeRatioVector,
+    }: {
+        objects: $ReadOnlyArray<T>,
+        cameraWindowGeometry: Geometry,
+        cameraLocationToWindowCenterLocationVector: Vector,
+        desiredCameraSizeToWorldCameraSizeRatioVector: Vector,
+    }): $ReadOnlyArray<T> => {
     return objects.map(object => {
         const windowGeometry = {
             location: addVectors({
@@ -112,12 +110,12 @@ type OwnProps = {
 type StateProps = {};
 
 type DispatchProps = {
-    moveCameraUp: ClientMoveCameraActionCreator,
-    moveCameraDown: ClientMoveCameraActionCreator,
-    moveCameraLeft: ClientMoveCameraActionCreator,
-    moveCameraRight: ClientMoveCameraActionCreator,
-    zoomCameraIn: ClientZoomCameraActionCreator,
-    zoomCameraOut: ClientZoomCameraActionCreator,
+    moveCameraUp: typeof moveCameraUp,
+    moveCameraDown: typeof moveCameraDown,
+    moveCameraLeft: typeof moveCameraLeft,
+    moveCameraRight: typeof moveCameraRight,
+    zoomCameraIn: typeof zoomCameraIn,
+    zoomCameraOut: typeof zoomCameraOut,
 };
 
 type Props = {

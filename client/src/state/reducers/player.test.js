@@ -1,18 +1,13 @@
 // @flow
 
-import {loadPlayer, updateState} from '../actions';
-import type {ClientState, ClientStateMenu, ClientStatePlayer} from '../state';
+import {dummy, loadPlayer} from '../actions';
+import type {ClientState, ClientStatePlayer} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {initialServerState} from '../../../../server/src/state/state';
-import {serverStateReducer} from './server-state';
-import type {ServerState} from '../../../../common/src/state';
 import {playerReducer} from './player';
 
 describe('playerReducer', () => {
     it('initializes its state', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,

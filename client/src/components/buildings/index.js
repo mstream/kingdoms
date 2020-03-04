@@ -5,10 +5,7 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import lumberMillImage from '../../assets/images/buildings/lumber-mill.png';
 import pastureImage from '../../assets/images/buildings/pasture.png';
-import type {
-    ClientAction,
-    ClientRequestBuildingUpgradeActionCreator
-} from '../../state/actions';
+import type {ClientAction,} from '../../state/actions';
 import {requestBuildingUpgrade} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
 import romanDecimalConverter from 'roman-decimal';
@@ -45,7 +42,7 @@ type StateProps = {
 };
 
 type DispatchProps = {
-    requestBuildingUpgrade: ClientRequestBuildingUpgradeActionCreator
+    requestBuildingUpgrade: typeof requestBuildingUpgrade,
 };
 
 type Props = {

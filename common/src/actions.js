@@ -6,57 +6,58 @@ import {parseJson} from './util';
 import type {Type} from 'flow-runtime';
 import {reify} from 'flow-runtime';
 
-export type ServerDummyAction = {
-    type: '_DUMMY_',
-};
+export type ServerDummyAction = $ReadOnly<{
+    type: 'DUMMY',
+    payload: void,
+}>;
 
-export type ServerAbandonCityAction = {
+export type ServerAbandonCityAction = $ReadOnly<{
     type: 'ABANDON_CITY',
     payload: {
         cityId: string,
         playerId: string,
     },
-}
+}>;
 
-export type ServerCreateCityAction = {
+export type ServerCreateCityAction = $ReadOnly<{
     type: 'CREATE_CITY',
     payload: {
         cityId: string,
         cityName: string,
         playerId: string,
     },
-}
+}>;
 
-export type ServerGetCurrentStateAction = {
+export type ServerGetCurrentStateAction = $ReadOnly<{
     type: 'GET_CURRENT_STATE',
-}
+}>;
 
-export type ServerResetStateAction = {
+export type ServerResetStateAction = $ReadOnly<{
     type: 'RESET_STATE',
-}
+}>;
 
-export type ServerExecuteTimeStepAction = {
+export type ServerExecuteTimeStepAction = $ReadOnly<{
     type: 'EXECUTE_TIME_STEP',
     payload: string
-};
+}>;
 
-export type ServerUpgradeBuildingAction = {
+export type ServerUpgradeBuildingAction = $ReadOnly<{
     type: 'UPGRADE_BUILDING',
     payload: {
         buildingType: string,
         cityId: string,
         playerId: string,
     }
-};
+}>;
 
-export type ServerChangeCityNameAction = {
+export type ServerChangeCityNameAction = $ReadOnly<{
     type: 'CHANGE_CITY_NAME',
     payload: {
         cityId: string,
         name: string,
         playerId: string,
     }
-};
+}>;
 
 export type ServerAction =
     | ServerAbandonCityAction
@@ -148,3 +149,9 @@ export const parseServerResponse = ({json}: { json: string }): ServerResponse =>
     return ServerResponseType.assert(object);
 };
 
+export const dummy = (): ServerDummyAction => {
+    return {
+        type: 'DUMMY',
+        payload: undefined,
+    }
+};

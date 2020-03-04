@@ -1,7 +1,13 @@
 // @flow
 
-import type {GeometryStyle} from './types';
 import type {Geometry} from '../../common/src/geometry';
+
+export type GeometryStyle = $ReadOnly<{
+    height: number,
+    width: number,
+    marginTop: number,
+    marginLeft: number,
+}>;
 
 const suffixes = [
     'k',

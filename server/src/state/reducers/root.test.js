@@ -4,8 +4,7 @@ import type {ServerStateReducerResult} from './root';
 import {rootReducer} from './root';
 import type {ServerState} from '../../../../common/src/state';
 import {emptyServerState, initialServerState} from '../state';
-
-describe('rootReducer', () => {
+import {dummy} from '../../../../common/src/actions';describe('rootReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
@@ -23,9 +22,7 @@ describe('rootReducer', () => {
     });
 
     it('returns the current state on unsupported action', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
         const previousState: ServerState = {
             ...emptyServerState,
         };

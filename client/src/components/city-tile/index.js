@@ -6,7 +6,6 @@ import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import type {
     ClientAction,
-    ClientOpenCityViewActionCreator
 } from '../../state/actions';
 import {openCityView} from '../../state/actions';
 import cityImage from '../../assets/images/cities/city.png';
@@ -24,7 +23,7 @@ type OwnProps = {
 type StateProps = {};
 
 type DispatchProps = {
-    openCityView: ClientOpenCityViewActionCreator,
+    openCityView: typeof openCityView,
 };
 
 type Props = {

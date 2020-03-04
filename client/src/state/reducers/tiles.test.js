@@ -1,6 +1,6 @@
 // @flow
 
-import {loadPlayer, updateState} from '../actions';
+import {dummy, loadPlayer, updateState} from '../actions';
 import type {
     ClientState,
     ClientStateMenu,
@@ -20,9 +20,7 @@ import {tilesReducer} from './tiles';
 
 describe('playerReducer', () => {
     it('initializes its state', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,

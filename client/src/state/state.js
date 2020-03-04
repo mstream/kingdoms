@@ -5,55 +5,62 @@ import type {Geometry} from '../../../common/src/geometry';
 import type {Vector} from '../../../common/src/vector';
 import type {Boundary} from '../../../common/src/boundary';
 
-export type ClientStateCamera = {
+export type ClientStateCamera = $ReadOnly<{
     locationLimit: Boundary,
     geometry: Geometry,
     movementSpeed: Vector,
     sizeLimit: Boundary,
     zoomingSpeed: Vector,
-};
+}>;
 
-export type ClientStateMenu = {
-    newCity: {
-        isOpen: boolean,
-        isCityBeingCreated: boolean,
-    },
-    cityView: {
-        currentCityId: ?string,
-        nextCityId: ?string,
-        previousCityId: ?string,
-    },
-};
+export type ClientStateCityView = $ReadOnly<{
+    currentCityId: ?string,
+    nextCityId: ?string,
+    previousCityId: ?string,
+}>;
 
-export type ClientStatePlayer = {
+export type ClientStateNewCity = $ReadOnly<{
+    isOpen: boolean,
+    isCityBeingCreated: boolean,
+}>;
+
+export type ClientStateMenu = $ReadOnly<{
+    newCity: ClientStateNewCity,
+    cityView: ClientStateCityView,
+}>;
+
+export type ClientStatePlayer = $ReadOnly<{
     name: ?string,
-};
+}>;
 
 export type TileType = 'CITY' | 'PLAINS';
 
-export type ClientStateTile = {
+export type ClientStateTile = $ReadOnly<{
     geometry: Geometry,
     index: Vector,
     textureIndex: number,
     type: TileType,
-};
+}>;
 
-export type ClientStateCityTiles = { [string]: ClientStateTile };
+export type ClientStateCityTiles = $ReadOnly<{
+    [string]: ClientStateTile,
+}>;
+
 export type ClientStateTerrainTiles = $ReadOnlyArray<ClientStateTile>;
 
-export type ClientStateTiles = {
+export type ClientStateTiles = $ReadOnly<{
     city: ClientStateCityTiles,
     terrain: ClientStateTerrainTiles,
-};
+}>;
 
 
-export type ClientState = {
+export type ClientState = $ReadOnly<{
     camera: ClientStateCamera,
     menu: ClientStateMenu,
     player: ClientStatePlayer,
     serverState: ?ServerState,
     tiles: ClientStateTiles,
-};
+}>;
 
 const emptyCameraState: ClientStateCamera = {
     locationLimit: {

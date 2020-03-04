@@ -6,8 +6,7 @@ import type {CommonStateTime, ServerState} from '../../../../common/src/state';
 import {worldReducer} from './world';
 import {executeTimeStep} from '../../../../common/src/actions';
 import type {ServerStateReducerResult} from './root';
-
-describe('timeReducer', () => {
+import {dummy} from '../../../../common/src/actions';describe('timeReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',
@@ -25,9 +24,7 @@ describe('timeReducer', () => {
     });
 
     it('returns the current state on unsupported action', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
         const previousState: ServerState = {
             ...emptyServerState,
         };

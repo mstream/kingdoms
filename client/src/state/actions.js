@@ -3,101 +3,199 @@
 import type {ServerState} from '../../../common/src/state';
 import type {Vector} from '../../../common/src/vector';
 
-export type ClientDummyAction = {
-    type: '_DUMMY_',
+
+type BaseAction<T, P> = $ReadOnly<{
+    type: T,
+    payload: P,
+}>;
+
+type ActionCreator<A> = ($PropertyType<A, 'payload'>) => A;
+
+
+export const DUMMY: 'DUMMY' = 'DUMMY';
+export type ClientDummyAction = BaseAction<typeof DUMMY, void>;
+
+export const dummy: ActionCreator<ClientDummyAction> = (payload) => {
+    return {
+        type: DUMMY,
+        payload,
+    };
 };
 
-export type ClientLoadPlayerActionPayload = {
-    name: string
+
+export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = 'CLOSE_CITY_VIEW';
+export type ClientCloseCityViewAction = BaseAction<typeof CLOSE_CITY_VIEW, void>;
+
+export const closeCityView: ActionCreator<ClientCloseCityViewAction> = () => {
+    return {
+        type: CLOSE_CITY_VIEW, payload: undefined,
+    };
 };
 
-export type ClientLoadPlayerAction = {
-    type: 'LOAD_PLAYER',
-    payload: ClientLoadPlayerActionPayload,
+
+export const OPEN_CITY_VIEW: 'OPEN_CITY_VIEW' = 'OPEN_CITY_VIEW';
+export type ClientOpenCityViewAction = BaseAction<typeof OPEN_CITY_VIEW, $ReadOnly<{ cityId: string, }>>;
+
+
+export const LOAD_PLAYER: 'LOAD_PLAYER' = 'LOAD_PLAYER';
+export type ClientLoadPlayerAction = BaseAction<typeof LOAD_PLAYER, $ReadOnly<{ name: string, }>>
+
+export const loadPlayer: ActionCreator<ClientLoadPlayerAction> = (payload) => {
+    return {
+        type: LOAD_PLAYER,
+        payload,
+    };
 };
 
-export type ClientUpdateStateActionPayload = {
-    serverState: ServerState
+
+export const NAVIGATE_TO_NEXT_CITY: 'NAVIGATE_TO_NEXT_CITY' = 'NAVIGATE_TO_NEXT_CITY';
+export type ClientNavigateToNextCityAction = BaseAction<typeof NAVIGATE_TO_NEXT_CITY, void>;
+
+export const navigateToNextCity: ActionCreator<ClientNavigateToNextCityAction> = () => {
+    return {
+        type: NAVIGATE_TO_NEXT_CITY,
+        payload: undefined,
+    };
 };
 
-export type ClientUpdateStateAction = {
-    type: 'UPDATE_STATE',
-    payload: ClientUpdateStateActionPayload,
+
+export const NAVIGATE_TO_PREVIOUS_CITY: 'NAVIGATE_TO_PREVIOUS_CITY' = 'NAVIGATE_TO_PREVIOUS_CITY';
+export type ClientNavigateToPreviousCityAction = BaseAction<typeof NAVIGATE_TO_PREVIOUS_CITY, void>;
+
+export const navigateToPreviousCity: ActionCreator<ClientNavigateToPreviousCityAction> = () => {
+    return {
+        type: NAVIGATE_TO_PREVIOUS_CITY,
+        payload: undefined,
+    };
 };
 
-export type ClientMoveCameraActionPayload = {
-    vector: Vector
-}
+export const UPDATE_STATE: 'UPDATE_STATE' = 'UPDATE_STATE';
+export type ClientUpdateStateAction = BaseAction<typeof UPDATE_STATE, $ReadOnly<{ serverState: ServerState }>>;
 
-export type ClientMoveCameraAction = {
-    type: 'MOVE_CAMERA',
-    payload: ClientMoveCameraActionPayload,
+export const updateState: ActionCreator<ClientUpdateStateAction> = (payload) => {
+    return {
+        type: UPDATE_STATE,
+        payload,
+    };
 };
 
-export type ClientZoomCameraActionPayload = {
-    vector: Vector
-}
 
-export type ClientZoomCameraAction = {
-    type: 'ZOOM_CAMERA',
-    payload: ClientZoomCameraActionPayload,
+export const REQUEST_BUILDING_UPGRADE: 'REQUEST_BUILDING_UPGRADE' = 'REQUEST_BUILDING_UPGRADE';
+export type ClientRequestBuildingUpgradeAction = BaseAction<typeof REQUEST_BUILDING_UPGRADE, $ReadOnly<{ cityId: string, buildingType: string, }>>
+
+export const requestBuildingUpgrade: ActionCreator<ClientRequestBuildingUpgradeAction> = (payload) => {
+    return {
+        type: REQUEST_BUILDING_UPGRADE,
+        payload,
+    };
 };
 
-export type  ClientOpenCityViewActionPayload = {
-    cityId: string
+
+export const openCityView: ActionCreator<ClientOpenCityViewAction> = (payload) => {
+    return {
+        type: OPEN_CITY_VIEW,
+        payload,
+    };
 };
 
-export type ClientOpenCityViewAction = {
-    type: 'OPEN_CITY_VIEW',
-    payload: ClientOpenCityViewActionPayload,
+
+export const REQUEST_CITY_NAME_CHANGE: 'REQUEST_CITY_NAME_CHANGE' = 'REQUEST_CITY_NAME_CHANGE';
+export type ClientRequestCityNameChangeAction = BaseAction<typeof REQUEST_CITY_NAME_CHANGE, $ReadOnly<{ cityId: string, name: string, }>>
+
+export const requestCityNameChange: ActionCreator<ClientRequestCityNameChangeAction> = (payload) => {
+    return {
+        type: REQUEST_CITY_NAME_CHANGE,
+        payload,
+    };
 };
 
-export type ClientCloseCityViewAction = {
-    type: 'CLOSE_CITY_VIEW'
+
+export const REQUEST_CITY_CREATION: 'REQUEST_CITY_CREATION' = 'REQUEST_CITY_CREATION';
+export type ClientRequestCityCreationAction = BaseAction<typeof REQUEST_CITY_CREATION, $ReadOnly<{ name: string, }>>
+
+export const requestCityCreation: ActionCreator<ClientRequestCityCreationAction> = (payload) => {
+    return {
+        type: REQUEST_CITY_CREATION,
+        payload,
+    };
 };
 
-export type ClientNavigateToNextCityAction = {
-    type: 'NAVIGATE_TO_NEXT_CITY',
+
+export const MOVE_CAMERA: 'MOVE_CAMERA' = 'MOVE_CAMERA';
+export type ClientMoveCameraAction = BaseAction<typeof MOVE_CAMERA, $ReadOnly<{ vector: Vector }>>;
+
+const moveCamera: ActionCreator<ClientMoveCameraAction> = (payload) => {
+    return {
+        type: MOVE_CAMERA,
+        payload,
+    };
 };
 
-export type ClientNavigateToPreviousCityAction = {
-    type: 'NAVIGATE_TO_PREVIOUS_CITY',
+
+export const ZOOM_CAMERA: 'ZOOM_CAMERA' = 'ZOOM_CAMERA';
+export type ClientZoomCameraAction = BaseAction<typeof ZOOM_CAMERA, $ReadOnly<{ vector: Vector }>>;
+
+
+const zoomCamera: ActionCreator<ClientZoomCameraAction> = (payload) => {
+    return {
+        type: ZOOM_CAMERA,
+        payload,
+    };
 };
 
-export type ClientRequestBuildingUpgradeActionPayload = {
-    cityId: string,
-    buildingType: string,
-}
 
-export type ClientRequestBuildingUpgradeAction = {
-    type: 'REQUEST_BUILDING_UPGRADE',
-    payload: ClientRequestBuildingUpgradeActionPayload,
+export const moveCameraUp = () => {
+    return moveCamera({
+        vector: {
+            x: 0,
+            y: -1,
+        },
+    });
 };
 
-export type ClientRequestCityNameChangeActionPayload = {
-    cityId: string,
-    name: string,
-}
-
-export type ClientRequestCityNameChangeAction = {
-    type: 'REQUEST_CITY_NAME_CHANGE',
-    payload: ClientRequestCityNameChangeActionPayload,
+export const moveCameraDown = () => {
+    return moveCamera({
+        vector: {
+            x: 0,
+            y: +1,
+        },
+    });
 };
 
-export type ClientRequestCityCreationActionPayload = {
-    name: string,
-}
-
-export type ClientRequestCityCreationAction = {
-    type: 'REQUEST_CITY_CREATION',
-    payload: ClientRequestCityCreationActionPayload,
+export const moveCameraLeft = () => {
+    return moveCamera({
+        vector: {
+            x: -1,
+            y: 0,
+        },
+    });
 };
 
-export type ClientFailBuildingUpgradePayload = string;
+export const moveCameraRight = () => {
+    return moveCamera({
+        vector: {
+            x: +1,
+            y: 0,
+        },
+    });
+};
 
-export type ClientFailBuildingUpgrade = {
-    type: 'FAIL_BUILDING_UPGRADE',
-    payload: ClientFailBuildingUpgradePayload,
+export const zoomCameraIn = () => {
+    return zoomCamera({
+        vector: {
+            x: -1,
+            y: -1,
+        },
+    });
+};
+
+export const zoomCameraOut = () => {
+    return zoomCamera({
+        vector: {
+            x: +1,
+            y: +1,
+        },
+    });
 };
 
 
@@ -112,148 +210,4 @@ export type ClientAction =
     | ClientNavigateToNextCityAction
     | ClientNavigateToPreviousCityAction
     | ClientRequestBuildingUpgradeAction
-    | ClientFailBuildingUpgrade
     | ClientRequestCityCreationAction
-
-type ActionCreator<A> = () => A;
-type PayloadActionCreator<A, P> = (P) => A;
-
-export type ClientLoadPlayerActionCreator = PayloadActionCreator<ClientLoadPlayerAction, ClientLoadPlayerActionPayload>
-export type ClientUpdateStateActionCreator = PayloadActionCreator<ClientUpdateStateAction, ClientUpdateStateActionPayload>
-export type ClientMoveCameraActionCreator = ActionCreator<ClientMoveCameraAction>
-export type ClientZoomCameraActionCreator = ActionCreator<ClientZoomCameraAction>
-export type ClientOpenCityViewActionCreator = PayloadActionCreator<ClientOpenCityViewAction, ClientOpenCityViewActionPayload>
-export type ClientCloseCityViewActionCreator = ActionCreator<ClientCloseCityViewAction>
-export type ClientNavigateToNextCityActionCreator = ActionCreator<ClientNavigateToNextCityAction>
-export type ClientNavigateToPreviousCityActionCreator = ActionCreator<ClientNavigateToPreviousCityAction>
-export type ClientRequestBuildingUpgradeActionCreator = PayloadActionCreator<ClientRequestBuildingUpgradeAction, ClientRequestBuildingUpgradeActionPayload>
-export type ClientRequestCityNameChangeActionCreator = PayloadActionCreator<ClientRequestCityNameChangeAction, ClientRequestCityNameChangeActionPayload>
-export type ClientRequestCityCreationActionCreator = PayloadActionCreator<ClientRequestCityCreationAction, ClientRequestCityCreationActionPayload>
-
-export const loadPlayer: ClientLoadPlayerActionCreator = (payload) => {
-    return {
-        type: 'LOAD_PLAYER',
-        payload,
-    };
-};
-
-export const updateState: ClientUpdateStateActionCreator = (payload) => {
-    return {
-        type: 'UPDATE_STATE',
-        payload,
-    };
-};
-
-const moveCamera: PayloadActionCreator<ClientMoveCameraAction, ClientMoveCameraActionPayload> = (payload) => {
-    return {
-        type: 'MOVE_CAMERA',
-        payload,
-    };
-};
-
-const zoomCamera: PayloadActionCreator<ClientZoomCameraAction, ClientZoomCameraActionPayload> = (payload) => {
-    return {
-        type: 'ZOOM_CAMERA',
-        payload,
-    };
-};
-
-export const moveCameraUp: ClientMoveCameraActionCreator = () => {
-    return moveCamera({
-        vector: {
-            x: 0,
-            y: -1,
-        },
-    });
-};
-
-export const moveCameraDown: ClientMoveCameraActionCreator = () => {
-    return moveCamera({
-        vector: {
-            x: 0,
-            y: +1,
-        },
-    });
-};
-
-export const moveCameraLeft: ClientMoveCameraActionCreator = () => {
-    return moveCamera({
-        vector: {
-            x: -1,
-            y: 0,
-        },
-    });
-};
-
-export const moveCameraRight: ClientMoveCameraActionCreator = () => {
-    return moveCamera({
-        vector: {
-            x: +1,
-            y: 0,
-        },
-    });
-};
-
-export const zoomCameraIn: ClientZoomCameraActionCreator = () => {
-    return zoomCamera({
-        vector: {
-            x: -1,
-            y: -1,
-        },
-    });
-};
-
-export const zoomCameraOut: ClientZoomCameraActionCreator = () => {
-    return zoomCamera({
-        vector: {
-            x: +1,
-            y: +1,
-        },
-    });
-};
-
-export const openCityView: ClientOpenCityViewActionCreator = (payload) => {
-    return {
-        type: 'OPEN_CITY_VIEW',
-        payload,
-    };
-};
-
-export const closeCityView: ClientCloseCityViewActionCreator = () => {
-    return {
-        type: 'CLOSE_CITY_VIEW',
-    };
-};
-
-export const navigateToNextCity: ClientNavigateToNextCityActionCreator = () => {
-    return {
-        type: 'NAVIGATE_TO_NEXT_CITY',
-    };
-};
-
-export const navigateToPreviousCity: ClientNavigateToPreviousCityActionCreator = () => {
-    return {
-        type: 'NAVIGATE_TO_PREVIOUS_CITY',
-    };
-};
-
-export const requestBuildingUpgrade: ClientRequestBuildingUpgradeActionCreator = (payload) => {
-    return {
-        type: 'REQUEST_BUILDING_UPGRADE',
-        payload,
-    };
-};
-
-export const requestCityNameChange: ClientRequestCityNameChangeActionCreator = (payload) => {
-    return {
-        type: 'REQUEST_CITY_NAME_CHANGE',
-        payload,
-    };
-};
-
-export const requestCityCreation: ClientRequestCityCreationActionCreator = (payload) => {
-    return {
-        type: 'REQUEST_CITY_CREATION',
-        payload,
-    };
-};

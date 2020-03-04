@@ -6,6 +6,7 @@ import tumult from 'tumult';
 import {surfaceImages} from '../../assets/images/terrain';
 import type {ClientState, ClientStateTiles} from '../state';
 import {initialClientState} from '../state';
+import {UPDATE_STATE} from '../actions';
 
 const perlin2 = new tumult.Simplex2('qwerty');
 
@@ -25,7 +26,7 @@ export const tilesReducer = (
     globalState: ClientState,
 ): ClientStateTiles => {
     switch (action.type) {
-        case 'UPDATE_STATE': {
+        case UPDATE_STATE: {
             const newCityTiles = Object.keys(action.payload.serverState.cities).reduce(
                 (newCityTiles, cityId) => {
                     const city = action.payload.serverState.cities[cityId];

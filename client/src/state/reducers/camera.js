@@ -7,6 +7,7 @@ import {
 import {clipToBoundary} from '../../../../common/src/boundary';
 import {tileSize} from './tiles';
 import type {ClientAction} from '../actions';
+import {MOVE_CAMERA, UPDATE_STATE, ZOOM_CAMERA} from '../actions';
 import type {ClientState, ClientStateCamera} from '../state';
 import {initialClientState} from '../state';
 
@@ -16,7 +17,7 @@ export const cameraReducer = (
     globalState: ClientState,
 ): ClientStateCamera => {
     switch (action.type) {
-        case 'MOVE_CAMERA': {
+        case MOVE_CAMERA: {
             const newCameraLocation = clipToBoundary({
                 vector: addVectors({
                     vector1: localState.geometry.location,
@@ -39,7 +40,7 @@ export const cameraReducer = (
                 },
             };
         }
-        case 'ZOOM_CAMERA': {
+        case ZOOM_CAMERA: {
             const newCameraSize = clipToBoundary({
                 vector: addVectors({
                     vector1: localState.geometry.size,
@@ -59,7 +60,7 @@ export const cameraReducer = (
                 },
             };
         }
-        case 'UPDATE_STATE': {
+        case UPDATE_STATE: {
             const halfWorldSize = multipleVectors({
                 vector1: addVectors({
                     vector1: action.payload.serverState.world.size,

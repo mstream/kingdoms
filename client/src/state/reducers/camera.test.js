@@ -1,6 +1,6 @@
 // @flow
 
-import {moveCameraUp, updateState, zoomCameraIn} from '../actions';
+import {dummy, moveCameraUp, updateState, zoomCameraIn} from '../actions';
 import type {ClientState, ClientStateCamera} from '../state';
 import {emptyClientState, initialClientState} from '../state';
 import {cameraReducer} from './camera';
@@ -8,9 +8,7 @@ import {emptyServerState} from '../../../../server/src/state/state';
 
 describe('cameraReducer', () => {
     it('initializes its state', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,

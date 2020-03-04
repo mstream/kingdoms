@@ -1,6 +1,7 @@
 // @flow
 
 import type {ClientAction} from '../actions';
+import {LOAD_PLAYER} from '../actions';
 import type {ClientState, ClientStatePlayer} from '../state';
 import {initialClientState} from '../state';
 
@@ -10,7 +11,7 @@ export const playerReducer = (
     globalState: ClientState,
 ): ClientStatePlayer => {
     switch (action.type) {
-        case 'LOAD_PLAYER': {
+        case LOAD_PLAYER: {
             return {
                 ...localState,
                 name: action.payload.name,

@@ -2,6 +2,7 @@
 
 import {
     closeCityView,
+    dummy,
     navigateToNextCity,
     navigateToPreviousCity,
     openCityView,
@@ -10,16 +11,11 @@ import {
 import {menuReducer} from './menu';
 import type {ClientState, ClientStateMenu} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {
-    emptyCityState,
-    emptyServerState
-} from '../../../../server/src/state/state';
+import {emptyServerState} from '../../../../server/src/state/state';
 
 describe('menuReducer', () => {
     it('initializes its state', () => {
-        const action = {
-            type: '_DUMMY_',
-        };
+        const action = dummy();
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,
@@ -36,7 +32,7 @@ describe('menuReducer', () => {
 
         expect(actual).toEqual(expected);
     });
-    
+
     it('handles close city view window event', () => {
         const action = closeCityView();
         const previousGlobalState: ClientState = {

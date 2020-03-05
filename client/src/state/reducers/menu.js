@@ -1,14 +1,16 @@
 // @flow
 
 import type {ClientAction} from '../actions';
-import type {ClientState, ClientStateMenu} from '../state';
-import {initialClientState} from '../state';
-import type {ServerState} from '../../../../common/src/state';
 import {
     CLOSE_CITY_VIEW,
     NAVIGATE_TO_NEXT_CITY,
-    NAVIGATE_TO_PREVIOUS_CITY, OPEN_CITY_VIEW, REQUEST_CITY_CREATION
+    NAVIGATE_TO_PREVIOUS_CITY,
+    OPEN_CITY_VIEW,
+    REQUEST_CITY_CREATION,
+    UPDATE_STATE
 } from '../actions';
+import type {ClientState, ClientStateMenu} from '../state';
+import {initialClientState} from '../state';
 
 const calculatePreviousCity = ({currentCityId, cityIds}: { currentCityId: string, cityIds: $ReadOnlyArray<string> }): ?string => {
     if (cityIds.length === 0) {
@@ -90,22 +92,58 @@ export const menuReducer = (
                 cityView: initialClientState.menu.cityView,
             };
         }
+        case UPDATE_STATE: {
+            if (globalState.player.name == null) {
+                return localState;
+            }
+
+            if (!localState.newCity.isCityBeingCreated) {
+                return localState;
+            }
+
+            const playerCities = action.payload.serverState.citiesByOwner[globalState.player.name];
+
+            if (playerCities == null || playerCities.length === 0) {
+                return localState;
+            }
+
+            return {
+                ...localState,
+                newCity: {
+                    ...localState.newCity,
+                    isCityBeingCreated: false,
+                    isOpen: false,
+                }
+            };
+        }
         case NAVIGATE_TO_NEXT_CITY: {
             if (localState.cityView.nextCityId == null) {
                 console.warn(`navigating to missing next city`);
                 return localState;
             }
-            return openCityView({cityId: localState.cityView.nextCityId, localState, globalState});
+            return openCityView({
+                cityId: localState.cityView.nextCityId,
+                localState,
+                globalState
+            });
         }
         case NAVIGATE_TO_PREVIOUS_CITY: {
             if (localState.cityView.previousCityId == null) {
                 console.warn(`navigating to missing previous city`);
                 return localState;
             }
-            return openCityView({cityId: localState.cityView.previousCityId, localState, globalState});
+            return openCityView({
+                cityId: localState.cityView.previousCityId,
+                localState,
+                globalState
+            });
         }
         case OPEN_CITY_VIEW: {
-            return openCityView({cityId: action.payload.cityId, localState, globalState});
+            return openCityView({
+                cityId: action.payload.cityId,
+                localState,
+                globalState
+            });
         }
         case REQUEST_CITY_CREATION: {
             return {

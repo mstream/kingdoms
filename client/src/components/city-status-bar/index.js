@@ -28,9 +28,7 @@ type Props = {
 const Component = ({city, player}: Props) => {
 
     if (player == null) {
-        return (
-            <div/>
-        );
+        return null;
     }
 
     const tiersSum = calculateBuildingTierSum({buildings: city.buildings});

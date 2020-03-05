@@ -46,7 +46,7 @@ type Props = {
 
 const Component = ({city, rules}: Props) => {
     if (rules == null) {
-        return (<div/>);
+        return null;
     }
     const resourceComponents = Object.keys(city.resources).map(resourceType => {
         const resource = city.resources[resourceType];

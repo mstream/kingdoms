@@ -53,7 +53,7 @@ type Props = {
 
 const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
     if (rules == null) {
-        return (<div/>);
+        return null;
     }
     const {buildings, resources} = city;
     const buildingComponents = Object.keys(buildings).map(buildingType => {

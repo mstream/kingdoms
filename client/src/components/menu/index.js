@@ -23,9 +23,7 @@ type Props = {
 
 const Component = ({player}: Props) => {
     if (player == null) {
-        return (
-            <div/>
-        );
+        return null;
     }
     return (
         <div

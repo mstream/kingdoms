@@ -68,6 +68,7 @@ export const cameraReducer = (
                 }),
                 vector2: tileSize,
             });
+
             return {
                 ...initialClientState.camera,
                 locationLimit: {

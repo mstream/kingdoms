@@ -13,13 +13,17 @@ import type {Dispatch} from 'redux';
 import type {ClientState} from '../../state/state';
 import type {CommonStateCity} from '../../../../common/src/state';
 import {CityHeaderComponent} from '../city-header';
+import {
+    currentlyViewedCityIdSelector,
+    currentlyViewedCitySelector,
+} from '../../state/selectors';
 
-type OwnProps = {
-    city: CommonStateCity,
-    cityId: string,
+type OwnProps = {};
+
+type StateProps = {
+    city: ?CommonStateCity,
+    cityId: ?string,
 };
-
-type StateProps = {};
 
 type DispatchProps = {
     closeCityView: typeof closeCityView,
@@ -36,6 +40,10 @@ const Component = ({
                        cityId,
                        closeCityView,
                    }: Props) => {
+    if (cityId == null || city == null) {
+        return null;
+    }
+
     const onBackgroundClick = () => {
         closeCityView();
     };
@@ -49,7 +57,7 @@ const Component = ({
             />
             <div
                 className="bricks-bg absolute w-9/12 rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl bg-gray-800">
-                <CityHeaderComponent city={city} cityId={cityId}/>
+                <CityHeaderComponent/>
                 <CitizensComponent city={city}/>
                 <ResourcesComponent city={city}/>
                 <BuildingsComponent city={city} cityId={cityId}/>
@@ -59,7 +67,10 @@ const Component = ({
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});
+    return Object.freeze({
+        city: currentlyViewedCitySelector(state),
+        cityId: currentlyViewedCityIdSelector(state),
+    });
 };
 
 const actionCreators: DispatchProps = Object.freeze({

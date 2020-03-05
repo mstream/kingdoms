@@ -47,28 +47,6 @@ export const loadPlayer: ActionCreator<ClientLoadPlayerAction> = (payload) => {
     };
 };
 
-
-export const NAVIGATE_TO_NEXT_CITY: 'NAVIGATE_TO_NEXT_CITY' = 'NAVIGATE_TO_NEXT_CITY';
-export type ClientNavigateToNextCityAction = BaseAction<typeof NAVIGATE_TO_NEXT_CITY, void>;
-
-export const navigateToNextCity: ActionCreator<ClientNavigateToNextCityAction> = () => {
-    return {
-        type: NAVIGATE_TO_NEXT_CITY,
-        payload: undefined,
-    };
-};
-
-
-export const NAVIGATE_TO_PREVIOUS_CITY: 'NAVIGATE_TO_PREVIOUS_CITY' = 'NAVIGATE_TO_PREVIOUS_CITY';
-export type ClientNavigateToPreviousCityAction = BaseAction<typeof NAVIGATE_TO_PREVIOUS_CITY, void>;
-
-export const navigateToPreviousCity: ActionCreator<ClientNavigateToPreviousCityAction> = () => {
-    return {
-        type: NAVIGATE_TO_PREVIOUS_CITY,
-        payload: undefined,
-    };
-};
-
 export const UPDATE_STATE: 'UPDATE_STATE' = 'UPDATE_STATE';
 export type ClientUpdateStateAction = BaseAction<typeof UPDATE_STATE, $ReadOnly<{ serverState: ServerState }>>;
 
@@ -207,7 +185,5 @@ export type ClientAction =
     | ClientZoomCameraAction
     | ClientOpenCityViewAction
     | ClientCloseCityViewAction
-    | ClientNavigateToNextCityAction
-    | ClientNavigateToPreviousCityAction
     | ClientRequestBuildingUpgradeAction
     | ClientRequestCityCreationAction

@@ -3,32 +3,13 @@
 import type {ClientAction} from '../actions';
 import {
     CLOSE_CITY_VIEW,
-    NAVIGATE_TO_NEXT_CITY,
-    NAVIGATE_TO_PREVIOUS_CITY,
     OPEN_CITY_VIEW,
     REQUEST_CITY_CREATION,
     UPDATE_STATE
 } from '../actions';
 import type {ClientState, ClientStateMenu} from '../state';
 import {initialClientState} from '../state';
-
-const calculatePreviousCity = ({currentCityId, cityIds}: { currentCityId: string, cityIds: $ReadOnlyArray<string> }): ?string => {
-    if (cityIds.length === 0) {
-        return null;
-    }
-    const sortedCityIds = [...cityIds].sort();
-    const currentCityIdIndex = sortedCityIds.indexOf(currentCityId);
-    return currentCityIdIndex === 0 ? sortedCityIds[cityIds.length - 1] : sortedCityIds[currentCityIdIndex - 1];
-};
-
-const calculateNextCity = ({currentCityId, cityIds}: { currentCityId: string, cityIds: $ReadOnlyArray<string> }): ?string => {
-    if (cityIds.length === 0) {
-        return null;
-    }
-    const sortedCityIds = [...cityIds].sort();
-    const currentCityIdIndex = sortedCityIds.indexOf(currentCityId);
-    return currentCityIdIndex === sortedCityIds.length - 1 ? sortedCityIds[0] : sortedCityIds[currentCityIdIndex + 1];
-};
+import {isCityBeingCreatedSelector, playerNameSelector} from '../selectors';
 
 const openCityView = ({cityId, localState, globalState}: { cityId: string, localState: ClientStateMenu, globalState: ClientState }): ClientStateMenu => {
     if (globalState.serverState == null) {
@@ -57,25 +38,11 @@ const openCityView = ({cityId, localState, globalState}: { cityId: string, local
         return localState;
     }
 
-    const currentCityId = cityId;
-
-    const nextCityId = calculateNextCity({
-        currentCityId,
-        cityIds: playerCities,
-    });
-
-    const previousCityId = calculatePreviousCity({
-        currentCityId,
-        cityIds: playerCities,
-    });
-
     return {
         ...localState,
         cityView: {
             ...localState.cityView,
-            currentCityId,
-            nextCityId,
-            previousCityId,
+            currentCityId: cityId,
         },
     };
 };
@@ -93,15 +60,19 @@ export const menuReducer = (
             };
         }
         case UPDATE_STATE: {
-            if (globalState.player.name == null) {
+            const playerId = playerNameSelector(globalState);
+
+            if (playerId == null) {
                 return localState;
             }
 
-            if (!localState.newCity.isCityBeingCreated) {
+            const isCityBeingCreated = isCityBeingCreatedSelector(globalState);
+
+            if (isCityBeingCreated) {
                 return localState;
             }
 
-            const playerCities = action.payload.serverState.citiesByOwner[globalState.player.name];
+            const playerCities = action.payload.serverState.citiesByOwner[playerId];
 
             if (playerCities == null || playerCities.length === 0) {
                 return localState;
@@ -112,31 +83,8 @@ export const menuReducer = (
                 newCity: {
                     ...localState.newCity,
                     isCityBeingCreated: false,
-                    isOpen: false,
                 }
             };
-        }
-        case NAVIGATE_TO_NEXT_CITY: {
-            if (localState.cityView.nextCityId == null) {
-                console.warn(`navigating to missing next city`);
-                return localState;
-            }
-            return openCityView({
-                cityId: localState.cityView.nextCityId,
-                localState,
-                globalState
-            });
-        }
-        case NAVIGATE_TO_PREVIOUS_CITY: {
-            if (localState.cityView.previousCityId == null) {
-                console.warn(`navigating to missing previous city`);
-                return localState;
-            }
-            return openCityView({
-                cityId: localState.cityView.previousCityId,
-                localState,
-                globalState
-            });
         }
         case OPEN_CITY_VIEW: {
             return openCityView({

@@ -1,19 +1,22 @@
 // @flow
 
 import React, {useState} from 'react';
-import type {
-    ClientAction,
-} from '../../state/actions';
+import type {ClientAction,} from '../../state/actions';
 import {requestCityCreation} from '../../state/actions';
 import type {Dispatch} from 'redux';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
 import type {ClientState} from '../../state/state';
+import {
+    isCityBeingCreatedSelector,
+    isGameStartingSelector
+} from '../../state/selectors';
 
 type OwnProps = {};
 
 type StateProps = {
     isCityBeingCreated: boolean,
+    isGameStarting: boolean,
 };
 
 type DispatchProps = {
@@ -26,7 +29,11 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({isCityBeingCreated, requestCityCreation}: Props) => {
+const Component = ({isCityBeingCreated, isGameStarting, requestCityCreation}: Props) => {
+    if (!isGameStarting) {
+        return null;
+    }
+
     const [nameDraft, setNameDraft] = useState('');
 
     const buttonClassName = classNames(
@@ -97,7 +104,8 @@ const Component = ({isCityBeingCreated, requestCityCreation}: Props) => {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        isCityBeingCreated: state.menu.newCity.isCityBeingCreated,
+        isGameStarting: isGameStartingSelector(state),
+        isCityBeingCreated: isCityBeingCreatedSelector(state),
     });
 };
 

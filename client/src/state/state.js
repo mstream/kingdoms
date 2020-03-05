@@ -15,12 +15,9 @@ export type ClientStateCamera = $ReadOnly<{
 
 export type ClientStateCityView = $ReadOnly<{
     currentCityId: ?string,
-    nextCityId: ?string,
-    previousCityId: ?string,
 }>;
 
 export type ClientStateNewCity = $ReadOnly<{
-    isOpen: boolean,
     isCityBeingCreated: boolean,
 }>;
 
@@ -110,25 +107,19 @@ const initialCameraState: ClientStateCamera = {
 
 const emptyMenuState: ClientStateMenu = {
     newCity: {
-        isOpen: false,
         isCityBeingCreated: false,
     },
     cityView: {
         currentCityId: null,
-        nextCityId: null,
-        previousCityId: null,
     },
 };
 
 const initialMenuState: ClientStateMenu = {
     newCity: {
-        isOpen: false,
         isCityBeingCreated: false,
     },
     cityView: {
         currentCityId: null,
-        nextCityId: null,
-        previousCityId: null,
     },
 };
 

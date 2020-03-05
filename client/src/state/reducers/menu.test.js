@@ -3,8 +3,6 @@
 import {
     closeCityView,
     dummy,
-    navigateToNextCity,
-    navigateToPreviousCity,
     openCityView,
     requestCityCreation
 } from '../actions';
@@ -41,9 +39,7 @@ describe('menuReducer', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '2',
-                    nextCityId: '3',
-                    previousCityId: '1',
+                    currentCityId: '1',
                 }
             }
         };
@@ -53,8 +49,6 @@ describe('menuReducer', () => {
             cityView: {
                 ...previousLocalState.cityView,
                 currentCityId: null,
-                nextCityId: null,
-                previousCityId: null,
             }
         };
         const actual = menuReducer(previousLocalState, action, previousGlobalState);
@@ -68,18 +62,10 @@ describe('menuReducer', () => {
             player: {
                 name: 'player1',
             },
-            serverState: {
-                ...emptyServerState,
-                citiesByOwner: {
-                    'player1': ['1', '2', '3']
-                },
-            },
             menu: {
                 ...emptyClientState.menu,
                 cityView: {
                     currentCityId: null,
-                    nextCityId: null,
-                    previousCityId: null,
                 }
             }
         };
@@ -88,78 +74,6 @@ describe('menuReducer', () => {
             ...previousLocalState,
             cityView: {
                 currentCityId: '1',
-                nextCityId: '2',
-                previousCityId: '3',
-            }
-        };
-        const actual = menuReducer(previousLocalState, action, previousGlobalState);
-        expect(actual).toEqual(expected);
-    });
-
-    it('handles navigate to next city event', () => {
-        const action = navigateToNextCity();
-        const previousGlobalState: ClientState = {
-            ...emptyClientState,
-            player: {
-                name: 'player1',
-            },
-            serverState: {
-                ...emptyServerState,
-                citiesByOwner: {
-                    'player1': ['1', '2', '3']
-                },
-            },
-            menu: {
-                ...emptyClientState.menu,
-                cityView: {
-                    currentCityId: '1',
-                    nextCityId: '2',
-                    previousCityId: '3',
-                }
-            }
-        };
-        const previousLocalState: ClientStateMenu = previousGlobalState.menu;
-        const expected: ClientStateMenu = {
-            ...previousLocalState,
-            cityView: {
-                currentCityId: '2',
-                nextCityId: '3',
-                previousCityId: '1',
-            }
-        };
-        const actual = menuReducer(previousLocalState, action, previousGlobalState);
-        expect(actual).toEqual(expected);
-    });
-
-    it('handles navigate to previous city event', () => {
-        const action = navigateToPreviousCity();
-        const previousGlobalState: ClientState = {
-            ...emptyClientState,
-            player: {
-                name: 'player1',
-            },
-            serverState: {
-                ...emptyServerState,
-                citiesByOwner: {
-                    'player1': ['1', '2', '3']
-                },
-            },
-            menu: {
-                ...emptyClientState.menu,
-                cityView: {
-                    currentCityId: '1',
-                    nextCityId: '2',
-                    previousCityId: '3',
-                }
-            }
-        };
-        const previousLocalState: ClientStateMenu = previousGlobalState.menu;
-        const expected: ClientStateMenu = {
-            ...previousLocalState,
-            cityView: {
-                currentCityId: '3',
-                nextCityId: '1',
-                previousCityId: '2',
             }
         };
         const actual = menuReducer(previousLocalState, action, previousGlobalState);
@@ -174,7 +88,6 @@ describe('menuReducer', () => {
                 ...emptyClientState.menu,
                 newCity: {
                     ...emptyClientState.menu.newCity,
-                    isOpen: true,
                     isCityBeingCreated: false,
                 }
             }
@@ -184,7 +97,6 @@ describe('menuReducer', () => {
             ...previousLocalState,
             newCity: {
                 ...previousLocalState.newCity,
-                isOpen: true,
                 isCityBeingCreated: true,
             }
         };

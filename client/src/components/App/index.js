@@ -7,14 +7,12 @@ import type {Dispatch} from 'redux';
 import {CityViewComponent} from '../city-view';
 import type {ClientAction} from '../../state/actions';
 import {MenuComponent} from '../menu';
-import {GameStartComponent} from '../game-start';
 import type {ClientState} from '../../state/state';
+import {GameStartComponent} from '../game-start';
 
 type OwnProps = {};
 
-type StateProps = {
-    state: ClientState
-};
+type StateProps = {};
 
 type DispatchProps = {};
 
@@ -24,7 +22,7 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({state}: Props) => {
+const Component = ({}: Props) => {
     const [, setState] = useState(true);
 
     const handleWindowResize = () => {
@@ -43,41 +41,25 @@ const Component = ({state}: Props) => {
 
     const windowSize = {x: window.innerWidth, y: window.innerHeight};
 
-    return state.serverState != null ? (
-        <div
-            className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
-            <div className="row-span-1">
-                <MenuComponent/>
-            </div>
-            <div className="row-span-11">
-                <WorldMapComponent
-                    camera={state.camera}
-                    cities={state.serverState.cities}
-                    tiles={state.tiles}
-                    windowSize={windowSize}
-                />
-                {
-                    state.menu.cityView.currentCityId != null &&
-                    <CityViewComponent
-                        city={state.serverState.cities[state.menu.cityView.currentCityId]}
-                        cityId={state.menu.cityView.currentCityId}
+    return (
+            <div
+                className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
+                <div className="row-span-1">
+                    <MenuComponent/>
+                </div>
+                <div className="row-span-11">
+                    <WorldMapComponent
+                        windowSize={windowSize}
                     />
-                }
-                {
-                    state.player.name != null && state.serverState.citiesByOwner[state.player.name] == null &&
+                    <CityViewComponent/>
                     <GameStartComponent/>
-                }
+                </div>
             </div>
-        </div>
-    ) : (
-        <div/>
-    );
+        );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return {
-        state
-    };
+    return Object.freeze({});
 };
 
 const actionCreators: DispatchProps = Object.freeze({});

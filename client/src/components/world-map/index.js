@@ -30,6 +30,11 @@ import type {
     ClientStateTiles
 } from '../../state/state';
 import type {CommonStateCities} from '../../../../common/src/state';
+import {
+    cameraSelector,
+    citiesSelector,
+    tilesSelector
+} from '../../state/selectors';
 
 
 const cullObjects = <T: $ReadOnly<{ geometry: Geometry, ... }>>(
@@ -101,13 +106,14 @@ const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry, ... }>>(
 };
 
 type OwnProps = {
-    camera: ClientStateCamera,
-    cities: CommonStateCities,
-    tiles: ClientStateTiles,
     windowSize: Vector,
 };
 
-type StateProps = {};
+type StateProps = {
+    camera: ClientStateCamera,
+    cities: ?CommonStateCities,
+    tiles: ClientStateTiles,
+};
 
 type DispatchProps = {
     moveCameraUp: typeof moveCameraUp,
@@ -136,6 +142,10 @@ const Component = ({
                        zoomCameraIn,
                        zoomCameraOut,
                    }: Props) => {
+    if (cities == null) {
+        return null;
+    }
+
     useEffect(() => {
         window.addEventListener('keydown', event => {
             switch (event.key) {
@@ -277,7 +287,11 @@ const Component = ({
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});
+    return Object.freeze({
+        camera: cameraSelector(state),
+        cities: citiesSelector(state),
+        tiles: tilesSelector(state),
+    });
 };
 
 const actionCreators: DispatchProps = {

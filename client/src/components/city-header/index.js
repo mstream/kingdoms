@@ -2,30 +2,61 @@
 
 import React, {useEffect, useRef, useState} from 'react';
 import type {ClientAction} from '../../state/actions';
-import {
-    navigateToNextCity,
-    navigateToPreviousCity,
-    requestCityNameChange,
-} from '../../state/actions';
+import {openCityView, requestCityNameChange,} from '../../state/actions';
 import {connect} from 'react-redux';
 import type {Dispatch} from 'redux';
 import {getRefValue} from '../../util';
-import type {ClientState, ClientStateCityView} from '../../state/state';
-import type {CommonStateCity} from '../../../../common/src/state';
+import type {ClientState} from '../../state/state';
 import classNames from 'classnames';
+import {
+    currentlyViewedCityIdSelector,
+    currentlyViewedCitySelector,
+    nextCityIdSelector,
+    previousCityIdSelector
+} from '../../state/selectors';
+import type {CommonStateCity} from '../../../../common/src/state';
 
-type OwnProps = {
-    city: CommonStateCity,
-    cityId: string,
+const navigateToNextCityButton = ({nextCityId, openCityView}: {nextCityId: string, openCityView: typeof openCityView}) => {
+    const onNavigateToNextCityClick = () => {
+        openCityView({cityId: nextCityId});
+    };
+
+    return (
+        <button
+            className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
+            onClick={onNavigateToNextCityClick}
+        >
+            <i className="icofont icofont-arrow-right"/>
+        </button>
+    );
 };
 
+const navigateToPreviousCityButton = ({openCityView, previousCityId}: {previousCityId: string, openCityView: typeof openCityView}) => {
+    const onNavigateToPreviousCityClick = () => {
+        openCityView({cityId: previousCityId});
+    };
+
+    return (
+        <button
+            className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
+            onClick={onNavigateToPreviousCityClick}
+        >
+            <i className="icofont icofont-arrow-left"/>
+        </button>
+    );
+};
+
+type OwnProps = {};
+
 type StateProps = {
-    cityView: ClientStateCityView,
+    city: ?CommonStateCity,
+    cityId: ?string,
+    nextCityId: ?string,
+    previousCityId: ?string,
 };
 
 type DispatchProps = {
-    navigateToNextCity: typeof navigateToNextCity,
-    navigateToPreviousCity: typeof navigateToPreviousCity,
+    openCityView: typeof openCityView,
     requestCityNameChange: typeof requestCityNameChange,
 };
 
@@ -38,11 +69,14 @@ type Props = {
 const Component = ({
                        city,
                        cityId,
-                       cityView,
-                       navigateToNextCity,
-                       navigateToPreviousCity,
+                       nextCityId,
+                       openCityView,
+                       previousCityId,
                        requestCityNameChange,
                    }: Props) => {
+    if (city == null || cityId == null) {
+        return null;
+    }
 
     const nameInputRef = useRef(null);
 
@@ -109,37 +143,7 @@ const Component = ({
             </p>
         );
 
-    const onNavigateToPreviousCityClick = () => {
-        navigateToPreviousCity();
-    };
-
-    const onNavigateToNextCityClick = () => {
-        navigateToNextCity();
-    };
-
-    const isNavigationEnabled = cityView.currentCityId !== cityView.previousCityId && cityView.currentCityId !== cityView.nextCityId;
-
-    const navigateToPreviousCityButton = isNavigationEnabled ?
-        (
-            <button
-                className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
-                onClick={onNavigateToPreviousCityClick}
-            >
-                <i className="icofont icofont-arrow-left"/>
-            </button>
-        ) :
-        null;
-
-    const navigateToNextCityButton = isNavigationEnabled ?
-        (
-            <button
-                className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
-                onClick={onNavigateToNextCityClick}
-            >
-                <i className="icofont icofont-arrow-right"/>
-            </button>
-        ) :
-        null;
+    const isNavigationEnabled = previousCityId != null || nextCityId != null;
 
     const className = classNames(
         'wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800',
@@ -152,24 +156,30 @@ const Component = ({
     return (
         <div
             className={className}>
-            {navigateToPreviousCityButton}
+            {
+                previousCityId != null && navigateToPreviousCityButton({openCityView, previousCityId})
+            }
             <div className="flex flex-row items-center justify-center">
                 {cityNameInput}
             </div>
-            {navigateToNextCityButton}
+            {
+                nextCityId != null && navigateToNextCityButton({nextCityId, openCityView})
+            }
         </div>
     );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        cityView: state.menu.cityView,
+        city: currentlyViewedCitySelector(state),
+        cityId: currentlyViewedCityIdSelector(state),
+        nextCityId: nextCityIdSelector(state),
+        previousCityId: previousCityIdSelector(state),
     });
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    navigateToNextCity,
-    navigateToPreviousCity,
+    openCityView,
     requestCityNameChange,
 });
 

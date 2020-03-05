@@ -10,6 +10,7 @@ import type {ClientAction} from '../actions';
 import {MOVE_CAMERA, UPDATE_STATE, ZOOM_CAMERA} from '../actions';
 import type {ClientState, ClientStateCamera} from '../state';
 import {initialClientState} from '../state';
+import {serverStateSelector} from '../selectors';
 
 export const cameraReducer = (
     localState: ClientStateCamera = initialClientState.camera,
@@ -61,6 +62,10 @@ export const cameraReducer = (
             };
         }
         case UPDATE_STATE: {
+            if (serverStateSelector(globalState) != null) {
+                return localState;
+            }
+
             const halfWorldSize = multipleVectors({
                 vector1: addVectors({
                     vector1: action.payload.serverState.world.size,

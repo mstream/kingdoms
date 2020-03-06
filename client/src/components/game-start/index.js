@@ -63,7 +63,7 @@ const Component = ({isCityBeingCreated, isGameStarting, requestCityCreation}: Pr
                         </p>
                     </div>
                 </div>
-                <form className="flex flex-col">
+                <div className="flex flex-col">
                     <div className="flex flex-row">
                         <div className="w-1/3">
                             <label
@@ -96,7 +96,7 @@ const Component = ({isCityBeingCreated, isGameStarting, requestCityCreation}: Pr
                         }>
                         Start
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     );

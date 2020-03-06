@@ -1,13 +1,18 @@
 // @flow
 
-import type {ClientState, ClientStateCamera, ClientStateTiles} from '../state';
-import {createSelector} from 'reselect';
+import type {
+    ClientState,
+    ClientStateCamera,
+    ClientStateTiles,
+} from '../state';
+import { createSelector } from 'reselect';
 import type {
     CommonStateCities,
     CommonStateCity,
-    ServerState
+    CommonStateWorld,
+    ServerState,
 } from '../../../../common/src/state';
-import {groupIdsByOwnerId} from './util';
+import { groupIdsByOwnerId } from './util';
 
 export const isCityBeingCreatedSelector = (state: ClientState): boolean => {
     return state.menu.newCity.isCityBeingCreated;
@@ -33,6 +38,16 @@ export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
     return state.menu.cityView.currentCityId;
 };
 
+export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld, ?ServerState>(
+    serverStateSelector,
+    (serverState) => {
+        if (serverState == null) {
+            return null;
+        }
+        return serverState.world;
+    },
+);
+
 export const citiesSelector = createSelector<ClientState, void, ?CommonStateCities, ?ServerState>(
     serverStateSelector,
     (serverState) => {
@@ -49,7 +64,7 @@ export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [strin
         if (serverState == null) {
             return Object.freeze({});
         }
-        return groupIdsByOwnerId({cities: serverState.cities});
+        return groupIdsByOwnerId({ cities: serverState.cities });
     },
 );
 
@@ -102,7 +117,7 @@ export const nextCityIdSelector = createSelector<ClientState, void, ?string, $Re
         const sortedCityIds = [...citiesOwnedByPlayer].sort();
         const currentlyViewedCityIndex = sortedCityIds.indexOf(currentlyViewedCity);
         return currentlyViewedCityIndex === 0 ? sortedCityIds[citiesOwnedByPlayer.length - 1] : sortedCityIds[currentlyViewedCityIndex - 1];
-    }
+    },
 );
 
 export const previousCityIdSelector = createSelector<ClientState, void, ?string, $ReadOnlyArray<string>, ?string>(
@@ -120,5 +135,5 @@ export const previousCityIdSelector = createSelector<ClientState, void, ?string,
         const sortedCityIds = [...citiesOwnedByPlayer].sort();
         const currentlyViewedCityIndex = sortedCityIds.indexOf(currentlyViewedCity);
         return currentlyViewedCityIndex === citiesOwnedByPlayer.length - 1 ? sortedCityIds[0] : sortedCityIds[currentlyViewedCityIndex + 1];
-    }
+    },
 );

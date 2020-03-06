@@ -3,7 +3,7 @@
 import {createCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {createCityCitiesByOwnerReducer} from './create-city';
-import {emptyServerState} from '../../state';
+import {emptyServerState} from '../../../../../common/src/state';
 
 describe(`createCityCitiesByOwnerReducer`, () => {
     it(`creates players first city`, () => {

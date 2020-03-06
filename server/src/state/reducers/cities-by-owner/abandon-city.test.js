@@ -3,7 +3,7 @@
 import {abandonCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {abandonCityCitiesByOwnerReducer} from './abandon-city';
-import {emptyServerState} from '../../state';
+import {emptyServerState} from '../../../../../common/src/state';
 
 describe('abandonCityCitiesByOwnerReducer', () => {
     it('removes the city', () => {

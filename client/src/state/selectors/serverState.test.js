@@ -1,14 +1,11 @@
 // @flow
 
-import {
-    emptyCityState,
-    emptyServerState
-} from '../../../../server/src/state/state';
 import type {CommonStateCity, ServerState} from '../../../../common/src/state';
 import {
     serverStatePlayerCitiesSelector,
     serverStatePlayerCityIdsSelector
 } from './serverState';
+import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 
 describe('serverStatePlayerCityIdsSelector', () => {
     it('returns all the city ids owned by the player', () => {

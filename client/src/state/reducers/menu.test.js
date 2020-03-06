@@ -9,10 +9,7 @@ import {
 import {menuReducer} from './menu';
 import type {ClientState, ClientStateMenu} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {
-    emptyCityState,
-    emptyServerState
-} from '../../../../server/src/state/state';
+import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 
 describe('menuReducer', () => {
     it('initializes its state', () => {

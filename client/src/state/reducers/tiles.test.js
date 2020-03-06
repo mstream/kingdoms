@@ -9,14 +9,13 @@ import type {
 } from '../state';
 import {emptyClientState, initialClientState} from '../state';
 import {
-    emptyCityState,
-    emptyServerState,
     initialServerState
 } from '../../../../server/src/state/state';
 import {serverStateReducer} from './server-state';
 import type {ServerState} from '../../../../common/src/state';
 import {playerReducer} from './player';
 import {tilesReducer} from './tiles';
+import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 
 describe('playerReducer', () => {
     it('initializes its state', () => {

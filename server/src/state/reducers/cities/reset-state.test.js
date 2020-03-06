@@ -1,9 +1,10 @@
 // @flow
 
 import {resetState} from '../../../../../common/src/actions';
-import {emptyServerState, initialServerState} from '../../state';
+import {initialServerState} from '../../state';
 import {resetStateCitiesReducer} from './reset-state';
 import type {ServerState} from '../../../../../common/src/state';
+import {emptyServerState} from '../../../../../common/src/state';
 
 describe('resetStateCitiesReducer', () => {
     it('returns the initial state', () => {

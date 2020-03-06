@@ -1,35 +1,9 @@
 // @flow
 import type {ServerState} from '../../../common/src/state';
 
-const emptyCities = {};
-const initialCities = {};
+const initialCitiesState = {};
 
-const emptyCitiesByOwner = {};
 const initialCitiesByOwner = {};
-
-const emptyRules = {
-    baseCityCapacity: 0,
-    basePeasantsMigrationRate: 0,
-    buildingUpgradeCoefficient: 0,
-    buildingUpgradeCosts: {
-        lumberMill: {
-            food: 0,
-            wood: 0,
-        },
-        pasture: {
-            food: 0,
-            wood: 0,
-        },
-    },
-    minimalCityMargin: {
-        x: 0,
-        y: 0,
-    },
-    populationGrowthChangeRateCoefficient: 0,
-    resourceIncreaseChangeRateCoefficient: 0,
-    unitFoodDemand: 0,
-    unitStarvingCoefficient: 0,
-};
 
 const initialRules = {
     baseCityCapacity: 1000,
@@ -55,52 +29,16 @@ const initialRules = {
     unitStarvingCoefficient: 0.2,
 };
 
-const emptyTime = '';
-
 const initialTime = new Date().toISOString();
-
-const emptyWorld = {size: {x: 0, y: 0}};
 
 const initialWorld = {size: {x: 10, y: 10}};
 
-export const emptyServerState: ServerState = {
-    cities: emptyCities,
-    citiesByOwner: emptyCitiesByOwner,
-    rules: emptyRules,
-    time: emptyTime,
-    world: emptyWorld,
-};
-
 export const initialServerState: ServerState = {
-    cities: initialCities,
+    cities: initialCitiesState,
     citiesByOwner: initialCitiesByOwner,
     rules: initialRules,
     time: initialTime,
     world: initialWorld,
-};
-
-export const emptyCityState = {
-    buildings: {
-        lumberMill: {
-            tier: 0,
-        },
-        pasture: {
-            tier: 0,
-        },
-    },
-    citizens: {
-        peasant: 0,
-    },
-    location: {
-        x: 0,
-        y: 0,
-    },
-    name: '',
-    ownerId: null,
-    resources: {
-        food: 0,
-        wood: 0,
-    },
 };
 
 export const initialCityState = {

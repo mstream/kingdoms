@@ -1,12 +1,15 @@
 // @flow
 
-import {emptyServerState, initialServerState} from '../state';
+import {initialServerState} from '../state';
 import {timeReducer} from './time';
 import type {CommonStateTime, ServerState} from '../../../../common/src/state';
 import {worldReducer} from './world';
 import {executeTimeStep} from '../../../../common/src/actions';
 import type {ServerStateReducerResult} from './root';
-import {dummy} from '../../../../common/src/actions';describe('timeReducer', () => {
+import {dummy} from '../../../../common/src/actions';
+import {emptyServerState} from '../../../../common/src/state';
+
+describe('timeReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',

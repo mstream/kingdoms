@@ -230,3 +230,63 @@ export const convertChangeInfoToChangeRate = ({changeInfo}: { changeInfo: Quanti
 export const convertChangeRateToDelta = ({changeRate, timeDelta}: { changeRate: number, timeDelta: number }): number => {
     return (changeRate / 3600) * timeDelta;
 };
+
+const emptyCitiesState = {};
+
+const emptyCitiesByOwnerState = {};
+
+export const emptyResourcesState = {
+    food: 0,
+    wood: 0,
+};
+
+const emptyRulesState = {
+    baseCityCapacity: 0,
+    basePeasantsMigrationRate: 0,
+    buildingUpgradeCoefficient: 0,
+    buildingUpgradeCosts: {
+        lumberMill: emptyResourcesState,
+        pasture: emptyResourcesState,
+    },
+    minimalCityMargin: {
+        x: 0,
+        y: 0,
+    },
+    populationGrowthChangeRateCoefficient: 0,
+    resourceIncreaseChangeRateCoefficient: 0,
+    unitFoodDemand: 0,
+    unitStarvingCoefficient: 0,
+};
+
+const emptyTimeState = '';
+
+const emptyWorldState = {size: {x: 0, y: 0}};
+
+export const emptyServerState: ServerState = {
+    cities: emptyCitiesState,
+    citiesByOwner: emptyCitiesByOwnerState,
+    rules: emptyRulesState,
+    time: emptyTimeState,
+    world: emptyWorldState,
+};
+
+export const emptyCityState = {
+    buildings: {
+        lumberMill: {
+            tier: 0,
+        },
+        pasture: {
+            tier: 0,
+        },
+    },
+    citizens: {
+        peasant: 0,
+    },
+    location: {
+        x: 0,
+        y: 0,
+    },
+    name: '',
+    ownerId: null,
+    resources: emptyResourcesState,
+};

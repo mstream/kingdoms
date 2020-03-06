@@ -3,7 +3,11 @@
 import {createCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {createCityCitiesReducer} from './create-city';
-import {emptyCityState, emptyServerState, initialCityState} from '../../state';
+import {initialCityState} from '../../state';
+import {
+    emptyCityState,
+    emptyServerState
+} from '../../../../../common/src/state';
 
 describe(`createCityCitiesReducer`, () => {
     it(`fails when there is not enough space for the city`, () => {

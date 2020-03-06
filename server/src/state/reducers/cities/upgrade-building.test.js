@@ -3,7 +3,10 @@
 import {upgradeBuildingCitiesReducer} from './upgrade-building';
 import {upgradeBuilding} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
-import {emptyCityState, emptyServerState} from '../../state';
+import {
+    emptyCityState,
+    emptyServerState
+} from '../../../../../common/src/state';
 
 describe('upgradeBuildingCitiesReducer', () => {
     it('fails when city does not exist', () => {

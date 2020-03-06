@@ -2,10 +2,6 @@
 
 import type {ClientState} from '../state';
 import {emptyClientState} from '../state';
-import {
-    emptyCityState,
-    emptyServerState
-} from '../../../../server/src/state/state';
 import type {
     CommonStateCities,
     CommonStateCity
@@ -16,6 +12,7 @@ import {
     currentlyViewedCitySelector,
     isGameStartingSelector
 } from './clientState';
+import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

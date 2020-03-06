@@ -7,7 +7,10 @@ import type {
 } from '../../../../../common/src/state';
 import type {ServerStateReducerResult} from '../root';
 import {executeTimeStepCitiesReducer} from './execute-time-step';
-import {emptyCityState, emptyServerState} from '../../state';
+import {
+    emptyCityState,
+    emptyServerState
+} from '../../../../../common/src/state';
 
 describe('executeTimeStepCitiesReducer', () => {
     it('previous time newer than the one from action', () => {

@@ -4,7 +4,7 @@ import {dummy, moveCameraUp, updateState, zoomCameraIn} from '../actions';
 import type {ClientState, ClientStateCamera} from '../state';
 import {emptyClientState, initialClientState} from '../state';
 import {cameraReducer} from './camera';
-import {emptyServerState} from '../../../../server/src/state/state';
+import {emptyServerState} from '../../../../common/src/state';
 
 describe('cameraReducer', () => {
     it('initializes its state', () => {

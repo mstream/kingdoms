@@ -3,7 +3,10 @@
 import {changeCityName} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {changeCityNameCitiesReducer} from './change-city-name';
-import {emptyCityState, emptyServerState} from '../../state';
+import {
+    emptyCityState,
+    emptyServerState
+} from '../../../../../common/src/state';
 
 describe('changeCityNameCitiesReducer', () => {
     it('fails when city does not exist', () => {

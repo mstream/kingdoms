@@ -3,7 +3,10 @@
 import {abandonCity} from '../../../../../common/src/actions';
 import type {ServerState} from '../../../../../common/src/state';
 import {abandonCityCitiesReducer} from './abandon-city';
-import {emptyCityState, emptyServerState} from '../../state';
+import {
+    emptyCityState,
+    emptyServerState
+} from '../../../../../common/src/state';
 
 describe('abandonCityCitiesReducer', () => {
     it('fails when city does not exist', () => {

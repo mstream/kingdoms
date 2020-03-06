@@ -2,8 +2,8 @@
 
 import type {ServerState} from '../../../../../common/src/state';
 import {unsupportedActionCitiesByOwnerReducer} from './unsupported';
-import {emptyServerState} from '../../state';
 import {dummy} from '../../../../../client/src/state/actions';
+import {emptyServerState} from '../../../../../common/src/state';
 
 describe('unsupportedActionCitiesByOwnerReducer', () => {
     it('returns the current state', () => {

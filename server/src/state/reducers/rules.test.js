@@ -1,11 +1,14 @@
 // @flow
 
 import {rulesReducer} from './rules';
-import {emptyServerState, initialServerState} from '../state';
+import {initialServerState} from '../state';
 import type {CommonStateRules, ServerState} from '../../../../common/src/state';
 import {worldReducer} from './world';
 import type {ServerStateReducerResult} from './root';
-import {dummy} from '../../../../common/src/actions';describe('worldReducer', () => {
+import {dummy} from '../../../../common/src/actions';
+import {emptyServerState} from '../../../../common/src/state';
+
+describe('worldReducer', () => {
     it('returns the default state on reset state action', () => {
         const action = {
             type: 'RESET_STATE',

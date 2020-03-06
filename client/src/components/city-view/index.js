@@ -16,7 +16,7 @@ import {CityHeaderComponent} from '../city-header';
 import {
     currentlyViewedCityIdSelector,
     currentlyViewedCitySelector,
-} from '../../state/selectors';
+} from '../../state/selectors/clientState';
 
 type OwnProps = {};
 

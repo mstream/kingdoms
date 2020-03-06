@@ -9,7 +9,10 @@ import {
 import {menuReducer} from './menu';
 import type {ClientState, ClientStateMenu} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {emptyServerState} from '../../../../server/src/state/state';
+import {
+    emptyCityState,
+    emptyServerState
+} from '../../../../server/src/state/state';
 
 describe('menuReducer', () => {
     it('initializes its state', () => {
@@ -61,6 +64,15 @@ describe('menuReducer', () => {
             ...emptyClientState,
             player: {
                 name: 'player1',
+            },
+            serverState: {
+                ...emptyServerState,
+                cities: {
+                    '1': {
+                        ...emptyCityState,
+                        ownerId: 'player1',
+                    }
+                },
             },
             menu: {
                 ...emptyClientState.menu,

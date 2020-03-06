@@ -7,7 +7,6 @@ import foodImage from '../../assets/images/resources/food.png';
 import woodImage from '../../assets/images/resources/wood.png';
 import type {ClientAction} from '../../state/actions';
 import {ImageComponent} from '../image';
-import {numberToQuantityString} from '../../util';
 import {CityItemsListComponent} from '../city-items-list';
 import type {
     CommonStateCity,
@@ -16,6 +15,7 @@ import type {
 import {calculateResourceChangeInfo} from '../../../../common/src/state';
 import {ChangeInfoComponent} from '../change-info';
 import type {ClientState} from '../../state/state';
+import {numberToQuantityString} from '../../../../common/src/util';
 
 const resourceVisuals = {
     food: {

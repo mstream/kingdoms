@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import peasantImage from '../../assets/images/units/peasant.png';
 import type {ClientAction} from '../../state/actions';
 import {CityItemsListComponent} from '../city-items-list';
-import {numberToQuantityString} from '../../util';
 import {ImageComponent} from '../image';
 import type {
     CommonStateCity,
@@ -20,6 +19,7 @@ import {
 } from '../../../../common/src/state';
 import {ChangeInfoComponent} from '../change-info';
 import type {ClientState} from '../../state/state';
+import {numberToQuantityString} from '../../../../common/src/util';
 
 const citizenVisuals = {
     peasant: {

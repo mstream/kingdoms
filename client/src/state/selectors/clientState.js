@@ -7,6 +7,7 @@ import type {
     CommonStateCity,
     ServerState
 } from '../../../../common/src/state';
+import {groupIdsByOwnerId} from './util';
 
 export const isCityBeingCreatedSelector = (state: ClientState): boolean => {
     return state.menu.newCity.isCityBeingCreated;
@@ -42,6 +43,16 @@ export const citiesSelector = createSelector<ClientState, void, ?CommonStateCiti
     },
 );
 
+export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [string]: $ReadOnlyArray<string> }, ?ServerState>(
+    serverStateSelector,
+    (serverState) => {
+        if (serverState == null) {
+            return Object.freeze({});
+        }
+        return groupIdsByOwnerId({cities: serverState.cities});
+    },
+);
+
 export const currentlyViewedCitySelector = createSelector<ClientState, void, ?CommonStateCity, ?CommonStateCities, ?string>(
     citiesSelector,
     currentlyViewedCityIdSelector,
@@ -54,22 +65,22 @@ export const currentlyViewedCitySelector = createSelector<ClientState, void, ?Co
     },
 );
 
-export const citiesOwnedByPlayerSelector = createSelector<ClientState, void, $ReadOnlyArray<string>, ?string, ?ServerState>(
+export const cityIdsOwnedByPlayerSelector = createSelector<ClientState, void, $ReadOnlyArray<string>, { [string]: $ReadOnlyArray<string> }, ?string>(
+    cityIdsByOwnerSelector,
     playerNameSelector,
-    serverStateSelector,
-    (playerName, serverState) => {
-        if (playerName == null || serverState == null) {
+    (cityIdsByOwner, playerName) => {
+        if (playerName == null) {
             return [];
         }
 
-        const citiesOwnedByPlayer = serverState.citiesByOwner[playerName];
+        const playerCityIds = cityIdsByOwner[playerName];
 
-        return citiesOwnedByPlayer == null ? [] : citiesOwnedByPlayer;
+        return playerCityIds == null ? [] : playerCityIds;
     },
 );
 
 export const isGameStartingSelector = createSelector<ClientState, void, boolean, $ReadOnlyArray<string>, ?string>(
-    citiesOwnedByPlayerSelector,
+    cityIdsOwnedByPlayerSelector,
     playerNameSelector,
     (citiesOwnedByPlayer, playerName) => {
         return playerName != null && citiesOwnedByPlayer.length === 0;
@@ -77,7 +88,7 @@ export const isGameStartingSelector = createSelector<ClientState, void, boolean,
 );
 
 export const nextCityIdSelector = createSelector<ClientState, void, ?string, $ReadOnlyArray<string>, ?string>(
-    citiesOwnedByPlayerSelector,
+    cityIdsOwnedByPlayerSelector,
     currentlyViewedCityIdSelector,
     (citiesOwnedByPlayer, currentlyViewedCity) => {
         if (currentlyViewedCity == null) {
@@ -95,7 +106,7 @@ export const nextCityIdSelector = createSelector<ClientState, void, ?string, $Re
 );
 
 export const previousCityIdSelector = createSelector<ClientState, void, ?string, $ReadOnlyArray<string>, ?string>(
-    citiesOwnedByPlayerSelector,
+    cityIdsOwnedByPlayerSelector,
     currentlyViewedCityIdSelector,
     (citiesOwnedByPlayer, currentlyViewedCity) => {
         if (currentlyViewedCity == null) {

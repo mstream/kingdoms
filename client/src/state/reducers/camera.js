@@ -5,12 +5,17 @@ import {
     negateVector,
 } from '../../../../common/src/vector';
 import {clipToBoundary} from '../../../../common/src/boundary';
-import {tileSize} from './tiles';
 import type {ClientAction} from '../actions';
 import {MOVE_CAMERA, UPDATE_STATE, ZOOM_CAMERA} from '../actions';
 import type {ClientState, ClientStateCamera} from '../state';
 import {initialClientState} from '../state';
-import {serverStateSelector} from '../selectors';
+import {
+    isCityBeingCreatedSelector,
+    playerNameSelector,
+    serverStateSelector
+} from '../selectors/clientState';
+import {serverStatePlayerCitiesSelector} from '../selectors/serverState';
+import {tileVectorToPixelVector} from '../../util';
 
 export const cameraReducer = (
     localState: ClientStateCamera = initialClientState.camera,
@@ -62,24 +67,46 @@ export const cameraReducer = (
             };
         }
         case UPDATE_STATE: {
-            if (serverStateSelector(globalState) != null) {
+            if (serverStateSelector(globalState) == null) {
+                const halfWorldSize = tileVectorToPixelVector({
+                    tileVector:  addVectors({
+                        vector1: action.payload.serverState.world.size,
+                        vector2: {x: 0.5, y: 0.5}
+                    }),
+                });
+
+                return {
+                    ...initialClientState.camera,
+                    locationLimit: {
+                        min: negateVector({vector: halfWorldSize}),
+                        max: halfWorldSize,
+                    },
+                };
+            }
+
+            const playerName = playerNameSelector(globalState);
+
+            if (playerName == null) {
                 return localState;
             }
 
-            const halfWorldSize = multipleVectors({
-                vector1: addVectors({
-                    vector1: action.payload.serverState.world.size,
-                    vector2: {x: 0.5, y: 0.5}
-                }),
-                vector2: tileSize,
-            });
+            const actionPlayerCities = serverStatePlayerCitiesSelector(action.payload.serverState, {playerName});
+            const shouldMoveToNewCity = isCityBeingCreatedSelector(globalState) && actionPlayerCities.length > 0;
+            const newCity = actionPlayerCities[0];
+
+            const newLocation = shouldMoveToNewCity ?
+                tileVectorToPixelVector({tileVector: newCity.location}) :
+                localState.geometry.location;
 
             return {
-                ...initialClientState.camera,
-                locationLimit: {
-                    min: negateVector({vector: halfWorldSize}),
-                    max: halfWorldSize,
-                },
+                ...localState,
+                geometry: {
+                    ...localState.geometry,
+                    location: {
+                        ...localState.geometry.location,
+                        ...newLocation,
+                    }
+                }
             };
         }
         default: {

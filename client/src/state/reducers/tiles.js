@@ -1,24 +1,18 @@
 // @flow
 import type {ClientAction} from '../actions';
+import {UPDATE_STATE} from '../actions';
 import type {Vector} from '../../../../common/src/vector';
-import {multipleVectors} from '../../../../common/src/vector';
 import tumult from 'tumult';
 import {surfaceImages} from '../../assets/images/terrain';
 import type {ClientState, ClientStateTiles} from '../state';
 import {initialClientState} from '../state';
-import {UPDATE_STATE} from '../actions';
+import {tileVectorToPixelVector} from '../../util';
 
 const perlin2 = new tumult.Simplex2('qwerty');
-
-export const tileSize = {
-    x: 64,
-    y: 64,
-};
 
 const calculateTextureIndex = ({index}: { index: Vector }): number => {
     return Math.round(Math.abs(perlin2.gen(Math.abs(index.x), Math.abs(index.y))) * (surfaceImages.length - 1));
 };
-
 
 export const tilesReducer = (
     localState: ClientStateTiles = initialClientState.tiles,
@@ -32,11 +26,8 @@ export const tilesReducer = (
                     const city = action.payload.serverState.cities[cityId];
 
                     const geometry = {
-                        location: multipleVectors({
-                            vector1: city.location,
-                            vector2: tileSize,
-                        }),
-                        size: tileSize,
+                        location: tileVectorToPixelVector({tileVector: city.location}),
+                        size: tileVectorToPixelVector({tileVector: {x: 1, y: 1}}),
                     };
 
                     return {
@@ -60,8 +51,8 @@ export const tilesReducer = (
                     newTerrainTiles.push({
                         index,
                         geometry: {
-                            location: {x: x * tileSize.x, y: y * tileSize.y},
-                            size: tileSize,
+                            location: tileVectorToPixelVector({tileVector: index}),
+                            size: tileVectorToPixelVector({tileVector: {x: 1, y: 1}}),
                         },
                         textureIndex: calculateTextureIndex({
                             index: {

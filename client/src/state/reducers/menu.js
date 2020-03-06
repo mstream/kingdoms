@@ -9,31 +9,35 @@ import {
 } from '../actions';
 import type {ClientState, ClientStateMenu} from '../state';
 import {initialClientState} from '../state';
-import {isCityBeingCreatedSelector, playerNameSelector} from '../selectors';
+import {
+    cityIdsByOwnerSelector,
+    isCityBeingCreatedSelector,
+    playerNameSelector,
+    serverStateSelector
+} from '../selectors/clientState';
 
 const openCityView = ({cityId, localState, globalState}: { cityId: string, localState: ClientStateMenu, globalState: ClientState }): ClientStateMenu => {
-    if (globalState.serverState == null) {
+    if (serverStateSelector(globalState) == null) {
         console.warn(`opening city view without the server state loaded`);
         return localState;
     }
 
-    const playerId = globalState.player.name;
+    const playerId = playerNameSelector(globalState);
 
     if (playerId == null) {
         console.warn(`opening city view for not loaded player`);
         return localState;
     }
 
-    const citiesByOwner = globalState.serverState.citiesByOwner;
+    const cityIdsByOwner = cityIdsByOwnerSelector(globalState);
+    const playerCityIds = cityIdsByOwner[playerId];
 
-    const playerCities = citiesByOwner[playerId];
-
-    if (playerCities == null) {
+    if (playerCityIds == null) {
         console.warn(`opening city view for player which does not own any city`);
         return localState;
     }
 
-    if (!playerCities.includes(cityId)) {
+    if (!playerCityIds.includes(cityId)) {
         console.warn(`opening city view for player who does not own the city`);
         return localState;
     }

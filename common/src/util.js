@@ -2,6 +2,13 @@
 
 import {v4} from 'uuid';
 
+const suffixes = [
+    'k',
+    'm',
+    'g',
+    't'
+];
+
 export const parseJson = ({json}: { json: ?string }): mixed => {
     // $FlowFixMe
     return JSON.parse(json);
@@ -13,4 +20,20 @@ export const stringifyJson = ({value}: { value: mixed }): ?string => {
 
 export const generateId = (): string => {
     return v4();
+};
+
+export const numberToQuantityString = ({value}: { value: number }): string => {
+    const quantity = suffixes.reduce(
+        (quantity, suffix) => {
+            if (quantity.value / 10000 < 1) {
+                return quantity;
+            }
+            return {
+                value: quantity.value / 1000,
+                suffix
+            };
+        },
+        {value, suffix: null}
+    );
+    return `${quantity.value.toString().substring(0, 4)}${quantity.suffix != null ? quantity.suffix : ''}`;
 };

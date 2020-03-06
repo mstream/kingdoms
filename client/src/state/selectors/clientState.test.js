@@ -6,13 +6,13 @@ import type {
     CommonStateCities,
     CommonStateCity
 } from '../../../../common/src/state';
+import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 import {
     citiesSelector,
     cityIdsOwnedByPlayerSelector,
     currentlyViewedCitySelector,
     isGameStartingSelector
 } from './clientState';
-import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

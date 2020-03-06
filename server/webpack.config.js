@@ -8,13 +8,13 @@ module.exports = {
     output: {
         filename: '[name]/app.js',
         libraryTarget: 'commonjs2',
-        path: __dirname + '/.aws-sam/build/'
+        path: __dirname + '/.aws-sam/build/',
     },
 
     devtool: 'source-map',
 
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js'],
     },
 
     target: 'node',
@@ -31,10 +31,10 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     configFile: '../babel-server.config.js',
-                }
+                },
             },
-        ]
+        ],
     },
 
-    plugins: [awsSamPlugin]
+    plugins: [awsSamPlugin],
 };

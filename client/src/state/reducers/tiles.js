@@ -27,7 +27,12 @@ export const tilesReducer = (
 
                     const geometry = {
                         location: tileVectorToPixelVector({tileVector: city.location}),
-                        size: tileVectorToPixelVector({tileVector: {x: 1, y: 1}}),
+                        size: tileVectorToPixelVector({
+                            tileVector: {
+                                x: 1,
+                                y: 1
+                            }
+                        }),
                     };
 
                     return {
@@ -52,7 +57,12 @@ export const tilesReducer = (
                         index,
                         geometry: {
                             location: tileVectorToPixelVector({tileVector: index}),
-                            size: tileVectorToPixelVector({tileVector: {x: 1, y: 1}}),
+                            size: tileVectorToPixelVector({
+                                tileVector: {
+                                    x: 1,
+                                    y: 1
+                                }
+                            }),
                         },
                         textureIndex: calculateTextureIndex({
                             index: {

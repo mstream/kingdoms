@@ -42,20 +42,20 @@ const Component = ({}: Props) => {
     const windowSize = {x: window.innerWidth, y: window.innerHeight};
 
     return (
-            <div
-                className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
-                <div className="row-span-1">
-                    <MenuComponent/>
-                </div>
-                <div className="row-span-11">
-                    <WorldMapComponent
-                        windowSize={windowSize}
-                    />
-                    <CityViewComponent/>
-                    <GameStartComponent/>
-                </div>
+        <div
+            className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
+            <div className="row-span-1">
+                <MenuComponent/>
             </div>
-        );
+            <div className="row-span-11">
+                <WorldMapComponent
+                    windowSize={windowSize}
+                />
+                <CityViewComponent/>
+                <GameStartComponent/>
+            </div>
+        </div>
+    );
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {

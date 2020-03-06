@@ -1,11 +1,10 @@
 // @flow
-import type {ClientState} from '../../state/state';
-import type {ActionCreatorsProps, StateToProps} from '../types';
-import {connect} from 'react-redux';
-import type {Dispatch} from 'redux';
-import type {ClientAction} from '../../state/actions';
-import type {Quantities} from '../../../../common/src/quantity';
-import type {CommonStateResources} from '../../../../common/src/state';
+import type { ClientState } from '../../state/state';
+import type { ActionCreatorsProps, StateToProps } from '../types';
+import { connect } from 'react-redux';
+import type { Dispatch } from 'redux';
+import type { ClientAction } from '../../state/actions';
+import type { CommonStateResources } from '../../../../common/src/state';
 
 type OwnProps = {
     availableResources: CommonStateResources,
@@ -39,5 +38,5 @@ export const connectProps = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    actionCreators
+    actionCreators,
 );

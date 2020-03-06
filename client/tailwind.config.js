@@ -1,11 +1,6 @@
 module.exports = {
     theme: {
-        alphaColors: [
-            'gray.100',
-            'gray.500',
-            'red.500',
-            'green.500',
-        ],
+        alphaColors: ['gray.100', 'gray.500', 'red.500', 'green.500'],
         extend: {
             gridRow: {
                 'span-11': 'span 11 / span 11',
@@ -15,14 +10,14 @@ module.exports = {
             },
         },
         filter: {
-            'grayscale': 'grayscale(1)',
+            grayscale: 'grayscale(1)',
         },
         fontFamily: {
-            'gothic': ['NanumGothicCoding'],
+            gothic: ['NanumGothicCoding'],
         },
         inset: {
             '1/2': '50%',
-            'full': '100%',
+            full: '100%',
         },
         opacity: {
             '0': '0',
@@ -34,7 +29,7 @@ module.exports = {
         },
     },
     variants: {
-        'visibility': ['hover', 'group-hover'],
+        visibility: ['hover', 'group-hover'],
     },
     plugins: [
         require('tailwindcss-bg-alpha')(),

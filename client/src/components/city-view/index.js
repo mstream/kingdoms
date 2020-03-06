@@ -1,9 +1,7 @@
 // @flow
 
 import React from 'react';
-import type {
-    ClientAction,
-} from '../../state/actions';
+import type {ClientAction,} from '../../state/actions';
 import {closeCityView,} from '../../state/actions';
 import {connect} from 'react-redux';
 import {ResourcesComponent} from '../resources';

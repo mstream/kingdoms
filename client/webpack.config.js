@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 
 const PATHS = {
-    src: path.join(__dirname, 'src')
+    src: path.join(__dirname, 'src'),
 };
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     configFile: '../babel-client.config.js',
-                }
+                },
             },
             {
                 test: /\.css$/,
@@ -30,32 +30,32 @@ module.exports = {
                         loader: 'postcss-loader',
                         options: {
                             ident: 'postcss',
-                            plugins: [tailwindcssPlugin]
-                        }
-                    }
-                ]
+                            plugins: [tailwindcssPlugin],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.(bmp|eot|gif|png|jpe?g|svg|ttf|woff|woff2|xml)$/i,
-                loader: 'file-loader'
-            }
+                loader: 'file-loader',
+            },
         ],
     },
     plugins: [
         new HtmlWebPackPlugin({
             template: './src/assets/html/index.html',
-            filename: './index.html'
+            filename: './index.html',
         }),
         new HtmlWebPackPlugin({
             template: './src/assets/html/error.html',
-            filename: './error.html'
+            filename: './error.html',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),
         new PurgecssPlugin({
             defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
-            paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true}),
+            paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
         }),
-    ]
+    ],
 };

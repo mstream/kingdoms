@@ -16,7 +16,7 @@ import {
 } from '../../state/selectors/clientState';
 import type {CommonStateCity} from '../../../../common/src/state';
 
-const navigateToNextCityButton = ({nextCityId, openCityView}: {nextCityId: string, openCityView: typeof openCityView}) => {
+const navigateToNextCityButton = ({nextCityId, openCityView}: { nextCityId: string, openCityView: typeof openCityView }) => {
     const onNavigateToNextCityClick = () => {
         openCityView({cityId: nextCityId});
     };
@@ -31,7 +31,7 @@ const navigateToNextCityButton = ({nextCityId, openCityView}: {nextCityId: strin
     );
 };
 
-const navigateToPreviousCityButton = ({openCityView, previousCityId}: {previousCityId: string, openCityView: typeof openCityView}) => {
+const navigateToPreviousCityButton = ({openCityView, previousCityId}: { previousCityId: string, openCityView: typeof openCityView }) => {
     const onNavigateToPreviousCityClick = () => {
         openCityView({cityId: previousCityId});
     };
@@ -157,13 +157,19 @@ const Component = ({
         <div
             className={className}>
             {
-                previousCityId != null && navigateToPreviousCityButton({openCityView, previousCityId})
+                previousCityId != null && navigateToPreviousCityButton({
+                    openCityView,
+                    previousCityId
+                })
             }
             <div className="flex flex-row items-center justify-center">
                 {cityNameInput}
             </div>
             {
-                nextCityId != null && navigateToNextCityButton({nextCityId, openCityView})
+                nextCityId != null && navigateToNextCityButton({
+                    nextCityId,
+                    openCityView
+                })
             }
         </div>
     );

@@ -69,7 +69,7 @@ export const cameraReducer = (
         case UPDATE_STATE: {
             if (serverStateSelector(globalState) == null) {
                 const halfWorldSize = tileVectorToPixelVector({
-                    tileVector:  addVectors({
+                    tileVector: addVectors({
                         vector1: action.payload.serverState.world.size,
                         vector2: {x: 0.5, y: 0.5}
                     }),

@@ -1,9 +1,7 @@
 module.exports = {
     devtool: 'source-map',
     resolve: {
-        extensions: [
-            '.js'
-        ],
+        extensions: ['.js'],
     },
     target: 'node',
     mode: process.env.NODE_ENV || 'production',
@@ -15,7 +13,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     configFile: '../babel-server.config.js',
-                }
+                },
             },
         ],
     },

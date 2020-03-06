@@ -44,10 +44,12 @@ const Component = ({children, image, ratio}: Props) => {
 };
 
 const mapStateToProps = (state: ClientState): StateProps => {
-    return Object.freeze({});;
+    return Object.freeze({});
+    ;
 };
 
-const actionCreators: DispatchProps = Object.freeze({});;
+const actionCreators: DispatchProps = Object.freeze({});
+;
 
 export const ImageComponent = connect<Props,
     OwnProps,

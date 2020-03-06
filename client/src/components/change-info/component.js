@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type {Props} from './props';
-import classNames from "classnames";
+import classNames from 'classnames';
 import {numberToQuantityString} from '../../../../common/src/util';
 
 
@@ -26,6 +26,7 @@ export const Component = ({changeInfo}: Props) => {
             );
         });
     return (
-        <div className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{changeComponents}</div>
+        <div
+            className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{changeComponents}</div>
     );
 };

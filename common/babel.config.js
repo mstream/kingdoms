@@ -4,8 +4,8 @@ module.exports = {
             '@babel/preset-env',
             {
                 targets: {
-                    'node': '10.16'
-                }
+                    node: '10.16',
+                },
             },
         ],
         '@babel/preset-flow',

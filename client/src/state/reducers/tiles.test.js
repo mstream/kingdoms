@@ -1,21 +1,11 @@
 // @flow
 
-import {dummy, loadPlayer, updateState} from '../actions';
-import type {
-    ClientState,
-    ClientStateMenu,
-    ClientStatePlayer,
-    ClientStateTiles
-} from '../state';
+import {dummy, updateState} from '../actions';
+import type {ClientState, ClientStateTiles} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {
-    initialServerState
-} from '../../../../server/src/state/state';
-import {serverStateReducer} from './server-state';
-import type {ServerState} from '../../../../common/src/state';
+import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 import {playerReducer} from './player';
 import {tilesReducer} from './tiles';
-import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 
 describe('playerReducer', () => {
     it('initializes its state', () => {

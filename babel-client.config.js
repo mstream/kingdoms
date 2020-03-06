@@ -1,23 +1,19 @@
 module.exports = {
-    babelrcRoots: [
-        '.',
-        'client',
-        'common'
-    ],
+    babelrcRoots: ['.', 'client', 'common'],
     plugins: [
         [
             'flow-runtime',
             {
-                optInOnly: true
+                optInOnly: true,
             },
         ],
-        '@babel/plugin-transform-block-scoping'
+        '@babel/plugin-transform-block-scoping',
     ],
     presets: [
         [
             '@babel/preset-env',
             {
-                targets: '> 0.25%, not dead'
+                targets: '> 0.25%, not dead',
             },
         ],
         '@babel/preset-react',

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type {Props} from './props';
-import classNames from "classnames";
+import classNames from 'classnames';
 import {numberToQuantityString} from '../../../../common/src/util';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
 import {subtractQuantities} from '../../../../common/src/quantity';

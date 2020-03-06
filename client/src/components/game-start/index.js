@@ -10,7 +10,7 @@ import type {ClientState} from '../../state/state';
 import {
     isCityBeingCreatedSelector,
     isGameStartingSelector
-} from '../../state/selectors/clientState';
+} from '../../state/selectors/client-state';
 
 type OwnProps = {};
 

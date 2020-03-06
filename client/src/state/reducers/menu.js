@@ -14,7 +14,7 @@ import {
     isCityBeingCreatedSelector,
     playerNameSelector,
     serverStateSelector
-} from '../selectors/clientState';
+} from '../selectors/client-state';
 
 const openCityView = ({cityId, localState, globalState}: { cityId: string, localState: ClientStateMenu, globalState: ClientState }): ClientStateMenu => {
     if (serverStateSelector(globalState) == null) {

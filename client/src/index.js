@@ -6,7 +6,7 @@ import './assets/css/style.css';
 import {AppComponent} from './components/app';
 import {Provider} from 'react-redux';
 // $FlowFixMe
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './service-worker';
 import {store} from './state/store';
 
 const rootElement = document.getElementById('root');

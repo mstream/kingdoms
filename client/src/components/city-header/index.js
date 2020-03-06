@@ -13,7 +13,7 @@ import {
     currentlyViewedCitySelector,
     nextCityIdSelector,
     previousCityIdSelector
-} from '../../state/selectors/clientState';
+} from '../../state/selectors/client-state';
 import type {CommonStateCity} from '../../../../common/src/state';
 
 const navigateToNextCityButton = ({nextCityId, openCityView}: { nextCityId: string, openCityView: typeof openCityView }) => {

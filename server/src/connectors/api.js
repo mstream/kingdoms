@@ -5,7 +5,7 @@ import type {ServerState} from '../../../common/src/state';
 import {ServerStateType} from '../../../common/src/state';
 import type {Redis} from '../clients/redis';
 import type {ServerResponse} from '../../../common/src/actions';
-import type {ApiGateway} from '../clients/apiGateway';
+import type {ApiGateway} from '../clients/api-gateway';
 
 export const getState = async ({redis}: { redis: Redis }): Promise<ServerState> => {
     const serializedState = await redis.get('state');

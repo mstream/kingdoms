@@ -12,7 +12,7 @@ import {
     cityIdsOwnedByPlayerSelector,
     currentlyViewedCitySelector,
     isGameStartingSelector
-} from './clientState';
+} from './client-state';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

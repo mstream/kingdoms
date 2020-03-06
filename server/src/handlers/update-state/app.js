@@ -1,7 +1,7 @@
 // @flow
 
 import {executeAction, sendResponse} from '../../utils';
-import {createApiGatewayClient} from '../../clients/apiGateway';
+import {createApiGatewayClient} from '../../clients/api-gateway';
 import {createRedisClient} from '../../clients/redis';
 import {executeTimeStep} from '../../../../common/src/actions';
 import type {ScheduledHandler} from '../types';

@@ -4,7 +4,7 @@ import {rootReducer} from './state/reducers/root';
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
 import type {ServerState} from '../../common/src/state';
 import verror from 'verror';
-import type {ApiGateway} from './clients/apiGateway';
+import type {ApiGateway} from './clients/api-gateway';
 import type {Redis} from './clients/redis';
 import {getState} from './connectors/database';
 import {sendServerResponse} from './connectors/api';

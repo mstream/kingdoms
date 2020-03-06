@@ -5,7 +5,7 @@ import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 import {
     serverStatePlayerCitiesSelector,
     serverStatePlayerCityIdsSelector
-} from './serverState';
+} from './server-state';
 
 describe('serverStatePlayerCityIdsSelector', () => {
     it('returns all the city ids owned by the player', () => {

@@ -1,7 +1,7 @@
 // @flow
 
 import {createRedisClient} from '../../clients/redis';
-import {createApiGatewayClient} from '../../clients/apiGateway';
+import {createApiGatewayClient} from '../../clients/api-gateway';
 import {executeAction, sendResponse} from '../../utils';
 import type {
     ServerRequest,

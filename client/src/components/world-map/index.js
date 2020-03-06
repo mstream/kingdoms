@@ -34,7 +34,7 @@ import {
     cameraSelector,
     citiesSelector,
     tilesSelector
-} from '../../state/selectors/clientState';
+} from '../../state/selectors/client-state';
 
 
 const cullObjects = <T: $ReadOnly<{ geometry: Geometry, ... }>>(

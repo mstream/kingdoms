@@ -1,17 +1,16 @@
 // @flow
 
 import React from 'react';
-import {createGeometryStyle} from '../../util';
-import type {Dispatch} from 'redux';
-import {connect} from 'react-redux';
-import type {ClientAction,} from '../../state/actions';
-import {openCityView} from '../../state/actions';
+import { createGeometryStyle } from '../../util';
+import type { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import type { ClientAction } from '../../state/actions';
+import { openCityView } from '../../state/actions';
 import cityImage from '../../assets/images/cities/city.png';
-import {ImageComponent} from '../image';
-import {CityStatusBarComponent} from '../city-status-bar';
-import type {ClientState, ClientStateTile} from '../../state/state';
-import type {CommonStateCity} from '../../../../common/src/state';
-import {CityOwnerBarComponent} from '../city-owner-bar';
+import { ImageComponent } from '../image';
+import { CityStatusBarComponent } from '../city-status-bar';
+import type { ClientState, ClientStateTile } from '../../state/state';
+import type { CommonStateCity } from '../../../../common/src/state';
 
 type OwnProps = {
     city: CommonStateCity,
@@ -31,18 +30,17 @@ type Props = {
     ...DispatchProps,
 };
 
-const Component = ({city, cityId, cityTile, openCityView}: Props) => {
+const Component = ({ city, cityId, cityTile, openCityView }: Props) => {
     const style = {
-        ...createGeometryStyle({geometry: cityTile.geometry}),
+        ...createGeometryStyle({ geometry: cityTile.geometry }),
     };
 
     return (
         <div
             className="absolute cursor-pointer"
             style={style}
-            onClick={() => openCityView({cityId})}
+            onClick={() => openCityView({ cityId })}
         >
-            <CityOwnerBarComponent city={city}/>
             <ImageComponent image={cityImage} ratio="100%"/>
             <CityStatusBarComponent city={city}/>
         </div>
@@ -65,5 +63,5 @@ export const CityTileComponent = connect<Props,
     Dispatch<ClientAction>>(
     mapStateToProps,
     // $FlowFixMe
-    actionCreators
+    actionCreators,
 )(Component);

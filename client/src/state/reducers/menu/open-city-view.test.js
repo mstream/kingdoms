@@ -3,7 +3,7 @@
 import { updateStateMenuReducer } from './update-state';
 import { closeCityView, openCityView } from '../../actions';
 import type { ClientState, ClientStateMenu } from '../../state';
-import { emptyClientState } from '../../state';
+import { emptyClientState, TAB_OVERVIEW, TAB_UNITS } from '../../state';
 import { closeCityViewMenuReducer } from './close-city-view';
 import {
     emptyCityState,
@@ -31,6 +31,7 @@ describe('updateStateMenuReducer', () => {
             menu: {
                 ...emptyClientState.menu,
                 cityView: {
+                    ...emptyClientState.menu.cityView,
                     currentCityId: null,
                 },
             },
@@ -40,6 +41,7 @@ describe('updateStateMenuReducer', () => {
             ...previousLocalState,
             cityView: {
                 currentCityId: '1',
+                tab: TAB_OVERVIEW,
             },
         };
 

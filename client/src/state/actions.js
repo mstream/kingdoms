@@ -1,7 +1,8 @@
 // @flow
 
-import type {ServerState} from '../../../common/src/state';
-import type {Vector} from '../../../common/src/vector';
+import type { ServerState } from '../../../common/src/state';
+import type { Vector } from '../../../common/src/vector';
+import type { ClientStateCityViewTab } from './state';
 
 
 type BaseAction<T, P> = $ReadOnly<{
@@ -37,6 +38,17 @@ export const OPEN_CITY_VIEW: 'OPEN_CITY_VIEW' = 'OPEN_CITY_VIEW';
 export type ClientOpenCityViewAction = BaseAction<typeof OPEN_CITY_VIEW, $ReadOnly<{ cityId: string, }>>;
 
 
+export const SELECT_CITY_VIEW_TAB: 'SELECT_CITY_VIEW_TAB' = 'SELECT_CITY_VIEW_TAB';
+export type ClientSelectCityViewTabAction = BaseAction<typeof SELECT_CITY_VIEW_TAB, $ReadOnly<{ tab: ClientStateCityViewTab, }>>;
+
+export const selectCityViewTab: ActionCreator<ClientSelectCityViewTabAction> = (payload) => {
+    return {
+        type: SELECT_CITY_VIEW_TAB,
+        payload,
+    };
+};
+
+
 export const LOAD_PLAYER: 'LOAD_PLAYER' = 'LOAD_PLAYER';
 export type ClientLoadPlayerAction = BaseAction<typeof LOAD_PLAYER, $ReadOnly<{ name: string, }>>
 
@@ -46,6 +58,7 @@ export const loadPlayer: ActionCreator<ClientLoadPlayerAction> = (payload) => {
         payload,
     };
 };
+
 
 export const UPDATE_STATE: 'UPDATE_STATE' = 'UPDATE_STATE';
 export type ClientUpdateStateAction = BaseAction<typeof UPDATE_STATE, $ReadOnly<{ serverState: ServerState }>>;
@@ -178,12 +191,13 @@ export const zoomCameraOut = () => {
 
 
 export type ClientAction =
+    | ClientCloseCityViewAction
     | ClientDummyAction
     | ClientLoadPlayerAction
-    | ClientUpdateStateAction
     | ClientMoveCameraAction
-    | ClientZoomCameraAction
     | ClientOpenCityViewAction
-    | ClientCloseCityViewAction
     | ClientRequestBuildingUpgradeAction
     | ClientRequestCityCreationAction
+    | ClientSelectCityViewTabAction
+    | ClientUpdateStateAction
+    | ClientZoomCameraAction

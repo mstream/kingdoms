@@ -7,18 +7,19 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {emptyClientState} from '../../state/state';
 import {CityItemsListComponent} from '.';
+import type { ClientState } from '../../state/state';
 
 const mockStore = configureStore([]);
 
 describe('CityItemsListComponent', () => {
-    test('renders city name and its development level', () => {
-        const state = {
+    test('renders city name and its development level', async () => {
+        const state: ClientState = {
             ...emptyClientState,
         };
 
         const store = mockStore(state);
 
-        const {getByText} = render(
+        const {queryByText} = render(
             <Provider store={store}>
                 <CityItemsListComponent>
                     <p>item1</p>
@@ -27,8 +28,8 @@ describe('CityItemsListComponent', () => {
                 </CityItemsListComponent>
             </Provider>
         );
-        expect(getByText('item1')).toBeInTheDocument();
-        expect(getByText('item2')).toBeInTheDocument();
-        expect(getByText('item3')).toBeInTheDocument();
+        await expect(queryByText('item1')).toBeInTheDocument();
+        await expect(queryByText('item2')).toBeInTheDocument();
+        await expect(queryByText('item3')).toBeInTheDocument();
     });
 });

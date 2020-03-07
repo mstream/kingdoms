@@ -186,12 +186,6 @@ const Component = ({
         zoomCameraOut,
     ]);
 
-    if (tiles.terrain.length === 0) {
-        return (
-            <LoaderComponent/>
-        );
-    }
-
     const windowCenterLocation = multipleVectors({
         vector1: windowSize,
         vector2: {x: 0.5, y: 0.5},

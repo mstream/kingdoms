@@ -1,13 +1,13 @@
 // @flow
 
-import type {Dispatch} from 'redux';
-import {applyMiddleware, createStore} from 'redux';
-import {rootReducer} from './reducers/root';
-import {websocketMiddleware} from './middleware/websocket';
-import type {ClientAction} from './actions';
+import type { Dispatch } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { rootReducer } from './reducers/root';
+import { websocketMiddleware } from './middleware/websocket';
+import type { ClientAction } from './actions';
 import queryString from 'query-string';
-import type {ClientState} from './state';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import type { ClientState } from './state';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const clientId = `5ujsbhm0e966tcue4cca3dkmut`;
 const cognitoBaseUrl = `https://kingdoms.auth.eu-west-1.amazoncognito.com`;
@@ -35,18 +35,20 @@ const composeEnhancers = composeWithDevTools({
     trace: true,
 });
 
-export const store = createStore<ClientState,
-    ClientAction,
-    Dispatch<ClientAction>>(
-    rootReducer,
-    composeEnhancers(
-        applyMiddleware(
-            websocketMiddleware({
-                token: getIdToken(),
-                url: wsUrl,
-            })
+export const createClientStore = () => {
+    return createStore<ClientState,
+        ClientAction,
+        Dispatch<ClientAction>>(
+        rootReducer,
+        composeEnhancers(
+            applyMiddleware(
+                websocketMiddleware({
+                    token: getIdToken(),
+                    url: wsUrl,
+                }),
+            ),
         ),
-    )
-);
+    );
+};
 
 

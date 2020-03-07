@@ -45,7 +45,8 @@ describe('executeTimeStepCitiesReducer', () => {
                             tier: 0
                         }
                     },
-                    citizens: {
+                    units: {
+                        ...emptyCityState.units,
                         peasant: 0,
                     },
                     resources: {
@@ -72,8 +73,8 @@ describe('executeTimeStepCitiesReducer', () => {
                 ...previousState.cities,
                 '1': {
                     ...previousState.cities['1'],
-                    citizens: {
-                        ...previousState.cities['1'].citizens,
+                    units: {
+                        ...previousState.cities['1'].units,
                         peasant: 100,
                     }
                 }

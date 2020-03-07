@@ -1,8 +1,10 @@
 // @flow
 
 import type {
+    ClientStateCityViewTab,
     ClientState,
     ClientStateCamera,
+    ClientStateMenu,
     ClientStateTiles,
 } from '../state';
 import { createSelector } from 'reselect';
@@ -24,6 +26,10 @@ export const tilesSelector = (state: ClientState): ClientStateTiles => {
 
 export const cameraSelector = (state: ClientState): ClientStateCamera => {
     return state.camera;
+};
+
+export const menuSelector = (state: ClientState): ClientStateMenu => {
+    return state.menu;
 };
 
 export const playerNameSelector = (state: ClientState): ?string => {
@@ -80,6 +86,13 @@ export const currentlyViewedCitySelector = createSelector<ClientState, void, ?Co
     },
 );
 
+export const activeCityTabSelector = createSelector<ClientState, void, ClientStateCityViewTab, ClientStateMenu>(
+    menuSelector,
+    (menu) => {
+        return menu.cityView.tab;
+    },
+);
+
 export const cityIdsOwnedByPlayerSelector = createSelector<ClientState, void, $ReadOnlyArray<string>, { [string]: $ReadOnlyArray<string> }, ?string>(
     cityIdsByOwnerSelector,
     playerNameSelector,
@@ -94,11 +107,12 @@ export const cityIdsOwnedByPlayerSelector = createSelector<ClientState, void, $R
     },
 );
 
-export const isGameStartingSelector = createSelector<ClientState, void, boolean, $ReadOnlyArray<string>, ?string>(
+export const isGameStartingSelector = createSelector<ClientState, void, boolean, $ReadOnlyArray<string>, ?string, ?ServerState>(
     cityIdsOwnedByPlayerSelector,
     playerNameSelector,
-    (citiesOwnedByPlayer, playerName) => {
-        return playerName != null && citiesOwnedByPlayer.length === 0;
+    serverStateSelector,
+    (citiesOwnedByPlayer, playerName, serverState) => {
+        return serverState != null && playerName != null && citiesOwnedByPlayer.length === 0;
     },
 );
 

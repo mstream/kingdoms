@@ -1,17 +1,18 @@
 // @flow
 
-import type {ClientState} from '../state';
-import {emptyClientState} from '../state';
+import type { ClientState, ClientStateCityViewTab } from '../state';
+import { emptyClientState, TAB_OVERVIEW, TAB_UNITS } from '../state';
 import type {
     CommonStateCities,
     CommonStateCity
 } from '../../../../common/src/state';
 import {emptyCityState, emptyServerState} from '../../../../common/src/state';
 import {
+    activeCityTabSelector,
     citiesSelector,
     cityIdsOwnedByPlayerSelector,
     currentlyViewedCitySelector,
-    isGameStartingSelector
+    isGameStartingSelector,
 } from './client-state';
 
 describe('citiesSelector', () => {
@@ -41,6 +42,27 @@ describe('citiesSelector', () => {
         };
 
         const actual = citiesSelector(state);
+
+        expect(actual).toEqual(expected);
+    });
+});
+
+describe('activeCityTabSelector', () => {
+    it('returns the active tab', () => {
+        const state: ClientState = {
+            ...emptyClientState,
+            menu: {
+                ...emptyClientState.menu,
+                cityView: {
+                    ...emptyClientState.menu.cityView,
+                    tab: TAB_UNITS,
+                }
+            }
+        };
+
+        const expected: ClientStateCityViewTab = TAB_UNITS;
+
+        const actual = activeCityTabSelector(state);
 
         expect(actual).toEqual(expected);
     });

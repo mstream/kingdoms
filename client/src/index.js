@@ -7,7 +7,7 @@ import {AppComponent} from './components/app';
 import {Provider} from 'react-redux';
 // $FlowFixMe
 import * as serviceWorker from './service-worker';
-import {store} from './state/store';
+import {createClientStore} from './state/store';
 
 const rootElement = document.getElementById('root');
 
@@ -16,7 +16,7 @@ if (rootElement == null) {
 }
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={createClientStore()}>
         <AppComponent/>
     </Provider>,
     rootElement

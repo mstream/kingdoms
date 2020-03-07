@@ -9,11 +9,12 @@ import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {emptyClientState} from '../../state/state';
 import {CityStatusBarComponent} from '.';
+import type { ClientState } from '../../state/state';
 
 const mockStore = configureStore([]);
 
 describe('CityStatusBarComponent', () => {
-    test('renders city name and its development level', () => {
+    test('renders city name and its development level', async () => {
         const city: CommonStateCity = {
             ...emptyCityState,
             buildings: {
@@ -31,7 +32,7 @@ describe('CityStatusBarComponent', () => {
             ownerId: 'player1',
         };
 
-        const state = {
+        const state: ClientState = {
             ...emptyClientState,
             player: {
                 ...emptyClientState.player,
@@ -41,12 +42,12 @@ describe('CityStatusBarComponent', () => {
 
         const store = mockStore(state);
 
-        const {getByText} = render(
+        const {queryByText} = render(
             <Provider store={store}>
                 <CityStatusBarComponent city={city}/>
             </Provider>
         );
-        expect(getByText('3')).toBeInTheDocument();
-        expect(getByText('Cityone')).toBeInTheDocument();
+        await expect(queryByText('3')).toBeInTheDocument();
+        await expect(queryByText('Cityone')).toBeInTheDocument();
     });
 });

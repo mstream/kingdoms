@@ -9,11 +9,12 @@ import {emptyClientState} from '../../state/state';
 import {CostInfoComponent} from '.';
 import type {CommonStateResources} from '../../../../common/src/state';
 import {emptyResourcesState} from '../../../../common/src/state';
+import type { ClientState } from '../../state/state';
 
 const mockStore = configureStore([]);
 
 describe('CostInfoComponent', () => {
-    test('bla bla bla', () => {
+    test('bla bla bla', async () => {
         const availableResources: CommonStateResources = {
             ...emptyResourcesState,
             food: 100,
@@ -26,13 +27,13 @@ describe('CostInfoComponent', () => {
             wood: 10000,
         };
 
-        const state = {
+        const state: ClientState = {
             ...emptyClientState,
         };
 
         const store = mockStore(state);
 
-        const {getByText} = render(
+        const {queryByText} = render(
             <Provider store={store}>
                 <CostInfoComponent
                     availableResources={availableResources}
@@ -40,9 +41,9 @@ describe('CostInfoComponent', () => {
                 />
             </Provider>
         );
-        expect(getByText(/food/)).toBeInTheDocument();
-        expect(getByText(/200/)).toBeInTheDocument();
-        expect(getByText(/wood/)).toBeInTheDocument();
-        expect(getByText(/10k/)).toBeInTheDocument();
+        await expect(queryByText(/food/)).toBeInTheDocument();
+        await expect(queryByText(/200/)).toBeInTheDocument();
+        await expect(queryByText(/wood/)).toBeInTheDocument();
+        await expect(queryByText(/10k/)).toBeInTheDocument();
     });
 });

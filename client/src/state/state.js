@@ -13,8 +13,20 @@ export type ClientStateCamera = $ReadOnly<{
     zoomingSpeed: Vector,
 }>;
 
+export const TAB_OVERVIEW: 'TAB_OVERVIEW' = 'TAB_OVERVIEW';
+export const TAB_UNITS: 'TAB_UNITS' = 'TAB_UNITS';
+export const TAB_RESOURCES: 'TAB_RESOURCES' = 'TAB_RESOURCES';
+export const TAB_BUILDINGS: 'TAB_BUILDINGS' = 'TAB_BUILDINGS';
+
+export type ClientStateCityViewTab =
+    | typeof TAB_BUILDINGS
+    | typeof TAB_OVERVIEW
+    | typeof TAB_RESOURCES
+    | typeof TAB_UNITS;
+
 export type ClientStateCityView = $ReadOnly<{
     currentCityId: ?string,
+    tab: ClientStateCityViewTab,
 }>;
 
 export type ClientStateNewCity = $ReadOnly<{
@@ -111,6 +123,7 @@ const emptyMenuState: ClientStateMenu = {
     },
     cityView: {
         currentCityId: null,
+        tab: TAB_OVERVIEW,
     },
 };
 
@@ -120,6 +133,7 @@ const initialMenuState: ClientStateMenu = {
     },
     cityView: {
         currentCityId: null,
+        tab: TAB_OVERVIEW,
     },
 };
 

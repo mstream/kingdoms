@@ -1,14 +1,11 @@
 // @flow
-import type {CommonStateCity} from '../../../../common/src/state';
-import type {ClientState} from '../../state/state';
-import type {ActionCreatorsProps, StateToProps} from '../types';
-import {connect} from 'react-redux';
-import type {Dispatch} from 'redux';
-import type {ClientAction} from '../../state/actions';
+import type { ClientState } from '../../state/state';
+import type { ActionCreatorsProps, StateToProps } from '../types';
+import { connect } from 'react-redux';
+import type { Dispatch } from 'redux';
+import type { ClientAction } from '../../state/actions';
 
-type OwnProps = {
-    city: CommonStateCity,
-};
+type OwnProps = {};
 
 type StateProps = $ReadOnly<{
     ...StateToProps<typeof mapStateToProps>,
@@ -37,5 +34,5 @@ export const connectProps = connect<Props,
     ClientState,
     Dispatch<ClientAction>>(
     mapStateToProps,
-    actionCreators
+    actionCreators,
 );

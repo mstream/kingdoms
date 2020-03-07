@@ -1,5 +1,5 @@
 // @flow
-import type {ServerState} from '../../../common/src/state';
+import type { ServerState } from '../../../common/src/state';
 
 const initialCitiesState = {};
 
@@ -31,7 +31,7 @@ const initialRules = {
 
 const initialTime = new Date().toISOString();
 
-const initialWorld = {size: {x: 10, y: 10}};
+const initialWorld = { size: { x: 10, y: 10 } };
 
 export const initialServerState: ServerState = {
     cities: initialCitiesState,
@@ -50,8 +50,14 @@ export const initialCityState = {
             tier: 0,
         },
     },
-    citizens: {
+    units: {
+        archer: 0,
+        catapult: 0,
+        knight: 0,
+        noble: 0,
         peasant: 0,
+        pikeman: 0,
+        swordman: 0,
     },
     location: {
         x: 0,

@@ -1,25 +1,26 @@
 // @flow
 
-import type {ServerExecuteTimeStepAction} from '../../../../../common/src/actions';
+import type { ServerExecuteTimeStepAction } from '../../../../../common/src/actions';
 import type {
     CommonStateCities,
-    ServerState
+    CommonStateUnits,
+    ServerState,
 } from '../../../../../common/src/state';
 import {
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
-    convertChangeRateToDelta
+    convertChangeRateToDelta,
 } from '../../../../../common/src/state';
-import type {ServerStateReducerResult} from '../root';
-import {failure, success} from '../root';
+import type { ServerStateReducerResult } from '../root';
+import { failure, success } from '../root';
 
-export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerExecuteTimeStepAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
+export const executeTimeStepCitiesReducer = ({ action, state }: { action: ServerExecuteTimeStepAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
     const timeDelta = (Date.parse(action.payload) - Date.parse(state.time)) / 1000;
 
     if (timeDelta <= 0) {
-        return failure({errors: [`the time from the action is not past the time from the state`]});
+        return failure({ errors: [`the time from the action is not past the time from the state`] });
     }
 
     const newState = Object.keys(state.cities).reduce(
@@ -30,26 +31,26 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
                 changeInfo: calculateResourceChangeInfo({
                     city,
                     resourceType: 'food',
-                    rules: state.rules
-                })
+                    rules: state.rules,
+                }),
             });
 
             const woodChangeRate = convertChangeInfoToChangeRate({
                 changeInfo: calculateResourceChangeInfo({
                     city,
                     resourceType: 'wood',
-                    rules: state.rules
-                })
+                    rules: state.rules,
+                }),
             });
 
             const newFood = Math.max(0, city.resources.food + convertChangeRateToDelta({
                 changeRate: foodChangeRate,
-                timeDelta
+                timeDelta,
             }));
 
             const newWood = Math.max(0, city.resources.wood + convertChangeRateToDelta({
                 changeRate: woodChangeRate,
-                timeDelta
+                timeDelta,
             }));
 
             const newResourcesState = {
@@ -58,41 +59,42 @@ export const executeTimeStepCitiesReducer = ({action, state}: { action: ServerEx
             };
 
             const buildingTiersSum = calculateBuildingTierSum({
-                buildings: city.buildings
+                buildings: city.buildings,
             });
 
             const peasantsChange = calculatePeasantChangeInfo({
                 buildingTiersSum,
-                citizensQuantity: city.citizens.peasant,
+                unitsQuantity: city.units.peasant,
                 food: newFood,
                 foodChangeRate,
-                rules: state.rules
+                rules: state.rules,
             });
 
-            const newPeasants = Math.max(0, city.citizens.peasant + Math.floor(convertChangeRateToDelta({
-                changeRate: convertChangeInfoToChangeRate({changeInfo: peasantsChange}),
-                timeDelta
+            const newPeasants = Math.max(0, city.units.peasant + Math.floor(convertChangeRateToDelta({
+                changeRate: convertChangeInfoToChangeRate({ changeInfo: peasantsChange }),
+                timeDelta,
             })));
 
-            const newCitizensState = {
-                peasant: newPeasants
+            const newUnitsState: CommonStateUnits = {
+                ...city.units,
+                peasant: newPeasants,
             };
 
             const newCityState = {
                 ...city,
-                citizens: newCitizensState,
+                units: newUnitsState,
                 resources: newResourcesState,
             };
 
             return {
                 ...newState,
                 [cityId]: newCityState,
-            }
+            };
         },
-        {}
+        {},
     );
 
-    return success({state: newState});
+    return success({ state: newState });
 };
 
 

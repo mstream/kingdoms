@@ -1,27 +1,36 @@
 // @flow
 
-import type {ServerCreateCityAction} from '../../../../../common/src/actions';
+import type { ServerCreateCityAction } from '../../../../../common/src/actions';
 import type {
     CommonStateCities,
     CommonStateCity,
-    ServerState
+    ServerState,
 } from '../../../../../common/src/state';
-import {calculateNextCitySpot} from '../../../../../common/src/state';
-import type {ServerStateReducerResult} from '../root';
-import {failure, success} from '../root';
-import {validateCityName} from '../../validators';
+import { calculateNextCitySpot } from '../../../../../common/src/state';
+import type { ServerStateReducerResult } from '../root';
+import { failure, success } from '../root';
+import { validateCityName } from '../../validators';
+import { initialCityState } from '../../state';
 
-export const createCityCitiesReducer = ({action, state}: { action: ServerCreateCityAction, state: ServerState }): ServerStateReducerResult<CommonStateCities> => {
-    const {cityId, cityName, playerId} = action.payload;
+export const createCityCitiesReducer = (
+    {
+        action,
+        state,
+    }:
+        {
+            action: ServerCreateCityAction,
+            state: ServerState
+        }): ServerStateReducerResult<CommonStateCities> => {
+    const { cityId, cityName, playerId } = action.payload;
 
-    const cityValidationErrors = validateCityName({name: cityName});
+    const cityValidationErrors = validateCityName({ name: cityName });
 
     if (cityValidationErrors.length > 0) {
-        return failure({errors: cityValidationErrors});
+        return failure({ errors: cityValidationErrors });
     }
 
     if (Object.keys(state.cities).find(cityId => state.cities[cityId].ownerId === playerId) != null) {
-        return failure({errors: [`player already owns a city`]});
+        return failure({ errors: [`player already owns a city`] });
     }
 
     const takenSpots = Object.keys(state.cities).map(cityId => state.cities[cityId].location);
@@ -29,32 +38,18 @@ export const createCityCitiesReducer = ({action, state}: { action: ServerCreateC
     const freeCitySpot = calculateNextCitySpot({
         minimalCityMargin: state.rules.minimalCityMargin,
         takenSpots,
-        worldSize: state.world.size
+        worldSize: state.world.size,
     });
 
     if (freeCitySpot == null) {
-        return failure({errors: [`there is no space for another city`]});
+        return failure({ errors: [`there is no space for another city`] });
     }
 
     const newCity: CommonStateCity = {
-        buildings: {
-            lumberMill: {
-                tier: 0,
-            },
-            pasture: {
-                tier: 0,
-            }
-        },
-        citizens: {
-            peasant: 0,
-        },
+        ...initialCityState,
         location: freeCitySpot,
         name: cityName,
         ownerId: playerId,
-        resources: {
-            food: 0,
-            wood: 0,
-        },
     };
 
     const newState = {
@@ -62,5 +57,5 @@ export const createCityCitiesReducer = ({action, state}: { action: ServerCreateC
         [cityId]: newCity,
     };
 
-    return success({state: newState});
+    return success({ state: newState });
 };

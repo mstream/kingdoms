@@ -1,9 +1,9 @@
 // @flow
 
-import type {ServerState} from '../../../common/src/state';
-import type {Geometry} from '../../../common/src/geometry';
-import type {Vector} from '../../../common/src/vector';
-import type {Boundary} from '../../../common/src/boundary';
+import type { ServerState } from '../../../common/src/state';
+import type { Geometry } from '../../../common/src/geometry';
+import type { Vector } from '../../../common/src/vector';
+import type { Boundary } from '../../../common/src/boundary';
 
 export type ClientStateCamera = $ReadOnly<{
     locationLimit: Boundary,
@@ -61,19 +61,19 @@ export type ClientState = $ReadOnly<{
 
 const emptyCameraState: ClientStateCamera = {
     locationLimit: {
-        min: {x: 0, y: 0,},
-        max: {x: 0, y: 0,},
+        min: { x: 0, y: 0 },
+        max: { x: 0, y: 0 },
     },
     geometry: {
-        location: {x: 0, y: 0,},
-        size: {x: 0, y: 0,},
+        location: { x: 0, y: 0 },
+        size: { x: 0, y: 0 },
     },
-    movementSpeed: {x: 0, y: 0,},
+    movementSpeed: { x: 0, y: 0 },
     sizeLimit: {
-        min: {x: 0, y: 0,},
-        max: {x: 0, y: 0,},
+        min: { x: 0, y: 0 },
+        max: { x: 0, y: 0 },
     },
-    zoomingSpeed: {x: 0, y: 0,},
+    zoomingSpeed: { x: 0, y: 0 },
 };
 
 const initialCameraState: ClientStateCamera = {
@@ -88,16 +88,16 @@ const initialCameraState: ClientStateCamera = {
         },
     },
     locationLimit: {
-        min: {x: 0, y: 0},
-        max: {x: 0, y: 0},
+        min: { x: 0, y: 0 },
+        max: { x: 0, y: 0 },
     },
     movementSpeed: {
         x: 0.1,
         y: 0.1,
     },
     sizeLimit: {
-        min: {x: 640, y: 400},
-        max: {x: 3200, y: 2000},
+        min: { x: 640, y: 400 },
+        max: { x: 3200, y: 2000 },
     },
     zoomingSpeed: {
         x: 100,

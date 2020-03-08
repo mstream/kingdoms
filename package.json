@@ -33,7 +33,7 @@
         "tailwindcss-filters": "3.0.0"
     },
     "dependencies": {
-        "aws-sdk": "2.634.0",
+        "aws-sdk": "2.635.0",
         "classnames": "2.2.6",
         "combine-reducers-global-state": "1.0.1",
         "flow-runtime": "0.17.0",

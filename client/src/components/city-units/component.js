@@ -3,6 +3,7 @@
 import React from 'react';
 import type { Props } from './props';
 import { unitVisuals } from '../../assets/images/units';
+import type { CommonStateUnits } from '../../../../common/src/state';
 import {
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
@@ -16,6 +17,16 @@ import { CityItemsListComponent } from '../city-items-list';
 
 export const testId = 'city-units';
 
+const unitsOrder: $ReadOnlyArray<$Keys<CommonStateUnits>> = [
+    'peasant',
+    'pikeman',
+    'archer',
+    'swordman',
+    'knight',
+    'catapult',
+    'noble',
+];
+
 export const Component = (
     {
         city,
@@ -28,7 +39,7 @@ export const Component = (
         return null;
     }
 
-    const unitsComponents = Object.keys(city.units).map(unitType => {
+    const unitsComponents = unitsOrder.map(unitType => {
         const unitsQuantity = city.units[unitType];
         const unitVisual = unitVisuals[unitType];
         const buildingTiersSum = calculateBuildingTierSum({ buildings: city.buildings });

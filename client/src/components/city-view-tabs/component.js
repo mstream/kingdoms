@@ -20,19 +20,19 @@ const tabsOrder = [
 
 const tabsVisuals = {
     [TAB_OVERVIEW]: {
-        icon: 'info-square',
+        icon: 'icofont-info-square',
         name: 'Overview',
     },
     [TAB_UNITS]: {
-        icon: 'people',
+        icon: 'icofont-people',
         name: 'Units',
     },
     [TAB_RESOURCES]: {
-        icon: 'corn',
+        icon: 'icofont-corn',
         name: 'Resources',
     },
     [TAB_BUILDINGS]: {
-        icon: 'home',
+        icon: 'icofont-home',
         name: 'Buildings',
     },
 };
@@ -52,7 +52,7 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
 
             const { icon, name } = tabsVisuals[tab];
 
-            const iconClassName = `icofont icofont-${icon}`;
+            const iconClassName = `icofont ${icon}`;
 
             const onClick = (event) => {
                 selectCityViewTab({ tab });

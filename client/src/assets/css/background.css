@@ -1,0 +1,30 @@
+
+.bricks-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/bricks.png");
+}
+
+.metal-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/metal.png");
+}
+
+.parchment-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/parchment.png");
+}
+
+.wallpaper-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/wallpaper.png");
+}
+
+.wallpaper2-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/wallpaper2.png");
+}
+
+.wood-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/wood.png");
+}

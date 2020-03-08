@@ -22,6 +22,7 @@ export type CommonStateResource = number;
 export type CommonStateBuildings = {
     lumberMill: CommonStateBuilding,
     pasture: CommonStateBuilding,
+    warehouse: CommonStateBuilding,
 }
 
 export type CommonStateUnits = {
@@ -55,6 +56,7 @@ export type CommonStateCitiesByOwner = { [string]: $ReadOnlyArray<string>, ... }
 export type CommonStateBuildingUpgradeCosts = {
     lumberMill: CommonStateResources,
     pasture: CommonStateResources,
+    warehouse: CommonStateResources,
 };
 
 export type CommonStateRules = {
@@ -253,6 +255,7 @@ const emptyRulesState = {
     buildingUpgradeCosts: {
         lumberMill: emptyResourcesState,
         pasture: emptyResourcesState,
+        warehouse: emptyResourcesState,
     },
     minimalCityMargin: {
         x: 0,
@@ -276,14 +279,15 @@ export const emptyServerState: ServerState = {
     world: emptyWorldState,
 };
 
+const emptyBuildingState: CommonStateBuilding = {
+    tier: 0,
+};
+
 export const emptyCityState = {
     buildings: {
-        lumberMill: {
-            tier: 0,
-        },
-        pasture: {
-            tier: 0,
-        },
+        lumberMill: emptyBuildingState,
+        pasture: emptyBuildingState,
+        warehouse: emptyBuildingState,
     },
     units: {
         archer: 0,

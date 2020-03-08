@@ -68,9 +68,7 @@ describe('upgradeBuildingCitiesReducer', () => {
                     ...emptyCityState,
                     ownerId: 'player1',
                     buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
+                        ...emptyCityState.buildings,
                         pasture: {
                             tier: 0,
                         }
@@ -116,12 +114,10 @@ describe('upgradeBuildingCitiesReducer', () => {
                     ...emptyCityState,
                     ownerId: 'player1',
                     buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
+                        ...emptyCityState.buildings,
                         pasture: {
                             tier: 0,
-                        }
+                        },
                     },
                     resources: {
                         food: 400,

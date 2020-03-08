@@ -20,17 +20,7 @@ import {CostInfoComponent} from '../cost-info';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
 import {subtractQuantities} from '../../../../common/src/quantity';
 import type {ClientState} from '../../state/state';
-
-const buildingVisuals = {
-    lumberMill: {
-        name: 'Lumber Mill',
-        image: lumberMillImage
-    },
-    pasture: {
-        name: 'Pasture',
-        image: pastureImage
-    },
-};
+import { buildingVisuals } from '../../assets/images/buildings';
 
 type OwnProps = {
     city: CommonStateCity,

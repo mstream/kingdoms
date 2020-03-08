@@ -18,6 +18,10 @@ const initialRules = {
             food: 0,
             wood: 50,
         },
+        warehouse: {
+            food: 0,
+            wood: 50,
+        },
     },
     minimalCityMargin: {
         x: 3,
@@ -47,6 +51,9 @@ export const initialCityState = {
             tier: 0,
         },
         pasture: {
+            tier: 0,
+        },
+        warehouse: {
             tier: 0,
         },
     },

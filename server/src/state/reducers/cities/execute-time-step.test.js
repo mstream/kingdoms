@@ -37,22 +37,10 @@ describe('executeTimeStepCitiesReducer', () => {
             cities: {
                 '1': {
                     ...emptyCityState,
-                    buildings: {
-                        lumberMill: {
-                            tier: 0,
-                        },
-                        pasture: {
-                            tier: 0
-                        }
-                    },
                     units: {
                         ...emptyCityState.units,
                         peasant: 0,
                     },
-                    resources: {
-                        food: 0,
-                        wood: 0,
-                    }
                 }
             },
             rules: {

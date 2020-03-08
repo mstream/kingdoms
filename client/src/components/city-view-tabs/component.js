@@ -20,15 +20,19 @@ const tabsOrder = [
 
 const tabsVisuals = {
     [TAB_OVERVIEW]: {
+        icon: 'info-square',
         name: 'Overview',
     },
     [TAB_UNITS]: {
+        icon: 'people',
         name: 'Units',
     },
     [TAB_RESOURCES]: {
+        icon: 'corn',
         name: 'Resources',
     },
     [TAB_BUILDINGS]: {
+        icon: 'home',
         name: 'Buildings',
     },
 };
@@ -38,12 +42,17 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
     const tabComponents = tabsOrder.map(
         (tab: ClientStateCityViewTab) => {
             const className = classNames(
-                'py-1 px-2 cursor-pointer',
+                'py-1 px-2',
                 {
                     'hover:bg-orange-600': tab !== activeTab,
                     'bg-orange-500': tab === activeTab,
+                    'cursor-pointer': tab !== activeTab,
                 },
             );
+
+            const { icon, name } = tabsVisuals[tab];
+
+            const iconClassName = `icofont icofont-${icon}`;
 
             const onClick = (event) => {
                 selectCityViewTab({ tab });
@@ -52,9 +61,11 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
             return (
                 <div key={tab}
                      className={className}
+                     role="tab"
                      onClick={onClick}
                 >
-                    {tabsVisuals[tab].name}
+                    <i className={iconClassName}/>
+                    {name}
                 </div>
             );
         },
@@ -62,7 +73,9 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
 
     return (
         <div
-            className="flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100">
+            className="flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100"
+            role="tablist"
+        >
             {tabComponents}
         </div>
     );

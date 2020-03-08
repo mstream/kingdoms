@@ -4,10 +4,10 @@ import React from 'react';
 import type { Props } from './props';
 import { CityHeaderComponent } from '../city-header';
 import { CityViewTabsComponent } from '../city-view-tabs';
-import { UnitsComponent } from '../units';
-import { ResourcesComponent } from '../resources';
-import { BuildingsComponent } from '../buildings';
-import { TAB_BUILDINGS, TAB_RESOURCES, TAB_UNITS } from '../../state/state';
+import { CityUnitsComponent } from '../city-units';
+import { CityResourcesComponent } from '../city-resources';
+import { CityBuildingsComponent } from '../city-buildings';
+import { CityOverviewComponent } from '../city-overview';
 
 
 export const Component = (
@@ -36,18 +36,10 @@ export const Component = (
                 className="bricks-bg absolute w-9/12 rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl bg-gray-800">
                 <CityHeaderComponent/>
                 <CityViewTabsComponent/>
-                {
-                    activeTab === TAB_UNITS &&
-                    <UnitsComponent city={city}/>
-                }
-                {
-                    activeTab === TAB_RESOURCES &&
-                    <ResourcesComponent city={city}/>
-                }
-                {
-                    activeTab === TAB_BUILDINGS &&
-                    <BuildingsComponent city={city} cityId={cityId}/>
-                }
+                <CityOverviewComponent/>
+                <CityUnitsComponent/>
+                <CityResourcesComponent/>
+                <CityBuildingsComponent/>
             </div>
         </div>
     );

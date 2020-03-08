@@ -15,6 +15,10 @@ import {
 } from '../../state/state';
 import { CityViewComponent } from '.';
 import { emptyCityState, emptyServerState } from '../../../../common/src/state';
+import { cityUnitsComponentTestId } from '../city-units';
+import { cityResourcesComponentTestId } from '../city-resources';
+import { cityBuildingsComponentTestId } from '../city-buildings';
+import { cityOverviewComponentTestId } from '../city-overview';
 
 const mockStore = configureStore([]);
 
@@ -42,20 +46,13 @@ describe('CityViewComponent', () => {
 
         const store = mockStore(state);
 
-        const { queryByText } = render(
+        const { queryByTestId } = render(
             <Provider store={store}>
                 <CityViewComponent/>
             </Provider>,
         );
 
-        await expect(queryByText(/Overview/)).toBeInTheDocument();
-        await expect(queryByText(/Resources/)).toBeInTheDocument();
-        await expect(queryByText(/Units/)).toBeInTheDocument();
-        await expect(queryByText(/Buildings/)).toBeInTheDocument();
-
-        await expect(queryByText(/Peasants/)).not.toBeInTheDocument();
-        await expect(queryByText(/Pasture/)).not.toBeInTheDocument();
-        await expect(queryByText(/Food/)).not.toBeInTheDocument();
+        await expect(queryByTestId(cityOverviewComponentTestId)).toBeInTheDocument();
     });
 
     test('displays units when the units tab is active', async () => {
@@ -81,20 +78,13 @@ describe('CityViewComponent', () => {
 
         const store = mockStore(state);
 
-        const { queryByText } = render(
+        const { queryByTestId } = render(
             <Provider store={store}>
                 <CityViewComponent/>
             </Provider>,
         );
 
-        await expect(queryByText(/Overview/)).toBeInTheDocument();
-        await expect(queryByText(/Resources/)).toBeInTheDocument();
-        await expect(queryByText(/Units/)).toBeInTheDocument();
-        await expect(queryByText(/Buildings/)).toBeInTheDocument();
-
-        await expect(queryByText(/Peasants/)).toBeInTheDocument();
-        await expect(queryByText(/Pasture/)).not.toBeInTheDocument();
-        await expect(queryByText(/Food/)).not.toBeInTheDocument();
+        await expect(queryByTestId(cityUnitsComponentTestId)).toBeInTheDocument();
     });
 
     test('displays buildings when the buildings tab is active', async () => {
@@ -120,20 +110,13 @@ describe('CityViewComponent', () => {
 
         const store = mockStore(state);
 
-        const { queryByText } = render(
+        const { queryByTestId } = render(
             <Provider store={store}>
                 <CityViewComponent/>
             </Provider>,
         );
 
-        await expect(queryByText(/Overview/)).toBeInTheDocument();
-        await expect(queryByText(/Resources/)).toBeInTheDocument();
-        await expect(queryByText(/Units/)).toBeInTheDocument();
-        await expect(queryByText(/Buildings/)).toBeInTheDocument();
-
-        await expect(queryByText(/Peasants/)).not.toBeInTheDocument();
-        await expect(queryByText(/Pasture/)).toBeInTheDocument();
-        await expect(queryByText(/Food/)).not.toBeInTheDocument();
+        await expect(queryByTestId(cityBuildingsComponentTestId)).toBeInTheDocument();
     });
 
     test('displays resources when the resources tab is active', async () => {
@@ -159,19 +142,12 @@ describe('CityViewComponent', () => {
 
         const store = mockStore(state);
 
-        const { queryByText } = render(
+        const { queryByTestId } = render(
             <Provider store={store}>
                 <CityViewComponent/>
             </Provider>,
         );
 
-        await expect(queryByText(/Overview/)).toBeInTheDocument();
-        await expect(queryByText(/Resources/)).toBeInTheDocument();
-        await expect(queryByText(/Units/)).toBeInTheDocument();
-        await expect(queryByText(/Buildings/)).toBeInTheDocument();
-
-        await expect(queryByText(/Peasants/)).not.toBeInTheDocument();
-        await expect(queryByText(/Pasture/)).not.toBeInTheDocument();
-        await expect(queryByText(/Food/)).toBeInTheDocument();
+        await expect(queryByTestId(cityResourcesComponentTestId)).toBeInTheDocument();
     });
 });

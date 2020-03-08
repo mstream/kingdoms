@@ -1,51 +1,34 @@
 // @flow
 
 import React from 'react';
-import type {Dispatch} from 'redux';
-import {connect} from 'react-redux';
-import lumberMillImage from '../../assets/images/buildings/lumber-mill.png';
-import pastureImage from '../../assets/images/buildings/pasture.png';
-import type {ClientAction,} from '../../state/actions';
-import {requestBuildingUpgrade} from '../../state/actions';
-import {CityItemsListComponent} from '../city-items-list';
-import romanDecimalConverter from 'roman-decimal';
-import {ImageComponent} from '../image';
-import classNames from 'classnames';
-import type {
-    CommonStateCity,
-    CommonStateRules
-} from '../../../../common/src/state';
-import {calculateBuildingsUpgradeCost} from '../../../../common/src/state';
-import {CostInfoComponent} from '../cost-info';
-import {convertQuantitiesToResources} from '../../../../common/src/resource';
-import {subtractQuantities} from '../../../../common/src/quantity';
-import type {ClientState} from '../../state/state';
+import type { Props } from './props';
+import { calculateBuildingsUpgradeCost } from '../../../../common/src/state';
+import { ImageComponent } from '../image';
+import { CityItemsListComponent } from '../city-items-list';
 import { buildingVisuals } from '../../assets/images/buildings';
+import { convertQuantitiesToResources } from '../../../../common/src/resource';
+import { subtractQuantities } from '../../../../common/src/quantity';
+import classNames from 'classnames';
+import romanDecimalConverter from 'roman-decimal';
+import { CostInfoComponent } from '../cost-info';
 
-type OwnProps = {
-    city: CommonStateCity,
-    cityId: string,
-};
+export const testId = 'city-buildings';
 
-type StateProps = {
-    rules: ?CommonStateRules
-};
+export const Component = (
+    {
+        city,
+        cityId,
+        isVisible,
+        requestBuildingUpgrade,
+        rules,
+    }: Props) => {
 
-type DispatchProps = {
-    requestBuildingUpgrade: typeof requestBuildingUpgrade,
-};
-
-type Props = {
-    ...OwnProps,
-    ...StateProps,
-    ...DispatchProps,
-};
-
-const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
-    if (rules == null) {
+    if (!isVisible || rules == null) {
         return null;
     }
-    const {buildings, resources} = city;
+
+    const { buildings, resources } = city;
+
     const buildingComponents = Object.keys(buildings).map(buildingType => {
         const building = buildings[buildingType];
         const buildingVisual = buildingVisuals[buildingType];
@@ -54,14 +37,14 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
         const requiredResources = calculateBuildingsUpgradeCost({
             buildingTier: building.tier,
             buildingType,
-            rules
+            rules,
         });
 
         const availableResourcesAfter = convertQuantitiesToResources({
             quantities: subtractQuantities({
                 quantities1: resources,
                 quantities2: requiredResources,
-            })
+            }),
         });
 
         const canBeUpgraded = !Object
@@ -73,8 +56,8 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
             {
                 'filter-grayscale': isDisabled,
                 'opacity-25': isDisabled,
-                'opacity-100': !isDisabled
-            }
+                'opacity-100': !isDisabled,
+            },
         );
 
         const buttonClassName = classNames(
@@ -85,7 +68,7 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
                 'opacity-25': !canBeUpgraded,
                 'opacity-100': canBeUpgraded,
                 'hover:bg-green-400': canBeUpgraded,
-            }
+            },
         );
 
         return (
@@ -95,7 +78,7 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
                 <button className={buttonClassName}
                         onClick={() => requestBuildingUpgrade({
                             cityId: cityId,
-                            buildingType
+                            buildingType,
                         })}>
                     {building.tier === 0 ? 'build' : 'upgrade'}
                 </button>
@@ -118,28 +101,10 @@ const Component = ({city, cityId, requestBuildingUpgrade, rules}: Props) => {
             </div>
         );
     });
+
     return (
-        <CityItemsListComponent>{buildingComponents}</CityItemsListComponent>
+        <div data-testid={testId} role="tabpanel">
+            <CityItemsListComponent>{buildingComponents}</CityItemsListComponent>
+        </div>
     );
 };
-
-const mapStateToProps = (state: ClientState): StateProps => {
-    return {
-        rules: state == null ? null : (state.serverState == null ? null : state.serverState.rules),
-    };
-};
-
-const actionCreators: DispatchProps = {
-    requestBuildingUpgrade
-};
-
-export const BuildingsComponent = connect<Props,
-    OwnProps,
-    StateProps,
-    DispatchProps,
-    ClientState,
-    Dispatch<ClientAction>>(
-    mapStateToProps,
-    // $FlowFixMe
-    actionCreators
-)(Component);

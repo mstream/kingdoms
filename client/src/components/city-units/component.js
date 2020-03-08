@@ -1,47 +1,33 @@
 // @flow
 
 import React from 'react';
-import type { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import type { ClientAction } from '../../state/actions';
-import { CityItemsListComponent } from '../city-items-list';
-import { ImageComponent } from '../image';
-import type {
-    CommonStateCity,
-    CommonStateRules,
-} from '../../../../common/src/state';
+import type { Props } from './props';
+import { unitVisuals } from '../../assets/images/units';
 import {
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
 } from '../../../../common/src/state';
-import { ChangeInfoComponent } from '../change-info';
-import type { ClientState } from '../../state/state';
 import { numberToQuantityString } from '../../../../common/src/util';
-import { unitVisuals } from '../../assets/images/units';
+import { ChangeInfoComponent } from '../change-info';
+import { ImageComponent } from '../image';
+import { CityItemsListComponent } from '../city-items-list';
 
+export const testId = 'city-units';
 
-type OwnProps = {
-    city: CommonStateCity,
-};
+export const Component = (
+    {
+        city,
+        isVisible,
+        rules,
+    }: Props,
+) => {
 
-type StateProps = {
-    rules: ?CommonStateRules,
-};
-
-type DispatchProps = {};
-
-type Props = {
-    ...OwnProps,
-    ...StateProps,
-    ...DispatchProps,
-};
-
-const Component = ({ city, rules }: Props) => {
-    if (rules == null) {
+    if (!isVisible || rules == null) {
         return null;
     }
+
     const unitsComponents = Object.keys(city.units).map(unitType => {
         const unitsQuantity = city.units[unitType];
         const unitVisual = unitVisuals[unitType];
@@ -61,6 +47,7 @@ const Component = ({ city, rules }: Props) => {
             foodChangeRate,
             rules,
         });
+
         return (
             <div
                 key={unitType}
@@ -75,26 +62,10 @@ const Component = ({ city, rules }: Props) => {
             </div>
         );
     });
+
     return (
-        <CityItemsListComponent>{unitsComponents}</CityItemsListComponent>
+        <div data-testid={testId} role="tabpanel">
+            <CityItemsListComponent>{unitsComponents}</CityItemsListComponent>
+        </div>
     );
 };
-
-const mapStateToProps = (state: ClientState): StateProps => {
-    return {
-        rules: state.serverState == null ? null : state.serverState.rules,
-    };
-};
-
-const actionCreators: DispatchProps = Object.freeze({});
-
-export const UnitsComponent = connect<Props,
-    OwnProps,
-    StateProps,
-    DispatchProps,
-    ClientState,
-    Dispatch<ClientAction>>(
-    mapStateToProps,
-    // $FlowFixMe
-    actionCreators,
-)(Component);

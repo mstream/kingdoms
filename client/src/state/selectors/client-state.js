@@ -1,9 +1,9 @@
 // @flow
 
 import type {
-    ClientStateCityViewTab,
     ClientState,
     ClientStateCamera,
+    ClientStateCityViewTab,
     ClientStateMenu,
     ClientStateTiles,
 } from '../state';
@@ -11,6 +11,7 @@ import { createSelector } from 'reselect';
 import type {
     CommonStateCities,
     CommonStateCity,
+    CommonStateRules,
     CommonStateWorld,
     ServerState,
 } from '../../../../common/src/state';
@@ -43,6 +44,16 @@ export const serverStateSelector = (state: ClientState): ?ServerState => {
 export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
     return state.menu.cityView.currentCityId;
 };
+
+export const rulesSelector = createSelector<ClientState, void, ?CommonStateRules, ?ServerState>(
+    serverStateSelector,
+    (serverState) => {
+        if (serverState == null) {
+            return null;
+        }
+        return serverState.rules;
+    },
+);
 
 export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld, ?ServerState>(
     serverStateSelector,

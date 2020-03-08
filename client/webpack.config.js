@@ -7,7 +7,6 @@ const PurgecssPlugin = require('purgecss-webpack-plugin');
 const MinimizeFontsPlugin = require('./webpack/minimize-fonts-plugin');
 
 
-
 const PATHS = {
     src: path.join(__dirname, 'src'),
 };
@@ -30,7 +29,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.(bmp|png|ttf|woff2)$/i,
+                test: /\.(bmp|ico|png|ttf|woff2)$/i,
                 exclude: exclusions,
                 loader: 'file-loader',
             },
@@ -60,12 +59,14 @@ module.exports = {
             filename: '[name].css',
         }),
         new HtmlWebPackPlugin({
-            template: './src/assets/html/index.html',
+            favicon: './src/assets/images/favicon.ico',
             filename: './index.html',
+            template: './src/assets/html/index.html',
         }),
         new HtmlWebPackPlugin({
-            template: './src/assets/html/error.html',
+            favicon: './src/assets/images/favicon.ico',
             filename: './error.html',
+            template: './src/assets/html/error.html',
         }),
         new MinimizeFontsPlugin(),
     ],

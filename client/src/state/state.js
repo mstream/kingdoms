@@ -53,6 +53,7 @@ export type ClientStateTile = $ReadOnly<{
 
 export type ClientStateCityTiles = $ReadOnly<{
     [string]: ClientStateTile,
+    ...
 }>;
 
 export type ClientStateTerrainTiles = $ReadOnlyArray<ClientStateTile>;
@@ -156,6 +157,16 @@ const emptyTilesState: ClientStateTiles = {
 const initialTilesState: ClientStateTiles = {
     city: Object.freeze({}),
     terrain: [],
+};
+
+export const emptyClientStateCityTile: ClientStateTile = {
+    geometry: {
+        location: { x: 0, y: 0 },
+        size: { x: 0, y: 0 },
+    },
+    index: { x: 0, y: 0 },
+    textureIndex: 0,
+    type: 'CITY',
 };
 
 export const emptyClientState: ClientState = {

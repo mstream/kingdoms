@@ -4,9 +4,9 @@ import React from 'react';
 import type { Props } from './props';
 
 
-export const Component = ({ isServerStateBeingLoaded }: Props) => {
+export const Component = ({ isCommonstateBeingLoaded }: Props) => {
 
-    if (isServerStateBeingLoaded === false) {
+    if (isCommonstateBeingLoaded === false) {
         return null;
     }
 

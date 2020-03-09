@@ -1,6 +1,6 @@
 // @flow
 
-import type { ServerState } from '../../../common/src/state';
+import type { CommonState } from '../../../common/src/state';
 import type { Geometry } from '../../../common/src/geometry';
 import type { Vector } from '../../../common/src/vector';
 import type { Boundary } from '../../../common/src/boundary';
@@ -68,7 +68,7 @@ export type ClientState = $ReadOnly<{
     camera: ClientStateCamera,
     menu: ClientStateMenu,
     player: ClientStatePlayer,
-    serverState: ?ServerState,
+    commonState: ?CommonState,
     tiles: ClientStateTiles,
 }>;
 
@@ -146,8 +146,8 @@ const initialPlayerState: ClientStatePlayer = {
     name: null,
 };
 
-const emptyServerState: ?ServerState = null;
-const initialServerState: ?ServerState = null;
+const emptyCommonstate: ?CommonState = null;
+const initialCommonstate: ?CommonState = null;
 
 const emptyTilesState: ClientStateTiles = {
     city: Object.freeze({}),
@@ -173,7 +173,7 @@ export const emptyClientState: ClientState = {
     camera: emptyCameraState,
     menu: emptyMenuState,
     player: emptyPlayerState,
-    serverState: emptyServerState,
+    commonState: emptyCommonstate,
     tiles: emptyTilesState,
 };
 
@@ -181,7 +181,7 @@ export const initialClientState: ClientState = {
     camera: initialCameraState,
     menu: initialMenuState,
     player: initialPlayerState,
-    serverState: initialServerState,
+    commonState: initialCommonstate,
     tiles: initialTilesState,
 };
 

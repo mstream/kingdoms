@@ -5,7 +5,7 @@ import type { ClientOpenCityViewAction } from '../../actions';
 import {
     cityIdsByOwnerSelector,
     playerNameSelector,
-    serverStateSelector,
+    commonStateSelector,
 } from '../../selectors/client-state';
 
 export const openCityViewMenuReducer = (
@@ -20,7 +20,7 @@ export const openCityViewMenuReducer = (
             globalState: ClientState,
         },
 ): ClientStateMenu => {
-    if (serverStateSelector(globalState) == null) {
+    if (commonStateSelector(globalState) == null) {
         console.warn(`opening city view without the server state loaded`);
         return localState;
     }

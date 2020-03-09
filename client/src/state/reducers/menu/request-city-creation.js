@@ -12,7 +12,7 @@ import type {
 import {
     cityIdsByOwnerSelector,
     playerNameSelector,
-    serverStateSelector,
+    commonStateSelector,
 } from '../../selectors/client-state';
 
 export const requestCityCreationMenuReducer = (

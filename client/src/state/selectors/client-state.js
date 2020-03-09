@@ -13,17 +13,12 @@ import type {
     CommonStateCity,
     CommonStateRules,
     CommonStateWorld,
-    ServerState,
+    CommonState,
 } from '../../../../common/src/state';
-import { groupIdsByOwnerId } from './util';
-
-export const isCityBeingCreatedSelector = (state: ClientState): boolean => {
-    return state.menu.newCity.isCityBeingCreated;
-};
-
-export const tilesSelector = (state: ClientState): ClientStateTiles => {
-    return state.tiles;
-};
+import {
+    commonStateCitiesSelector, commonStateCityIdsByOwnerSelector,
+    commonStateRulesSelector, commonStateWorldSelector,
+} from '../../../../common/src/selectors/common-state';
 
 export const cameraSelector = (state: ClientState): ClientStateCamera => {
     return state.camera;
@@ -33,55 +28,64 @@ export const menuSelector = (state: ClientState): ClientStateMenu => {
     return state.menu;
 };
 
+export const tilesSelector = (state: ClientState): ClientStateTiles => {
+    return state.tiles;
+};
+
+export const commonStateSelector = (state: ClientState): ?CommonState => {
+    return state.commonState;
+};
+
+
 export const playerNameSelector = (state: ClientState): ?string => {
     return state.player.name;
 };
 
-export const serverStateSelector = (state: ClientState): ?ServerState => {
-    return state.serverState;
+export const isCityBeingCreatedSelector = (state: ClientState): boolean => {
+    return state.menu.newCity.isCityBeingCreated;
 };
 
 export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
     return state.menu.cityView.currentCityId;
 };
 
-export const rulesSelector = createSelector<ClientState, void, ?CommonStateRules, ?ServerState>(
-    serverStateSelector,
-    (serverState) => {
-        if (serverState == null) {
+export const citiesSelector = createSelector<ClientState, void, ?CommonStateCities, ?CommonState>(
+    commonStateSelector,
+    (commonState) => {
+        if (commonState == null) {
             return null;
         }
-        return serverState.rules;
+        return commonStateCitiesSelector(commonState);
     },
 );
 
-export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld, ?ServerState>(
-    serverStateSelector,
-    (serverState) => {
-        if (serverState == null) {
+export const rulesSelector = createSelector<ClientState, void, ?CommonStateRules, ?CommonState>(
+    commonStateSelector,
+    (commonState) => {
+        if (commonState == null) {
             return null;
         }
-        return serverState.world;
+        return commonStateRulesSelector(commonState);
     },
 );
 
-export const citiesSelector = createSelector<ClientState, void, ?CommonStateCities, ?ServerState>(
-    serverStateSelector,
-    (serverState) => {
-        if (serverState == null) {
+export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld, ?CommonState>(
+    commonStateSelector,
+    (commonState) => {
+        if (commonState == null) {
             return null;
         }
-        return serverState.cities;
+        return commonStateWorldSelector(commonState);
     },
 );
 
-export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [string]: $ReadOnlyArray<string> }, ?ServerState>(
-    serverStateSelector,
-    (serverState) => {
-        if (serverState == null) {
+export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [string]: $ReadOnlyArray<string> }, ?CommonState>(
+    commonStateSelector,
+    (commonState) => {
+        if (commonState == null) {
             return Object.freeze({});
         }
-        return groupIdsByOwnerId({ cities: serverState.cities });
+        return commonStateCityIdsByOwnerSelector(commonState);
     },
 );
 
@@ -118,12 +122,12 @@ export const cityIdsOwnedByPlayerSelector = createSelector<ClientState, void, $R
     },
 );
 
-export const isGameStartingSelector = createSelector<ClientState, void, boolean, $ReadOnlyArray<string>, ?string, ?ServerState>(
+export const isGameStartingSelector = createSelector<ClientState, void, boolean, $ReadOnlyArray<string>, ?string, ?CommonState>(
     cityIdsOwnedByPlayerSelector,
     playerNameSelector,
-    serverStateSelector,
-    (citiesOwnedByPlayer, playerName, serverState) => {
-        return serverState != null && playerName != null && citiesOwnedByPlayer.length === 0;
+    commonStateSelector,
+    (citiesOwnedByPlayer, playerName, commonState) => {
+        return commonState != null && playerName != null && citiesOwnedByPlayer.length === 0;
     },
 );
 

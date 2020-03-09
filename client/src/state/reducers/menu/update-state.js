@@ -6,6 +6,7 @@ import {
     isCityBeingCreatedSelector,
     playerNameSelector,
 } from '../../selectors/client-state';
+import { commonStateCityIdsByOwnerSelector } from '../../../../../common/src/selectors/common-state';
 
 export const updateStateMenuReducer = (
     {
@@ -31,7 +32,7 @@ export const updateStateMenuReducer = (
         return localState;
     }
 
-    const playerCities = action.payload.serverState.citiesByOwner[playerId];
+    const playerCities = commonStateCityIdsByOwnerSelector(action.payload.commonState)[playerId];
 
     if (playerCities == null || playerCities.length === 0) {
         return localState;

@@ -8,7 +8,7 @@ import configureStore from 'redux-mock-store';
 import type { ClientState } from '../../state/state';
 import { emptyClientState, emptyClientStateCityTile } from '../../state/state';
 import { AppComponent } from '.';
-import { emptyCityState, emptyServerState } from '../../../../common/src/state';
+import { emptyCityState, emptyCommonstate } from '../../../../common/src/state';
 
 const mockStore = configureStore([]);
 
@@ -36,8 +36,8 @@ describe('AppComponent', () => {
                 ...emptyClientState.player,
                 name: 'player1',
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -76,8 +76,8 @@ describe('AppComponent', () => {
                 ...emptyClientState.player,
                 name: 'player1',
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,

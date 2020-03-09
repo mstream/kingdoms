@@ -21,9 +21,9 @@ export const tilesReducer = (
 ): ClientStateTiles => {
     switch (action.type) {
         case UPDATE_STATE: {
-            const newCityTiles = Object.keys(action.payload.serverState.cities).reduce(
+            const newCityTiles = Object.keys(action.payload.commonState.cities).reduce(
                 (newCityTiles, cityId) => {
-                    const city = action.payload.serverState.cities[cityId];
+                    const city = action.payload.commonState.cities[cityId];
 
                     const geometry = {
                         location: tileVectorToPixelVector({tileVector: city.location}),
@@ -50,8 +50,8 @@ export const tilesReducer = (
 
             const newTerrainTiles = [];
 
-            for (let y = -action.payload.serverState.world.size.y; y <= action.payload.serverState.world.size.y; y++) {
-                for (let x = -action.payload.serverState.world.size.x; x <= action.payload.serverState.world.size.x; x++) {
+            for (let y = -action.payload.commonState.world.size.y; y <= action.payload.commonState.world.size.y; y++) {
+                for (let x = -action.payload.commonState.world.size.x; x <= action.payload.commonState.world.size.x; x++) {
                     const index = {x, y};
                     newTerrainTiles.push({
                         index,
@@ -66,8 +66,8 @@ export const tilesReducer = (
                         },
                         textureIndex: calculateTextureIndex({
                             index: {
-                                x: index.x + action.payload.serverState.world.size.x,
-                                y: index.y + action.payload.serverState.world.size.y
+                                x: index.x + action.payload.commonState.world.size.x,
+                                y: index.y + action.payload.commonState.world.size.y
                             }
                         }),
                         type: 'PLAINS',

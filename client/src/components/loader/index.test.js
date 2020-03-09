@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { emptyClientState } from '../../state/state';
 import { LoaderComponent } from '.';
-import { emptyServerState } from '../../../../common/src/state';
+import { emptyCommonstate } from '../../../../common/src/state';
 import type { ClientState } from '../../state/state';
 
 const mockStore = configureStore([]);
@@ -16,8 +16,8 @@ describe('LoaderComponent', () => {
     test('is hidden when server state is loaded', async () => {
         const state: ClientState = {
             ...emptyClientState,
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
             },
         };
 
@@ -35,7 +35,7 @@ describe('LoaderComponent', () => {
     test('shows up while loading the server state', async () => {
         const state: ClientState = {
             ...emptyClientState,
-            serverState: null,
+            commonState: null,
         };
 
         const store = mockStore(state);

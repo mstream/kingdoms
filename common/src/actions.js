@@ -1,7 +1,7 @@
 // @flow
 // @flow-runtime
 
-import type {ServerState} from './state';
+import type {CommonState} from './state';
 import {parseJson} from './util';
 import type {Type} from 'flow-runtime';
 import {reify} from 'flow-runtime';
@@ -139,7 +139,7 @@ export const ServerRequestType = (reify: Type<ServerRequest>);
 export type ServerResponse = {
     request: ServerAction,
     errors: $ReadOnlyArray<string>,
-    state: ServerState,
+    state: CommonState,
 }
 
 const ServerResponseType = (reify: Type<ServerResponse>);

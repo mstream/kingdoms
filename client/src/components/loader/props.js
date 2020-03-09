@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
 import type { CommonStateResources } from '../../../../common/src/state';
-import { serverStateSelector } from '../../state/selectors/client-state';
+import { commonStateSelector } from '../../state/selectors/client-state';
 
 type OwnProps = {
     availableResources: CommonStateResources,
@@ -28,7 +28,7 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        isServerStateBeingLoaded: serverStateSelector(state) == null,
+        isCommonstateBeingLoaded: commonStateSelector(state) == null,
     });
 };
 

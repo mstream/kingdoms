@@ -3,11 +3,11 @@
 import {dummy, updateState} from '../actions';
 import type {ClientState} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {initialServerState} from '../../../../server/src/state/state';
-import {serverStateReducer} from './server-state';
-import type {ServerState} from '../../../../common/src/state';
+import {commonStateReducer} from './common-state';
+import type {CommonState} from '../../../../common/src/state';
+import { initialCommonstate } from '../../../../common/src/state/state';
 
-describe('serverStateReducer', () => {
+describe('commonStateReducer', () => {
     it('initializes its state', () => {
         const action = dummy();
 
@@ -16,23 +16,23 @@ describe('serverStateReducer', () => {
         };
 
         // $FlowFixMe
-        const previousLocalState: ?ServerState = undefined;
+        const previousLocalState: ?CommonState = undefined;
 
-        const expected: ?ServerState = initialClientState.serverState;
+        const expected: ?CommonState = initialClientState.commonState;
 
-        const actual = serverStateReducer(previousLocalState, action, previousGlobalState);
+        const actual = commonStateReducer(previousLocalState, action, previousGlobalState);
 
         expect(actual).toEqual(expected);
     });
 
     it('handles update state event', () => {
-        const action = updateState({serverState: initialServerState});
+        const action = updateState({commonState: initialCommonstate});
         const previousGlobalState: ClientState = {
             ...emptyClientState,
         };
-        const previousLocalState: ?ServerState = previousGlobalState.serverState;
-        const expected: ?ServerState = initialServerState;
-        const actual = serverStateReducer(previousLocalState, action, previousGlobalState);
+        const previousLocalState: ?CommonState = previousGlobalState.commonState;
+        const expected: ?CommonState = initialCommonstate;
+        const actual = commonStateReducer(previousLocalState, action, previousGlobalState);
         expect(actual).toEqual(expected);
     });
 });

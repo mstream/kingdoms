@@ -77,16 +77,15 @@ export type CommonStateWorld = {
     size: Vector,
 };
 
-export type ServerState = {
+export type CommonState = {
     cities: CommonStateCities,
-    citiesByOwner: CommonStateCitiesByOwner,
     rules: CommonStateRules,
     time: CommonStateTime,
     world: CommonStateWorld,
     ...
 };
 
-export const ServerStateType = (reify: Type<ServerState>);
+export const CommonstateType = (reify: Type<CommonState>);
 
 export const calculateNextCitySpot = ({ minimalCityMargin, takenSpots, worldSize }: { minimalCityMargin: Vector, takenSpots: $ReadOnlyArray<Vector>, worldSize: Vector }): ?Vector => {
 
@@ -271,7 +270,7 @@ const emptyTimeState = '';
 
 const emptyWorldState = { size: { x: 0, y: 0 } };
 
-export const emptyServerState: ServerState = {
+export const emptyCommonstate: CommonState = {
     cities: emptyCitiesState,
     citiesByOwner: emptyCitiesByOwnerState,
     rules: emptyRulesState,

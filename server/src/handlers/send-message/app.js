@@ -2,7 +2,7 @@
 
 import {createRedisClient} from '../../clients/redis';
 import {createApiGatewayClient} from '../../clients/api-gateway';
-import {executeAction, sendResponse} from '../../utils';
+import {executeAction, sendResponse} from '../../util';
 import type {
     ServerRequest,
     ServerResponse

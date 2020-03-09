@@ -5,7 +5,7 @@ import type { ClientState, ClientStateCamera } from '../../state';
 import { emptyClientState } from '../../state';
 import {
     emptyCityState,
-    emptyServerState,
+    emptyCommonstate,
 } from '../../../../../common/src/state';
 import { updateStateCameraReducer } from './update-state';
 import { tileVectorToPixelVector } from '../../../util';
@@ -13,10 +13,10 @@ import { addVectors, negateVector } from '../../../../../common/src/vector';
 
 describe('updateStateCameraReducer', () => {
     it('handles update state event', () => {
-        const serverState = {
-            ...emptyServerState,
+        const commonState = {
+            ...emptyCommonstate,
             world: {
-                ...emptyServerState.world,
+                ...emptyCommonstate.world,
                 size: {
                     x: 10,
                     y: 10,
@@ -24,7 +24,7 @@ describe('updateStateCameraReducer', () => {
             },
         };
 
-        const action = updateState({ serverState });
+        const action = updateState({ commonState });
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,
@@ -58,8 +58,8 @@ describe('updateStateCameraReducer', () => {
     });
 
     it('centers camera on the newly created city', () => {
-        const serverState = {
-            ...emptyServerState,
+        const commonState = {
+            ...emptyCommonstate,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -76,7 +76,7 @@ describe('updateStateCameraReducer', () => {
                 },
             },
             world: {
-                ...emptyServerState.world,
+                ...emptyCommonstate.world,
                 size: {
                     x: 10,
                     y: 10,
@@ -84,7 +84,7 @@ describe('updateStateCameraReducer', () => {
             },
         };
 
-        const action = updateState({ serverState });
+        const action = updateState({ commonState });
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,
@@ -102,8 +102,8 @@ describe('updateStateCameraReducer', () => {
             player: {
                 name: 'player1',
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -111,7 +111,7 @@ describe('updateStateCameraReducer', () => {
                     },
                 },
                 world: {
-                    ...emptyServerState.world,
+                    ...emptyCommonstate.world,
                     size: {
                         x: 10,
                         y: 10,

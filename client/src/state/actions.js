@@ -1,6 +1,6 @@
 // @flow
 
-import type { ServerState } from '../../../common/src/state';
+import type { CommonState } from '../../../common/src/state';
 import type { Vector } from '../../../common/src/vector';
 import type { ClientStateCityViewTab } from './state';
 
@@ -61,7 +61,7 @@ export const loadPlayer: ActionCreator<ClientLoadPlayerAction> = (payload) => {
 
 
 export const UPDATE_STATE: 'UPDATE_STATE' = 'UPDATE_STATE';
-export type ClientUpdateStateAction = BaseAction<typeof UPDATE_STATE, $ReadOnly<{ serverState: ServerState }>>;
+export type ClientUpdateStateAction = BaseAction<typeof UPDATE_STATE, $ReadOnly<{ commonState: CommonState }>>;
 
 export const updateState: ActionCreator<ClientUpdateStateAction> = (payload) => {
     return {

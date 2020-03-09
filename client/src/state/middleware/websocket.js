@@ -45,7 +45,7 @@ const createOnDataHandler = (store) => {
             case 'GET_CURRENT_STATE':
             case 'EXECUTE_TIME_STEP':
             case 'UPGRADE_BUILDING': {
-                store.dispatch(updateState({serverState: serverResponse.state}));
+                store.dispatch(updateState({commonState: serverResponse.state}));
                 return;
             }
             default: {

@@ -1,6 +1,6 @@
 // @flow
 
-import {executeAction, sendResponse} from '../../utils';
+import {executeAction, sendResponse} from '../../util';
 import {createApiGatewayClient} from '../../clients/api-gateway';
 import {createRedisClient} from '../../clients/redis';
 import {executeTimeStep} from '../../../../common/src/actions';

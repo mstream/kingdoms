@@ -1,16 +1,16 @@
 // @flow
 
 import {parseJson, stringifyJson} from '../../../common/src/util';
-import type {ServerState} from '../../../common/src/state';
-import {ServerStateType} from '../../../common/src/state';
+import type {CommonState} from '../../../common/src/state';
+import {CommonstateType} from '../../../common/src/state';
 import type {Redis} from '../clients/redis';
 import type {ServerResponse} from '../../../common/src/actions';
 import type {ApiGateway} from '../clients/api-gateway';
 
-export const getState = async ({redis}: { redis: Redis }): Promise<ServerState> => {
+export const getState = async ({redis}: { redis: Redis }): Promise<CommonState> => {
     const serializedState = await redis.get('state');
     const stateObject = parseJson({json: serializedState});
-    return ServerStateType.assert(stateObject);
+    return CommonstateType.assert(stateObject);
 };
 
 export const sendServerResponse = async ({apiGateway, connectionId, response}: { apiGateway: ApiGateway, connectionId: string, response: ServerResponse }): Promise<void> => {

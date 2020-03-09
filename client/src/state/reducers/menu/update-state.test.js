@@ -1,20 +1,18 @@
 // @flow
 
-import { tileVectorToPixelVector } from '../../../util';
-import { addVectors } from '../../../../../common/src/vector';
 import { updateState } from '../../actions';
 import {
     emptyCityState,
-    emptyServerState,
+    emptyCommonstate,
 } from '../../../../../common/src/state';
-import { emptyClientState } from '../../state';
 import type { ClientState, ClientStateMenu } from '../../state';
+import { emptyClientState } from '../../state';
 import { updateStateMenuReducer } from './update-state';
 
 describe('updateStateMenuReducer', () => {
     it('handles update state event', () => {
-        const serverState = {
-            ...emptyServerState,
+        const commonState = {
+            ...emptyCommonstate,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -27,7 +25,7 @@ describe('updateStateMenuReducer', () => {
             },
         };
 
-        const action = updateState({ serverState });
+        const action = updateState({ commonState });
 
         const previousGlobalState: ClientState = {
             ...emptyClientState,
@@ -45,8 +43,8 @@ describe('updateStateMenuReducer', () => {
             player: {
                 name: 'player1',
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -63,7 +61,7 @@ describe('updateStateMenuReducer', () => {
             newCity: {
                 ...previousLocalState.newCity,
                 isCityBeingCreated: false,
-            }
+            },
         };
 
         const actual = updateStateMenuReducer({

@@ -6,7 +6,7 @@ import type {
     CommonStateCities,
     CommonStateCity
 } from '../../../../common/src/state';
-import {emptyCityState, emptyServerState} from '../../../../common/src/state';
+import {emptyCityState, emptyCommonstate} from '../../../../common/src/state';
 import {
     activeCityTabSelector,
     citiesSelector,
@@ -19,8 +19,8 @@ describe('citiesSelector', () => {
     it('returns all the cities', () => {
         const state: ClientState = {
             ...emptyClientState,
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -79,8 +79,8 @@ describe('currentlyViewedCitySelector', () => {
                     currentCityId: null,
                 },
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -106,8 +106,8 @@ describe('currentlyViewedCitySelector', () => {
                     currentCityId: '1',
                 },
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -133,8 +133,8 @@ describe('citiesOwnedByPlayerSelector', () => {
             player: {
                 name: 'player1'
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -167,8 +167,8 @@ describe('isGameStartingSelector', () => {
             player: {
                 name: 'player1'
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -195,8 +195,8 @@ describe('isGameStartingSelector', () => {
             player: {
                 name: null,
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -223,8 +223,8 @@ describe('isGameStartingSelector', () => {
             player: {
                 name: 'player1'
             },
-            serverState: {
-                ...emptyServerState,
+            commonState: {
+                ...emptyCommonstate,
                 cities: {
                     '1': {
                         ...emptyCityState,

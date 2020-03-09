@@ -8,12 +8,14 @@ import {
     negateVector,
 } from '../../../../../common/src/vector';
 import { tileVectorToPixelVector } from '../../../util';
-import { serverStatePlayerCitiesSelector } from '../../selectors/server-state';
 import {
     cityIdsOwnedByPlayerSelector,
     playerNameSelector,
     worldSelector,
 } from '../../selectors/client-state';
+import { commonStateCitiesByOwnerSelector } from '../../../../../common/src/selectors/common-state';
+import type { Vector } from '../../../../../common/src/vector';
+import type { CommonStateCity } from '../../../../../common/src/state';
 
 export const updateStateCameraReducer = (
     {
@@ -41,20 +43,19 @@ export const updateStateCameraReducer = (
             return localState.geometry.location;
         }
 
-        const serverStatePlayerCities = serverStatePlayerCitiesSelector(
-            action.payload.serverState,
-            { playerName },
-        );
+        const commonStatePlayerCities = commonStateCitiesByOwnerSelector(action.payload.commonState)[playerName];
 
-        if (serverStatePlayerCities.length === 0) {
+        if (commonStatePlayerCities == null || commonStatePlayerCities.length === 0) {
             return localState.geometry.location;
         }
 
-        const cityTileLocation = serverStatePlayerCities[0].location;
+        console.log(JSON.stringify(commonStatePlayerCities))
+
+        const firstPlayerCity: CommonStateCity = commonStatePlayerCities[0];
 
         return tileVectorToPixelVector({
             tileVector: addVectors({
-                vector1: cityTileLocation,
+                vector1: firstPlayerCity.location,
                 vector2: { x: 0.5, y: 0.5 },
             }),
         });
@@ -62,7 +63,7 @@ export const updateStateCameraReducer = (
 
     const calculateNewLocationLimit = () => {
         const world = worldSelector(globalState);
-        const actionWorldSize = action.payload.serverState.world.size;
+        const actionWorldSize = action.payload.commonState.world.size;
 
         if (world != null && areVectorsEqual({
             vector1: world.size,

@@ -146,8 +146,8 @@ const initialPlayerState: ClientStatePlayer = {
     name: null,
 };
 
-const emptyCommonstate: ?CommonState = null;
-const initialCommonstate: ?CommonState = null;
+const emptyCommonState: ?CommonState = null;
+const initialCommonState: ?CommonState = null;
 
 const emptyTilesState: ClientStateTiles = {
     city: Object.freeze({}),
@@ -169,11 +169,21 @@ export const emptyClientStateCityTile: ClientStateTile = {
     type: 'CITY',
 };
 
+export const emptyClientStateTerrainTile: ClientStateTile = {
+    geometry: {
+        location: { x: 0, y: 0 },
+        size: { x: 0, y: 0 },
+    },
+    index: { x: 0, y: 0 },
+    textureIndex: 0,
+    type: 'PLAINS',
+};
+
 export const emptyClientState: ClientState = {
     camera: emptyCameraState,
     menu: emptyMenuState,
     player: emptyPlayerState,
-    commonState: emptyCommonstate,
+    commonState: emptyCommonState,
     tiles: emptyTilesState,
 };
 
@@ -181,7 +191,7 @@ export const initialClientState: ClientState = {
     camera: initialCameraState,
     menu: initialMenuState,
     player: initialPlayerState,
-    commonState: initialCommonstate,
+    commonState: initialCommonState,
     tiles: initialTilesState,
 };
 

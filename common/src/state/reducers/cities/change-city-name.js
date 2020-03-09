@@ -5,11 +5,11 @@ import type {
     CommonStateCities,
     CommonState
 } from '../../../../../common/src/state';
-import type {CommonstateReducerResult} from '../root';
+import type {CommonStateReducerResult} from '../root';
 import {failure, success} from '../root';
 import {validateCityName} from '../../validators';
 
-export const changeCityNameCitiesReducer = ({action, state}: { action: ServerChangeCityNameAction, state: CommonState }): CommonstateReducerResult<CommonStateCities> => {
+export const changeCityNameCitiesReducer = ({action, state}: { action: ServerChangeCityNameAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const {cityId, name, playerId} = action.payload;
     const city = state.cities[cityId];
 

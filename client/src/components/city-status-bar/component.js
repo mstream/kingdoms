@@ -5,6 +5,8 @@ import classNames from 'classnames';
 import { calculateBuildingTierSum } from '../../../../common/src/state';
 import type { Props } from './props';
 
+export const testId = 'city-status-bar';
+
 export const Component = ({ city, player }: Props) => {
 
     if (player == null) {
@@ -27,7 +29,8 @@ export const Component = ({ city, player }: Props) => {
     );
 
     return (
-        <div className={className}>
+        <div data-testid={testId}
+             className={className}>
             <div
                 className="flex items-center p-1 text-md font-bold border-r border-gray-900">{tiersSum}
             </div>

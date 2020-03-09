@@ -7,7 +7,7 @@ import { emptyClientState, TAB_OVERVIEW, TAB_UNITS } from '../../state';
 import { closeCityViewMenuReducer } from './close-city-view';
 import {
     emptyCityState,
-    emptyCommonstate,
+    emptyCommonState,
 } from '../../../../../common/src/state';
 import { menuReducer } from './index';
 
@@ -20,7 +20,7 @@ describe('updateStateMenuReducer', () => {
                 name: 'player1',
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,

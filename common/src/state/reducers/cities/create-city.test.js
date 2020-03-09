@@ -6,7 +6,7 @@ import {createCityCitiesReducer} from './create-city';
 import {initialCityState} from '../../state';
 import {
     emptyCityState,
-    emptyCommonstate
+    emptyCommonState
 } from '../../../../../common/src/state';
 
 describe(`createCityCitiesReducer`, () => {
@@ -17,9 +17,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             rules: {
-                ...emptyCommonstate.rules,
+                ...emptyCommonState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -47,9 +47,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             rules: {
-                ...emptyCommonstate.rules,
+                ...emptyCommonState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -77,9 +77,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             rules: {
-                ...emptyCommonstate.rules,
+                ...emptyCommonState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -107,9 +107,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             rules: {
-                ...emptyCommonstate.rules,
+                ...emptyCommonState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -137,9 +137,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
-                ...emptyCommonstate.cities,
+                ...emptyCommonState.cities,
                 '1': {
                     ...emptyCityState,
                     location: {
@@ -150,7 +150,7 @@ describe(`createCityCitiesReducer`, () => {
                 },
             },
             rules: {
-                ...emptyCommonstate.rules,
+                ...emptyCommonState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,
@@ -178,9 +178,9 @@ describe(`createCityCitiesReducer`, () => {
             playerId: `player1`
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             rules: {
-                ...emptyCommonstate.rules,
+                ...emptyCommonState.rules,
                 minimalCityMargin: {
                     x: 2,
                     y: 2,

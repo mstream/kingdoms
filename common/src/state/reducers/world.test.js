@@ -1,12 +1,12 @@
 // @flow
 
 import {worldReducer} from './world';
-import {initialCommonstate} from '../state';
+import {initialCommonState} from '../state';
 import type {CommonStateWorld, CommonState} from '../../../../common/src/state';
-import type {CommonstateReducerResult} from './root';
+import type {CommonStateReducerResult} from './root';
 import {success} from './root';
 import {dummy} from '../../../../common/src/actions';
-import {emptyCommonstate} from '../../../../common/src/state';
+import {emptyCommonState} from '../../../../common/src/state';
 
 describe('worldReducer', () => {
     it('returns the default state on reset state action', () => {
@@ -14,12 +14,12 @@ describe('worldReducer', () => {
             type: 'RESET_STATE',
         };
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             unsupportedProperty: 'unsupportedPropertyValue',
         };
-        const expected: CommonstateReducerResult<CommonStateWorld> = {
+        const expected: CommonStateReducerResult<CommonStateWorld> = {
             errors: [],
-            state: initialCommonstate.world,
+            state: initialCommonState.world,
         };
         const actual = worldReducer({action, state: previousState});
         expect(actual).toEqual(expected);
@@ -29,11 +29,11 @@ describe('worldReducer', () => {
         const action = dummy();
 
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
         };
         success({state: previousState.world});
         const actual = worldReducer({action, state: previousState});
-        const expected: CommonstateReducerResult<CommonStateWorld> = {
+        const expected: CommonStateReducerResult<CommonStateWorld> = {
             errors: [],
             state: previousState.world,
         };

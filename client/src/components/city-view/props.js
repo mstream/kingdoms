@@ -30,7 +30,6 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        activeTab: activeCityTabSelector(state),
         city: currentlyViewedCitySelector(state),
         cityId: currentlyViewedCityIdSelector(state),
     });

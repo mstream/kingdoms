@@ -14,7 +14,7 @@ import {
     TAB_UNITS,
 } from '../../state/state';
 import { CityViewComponent } from '.';
-import { emptyCityState, emptyCommonstate } from '../../../../common/src/state';
+import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
 import { cityUnitsComponentTestId } from '../city-units';
 import { cityResourcesComponentTestId } from '../city-resources';
 import { cityBuildingsComponentTestId } from '../city-buildings';
@@ -35,7 +35,7 @@ describe('CityViewComponent', () => {
                 },
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -67,7 +67,7 @@ describe('CityViewComponent', () => {
                 },
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -99,7 +99,7 @@ describe('CityViewComponent', () => {
                 },
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -131,7 +131,7 @@ describe('CityViewComponent', () => {
                 },
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,

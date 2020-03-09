@@ -37,6 +37,8 @@ const tabsVisuals = {
     },
 };
 
+export const testId = 'city-view-tabs';
+
 export const Component = ({ activeTab, selectCityViewTab }: Props) => {
 
     const tabComponents = tabsOrder.map(
@@ -73,6 +75,7 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
 
     return (
         <div
+            data-testid={testId}
             className="flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100"
             role="tablist"
         >

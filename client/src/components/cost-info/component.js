@@ -7,6 +7,7 @@ import {numberToQuantityString} from '../../../../common/src/util';
 import {convertQuantitiesToResources} from '../../../../common/src/resource';
 import {subtractQuantities} from '../../../../common/src/quantity';
 
+export const testId = 'cost-info';
 
 export const Component = ({availableResources, requiredResources}: Props) => {
     const availableResourcesAfter = convertQuantitiesToResources({
@@ -35,7 +36,7 @@ export const Component = ({availableResources, requiredResources}: Props) => {
             );
         });
     return (
-        <div
+        <div data-testid={testId}
             className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{requiredResourceComponents}
         </div>
     );

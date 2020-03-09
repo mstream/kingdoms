@@ -1,33 +1,39 @@
 // @flow
 
 import Socket from 'simple-websocket';
-import type {Middleware} from 'redux';
-import type {ClientAction} from '../actions';
-import {loadPlayer, updateState} from '../actions';
+import type { Middleware } from 'redux';
+import type { ClientAction } from '../actions';
+import {
+    loadPlayer,
+    REQUEST_BUILDING_UPGRADE,
+    REQUEST_CITY_CREATION,
+    REQUEST_CITY_NAME_CHANGE,
+    updateState,
+} from '../actions';
 import type {
     ServerAction,
-    ServerResponse
+    ServerResponse,
 } from '../../../../common/src/actions';
 import {
     changeCityName,
     createCity,
     getCurrentState,
     parseServerResponse,
-    upgradeBuilding
+    upgradeBuilding,
 } from '../../../../common/src/actions';
 import jwt from 'jsonwebtoken';
-import {generateId, stringifyJson} from '../../../../common/src/util';
-import type {ClientState} from '../state';
+import { generateId, stringifyJson } from '../../../../common/src/util';
+import type { ClientState } from '../state';
 
 
-const send = ({action, socket}: { action: ServerAction, socket: Socket }): void => {
+const send = ({ action, socket }: { action: ServerAction, socket: Socket }): void => {
     socket.send(
         stringifyJson({
             value: {
                 message: 'sendmessage',
                 data: action,
-            }
-        })
+            },
+        }),
     );
 };
 
@@ -37,7 +43,7 @@ const createOnDataHandler = (store) => {
 
         console.log('ws data received: ' + dataString);
 
-        const serverResponse: ServerResponse = parseServerResponse({json: dataString});
+        const serverResponse: ServerResponse = parseServerResponse({ json: dataString });
 
         switch (serverResponse.request.type) {
             case 'CHANGE_CITY_NAME':
@@ -45,19 +51,19 @@ const createOnDataHandler = (store) => {
             case 'GET_CURRENT_STATE':
             case 'EXECUTE_TIME_STEP':
             case 'UPGRADE_BUILDING': {
-                store.dispatch(updateState({commonState: serverResponse.state}));
+                store.dispatch(updateState({ commonState: serverResponse.state }));
                 return;
             }
             default: {
                 console.error(
-                    `unsupported response type received from server: ${serverResponse.request.type}`
+                    `unsupported response type received from server: ${serverResponse.request.type}`,
                 );
             }
         }
     };
 };
 
-export const websocketMiddleware = ({token, url}: { token: string, url: string }) => {
+export const websocketMiddleware = ({ token, url }: { token: string, url: string }) => {
 
     // TODO verify using a public key
     const userInfo = jwt.decode(token);
@@ -74,8 +80,8 @@ export const websocketMiddleware = ({token, url}: { token: string, url: string }
 
         socket.on('connect', () => {
             console.log(`ws connection established: ${url}`);
-            send({action: getCurrentState(), socket});
-            store.dispatch(loadPlayer({name: username}));
+            send({ action: getCurrentState(), socket });
+            store.dispatch(loadPlayer({ name: username }));
         });
 
         socket.on('close', () => {
@@ -92,33 +98,33 @@ export const websocketMiddleware = ({token, url}: { token: string, url: string }
         return next => {
             return action => {
                 switch (action.type) {
-                    case 'REQUEST_BUILDING_UPGRADE': {
+                    case REQUEST_BUILDING_UPGRADE: {
                         send({
                             action: upgradeBuilding({
                                 buildingType: action.payload.buildingType,
                                 cityId: action.payload.cityId,
                                 playerId: username,
-                            }), socket
+                            }), socket,
                         });
                         break;
                     }
-                    case 'REQUEST_CITY_NAME_CHANGE': {
+                    case REQUEST_CITY_NAME_CHANGE: {
                         send({
                             action: changeCityName({
                                 cityId: action.payload.cityId,
                                 name: action.payload.name,
                                 playerId: username,
-                            }), socket
+                            }), socket,
                         });
                         break;
                     }
-                    case 'REQUEST_CITY_CREATION': {
+                    case REQUEST_CITY_CREATION: {
                         send({
                             action: createCity({
                                 cityId: generateId(),
                                 cityName: action.payload.name,
                                 playerId: username,
-                            }), socket
+                            }), socket,
                         });
                         break;
                     }

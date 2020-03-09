@@ -9,14 +9,15 @@ import { CityResourcesComponent } from '../city-resources';
 import { CityBuildingsComponent } from '../city-buildings';
 import { CityOverviewComponent } from '../city-overview';
 
+export const testId = 'city-view';
 
 export const Component = (
     {
-        activeTab,
         city,
         cityId,
         closeCityView,
     }: Props) => {
+
     if (cityId == null || city == null) {
         return null;
     }
@@ -26,7 +27,7 @@ export const Component = (
     };
 
     return (
-        <div
+        <div data-testid={testId}
             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t">
             <div
                 onClick={onBackgroundClick}

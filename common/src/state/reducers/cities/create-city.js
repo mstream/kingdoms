@@ -7,7 +7,7 @@ import type {
     CommonState,
 } from '../../../../../common/src/state';
 import { calculateNextCitySpot } from '../../../../../common/src/state';
-import type { CommonstateReducerResult } from '../root';
+import type { CommonStateReducerResult } from '../root';
 import { failure, success } from '../root';
 import { validateCityName } from '../../validators';
 import { initialCityState } from '../../state';
@@ -20,7 +20,7 @@ export const createCityCitiesReducer = (
         {
             action: ServerCreateCityAction,
             state: CommonState
-        }): CommonstateReducerResult<CommonStateCities> => {
+        }): CommonStateReducerResult<CommonStateCities> => {
     const { cityId, cityName, playerId } = action.payload;
 
     const cityValidationErrors = validateCityName({ name: cityName });

@@ -3,7 +3,7 @@
 import {dummy, updateState} from '../actions';
 import type {ClientState, ClientStateTiles} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {emptyCityState, emptyCommonstate} from '../../../../common/src/state';
+import {emptyCityState, emptyCommonState} from '../../../../common/src/state';
 import {playerReducer} from './player';
 import {tilesReducer} from './tiles';
 
@@ -29,7 +29,7 @@ describe('playerReducer', () => {
 
     it('handles update state event', () => {
         const commonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -39,7 +39,7 @@ describe('playerReducer', () => {
                 }
             },
             world: {
-                ...emptyCommonstate.world,
+                ...emptyCommonState.world,
                 size: {
                     x: 1,
                     y: 1,

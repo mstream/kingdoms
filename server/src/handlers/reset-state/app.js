@@ -5,7 +5,7 @@ import { executeAction } from '../../util';
 import { resetState } from '../../../../common/src/actions';
 import type { ProxyHandler } from '../types';
 import { stringifyJson } from '../../../../common/src/util';
-import { initialCommonstate } from '../../../../common/src/state/state';
+import { initialCommonState } from '../../../../common/src/state/state';
 
 const redis = createRedisClient();
 
@@ -19,7 +19,7 @@ export const handler: ProxyHandler = async () => {
         console.error(error.stack);
         try {
             console.info('forcing state reset');
-            const serializedState = stringifyJson({ value: initialCommonstate });
+            const serializedState = stringifyJson({ value: initialCommonState });
             if (serializedState == null) {
                 throw Error('state is missing');
             }

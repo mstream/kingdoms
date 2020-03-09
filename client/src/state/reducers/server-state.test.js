@@ -5,7 +5,7 @@ import type {ClientState} from '../state';
 import {emptyClientState, initialClientState} from '../state';
 import {commonStateReducer} from './common-state';
 import type {CommonState} from '../../../../common/src/state';
-import { initialCommonstate } from '../../../../common/src/state/state';
+import { initialCommonState } from '../../../../common/src/state/state';
 
 describe('commonStateReducer', () => {
     it('initializes its state', () => {
@@ -26,12 +26,12 @@ describe('commonStateReducer', () => {
     });
 
     it('handles update state event', () => {
-        const action = updateState({commonState: initialCommonstate});
+        const action = updateState({commonState: initialCommonState});
         const previousGlobalState: ClientState = {
             ...emptyClientState,
         };
         const previousLocalState: ?CommonState = previousGlobalState.commonState;
-        const expected: ?CommonState = initialCommonstate;
+        const expected: ?CommonState = initialCommonState;
         const actual = commonStateReducer(previousLocalState, action, previousGlobalState);
         expect(actual).toEqual(expected);
     });

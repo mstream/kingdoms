@@ -5,14 +5,14 @@ import type {CommonState} from '../../../../../common/src/state';
 import {abandonCityCitiesReducer} from './abandon-city';
 import {
     emptyCityState,
-    emptyCommonstate
+    emptyCommonState
 } from '../../../../../common/src/state';
 
 describe('abandonCityCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
         };
         const expected = {
             errors: ['the city does not exist'],
@@ -25,7 +25,7 @@ describe('abandonCityCitiesReducer', () => {
     it('fails when city does not belong to the player', () => {
         const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -44,7 +44,7 @@ describe('abandonCityCitiesReducer', () => {
     it('removes the ownership', () => {
         const action = abandonCity({cityId: '1', playerId: 'player1'});
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import type { ClientState } from '../../state/state';
 import { emptyClientState, TAB_BUILDINGS, TAB_UNITS } from '../../state/state';
-import { emptyCityState, emptyCommonstate } from '../../../../common/src/state';
+import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
 import { CityBuildingsComponent } from './index';
 
 const mockStore = configureStore([]);
@@ -26,7 +26,7 @@ describe('CityResourcesComponent', () => {
                 },
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -58,7 +58,7 @@ describe('CityResourcesComponent', () => {
                 },
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,

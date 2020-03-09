@@ -47,6 +47,7 @@ describe('CityStatusBarComponent', () => {
                 <CityStatusBarComponent city={city}/>
             </Provider>
         );
+
         await expect(queryByText('3')).toBeInTheDocument();
         await expect(queryByText('Cityone')).toBeInTheDocument();
     });

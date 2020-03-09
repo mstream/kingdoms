@@ -3,7 +3,7 @@
 import { updateState } from '../../actions';
 import {
     emptyCityState,
-    emptyCommonstate,
+    emptyCommonState,
 } from '../../../../../common/src/state';
 import type { ClientState, ClientStateMenu } from '../../state';
 import { emptyClientState } from '../../state';
@@ -12,7 +12,7 @@ import { updateStateMenuReducer } from './update-state';
 describe('updateStateMenuReducer', () => {
     it('handles update state event', () => {
         const commonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -44,7 +44,7 @@ describe('updateStateMenuReducer', () => {
                 name: 'player1',
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,

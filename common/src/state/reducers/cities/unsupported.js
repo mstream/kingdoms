@@ -8,10 +8,10 @@ import type {
     CommonStateCities,
     CommonState
 } from '../../../../../common/src/state';
-import type {CommonstateReducerResult} from '../root';
+import type {CommonStateReducerResult} from '../root';
 import {success} from '../root';
-import {initialCommonstate} from '../../state';
+import {initialCommonState} from '../../state';
 
-export const unsupportedActionCitiesReducer = ({action, state}: { action: ServerAction, state: CommonState }): CommonstateReducerResult<CommonStateCities> => {
+export const unsupportedActionCitiesReducer = ({action, state}: { action: ServerAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     return success({state: state.cities});
 };

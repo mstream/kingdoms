@@ -6,12 +6,12 @@ import type {
     CommonState
 } from '../../../../../common/src/state';
 import {calculateBuildingsUpgradeCost} from '../../../../../common/src/state';
-import type {CommonstateReducerResult} from '../root';
+import type {CommonStateReducerResult} from '../root';
 import {failure, success} from '../root';
 import {convertQuantitiesToResources} from '../../../../../common/src/resource';
 import {subtractQuantities} from '../../../../../common/src/quantity';
 
-export const upgradeBuildingCitiesReducer = ({action, state}: { action: ServerUpgradeBuildingAction, state: CommonState }): CommonstateReducerResult<CommonStateCities> => {
+export const upgradeBuildingCitiesReducer = ({action, state}: { action: ServerUpgradeBuildingAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const {buildingType, cityId, playerId} = action.payload;
     const city = state.cities[cityId];
 

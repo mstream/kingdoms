@@ -6,7 +6,7 @@ import {abandonCityCitiesReducer} from './abandon-city';
 import {changeCityNameCitiesReducer} from './change-city-name';
 import {upgradeBuildingCitiesReducer} from './upgrade-building';
 import {executeTimeStepCitiesReducer} from './execute-time-step';
-import type {CommonstateReducer} from '../root';
+import type {CommonStateReducer} from '../root';
 import type {
     CommonStateCities,
     CommonState
@@ -15,7 +15,7 @@ import {unsupportedActionCitiesReducer} from './unsupported';
 import type {ServerAction} from '../../../../../common/src/actions';
 import {createCityCitiesReducer} from './create-city';
 
-export const citiesReducer: CommonstateReducer<CommonStateCities> = ({action, state}: {action: ServerAction, state: CommonState}) => {
+export const citiesReducer: CommonStateReducer<CommonStateCities> = ({action, state}: {action: ServerAction, state: CommonState}) => {
     switch (action.type) {
         case 'ABANDON_CITY': {
             return abandonCityCitiesReducer({action, state});

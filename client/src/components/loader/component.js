@@ -3,15 +3,17 @@
 import React from 'react';
 import type { Props } from './props';
 
+export const testId = 'loader';
 
-export const Component = ({ isCommonstateBeingLoaded }: Props) => {
+export const Component = ({ isCommonStateBeingLoaded }: Props) => {
 
-    if (isCommonstateBeingLoaded === false) {
+    if (isCommonStateBeingLoaded === false) {
         return null;
     }
 
     return (
         <div
+            data-testid={testId}
             className="absolute flex flex-row content-center justify-center h-screen w-screen">
             <div
                 className="flex flex-col content-cente justify-center text-gray-100">

@@ -4,7 +4,7 @@ import type {
     ClientState,
     ClientStateCamera,
     ClientStateCityViewTab,
-    ClientStateMenu,
+    ClientStateMenu, ClientStatePlayer,
     ClientStateTiles,
 } from '../state';
 import { createSelector } from 'reselect';
@@ -28,6 +28,10 @@ export const menuSelector = (state: ClientState): ClientStateMenu => {
     return state.menu;
 };
 
+export const playerSelector = (state: ClientState): ?ClientStatePlayer => {
+    return state.player;
+};
+
 export const tilesSelector = (state: ClientState): ClientStateTiles => {
     return state.tiles;
 };
@@ -49,11 +53,11 @@ export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
     return state.menu.cityView.currentCityId;
 };
 
-export const citiesSelector = createSelector<ClientState, void, ?CommonStateCities, ?CommonState>(
+export const citiesSelector = createSelector<ClientState, void, CommonStateCities, ?CommonState>(
     commonStateSelector,
     (commonState) => {
         if (commonState == null) {
-            return null;
+            return Object.freeze({});
         }
         return commonStateCitiesSelector(commonState);
     },

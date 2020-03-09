@@ -4,13 +4,9 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import type { CommonStateResources } from '../../../../common/src/state';
 import { commonStateSelector } from '../../state/selectors/client-state';
 
-type OwnProps = {
-    availableResources: CommonStateResources,
-    requiredResources: CommonStateResources,
-};
+type OwnProps = {};
 
 type StateProps = $ReadOnly<{
     ...StateToProps<typeof mapStateToProps>,
@@ -28,7 +24,7 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        isCommonstateBeingLoaded: commonStateSelector(state) == null,
+        isCommonStateBeingLoaded: commonStateSelector(state) == null,
     });
 };
 

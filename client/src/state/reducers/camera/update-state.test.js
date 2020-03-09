@@ -5,7 +5,7 @@ import type { ClientState, ClientStateCamera } from '../../state';
 import { emptyClientState } from '../../state';
 import {
     emptyCityState,
-    emptyCommonstate,
+    emptyCommonState,
 } from '../../../../../common/src/state';
 import { updateStateCameraReducer } from './update-state';
 import { tileVectorToPixelVector } from '../../../util';
@@ -14,9 +14,9 @@ import { addVectors, negateVector } from '../../../../../common/src/vector';
 describe('updateStateCameraReducer', () => {
     it('handles update state event', () => {
         const commonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             world: {
-                ...emptyCommonstate.world,
+                ...emptyCommonState.world,
                 size: {
                     x: 10,
                     y: 10,
@@ -59,7 +59,7 @@ describe('updateStateCameraReducer', () => {
 
     it('centers camera on the newly created city', () => {
         const commonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -76,7 +76,7 @@ describe('updateStateCameraReducer', () => {
                 },
             },
             world: {
-                ...emptyCommonstate.world,
+                ...emptyCommonState.world,
                 size: {
                     x: 10,
                     y: 10,
@@ -103,7 +103,7 @@ describe('updateStateCameraReducer', () => {
                 name: 'player1',
             },
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,
@@ -111,7 +111,7 @@ describe('updateStateCameraReducer', () => {
                     },
                 },
                 world: {
-                    ...emptyCommonstate.world,
+                    ...emptyCommonState.world,
                     size: {
                         x: 10,
                         y: 10,

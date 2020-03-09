@@ -1,14 +1,14 @@
 // @flow
 
 import type {CommonStateTime} from '../../../../common/src/state';
-import type {CommonstateReducer} from './root';
+import type {CommonStateReducer} from './root';
 import {success} from './root';
-import {initialCommonstate} from '../state';
+import {initialCommonState} from '../state';
 
-export const timeReducer: CommonstateReducer<CommonStateTime> = ({action, state}) => {
+export const timeReducer: CommonStateReducer<CommonStateTime> = ({action, state}) => {
     switch (action.type) {
         case 'RESET_STATE': {
-            return success({state: initialCommonstate.time});
+            return success({state: initialCommonState.time});
         }
         case 'EXECUTE_TIME_STEP': {
             return success({state: action.payload});

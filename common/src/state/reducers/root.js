@@ -13,21 +13,21 @@ import { rulesReducer } from './rules';
 import { timeReducer } from './time';
 import { worldReducer } from './world';
 
-export type CommonstateReducerResult<S> = {
+export type CommonStateReducerResult<S> = {
     errors: $ReadOnlyArray<string>,
     state: ?S,
 };
 
-export type CommonstateReducer<S> = ({ action: ServerAction, state: CommonState }) => CommonstateReducerResult<S>;
+export type CommonStateReducer<S> = ({ action: ServerAction, state: CommonState }) => CommonStateReducerResult<S>;
 
-export const success = <S>({ state }: { state: S }): CommonstateReducerResult<S> => {
+export const success = <S>({ state }: { state: S }): CommonStateReducerResult<S> => {
     return {
         state,
         errors: [],
     };
 };
 
-export const failure = <S>({ errors }: { errors: $ReadOnlyArray<string> }): CommonstateReducerResult<S> => {
+export const failure = <S>({ errors }: { errors: $ReadOnlyArray<string> }): CommonStateReducerResult<S> => {
     return {
         state: null,
         errors,
@@ -35,14 +35,14 @@ export const failure = <S>({ errors }: { errors: $ReadOnlyArray<string> }): Comm
 };
 
 type StateToReducersMapping = {
-    cities: CommonstateReducer<CommonStateCities>,
-    rules: CommonstateReducer<CommonStateRules>,
-    time: CommonstateReducer<CommonStateTime>,
-    world: CommonstateReducer<CommonStateWorld>,
+    cities: CommonStateReducer<CommonStateCities>,
+    rules: CommonStateReducer<CommonStateRules>,
+    time: CommonStateReducer<CommonStateTime>,
+    world: CommonStateReducer<CommonStateWorld>,
 };
 
-const combineCommonstateReducers = ({ stateToReducersMapping }: { stateToReducersMapping: StateToReducersMapping }) => {
-    const combinedReducer: CommonstateReducer<CommonState> = ({ action, state }) => {
+const combineCommonStateReducers = ({ stateToReducersMapping }: { stateToReducersMapping: StateToReducersMapping }) => {
+    const combinedReducer: CommonStateReducer<CommonState> = ({ action, state }) => {
         const reducibleState: CommonState = Object.keys(stateToReducersMapping).reduce(
             (reducibleState, stateProperty: $Keys<StateToReducersMapping>) => {
                 return {
@@ -89,4 +89,4 @@ const stateToReducersMapping: StateToReducersMapping = {
 };
 
 
-export const rootReducer = combineCommonstateReducers({ stateToReducersMapping });
+export const rootReducer = combineCommonStateReducers({ stateToReducersMapping });

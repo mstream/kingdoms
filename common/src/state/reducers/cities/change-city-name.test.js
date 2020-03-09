@@ -5,7 +5,7 @@ import type {CommonState} from '../../../../../common/src/state';
 import {changeCityNameCitiesReducer} from './change-city-name';
 import {
     emptyCityState,
-    emptyCommonstate
+    emptyCommonState
 } from '../../../../../common/src/state';
 
 describe('changeCityNameCitiesReducer', () => {
@@ -16,7 +16,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
         };
         const expected = {
             errors: ['the city does not exist'],
@@ -36,7 +36,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -63,7 +63,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -90,7 +90,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -117,7 +117,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
@@ -144,7 +144,7 @@ describe('changeCityNameCitiesReducer', () => {
             playerId: 'player1'
         });
         const previousState: CommonState = {
-            ...emptyCommonstate,
+            ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,

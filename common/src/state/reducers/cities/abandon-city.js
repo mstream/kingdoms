@@ -5,10 +5,10 @@ import type {
     CommonStateCities,
     CommonState
 } from '../../../../../common/src/state';
-import type {CommonstateReducerResult} from '../root';
+import type {CommonStateReducerResult} from '../root';
 import {failure, success} from '../root';
 
-export const abandonCityCitiesReducer = ({action, state}: { action: ServerAbandonCityAction, state: CommonState }): CommonstateReducerResult<CommonStateCities> => {
+export const abandonCityCitiesReducer = ({action, state}: { action: ServerAbandonCityAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const {cityId, playerId} = action.payload;
     const city = state.cities[cityId];
 

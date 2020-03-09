@@ -13,10 +13,10 @@ import {
     convertChangeInfoToChangeRate,
     convertChangeRateToDelta,
 } from '../../../../../common/src/state';
-import type { CommonstateReducerResult } from '../root';
+import type { CommonStateReducerResult } from '../root';
 import { failure, success } from '../root';
 
-export const executeTimeStepCitiesReducer = ({ action, state }: { action: ServerExecuteTimeStepAction, state: CommonState }): CommonstateReducerResult<CommonStateCities> => {
+export const executeTimeStepCitiesReducer = ({ action, state }: { action: ServerExecuteTimeStepAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const timeDelta = (Date.parse(action.payload) - Date.parse(state.time)) / 1000;
 
     if (timeDelta <= 0) {

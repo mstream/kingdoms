@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { emptyClientState } from '../../state/state';
 import { LoaderComponent } from '.';
-import { emptyCommonstate } from '../../../../common/src/state';
+import { emptyCommonState } from '../../../../common/src/state';
 import type { ClientState } from '../../state/state';
 
 const mockStore = configureStore([]);
@@ -17,7 +17,7 @@ describe('LoaderComponent', () => {
         const state: ClientState = {
             ...emptyClientState,
             commonState: {
-                ...emptyCommonstate,
+                ...emptyCommonState,
             },
         };
 

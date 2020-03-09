@@ -37,7 +37,7 @@ const initialTime = new Date().toISOString();
 
 const initialWorld = { size: { x: 10, y: 10 } };
 
-export const initialCommonstate: CommonState = {
+export const initialCommonState: CommonState = {
     cities: initialCitiesState,
     citiesByOwner: initialCitiesByOwner,
     rules: initialRules,

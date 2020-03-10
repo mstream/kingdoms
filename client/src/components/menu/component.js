@@ -12,20 +12,22 @@ export const Component = ({ player }: Props) => {
     }
     return (
         <div data-testid={testId}
-             className="wallpaper-bg relative flex flex-row items-stretch justify-start h-20 w-full z-10 shadow-lg bg-gray-500 text-gray-100">
-            <div className="group cursor-pointer">
-                <div className="h-full">
-                    <i className="icofont icofont-ui-user"/>
+             className="wood2-bg relative flex flex-row items-end justify-start h-20 w-full z-10 shadow-lg bg-gray-500 text-gray-100">
+            <div className="group ml-1 cursor-pointer">
+                <div className="h-full p-2">
+                    <i className="icofont icofont-ui-user mr-1"/>
                     {player.name}
                     <i className="icofont icofont-caret-down"/>
                 </div>
                 <div
-                    className="wallpaper2-bg absolute invisible group-hover:visible bg-gray-500 text-gray-100">
-                    <div className="cursor-pointer" onClick={
-                        (event) => {
-                            signOut();
-                        }
-                    }>
+                    className="absolute invisible group-hover:visible text-gray-100">
+                    <div
+                        className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
+                        onClick={
+                            (event) => {
+                                signOut();
+                            }
+                        }>
                         <i className="icofont icofont-ui-power"/>
                         Sign Out
                     </div>

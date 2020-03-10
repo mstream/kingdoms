@@ -28,3 +28,8 @@
     background-blend-mode: multiply;
     background-image: url("../images/wood.png");
 }
+
+.wood2-bg {
+    background-blend-mode: multiply;
+    background-image: url("../images/wood2.png");
+}

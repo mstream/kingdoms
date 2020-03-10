@@ -8,6 +8,7 @@ import { CityViewComponent } from '../city-view';
 import { GameStartComponent } from '../game-start';
 import { LoaderComponent } from '../loader';
 
+export const testId = 'app';
 
 export const Component = ({}: Props) => {
 
@@ -30,8 +31,8 @@ export const Component = ({}: Props) => {
     const windowSize = { x: window.innerWidth, y: window.innerHeight };
 
     return (
-        <div
-            className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic cursor-default">
+        <div data-testid={testId}
+             className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
             <div className="row-span-1">
                 <MenuComponent/>
             </div>

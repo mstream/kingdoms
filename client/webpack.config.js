@@ -52,7 +52,7 @@ module.exports = {
     },
     plugins: [
         new PurgecssPlugin({
-            defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || [],
+            defaultExtractor: content => content.match(/[\w-\/:]+(?<!:)/g) || [],
             paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),
         }),
         new MiniCssExtractPlugin({

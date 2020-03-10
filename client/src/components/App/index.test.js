@@ -9,6 +9,8 @@ import type { ClientState } from '../../state/state';
 import { emptyClientState, emptyClientStateCityTile } from '../../state/state';
 import { AppComponent } from '.';
 import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
+import { LoaderComponent, loaderComponentTestId } from '../loader';
+import { gameStartComponentTestId } from '../game-start';
 
 const mockStore = configureStore([]);
 
@@ -20,13 +22,13 @@ describe('AppComponent', () => {
 
         const store = mockStore(state);
 
-        const { queryByText } = render(
+        const { queryByTestId } = render(
             <Provider store={store}>
                 <AppComponent/>
             </Provider>,
         );
 
-        await expect(queryByText('Loading...')).toBeInTheDocument();
+        await expect(queryByTestId(loaderComponentTestId)).toBeInTheDocument();
     });
 
     test('displays new game window when the server state is loaded and the player does not own any city', async () => {
@@ -58,15 +60,14 @@ describe('AppComponent', () => {
 
         const store = mockStore(state);
 
-        const { queryByText } = render(
+        const { queryByTestId } = render(
             <Provider store={store}>
                 <AppComponent/>
             </Provider>,
         );
 
-        await expect(queryByText('Start game')).toBeInTheDocument();
-        await expect(queryByText('City name')).toBeInTheDocument();
-        await expect(queryByText('Start')).toBeInTheDocument();
+        await expect(queryByTestId(loaderComponentTestId)).not.toBeInTheDocument();
+        await expect(queryByTestId(gameStartComponentTestId)).toBeInTheDocument();
     });
 
     test('does not display new game window when the server state is loaded and the player does own a city', async () => {

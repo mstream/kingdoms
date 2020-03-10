@@ -1,4 +1,7 @@
 module.exports = {
+    corePlugins: {
+        cursor: false,
+    },
     theme: {
         alphaColors: ['gray.100', 'gray.500', 'red.500', 'green.500'],
         extend: {

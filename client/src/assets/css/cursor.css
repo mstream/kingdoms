@@ -1,0 +1,81 @@
+.cursor-default {
+    cursor: url('../images/cursors/cursor-default.png') 0 0, default;
+}
+
+.cursor-move {
+    cursor: url('../images/cursors/cursor-move.png') 15 15, move;
+}
+
+.cursor-not-allowed {
+    cursor: url('../images/cursors/cursor-not-allowed.png') 15 15, not-allowed;
+}
+
+.cursor-pointer {
+    animation: cursor-pointer 500ms infinite;
+}
+
+.cursor-text {
+    cursor: url('../images/cursors/cursor-text.png') 15 31, text;
+}
+
+.cursor-wait {
+    animation: cursor-wait 500ms infinite;
+}
+
+@keyframes cursor-pointer {
+    0% {
+        cursor: url('../images/cursors/cursor-pointer-00.png') 15 0, pointer;
+    }
+    18% {
+        cursor: url('../images/cursors/cursor-pointer-01.png') 15 0, pointer;
+    }
+    36% {
+        cursor: url('../images/cursors/cursor-pointer-02.png') 15 0, pointer;
+    }
+    43% {
+        cursor: url('../images/cursors/cursor-pointer-03.png') 15 0, pointer;
+    }
+    63% {
+        cursor: url('../images/cursors/cursor-pointer-04.png') 15 0, pointer;
+    }
+    80% {
+        cursor: url('../images/cursors/cursor-pointer-05.png') 15 0, pointer;
+    }
+    100% {
+        cursor: url('../images/cursors/cursor-pointer-06.png') 15 0, pointer;
+    }
+}
+
+
+@keyframes cursor-wait {
+    0% {
+        cursor: url('../images/cursors/cursor-wait-00.png') 15 15, wait;
+    }
+    11% {
+        cursor: url('../images/cursors/cursor-wait-01.png') 15 15, wait;
+    }
+    22% {
+        cursor: url('../images/cursors/cursor-wait-02.png') 15 15, wait;
+    }
+    33% {
+        cursor: url('../images/cursors/cursor-wait-03.png') 15 15, wait;
+    }
+    44% {
+        cursor: url('../images/cursors/cursor-wait-04.png') 15 15, wait;
+    }
+    55% {
+        cursor: url('../images/cursors/cursor-wait-05.png') 15 15, wait;
+    }
+    67% {
+        cursor: url('../images/cursors/cursor-wait-06.png') 15 15, wait;
+    }
+    78% {
+        cursor: url('../images/cursors/cursor-wait-07.png') 15 15, wait;
+    }
+    89% {
+        cursor: url('../images/cursors/cursor-wait-08.png') 15 15, wait;
+    }
+    100% {
+        cursor: url('../images/cursors/cursor-wait-09.png') 15 15, wait;
+    }
+}

@@ -29,7 +29,7 @@ module.exports = {
                 },
             },
             {
-                test: /\.(bmp|ico|png|ttf|woff2)$/i,
+                test: /\.(ani|bmp|cur|ico|png|ttf|woff2)$/i,
                 exclude: exclusions,
                 loader: 'file-loader',
             },

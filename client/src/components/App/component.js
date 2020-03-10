@@ -31,7 +31,7 @@ export const Component = ({}: Props) => {
 
     return (
         <div
-            className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic">
+            className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic cursor-default">
             <div className="row-span-1">
                 <MenuComponent/>
             </div>

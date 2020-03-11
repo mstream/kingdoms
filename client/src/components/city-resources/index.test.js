@@ -8,7 +8,10 @@ import configureStore from 'redux-mock-store';
 import type { ClientState } from '../../state/state';
 import { emptyClientState, TAB_RESOURCES, TAB_UNITS } from '../../state/state';
 import { CityResourcesComponent } from '.';
-import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

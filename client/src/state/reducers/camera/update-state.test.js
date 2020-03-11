@@ -3,13 +3,13 @@
 import { updateState } from '../../actions';
 import type { ClientState, ClientStateCamera } from '../../state';
 import { emptyClientState } from '../../state';
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../../common/src/state';
 import { updateStateCameraReducer } from './update-state';
 import { tileVectorToPixelVector } from '../../../util';
 import { addVectors, negateVector } from '../../../../../common/src/vector';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../../common/src/state/state';
 
 describe('updateStateCameraReducer', () => {
     it('handles update state event', () => {

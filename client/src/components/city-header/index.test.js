@@ -8,7 +8,10 @@ import { emptyClientState } from '../../state/state';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { CityHeaderComponent, cityHeaderComponentTestId } from './index';
-import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

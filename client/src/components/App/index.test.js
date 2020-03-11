@@ -8,9 +8,12 @@ import configureStore from 'redux-mock-store';
 import type { ClientState } from '../../state/state';
 import { emptyClientState, emptyClientStateCityTile } from '../../state/state';
 import { AppComponent } from '.';
-import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
 import { LoaderComponent, loaderComponentTestId } from '../loader';
 import { gameStartComponentTestId } from '../game-start';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

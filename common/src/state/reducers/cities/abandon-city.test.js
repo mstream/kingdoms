@@ -1,12 +1,9 @@
 // @flow
 
 import {abandonCity} from '../../../../../common/src/actions';
-import type {CommonState} from '../../../../../common/src/state';
 import {abandonCityCitiesReducer} from './abandon-city';
-import {
-    emptyCityState,
-    emptyCommonState
-} from '../../../../../common/src/state';
+import { emptyCityState, emptyCommonState } from '../../state';
+import type { CommonState } from '../../state';
 
 describe('abandonCityCitiesReducer', () => {
     it('fails when city does not exist', () => {

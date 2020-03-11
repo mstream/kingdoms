@@ -3,9 +3,12 @@
 import {dummy, updateState} from '../actions';
 import type {ClientState, ClientStateTiles} from '../state';
 import {emptyClientState, initialClientState} from '../state';
-import {emptyCityState, emptyCommonState} from '../../../../common/src/state';
 import {playerReducer} from './player';
 import {tilesReducer} from './tiles';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state/state';
 
 describe('playerReducer', () => {
     it('initializes its state', () => {

@@ -1,20 +1,23 @@
 // @flow
 
 import type { ServerExecuteTimeStepAction } from '../../../../../common/src/actions';
+import type { CommonStateReducerResult } from '../root';
+import { failure, success } from '../root';
 import type {
+    CommonState,
     CommonStateCities,
     CommonStateUnits,
-    CommonState,
-} from '../../../../../common/src/state';
+} from '../../state';
 import {
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
     convertChangeRateToDelta,
-} from '../../../../../common/src/state';
-import type { CommonStateReducerResult } from '../root';
-import { failure, success } from '../root';
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+    UNIT_PEASANT,
+} from '../../state';
 
 export const executeTimeStepCitiesReducer = ({ action, state }: { action: ServerExecuteTimeStepAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const timeDelta = (Date.parse(action.payload) - Date.parse(state.time)) / 1000;
@@ -30,7 +33,7 @@ export const executeTimeStepCitiesReducer = ({ action, state }: { action: Server
             const foodChangeRate = convertChangeInfoToChangeRate({
                 changeInfo: calculateResourceChangeInfo({
                     city,
-                    resourceType: 'food',
+                    resourceType: RESOURCE_FOOD,
                     rules: state.rules,
                 }),
             });
@@ -38,24 +41,24 @@ export const executeTimeStepCitiesReducer = ({ action, state }: { action: Server
             const woodChangeRate = convertChangeInfoToChangeRate({
                 changeInfo: calculateResourceChangeInfo({
                     city,
-                    resourceType: 'wood',
+                    resourceType: RESOURCE_WOOD,
                     rules: state.rules,
                 }),
             });
 
-            const newFood = Math.max(0, city.resources.food + convertChangeRateToDelta({
+            const newFood = Math.max(0, city.resources[RESOURCE_FOOD] + convertChangeRateToDelta({
                 changeRate: foodChangeRate,
                 timeDelta,
             }));
 
-            const newWood = Math.max(0, city.resources.wood + convertChangeRateToDelta({
+            const newWood = Math.max(0, city.resources[RESOURCE_WOOD] + convertChangeRateToDelta({
                 changeRate: woodChangeRate,
                 timeDelta,
             }));
 
             const newResourcesState = {
-                food: newFood,
-                wood: newWood,
+                [RESOURCE_FOOD]: newFood,
+                [RESOURCE_WOOD]: newWood,
             };
 
             const buildingTiersSum = calculateBuildingTierSum({
@@ -64,20 +67,20 @@ export const executeTimeStepCitiesReducer = ({ action, state }: { action: Server
 
             const peasantsChange = calculatePeasantChangeInfo({
                 buildingTiersSum,
-                unitsQuantity: city.units.peasant,
+                unitsQuantity: city.units[UNIT_PEASANT],
                 food: newFood,
                 foodChangeRate,
                 rules: state.rules,
             });
 
-            const newPeasants = Math.max(0, city.units.peasant + Math.floor(convertChangeRateToDelta({
+            const newPeasants = Math.max(0, city.units[UNIT_PEASANT] + Math.floor(convertChangeRateToDelta({
                 changeRate: convertChangeInfoToChangeRate({ changeInfo: peasantsChange }),
                 timeDelta,
             })));
 
             const newUnitsState: CommonStateUnits = {
                 ...city.units,
-                peasant: newPeasants,
+                [UNIT_PEASANT]: newPeasants,
             };
 
             const newCityState = {

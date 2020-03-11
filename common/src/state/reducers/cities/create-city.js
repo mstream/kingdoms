@@ -1,16 +1,15 @@
 // @flow
 
 import type { ServerCreateCityAction } from '../../../../../common/src/actions';
-import type {
-    CommonStateCities,
-    CommonStateCity,
-    CommonState,
-} from '../../../../../common/src/state';
-import { calculateNextCitySpot } from '../../../../../common/src/state';
 import type { CommonStateReducerResult } from '../root';
 import { failure, success } from '../root';
 import { validateCityName } from '../../validators';
-import { initialCityState } from '../../state';
+import { calculateNextCitySpot, initialCityState } from '../../state';
+import type {
+    CommonState,
+    CommonStateCities,
+    CommonStateCity,
+} from '../../state';
 
 export const createCityCitiesReducer = (
     {

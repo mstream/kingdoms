@@ -1,12 +1,11 @@
 // @flow
 
 import {worldReducer} from './world';
-import {initialCommonState} from '../state';
-import type {CommonStateWorld, CommonState} from '../../../../common/src/state';
+import { emptyCommonState, initialCommonState } from '../state';
 import type {CommonStateReducerResult} from './root';
 import {success} from './root';
 import {dummy} from '../../../../common/src/actions';
-import {emptyCommonState} from '../../../../common/src/state';
+import type { CommonState, CommonStateWorld } from '../state';
 
 describe('worldReducer', () => {
     it('returns the default state on reset state action', () => {

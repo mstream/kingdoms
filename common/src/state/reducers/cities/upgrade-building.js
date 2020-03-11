@@ -1,15 +1,12 @@
 // @flow
 
 import type {ServerUpgradeBuildingAction} from '../../../../../common/src/actions';
-import type {
-    CommonStateCities,
-    CommonState
-} from '../../../../../common/src/state';
-import {calculateBuildingsUpgradeCost} from '../../../../../common/src/state';
 import type {CommonStateReducerResult} from '../root';
 import {failure, success} from '../root';
 import {convertQuantitiesToResources} from '../../../../../common/src/resource';
 import {subtractQuantities} from '../../../../../common/src/quantity';
+import { calculateBuildingsUpgradeCost } from '../../state';
+import type { CommonState, CommonStateCities } from '../../state';
 
 export const upgradeBuildingCitiesReducer = ({action, state}: { action: ServerUpgradeBuildingAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const {buildingType, cityId, playerId} = action.payload;

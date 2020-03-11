@@ -1,13 +1,13 @@
 // @flow
 
 import type {ServerAction, ServerResponse} from '../../common/src/actions';
-import type {CommonState} from '../../common/src/state';
 import verror from 'verror';
 import type {ApiGateway} from './clients/api-gateway';
 import type {Redis} from './clients/redis';
 import {getState} from './connectors/database';
 import {sendServerResponse} from './connectors/api';
 import { rootReducer } from '../../common/src/state/reducers/root';
+import type { CommonState } from '../../common/src/state/state';
 
 
 const optimisticLockingAttempts = 3;

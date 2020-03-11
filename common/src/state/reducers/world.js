@@ -1,9 +1,9 @@
 // @flow
 
-import type {CommonStateWorld} from '../../../../common/src/state';
 import type {CommonStateReducer} from './root';
 import {success} from './root';
 import {initialCommonState} from '../state';
+import type { CommonStateWorld } from '../state';
 
 export const worldReducer: CommonStateReducer<CommonStateWorld> = ({action, state}) => {
     switch (action.type) {

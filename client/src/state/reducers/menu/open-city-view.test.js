@@ -5,11 +5,11 @@ import { closeCityView, openCityView } from '../../actions';
 import type { ClientState, ClientStateMenu } from '../../state';
 import { emptyClientState, TAB_OVERVIEW, TAB_UNITS } from '../../state';
 import { closeCityViewMenuReducer } from './close-city-view';
+import { menuReducer } from './index';
 import {
     emptyCityState,
     emptyCommonState,
-} from '../../../../../common/src/state';
-import { menuReducer } from './index';
+} from '../../../../../common/src/state/state';
 
 describe('updateStateMenuReducer', () => {
     it('handles open city action', () => {

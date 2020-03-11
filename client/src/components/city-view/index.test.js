@@ -14,11 +14,14 @@ import {
     TAB_UNITS,
 } from '../../state/state';
 import { CityViewComponent } from '.';
-import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
 import { cityUnitsComponentTestId } from '../city-units';
 import { cityResourcesComponentTestId } from '../city-resources';
 import { cityBuildingsComponentTestId } from '../city-buildings';
 import { cityOverviewComponentTestId } from '../city-overview';
+import {
+    emptyCityState,
+    emptyCommonState, emptyUnitStatsState, UNIT_PEASANT,
+} from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

@@ -1,7 +1,7 @@
 // @flow
 
-import {calculateNextCitySpot} from './state';
-import {areVectorsEqual} from './vector';
+import { calculateNextCitySpot } from './state';
+import { areVectorsEqual } from '../vector';
 
 describe('calculateNextCitySpot', () => {
     it('chooses the center of an empty map', () => {

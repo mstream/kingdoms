@@ -1,9 +1,13 @@
 // @flow
 
-import type { CommonState, CommonStateUnits } from '../../../common/src/state';
 import type { Geometry } from '../../../common/src/geometry';
 import type { Vector } from '../../../common/src/vector';
 import type { Boundary } from '../../../common/src/boundary';
+import type {
+    CommonState,
+    CommonStateUnits,
+} from '../../../common/src/state/state';
+import { UNIT_PEASANT } from '../../../common/src/state/state';
 
 export type ClientStateCamera = $ReadOnly<{
     locationLimit: Boundary,
@@ -126,7 +130,7 @@ const emptyMenuState: ClientStateMenu = {
     cityView: {
         currentCityId: null,
         tab: TAB_OVERVIEW,
-        unit: 'peasant',
+        unit: UNIT_PEASANT,
     },
 };
 
@@ -137,7 +141,7 @@ const initialMenuState: ClientStateMenu = {
     cityView: {
         currentCityId: null,
         tab: TAB_OVERVIEW,
-        unit: 'peasant',
+        unit: UNIT_PEASANT,
     },
 };
 

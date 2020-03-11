@@ -5,11 +5,23 @@ import type { Props } from './props';
 
 export const testId = 'image';
 
-export const Component = ({ children, image, ratio }: Props) => {
+export const Component = (
+    {
+        children,
+        className,
+        image,
+        ratio,
+    }: Props) => {
 
     const style = {
         paddingBottom: ratio,
     };
+
+    const localClassname = 'absolute h-full w-full object-cover';
+    const mergedClassname = className == null ?
+        localClassname :
+        `${localClassname} ${className}`;
+
     return (
         <div
             data-testid={testId}
@@ -17,7 +29,7 @@ export const Component = ({ children, image, ratio }: Props) => {
             style={style}
         >
             <img
-                className="absolute h-full w-full object-cover"
+                className={mergedClassname}
                 src={image}
                 alt="image"
             />

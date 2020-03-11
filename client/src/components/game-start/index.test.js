@@ -5,10 +5,13 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type { ClientState } from '../../state/state';
 import { emptyClientState } from '../../state/state';
-import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { GameStartComponent, gameStartComponentTestId } from './index';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

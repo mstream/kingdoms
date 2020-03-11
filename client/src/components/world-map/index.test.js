@@ -11,10 +11,13 @@ import {
     emptyClientStateCityTile,
     emptyClientStateTerrainTile,
 } from '../../state/state';
-import { emptyCityState, emptyCommonState } from '../../../../common/src/state';
 import { WorldMapComponent } from './index';
 import { terrainTileComponentTestId } from '../terrain-tile';
 import { cityTileComponentTestId } from '../city-tile';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

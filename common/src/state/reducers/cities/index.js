@@ -7,13 +7,10 @@ import {changeCityNameCitiesReducer} from './change-city-name';
 import {upgradeBuildingCitiesReducer} from './upgrade-building';
 import {executeTimeStepCitiesReducer} from './execute-time-step';
 import type {CommonStateReducer} from '../root';
-import type {
-    CommonStateCities,
-    CommonState
-} from '../../../../../common/src/state';
 import {unsupportedActionCitiesReducer} from './unsupported';
 import type {ServerAction} from '../../../../../common/src/actions';
 import {createCityCitiesReducer} from './create-city';
+import type { CommonState, CommonStateCities } from '../../state';
 
 export const citiesReducer: CommonStateReducer<CommonStateCities> = ({action, state}: {action: ServerAction, state: CommonState}) => {
     switch (action.type) {

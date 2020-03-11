@@ -1,10 +1,10 @@
 // @flow
 // @flow-runtime
 
-import type {CommonState} from './state';
 import {parseJson} from './util';
 import type {Type} from 'flow-runtime';
 import {reify} from 'flow-runtime';
+import type { CommonState } from './state/state';
 
 export type ServerDummyAction = $ReadOnly<{
     type: 'DUMMY',

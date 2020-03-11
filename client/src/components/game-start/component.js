@@ -22,12 +22,15 @@ export const Component = (
     const buttonClassName = classNames(
         'text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600',
         {
+            'cursor-not-allowed': nameDraft.length === 0,
+            'filter-grayscale': nameDraft.length === 0,
             'spinner': isCityBeingCreated,
-            'cursor-pointer': !isCityBeingCreated,
+            'cursor-pointer': !isCityBeingCreated && nameDraft.length > 0,
             'cursor-wait': isCityBeingCreated,
-            'hover:bg-green-400': !isCityBeingCreated,
+            'hover:bg-green-400': !isCityBeingCreated && nameDraft.length > 0,
         },
     );
+
 
     return (
         <div data-testid={testId}
@@ -58,7 +61,7 @@ export const Component = (
                         <div className="w-2/3">
                             <input
                                 id="new-city-name"
-                                className="appearance-none border-none w-full leading-tight focus:outline-none text-gray-900 bg-gray-100"
+                                className="appearance-none border-none w-full leading-tight focus:outline-none text-gray-900 bg-gray-100 cursor-text"
                                 type="text"
                                 placeholder="London"
                                 onChange={
@@ -74,6 +77,9 @@ export const Component = (
                         className={buttonClassName}
                         onClick={
                             (event) => {
+                                if (nameDraft.length === 0) {
+                                    return;
+                                }
                                 requestCityCreation({ name: nameDraft });
                             }
                         }>

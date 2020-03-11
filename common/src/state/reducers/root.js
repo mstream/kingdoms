@@ -1,17 +1,16 @@
 // @flow
 
-import type {
-    CommonStateCities,
-    CommonStateRules,
-    CommonStateTime,
-    CommonStateWorld,
-    CommonState,
-} from '../../../../common/src/state';
 import type { ServerAction } from '../../../../common/src/actions';
 import { citiesReducer } from './cities';
 import { rulesReducer } from './rules';
 import { timeReducer } from './time';
 import { worldReducer } from './world';
+import type {
+    CommonState, CommonStateCities,
+    CommonStateRules,
+    CommonStateTime,
+    CommonStateWorld,
+} from '../state';
 
 export type CommonStateReducerResult<S> = {
     errors: $ReadOnlyArray<string>,

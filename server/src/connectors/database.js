@@ -1,10 +1,10 @@
 // @flow
 
 import {parseJson} from '../../../common/src/util';
-import type {CommonState} from '../../../common/src/state';
-import {CommonStateType} from '../../../common/src/state';
 import type {Redis} from '../clients/redis';
 import verror from "verror";
+import { CommonStateType } from '../../../common/src/state/state';
+import type { CommonState } from '../../../common/src/state/state';
 
 export const getState = async ({redis}: { redis: Redis }): Promise<CommonState> => {
     try {

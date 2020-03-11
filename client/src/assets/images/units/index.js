@@ -7,33 +7,42 @@ import noble from './noble.png';
 import peasant from './peasant.png';
 import pikeman from './pikeman.png';
 import swordman from './swordman.png';
+import {
+    UNIT_ARCHER,
+    UNIT_CATAPULT,
+    UNIT_KNIGHT,
+    UNIT_NOBLE,
+    UNIT_PEASANT,
+    UNIT_PIKEMAN,
+    UNIT_SWORDMAN,
+} from '../../../../../common/src/state/state';
 
 export const unitVisuals = {
-    archer: {
+    [UNIT_ARCHER]: {
         name: 'Archers',
         image: archer,
     },
-    catapult: {
+    [UNIT_CATAPULT]: {
         name: 'Catapults',
         image: catapult,
     },
-    knight: {
+    [UNIT_KNIGHT]: {
         name: 'Knights',
         image: knight,
     },
-    noble: {
+    [UNIT_NOBLE]: {
         name: 'Nobles',
         image: noble,
     },
-    peasant: {
+    [UNIT_PEASANT]: {
         name: 'Peasants',
         image: peasant,
     },
-    pikeman: {
+    [UNIT_PIKEMAN]: {
         name: 'Pikemen',
         image: pikeman,
     },
-    swordman: {
+    [UNIT_SWORDMAN]: {
         name: 'Swordmen',
         image: swordman,
     },

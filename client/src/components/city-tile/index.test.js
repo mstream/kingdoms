@@ -8,8 +8,8 @@ import { emptyClientState, emptyClientStateCityTile } from '../../state/state';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { CityTileComponent } from './index';
-import { emptyCityState } from '../../../../common/src/state';
 import { cityStatusBarComponentTestId } from '../city-status-bar';
+import { emptyCityState } from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

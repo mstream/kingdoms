@@ -2,7 +2,6 @@
 
 import React from 'react';
 import type { Props } from './props';
-import { calculateBuildingsUpgradeCost } from '../../../../common/src/state';
 import { ImageComponent } from '../image';
 import { CityItemsListComponent } from '../city-items-list';
 import { buildingVisuals } from '../../assets/images/buildings';
@@ -11,6 +10,7 @@ import { subtractQuantities } from '../../../../common/src/quantity';
 import classNames from 'classnames';
 import romanDecimalConverter from 'roman-decimal';
 import { CostInfoComponent } from '../cost-info';
+import { calculateBuildingsUpgradeCost } from '../../../../common/src/state/state';
 
 export const testId = 'city-buildings';
 

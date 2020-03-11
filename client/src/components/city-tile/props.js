@@ -13,7 +13,7 @@ import {
     nextCityIdSelector,
     previousCityIdSelector,
 } from '../../state/selectors/client-state';
-import type { CommonStateCity } from '../../../../common/src/state';
+import type { CommonStateCity } from '../../../../common/src/state/state';
 
 type OwnProps = {
     city: CommonStateCity,

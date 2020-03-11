@@ -14,6 +14,7 @@ module.exports = {
         },
         filter: {
             grayscale: 'grayscale(1)',
+            invert: 'invert(1)'
         },
         fontFamily: {
             gothic: ['NanumGothicCoding'],

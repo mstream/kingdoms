@@ -2,12 +2,12 @@
 
 import React from 'react';
 import type { Props } from './props';
-import { calculateResourceChangeInfo } from '../../../../common/src/state';
 import { numberToQuantityString } from '../../../../common/src/util';
 import { ChangeInfoComponent } from '../change-info';
 import { ImageComponent } from '../image';
 import { CityItemsListComponent } from '../city-items-list';
 import { resourceVisuals } from '../../assets/images/resources';
+import { calculateResourceChangeInfo } from '../../../../common/src/state/state';
 
 export const testId = 'city-resources';
 

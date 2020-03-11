@@ -1,33 +1,59 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
-import { unitVisuals } from '../../assets/images/units';
-import type { CommonStateUnits } from '../../../../common/src/state';
+import { numberToQuantityString } from '../../../../common/src/util';
+import type {
+    CommonStateDamage,
+    UnitType,
+} from '../../../../common/src/state/state';
 import {
+    ARMOR_HEAVY,
+    ARMOR_LIGHT,
+    ARMOR_MEDIUM,
+    ARMOR_NONE,
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
-} from '../../../../common/src/state';
-import { numberToQuantityString } from '../../../../common/src/util';
-import { ChangeInfoComponent } from '../change-info';
+    RESOURCE_FOOD,
+    UNIT_ARCHER,
+    UNIT_CATAPULT,
+    UNIT_KNIGHT,
+    UNIT_NOBLE,
+    UNIT_PEASANT,
+    UNIT_PIKEMAN,
+    UNIT_SWORDMAN,
+} from '../../../../common/src/state/state';
 import { ImageComponent } from '../image';
 import { CityItemsListComponent } from '../city-items-list';
+import { armor, food, speed, sword } from '../../assets/images/icons';
+import { unitVisuals } from '../../assets/images/units';
+import { ChangeInfoComponent } from '../change-info';
 import classNames from 'classnames';
-
+import type { Props } from './props';
 
 export const testId = 'city-units';
 
-const unitsOrder: $ReadOnlyArray<$Keys<CommonStateUnits>> = [
-    'peasant',
-    'pikeman',
-    'archer',
-    'swordman',
-    'knight',
-    'catapult',
-    'noble',
+const unitsOrder: $ReadOnlyArray<UnitType> = [
+    UNIT_PEASANT,
+    UNIT_PIKEMAN,
+    UNIT_ARCHER,
+    UNIT_SWORDMAN,
+    UNIT_KNIGHT,
+    UNIT_CATAPULT,
+    UNIT_NOBLE,
 ];
+
+const armorDescriptions = {
+    [ARMOR_NONE]: 'none',
+    [ARMOR_LIGHT]: 'light',
+    [ARMOR_MEDIUM]: 'medium',
+    [ARMOR_HEAVY]: 'heavy',
+};
+
+const formatDamageString = ({ damage }: { damage: CommonStateDamage }) => {
+    return `${numberToQuantityString({ value: damage[ARMOR_NONE] })}/${numberToQuantityString({ value: damage[ARMOR_LIGHT] })}/${numberToQuantityString({ value: damage[ARMOR_MEDIUM] })}/${numberToQuantityString({ value: damage[ARMOR_HEAVY] })}`;
+};
 
 export const Component = (
     {
@@ -51,7 +77,7 @@ export const Component = (
         const foodChangeRate = convertChangeInfoToChangeRate({
             changeInfo: calculateResourceChangeInfo({
                 city,
-                resourceType: 'food',
+                resourceType: RESOURCE_FOOD,
                 rules,
             }),
         });
@@ -59,7 +85,7 @@ export const Component = (
         const changeInfo = calculatePeasantChangeInfo({
             buildingTiersSum,
             unitsQuantity: unitsQuantity,
-            food: city.resources.food,
+            food: city.resources[RESOURCE_FOOD],
             foodChangeRate,
             rules,
         });
@@ -86,7 +112,10 @@ export const Component = (
                     className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-10 opacity-75 cursor-default pointer-events-none">
                     <ChangeInfoComponent changeInfo={changeInfo}/>
                 </div>
-                <ImageComponent image={unitVisual.image} ratio="100%"/>
+                <ImageComponent
+                    image={unitVisual.image}
+                    ratio="100%"
+                />
                 <p className="text-xs text-center text-gray-100">{unitVisual.name}</p>
             </div>
         );
@@ -94,6 +123,7 @@ export const Component = (
 
     const unitStat = unitStats[activeUnit];
     const unitVisual = unitVisuals[activeUnit];
+    const armorDescription = armorDescriptions[unitStat.armor];
 
     return (
         <div data-testid={testId} role="tabpanel">
@@ -103,12 +133,43 @@ export const Component = (
                 <table className="border-collapse table-fixed">
                     <tbody>
                         <tr>
-                            <td>Attack</td>
-                            <td>{unitStat.attack}</td>
+                            <td className="w-8 p-1">
+                                <ImageComponent
+                                    className="filter-invert"
+                                    image={sword}
+                                    ratio="100%"
+                                />
+                            </td>
+                            <td>{formatDamageString({ damage: unitStat.damage })}</td>
                         </tr>
                         <tr>
-                            <td>Defence</td>
-                            <td>{unitStat.defence}</td>
+                            <td className="w-8 p-1">
+                                <ImageComponent
+                                    className="filter-invert"
+                                    image={armor}
+                                    ratio="100%"
+                                />
+                            </td>
+                            <td>{armorDescription}</td>
+                        </tr>
+                        <tr>
+                            <td className="w-8 p-1">
+                                <ImageComponent
+                                    className="filter-invert"
+                                    image={speed}
+                                    ratio="100%"
+                                />
+                            </td>
+                            <td>{`${numberToQuantityString({ value: unitStat.speed })}/h`}</td>
+                        </tr>
+                        <tr>
+                            <td className="w-8 p-1">
+                                <ImageComponent
+                                    className="filter-invert"
+                                    image={food}
+                                    ratio="100%"
+                                /></td>
+                            <td>{`${numberToQuantityString({ value: unitStat.foodDemand })}/h`}</td>
                         </tr>
                     </tbody>
                 </table>

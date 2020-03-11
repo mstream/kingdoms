@@ -2,10 +2,9 @@
 
 import type {CommonStateReducerResult} from './root';
 import {rootReducer} from './root';
-import type {CommonState} from '../../../../common/src/state';
-import {initialCommonState} from '../state';
+import { emptyCommonState, initialCommonState } from '../state';
 import {dummy} from '../../../../common/src/actions';
-import {emptyCommonState} from '../../../../common/src/state';
+import type { CommonState } from '../state';
 
 describe('rootReducer', () => {
     it('returns the default state on reset state action', () => {

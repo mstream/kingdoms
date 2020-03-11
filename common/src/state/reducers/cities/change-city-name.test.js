@@ -1,12 +1,9 @@
 // @flow
 
 import {changeCityName} from '../../../../../common/src/actions';
-import type {CommonState} from '../../../../../common/src/state';
 import {changeCityNameCitiesReducer} from './change-city-name';
-import {
-    emptyCityState,
-    emptyCommonState
-} from '../../../../../common/src/state';
+import { emptyCityState, emptyCommonState } from '../../state';
+import type { CommonState } from '../../state';
 
 describe('changeCityNameCitiesReducer', () => {
     it('fails when city does not exist', () => {

@@ -2,13 +2,10 @@
 
 import { createSelector } from 'reselect';
 import type {
-    CommonState,
-    CommonStateCities,
-    CommonStateCity,
-    CommonStateRules,
+    CommonState, CommonStateCities, CommonStateCity, CommonStateRules,
     CommonStateTime, CommonStateUnitStats,
     CommonStateWorld,
-} from '../state';
+} from '../state/state';
 
 export const commonStateCitiesSelector = (state: CommonState): CommonStateCities => {
     return state.cities;

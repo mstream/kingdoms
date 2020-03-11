@@ -3,17 +3,21 @@
 import lumberMill from './lumber-mill.png';
 import pasture from './pasture.png';
 import warehouse from './warehouse.png';
+import {
+    BUILDING_LUMBER_MILL,
+    BUILDING_PASTURE, BUILDING_WAREHOUSE,
+} from '../../../../../common/src/state/state';
 
 export const buildingVisuals = {
-    lumberMill: {
+    [BUILDING_LUMBER_MILL]: {
         name: 'Lumber Mill',
         image: lumberMill,
     },
-    pasture: {
+    [BUILDING_PASTURE]: {
         name: 'Pasture',
         image: pasture,
     },
-    warehouse: {
+    [BUILDING_WAREHOUSE]: {
         name: 'Warehouse',
         image: warehouse,
     },

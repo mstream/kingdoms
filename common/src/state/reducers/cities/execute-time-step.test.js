@@ -1,16 +1,10 @@
 // @flow
 
-import {executeTimeStep} from '../../../../../common/src/actions';
-import type {
-    CommonStateCities,
-    CommonState
-} from '../../../../../common/src/state';
-import type {CommonStateReducerResult} from '../root';
-import {executeTimeStepCitiesReducer} from './execute-time-step';
-import {
-    emptyCityState,
-    emptyCommonState
-} from '../../../../../common/src/state';
+import { executeTimeStep } from '../../../../../common/src/actions';
+import type { CommonStateReducerResult } from '../root';
+import { executeTimeStepCitiesReducer } from './execute-time-step';
+import type { CommonState, CommonStateCities } from '../../state';
+import { emptyCityState, emptyCommonState, UNIT_PEASANT } from '../../state';
 
 describe('executeTimeStepCitiesReducer', () => {
     it('previous time newer than the one from action', () => {
@@ -19,14 +13,14 @@ describe('executeTimeStepCitiesReducer', () => {
             time: '2000-01-01T02:00:00Z',
         };
         const updateTime = '2000-01-01T01:00:00Z';
-        const action = executeTimeStep({time: updateTime});
+        const action = executeTimeStep({ time: updateTime });
         const expected: CommonStateReducerResult<CommonStateCities> = {
             errors: ['the time from the action is not past the time from the state'],
             state: null,
         };
         const actual = executeTimeStepCitiesReducer({
             action,
-            state: previousState
+            state: previousState,
         });
         expect(actual).toEqual(expected);
     });
@@ -39,9 +33,9 @@ describe('executeTimeStepCitiesReducer', () => {
                     ...emptyCityState,
                     units: {
                         ...emptyCityState.units,
-                        peasant: 0,
+                        [UNIT_PEASANT]: 0,
                     },
-                }
+                },
             },
             rules: {
                 ...emptyCommonState.rules,
@@ -54,7 +48,7 @@ describe('executeTimeStepCitiesReducer', () => {
             time: '2000-01-01T00:00:00Z',
         };
         const updateTime = '2000-01-01T01:00:00Z';
-        const action = executeTimeStep({time: updateTime});
+        const action = executeTimeStep({ time: updateTime });
         const expected: CommonStateReducerResult<CommonStateCities> = {
             errors: [],
             state: {
@@ -63,14 +57,14 @@ describe('executeTimeStepCitiesReducer', () => {
                     ...previousState.cities['1'],
                     units: {
                         ...previousState.cities['1'].units,
-                        peasant: 100,
-                    }
-                }
-            }
+                        [UNIT_PEASANT]: 100,
+                    },
+                },
+            },
         };
         const actual = executeTimeStepCitiesReducer({
             action,
-            state: previousState
+            state: previousState,
         });
         expect(actual).toEqual(expected);
     });

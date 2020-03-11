@@ -1,9 +1,9 @@
 // @flow
 
-import type {CommonState} from '../../../../../common/src/state';
 import {unsupportedActionCitiesReducer} from './unsupported';
 import {dummy} from '../../../../../client/src/state/actions';
-import {emptyCommonState} from '../../../../../common/src/state';
+import { emptyCommonState } from '../../state';
+import type { CommonState } from '../../state';
 
 describe('unsupportedActionCitiesReducer', () => {
     it('returns the current state', () => {

@@ -1,13 +1,13 @@
 // @flow
 
 import {createCity} from '../../../../../common/src/actions';
-import type {CommonState} from '../../../../../common/src/state';
 import {createCityCitiesReducer} from './create-city';
-import {initialCityState} from '../../state';
 import {
     emptyCityState,
-    emptyCommonState
-} from '../../../../../common/src/state';
+    emptyCommonState,
+    initialCityState,
+} from '../../state';
+import type { CommonState } from '../../state';
 
 describe(`createCityCitiesReducer`, () => {
     it(`fails when there is not enough space for the city`, () => {

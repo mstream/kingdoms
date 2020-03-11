@@ -2,13 +2,17 @@
 
 import food from './food.png';
 import wood from './wood.png';
+import {
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+} from '../../../../../common/src/state/state';
 
 export const resourceVisuals = {
-    food: {
+    [RESOURCE_FOOD]: {
         name: 'Food',
         image: food,
     },
-    wood: {
+    [RESOURCE_WOOD]: {
         name: 'Wood',
         image: wood,
     },

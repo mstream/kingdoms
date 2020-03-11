@@ -9,20 +9,20 @@ import type {
     ClientStateTiles,
 } from '../state';
 import { createSelector } from 'reselect';
-import type {
-    CommonState,
-    CommonStateCities,
-    CommonStateCity,
-    CommonStateRules,
-    CommonStateUnits, CommonStateUnitStats,
-    CommonStateWorld,
-} from '../../../../common/src/state';
 import {
     commonStateCitiesSelector,
     commonStateCityIdsByOwnerSelector,
     commonStateRulesSelector,
     commonStateWorldSelector,
 } from '../../../../common/src/selectors/common-state';
+import type {
+    CommonState,
+    CommonStateCities,
+    CommonStateCity,
+    CommonStateRules, CommonStateUnits,
+    CommonStateUnitStats,
+    CommonStateWorld,
+} from '../../../../common/src/state/state';
 
 export const cameraSelector = (state: ClientState): ClientStateCamera => {
     return state.camera;

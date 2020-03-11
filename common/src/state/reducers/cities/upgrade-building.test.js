@@ -1,19 +1,22 @@
 // @flow
 
-import {upgradeBuildingCitiesReducer} from './upgrade-building';
-import {upgradeBuilding} from '../../../../../common/src/actions';
-import type {CommonState} from '../../../../../common/src/state';
+import { upgradeBuildingCitiesReducer } from './upgrade-building';
+import { upgradeBuilding } from '../../../../../common/src/actions';
+import type { CommonState } from '../../state';
 import {
+    BUILDING_PASTURE,
     emptyCityState,
-    emptyCommonState
-} from '../../../../../common/src/state';
+    emptyCommonState,
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+} from '../../state';
 
 describe('upgradeBuildingCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = upgradeBuilding({
             buildingType: 'pasture',
             cityId: '1',
-            playerId: 'player1'
+            playerId: 'player1',
         });
         const previousState: CommonState = {
             ...emptyCommonState,
@@ -24,7 +27,7 @@ describe('upgradeBuildingCitiesReducer', () => {
         };
         const actual = upgradeBuildingCitiesReducer({
             action,
-            state: previousState
+            state: previousState,
         });
         expect(actual).toEqual(expected);
     });
@@ -33,16 +36,16 @@ describe('upgradeBuildingCitiesReducer', () => {
         const action = upgradeBuilding({
             buildingType: 'pasture',
             cityId: '1',
-            playerId: 'player1'
+            playerId: 'player1',
         });
         const previousState: CommonState = {
             ...emptyCommonState,
             cities: {
                 '1': {
                     ...emptyCityState,
-                    ownerId: 'player2'
-                }
-            }
+                    ownerId: 'player2',
+                },
+            },
         };
         const expected = {
             errors: ['the city does not belong to the player'],
@@ -50,14 +53,14 @@ describe('upgradeBuildingCitiesReducer', () => {
         };
         const actual = upgradeBuildingCitiesReducer({
             action,
-            state: previousState
+            state: previousState,
         });
         expect(actual).toEqual(expected);
     });
 
     it('fails when the resources are insufficient', () => {
         const action = upgradeBuilding({
-            buildingType: 'pasture',
+            buildingType: BUILDING_PASTURE,
             cityId: '1',
             playerId: 'player1',
         });
@@ -69,43 +72,45 @@ describe('upgradeBuildingCitiesReducer', () => {
                     ownerId: 'player1',
                     buildings: {
                         ...emptyCityState.buildings,
-                        pasture: {
+                        [BUILDING_PASTURE]: {
                             tier: 0,
-                        }
+                        },
                     },
                     resources: {
-                        food: 100,
-                        wood: 100,
-                    }
-                }
+                        [RESOURCE_FOOD]: 100,
+                        [RESOURCE_WOOD]: 100,
+                    },
+                },
             },
             rules: {
                 ...emptyCommonState.rules,
                 buildingUpgradeCosts: {
                     ...emptyCommonState.rules.buildingUpgradeCosts,
-                    pasture: {
-                        food: 200,
-                        wood: 200,
+                    [BUILDING_PASTURE]: {
+                        // $FlowFixMe
+                        [RESOURCE_FOOD]: 200,
+                        // $FlowFixMe
+                        [RESOURCE_WOOD]: 200,
                     },
                 },
-            }
+            },
         };
         const expected = {
-            errors: ['insufficient food', 'insufficient wood'],
+            errors: ['insufficient RESOURCE_FOOD', 'insufficient RESOURCE_WOOD'],
             state: null,
         };
         const actual = upgradeBuildingCitiesReducer({
             action,
-            state: previousState
+            state: previousState,
         });
         expect(actual).toEqual(expected);
     });
 
     it('upgrades the tier and decreases used resources', () => {
         const action = upgradeBuilding({
-            buildingType: 'pasture',
+            buildingType: BUILDING_PASTURE,
             cityId: '1',
-            playerId: 'player1'
+            playerId: 'player1',
         });
         const previousState: CommonState = {
             ...emptyCommonState,
@@ -115,26 +120,28 @@ describe('upgradeBuildingCitiesReducer', () => {
                     ownerId: 'player1',
                     buildings: {
                         ...emptyCityState.buildings,
-                        pasture: {
+                        [BUILDING_PASTURE]: {
                             tier: 0,
                         },
                     },
                     resources: {
-                        food: 400,
-                        wood: 300,
-                    }
-                }
+                        [RESOURCE_FOOD]: 400,
+                        [RESOURCE_WOOD]: 300,
+                    },
+                },
             },
             rules: {
                 ...emptyCommonState.rules,
                 buildingUpgradeCosts: {
                     ...emptyCommonState.rules.buildingUpgradeCosts,
-                    pasture: {
-                        food: 200,
-                        wood: 200,
+                    [BUILDING_PASTURE]: {
+                        // $FlowFixMe
+                        [RESOURCE_FOOD]: 200,
+                        // $FlowFixMe
+                        [RESOURCE_WOOD]: 200,
                     },
                 },
-            }
+            },
         };
         const expected = {
             errors: [],
@@ -144,22 +151,22 @@ describe('upgradeBuildingCitiesReducer', () => {
                     ...previousState.cities['1'],
                     buildings: {
                         ...previousState.cities['1'].buildings,
-                        pasture: {
-                            ...previousState.cities['1'].buildings.pasture,
-                            tier: 1
-                        }
+                        [BUILDING_PASTURE]: {
+                            ...previousState.cities['1'].buildings[BUILDING_PASTURE],
+                            tier: 1,
+                        },
                     },
                     resources: {
                         ...previousState.cities['1'].resources,
-                        food: 200,
-                        wood: 100,
-                    }
-                }
-            }
+                        [RESOURCE_FOOD]: 200,
+                        [RESOURCE_WOOD]: 100,
+                    },
+                },
+            },
         };
         const actual = upgradeBuildingCitiesReducer({
             action,
-            state: previousState
+            state: previousState,
         });
         expect(actual).toEqual(expected);
     });

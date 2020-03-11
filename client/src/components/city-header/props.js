@@ -39,8 +39,8 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    openCityView: typeof openCityView,
-    requestCityNameChange: typeof requestCityNameChange,
+    openCityView,
+    requestCityNameChange,
 });
 
 export const connectProps = connect<Props,

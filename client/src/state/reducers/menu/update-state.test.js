@@ -1,13 +1,13 @@
 // @flow
 
 import { updateState } from '../../actions';
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../../common/src/state';
 import type { ClientState, ClientStateMenu } from '../../state';
 import { emptyClientState } from '../../state';
 import { updateStateMenuReducer } from './update-state';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../../common/src/state/state';
 
 describe('updateStateMenuReducer', () => {
     it('handles update state event', () => {

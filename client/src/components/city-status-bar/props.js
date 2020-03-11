@@ -1,10 +1,10 @@
 // @flow
-import type {CommonStateCity} from '../../../../common/src/state';
 import type {ClientState} from '../../state/state';
 import type {ActionCreatorsProps, StateToProps} from '../types';
 import {connect} from 'react-redux';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
+import type { CommonStateCity } from '../../../../common/src/state/state';
 
 type OwnProps = {
     city: CommonStateCity,

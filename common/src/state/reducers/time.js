@@ -1,9 +1,9 @@
 // @flow
 
-import type {CommonStateTime} from '../../../../common/src/state';
 import type {CommonStateReducer} from './root';
 import {success} from './root';
 import {initialCommonState} from '../state';
+import type { CommonStateTime } from '../state';
 
 export const timeReducer: CommonStateReducer<CommonStateTime> = ({action, state}) => {
     switch (action.type) {

@@ -1,10 +1,11 @@
 // @flow
 
-import type {Quantities} from './quantity';
+import type { Quantities } from './quantity';
+import { RESOURCE_FOOD, RESOURCE_WOOD } from './state/state';
 
-export const convertQuantitiesToResources = ({quantities}: { quantities: Quantities }) => {
+export const convertQuantitiesToResources = ({ quantities }: { quantities: Quantities }) => {
     return {
-        food: quantities.food != null ? quantities.food : 0,
-        wood: quantities.food != null ? quantities.wood : 0,
-    }
+        [RESOURCE_FOOD]: quantities[RESOURCE_FOOD] != null ? quantities[RESOURCE_FOOD] : 0,
+        [RESOURCE_WOOD]: quantities[RESOURCE_WOOD] != null ? quantities[RESOURCE_WOOD] : 0,
+    };
 };

@@ -2,11 +2,6 @@
 
 import type { ClientState, ClientStateCityViewTab } from '../state';
 import { emptyClientState, TAB_OVERVIEW, TAB_UNITS } from '../state';
-import type {
-    CommonStateCities,
-    CommonStateCity
-} from '../../../../common/src/state';
-import {emptyCityState, emptyCommonState} from '../../../../common/src/state';
 import {
     activeCityTabSelector,
     citiesSelector,
@@ -14,6 +9,14 @@ import {
     currentlyViewedCitySelector,
     isGameStartingSelector,
 } from './client-state';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state/state';
+import type {
+    CommonStateCities,
+    CommonStateCity,
+} from '../../../../common/src/state/state';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

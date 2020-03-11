@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { emptyClientState } from '../../state/state';
 import { LoaderComponent } from '.';
-import { emptyCommonState } from '../../../../common/src/state';
 import type { ClientState } from '../../state/state';
+import { emptyCommonState } from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 

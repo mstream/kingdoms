@@ -9,6 +9,7 @@ import type { Node } from 'react';
 
 type OwnProps = {
     children?: Node,
+    filters?: $ReadOnlyArray<string>,
     image: string,
     ratio: string
 };

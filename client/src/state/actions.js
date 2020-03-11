@@ -1,8 +1,11 @@
 // @flow
 
-import type { CommonState, CommonStateUnits } from '../../../common/src/state';
 import type { Vector } from '../../../common/src/vector';
 import type { ClientStateCityViewTab } from './state';
+import type {
+    CommonState,
+    CommonStateUnits,
+} from '../../../common/src/state/state';
 
 
 type BaseAction<T, P> = $ReadOnly<{

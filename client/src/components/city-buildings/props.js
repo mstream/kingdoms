@@ -40,7 +40,7 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    requestBuildingUpgrade: typeof requestBuildingUpgrade,
+    requestBuildingUpgrade,
 });
 
 export const connectProps = connect<Props,

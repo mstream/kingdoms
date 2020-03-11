@@ -2,14 +2,18 @@
 
 import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
-import {render} from '@testing-library/react';
-import type {CommonStateCity} from '../../../../common/src/state';
-import {emptyCityState} from '../../../../common/src/state';
-import {Provider} from 'react-redux';
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {emptyClientState} from '../../state/state';
-import {CityStatusBarComponent} from '.';
 import type { ClientState } from '../../state/state';
+import { emptyClientState } from '../../state/state';
+import { CityStatusBarComponent } from '.';
+import type { CommonStateCity } from '../../../../common/src/state/state';
+import {
+    BUILDING_LUMBER_MILL,
+    BUILDING_PASTURE,
+    emptyCityState,
+} from '../../../../common/src/state/state';
 
 const mockStore = configureStore([]);
 
@@ -19,12 +23,12 @@ describe('CityStatusBarComponent', () => {
             ...emptyCityState,
             buildings: {
                 ...emptyCityState.buildings,
-                lumberMill: {
-                    ...emptyCityState.buildings.lumberMill,
+                [BUILDING_LUMBER_MILL]: {
+                    ...emptyCityState.buildings[BUILDING_LUMBER_MILL],
                     tier: 1,
                 },
-                pasture: {
-                    ...emptyCityState.buildings.pasture,
+                [BUILDING_PASTURE]: {
+                    ...emptyCityState.buildings[BUILDING_PASTURE],
                     tier: 2,
                 },
             },
@@ -37,15 +41,15 @@ describe('CityStatusBarComponent', () => {
             player: {
                 ...emptyClientState.player,
                 name: 'player1',
-            }
+            },
         };
 
         const store = mockStore(state);
 
-        const {queryByText} = render(
+        const { queryByText } = render(
             <Provider store={store}>
                 <CityStatusBarComponent city={city}/>
-            </Provider>
+            </Provider>,
         );
 
         await expect(queryByText('3')).toBeInTheDocument();

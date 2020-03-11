@@ -1,6 +1,6 @@
 // @flow
 
-import type { CommonState } from '../../../common/src/state';
+import type { CommonState, CommonStateUnits } from '../../../common/src/state';
 import type { Vector } from '../../../common/src/vector';
 import type { ClientStateCityViewTab } from './state';
 
@@ -48,6 +48,15 @@ export const selectCityViewTab: ActionCreator<ClientSelectCityViewTabAction> = (
     };
 };
 
+export const SELECT_CITY_VIEW_UNIT: 'SELECT_CITY_VIEW_UNIT' = 'SELECT_CITY_VIEW_UNIT';
+export type ClientSelectCityViewUnitAction = BaseAction<typeof SELECT_CITY_VIEW_UNIT, $ReadOnly<{ unitType: $Keys<CommonStateUnits>, }>>;
+
+export const selectCityViewUnit: ActionCreator<ClientSelectCityViewUnitAction> = (payload) => {
+    return {
+        type: SELECT_CITY_VIEW_UNIT,
+        payload,
+    };
+};
 
 export const LOAD_PLAYER: 'LOAD_PLAYER' = 'LOAD_PLAYER';
 export type ClientLoadPlayerAction = BaseAction<typeof LOAD_PLAYER, $ReadOnly<{ name: string, }>>
@@ -198,6 +207,7 @@ export type ClientAction =
     | ClientOpenCityViewAction
     | ClientRequestBuildingUpgradeAction
     | ClientRequestCityCreationAction
+    | ClientSelectCityViewUnitAction
     | ClientSelectCityViewTabAction
     | ClientUpdateStateAction
     | ClientZoomCameraAction

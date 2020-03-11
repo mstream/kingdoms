@@ -59,6 +59,21 @@ export type CommonStateBuildingUpgradeCosts = {
     warehouse: CommonStateResources,
 };
 
+export type CommonStateUnitStat = {
+    attack: number,
+    defence: number,
+};
+
+export type CommonStateUnitStats = {
+    archer: CommonStateUnitStat,
+    catapult: CommonStateUnitStat,
+    knight: CommonStateUnitStat,
+    noble: CommonStateUnitStat,
+    peasant: CommonStateUnitStat,
+    pikeman: CommonStateUnitStat,
+    swordman: CommonStateUnitStat,
+};
+
 export type CommonStateRules = {
     baseCityCapacity: number,
     buildingUpgradeCoefficient: number,
@@ -69,6 +84,7 @@ export type CommonStateRules = {
     resourceIncreaseChangeRateCoefficient: number,
     unitFoodDemand: number,
     unitStarvingCoefficient: number,
+    unitStats: CommonStateUnitStats,
 };
 
 export type CommonStateTime = string;
@@ -247,6 +263,21 @@ export const emptyResourcesState = {
     wood: 0,
 };
 
+const emptyUnitStatState = {
+    attack: 0,
+    defence: 0,
+};
+
+const emptyUnitStatsState = {
+    archer: emptyUnitStatState,
+    catapult: emptyUnitStatState,
+    knight: emptyUnitStatState,
+    noble: emptyUnitStatState,
+    peasant: emptyUnitStatState,
+    pikeman: emptyUnitStatState,
+    swordman: emptyUnitStatState,
+};
+
 const emptyRulesState = {
     baseCityCapacity: 0,
     basePeasantsMigrationRate: 0,
@@ -264,6 +295,7 @@ const emptyRulesState = {
     resourceIncreaseChangeRateCoefficient: 0,
     unitFoodDemand: 0,
     unitStarvingCoefficient: 0,
+    unitStats: emptyUnitStatsState,
 };
 
 const emptyTimeState = '';

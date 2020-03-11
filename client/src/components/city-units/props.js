@@ -6,10 +6,13 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
+import { selectCityViewUnit } from '../../state/actions';
 import {
     activeCityTabSelector,
+    activeUnitSelector,
     currentlyViewedCitySelector,
     rulesSelector,
+    unitStatsSelector,
 } from '../../state/selectors/client-state';
 
 type OwnProps = {};
@@ -30,13 +33,17 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
+        activeUnit: activeUnitSelector(state),
         city: currentlyViewedCitySelector(state),
         isVisible: activeCityTabSelector(state) === TAB_UNITS,
         rules: rulesSelector(state),
+        unitStats: unitStatsSelector(state),
     });
 };
 
-const actionCreators: DispatchProps = Object.freeze({});
+const actionCreators: DispatchProps = Object.freeze({
+    selectCityViewUnit,
+});
 
 export const connectProps = connect<Props,
     OwnProps,

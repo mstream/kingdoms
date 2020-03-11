@@ -6,7 +6,7 @@ import type {
     CommonStateCities,
     CommonStateCity,
     CommonStateRules,
-    CommonStateTime,
+    CommonStateTime, CommonStateUnitStats,
     CommonStateWorld,
 } from '../state';
 
@@ -64,5 +64,12 @@ export const commonStateCitiesByOwnerSelector = createSelector<CommonState, void
             },
             Object.freeze({}),
         );
+    },
+);
+
+export const commonStateUnitStatsSelector = createSelector<CommonState, void, CommonStateUnitStats, CommonStateRules>(
+    commonStateRulesSelector,
+    (rules) => {
+        return rules.unitStats;
     },
 );

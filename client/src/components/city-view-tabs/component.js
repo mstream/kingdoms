@@ -49,6 +49,7 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
                     'hover:bg-orange-600': tab !== activeTab,
                     'bg-orange-500': tab === activeTab,
                     'cursor-pointer': tab !== activeTab,
+                    'cursor-default': tab === activeTab,
                 },
             );
 

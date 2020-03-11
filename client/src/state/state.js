@@ -1,6 +1,6 @@
 // @flow
 
-import type { CommonState } from '../../../common/src/state';
+import type { CommonState, CommonStateUnits } from '../../../common/src/state';
 import type { Geometry } from '../../../common/src/geometry';
 import type { Vector } from '../../../common/src/vector';
 import type { Boundary } from '../../../common/src/boundary';
@@ -27,6 +27,7 @@ export type ClientStateCityViewTab =
 export type ClientStateCityView = $ReadOnly<{
     currentCityId: ?string,
     tab: ClientStateCityViewTab,
+    unit: $Keys<CommonStateUnits>,
 }>;
 
 export type ClientStateNewCity = $ReadOnly<{
@@ -125,6 +126,7 @@ const emptyMenuState: ClientStateMenu = {
     cityView: {
         currentCityId: null,
         tab: TAB_OVERVIEW,
+        unit: 'peasant',
     },
 };
 
@@ -135,6 +137,7 @@ const initialMenuState: ClientStateMenu = {
     cityView: {
         currentCityId: null,
         tab: TAB_OVERVIEW,
+        unit: 'peasant',
     },
 };
 

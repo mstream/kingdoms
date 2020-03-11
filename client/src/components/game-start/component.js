@@ -24,7 +24,7 @@ export const Component = (
         {
             'spinner': isCityBeingCreated,
             'cursor-pointer': !isCityBeingCreated,
-            'cursor-not-allowed': isCityBeingCreated,
+            'cursor-wait': isCityBeingCreated,
             'hover:bg-green-400': !isCityBeingCreated,
         },
     );

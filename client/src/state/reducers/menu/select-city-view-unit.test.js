@@ -6,7 +6,7 @@ import { emptyClientState, TAB_BUILDINGS, TAB_UNITS } from '../../state';
 import { selectCityViewTabMenuReducer } from './select-city-view-tab';
 
 describe('selectCityViewTabMenuReducer', () => {
-    it('handles select city view action', () => {
+    it('handles select city unit action', () => {
         const action = selectCityViewTab({ tab: TAB_UNITS });
 
         const previousGlobalState: ClientState = {
@@ -15,7 +15,7 @@ describe('selectCityViewTabMenuReducer', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    tab: TAB_BUILDINGS,
+                    unit: 'catapult',
                 },
             },
         };
@@ -26,7 +26,7 @@ describe('selectCityViewTabMenuReducer', () => {
             ...previousLocalState,
             cityView: {
                 ...previousLocalState.cityView,
-                tab: TAB_UNITS,
+                unit: 'peasant',
             },
         };
 

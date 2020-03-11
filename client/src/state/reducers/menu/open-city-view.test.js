@@ -40,6 +40,7 @@ describe('updateStateMenuReducer', () => {
         const expected: ClientStateMenu = {
             ...previousLocalState,
             cityView: {
+                ...previousLocalState.cityView,
                 currentCityId: '1',
                 tab: TAB_OVERVIEW,
             },

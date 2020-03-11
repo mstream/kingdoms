@@ -4,20 +4,24 @@ import type {
     ClientState,
     ClientStateCamera,
     ClientStateCityViewTab,
-    ClientStateMenu, ClientStatePlayer,
+    ClientStateMenu,
+    ClientStatePlayer,
     ClientStateTiles,
 } from '../state';
 import { createSelector } from 'reselect';
 import type {
+    CommonState,
     CommonStateCities,
     CommonStateCity,
     CommonStateRules,
+    CommonStateUnits, CommonStateUnitStats,
     CommonStateWorld,
-    CommonState,
 } from '../../../../common/src/state';
 import {
-    commonStateCitiesSelector, commonStateCityIdsByOwnerSelector,
-    commonStateRulesSelector, commonStateWorldSelector,
+    commonStateCitiesSelector,
+    commonStateCityIdsByOwnerSelector,
+    commonStateRulesSelector,
+    commonStateWorldSelector,
 } from '../../../../common/src/selectors/common-state';
 
 export const cameraSelector = (state: ClientState): ClientStateCamera => {
@@ -73,6 +77,16 @@ export const rulesSelector = createSelector<ClientState, void, ?CommonStateRules
     },
 );
 
+export const unitStatsSelector = createSelector<ClientState, void, ?CommonStateUnitStats, ?CommonStateRules>(
+    rulesSelector,
+    (rules) => {
+        if (rules == null) {
+            return null;
+        }
+        return rules.unitStats;
+    },
+);
+
 export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld, ?CommonState>(
     commonStateSelector,
     (commonState) => {
@@ -109,6 +123,13 @@ export const activeCityTabSelector = createSelector<ClientState, void, ClientSta
     menuSelector,
     (menu) => {
         return menu.cityView.tab;
+    },
+);
+
+export const activeUnitSelector = createSelector<ClientState, void, $Keys<CommonStateUnits>, ClientStateMenu>(
+    menuSelector,
+    (menu) => {
+        return menu.cityView.unit;
     },
 );
 

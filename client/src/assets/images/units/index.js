@@ -19,30 +19,37 @@ import {
 
 export const unitVisuals = {
     [UNIT_ARCHER]: {
+        description: 'TODO',
         name: 'Archers',
         image: archer,
     },
     [UNIT_CATAPULT]: {
+        description: 'TODO',
         name: 'Catapults',
         image: catapult,
     },
     [UNIT_KNIGHT]: {
+        description: 'TODO',
         name: 'Knights',
         image: knight,
     },
     [UNIT_NOBLE]: {
+        description: 'TODO',
         name: 'Nobles',
         image: noble,
     },
     [UNIT_PEASANT]: {
+        description: 'TODO',
         name: 'Peasants',
         image: peasant,
     },
     [UNIT_PIKEMAN]: {
+        description: 'TODO',
         name: 'Pikemen',
         image: pikeman,
     },
     [UNIT_SWORDMAN]: {
+        description: 'TODO',
         name: 'Swordmen',
         image: swordman,
     },

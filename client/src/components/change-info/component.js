@@ -8,10 +8,11 @@ import { numberToQuantityString } from '../../../../common/src/util';
 export const testId = 'change-info';
 
 export const Component = ({ changeInfo }: Props) => {
-    const changeComponents = Object
+    const changeRowComponents = Object
         .keys(changeInfo)
+        .filter(changeType => Math.abs(changeInfo[changeType]) >= 1)
         .sort((changeType1, changeType2) => {
-            return changeInfo[changeType1] - changeInfo[changeType2];
+            return changeInfo[changeType2] - changeInfo[changeType1];
         }).map(changeType => {
             const partialRate = changeInfo[changeType];
             const className = classNames({
@@ -20,14 +21,19 @@ export const Component = ({ changeInfo }: Props) => {
                 'text-green-500': partialRate > 0,
             });
             return (
-                <p key={changeType}
-                   className="text-xs text-center font-medium text-gray-900">{changeType}:
-                    <i className={className}>{numberToQuantityString({ value: partialRate })}/h</i>
-                </p>
+                <tr key={changeType}
+                    className="text-sm text-right font-medium text-gray-900">
+                    <td>{changeType}:</td>
+                    <td className={className}>{numberToQuantityString({ value: partialRate })}/h</td>
+                </tr>
             );
         });
     return (
-        <div data-testid={testId}
-             className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs">{changeComponents}</div>
+        <table data-testid={testId}
+               className="table-fixed border-separate shadow-inner">
+            <tbody>
+                {changeRowComponents}
+            </tbody>
+        </table>
     );
 };

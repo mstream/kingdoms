@@ -4,8 +4,6 @@
 import type { Quantities } from '../quantity';
 import { multipleQuantitiesByScalar } from '../quantity';
 import { convertQuantitiesToResources } from '../resource';
-import type { Vector } from '../vector';
-import { addVectors, getDistanceBetweenVectors } from '../vector';
 import { reify, Type } from 'flow-runtime';
 
 
@@ -357,74 +355,6 @@ export const initialCommonState: CommonState = {
 
 
 export const CommonStateType = (reify: Type<CommonState>);
-
-
-export const calculateNextCitySpot = ({ minimalCityMargin, takenSpots, worldSize }: { minimalCityMargin: Vector, takenSpots: $ReadOnlyArray<Vector>, worldSize: Vector }): ?Vector => {
-
-    const generateLocationHash = ({ location }: { location: Vector }): string => {
-        return `${location.x}_${location.y}`;
-    };
-
-    const isSpotValid = ({ location }: { location: Vector }): boolean => {
-        for (let yOffset = -minimalCityMargin.y; yOffset <= minimalCityMargin.y; yOffset++) {
-            for (let xOffset = -minimalCityMargin.x; xOffset <= minimalCityMargin.x; xOffset++) {
-                const offset = { x: xOffset, y: yOffset };
-                const neighbouringTileLocation = addVectors({
-                    vector1: location,
-                    vector2: offset,
-                });
-                if (neighbouringTileLocation.x < -worldSize.x) {
-                    return false;
-                }
-                if (neighbouringTileLocation.x > worldSize.x) {
-                    return false;
-                }
-                if (neighbouringTileLocation.y < -worldSize.y) {
-                    return false;
-                }
-                if (neighbouringTileLocation.y > worldSize.y) {
-                    return false;
-                }
-                if (allocation[generateLocationHash({ location: neighbouringTileLocation })] === true) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    };
-
-    const allocation = takenSpots.reduce(
-        (allocation, location) => {
-            return {
-                ...allocation,
-                [generateLocationHash({ location })]: true,
-            };
-        },
-        {},
-    );
-
-    const freeSpots = [];
-
-    for (let y = -worldSize.y; y <= worldSize.y; y++) {
-        for (let x = -worldSize.x; x <= worldSize.x; x++) {
-            const location = { x, y };
-            if (isSpotValid({ location })) {
-                freeSpots.push(location);
-            }
-        }
-    }
-
-    freeSpots.sort((freeSpotLocation1, freeSpotLocation2) => getDistanceBetweenVectors({
-        vector1: { x: 0, y: 0 },
-        vector2: freeSpotLocation1,
-    }) - getDistanceBetweenVectors({
-        vector1: { x: 0, y: 0 },
-        vector2: freeSpotLocation2,
-    }));
-
-    return freeSpots.length > 0 ? freeSpots[0] : null;
-};
-
 
 export const calculateBuildingTierSum = ({ buildings }: { buildings: CommonStateBuildings }): number => {
     return Object.keys(buildings).reduce(

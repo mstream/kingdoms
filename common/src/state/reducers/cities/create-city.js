@@ -4,12 +4,13 @@ import type { ServerCreateCityAction } from '../../../../../common/src/actions';
 import type { CommonStateReducerResult } from '../root';
 import { failure, success } from '../root';
 import { validateCityName } from '../../validators';
-import { calculateNextCitySpot, initialCityState } from '../../state';
 import type {
     CommonState,
     CommonStateCities,
     CommonStateCity,
 } from '../../state';
+import { initialCityState } from '../../state';
+import { nextCitySpotSelector } from '../../../selectors/common-state';
 
 export const createCityCitiesReducer = (
     {
@@ -32,13 +33,8 @@ export const createCityCitiesReducer = (
         return failure({ errors: [`player already owns a city`] });
     }
 
-    const takenSpots = Object.keys(state.cities).map(cityId => state.cities[cityId].location);
 
-    const freeCitySpot = calculateNextCitySpot({
-        minimalCityMargin: state.rules.minimalCityMargin,
-        takenSpots,
-        worldSize: state.world.size,
-    });
+    const freeCitySpot = nextCitySpotSelector(state);
 
     if (freeCitySpot == null) {
         return failure({ errors: [`there is no space for another city`] });

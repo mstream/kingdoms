@@ -252,10 +252,10 @@ export const initialCommonState: CommonState = {
             [UNIT_CATAPULT]: {
                 armor: ARMOR_HEAVY,
                 damage: {
-                    [ARMOR_NONE]: 0,
-                    [ARMOR_LIGHT]: 0,
-                    [ARMOR_MEDIUM]: 0,
-                    [ARMOR_HEAVY]: 0,
+                    [ARMOR_NONE]: 100,
+                    [ARMOR_LIGHT]: 100,
+                    [ARMOR_MEDIUM]: 100,
+                    [ARMOR_HEAVY]: 100,
                 },
                 foodDemand: 2,
                 range: 0,
@@ -264,10 +264,10 @@ export const initialCommonState: CommonState = {
             [UNIT_KNIGHT]: {
                 armor: ARMOR_MEDIUM,
                 damage: {
-                    [ARMOR_NONE]: 0,
-                    [ARMOR_LIGHT]: 0,
-                    [ARMOR_MEDIUM]: 0,
-                    [ARMOR_HEAVY]: 0,
+                    [ARMOR_NONE]: 20,
+                    [ARMOR_LIGHT]: 10,
+                    [ARMOR_MEDIUM]: 5,
+                    [ARMOR_HEAVY]: 2,
                 },
                 foodDemand: 3,
                 range: 0,
@@ -288,9 +288,9 @@ export const initialCommonState: CommonState = {
             [UNIT_PEASANT]: {
                 armor: ARMOR_NONE,
                 damage: {
-                    [ARMOR_NONE]: 0,
-                    [ARMOR_LIGHT]: 0,
-                    [ARMOR_MEDIUM]: 0,
+                    [ARMOR_NONE]: 4,
+                    [ARMOR_LIGHT]: 2,
+                    [ARMOR_MEDIUM]: 1,
                     [ARMOR_HEAVY]: 0,
                 },
                 foodDemand: 1,
@@ -300,10 +300,10 @@ export const initialCommonState: CommonState = {
             [UNIT_PIKEMAN]: {
                 armor: ARMOR_LIGHT,
                 damage: {
-                    [ARMOR_NONE]: 0,
-                    [ARMOR_LIGHT]: 0,
-                    [ARMOR_MEDIUM]: 0,
-                    [ARMOR_HEAVY]: 0,
+                    [ARMOR_NONE]: 8,
+                    [ARMOR_LIGHT]: 4,
+                    [ARMOR_MEDIUM]: 2,
+                    [ARMOR_HEAVY]: 1,
                 },
                 foodDemand: 1,
                 range: 0,
@@ -312,10 +312,10 @@ export const initialCommonState: CommonState = {
             [UNIT_SWORDMAN]: {
                 armor: ARMOR_HEAVY,
                 damage: {
-                    [ARMOR_NONE]: 0,
-                    [ARMOR_LIGHT]: 0,
-                    [ARMOR_MEDIUM]: 0,
-                    [ARMOR_HEAVY]: 0,
+                    [ARMOR_NONE]: 20,
+                    [ARMOR_LIGHT]: 10,
+                    [ARMOR_MEDIUM]: 5,
+                    [ARMOR_HEAVY]: 2,
                 },
                 foodDemand: 1,
                 range: 0,

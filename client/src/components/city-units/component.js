@@ -64,116 +64,149 @@ export const Component = (
         selectCityViewUnit,
         unitStats,
     }: Props,
-) => {
+    ) => {
 
-    if (!isVisible || rules == null) {
-        return null;
-    }
+        if (!isVisible || rules == null) {
+            return null;
+        }
 
-    const unitComponents = unitsOrder.map(unitType => {
-        const unitsQuantity = city.units[unitType];
-        const unitVisual = unitVisuals[unitType];
-        const buildingTiersSum = calculateBuildingTierSum({ buildings: city.buildings });
-        const foodChangeRate = convertChangeInfoToChangeRate({
-            changeInfo: calculateResourceChangeInfo({
-                city,
-                resourceType: RESOURCE_FOOD,
+        const unitComponents = unitsOrder.map(unitType => {
+            const unitsQuantity = city.units[unitType];
+            const unitVisual = unitVisuals[unitType];
+
+            const buildingTiersSum = calculateBuildingTierSum({ buildings: city.buildings });
+            const foodChangeRate = convertChangeInfoToChangeRate({
+                changeInfo: calculateResourceChangeInfo({
+                    city,
+                    resourceType: RESOURCE_FOOD,
+                    rules,
+                }),
+            });
+
+            const changeInfo = calculatePeasantChangeInfo({
+                buildingTiersSum,
+                unitsQuantity: unitsQuantity,
+                food: city.resources[RESOURCE_FOOD],
+                foodChangeRate,
                 rules,
-            }),
+            });
+
+            const onClick = (event) => {
+                selectCityViewUnit({ unitType });
+            };
+
+            const isSelected = unitType === activeUnit;
+
+            const parentClassName = classNames(
+                'parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 border-solid border-l border-r border-t border-gray-900 rounded-t-lg shadow-2xs',
+                {
+                    'border-0': isSelected,
+                    'border-b': !isSelected,
+                    'bg-gray-400': !isSelected,
+                    'hover:bg-gray-200': !isSelected,
+                },
+            );
+
+            const nameClassName = classNames(
+                'text-xs text-center text-gray-100',
+                {
+                    'invisible': isSelected,
+                },
+            );
+
+            return (
+                <div
+                    key={unitType}
+                    className={parentClassName}
+                    onClick={onClick}
+                >
+                    <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({ value: unitsQuantity })}</p>
+                    <div
+                        className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-10 opacity-75 cursor-default pointer-events-none">
+                        <ChangeInfoComponent changeInfo={changeInfo}/>
+                    </div>
+                    <ImageComponent
+                        image={unitVisual.image}
+                        ratio="100%"
+                    />
+                    <p className={nameClassName}>{unitVisual.name}</p>
+                </div>
+            );
         });
 
-        const changeInfo = calculatePeasantChangeInfo({
-            buildingTiersSum,
-            unitsQuantity: unitsQuantity,
-            food: city.resources[RESOURCE_FOOD],
-            foodChangeRate,
-            rules,
-        });
+        const activeUnitStat = unitStats[activeUnit];
+        const activeUnitVisual = unitVisuals[activeUnit];
+        const activeUnitArmorDescription = armorDescriptions[activeUnitStat.armor];
+        
+        const statsComponent = (
+            <table className="border-collapse table-fixed">
+                <tbody>
+                    <tr>
+                        <td className="w-8 p-1">
+                            <ImageComponent
+                                className="filter-invert"
+                                image={sword}
+                                ratio="100%"
+                            />
+                        </td>
+                        <td>{formatDamageString({ damage: activeUnitStat.damage })}</td>
+                    </tr>
+                    <tr>
+                        <td className="w-8 p-1">
+                            <ImageComponent
+                                className="filter-invert"
+                                image={armor}
+                                ratio="100%"
+                            />
+                        </td>
+                        <td>{activeUnitArmorDescription}</td>
+                    </tr>
+                    <tr>
+                        <td className="w-8 p-1">
+                            <ImageComponent
+                                className="filter-invert"
+                                image={speed}
+                                ratio="100%"
+                            />
+                        </td>
+                        <td>{`${numberToQuantityString({ value: activeUnitStat.speed })}/h`}</td>
+                    </tr>
+                    <tr>
+                        <td className="w-8 p-1">
+                            <ImageComponent
+                                className="filter-invert"
+                                image={food}
+                                ratio="100%"
+                            /></td>
+                        <td>{`${numberToQuantityString({ value: activeUnitStat.foodDemand })}/h`}</td>
+                    </tr>
+                </tbody>
+            </table>
+        );
 
-        const onClick = (event) => {
-            selectCityViewUnit({ unitType });
-        };
+        const changeComponent = (
+            <div>CHANGE_INFO</div>
+        );
 
-        const className = classNames(
-            'parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 m-1 border-double rounded-t-lg rounded-b-lg rounded-sm shadow-2xs bg-gray-400 hover:bg-gray-300',
-            {
-                'border-4': unitType === activeUnit,
-            },
+        const infoComponent = (
+            <div
+                className="parchment-bg flex flex-col w-full h-full border-solid border-l border-r border-b rounded-b border-gray-900">
+                <p className="text-lg">{activeUnitVisual.name}</p>
+                <div className="flex flex-row justify-around">
+                    {statsComponent}
+                    {changeComponent}
+                </div>
+                <div>
+                    UNIT_DESCRIPTION
+                </div>
+            </div>
         );
 
         return (
-            <div
-                key={unitType}
-                className={className}
-                onClick={onClick}
-            >
-                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({ value: unitsQuantity })}</p>
-                <div
-                    className="absolute top-full left-full invisible group-hover:visible w-16 sm:w-24 md:w-32 lg:w-40 xl:w-48 z-10 opacity-75 cursor-default pointer-events-none">
-                    <ChangeInfoComponent changeInfo={changeInfo}/>
-                </div>
-                <ImageComponent
-                    image={unitVisual.image}
-                    ratio="100%"
-                />
-                <p className="text-xs text-center text-gray-100">{unitVisual.name}</p>
+            <div data-testid={testId} role="tabpanel">
+                <CityItemsListComponent>{unitComponents}</CityItemsListComponent>
+                {infoComponent}
             </div>
         );
-    });
-
-    const unitStat = unitStats[activeUnit];
-    const unitVisual = unitVisuals[activeUnit];
-    const armorDescription = armorDescriptions[unitStat.armor];
-
-    return (
-        <div data-testid={testId} role="tabpanel">
-            <CityItemsListComponent>{unitComponents}</CityItemsListComponent>
-            <div className="parchment-bg w-full h-full">
-                <p className="text-lg">{unitVisual.name}</p>
-                <table className="border-collapse table-fixed">
-                    <tbody>
-                        <tr>
-                            <td className="w-8 p-1">
-                                <ImageComponent
-                                    className="filter-invert"
-                                    image={sword}
-                                    ratio="100%"
-                                />
-                            </td>
-                            <td>{formatDamageString({ damage: unitStat.damage })}</td>
-                        </tr>
-                        <tr>
-                            <td className="w-8 p-1">
-                                <ImageComponent
-                                    className="filter-invert"
-                                    image={armor}
-                                    ratio="100%"
-                                />
-                            </td>
-                            <td>{armorDescription}</td>
-                        </tr>
-                        <tr>
-                            <td className="w-8 p-1">
-                                <ImageComponent
-                                    className="filter-invert"
-                                    image={speed}
-                                    ratio="100%"
-                                />
-                            </td>
-                            <td>{`${numberToQuantityString({ value: unitStat.speed })}/h`}</td>
-                        </tr>
-                        <tr>
-                            <td className="w-8 p-1">
-                                <ImageComponent
-                                    className="filter-invert"
-                                    image={food}
-                                    ratio="100%"
-                                /></td>
-                            <td>{`${numberToQuantityString({ value: unitStat.foodDemand })}/h`}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
-};
+    }
+;

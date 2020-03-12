@@ -2,10 +2,10 @@
 
 import type {Vector} from './vector';
 
-export type Boundary = {
+export type Boundary = $ReadOnly<{
     min: Vector,
     max: Vector,
-};
+}>;
 
 export const clipToBoundary = ({vector, boundary}: { vector: Vector, boundary: Boundary }): Vector => {
     return {

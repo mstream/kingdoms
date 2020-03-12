@@ -8,19 +8,14 @@ import type { ClientAction } from './actions';
 import queryString from 'query-string';
 import type { ClientState } from './state';
 import { composeWithDevTools } from 'redux-devtools-extension';
-
-const clientId = CLIENT_ID;
-const cognitoBaseUrl = COGNITO_URL;
-const signInUrl = `${cognitoBaseUrl}/login?client_id=${clientId}&response_type=token&scope=email+openid&redirect_uri=${window.location.origin}`;
-const signOutUrl = `${cognitoBaseUrl}/logout?client_id=${clientId}&response_type=token&scope=email+openid&redirect_uri=${window.location.origin}`;
-const wsUrl = WEB_SOCKET_URI;
+import { config } from '../config';
 
 const getIdToken = (): string => {
     const locationHash = queryString.parse(window.location.hash);
     const idToken = locationHash['id_token'];
     if (typeof idToken !== 'string') {
         console.log('no id token: redirecting to the authentication website');
-        window.location.replace(signInUrl);
+        window.location.replace(config.cognitoSignInUrl);
         return '';
     } else {
         return idToken;
@@ -28,7 +23,7 @@ const getIdToken = (): string => {
 };
 
 export const signOut = (): void => {
-    window.location.replace(signOutUrl);
+    window.location.replace(config.cognitoSignOutUrl);
 };
 
 const composeEnhancers = composeWithDevTools({
@@ -44,7 +39,7 @@ export const createClientStore = () => {
             applyMiddleware(
                 websocketMiddleware({
                     token: getIdToken(),
-                    url: wsUrl,
+                    url: config.wsUrl,
                 }),
             ),
         ),

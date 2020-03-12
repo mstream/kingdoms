@@ -5,6 +5,7 @@ import type { Quantities } from '../quantity';
 import { multipleQuantitiesByScalar } from '../quantity';
 import { convertQuantitiesToResources } from '../resource';
 import { reify, Type } from 'flow-runtime';
+import { zeroVector } from '../vector';
 
 
 export const ARMOR_NONE: 'ARMOR_NONE' = 'ARMOR_NONE';
@@ -95,10 +96,7 @@ export type CommonStateResources = typeof emptyResourcesState;
 const emptyCityStateWithoutOptionals = {
     buildings: emptyBuildingsState,
     units: emptyUnitsState,
-    location: {
-        x: 0,
-        y: 0,
-    },
+    location: zeroVector,
     name: '',
     resources: emptyResourcesState,
 };
@@ -194,7 +192,7 @@ export const emptyTimeState = '';
 export type CommonStateTime = typeof emptyTimeState;
 
 
-export const emptyWorldState = { size: { x: 0, y: 0 } };
+export const emptyWorldState = { size: zeroVector };
 
 export type CommonStateWorld = typeof emptyWorldState;
 

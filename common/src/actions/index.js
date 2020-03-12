@@ -1,10 +1,10 @@
 // @flow
 // @flow-runtime
 
-import { parseJson } from './util';
 import type { Type } from 'flow-runtime';
 import { reify } from 'flow-runtime';
-import type { BuildingType, CommonState } from './state';
+import type { BuildingType, CommonState } from '../state';
+import { parseJson } from '../util';
 
 export type ServerDummyAction = $ReadOnly<{
     type: 'DUMMY',
@@ -79,7 +79,17 @@ export const abandonCity = ({ cityId, playerId }: { cityId: string, playerId: st
     };
 };
 
-export const createCity = ({ cityId, cityName, playerId }: { cityId: string, cityName: string, playerId: string }): ServerCreateCityAction => {
+export const createCity = (
+    {
+        cityId,
+        cityName,
+        playerId,
+    }: {
+        cityId: string,
+        cityName: string,
+        playerId: string
+    },
+): ServerCreateCityAction => {
     return {
         type: 'CREATE_CITY',
         payload: {
@@ -110,7 +120,17 @@ export const executeTimeStep = ({ time }: { time: string }): ServerExecuteTimeSt
     };
 };
 
-export const upgradeBuilding = ({ cityId, buildingType, playerId }: { cityId: string, buildingType: BuildingType, playerId: string }): ServerUpgradeBuildingAction => {
+export const upgradeBuilding = (
+    {
+        cityId,
+        buildingType,
+        playerId,
+    }: {
+        cityId: string,
+        buildingType: BuildingType,
+        playerId: string
+    },
+): ServerUpgradeBuildingAction => {
     return {
         type: 'UPGRADE_BUILDING',
         payload: {
@@ -121,7 +141,17 @@ export const upgradeBuilding = ({ cityId, buildingType, playerId }: { cityId: st
     };
 };
 
-export const changeCityName = ({ cityId, name, playerId }: { cityId: string, name: string, playerId: string }): ServerChangeCityNameAction => {
+export const changeCityName = (
+    {
+        cityId,
+        name,
+        playerId,
+    }: {
+        cityId: string,
+        name: string,
+        playerId: string
+    },
+): ServerChangeCityNameAction => {
     return {
         type: 'CHANGE_CITY_NAME',
         payload: {
@@ -144,8 +174,18 @@ export type ServerResponse = {
 
 const ServerResponseType = (reify: Type<ServerResponse>);
 
-export const parseServerResponse = ({ json }: { json: string }): ServerResponse => {
-    const object = parseJson({ json });
+export const parseServerResponse = (
+    {
+        json,
+    }: {
+        json: string
+    },
+): ServerResponse => {
+    const object = parseJson(
+        {
+            json,
+        },
+    );
     return ServerResponseType.assert(object);
 };
 

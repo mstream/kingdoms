@@ -12,7 +12,7 @@ import type {
 } from '../state';
 
 import type { Vector } from '../vector';
-import { addVectors, getDistanceBetweenVectors } from '../vector';
+import { addVectors, getDistanceBetweenVectors, zeroVector } from '../vector';
 
 export const commonStateCitiesSelector = (state: CommonState): CommonStateCities => {
     return state.cities;
@@ -139,10 +139,10 @@ export const nextCitySpotSelector = createSelector<CommonState, void, ?Vector, C
         }
 
         freeSpots.sort((freeSpotLocation1, freeSpotLocation2) => getDistanceBetweenVectors({
-            vector1: { x: 0, y: 0 },
+            vector1: zeroVector,
             vector2: freeSpotLocation1,
         }) - getDistanceBetweenVectors({
-            vector1: { x: 0, y: 0 },
+            vector1: zeroVector,
             vector2: freeSpotLocation2,
         }));
 

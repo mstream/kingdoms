@@ -2,11 +2,9 @@
 
 import type { Geometry } from '../../../common/src/geometry';
 import type { Vector } from '../../../common/src/vector';
+import { zeroVector } from '../../../common/src/vector';
 import type { Boundary } from '../../../common/src/boundary';
-import type {
-    CommonState,
-    CommonStateUnits,
-} from '../../../common/src/state';
+import type { CommonState, CommonStateUnits } from '../../../common/src/state';
 import { UNIT_PEASANT } from '../../../common/src/state';
 
 export type ClientStateCamera = $ReadOnly<{
@@ -79,19 +77,19 @@ export type ClientState = $ReadOnly<{
 
 const emptyCameraState: ClientStateCamera = {
     locationLimit: {
-        min: { x: 0, y: 0 },
-        max: { x: 0, y: 0 },
+        min: zeroVector,
+        max: zeroVector,
     },
     geometry: {
-        location: { x: 0, y: 0 },
-        size: { x: 0, y: 0 },
+        location: zeroVector,
+        size: zeroVector,
     },
-    movementSpeed: { x: 0, y: 0 },
+    movementSpeed: zeroVector,
     sizeLimit: {
-        min: { x: 0, y: 0 },
-        max: { x: 0, y: 0 },
+        min: zeroVector,
+        max: zeroVector,
     },
-    zoomingSpeed: { x: 0, y: 0 },
+    zoomingSpeed: zeroVector,
 };
 
 const initialCameraState: ClientStateCamera = {
@@ -106,8 +104,8 @@ const initialCameraState: ClientStateCamera = {
         },
     },
     locationLimit: {
-        min: { x: 0, y: 0 },
-        max: { x: 0, y: 0 },
+        min: zeroVector,
+        max: zeroVector,
     },
     movementSpeed: {
         x: 0.1,
@@ -168,20 +166,20 @@ const initialTilesState: ClientStateTiles = {
 
 export const emptyClientStateCityTile: ClientStateTile = {
     geometry: {
-        location: { x: 0, y: 0 },
-        size: { x: 0, y: 0 },
+        location: zeroVector,
+        size: zeroVector,
     },
-    index: { x: 0, y: 0 },
+    index: zeroVector,
     textureIndex: 0,
     type: 'CITY',
 };
 
 export const emptyClientStateTerrainTile: ClientStateTile = {
     geometry: {
-        location: { x: 0, y: 0 },
-        size: { x: 0, y: 0 },
+        location: zeroVector,
+        size: zeroVector,
     },
-    index: { x: 0, y: 0 },
+    index: zeroVector,
     textureIndex: 0,
     type: 'PLAINS',
 };

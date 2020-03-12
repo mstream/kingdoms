@@ -3,7 +3,6 @@
 import type { ServerCreateCityAction } from '../../../../../common/src/actions';
 import type { CommonStateReducerResult } from '../root';
 import { failure, success } from '../root';
-import { validateCityName } from '../../validators';
 import type {
     CommonState,
     CommonStateCities,
@@ -24,6 +23,7 @@ import {
     UNIT_SWORDMAN,
 } from '../../index';
 import { nextCitySpotSelector } from '../../../selectors/common-state';
+import { validateCityName } from '../../../validators';
 
 export const createCityCitiesReducer = (
     {
@@ -45,7 +45,6 @@ export const createCityCitiesReducer = (
     if (Object.keys(state.cities).find(cityId => state.cities[cityId].ownerId === playerId) != null) {
         return failure({ errors: [`player already owns a city`] });
     }
-
 
     const freeCitySpot = nextCitySpotSelector(state);
 

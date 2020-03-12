@@ -6,7 +6,7 @@ import {
     commonStateCitiesSelector,
     nextCitySpotSelector,
 } from './common-state';
-import { areVectorsEqual } from '../vector';
+import { areVectorsEqual, zeroVector } from '../vector';
 
 describe('commonStateCitiesSelector', () => {
     it('returns all the cities', () => {
@@ -59,7 +59,7 @@ describe('nextCitySpotSelector', () => {
             },
         };
 
-        const expected = { x: 0, y: 0 };
+        const expected = zeroVector;
 
         const actual = nextCitySpotSelector(state);
 
@@ -73,7 +73,7 @@ describe('nextCitySpotSelector', () => {
                 ...emptyCommonState.cities,
                 '1': {
                     ...emptyCityState,
-                    location: { x: 0, y: 0 },
+                    location: zeroVector,
                 },
             },
             rules: {
@@ -113,7 +113,7 @@ describe('nextCitySpotSelector', () => {
                 ...emptyCommonState.cities,
                 '1': {
                     ...emptyCityState,
-                    location: { x: 0, y: 0 },
+                    location: zeroVector,
                 },
                 '2': {
                     ...emptyCityState,

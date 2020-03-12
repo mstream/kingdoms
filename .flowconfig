@@ -2,6 +2,7 @@
 [untyped]
 [include]
 [libs]
+./flow-defs
 ./flow-typed
 [options]
 exact_by_default=true

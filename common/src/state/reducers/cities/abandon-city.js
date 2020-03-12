@@ -1,20 +1,20 @@
 // @flow
 
-import type {ServerAbandonCityAction} from '../../../../../common/src/actions';
-import type {CommonStateReducerResult} from '../root';
-import {failure, success} from '../root';
+import type { ServerAbandonCityAction } from '../../../../../common/src/actions';
+import type { CommonStateReducerResult } from '../root';
+import { failure, success } from '../root';
 import type { CommonState, CommonStateCities } from '../../index';
 
-export const abandonCityCitiesReducer = ({action, state}: { action: ServerAbandonCityAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
-    const {cityId, playerId} = action.payload;
+export const abandonCityCitiesReducer = ({ action, state }: { action: ServerAbandonCityAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
+    const { cityId, playerId } = action.payload;
     const city = state.cities[cityId];
 
     if (city == null) {
-        return failure({errors: [`the city does not exist`]});
+        return failure({ errors: [`the city does not exist`] });
     }
 
     if (playerId !== city.ownerId) {
-        return failure({errors: [`the city does not belong to the player`]});
+        return failure({ errors: [`the city does not belong to the player`] });
     }
 
     const newCityState = {
@@ -27,5 +27,5 @@ export const abandonCityCitiesReducer = ({action, state}: { action: ServerAbando
         [cityId]: newCityState,
     };
 
-    return success({state: newState});
+    return success({ state: newState });
 };

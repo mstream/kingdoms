@@ -5,7 +5,7 @@ const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const MinimizeFontsPlugin = require('./webpack/minimize-fonts-plugin');
-
+const webpack = require('webpack');
 
 const PATHS = {
     src: path.join(__dirname, 'src'),
@@ -51,6 +51,11 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.DefinePlugin({
+            CLIENT_ID: JSON.stringify('78pgeo0bb3r0mg1hat0qajtrap'),
+            COGNITO_URL: JSON.stringify('https://kingdoms.auth.eu-west-1.amazoncognito.com'),
+            WEB_SOCKET_URI: JSON.stringify('wss://7yaiaw5zt7.execute-api.eu-west-1.amazonaws.com/Prod'),
+        }),
         new PurgecssPlugin({
             defaultExtractor: content => content.match(/[\w-\/:]+(?<!:)/g) || [],
             paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true }),

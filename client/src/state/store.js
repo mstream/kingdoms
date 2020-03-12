@@ -9,11 +9,11 @@ import queryString from 'query-string';
 import type { ClientState } from './state';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const clientId = `5ujsbhm0e966tcue4cca3dkmut`;
-const cognitoBaseUrl = `https://kingdoms.auth.eu-west-1.amazoncognito.com`;
+const clientId = CLIENT_ID;
+const cognitoBaseUrl = COGNITO_URL;
 const signInUrl = `${cognitoBaseUrl}/login?client_id=${clientId}&response_type=token&scope=email+openid&redirect_uri=${window.location.origin}`;
 const signOutUrl = `${cognitoBaseUrl}/logout?client_id=${clientId}&response_type=token&scope=email+openid&redirect_uri=${window.location.origin}`;
-const wsUrl = `wss://fyl4du2353.execute-api.eu-west-1.amazonaws.com/Prod`;
+const wsUrl = WEB_SOCKET_URI;
 
 const getIdToken = (): string => {
     const locationHash = queryString.parse(window.location.hash);

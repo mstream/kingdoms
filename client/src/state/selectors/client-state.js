@@ -22,7 +22,7 @@ import type {
     CommonStateRules, CommonStateUnits,
     CommonStateUnitStats,
     CommonStateWorld,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 
 export const cameraSelector = (state: ClientState): ClientStateCamera => {
     return state.camera;

@@ -4,7 +4,7 @@ import type {ActionCreatorsProps, StateToProps} from '../types';
 import {connect} from 'react-redux';
 import type {Dispatch} from 'redux';
 import type {ClientAction} from '../../state/actions';
-import type { CommonStateCity } from '../../../../common/src/state/state';
+import type { CommonStateCity } from '../../../../common/src/state';
 
 type OwnProps = {
     city: CommonStateCity,

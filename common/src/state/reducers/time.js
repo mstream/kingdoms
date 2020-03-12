@@ -2,8 +2,8 @@
 
 import type {CommonStateReducer} from './root';
 import {success} from './root';
-import {initialCommonState} from '../state';
-import type { CommonStateTime } from '../state';
+import {initialCommonState} from '../index';
+import type { CommonStateTime } from '../index';
 
 export const timeReducer: CommonStateReducer<CommonStateTime> = ({action, state}) => {
     switch (action.type) {

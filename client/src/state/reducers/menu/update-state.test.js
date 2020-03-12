@@ -7,7 +7,7 @@ import { updateStateMenuReducer } from './update-state';
 import {
     emptyCityState,
     emptyCommonState,
-} from '../../../../../common/src/state/state';
+} from '../../../../../common/src/state';
 
 describe('updateStateMenuReducer', () => {
     it('handles update state event', () => {

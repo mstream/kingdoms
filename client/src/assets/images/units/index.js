@@ -15,7 +15,7 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDMAN,
-} from '../../../../../common/src/state/state';
+} from '../../../../../common/src/state';
 
 export const unitVisuals = {
     [UNIT_ARCHER]: {

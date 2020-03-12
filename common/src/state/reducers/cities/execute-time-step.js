@@ -7,7 +7,7 @@ import type {
     CommonState,
     CommonStateCities,
     CommonStateUnits,
-} from '../../state';
+} from '../../index';
 import {
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
@@ -17,7 +17,7 @@ import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
     UNIT_PEASANT,
-} from '../../state';
+} from '../../index';
 
 export const executeTimeStepCitiesReducer = ({ action, state }: { action: ServerExecuteTimeStepAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const timeDelta = (Date.parse(action.payload) - Date.parse(state.time)) / 1000;

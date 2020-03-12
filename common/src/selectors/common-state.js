@@ -9,7 +9,7 @@ import type {
     CommonStateTime,
     CommonStateUnitStats,
     CommonStateWorld,
-} from '../state/state';
+} from '../state';
 
 import type { Vector } from '../vector';
 import { addVectors, getDistanceBetweenVectors } from '../vector';

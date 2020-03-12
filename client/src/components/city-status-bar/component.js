@@ -3,7 +3,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import type { Props } from './props';
-import { calculateBuildingTierSum } from '../../../../common/src/state/state';
+import { calculateBuildingTierSum } from '../../../../common/src/state';
 
 export const testId = 'city-status-bar';
 

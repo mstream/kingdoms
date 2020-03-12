@@ -8,12 +8,12 @@ import configureStore from 'redux-mock-store';
 import type { ClientState } from '../../state/state';
 import { emptyClientState } from '../../state/state';
 import { CityStatusBarComponent } from '.';
-import type { CommonStateCity } from '../../../../common/src/state/state';
+import type { CommonStateCity } from '../../../../common/src/state';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
     emptyCityState,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 
 const mockStore = configureStore([]);
 

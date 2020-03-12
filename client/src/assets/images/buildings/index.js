@@ -6,7 +6,7 @@ import warehouse from './warehouse.png';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE, BUILDING_WAREHOUSE,
-} from '../../../../../common/src/state/state';
+} from '../../../../../common/src/state';
 
 export const buildingVisuals = {
     [BUILDING_LUMBER_MILL]: {

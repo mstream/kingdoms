@@ -11,7 +11,7 @@ import { CityBuildingsComponent } from './index';
 import {
     emptyCityState,
     emptyCommonState,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 
 const mockStore = configureStore([]);
 

@@ -3,9 +3,10 @@
 import type { Vector } from '../../../common/src/vector';
 import type { ClientStateCityViewTab } from './state';
 import type {
+    BuildingType,
     CommonState,
     CommonStateUnits,
-} from '../../../common/src/state/state';
+} from '../../../common/src/state';
 
 
 type BaseAction<T, P> = $ReadOnly<{
@@ -84,7 +85,7 @@ export const updateState: ActionCreator<ClientUpdateStateAction> = (payload) => 
 
 
 export const REQUEST_BUILDING_UPGRADE: 'REQUEST_BUILDING_UPGRADE' = 'REQUEST_BUILDING_UPGRADE';
-export type ClientRequestBuildingUpgradeAction = BaseAction<typeof REQUEST_BUILDING_UPGRADE, $ReadOnly<{ cityId: string, buildingType: string, }>>
+export type ClientRequestBuildingUpgradeAction = BaseAction<typeof REQUEST_BUILDING_UPGRADE, $ReadOnly<{ cityId: string, buildingType: BuildingType, }>>
 
 export const requestBuildingUpgrade: ActionCreator<ClientRequestBuildingUpgradeAction> = (payload) => {
     return {

@@ -12,11 +12,11 @@ import {
 import {
     emptyCityState,
     emptyCommonState,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 import type {
     CommonStateCities,
     CommonStateCity,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

@@ -1,9 +1,9 @@
 // @flow
 
 import {resetState} from '../../../../../common/src/actions';
-import { emptyCommonState, initialCommonState } from '../../state';
+import { emptyCommonState, initialCommonState } from '../../index';
 import {resetStateCitiesReducer} from './reset-state';
-import type { CommonState } from '../../state';
+import type { CommonState } from '../../index';
 
 describe('resetStateCitiesReducer', () => {
     it('returns the initial state', () => {

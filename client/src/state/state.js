@@ -6,8 +6,8 @@ import type { Boundary } from '../../../common/src/boundary';
 import type {
     CommonState,
     CommonStateUnits,
-} from '../../../common/src/state/state';
-import { UNIT_PEASANT } from '../../../common/src/state/state';
+} from '../../../common/src/state';
+import { UNIT_PEASANT } from '../../../common/src/state';
 
 export type ClientStateCamera = $ReadOnly<{
     locationLimit: Boundary,

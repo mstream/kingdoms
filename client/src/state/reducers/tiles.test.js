@@ -8,7 +8,7 @@ import {tilesReducer} from './tiles';
 import {
     emptyCityState,
     emptyCommonState,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 
 describe('playerReducer', () => {
     it('initializes its state', () => {

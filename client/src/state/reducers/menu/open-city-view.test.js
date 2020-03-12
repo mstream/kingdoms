@@ -9,7 +9,7 @@ import { menuReducer } from './index';
 import {
     emptyCityState,
     emptyCommonState,
-} from '../../../../../common/src/state/state';
+} from '../../../../../common/src/state';
 
 describe('updateStateMenuReducer', () => {
     it('handles open city action', () => {

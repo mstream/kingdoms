@@ -15,7 +15,7 @@ import {
 } from '../../selectors/client-state';
 import { commonStateCitiesByOwnerSelector } from '../../../../../common/src/selectors/common-state';
 import type { Vector } from '../../../../../common/src/vector';
-import type { CommonStateCity } from '../../../../../common/src/state/state';
+import type { CommonStateCity } from '../../../../../common/src/state';
 
 export const updateStateCameraReducer = (
     {

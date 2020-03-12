@@ -9,7 +9,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { CityTileComponent } from './index';
 import { cityStatusBarComponentTestId } from '../city-status-bar';
-import { emptyCityState } from '../../../../common/src/state/state';
+import { emptyCityState } from '../../../../common/src/state';
 
 const mockStore = configureStore([]);
 

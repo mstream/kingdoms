@@ -10,7 +10,7 @@ import type {CommonStateReducer} from '../root';
 import {unsupportedActionCitiesReducer} from './unsupported';
 import type {ServerAction} from '../../../../../common/src/actions';
 import {createCityCitiesReducer} from './create-city';
-import type { CommonState, CommonStateCities } from '../../state';
+import type { CommonState, CommonStateCities } from '../../index';
 
 export const citiesReducer: CommonStateReducer<CommonStateCities> = ({action, state}: {action: ServerAction, state: CommonState}) => {
     switch (action.type) {

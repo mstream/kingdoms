@@ -8,12 +8,12 @@ import configureStore from 'redux-mock-store';
 import type { ClientState } from '../../state/state';
 import { emptyClientState } from '../../state/state';
 import { CostInfoComponent } from '.';
-import type { CommonStateResources } from '../../../../common/src/state/state';
+import type { CommonStateResources } from '../../../../common/src/state';
 import {
     emptyResourcesState,
     RESOURCE_FOOD,
     RESOURCE_WOOD,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 
 const mockStore = configureStore([]);
 

@@ -7,7 +7,7 @@ import type {Redis} from './clients/redis';
 import {getState} from './connectors/database';
 import {sendServerResponse} from './connectors/api';
 import { rootReducer } from '../../common/src/state/reducers/root';
-import type { CommonState } from '../../common/src/state/state';
+import type { CommonState } from '../../common/src/state';
 
 
 const optimisticLockingAttempts = 3;

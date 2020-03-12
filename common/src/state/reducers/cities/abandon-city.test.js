@@ -2,8 +2,8 @@
 
 import {abandonCity} from '../../../../../common/src/actions';
 import {abandonCityCitiesReducer} from './abandon-city';
-import { emptyCityState, emptyCommonState } from '../../state';
-import type { CommonState } from '../../state';
+import { emptyCityState, emptyCommonState } from '../../index';
+import type { CommonState } from '../../index';
 
 describe('abandonCityCitiesReducer', () => {
     it('fails when city does not exist', () => {

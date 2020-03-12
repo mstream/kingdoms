@@ -21,7 +21,7 @@ import { cityOverviewComponentTestId } from '../city-overview';
 import {
     emptyCityState,
     emptyCommonState, emptyUnitStatsState, UNIT_PEASANT,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 
 const mockStore = configureStore([]);
 

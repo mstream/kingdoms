@@ -61,10 +61,8 @@ export const emptyBuildingState = {
 
 export type CommonStateBuilding = typeof emptyBuildingState;
 
-export const initialBuildingState: CommonStateBuilding = emptyBuildingState;
 
-
-export const emptyBuildingsState = {
+export const emptyBuildingsState: { [BuildingType]: CommonStateBuilding, ... } = {
     [BUILDING_LUMBER_MILL]: emptyBuildingState,
     [BUILDING_PASTURE]: emptyBuildingState,
     [BUILDING_WAREHOUSE]: emptyBuildingState,
@@ -73,7 +71,7 @@ export const emptyBuildingsState = {
 export type CommonStateBuildings = typeof emptyBuildingsState;
 
 
-export const emptyUnitsState = {
+export const emptyUnitsState: { [UnitType]: number, ... } = {
     [UNIT_ARCHER]: 0,
     [UNIT_CATAPULT]: 0,
     [UNIT_KNIGHT]: 0,
@@ -85,17 +83,14 @@ export const emptyUnitsState = {
 
 export type CommonStateUnits = typeof emptyUnitsState;
 
-export const initialUnitsState: CommonStateUnits = emptyUnitsState;
 
-
-export const emptyResourcesState = {
+export const emptyResourcesState: { [ResourceType]: number, ... } = {
     [RESOURCE_FOOD]: 0,
     [RESOURCE_WOOD]: 0,
 };
 
 export type CommonStateResources = typeof emptyResourcesState;
 
-export const initialResourcesState: CommonStateResources = emptyResourcesState;
 
 const emptyCityStateWithoutOptionals = {
     buildings: emptyBuildingsState,
@@ -118,28 +113,21 @@ export type CommonStateCity = {
     ownerId: ?string,
 };
 
-export const initialCityState: CommonStateCity = {
-    ...emptyCityState,
-};
-
 
 export const emptyCitiesState: { [string]: CommonStateCity, ... } = Object.freeze({});
 
 export type CommonStateCities = typeof emptyCitiesState
 
-export const initialCitiesState: CommonStateCities = emptyCitiesState;
 
-
-export const emptyBuildingUpgradeCostState = {
+export const emptyBuildingUpgradeCostState: { [ResourceType]: number, ... } = {
     [RESOURCE_FOOD]: 0,
     [RESOURCE_WOOD]: 0,
 };
 
 export type CommonStateBuildingUpgradeCost = typeof emptyBuildingUpgradeCostState;
 
-export const initialBuildingUpgradeCostState: CommonStateBuildingUpgradeCost = emptyBuildingUpgradeCostState;
 
-export const emptyBuildingUpgradeCostsState = {
+export const emptyBuildingUpgradeCostsState: { [BuildingType]: CommonStateBuildingUpgradeCost, ... } = {
     [BUILDING_LUMBER_MILL]: emptyBuildingUpgradeCostState,
     [BUILDING_PASTURE]: emptyBuildingUpgradeCostState,
     [BUILDING_WAREHOUSE]: emptyBuildingUpgradeCostState,
@@ -147,23 +135,8 @@ export const emptyBuildingUpgradeCostsState = {
 
 export type CommonStateBuildingUpgradeCosts = typeof emptyBuildingUpgradeCostsState;
 
-export const initialBuildingUpgradeCosts: CommonStateBuildingUpgradeCosts = {
-    [BUILDING_LUMBER_MILL]: {
-        [RESOURCE_FOOD]: 0,
-        [RESOURCE_WOOD]: 100,
-    },
-    [BUILDING_PASTURE]: {
-        [RESOURCE_FOOD]: 0,
-        [RESOURCE_WOOD]: 50,
-    },
-    [BUILDING_WAREHOUSE]: {
-        [RESOURCE_FOOD]: 0,
-        [RESOURCE_WOOD]: 200,
-    },
-};
 
-
-export const emptyDamageState = {
+export const emptyDamageState: { [ArmorType]: number, ... } = {
     [ARMOR_NONE]: 0,
     [ARMOR_LIGHT]: 0,
     [ARMOR_MEDIUM]: 0,
@@ -171,8 +144,6 @@ export const emptyDamageState = {
 };
 
 export type CommonStateDamage = typeof emptyDamageState;
-
-export const initialDamageState: CommonStateDamage = emptyDamageState;
 
 
 export const emptyUnitStatState = {
@@ -183,12 +154,10 @@ export const emptyUnitStatState = {
     speed: 0,
 };
 
-export type CommonStateUnitStat = typeof emptyUnitStatState;
-
-export const initialUnitStatState: CommonStateUnitStat = emptyUnitStatState;
+export type CommonStateUnitStat = { ...typeof emptyUnitStatState, armor: ArmorType, };
 
 
-export const emptyUnitStatsState = {
+export const emptyUnitStatsState: { [UnitType]: CommonStateUnitStat, ... } = {
     [UNIT_ARCHER]: emptyUnitStatState,
     [UNIT_CATAPULT]: emptyUnitStatState,
     [UNIT_KNIGHT]: emptyUnitStatState,
@@ -199,93 +168,6 @@ export const emptyUnitStatsState = {
 };
 
 export type CommonStateUnitStats = typeof emptyUnitStatsState;
-
-export const initialUnitStatsState: CommonStateUnitStats = {
-    [UNIT_ARCHER]: {
-        armor: ARMOR_LIGHT,
-        damage: {
-            [ARMOR_NONE]: 10,
-            [ARMOR_LIGHT]: 5,
-            [ARMOR_MEDIUM]: 1,
-            [ARMOR_HEAVY]: 0,
-        },
-        foodDemand: 1,
-        range: 0,
-        speed: 10,
-    },
-    [UNIT_CATAPULT]: {
-        armor: ARMOR_HEAVY,
-        damage: {
-            [ARMOR_NONE]: 0,
-            [ARMOR_LIGHT]: 0,
-            [ARMOR_MEDIUM]: 0,
-            [ARMOR_HEAVY]: 0,
-        },
-        foodDemand: 2,
-        range: 0,
-        speed: 1,
-    },
-    [UNIT_KNIGHT]: {
-        armor: ARMOR_MEDIUM,
-        damage: {
-            [ARMOR_NONE]: 0,
-            [ARMOR_LIGHT]: 0,
-            [ARMOR_MEDIUM]: 0,
-            [ARMOR_HEAVY]: 0,
-        },
-        foodDemand: 3,
-        range: 0,
-        speed: 50,
-    },
-    [UNIT_NOBLE]: {
-        armor: ARMOR_NONE,
-        damage: {
-            [ARMOR_NONE]: 0,
-            [ARMOR_LIGHT]: 0,
-            [ARMOR_MEDIUM]: 0,
-            [ARMOR_HEAVY]: 0,
-        },
-        foodDemand: 100,
-        range: 0,
-        speed: 1,
-    },
-    [UNIT_PEASANT]: {
-        armor: ARMOR_NONE,
-        damage: {
-            [ARMOR_NONE]: 0,
-            [ARMOR_LIGHT]: 0,
-            [ARMOR_MEDIUM]: 0,
-            [ARMOR_HEAVY]: 0,
-        },
-        foodDemand: 1,
-        range: 0,
-        speed: 10,
-    },
-    [UNIT_PIKEMAN]: {
-        armor: ARMOR_LIGHT,
-        damage: {
-            [ARMOR_NONE]: 0,
-            [ARMOR_LIGHT]: 0,
-            [ARMOR_MEDIUM]: 0,
-            [ARMOR_HEAVY]: 0,
-        },
-        foodDemand: 1,
-        range: 0,
-        speed: 10,
-    },
-    [UNIT_SWORDMAN]: {
-        armor: ARMOR_HEAVY,
-        damage: {
-            [ARMOR_NONE]: 0,
-            [ARMOR_LIGHT]: 0,
-            [ARMOR_MEDIUM]: 0,
-            [ARMOR_HEAVY]: 0,
-        },
-        foodDemand: 1,
-        range: 0,
-        speed: 2,
-    },
-};
 
 
 export const emptyRulesState = {
@@ -306,35 +188,15 @@ export const emptyRulesState = {
 
 export type CommonStateRules = typeof emptyRulesState;
 
-export const initialRulesState: CommonStateRules = {
-    baseCityCapacity: 1000,
-    basePeasantsMigrationRate: 100,
-    buildingUpgradeCoefficient: 0.5,
-    buildingUpgradeCosts: initialBuildingUpgradeCosts,
-    minimalCityMargin: {
-        x: 3,
-        y: 3,
-    },
-    populationGrowthChangeRateCoefficient: 1,
-    resourceIncreaseChangeRateCoefficient: 10000,
-    unitFoodDemand: 1,
-    unitStarvingCoefficient: 0.2,
-    unitStats: initialUnitStatsState,
-};
-
 
 export const emptyTimeState = '';
 
 export type CommonStateTime = typeof emptyTimeState;
 
-export const initialTimeState: CommonStateTime = new Date().toISOString();
-
 
 export const emptyWorldState = { size: { x: 0, y: 0 } };
 
 export type CommonStateWorld = typeof emptyWorldState;
-
-export const initialWorldState: CommonStateWorld = { size: { x: 10, y: 10 } };
 
 
 export const emptyCommonState = {
@@ -347,10 +209,122 @@ export const emptyCommonState = {
 export type CommonState = typeof emptyCommonState;
 
 export const initialCommonState: CommonState = {
-    cities: initialCitiesState,
-    rules: initialRulesState,
-    time: initialTimeState,
-    world: initialWorldState,
+    cities: {},
+    rules: {
+        baseCityCapacity: 1000,
+        basePeasantsMigrationRate: 100,
+        buildingUpgradeCoefficient: 0.5,
+        buildingUpgradeCosts: {
+            [BUILDING_LUMBER_MILL]: {
+                [RESOURCE_FOOD]: 0,
+                [RESOURCE_WOOD]: 100,
+            },
+            [BUILDING_PASTURE]: {
+                [RESOURCE_FOOD]: 0,
+                [RESOURCE_WOOD]: 50,
+            },
+            [BUILDING_WAREHOUSE]: {
+                [RESOURCE_FOOD]: 0,
+                [RESOURCE_WOOD]: 200,
+            },
+        },
+        minimalCityMargin: {
+            x: 3,
+            y: 3,
+        },
+        populationGrowthChangeRateCoefficient: 1,
+        resourceIncreaseChangeRateCoefficient: 10000,
+        unitFoodDemand: 1,
+        unitStarvingCoefficient: 0.2,
+        unitStats: {
+            [UNIT_ARCHER]: {
+                armor: ARMOR_LIGHT,
+                damage: {
+                    [ARMOR_NONE]: 10,
+                    [ARMOR_LIGHT]: 5,
+                    [ARMOR_MEDIUM]: 1,
+                    [ARMOR_HEAVY]: 0,
+                },
+                foodDemand: 1,
+                range: 0,
+                speed: 10,
+            },
+            [UNIT_CATAPULT]: {
+                armor: ARMOR_HEAVY,
+                damage: {
+                    [ARMOR_NONE]: 0,
+                    [ARMOR_LIGHT]: 0,
+                    [ARMOR_MEDIUM]: 0,
+                    [ARMOR_HEAVY]: 0,
+                },
+                foodDemand: 2,
+                range: 0,
+                speed: 1,
+            },
+            [UNIT_KNIGHT]: {
+                armor: ARMOR_MEDIUM,
+                damage: {
+                    [ARMOR_NONE]: 0,
+                    [ARMOR_LIGHT]: 0,
+                    [ARMOR_MEDIUM]: 0,
+                    [ARMOR_HEAVY]: 0,
+                },
+                foodDemand: 3,
+                range: 0,
+                speed: 50,
+            },
+            [UNIT_NOBLE]: {
+                armor: ARMOR_NONE,
+                damage: {
+                    [ARMOR_NONE]: 0,
+                    [ARMOR_LIGHT]: 0,
+                    [ARMOR_MEDIUM]: 0,
+                    [ARMOR_HEAVY]: 0,
+                },
+                foodDemand: 100,
+                range: 0,
+                speed: 1,
+            },
+            [UNIT_PEASANT]: {
+                armor: ARMOR_NONE,
+                damage: {
+                    [ARMOR_NONE]: 0,
+                    [ARMOR_LIGHT]: 0,
+                    [ARMOR_MEDIUM]: 0,
+                    [ARMOR_HEAVY]: 0,
+                },
+                foodDemand: 1,
+                range: 0,
+                speed: 10,
+            },
+            [UNIT_PIKEMAN]: {
+                armor: ARMOR_LIGHT,
+                damage: {
+                    [ARMOR_NONE]: 0,
+                    [ARMOR_LIGHT]: 0,
+                    [ARMOR_MEDIUM]: 0,
+                    [ARMOR_HEAVY]: 0,
+                },
+                foodDemand: 1,
+                range: 0,
+                speed: 10,
+            },
+            [UNIT_SWORDMAN]: {
+                armor: ARMOR_HEAVY,
+                damage: {
+                    [ARMOR_NONE]: 0,
+                    [ARMOR_LIGHT]: 0,
+                    [ARMOR_MEDIUM]: 0,
+                    [ARMOR_HEAVY]: 0,
+                },
+                foodDemand: 1,
+                range: 0,
+                speed: 2,
+            },
+        },
+    },
+    time: new Date().toISOString(),
+    world: { size: { x: 10, y: 10 } },
 };
 
 
@@ -366,7 +340,7 @@ export const calculateBuildingTierSum = ({ buildings }: { buildings: CommonState
 };
 
 
-export const calculateBuildingsUpgradeCost = ({ buildingTier, buildingType, rules }: { buildingTier: number, buildingType: string, rules: CommonStateRules }): CommonStateResources => {
+export const calculateBuildingsUpgradeCost = ({ buildingTier, buildingType, rules }: { buildingTier: number, buildingType: BuildingType, rules: CommonStateRules }): CommonStateResources => {
     const costFactor = 1 + buildingTier * rules.buildingUpgradeCoefficient;
 
     return convertQuantitiesToResources({
@@ -395,7 +369,7 @@ const calculateWoodChangeInfo = ({ unitsQuantity, lumberMillTier, rules }: { uni
 };
 
 
-export const calculateResourceChangeInfo = ({ city, resourceType, rules }: { city: CommonStateCity, resourceType: string, rules: CommonStateRules }): Quantities => {
+export const calculateResourceChangeInfo = ({ city, resourceType, rules }: { city: CommonStateCity, resourceType: ResourceType, rules: CommonStateRules }): Quantities => {
     switch (resourceType) {
         case RESOURCE_FOOD: {
             return calculateFoodChangeInfo({

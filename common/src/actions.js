@@ -1,10 +1,10 @@
 // @flow
 // @flow-runtime
 
-import {parseJson} from './util';
-import type {Type} from 'flow-runtime';
-import {reify} from 'flow-runtime';
-import type { CommonState } from './state/state';
+import { parseJson } from './util';
+import type { Type } from 'flow-runtime';
+import { reify } from 'flow-runtime';
+import type { BuildingType, CommonState } from './state';
 
 export type ServerDummyAction = $ReadOnly<{
     type: 'DUMMY',
@@ -44,7 +44,7 @@ export type ServerExecuteTimeStepAction = $ReadOnly<{
 export type ServerUpgradeBuildingAction = $ReadOnly<{
     type: 'UPGRADE_BUILDING',
     payload: {
-        buildingType: string,
+        buildingType: BuildingType,
         cityId: string,
         playerId: string,
     }
@@ -69,7 +69,7 @@ export type ServerAction =
     | ServerExecuteTimeStepAction
     | ServerUpgradeBuildingAction;
 
-export const abandonCity = ({cityId, playerId}: { cityId: string, playerId: string }): ServerAbandonCityAction => {
+export const abandonCity = ({ cityId, playerId }: { cityId: string, playerId: string }): ServerAbandonCityAction => {
     return {
         type: 'ABANDON_CITY',
         payload: {
@@ -79,7 +79,7 @@ export const abandonCity = ({cityId, playerId}: { cityId: string, playerId: stri
     };
 };
 
-export const createCity = ({cityId, cityName, playerId}: { cityId: string, cityName: string, playerId: string }): ServerCreateCityAction => {
+export const createCity = ({ cityId, cityName, playerId }: { cityId: string, cityName: string, playerId: string }): ServerCreateCityAction => {
     return {
         type: 'CREATE_CITY',
         payload: {
@@ -92,43 +92,43 @@ export const createCity = ({cityId, cityName, playerId}: { cityId: string, cityN
 
 export const getCurrentState = (): ServerGetCurrentStateAction => {
     return {
-        type: 'GET_CURRENT_STATE'
+        type: 'GET_CURRENT_STATE',
     };
 };
 
 
 export const resetState = (): ServerResetStateAction => {
     return {
-        type: 'RESET_STATE'
+        type: 'RESET_STATE',
     };
 };
 
-export const executeTimeStep = ({time}: { time: string }): ServerExecuteTimeStepAction => {
+export const executeTimeStep = ({ time }: { time: string }): ServerExecuteTimeStepAction => {
     return {
         type: 'EXECUTE_TIME_STEP',
-        payload: time
+        payload: time,
     };
 };
 
-export const upgradeBuilding = ({cityId, buildingType, playerId}: { cityId: string, buildingType: string, playerId: string }): ServerUpgradeBuildingAction => {
+export const upgradeBuilding = ({ cityId, buildingType, playerId }: { cityId: string, buildingType: BuildingType, playerId: string }): ServerUpgradeBuildingAction => {
     return {
         type: 'UPGRADE_BUILDING',
         payload: {
             buildingType,
             cityId,
             playerId,
-        }
+        },
     };
 };
 
-export const changeCityName = ({cityId, name, playerId}: { cityId: string, name: string, playerId: string }): ServerChangeCityNameAction => {
+export const changeCityName = ({ cityId, name, playerId }: { cityId: string, name: string, playerId: string }): ServerChangeCityNameAction => {
     return {
         type: 'CHANGE_CITY_NAME',
         payload: {
             cityId,
             name,
             playerId,
-        }
+        },
     };
 };
 
@@ -144,8 +144,8 @@ export type ServerResponse = {
 
 const ServerResponseType = (reify: Type<ServerResponse>);
 
-export const parseServerResponse = ({json}: { json: string }): ServerResponse => {
-    const object = parseJson({json});
+export const parseServerResponse = ({ json }: { json: string }): ServerResponse => {
+    const object = parseJson({ json });
     return ServerResponseType.assert(object);
 };
 
@@ -153,5 +153,5 @@ export const dummy = (): ServerDummyAction => {
     return {
         type: 'DUMMY',
         payload: undefined,
-    }
+    };
 };

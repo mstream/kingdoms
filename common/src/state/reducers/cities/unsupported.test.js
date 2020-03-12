@@ -2,8 +2,8 @@
 
 import {unsupportedActionCitiesReducer} from './unsupported';
 import {dummy} from '../../../../../client/src/state/actions';
-import { emptyCommonState } from '../../state';
-import type { CommonState } from '../../state';
+import { emptyCommonState } from '../../index';
+import type { CommonState } from '../../index';
 
 describe('unsupportedActionCitiesReducer', () => {
     it('returns the current state', () => {

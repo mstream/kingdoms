@@ -2,19 +2,19 @@
 
 import { upgradeBuildingCitiesReducer } from './upgrade-building';
 import { upgradeBuilding } from '../../../../../common/src/actions';
-import type { CommonState } from '../../state';
+import type { CommonState } from '../../index';
 import {
     BUILDING_PASTURE,
     emptyCityState,
     emptyCommonState,
     RESOURCE_FOOD,
     RESOURCE_WOOD,
-} from '../../state';
+} from '../../index';
 
 describe('upgradeBuildingCitiesReducer', () => {
     it('fails when city does not exist', () => {
         const action = upgradeBuilding({
-            buildingType: 'pasture',
+            buildingType: BUILDING_PASTURE,
             cityId: '1',
             playerId: 'player1',
         });
@@ -34,7 +34,7 @@ describe('upgradeBuildingCitiesReducer', () => {
 
     it('fails when city does not belong to the player', () => {
         const action = upgradeBuilding({
-            buildingType: 'pasture',
+            buildingType: BUILDING_PASTURE,
             cityId: '1',
             playerId: 'player1',
         });

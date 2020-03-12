@@ -1,7 +1,7 @@
 // @flow
 
-import type { CommonState, CommonStateCities } from '../state/state';
-import { emptyCityState, emptyCommonState } from '../state/state';
+import type { CommonState, CommonStateCities } from '../state';
+import { emptyCityState, emptyCommonState } from '../state';
 import {
     commonStateCitiesSelector,
     nextCitySpotSelector,

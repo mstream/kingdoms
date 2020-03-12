@@ -2,8 +2,8 @@
 
 import type {CommonStateReducer} from './root';
 import {success} from './root';
-import {initialCommonState} from '../state';
-import type { CommonStateWorld } from '../state';
+import {initialCommonState} from '../index';
+import type { CommonStateWorld } from '../index';
 
 export const worldReducer: CommonStateReducer<CommonStateWorld> = ({action, state}) => {
     switch (action.type) {

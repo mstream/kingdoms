@@ -1,12 +1,12 @@
 // @flow
 
-import { emptyCommonState, initialCommonState } from '../state';
+import { emptyCommonState, initialCommonState } from '../index';
 import {timeReducer} from './time';
 import {worldReducer} from './world';
 import {executeTimeStep} from '../../../../common/src/actions';
 import type {CommonStateReducerResult} from './root';
 import {dummy} from '../../../../common/src/actions';
-import type { CommonState, CommonStateTime } from '../state';
+import type { CommonState, CommonStateTime } from '../index';
 
 describe('timeReducer', () => {
     it('returns the default state on reset state action', () => {

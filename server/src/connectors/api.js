@@ -4,8 +4,8 @@ import {parseJson, stringifyJson} from '../../../common/src/util';
 import type {Redis} from '../clients/redis';
 import type {ServerResponse} from '../../../common/src/actions';
 import type {ApiGateway} from '../clients/api-gateway';
-import { CommonStateType } from '../../../common/src/state/state';
-import type { CommonState } from '../../../common/src/state/state';
+import { CommonStateType } from '../../../common/src/state';
+import type { CommonState } from '../../../common/src/state';
 
 export const getState = async ({redis}: { redis: Redis }): Promise<CommonState> => {
     const serializedState = await redis.get('state');

@@ -2,8 +2,8 @@
 
 import type {CommonStateReducer} from './root';
 import {success} from './root';
-import {initialCommonState} from '../state';
-import type { CommonStateRules } from '../state';
+import {initialCommonState} from '../index';
+import type { CommonStateRules } from '../index';
 
 export const rulesReducer: CommonStateReducer<CommonStateRules> = ({action, state}) => {
     switch (action.type) {

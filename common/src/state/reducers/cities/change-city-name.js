@@ -4,7 +4,7 @@ import type {ServerChangeCityNameAction} from '../../../../../common/src/actions
 import type {CommonStateReducerResult} from '../root';
 import {failure, success} from '../root';
 import {validateCityName} from '../../validators';
-import type { CommonState, CommonStateCities } from '../../state';
+import type { CommonState, CommonStateCities } from '../../index';
 
 export const changeCityNameCitiesReducer = ({action, state}: { action: ServerChangeCityNameAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const {cityId, name, playerId} = action.payload;

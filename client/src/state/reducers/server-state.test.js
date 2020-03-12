@@ -4,8 +4,8 @@ import {dummy, updateState} from '../actions';
 import type {ClientState} from '../state';
 import {emptyClientState, initialClientState} from '../state';
 import {commonStateReducer} from './common-state';
-import { initialCommonState } from '../../../../common/src/state/state';
-import type { CommonState } from '../../../../common/src/state/state';
+import { initialCommonState } from '../../../../common/src/state';
+import type { CommonState } from '../../../../common/src/state';
 
 describe('commonStateReducer', () => {
     it('initializes its state', () => {

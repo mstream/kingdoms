@@ -7,7 +7,7 @@ import { selectCityViewTabMenuReducer } from './select-city-view-tab';
 import {
     UNIT_CATAPULT,
     UNIT_PEASANT, UNIT_SWORDMAN,
-} from '../../../../../common/src/state/state';
+} from '../../../../../common/src/state';
 import { selectCityViewUnitMenuReducer } from './select-city-view-unit';
 
 describe('selectCityViewTabMenuReducer', () => {

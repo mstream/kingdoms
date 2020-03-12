@@ -8,8 +8,21 @@ import type {
     CommonState,
     CommonStateCities,
     CommonStateCity,
-} from '../../state';
-import { initialCityState } from '../../state';
+} from '../../index';
+import {
+    BUILDING_LUMBER_MILL,
+    BUILDING_PASTURE,
+    BUILDING_WAREHOUSE,
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+    UNIT_ARCHER,
+    UNIT_CATAPULT,
+    UNIT_KNIGHT,
+    UNIT_NOBLE,
+    UNIT_PEASANT,
+    UNIT_PIKEMAN,
+    UNIT_SWORDMAN,
+} from '../../index';
 import { nextCitySpotSelector } from '../../../selectors/common-state';
 
 export const createCityCitiesReducer = (
@@ -41,10 +54,33 @@ export const createCityCitiesReducer = (
     }
 
     const newCity: CommonStateCity = {
-        ...initialCityState,
+        buildings: {
+            [BUILDING_LUMBER_MILL]: {
+                tier: 0,
+            },
+            [BUILDING_PASTURE]: {
+                tier: 0,
+            },
+            [BUILDING_WAREHOUSE]: {
+                tier: 0,
+            },
+        },
         location: freeCitySpot,
         name: cityName,
         ownerId: playerId,
+        resources: {
+            [RESOURCE_FOOD]: 0,
+            [RESOURCE_WOOD]: 0,
+        },
+        units: {
+            [UNIT_ARCHER]: 0,
+            [UNIT_CATAPULT]: 0,
+            [UNIT_KNIGHT]: 0,
+            [UNIT_NOBLE]: 0,
+            [UNIT_PEASANT]: 0,
+            [UNIT_PIKEMAN]: 0,
+            [UNIT_SWORDMAN]: 0,
+        },
     };
 
     const newState = {

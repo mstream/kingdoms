@@ -3,8 +3,8 @@
 import { executeTimeStep } from '../../../../../common/src/actions';
 import type { CommonStateReducerResult } from '../root';
 import { executeTimeStepCitiesReducer } from './execute-time-step';
-import type { CommonState, CommonStateCities } from '../../state';
-import { emptyCityState, emptyCommonState, UNIT_PEASANT } from '../../state';
+import type { CommonState, CommonStateCities } from '../../index';
+import { emptyCityState, emptyCommonState, UNIT_PEASANT } from '../../index';
 
 describe('executeTimeStepCitiesReducer', () => {
     it('previous time newer than the one from action', () => {

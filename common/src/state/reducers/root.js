@@ -10,7 +10,7 @@ import type {
     CommonStateRules,
     CommonStateTime,
     CommonStateWorld,
-} from '../state';
+} from '../index';
 
 export type CommonStateReducerResult<S> = {
     errors: $ReadOnlyArray<string>,

@@ -7,7 +7,7 @@ import { ChangeInfoComponent } from '../change-info';
 import { ImageComponent } from '../image';
 import { CityItemsListComponent } from '../city-items-list';
 import { resourceVisuals } from '../../assets/images/resources';
-import { calculateResourceChangeInfo } from '../../../../common/src/state/state';
+import { calculateResourceChangeInfo } from '../../../../common/src/state';
 
 export const testId = 'city-resources';
 

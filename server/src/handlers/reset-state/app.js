@@ -5,7 +5,7 @@ import { executeAction } from '../../util';
 import { resetState } from '../../../../common/src/actions';
 import type { ProxyHandler } from '../types';
 import { stringifyJson } from '../../../../common/src/util';
-import { initialCommonState } from '../../../../common/src/state/state';
+import { initialCommonState } from '../../../../common/src/state';
 
 const redis = createRedisClient();
 

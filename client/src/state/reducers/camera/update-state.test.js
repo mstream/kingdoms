@@ -9,7 +9,7 @@ import { addVectors, negateVector } from '../../../../../common/src/vector';
 import {
     emptyCityState,
     emptyCommonState,
-} from '../../../../../common/src/state/state';
+} from '../../../../../common/src/state';
 
 describe('updateStateCameraReducer', () => {
     it('handles update state event', () => {

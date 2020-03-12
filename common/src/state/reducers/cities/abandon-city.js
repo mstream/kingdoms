@@ -3,7 +3,7 @@
 import type {ServerAbandonCityAction} from '../../../../../common/src/actions';
 import type {CommonStateReducerResult} from '../root';
 import {failure, success} from '../root';
-import type { CommonState, CommonStateCities } from '../../state';
+import type { CommonState, CommonStateCities } from '../../index';
 
 export const abandonCityCitiesReducer = ({action, state}: { action: ServerAbandonCityAction, state: CommonState }): CommonStateReducerResult<CommonStateCities> => {
     const {cityId, playerId} = action.payload;

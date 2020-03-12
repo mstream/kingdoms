@@ -2,8 +2,8 @@
 
 import {changeCityName} from '../../../../../common/src/actions';
 import {changeCityNameCitiesReducer} from './change-city-name';
-import { emptyCityState, emptyCommonState } from '../../state';
-import type { CommonState } from '../../state';
+import { emptyCityState, emptyCommonState } from '../../index';
+import type { CommonState } from '../../index';
 
 describe('changeCityNameCitiesReducer', () => {
     it('fails when city does not exist', () => {

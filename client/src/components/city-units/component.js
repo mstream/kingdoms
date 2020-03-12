@@ -5,7 +5,7 @@ import { numberToQuantityString } from '../../../../common/src/util';
 import type {
     CommonStateDamage,
     UnitType,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 import {
     ARMOR_HEAVY,
     ARMOR_LIGHT,
@@ -23,7 +23,7 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDMAN,
-} from '../../../../common/src/state/state';
+} from '../../../../common/src/state';
 import { ImageComponent } from '../image';
 import { CityItemsListComponent } from '../city-items-list';
 import { armor, food, speed, sword } from '../../assets/images/icons';

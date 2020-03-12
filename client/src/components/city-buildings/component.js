@@ -10,7 +10,7 @@ import { subtractQuantities } from '../../../../common/src/quantity';
 import classNames from 'classnames';
 import romanDecimalConverter from 'roman-decimal';
 import { CostInfoComponent } from '../cost-info';
-import { calculateBuildingsUpgradeCost } from '../../../../common/src/state/state';
+import { calculateBuildingsUpgradeCost } from '../../../../common/src/state';
 
 export const testId = 'city-buildings';
 

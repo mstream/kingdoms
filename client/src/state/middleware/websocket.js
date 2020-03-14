@@ -23,7 +23,7 @@ import {
 } from '../../../../common/src/actions';
 import jwt from 'jsonwebtoken';
 import { generateId, stringifyJson } from '../../../../common/src/util';
-import type { ClientState } from '../state';
+import type { ClientState } from '../modules/root';
 
 
 const send = ({ action, socket }: { action: ServerAction, socket: Socket }): void => {

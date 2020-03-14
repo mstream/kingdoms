@@ -3,14 +3,15 @@
 import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import configureStore from 'redux-mock-store';
-import type { ClientState } from '../../state/state';
-import { emptyClientState, emptyClientStateCityTile } from '../../state/state';
 import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { CityTileComponent } from './index';
 import { cityStatusBarComponentTestId } from '../city-status-bar';
 import { emptyCityState } from '../../../../common/src/state';
 import { openAttackView, openCityView } from '../../state/actions';
+import { emptyClientStateCityTile } from '../../state/modules/tiles/types';
+import { emptyClientState } from '../../state/modules/types';
+import type { ClientState } from '../../state/modules/root';
 
 const mockStore = configureStore([]);
 

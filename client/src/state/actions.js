@@ -1,12 +1,12 @@
 // @flow
 
 import type { Vector } from '../../../common/src/vector';
-import type { ClientStateCityViewTab } from './state';
 import type {
     BuildingType,
     CommonState,
     CommonStateUnits,
 } from '../../../common/src/state';
+import type { ClientStateCityViewTab } from './modules/menu/types';
 
 
 type BaseAction<T, P> = $ReadOnly<{

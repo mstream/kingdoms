@@ -1,7 +1,5 @@
 // @flow
 
-import type { ClientState, ClientStateCityViewTab } from '../state';
-import { emptyClientState, TAB_OVERVIEW, TAB_UNITS } from '../state';
 import {
     activeCityTabSelector,
     citiesSelector,
@@ -17,6 +15,10 @@ import type {
     CommonStateCities,
     CommonStateCity,
 } from '../../../../common/src/state';
+import type { ClientStateCityViewTab } from '../modules/menu/types';
+import { TAB_OVERVIEW, TAB_UNITS } from '../modules/menu/types';
+import { emptyClientState } from '../modules/types';
+import type { ClientState } from '../modules/root';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

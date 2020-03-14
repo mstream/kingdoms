@@ -5,14 +5,6 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import type { ClientState } from '../../state/state';
-import {
-    emptyClientState,
-    TAB_BUILDINGS,
-    TAB_OVERVIEW,
-    TAB_RESOURCES,
-    TAB_UNITS,
-} from '../../state/state';
 import { CityViewComponent } from '.';
 import { cityUnitsComponentTestId } from '../city-units';
 import { cityResourcesComponentTestId } from '../city-resources';
@@ -22,6 +14,13 @@ import {
     emptyCityState,
     emptyCommonState, emptyUnitStatsState, UNIT_PEASANT,
 } from '../../../../common/src/state';
+import {
+    TAB_BUILDINGS, TAB_OVERVIEW,
+    TAB_RESOURCES,
+    TAB_UNITS,
+} from '../../state/modules/menu/types';
+import { emptyClientState } from '../../state/modules/types';
+import type { ClientState } from '../../state/modules/root';
 
 const mockStore = configureStore([]);
 

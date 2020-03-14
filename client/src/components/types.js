@@ -1,6 +1,6 @@
 // @flow
 
-import type {ClientState} from '../state/state';
+import type { ClientState } from '../state/modules/root';
 
 type ExtractReturn<F> = $Call<<T>((...Iterable<ClientState>) => T) => T, F>;
 type ExtractReturnWithDispatch = <A>((...args: Array<mixed>) => A) => (A) => Promise<mixed>;

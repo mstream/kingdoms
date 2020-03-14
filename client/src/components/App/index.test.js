@@ -5,15 +5,16 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import type { ClientState } from '../../state/state';
-import { emptyClientState, emptyClientStateCityTile } from '../../state/state';
 import { AppComponent } from '.';
-import { LoaderComponent, loaderComponentTestId } from '../loader';
+import { loaderComponentTestId } from '../loader';
 import { gameStartComponentTestId } from '../game-start';
 import {
     emptyCityState,
     emptyCommonState,
 } from '../../../../common/src/state';
+import { emptyClientStateCityTile } from '../../state/modules/tiles/types';
+import { emptyClientState } from '../../state/modules/types';
+import type { ClientState } from '../../state/modules/root';
 
 const mockStore = configureStore([]);
 
@@ -21,6 +22,7 @@ describe('AppComponent', () => {
     test('displays loader while the server state is being fetched', async () => {
         const state: ClientState = {
             ...emptyClientState,
+            commonState: null,
         };
 
         const store = mockStore(state);

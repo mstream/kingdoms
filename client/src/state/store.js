@@ -2,13 +2,13 @@
 
 import type { Dispatch } from 'redux';
 import { applyMiddleware, createStore } from 'redux';
-import { rootReducer } from './reducers/root';
+import { rootReducer } from './modules/root';
 import { websocketMiddleware } from './middleware/websocket';
 import type { ClientAction } from './actions';
 import queryString from 'query-string';
-import type { ClientState } from './state';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '../config';
+import type { ClientState } from './modules/root';
 
 const getIdToken = (): string => {
     const locationHash = queryString.parse(window.location.hash);

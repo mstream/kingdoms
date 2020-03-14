@@ -1,13 +1,5 @@
 // @flow
 
-import type {
-    ClientState,
-    ClientStateCamera,
-    ClientStateCityViewTab,
-    ClientStateMenu,
-    ClientStatePlayer,
-    ClientStateTiles,
-} from '../state';
 import { createSelector } from 'reselect';
 import {
     commonStateCitiesSelector,
@@ -24,6 +16,14 @@ import type {
     CommonStateUnitStats,
     CommonStateWorld,
 } from '../../../../common/src/state';
+import type { ClientStateCamera } from '../modules/camera/types';
+import type { ClientStatePlayer } from '../modules/player/types';
+import type { ClientStateTiles } from '../modules/tiles/types';
+import type {
+    ClientStateCityViewTab,
+    ClientStateMenu,
+} from '../modules/menu/types';
+import type { ClientState } from '../modules/root';
 
 export const cameraSelector = (state: ClientState): ClientStateCamera => {
     return state.camera;

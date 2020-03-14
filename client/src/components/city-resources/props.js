@@ -1,6 +1,5 @@
 // @flow
 
-import type { ClientState } from '../../state/state';
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
@@ -10,7 +9,8 @@ import {
     currentlyViewedCitySelector,
     rulesSelector,
 } from '../../state/selectors';
-import { TAB_RESOURCES } from '../../state/state';
+import { TAB_RESOURCES } from '../../state/modules/menu/types';
+import type { ClientState } from '../../state/modules/root';
 
 type OwnProps = {};
 

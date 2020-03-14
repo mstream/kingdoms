@@ -1,13 +1,13 @@
 // @flow
 
-import { emptyCameraState } from './camera/types';
-import { emptyMenuState } from './menu/types';
-import { emptyTilesState } from './tiles/types';
-import { emptyPlayerState } from './player/types';
+import { emptyCameraState } from './camera/reducer/types';
+import { emptyMenuState } from './menu/reducer/types';
+import { emptyTilesState } from './tiles/reducer/types';
+import { emptyPlayerState } from './player/reducer/types';
 import { emptyCommonState } from '../../../../common/src/state';
 import type { ClientAction } from '../actions';
 import type { ClientState } from './root';
-import { emptyCommonStateState } from './common-state/types';
+import { emptyCommonStateState } from './common-state/reducer/types';
 
 
 export type ClientStateReducerTestScenario<S, A: ClientAction> = {

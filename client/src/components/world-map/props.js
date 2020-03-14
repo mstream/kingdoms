@@ -13,12 +13,12 @@ import {
     zoomCameraOut,
 } from '../../state/actions';
 import {
-    cameraSelector,
     citiesSelector,
-    tilesSelector,
 } from '../../state/selectors';
 import type { Vector } from '../../../../common/src/vector';
 import type { ClientState } from '../../state/modules/root';
+import { tilesSelector } from '../../state/modules/tiles/selectors';
+import { cameraSelector } from '../../state/modules/camera/selectors';
 
 type OwnProps = {
     windowSize: Vector,

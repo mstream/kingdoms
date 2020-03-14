@@ -8,61 +8,27 @@ import {
     commonStateWorldSelector,
 } from '../../../../common/src/selectors/common-state';
 import type {
-    CommonState,
-    CommonStateCities,
-    CommonStateCity,
+    CommonStateCities, CommonStateCity,
     CommonStateRules,
     CommonStateUnits,
     CommonStateUnitStats,
     CommonStateWorld,
 } from '../../../../common/src/state';
-import type { ClientStateCamera } from '../modules/camera/types';
-import type { ClientStatePlayer } from '../modules/player/types';
-import type { ClientStateTiles } from '../modules/tiles/types';
 import type {
     ClientStateCityViewTab,
     ClientStateMenu,
-} from '../modules/menu/types';
+} from '../modules/menu/reducer/types';
 import type { ClientState } from '../modules/root';
+import { commonStateSelector } from '../modules/common-state/selectors';
+import type { ClientStateCommonState } from '../modules/common-state/reducer/types';
+import { playerNameSelector } from '../modules/player/selectors';
+import {
+    attackedCityIdSelector,
+    currentlyViewedCityIdSelector,
+    menuSelector,
+} from '../modules/menu/selectors';
 
-export const cameraSelector = (state: ClientState): ClientStateCamera => {
-    return state.camera;
-};
-
-export const menuSelector = (state: ClientState): ClientStateMenu => {
-    return state.menu;
-};
-
-export const playerSelector = (state: ClientState): ?ClientStatePlayer => {
-    return state.player;
-};
-
-export const tilesSelector = (state: ClientState): ClientStateTiles => {
-    return state.tiles;
-};
-
-export const commonStateSelector = (state: ClientState): ?CommonState => {
-    return state.commonState;
-};
-
-
-export const playerNameSelector = (state: ClientState): ?string => {
-    return state.player.name;
-};
-
-export const isCityBeingCreatedSelector = (state: ClientState): boolean => {
-    return state.menu.newCity.isCityBeingCreated;
-};
-
-export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
-    return state.menu.cityView.currentCityId;
-};
-
-export const attackedCityIdSelector = (state: ClientState): ?string => {
-    return state.menu.attackView.attackedCityId;
-};
-
-export const citiesSelector = createSelector<ClientState, void, CommonStateCities, ?CommonState>(
+export const citiesSelector = createSelector<ClientState, void, CommonStateCities, ClientStateCommonState>(
     commonStateSelector,
     (commonState) => {
         if (commonState == null) {
@@ -72,7 +38,7 @@ export const citiesSelector = createSelector<ClientState, void, CommonStateCitie
     },
 );
 
-export const rulesSelector = createSelector<ClientState, void, ?CommonStateRules, ?CommonState>(
+export const rulesSelector = createSelector<ClientState, void, ?CommonStateRules, ClientStateCommonState>(
     commonStateSelector,
     (commonState) => {
         if (commonState == null) {
@@ -92,7 +58,7 @@ export const unitStatsSelector = createSelector<ClientState, void, ?CommonStateU
     },
 );
 
-export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld, ?CommonState>(
+export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld, ?ClientStateCommonState>(
     commonStateSelector,
     (commonState) => {
         if (commonState == null) {
@@ -102,7 +68,7 @@ export const worldSelector = createSelector<ClientState, void, ?CommonStateWorld
     },
 );
 
-export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [string]: $ReadOnlyArray<string> }, ?CommonState>(
+export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [string]: $ReadOnlyArray<string> }, ClientStateCommonState>(
     commonStateSelector,
     (commonState) => {
         if (commonState == null) {
@@ -112,7 +78,7 @@ export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [strin
     },
 );
 
-export const currentlyViewedCitySelector = createSelector<ClientState, void, ?CommonStateCity, ?CommonStateCities, ?string>(
+export const currentlyViewedCitySelector = createSelector<ClientState, void, ?CommonStateCity, CommonStateCities, ?string>(
     citiesSelector,
     currentlyViewedCityIdSelector,
     (cities, currentlyViewedCityId) => {
@@ -146,7 +112,7 @@ export const isAnyMenuOpen = createSelector<ClientState, void, boolean, boolean,
     },
 );
 
-export const attackedCitySelector = createSelector<ClientState, void, ?CommonStateCity, ?CommonStateCities, ?string>(
+export const attackedCitySelector = createSelector<ClientState, void, ?CommonStateCity, CommonStateCities, ?string>(
     citiesSelector,
     attackedCityIdSelector,
     (cities, attackedCityId) => {
@@ -186,7 +152,7 @@ export const cityIdsOwnedByPlayerSelector = createSelector<ClientState, void, $R
     },
 );
 
-export const isGameStartingSelector = createSelector<ClientState, void, boolean, $ReadOnlyArray<string>, ?string, ?CommonState>(
+export const isGameStartingSelector = createSelector<ClientState, void, boolean, $ReadOnlyArray<string>, ?string, ClientStateCommonState>(
     cityIdsOwnedByPlayerSelector,
     playerNameSelector,
     commonStateSelector,

@@ -6,7 +6,7 @@ import type {
     CommonState,
     CommonStateUnits,
 } from '../../../common/src/state';
-import type { ClientStateCityViewTab } from './modules/menu/types';
+import type { ClientStateCityViewTab } from './modules/menu/reducer/types';
 
 
 type BaseAction<T, P> = $ReadOnly<{

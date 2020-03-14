@@ -10,7 +10,7 @@ import {
     emptyCityState,
     emptyCommonState,
 } from '../../../../common/src/state';
-import { TAB_OVERVIEW, TAB_UNITS } from '../../state/modules/menu/types';
+import { TAB_OVERVIEW, TAB_UNITS } from '../../state/modules/menu/reducer/types';
 import { emptyClientState } from '../../state/modules/types';
 import type { ClientState } from '../../state/modules/root';
 

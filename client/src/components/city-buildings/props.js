@@ -7,12 +7,12 @@ import type { ClientAction } from '../../state/actions';
 import { requestBuildingUpgrade } from '../../state/actions';
 import {
     activeCityTabSelector,
-    currentlyViewedCityIdSelector,
     currentlyViewedCitySelector,
     rulesSelector,
 } from '../../state/selectors';
-import { TAB_BUILDINGS } from '../../state/modules/menu/types';
+import { TAB_BUILDINGS } from '../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../state/modules/root';
+import { currentlyViewedCityIdSelector } from '../../state/modules/menu/selectors';
 
 type OwnProps = {};
 

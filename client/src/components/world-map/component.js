@@ -12,7 +12,7 @@ import type { Geometry } from '../../../../common/src/geometry';
 import { checkIfIntersect } from '../../../../common/src/geometry';
 import { TerrainTileComponent } from '../terrain-tile';
 import { CityTileComponent } from '../city-tile';
-import type { ClientStateTile } from '../../state/modules/tiles/types';
+import type { ClientStateTile } from '../../state/modules/tiles/reducer/types';
 
 
 const cullObjects = <T: $ReadOnly<{ geometry: Geometry, ... }>>(

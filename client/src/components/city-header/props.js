@@ -6,12 +6,12 @@ import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
 import { openCityView, requestCityNameChange } from '../../state/actions';
 import {
-    currentlyViewedCityIdSelector,
     currentlyViewedCitySelector,
     nextCityIdSelector,
     previousCityIdSelector,
 } from '../../state/selectors';
 import type { ClientState } from '../../state/modules/root';
+import { currentlyViewedCityIdSelector } from '../../state/modules/menu/selectors';
 
 type OwnProps = {};
 

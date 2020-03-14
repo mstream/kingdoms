@@ -9,7 +9,7 @@ import {
     currentlyViewedCitySelector,
     rulesSelector,
 } from '../../state/selectors';
-import { TAB_RESOURCES } from '../../state/modules/menu/types';
+import { TAB_RESOURCES } from '../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../state/modules/root';
 
 type OwnProps = {};

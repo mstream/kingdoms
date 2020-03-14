@@ -6,10 +6,10 @@ import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
 import { requestCityCreation } from '../../state/actions';
 import {
-    isCityBeingCreatedSelector,
     isGameStartingSelector,
 } from '../../state/selectors';
 import type { ClientState } from '../../state/modules/root';
+import { isCityBeingCreatedSelector } from '../../state/modules/menu/selectors';
 
 type OwnProps = {};
 

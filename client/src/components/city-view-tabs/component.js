@@ -3,12 +3,12 @@
 import React from 'react';
 import type { Props } from './props';
 import classNames from 'classnames';
-import type { ClientStateCityViewTab } from '../../state/modules/menu/types';
+import type { ClientStateCityViewTab } from '../../state/modules/menu/reducer/types';
 import {
     TAB_BUILDINGS, TAB_OVERVIEW,
     TAB_RESOURCES,
     TAB_UNITS,
-} from '../../state/modules/menu/types';
+} from '../../state/modules/menu/reducer/types';
 
 const tabsOrder = [
     TAB_OVERVIEW,

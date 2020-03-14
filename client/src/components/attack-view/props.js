@@ -6,10 +6,10 @@ import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
 import { closeAttackView } from '../../state/actions';
 import {
-    attackedCityIdSelector,
     attackedCitySelector,
 } from '../../state/selectors';
 import type { ClientState } from '../../state/modules/root';
+import { attackedCityIdSelector } from '../../state/modules/menu/selectors';
 
 type OwnProps = {};
 

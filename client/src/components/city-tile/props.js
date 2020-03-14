@@ -6,9 +6,9 @@ import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
 import { openAttackView, openCityView } from '../../state/actions';
 import type { CommonStateCity } from '../../../../common/src/state';
-import { playerNameSelector } from '../../state/selectors';
-import type { ClientStateTile } from '../../state/modules/tiles/types';
+import type { ClientStateTile } from '../../state/modules/tiles/reducer/types';
 import type { ClientState } from '../../state/modules/root';
+import { playerNameSelector } from '../../state/modules/player/selectors';
 
 type OwnProps = {
     city: CommonStateCity,

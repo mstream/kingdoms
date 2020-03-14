@@ -4,8 +4,8 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import { playerSelector } from '../../state/selectors';
 import type { ClientState } from '../../state/modules/root';
+import { playerSelector } from '../../state/modules/player/selectors';
 
 type OwnProps = {};
 

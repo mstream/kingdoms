@@ -18,7 +18,7 @@ import {
     TAB_BUILDINGS, TAB_OVERVIEW,
     TAB_RESOURCES,
     TAB_UNITS,
-} from '../../state/modules/menu/types';
+} from '../../state/modules/menu/reducer/types';
 import { emptyClientState } from '../../state/modules/types';
 import type { ClientState } from '../../state/modules/root';
 

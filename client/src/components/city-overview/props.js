@@ -8,7 +8,7 @@ import {
     activeCityTabSelector,
     currentlyViewedCitySelector,
 } from '../../state/selectors';
-import { TAB_OVERVIEW } from '../../state/modules/menu/types';
+import { TAB_OVERVIEW } from '../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../state/modules/root';
 
 type OwnProps = {};

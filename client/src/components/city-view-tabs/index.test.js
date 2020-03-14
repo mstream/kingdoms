@@ -6,7 +6,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityViewTabsComponent } from '.';
-import { TAB_OVERVIEW } from '../../state/modules/menu/types';
+import { TAB_OVERVIEW } from '../../state/modules/menu/reducer/types';
 import { emptyClientState } from '../../state/modules/types';
 import type { ClientState } from '../../state/modules/root';
 

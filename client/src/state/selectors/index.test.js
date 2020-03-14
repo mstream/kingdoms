@@ -15,8 +15,8 @@ import type {
     CommonStateCities,
     CommonStateCity,
 } from '../../../../common/src/state';
-import type { ClientStateCityViewTab } from '../modules/menu/types';
-import { TAB_OVERVIEW, TAB_UNITS } from '../modules/menu/types';
+import type { ClientStateCityViewTab } from '../modules/menu/reducer/types';
+import { TAB_OVERVIEW, TAB_UNITS } from '../modules/menu/reducer/types';
 import { emptyClientState } from '../modules/types';
 import type { ClientState } from '../modules/root';
 

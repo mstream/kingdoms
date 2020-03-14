@@ -15,7 +15,7 @@ import {
 import {
     emptyClientStateCityTile,
     emptyClientStateTerrainTile,
-} from '../../state/modules/tiles/types';
+} from '../../state/modules/tiles/reducer/types';
 import { emptyClientState } from '../../state/modules/types';
 import type { ClientState } from '../../state/modules/root';
 

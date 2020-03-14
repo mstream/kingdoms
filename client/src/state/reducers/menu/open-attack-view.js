@@ -9,7 +9,7 @@ import {
     cityIdsByOwnerSelector,
     playerNameSelector,
     commonStateSelector,
-} from '../../selectors/client-state';
+} from '../../selectors';
 
 export const openAttackViewMenuReducer = (
     {

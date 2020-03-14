@@ -11,7 +11,7 @@ import {
     currentlyViewedCitySelector,
     nextCityIdSelector,
     previousCityIdSelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 
 type OwnProps = {};
 

@@ -20,7 +20,7 @@ import {
     UNIT_NOBLE,
     UNIT_PEASANT,
     UNIT_PIKEMAN,
-    UNIT_SWORDMAN,
+    UNIT_SWORDSMAN,
 } from '../../index';
 import { nextCitySpotSelector } from '../../../selectors/common-state';
 import { validateCityName } from '../../../validators';
@@ -78,7 +78,7 @@ export const createCityCitiesReducer = (
             [UNIT_NOBLE]: 0,
             [UNIT_PEASANT]: 0,
             [UNIT_PIKEMAN]: 0,
-            [UNIT_SWORDMAN]: 0,
+            [UNIT_SWORDSMAN]: 0,
         },
     };
 

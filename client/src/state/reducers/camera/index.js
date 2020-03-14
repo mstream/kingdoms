@@ -8,6 +8,10 @@ import { moveCameraCameraReducer } from './move-camera';
 import { zoomCameraCameraReducer } from './zoom-camera';
 import { updateStateCameraReducer } from './update-state';
 import { unsupportedActionReducer } from '../unsupported-action-reducer';
+import type { ClientStateReducerTestScenario } from '../root';
+
+
+export type ClientStateCameraReducerTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientStateCamera, A>;
 
 export const cameraReducer = (
     localState: ClientStateCamera = initialClientState.camera,

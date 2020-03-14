@@ -2,10 +2,7 @@
 
 import React from 'react';
 import { numberToQuantityString } from '../../../../common/src/util';
-import type {
-    CommonStateDamage,
-    UnitType,
-} from '../../../../common/src/state';
+import type { CommonStateDamage } from '../../../../common/src/state';
 import {
     ARMOR_HEAVY,
     ARMOR_LIGHT,
@@ -16,33 +13,16 @@ import {
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
     RESOURCE_FOOD,
-    UNIT_ARCHER,
-    UNIT_CATAPULT,
-    UNIT_KNIGHT,
-    UNIT_NOBLE,
-    UNIT_PEASANT,
-    UNIT_PIKEMAN,
-    UNIT_SWORDMAN,
 } from '../../../../common/src/state';
 import { ImageComponent } from '../image';
 import { CityItemsListComponent } from '../city-items-list';
 import { armor, food, speed, sword } from '../../assets/images/icons';
-import { unitVisuals } from '../../assets/images/units';
+import { unitsOrder, unitVisuals } from '../../assets/images/units';
 import { ChangeInfoComponent } from '../change-info';
 import classNames from 'classnames';
 import type { Props } from './props';
 
 export const testId = 'city-units';
-
-const unitsOrder: $ReadOnlyArray<UnitType> = [
-    UNIT_PEASANT,
-    UNIT_PIKEMAN,
-    UNIT_ARCHER,
-    UNIT_SWORDMAN,
-    UNIT_KNIGHT,
-    UNIT_CATAPULT,
-    UNIT_NOBLE,
-];
 
 const armorDescriptions = {
     [ARMOR_NONE]: 'none',

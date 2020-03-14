@@ -9,7 +9,7 @@ import { closeAttackView } from '../../state/actions';
 import {
     attackedCityIdSelector,
     attackedCitySelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 
 type OwnProps = {};
 

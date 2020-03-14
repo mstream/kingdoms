@@ -9,7 +9,7 @@ import type { ClientAction } from '../../state/actions';
 import {
     activeCityTabSelector,
     currentlyViewedCitySelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 
 type OwnProps = {};
 

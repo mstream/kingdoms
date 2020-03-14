@@ -59,73 +59,73 @@ export interface ClientContextEnv {
 
 export type Callback<TResult = mixed> = (error?: Error | string | null, result?: TResult) => void;
 
-export interface APIGatewayEventRequestContext {
-    accountId: string;
-    apiId: string;
-    authorizer?: AuthResponseContext | null;
-    connectedAt?: number;
-    connectionId?: string;
-    domainName?: string;
-    domainPrefix?: string;
-    eventType?: string;
-    extendedRequestId?: string;
-    protocol: string;
-    httpMethod: string;
-    identity: APIGatewayEventIdentity;
-    messageDirection?: string;
-    messageId?: string | null;
-    path: string;
-    stage: string;
-    requestId: string;
-    requestTime?: string;
-    requestTimeEpoch: number;
-    resourceId: string;
-    resourcePath: string;
-    routeKey?: string;
+export type APIGatewayEventRequestContext = {
+    accountId: string,
+    apiId: string,
+    authorizer?: ?AuthResponseContext,
+    connectedAt?: number,
+    connectionId?: string,
+    domainName?: string,
+    domainPrefix?: string,
+    eventType?: string,
+    extendedRequestId?: string,
+    protocol: string,
+    httpMethod: string,
+    identity: APIGatewayEventIdentity,
+    messageDirection?: string,
+    messageId?: ?string,
+    path: string,
+    stage: string,
+    requestId: string,
+    requestTime?: string,
+    requestTimeEpoch: number,
+    resourceId: string,
+    resourcePath: string,
+    routeKey?: string,
 }
 
-export interface APIGatewayEventIdentity {
-    accessKey: string | null;
-    accountId: string | null;
-    apiKey: string | null;
-    apiKeyId: string | null;
-    caller: string | null;
-    cognitoAuthenticationProvider: string | null;
-    cognitoAuthenticationType: string | null;
-    cognitoIdentityId: string | null;
-    cognitoIdentityPoolId: string | null;
-    principalOrgId: string | null;
-    sourceIp: string;
-    user: string | null;
-    userAgent: string | null;
-    userArn: string | null;
+export type APIGatewayEventIdentity = {
+    accessKey: ?string,
+    accountId: ?string,
+    apiKey: ?string,
+    apiKeyId: ?string,
+    caller: ?string,
+    cognitoAuthenticationProvider: ?string,
+    cognitoAuthenticationType: ?string,
+    cognitoIdentityId:?string,
+    cognitoIdentityPoolId:?string,
+    principalOrgId: ?string,
+    sourceIp: string,
+    user: ?string,
+    userAgent: ?string,
+    userArn: ?string,
 }
 
-export interface AuthResponseContext {
-    [name: string]: mixed;
+export type AuthResponseContext = {
+    [string]: mixed,
 }
 
 export type APIGatewayProxyHandler = Handler<APIGatewayProxyEvent, APIGatewayProxyResult>;
 export type APIGatewayProxyCallback = Callback<APIGatewayProxyResult>;
 
-export type ProxyHandler = APIGatewayProxyHandler; // Old name
-export type ProxyCallback = APIGatewayProxyCallback; // Old name
-export type APIGatewayEvent = APIGatewayProxyEvent; // Old name
-export type ProxyResult = APIGatewayProxyResult; // Old name
+export type ProxyHandler = APIGatewayProxyHandler;
+export type ProxyCallback = APIGatewayProxyCallback;
+export type APIGatewayEvent = APIGatewayProxyEvent;
+export type ProxyResult = APIGatewayProxyResult;
 
-export interface APIGatewayProxyEvent {
-    body: string | null;
-    headers: { [name: string]: string };
-    multiValueHeaders: { [name: string]: string[] };
-    httpMethod: string;
-    isBase64Encoded: boolean;
-    path: string;
-    pathParameters: { [name: string]: string } | null;
-    queryStringParameters: { [name: string]: string } | null;
-    multiValueQueryStringParameters: { [name: string]: string[] } | null;
-    stageVariables: { [name: string]: string } | null;
-    requestContext: APIGatewayEventRequestContext;
-    resource: string;
+export type APIGatewayProxyEvent = {
+    body: ?string,
+    headers: { [string]: string },
+    multiValueHeaders: { [string]: string[] },
+    httpMethod: string,
+    isBase64Encoded: boolean,
+    path: string,
+    pathParameters: ?{ [string]: string },
+    queryStringParameters: ?{ [string]: string },
+    multiValueQueryStringParameters: ?{ [string]: string[] },
+    stageVariables: ?{ [string]: string },
+    requestContext: APIGatewayEventRequestContext,
+    resource: string,
 }
 
 export interface APIGatewayProxyResult {

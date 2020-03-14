@@ -9,7 +9,7 @@ import { requestCityCreation } from '../../state/actions';
 import {
     isCityBeingCreatedSelector,
     isGameStartingSelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 
 type OwnProps = {};
 

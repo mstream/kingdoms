@@ -1,24 +1,18 @@
 // @flow
 
-import { updateStateMenuReducer } from './update-state';
-import { closeCityView, openAttackView } from '../../actions';
-import type { ClientState, ClientStateMenu } from '../../state';
+import type { ClientOpenAttackViewAction } from '../../actions';
+import { openAttackView } from '../../actions';
 import { emptyClientState } from '../../state';
 import {
     emptyCityState,
     emptyCommonState,
 } from '../../../../../common/src/state';
-import { openAttackViewMenuReducer } from './open-attack-view';
-import type { ClientStateReducerTestScenario } from '../root';
-import type {
-    ClientCloseCityViewAction,
-    ClientOpenAttackViewAction,
-} from '../../actions';
+import type { ClientStateMenuReducerTestScenario } from './index';
 
-export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateReducerTestScenario<ClientStateMenu, ClientOpenAttackViewAction>> = [
+export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientOpenAttackViewAction>> = [
     {
         name: 'opens attack view',
-        action:  openAttackView({ cityId: '2' }),
+        action: openAttackView({ cityId: '2' }),
         previousGlobalState: {
             ...emptyClientState,
             player: {

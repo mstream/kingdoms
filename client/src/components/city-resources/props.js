@@ -9,7 +9,7 @@ import {
     activeCityTabSelector,
     currentlyViewedCitySelector,
     rulesSelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 import { TAB_RESOURCES } from '../../state/state';
 
 type OwnProps = {};

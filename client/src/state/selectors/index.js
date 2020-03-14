@@ -19,7 +19,8 @@ import type {
     CommonState,
     CommonStateCities,
     CommonStateCity,
-    CommonStateRules, CommonStateUnits,
+    CommonStateRules,
+    CommonStateUnits,
     CommonStateUnitStats,
     CommonStateWorld,
 } from '../../../../common/src/state';
@@ -120,6 +121,28 @@ export const currentlyViewedCitySelector = createSelector<ClientState, void, ?Co
         }
 
         return cities[currentlyViewedCityId];
+    },
+);
+
+export const isCityViewOpenSelector = createSelector<ClientState, void, boolean, ?string>(
+    currentlyViewedCityIdSelector,
+    (currentlyViewedCityId) => {
+        return currentlyViewedCityId != null;
+    },
+);
+
+export const isAttackViewOpenSelector = createSelector<ClientState, void, boolean, ?string>(
+    attackedCityIdSelector,
+    (attackedCityId) => {
+        return attackedCityId != null;
+    },
+);
+
+export const isAnyMenuOpen = createSelector<ClientState, void, boolean, boolean, boolean>(
+    isAttackViewOpenSelector,
+    isCityViewOpenSelector,
+    (isAttackViewOpen, cityViewOpenSelector) => {
+        return isAttackViewOpen || cityViewOpenSelector;
     },
 );
 

@@ -46,7 +46,7 @@ export const UNIT_KNIGHT: 'UNIT_KNIGHT' = 'UNIT_KNIGHT';
 export const UNIT_NOBLE: 'UNIT_NOBLE' = 'UNIT_NOBLE';
 export const UNIT_PEASANT: 'UNIT_PEASANT' = 'UNIT_PEASANT';
 export const UNIT_PIKEMAN: 'UNIT_PIKEMAN' = 'UNIT_PIKEMAN';
-export const UNIT_SWORDMAN: 'UNIT_SWORDMAN' = 'UNIT_SWORDMAN';
+export const UNIT_SWORDSMAN: 'UNIT_SWORDSMAN' = 'UNIT_SWORDSMAN';
 
 export type UnitType =
     | typeof UNIT_ARCHER
@@ -55,7 +55,7 @@ export type UnitType =
     | typeof UNIT_NOBLE
     | typeof UNIT_PEASANT
     | typeof UNIT_PIKEMAN
-    | typeof UNIT_SWORDMAN;
+    | typeof UNIT_SWORDSMAN;
 
 
 export const emptyBuildingState = {
@@ -81,23 +81,23 @@ export const emptyUnitsState: { [UnitType]: number, ... } = {
     [UNIT_NOBLE]: 0,
     [UNIT_PEASANT]: 0,
     [UNIT_PIKEMAN]: 0,
-    [UNIT_SWORDMAN]: 0,
+    [UNIT_SWORDSMAN]: 0,
 };
 
 export type CommonStateUnits = typeof emptyUnitsState;
 
 
-export const emptyRegimentState: { [UnitType]: Range, ... } = {
+export const emptyRegimentTemplateState: { [UnitType]: Range, ... } = {
     [UNIT_ARCHER]: emptyRange,
     [UNIT_CATAPULT]: emptyRange,
     [UNIT_KNIGHT]: emptyRange,
     [UNIT_NOBLE]: emptyRange,
     [UNIT_PEASANT]: emptyRange,
     [UNIT_PIKEMAN]: emptyRange,
-    [UNIT_SWORDMAN]: emptyRange,
+    [UNIT_SWORDSMAN]: emptyRange,
 };
 
-export type Regiment = typeof emptyRegimentState;
+export type RegimentTemplate = typeof emptyRegimentTemplateState;
 
 
 export const emptyResourcesState: { [ResourceType]: number, ... } = {
@@ -177,7 +177,7 @@ export const emptyUnitStatsState: { [UnitType]: CommonStateUnitStat, ... } = {
     [UNIT_NOBLE]: emptyUnitStatState,
     [UNIT_PEASANT]: emptyUnitStatState,
     [UNIT_PIKEMAN]: emptyUnitStatState,
-    [UNIT_SWORDMAN]: emptyUnitStatState,
+    [UNIT_SWORDSMAN]: emptyUnitStatState,
 };
 
 export type CommonStateUnitStats = typeof emptyUnitStatsState;
@@ -322,7 +322,7 @@ export const initialCommonState: CommonState = {
                 range: 0,
                 speed: 10,
             },
-            [UNIT_SWORDMAN]: {
+            [UNIT_SWORDSMAN]: {
                 armor: ARMOR_HEAVY,
                 damage: {
                     [ARMOR_NONE]: 20,

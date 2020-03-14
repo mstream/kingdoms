@@ -4,13 +4,14 @@ import type { ClientSelectCityViewUnitAction } from '../../actions';
 import { selectCityViewUnit } from '../../actions';
 import type { ClientStateMenu } from '../../state';
 import { emptyClientState } from '../../state';
-import { UNIT_CATAPULT, UNIT_SWORDMAN } from '../../../../../common/src/state';
+import { UNIT_CATAPULT, UNIT_SWORDSMAN } from '../../../../../common/src/state';
 import type { ClientStateReducerTestScenario } from '../root';
+import type { ClientStateMenuReducerTestScenario } from './index';
 
-export const selectCityViewUnitTestScenarios: $ReadOnlyArray<ClientStateReducerTestScenario<ClientStateMenu, ClientSelectCityViewUnitAction>> = [
+export const selectCityViewUnitTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitAction>> = [
     {
         name: 'select city view unit',
-        action: selectCityViewUnit({ unitType: UNIT_SWORDMAN }),
+        action: selectCityViewUnit({ unitType: UNIT_SWORDSMAN }),
         previousGlobalState: {
             ...emptyClientState,
             menu: {
@@ -26,7 +27,7 @@ export const selectCityViewUnitTestScenarios: $ReadOnlyArray<ClientStateReducerT
                 ...previousLocalState,
                 cityView: {
                     ...previousLocalState.cityView,
-                    unit: UNIT_SWORDMAN,
+                    unit: UNIT_SWORDSMAN,
                 },
             };
         },

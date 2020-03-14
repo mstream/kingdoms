@@ -55,6 +55,7 @@
         "verror": "1.10.0"
     },
     "scripts": {
-        "flow": "flow check"
+        "flow": "flow check",
+        "test": "npm --prefix common test && npm --prefix server test && npm --prefix client test"
     }
 }

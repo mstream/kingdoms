@@ -7,7 +7,7 @@ import type { Boundary } from '../../../common/src/boundary';
 import type {
     CommonState,
     CommonStateUnits,
-    Regiment,
+    RegimentTemplate,
 } from '../../../common/src/state';
 import { UNIT_PEASANT } from '../../../common/src/state';
 
@@ -33,7 +33,7 @@ export type ClientStateCityViewTab =
 export type ClientStateAttackView = $ReadOnly<{
     attackedCityId: ?string,
     attackingCityId: ?string,
-    regiment: Regiment,
+    regimentTemplate: RegimentTemplate,
 }>;
 
 export type ClientStateCityView = $ReadOnly<{
@@ -136,7 +136,7 @@ const emptyMenuState: ClientStateMenu = {
     attackView: {
         attackedCityId: null,
         attackingCityId: null,
-        regiment: {},
+        regimentTemplate: {},
     },
     cityView: {
         currentCityId: null,
@@ -152,7 +152,7 @@ const initialMenuState: ClientStateMenu = {
     attackView: {
         attackedCityId: null,
         attackingCityId: null,
-        regiment: {},
+        regimentTemplate: {},
     },
     cityView: {
         currentCityId: null,

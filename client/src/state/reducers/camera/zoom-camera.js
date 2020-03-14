@@ -4,6 +4,7 @@ import type { ClientState, ClientStateCamera } from '../../state';
 import type { ClientZoomCameraAction } from '../../actions';
 import { clipToBoundary } from '../../../../../common/src/boundary';
 import { addVectors, multipleVectors } from '../../../../../common/src/vector';
+import { isAnyMenuOpen } from '../../selectors';
 
 export const zoomCameraCameraReducer = (
     {
@@ -17,6 +18,10 @@ export const zoomCameraCameraReducer = (
             globalState: ClientState,
         },
 ): ClientStateCamera => {
+    if (isAnyMenuOpen(globalState)) {
+        return localState;
+    }
+
     const newCameraSize = clipToBoundary({
         vector: addVectors({
             vector1: localState.geometry.size,

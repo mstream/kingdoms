@@ -10,7 +10,7 @@ import {
     activeCityTabSelector,
     currentlyViewedCityIdSelector,
     currentlyViewedCitySelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 
 type OwnProps = {};
 

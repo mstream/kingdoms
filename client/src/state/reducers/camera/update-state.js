@@ -12,7 +12,7 @@ import {
     cityIdsOwnedByPlayerSelector,
     playerNameSelector,
     worldSelector,
-} from '../../selectors/client-state';
+} from '../../selectors';
 import { commonStateCitiesByOwnerSelector } from '../../../../../common/src/selectors/common-state';
 import type { Vector } from '../../../../../common/src/vector';
 import type { CommonStateCity } from '../../../../../common/src/state';
@@ -48,8 +48,6 @@ export const updateStateCameraReducer = (
         if (commonStatePlayerCities == null || commonStatePlayerCities.length === 0) {
             return localState.geometry.location;
         }
-
-        console.log(JSON.stringify(commonStatePlayerCities))
 
         const firstPlayerCity: CommonStateCity = commonStatePlayerCities[0];
 

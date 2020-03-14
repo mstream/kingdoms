@@ -1,27 +1,47 @@
 // @flow
 
 
+import type { ClientStatePlayerReducerTestScenario } from './index';
 import { playerReducer } from './index';
 import { dummy } from '../../../../../common/src/actions';
-import type { ClientState, ClientStatePlayer } from '../../state';
 import { emptyClientState, initialClientState } from '../../state';
+import type { ClientAction, ClientDummyAction } from '../../actions';
+import { loadPlayerTestScenarios } from './load-player-test-scenarios';
 
-describe('playerReducer', () => {
-    it('initializes its state', () => {
-        const action = dummy();
+const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStatePlayerReducerTestScenario<ClientAction>> }): void => {
+    scenarios.forEach(
+        (scenario) => {
+            it(scenario.name, () => {
+                const previousLocalState = scenario.previousGlobalState.player;
+                const actual = playerReducer(scenario.previousGlobalState.player, scenario.action, scenario.previousGlobalState);
+                const expectedLocalState = scenario.expectedLocalStateCreator({ previousLocalState });
+                expect(actual).toEqual(expectedLocalState);
+            });
+        },
+    );
+};
 
-        const previousGlobalState: ClientState = {
-            ...emptyClientState,
-        };
-
+const stateInitializationScenario: ClientStatePlayerReducerTestScenario<ClientDummyAction> = {
+    name: 'initializes its state',
+    action: dummy(),
+    previousGlobalState: {
+        ...emptyClientState,
         // $FlowFixMe
-        const previousLocalState: ?ClientStatePlayer = undefined;
-
-        const expected: ClientStatePlayer = {
+        player: undefined,
+    },
+    expectedLocalStateCreator: ({ previousLocalState }) => {
+        return {
             ...initialClientState.player,
         };
+    },
+};
 
-        const actual = playerReducer(previousLocalState, action, previousGlobalState);
-        expect(actual).toEqual(expected);
+describe('playerReducer', () => {
+    // $FlowFixMe
+    runScenarios({
+        scenarios: [
+            stateInitializationScenario,
+            ...loadPlayerTestScenarios,
+        ],
     });
 });

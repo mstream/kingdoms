@@ -5,7 +5,7 @@ import type { ClientUpdateStateAction } from '../../actions';
 import {
     isCityBeingCreatedSelector,
     playerNameSelector,
-} from '../../selectors/client-state';
+} from '../../selectors';
 import { commonStateCityIdsByOwnerSelector } from '../../../../../common/src/selectors/common-state';
 
 export const updateStateMenuReducer = (

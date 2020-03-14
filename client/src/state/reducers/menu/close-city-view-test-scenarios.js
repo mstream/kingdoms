@@ -1,13 +1,17 @@
 // @flow
 
-import type { ClientCloseCityViewAction } from '../../actions';
+import type {
+    ClientCloseCityViewAction,
+    ClientSelectCityViewUnitAction,
+} from '../../actions';
 import { closeCityView } from '../../actions';
 import type { ClientStateMenu } from '../../state';
 import { emptyClientState } from '../../state';
 import type { ClientStateReducerTestScenario } from '../root';
+import type { ClientStateMenuReducerTestScenario } from './index';
 
 
-export const closeCityViewTestScenarios: $ReadOnlyArray<ClientStateReducerTestScenario<ClientStateMenu, ClientCloseCityViewAction>> = [
+export const closeCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientCloseCityViewAction>> = [
     {
         name: 'closes city view',
         action: closeCityView(),

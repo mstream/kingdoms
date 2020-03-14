@@ -1,28 +1,50 @@
 // @flow
 
+import type { ClientAction, ClientDummyAction } from '../../actions';
 import { dummy } from '../../actions';
-import type { ClientState, ClientStateCamera } from '../../state';
 import { emptyClientState, initialClientState } from '../../state';
+import type { ClientStateCameraReducerTestScenario } from './index';
 import { cameraReducer } from './index';
+import { zoomCameraTestScenarios } from './zoom-camera-test-scenarios';
+import { updateStateTestScenarios } from './update-state-test-scenarios';
+import { moveCameraTestScenarios } from './move-camera-test-scenarios';
 
-describe('cameraReducer', () => {
-    it('initializes its state', () => {
-        const action = dummy();
+const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientAction>> }): void => {
+    scenarios.forEach(
+        (scenario) => {
+            it(scenario.name, () => {
+                const previousLocalState = scenario.previousGlobalState.camera;
+                const actual = cameraReducer(scenario.previousGlobalState.camera, scenario.action, scenario.previousGlobalState);
+                const expectedLocalState = scenario.expectedLocalStateCreator({ previousLocalState });
+                expect(actual).toEqual(expectedLocalState);
+            });
+        },
+    );
+};
 
-        const previousGlobalState: ClientState = {
-            ...emptyClientState,
-        };
-
+const stateInitializationScenario: ClientStateCameraReducerTestScenario<ClientDummyAction> = {
+    name: 'initializes its state',
+    action: dummy(),
+    previousGlobalState: {
+        ...emptyClientState,
         // $FlowFixMe
-        const previousLocalState: ?ClientStateCamera = undefined;
-
-        const expected: ClientStateCamera = {
+        camera: undefined,
+    },
+    expectedLocalStateCreator: ({ previousLocalState }) => {
+        return {
             ...initialClientState.camera,
         };
+    },
+};
 
-        const actual = cameraReducer(previousLocalState, action, previousGlobalState);
-        expect(actual).toEqual(expected);
+describe('cameraReducer', () => {
+    // $FlowFixMe
+    runScenarios({
+        scenarios: [
+            stateInitializationScenario,
+            ...moveCameraTestScenarios,
+            ...updateStateTestScenarios,
+            ...zoomCameraTestScenarios,
+        ],
     });
-
-
 });

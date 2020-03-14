@@ -8,7 +8,7 @@ import {
     cityIdsOwnedByPlayerSelector,
     currentlyViewedCitySelector,
     isGameStartingSelector,
-} from './client-state';
+} from './index';
 import {
     emptyCityState,
     emptyCommonState,

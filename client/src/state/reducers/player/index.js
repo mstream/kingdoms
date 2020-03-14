@@ -4,9 +4,16 @@
 import { LOAD_PLAYER } from '../../actions';
 import { loadPlayerPlayerReducer } from './load-player';
 import { unsupportedActionReducer } from '../unsupported-action-reducer';
-import type { ClientState, ClientStatePlayer } from '../../state';
+import type {
+    ClientState,
+    ClientStateMenu,
+    ClientStatePlayer,
+} from '../../state';
 import type { ClientAction } from '../../actions';
 import { initialClientState } from '../../state';
+import type { ClientStateReducerTestScenario } from '../root';
+
+export type ClientStatePlayerReducerTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientStatePlayer, A>;
 
 export const playerReducer = (
     localState: ClientStatePlayer = initialClientState.player,

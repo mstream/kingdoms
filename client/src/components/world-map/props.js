@@ -17,7 +17,7 @@ import {
     cameraSelector,
     citiesSelector,
     tilesSelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 import type { Vector } from '../../../../common/src/vector';
 
 type OwnProps = {

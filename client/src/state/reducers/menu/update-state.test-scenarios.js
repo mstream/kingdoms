@@ -2,18 +2,14 @@
 
 import type { ClientUpdateStateAction } from '../../actions';
 import { updateState } from '../../actions';
-import type { ClientState, ClientStateMenu } from '../../state';
 import { emptyClientState } from '../../state';
-import { updateStateMenuReducer } from './update-state';
 import {
     emptyCityState,
     emptyCommonState,
-    UNIT_CATAPULT,
-    UNIT_SWORDMAN,
 } from '../../../../../common/src/state';
-import type { ClientStateReducerTestScenario } from '../root';
+import type { ClientStateMenuReducerTestScenario } from './index';
 
-export const updateStateTestScenarios: $ReadOnlyArray<ClientStateReducerTestScenario<ClientStateMenu, ClientUpdateStateAction>> = [
+export const updateStateTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientUpdateStateAction>> = [
     {
         name: 'upates state',
         action: updateState({

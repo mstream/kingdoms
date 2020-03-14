@@ -22,6 +22,9 @@ import { selectCityViewTabMenuReducer } from './select-city-view-tab';
 import { selectCityViewUnitMenuReducer } from './select-city-view-unit';
 import { closeAttackViewMenuReducer } from './close-attack-view';
 import { openAttackViewMenuReducer } from './open-attack-view';
+import type { ClientStateReducerTestScenario } from '../root';
+
+export type ClientStateMenuReducerTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientStateMenu, A>;
 
 export const menuReducer = (
     localState: ClientStateMenu = initialClientState.menu,

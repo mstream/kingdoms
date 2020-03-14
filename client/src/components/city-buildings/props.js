@@ -12,7 +12,7 @@ import {
     currentlyViewedCityIdSelector,
     currentlyViewedCitySelector,
     rulesSelector,
-} from '../../state/selectors/client-state';
+} from '../../state/selectors';
 
 type OwnProps = {};
 

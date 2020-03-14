@@ -1,19 +1,17 @@
 // @flow
 
-import type { ClientState, ClientStateTile } from '../../state/state';
+import type { ClientState } from '../../state/state';
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import { openAttackView, openCityView } from '../../state/actions';
-import type { CommonStateCity } from '../../../../common/src/state';
-import { playerNameSelector } from '../../state/selectors/client-state';
+import { closeAttackView } from '../../state/actions';
+import {
+    attackedCityIdSelector,
+    attackedCitySelector,
+} from '../../state/selectors/client-state';
 
-type OwnProps = {
-    city: CommonStateCity,
-    cityTile: ClientStateTile,
-    cityId: string,
-};
+type OwnProps = {};
 
 type StateProps = $ReadOnly<{
     ...StateToProps<typeof mapStateToProps>,
@@ -29,15 +27,15 @@ export type Props = {
     ...DispatchProps,
 };
 
-const mapStateToProps = (state: ClientState) => {
+const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        playerName: playerNameSelector(state),
+        city: attackedCitySelector(state),
+        cityId: attackedCityIdSelector(state),
     });
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    openAttackView,
-    openCityView,
+    closeAttackView,
 });
 
 export const connectProps = connect<Props,

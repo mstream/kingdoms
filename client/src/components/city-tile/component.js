@@ -9,16 +9,20 @@ import { CityStatusBarComponent } from '../city-status-bar';
 
 export const testId = 'city-tile';
 
-export const Component = ({ city, cityId, cityTile, openCityView }: Props) => {
+export const Component = ({ city, cityId, cityTile, openAttackView, openCityView, playerName }: Props) => {
     const style = {
         ...createGeometryStyle({ geometry: cityTile.geometry }),
+    };
+
+    const onClick = () => {
+        city.ownerId === playerName ? openCityView({ cityId }) : openAttackView({ cityId });
     };
 
     return (
         <div data-testid={testId}
              className="absolute cursor-pointer"
              style={style}
-             onClick={() => openCityView({ cityId })}
+             onClick={onClick}
         >
             <ImageComponent image={cityImage} ratio="100%"/>
             <CityStatusBarComponent city={city}/>

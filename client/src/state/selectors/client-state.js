@@ -57,6 +57,10 @@ export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
     return state.menu.cityView.currentCityId;
 };
 
+export const attackedCityIdSelector = (state: ClientState): ?string => {
+    return state.menu.attackView.attackedCityId;
+};
+
 export const citiesSelector = createSelector<ClientState, void, CommonStateCities, ?CommonState>(
     commonStateSelector,
     (commonState) => {
@@ -116,6 +120,18 @@ export const currentlyViewedCitySelector = createSelector<ClientState, void, ?Co
         }
 
         return cities[currentlyViewedCityId];
+    },
+);
+
+export const attackedCitySelector = createSelector<ClientState, void, ?CommonStateCity, ?CommonStateCities, ?string>(
+    citiesSelector,
+    attackedCityIdSelector,
+    (cities, attackedCityId) => {
+        if (cities == null || attackedCityId == null) {
+            return null;
+        }
+
+        return cities[attackedCityId];
     },
 );
 

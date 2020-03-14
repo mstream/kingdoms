@@ -3,6 +3,8 @@
 
 import type { Quantities } from '../quantity';
 import { multipleQuantitiesByScalar } from '../quantity';
+import type { Range } from '../range';
+import { emptyRange } from '../range';
 import { convertQuantitiesToResources } from '../resource';
 import { reify, Type } from 'flow-runtime';
 import { zeroVector } from '../vector';
@@ -83,6 +85,19 @@ export const emptyUnitsState: { [UnitType]: number, ... } = {
 };
 
 export type CommonStateUnits = typeof emptyUnitsState;
+
+
+export const emptyRegimentState: { [UnitType]: Range, ... } = {
+    [UNIT_ARCHER]: emptyRange,
+    [UNIT_CATAPULT]: emptyRange,
+    [UNIT_KNIGHT]: emptyRange,
+    [UNIT_NOBLE]: emptyRange,
+    [UNIT_PEASANT]: emptyRange,
+    [UNIT_PIKEMAN]: emptyRange,
+    [UNIT_SWORDMAN]: emptyRange,
+};
+
+export type Regiment = typeof emptyRegimentState;
 
 
 export const emptyResourcesState: { [ResourceType]: number, ... } = {

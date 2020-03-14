@@ -28,6 +28,20 @@ export const dummy: ActionCreator<ClientDummyAction> = (payload) => {
 };
 
 
+export const CLOSE_ATTACK_VIEW: 'CLOSE_ATTACK_VIEW' = 'CLOSE_ATTACK_VIEW';
+export type ClientCloseAttackViewAction = BaseAction<typeof CLOSE_ATTACK_VIEW, void>;
+
+export const closeAttackView: ActionCreator<ClientCloseAttackViewAction> = () => {
+    return {
+        type: CLOSE_ATTACK_VIEW, payload: undefined,
+    };
+};
+
+
+export const OPEN_ATTACK_VIEW: 'OPEN_ATTACK_VIEW' = 'OPEN_ATTACK_VIEW';
+export type ClientOpenAttackViewAction = BaseAction<typeof OPEN_ATTACK_VIEW, $ReadOnly<{ cityId: string, }>>;
+
+
 export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = 'CLOSE_CITY_VIEW';
 export type ClientCloseCityViewAction = BaseAction<typeof CLOSE_CITY_VIEW, void>;
 
@@ -90,6 +104,14 @@ export type ClientRequestBuildingUpgradeAction = BaseAction<typeof REQUEST_BUILD
 export const requestBuildingUpgrade: ActionCreator<ClientRequestBuildingUpgradeAction> = (payload) => {
     return {
         type: REQUEST_BUILDING_UPGRADE,
+        payload,
+    };
+};
+
+
+export const openAttackView: ActionCreator<ClientOpenAttackViewAction> = (payload) => {
+    return {
+        type: OPEN_ATTACK_VIEW,
         payload,
     };
 };
@@ -204,10 +226,12 @@ export const zoomCameraOut = () => {
 
 
 export type ClientAction =
+    | ClientCloseAttackViewAction
     | ClientCloseCityViewAction
     | ClientDummyAction
     | ClientLoadPlayerAction
     | ClientMoveCameraAction
+    | ClientOpenAttackViewAction
     | ClientOpenCityViewAction
     | ClientRequestBuildingUpgradeAction
     | ClientRequestCityCreationAction

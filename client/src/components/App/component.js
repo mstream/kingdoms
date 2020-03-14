@@ -7,6 +7,7 @@ import { WorldMapComponent } from '../world-map';
 import { CityViewComponent } from '../city-view';
 import { GameStartComponent } from '../game-start';
 import { LoaderComponent } from '../loader';
+import { AttackViewComponent } from '../attack-view';
 
 export const testId = 'app';
 
@@ -41,6 +42,7 @@ export const Component = ({}: Props) => {
                     windowSize={windowSize}
                 />
                 <CityViewComponent/>
+                <AttackViewComponent/>
                 <GameStartComponent/>
             </div>
             <LoaderComponent/>

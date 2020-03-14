@@ -4,10 +4,13 @@ import type { ClientState, ClientStateMenu } from '../../state';
 import { initialClientState } from '../../state';
 import type { ClientAction } from '../../actions';
 import {
+    CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
+    OPEN_ATTACK_VIEW,
     OPEN_CITY_VIEW,
     REQUEST_CITY_CREATION,
-    SELECT_CITY_VIEW_TAB, SELECT_CITY_VIEW_UNIT, selectCityViewUnit,
+    SELECT_CITY_VIEW_TAB,
+    SELECT_CITY_VIEW_UNIT,
     UPDATE_STATE,
 } from '../../actions';
 import { unsupportedActionReducer } from '../unsupported-action-reducer';
@@ -17,6 +20,8 @@ import { openCityViewMenuReducer } from './open-city-view';
 import { requestCityCreationMenuReducer } from './request-city-creation';
 import { selectCityViewTabMenuReducer } from './select-city-view-tab';
 import { selectCityViewUnitMenuReducer } from './select-city-view-unit';
+import { closeAttackViewMenuReducer } from './close-attack-view';
+import { openAttackViewMenuReducer } from './open-attack-view';
 
 export const menuReducer = (
     localState: ClientStateMenu = initialClientState.menu,
@@ -24,8 +29,22 @@ export const menuReducer = (
     globalState: ClientState,
 ): ClientStateMenu => {
     switch (action.type) {
+        case CLOSE_ATTACK_VIEW: {
+            return closeAttackViewMenuReducer({
+                action,
+                localState,
+                globalState,
+            });
+        }
         case CLOSE_CITY_VIEW: {
             return closeCityViewMenuReducer({
+                action,
+                localState,
+                globalState,
+            });
+        }
+        case OPEN_ATTACK_VIEW: {
+            return openAttackViewMenuReducer({
                 action,
                 localState,
                 globalState,

@@ -1,5 +1,6 @@
 // @flow
 
+import type { ClientUpdateStateAction } from '../../actions';
 import { updateState } from '../../actions';
 import type { ClientState, ClientStateMenu } from '../../state';
 import { emptyClientState } from '../../state';
@@ -7,27 +8,30 @@ import { updateStateMenuReducer } from './update-state';
 import {
     emptyCityState,
     emptyCommonState,
+    UNIT_CATAPULT,
+    UNIT_SWORDMAN,
 } from '../../../../../common/src/state';
+import type { ClientStateReducerTestScenario } from '../root';
 
-describe('updateStateMenuReducer', () => {
-    it('handles update state event', () => {
-        const commonState = {
-            ...emptyCommonState,
-            cities: {
-                '1': {
-                    ...emptyCityState,
-                    ownerId: 'player2',
-                },
-                '2': {
-                    ...emptyCityState,
-                    ownerId: 'player1',
+export const updateStateTestScenarios: $ReadOnlyArray<ClientStateReducerTestScenario<ClientStateMenu, ClientUpdateStateAction>> = [
+    {
+        name: 'upates state',
+        action: updateState({
+            commonState: {
+                ...emptyCommonState,
+                cities: {
+                    '1': {
+                        ...emptyCityState,
+                        ownerId: 'player2',
+                    },
+                    '2': {
+                        ...emptyCityState,
+                        ownerId: 'player1',
+                    },
                 },
             },
-        };
-
-        const action = updateState({ commonState });
-
-        const previousGlobalState: ClientState = {
+        }),
+        previousGlobalState: {
             ...emptyClientState,
             camera: {
                 ...emptyClientState.camera,
@@ -52,24 +56,16 @@ describe('updateStateMenuReducer', () => {
                     },
                 },
             },
-        };
+        },
+        expectedLocalStateCreator: ({ previousLocalState }) => {
+            return {
+                ...previousLocalState,
+                newCity: {
+                    ...previousLocalState.newCity,
+                    isCityBeingCreated: false,
+                },
+            };
+        },
+    },
+];
 
-        const previousLocalState: ClientStateMenu = previousGlobalState.menu;
-
-        const expected: ClientStateMenu = {
-            ...previousLocalState,
-            newCity: {
-                ...previousLocalState.newCity,
-                isCityBeingCreated: false,
-            },
-        };
-
-        const actual = updateStateMenuReducer({
-            localState: previousLocalState,
-            action,
-            globalState: previousGlobalState,
-        });
-
-        expect(actual).toEqual(expected);
-    });
-});

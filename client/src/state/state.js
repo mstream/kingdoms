@@ -4,7 +4,11 @@ import type { Geometry } from '../../../common/src/geometry';
 import type { Vector } from '../../../common/src/vector';
 import { zeroVector } from '../../../common/src/vector';
 import type { Boundary } from '../../../common/src/boundary';
-import type { CommonState, CommonStateUnits } from '../../../common/src/state';
+import type {
+    CommonState,
+    CommonStateUnits,
+    Regiment,
+} from '../../../common/src/state';
 import { UNIT_PEASANT } from '../../../common/src/state';
 
 export type ClientStateCamera = $ReadOnly<{
@@ -26,6 +30,12 @@ export type ClientStateCityViewTab =
     | typeof TAB_RESOURCES
     | typeof TAB_UNITS;
 
+export type ClientStateAttackView = $ReadOnly<{
+    attackedCityId: ?string,
+    attackingCityId: ?string,
+    regiment: Regiment,
+}>;
+
 export type ClientStateCityView = $ReadOnly<{
     currentCityId: ?string,
     tab: ClientStateCityViewTab,
@@ -37,8 +47,9 @@ export type ClientStateNewCity = $ReadOnly<{
 }>;
 
 export type ClientStateMenu = $ReadOnly<{
-    newCity: ClientStateNewCity,
+    attackView: ClientStateAttackView,
     cityView: ClientStateCityView,
+    newCity: ClientStateNewCity,
 }>;
 
 export type ClientStatePlayer = $ReadOnly<{
@@ -122,24 +133,34 @@ const initialCameraState: ClientStateCamera = {
 };
 
 const emptyMenuState: ClientStateMenu = {
-    newCity: {
-        isCityBeingCreated: false,
+    attackView: {
+        attackedCityId: null,
+        attackingCityId: null,
+        regiment: {},
     },
     cityView: {
         currentCityId: null,
         tab: TAB_OVERVIEW,
         unit: UNIT_PEASANT,
+    },
+    newCity: {
+        isCityBeingCreated: false,
     },
 };
 
 const initialMenuState: ClientStateMenu = {
-    newCity: {
-        isCityBeingCreated: false,
+    attackView: {
+        attackedCityId: null,
+        attackingCityId: null,
+        regiment: {},
     },
     cityView: {
         currentCityId: null,
         tab: TAB_OVERVIEW,
         unit: UNIT_PEASANT,
+    },
+    newCity: {
+        isCityBeingCreated: false,
     },
 };
 

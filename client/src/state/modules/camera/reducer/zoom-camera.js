@@ -1,11 +1,11 @@
 // @flow
 
-import type { ClientZoomCameraAction } from '../../../actions';
 import { clipToBoundary } from '../../../../../../common/src/boundary';
 import { addVectors, multipleVectors } from '../../../../../../common/src/vector';
 import { isAnyMenuOpen } from '../../../selectors';
 import type { ClientStateCamera } from './types';
 import type { ClientState } from '../../root';
+import type { ClientZoomCameraAction } from '../actions';
 
 export const zoomCameraCameraReducer = (
     {

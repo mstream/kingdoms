@@ -1,13 +1,13 @@
 // @flow
 
 
-import type { ClientUpdateStateAction } from '../../../actions';
 import type { ClientStateTiles } from './types';
 import { tileVectorToPixelVector } from '../../../../util';
 import tumult from 'tumult';
 import type { Vector } from '../../../../../../common/src/vector';
 import { surfaceImages } from '../../../../assets/images/terrain';
 import type { ClientState } from '../../root';
+import type { ClientUpdateStateAction } from '../../common-state/actions';
 
 const perlin2 = new tumult.Simplex2('qwerty');
 

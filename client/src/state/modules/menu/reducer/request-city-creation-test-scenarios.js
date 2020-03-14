@@ -1,16 +1,13 @@
 // @flow
 
 import type {
-    ClientRequestCityCreationAction,
-    ClientSelectCityViewUnitAction,
-} from '../../../actions';
-import { requestCityCreation } from '../../../actions';
-import type {
     ClientStateMenu,
     ClientStateMenuReducerTestScenario,
 } from './types';
 import { emptyClientState } from '../../types';
 import type { ClientStateReducerTestScenario } from '../../types';
+import type { ClientRequestCityCreationAction } from '../../common-state/actions';
+import { requestCityCreation } from '../../common-state/actions';
 
 export const requestCityCreationTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientRequestCityCreationAction>> = [
     {

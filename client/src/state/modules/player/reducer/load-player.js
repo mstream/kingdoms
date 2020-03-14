@@ -1,9 +1,9 @@
 // @flow
 
 
-import type { ClientLoadPlayerAction } from '../../../actions';
 import type { ClientStatePlayer } from './types';
 import type { ClientState } from '../../root';
+import type { ClientLoadPlayerAction } from '../actions';
 
 export const loadPlayerPlayerReducer = (
     {

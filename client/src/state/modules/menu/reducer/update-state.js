@@ -1,11 +1,11 @@
 // @flow
 
-import type { ClientUpdateStateAction } from '../../../actions';
 import { commonStateCityIdsByOwnerSelector } from '../../../../../../common/src/selectors/common-state';
 import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../root';
 import { playerNameSelector } from '../../player/selectors';
 import { isCityBeingCreatedSelector } from '../selectors';
+import type { ClientUpdateStateAction } from '../../common-state/actions';
 
 export const updateStateMenuReducer = (
     {

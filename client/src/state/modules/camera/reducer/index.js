@@ -1,7 +1,6 @@
 // @flow
 
 import type { ClientAction } from '../../../actions';
-import { MOVE_CAMERA, UPDATE_STATE, ZOOM_CAMERA } from '../../../actions';
 import { moveCameraCameraReducer } from './move-camera';
 import { zoomCameraCameraReducer } from './zoom-camera';
 import { updateStateCameraReducer } from './update-state';
@@ -9,6 +8,8 @@ import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import type { ClientStateCamera } from './types';
 import type { ClientState } from '../../root';
 import { zeroVector } from '../../../../../../common/src/vector';
+import { UPDATE_STATE } from '../../common-state/actions';
+import { MOVE_CAMERA, ZOOM_CAMERA } from '../actions';
 
 export const initialCameraState: ClientStateCamera = {
     geometry: {

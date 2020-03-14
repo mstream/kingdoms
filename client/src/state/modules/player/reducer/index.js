@@ -2,11 +2,11 @@
 
 
 import type { ClientAction } from '../../../actions';
-import { LOAD_PLAYER } from '../../../actions';
 import { loadPlayerPlayerReducer } from './load-player';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import type { ClientStatePlayer } from './types';
 import type { ClientState } from '../../root';
+import { LOAD_PLAYER } from '../actions';
 
 export const initialPlayerState = {
     name: null,

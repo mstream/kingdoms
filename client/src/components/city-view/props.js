@@ -4,12 +4,12 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import { closeCityView } from '../../state/actions';
 import {
     currentlyViewedCitySelector,
 } from '../../state/selectors';
 import type { ClientState } from '../../state/modules/root';
 import { currentlyViewedCityIdSelector } from '../../state/modules/menu/selectors';
+import { closeCityView } from '../../state/modules/menu/actions';
 
 type OwnProps = {};
 

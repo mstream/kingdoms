@@ -4,12 +4,12 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import { closeAttackView } from '../../state/actions';
 import {
     attackedCitySelector,
 } from '../../state/selectors';
 import type { ClientState } from '../../state/modules/root';
 import { attackedCityIdSelector } from '../../state/modules/menu/selectors';
+import { closeAttackView } from '../../state/modules/menu/actions';
 
 type OwnProps = {};
 

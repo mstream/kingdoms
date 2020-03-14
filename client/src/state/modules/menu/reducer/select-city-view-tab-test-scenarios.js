@@ -1,17 +1,13 @@
 // @flow
 
 import type {
-    ClientSelectCityViewTabAction,
-    ClientSelectCityViewUnitAction,
-} from '../../../actions';
-import { selectCityViewTab } from '../../../actions';
-import type {
     ClientStateMenu,
     ClientStateMenuReducerTestScenario,
 } from './types';
 import { TAB_BUILDINGS, TAB_UNITS } from './types';
 import { emptyClientState } from '../../types';
-import type { ClientStateReducerTestScenario } from '../../types';
+import type { ClientSelectCityViewTabAction } from '../actions';
+import { selectCityViewTab } from '../actions';
 
 export const selectCityViewTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewTabAction>> = [
     {

@@ -4,7 +4,6 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import { selectCityViewUnit } from '../../state/actions';
 import {
     activeCityTabSelector,
     activeUnitSelector,
@@ -14,6 +13,7 @@ import {
 } from '../../state/selectors';
 import { TAB_UNITS } from '../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../state/modules/root';
+import { selectCityViewUnitTab } from '../../state/modules/menu/actions';
 
 type OwnProps = {};
 
@@ -42,7 +42,7 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    selectCityViewUnit,
+    selectCityViewUnitTab,
 });
 
 export const connectProps = connect<Props,

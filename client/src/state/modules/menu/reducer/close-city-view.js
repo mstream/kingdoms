@@ -1,10 +1,10 @@
 // @flow
 
-import type { ClientCloseCityViewAction } from '../../../actions';
 import type { ClientStateMenu } from './types';
 import { TAB_OVERVIEW } from './types';
 import type { ClientState } from '../../root';
 import { UNIT_PEASANT } from '../../../../../../common/src/state';
+import type { ClientCloseCityViewAction } from '../actions';
 
 export const closeCityViewMenuReducer = (
     {

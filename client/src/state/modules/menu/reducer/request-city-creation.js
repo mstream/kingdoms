@@ -1,15 +1,9 @@
 // @flow
 
-import type {
-    ClientCloseCityViewAction,
-    ClientRequestCityCreationAction,
-} from '../../../actions';
-import {
-    cityIdsByOwnerSelector,
-} from '../../../selectors';
-import type { ClientStateCamera } from '../../camera/reducer/types';
+
 import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../root';
+import type { ClientRequestCityCreationAction } from '../../common-state/actions';
 
 export const requestCityCreationMenuReducer = (
     {

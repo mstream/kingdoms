@@ -1,14 +1,15 @@
 // @flow
 
 
-import type { ClientUpdateStateAction } from '../../../actions';
-import { updateState } from '../../../actions';
+
 import { emptyClientState } from '../../types';
 import {
     emptyCityState,
     emptyCommonState,
 } from '../../../../../../common/src/state';
 import type { ClientStateCommonStateReducerTestScenario } from './types';
+import { updateState } from '../actions';
+import type { ClientUpdateStateAction } from '../actions';
 
 
 export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCommonStateReducerTestScenario<ClientUpdateStateAction>> = [

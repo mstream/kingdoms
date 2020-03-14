@@ -41,7 +41,7 @@ export const Component = (
         city,
         isVisible,
         rules,
-        selectCityViewUnit,
+        selectCityViewUnitTab,
         unitStats,
     }: Props,
 ) => {
@@ -55,7 +55,7 @@ export const Component = (
         const unitVisual = unitVisuals[unitType];
 
         const onClick = (event) => {
-            selectCityViewUnit({ unitType });
+            selectCityViewUnitTab({ unitType });
         };
 
         const isSelected = unitType === activeUnit;

@@ -1,9 +1,9 @@
 // @flow
 
-import type { ClientZoomCameraAction } from '../../../actions';
-import { zoomCameraIn } from '../../../actions';
 import type { ClientStateCameraReducerTestScenario } from './types';
 import { emptyClientState } from '../../types';
+import { zoomCameraIn } from '../actions';
+import type { ClientZoomCameraAction } from '../actions';
 
 
 export const zoomCameraTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientZoomCameraAction>> = [

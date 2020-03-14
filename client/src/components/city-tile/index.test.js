@@ -8,10 +8,10 @@ import { Provider } from 'react-redux';
 import { CityTileComponent } from './index';
 import { cityStatusBarComponentTestId } from '../city-status-bar';
 import { emptyCityState } from '../../../../common/src/state';
-import { openAttackView, openCityView } from '../../state/actions';
 import { emptyClientStateCityTile } from '../../state/modules/tiles/reducer/types';
 import { emptyClientState } from '../../state/modules/types';
 import type { ClientState } from '../../state/modules/root';
+import { openAttackView, openCityView } from '../../state/modules/menu/actions';
 
 const mockStore = configureStore([]);
 

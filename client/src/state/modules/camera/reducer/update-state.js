@@ -1,6 +1,5 @@
 // @flow
 
-import type { ClientUpdateStateAction } from '../../../actions';
 import {
     addVectors,
     areVectorsEqual,
@@ -17,6 +16,7 @@ import type { CommonStateCity } from '../../../../../../common/src/state';
 import type { ClientStateCamera } from './types';
 import type { ClientState } from '../../root';
 import { playerNameSelector } from '../../player/selectors';
+import type { ClientUpdateStateAction } from '../../common-state/actions';
 
 export const updateStateCameraReducer = (
     {

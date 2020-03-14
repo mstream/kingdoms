@@ -1,9 +1,5 @@
 // @flow
 
-import type {
-    ClientOpenAttackViewAction,
-    ClientOpenCityViewAction,
-} from '../../../actions';
 import {
     cityIdsByOwnerSelector,
 } from '../../../selectors';
@@ -11,6 +7,7 @@ import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../root';
 import { playerNameSelector } from '../../player/selectors';
 import { commonStateSelector } from '../../common-state/selectors';
+import type { ClientOpenAttackViewAction } from '../actions';
 
 export const openAttackViewMenuReducer = (
     {

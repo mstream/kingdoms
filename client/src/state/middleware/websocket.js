@@ -3,13 +3,6 @@
 import Socket from 'simple-websocket';
 import type { Middleware } from 'redux';
 import type { ClientAction } from '../actions';
-import {
-    loadPlayer,
-    REQUEST_BUILDING_UPGRADE,
-    REQUEST_CITY_CREATION,
-    REQUEST_CITY_NAME_CHANGE,
-    updateState,
-} from '../actions';
 import type {
     ServerAction,
     ServerResponse,
@@ -24,6 +17,11 @@ import {
 import jwt from 'jsonwebtoken';
 import { generateId, stringifyJson } from '../../../../common/src/util';
 import type { ClientState } from '../modules/root';
+import {
+    REQUEST_BUILDING_UPGRADE, REQUEST_CITY_CREATION,
+    REQUEST_CITY_NAME_CHANGE, updateState,
+} from '../modules/common-state/actions';
+import { loadPlayer } from '../modules/player/actions';
 
 
 const send = ({ action, socket }: { action: ServerAction, socket: Socket }): void => {

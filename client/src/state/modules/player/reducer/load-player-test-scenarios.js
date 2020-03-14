@@ -1,10 +1,10 @@
 // @flow
 
 
-import type { ClientLoadPlayerAction } from '../../../actions';
-import { loadPlayer } from '../../../actions';
 import type { ClientStatePlayerReducerTestScenario } from './types';
 import { emptyClientState } from '../../types';
+import type { ClientLoadPlayerAction } from '../actions';
+import { loadPlayer } from '../actions';
 
 
 export const loadPlayerTestScenarios: $ReadOnlyArray<ClientStatePlayerReducerTestScenario<ClientLoadPlayerAction>> = [

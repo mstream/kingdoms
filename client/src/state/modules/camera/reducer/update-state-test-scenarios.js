@@ -1,7 +1,6 @@
 // @flow
 
-import type { ClientUpdateStateAction } from '../../../actions';
-import { updateState } from '../../../actions';
+
 import { addVectors, negateVector } from '../../../../../../common/src/vector';
 import {
     emptyCityState,
@@ -10,6 +9,8 @@ import {
 import { tileVectorToPixelVector } from '../../../../util';
 import type { ClientStateCameraReducerTestScenario } from './types';
 import { emptyClientState } from '../../types';
+import type { ClientUpdateStateAction } from '../../common-state/actions';
+import { updateState } from '../../common-state/actions';
 
 
 export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientUpdateStateAction>> = [

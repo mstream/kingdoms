@@ -4,7 +4,6 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import { requestBuildingUpgrade } from '../../state/actions';
 import {
     activeCityTabSelector,
     currentlyViewedCitySelector,
@@ -13,6 +12,7 @@ import {
 import { TAB_BUILDINGS } from '../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../state/modules/root';
 import { currentlyViewedCityIdSelector } from '../../state/modules/menu/selectors';
+import { requestBuildingUpgrade } from '../../state/modules/common-state/actions';
 
 type OwnProps = {};
 

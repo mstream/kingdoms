@@ -1,29 +1,31 @@
 // @flow
 
 import type { ClientAction } from '../../../actions';
-import {
-    CLOSE_ATTACK_VIEW,
-    CLOSE_CITY_VIEW,
-    OPEN_ATTACK_VIEW,
-    OPEN_CITY_VIEW,
-    REQUEST_CITY_CREATION,
-    SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNIT,
-    UPDATE_STATE,
-} from '../../../actions';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import { updateStateMenuReducer } from './update-state';
 import { closeCityViewMenuReducer } from './close-city-view';
 import { openCityViewMenuReducer } from './open-city-view';
 import { requestCityCreationMenuReducer } from './request-city-creation';
 import { selectCityViewTabMenuReducer } from './select-city-view-tab';
-import { selectCityViewUnitMenuReducer } from './select-city-view-unit';
+import { selectCityViewUnitTabMenuReducer } from './select-city-view-unit';
 import { closeAttackViewMenuReducer } from './close-attack-view';
 import { openAttackViewMenuReducer } from './open-attack-view';
 import type { ClientStateMenu } from './types';
 import { TAB_OVERVIEW } from './types';
 import { UNIT_PEASANT } from '../../../../../../common/src/state';
 import type { ClientState } from '../../root';
+import {
+    CLOSE_ATTACK_VIEW,
+    CLOSE_CITY_VIEW,
+    OPEN_ATTACK_VIEW,
+    OPEN_CITY_VIEW,
+    SELECT_CITY_VIEW_TAB,
+    SELECT_CITY_VIEW_UNIT_TAB,
+} from '../actions';
+import {
+    REQUEST_CITY_CREATION,
+    UPDATE_STATE,
+} from '../../common-state/actions';
 
 export const initialMenuState = {
     attackView: {
@@ -89,8 +91,8 @@ export const menuReducer = (
                 globalState,
             });
         }
-        case SELECT_CITY_VIEW_UNIT: {
-            return selectCityViewUnitMenuReducer({
+        case SELECT_CITY_VIEW_UNIT_TAB: {
+            return selectCityViewUnitTabMenuReducer({
                 action,
                 localState,
                 globalState,

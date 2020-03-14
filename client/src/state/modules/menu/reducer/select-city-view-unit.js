@@ -1,13 +1,10 @@
 // @flow
 
-import type {
-    ClientSelectCityViewTabAction,
-    ClientSelectCityViewUnitAction,
-} from '../../../actions';
 import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../root';
+import type { ClientSelectCityViewUnitTabTabAction } from '../actions';
 
-export const selectCityViewUnitMenuReducer = (
+export const selectCityViewUnitTabMenuReducer = (
     {
         localState,
         action,
@@ -15,7 +12,7 @@ export const selectCityViewUnitMenuReducer = (
     }:
         {
             localState: ClientStateMenu,
-            action: ClientSelectCityViewUnitAction,
+            action: ClientSelectCityViewUnitTabTabAction,
             globalState: ClientState,
         },
 ): ClientStateMenu => {

@@ -9,7 +9,7 @@ import { openAttackViewTestScenarios } from './open-attack-view-test-scenarios';
 import { openCityViewTestScenarios } from './open-city-view-test-scenarios';
 import { requestCityCreationTestScenarios } from './request-city-creation-test-scenarios';
 import { selectCityViewTabTestScenarios } from './select-city-view-tab-test-scenarios';
-import { selectCityViewUnitTestScenarios } from './select-city-view-unit-test-scenarios';
+import { selectCityViewUnitTabTestScenarios } from './select-city-view-unit-test-scenarios';
 import { updateStateTestScenarios } from './update-state.test-scenarios';
 import { emptyClientState } from '../../types';
 import { TAB_OVERVIEW } from './types';
@@ -67,7 +67,7 @@ describe('menuReducer', () => {
             ...openCityViewTestScenarios,
             ...requestCityCreationTestScenarios,
             ...selectCityViewTabTestScenarios,
-            ...selectCityViewUnitTestScenarios,
+            ...selectCityViewUnitTabTestScenarios,
             ...updateStateTestScenarios,
         ],
     });

@@ -2,10 +2,10 @@
 
 import { clipToBoundary } from '../../../../../../common/src/boundary';
 import { addVectors, multipleVectors } from '../../../../../../common/src/vector';
-import type { ClientMoveCameraAction } from '../../../actions';
 import { isAnyMenuOpen } from '../../../selectors';
 import type { ClientStateCamera } from './types';
 import type { ClientState } from '../../root';
+import type { ClientMoveCameraAction } from '../actions';
 
 export const moveCameraCameraReducer = (
     {

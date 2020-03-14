@@ -1,9 +1,9 @@
 // @flow
 
 
-import type { ClientUpdateStateAction } from '../../../actions';
 import type { ClientStateCommonState } from './types';
 import type { ClientState } from '../../root';
+import type { ClientUpdateStateAction } from '../actions';
 
 export const updateStateCommonStateReducer = (
     {

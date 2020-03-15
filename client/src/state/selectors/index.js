@@ -8,7 +8,8 @@ import {
     commonStateWorldSelector,
 } from '../../../../common/src/selectors/common-state';
 import type {
-    CommonStateCities, CommonStateCity,
+    CommonStateCities,
+    CommonStateCity,
     CommonStateRules,
     CommonStateUnits,
     CommonStateUnitStats,
@@ -27,6 +28,7 @@ import {
     currentlyViewedCityIdSelector,
     menuSelector,
 } from '../modules/menu/selectors';
+import { getDistanceBetweenVectors } from '../../../../common/src/vector';
 
 export const citiesSelector = createSelector<ClientState, void, CommonStateCities, ClientStateCommonState>(
     commonStateSelector,
@@ -75,6 +77,39 @@ export const cityIdsByOwnerSelector = createSelector<ClientState, void, { [strin
             return Object.freeze({});
         }
         return commonStateCityIdsByOwnerSelector(commonState);
+    },
+);
+
+export const cityDistancesSelector = createSelector<ClientState, void, { [string]: { [string]: number, ... }, ... }, CommonStateCities>(
+    citiesSelector,
+    (cities) => {
+        return Object.keys(cities).reduce(
+            (cityDistances, cityId: string) => {
+
+                const distances: { [string]: number, ... } = Object.keys(cities).reduce(
+                    (distances, otherCityId: string) => {
+
+                        const distance: number = getDistanceBetweenVectors({
+                            vector1: cities[cityId].location,
+                            vector2: cities[otherCityId].location,
+                        });
+
+                        return {
+                            ...distances,
+                            // $FlowFixMe
+                            [otherCityId]: distance,
+                        };
+                    },
+                    {},
+                );
+
+                return {
+                    ...cityDistances,
+                    [cityId]: distances,
+                };
+            },
+            {},
+        );
     },
 );
 

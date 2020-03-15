@@ -2,9 +2,12 @@
 
 import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../root';
-import type { ClientSelectCityViewUnitTabTabAction } from '../actions';
+import type {
+    ClientSelectAttackViewAttackingCityAction,
+    ClientSelectCityViewUnitTabAction,
+} from '../actions';
 
-export const selectCityViewUnitTabMenuReducer = (
+export const selectAttackViewAttackingCityReducer = (
     {
         localState,
         action,
@@ -12,15 +15,15 @@ export const selectCityViewUnitTabMenuReducer = (
     }:
         {
             localState: ClientStateMenu,
-            action: ClientSelectCityViewUnitTabTabAction,
+            action: ClientSelectAttackViewAttackingCityAction,
             globalState: ClientState,
         },
 ): ClientStateMenu => {
     return {
         ...localState,
-        cityView: {
-            ...localState.cityView,
-            unit: action.payload.unitType,
+        attackView: {
+            ...localState.attackView,
+            attackingCityId: action.payload.cityId,
         },
     };
 };

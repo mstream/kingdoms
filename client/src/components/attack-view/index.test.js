@@ -19,6 +19,38 @@ describe('AttackViewComponent', () => {
     test('displays the attack form', async () => {
         const state: ClientState = {
             ...emptyClientState,
+            commonState: {
+                ...emptyCommonState,
+                cities: {
+                    '1': {
+                        ...emptyCityState,
+                        location: {
+                            x: 0,
+                            y: 0,
+                        },
+                        name: 'EnemyCityOne',
+                        ownerId: 'player2',
+                    },
+                    '2': {
+                        ...emptyCityState,
+                        location: {
+                            x: 1,
+                            y: 0,
+                        },
+                        name: 'PlayerCityOne',
+                        ownerId: 'player1',
+                    },
+                    '3': {
+                        ...emptyCityState,
+                        location: {
+                            x: 2,
+                            y: 0,
+                        },
+                        name: 'PlayerCityTwo',
+                        ownerId: 'player1',
+                    },
+                },
+            },
             menu: {
                 ...emptyClientState.menu,
                 attackView: {
@@ -26,14 +58,8 @@ describe('AttackViewComponent', () => {
                     attackedCityId: '1',
                 },
             },
-            commonState: {
-                ...emptyCommonState,
-                cities: {
-                    '1': {
-                        ...emptyCityState,
-                        name: 'Cityone',
-                    },
-                },
+            player: {
+                name: 'player1',
             },
         };
 
@@ -45,6 +71,10 @@ describe('AttackViewComponent', () => {
             </Provider>,
         );
 
-        await expect(queryByText('Cityone')).toBeInTheDocument();
+        await expect(queryByText('EnemyCityOne')).toBeInTheDocument();
+        await expect(queryByText('PlayerCityOne')).toBeInTheDocument();
+        await expect(queryByText('PlayerCityTwo')).toBeInTheDocument();
+        await expect(queryByText('1 square away')).toBeInTheDocument();
+        await expect(queryByText('2 squares away')).toBeInTheDocument();
     });
 });

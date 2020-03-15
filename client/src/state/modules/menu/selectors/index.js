@@ -18,3 +18,7 @@ export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
 export const attackedCityIdSelector = (state: ClientState): ?string => {
     return state.menu.attackView.attackedCityId;
 };
+
+export const attackingCityIdSelector = (state: ClientState): ?string => {
+    return state.menu.attackView.attackingCityId;
+};

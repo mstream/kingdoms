@@ -8,10 +8,10 @@ import type {
 } from './types';
 import { emptyClientState } from '../../types';
 import type { ClientStateReducerTestScenario } from '../../types';
-import type { ClientSelectCityViewUnitTabTabAction } from '../actions';
+import type { ClientSelectCityViewUnitTabAction } from '../actions';
 import { selectCityViewUnitTab } from '../actions';
 
-export const selectCityViewUnitTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitTabTabAction>> = [
+export const selectCityViewUnitTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitTabAction>> = [
     {
         name: 'select city view unit',
         action: selectCityViewUnitTab({ unitType: UNIT_SWORDSMAN }),

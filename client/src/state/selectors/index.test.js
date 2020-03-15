@@ -2,21 +2,21 @@
 
 import {
     activeCityTabSelector,
-    citiesSelector,
+    citiesSelector, cityDistancesSelector,
     cityIdsOwnedByPlayerSelector,
     currentlyViewedCitySelector,
     isGameStartingSelector,
 } from './index';
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../common/src/state';
 import type {
     CommonStateCities,
     CommonStateCity,
 } from '../../../../common/src/state';
+import {
+    emptyCityState,
+    emptyCommonState,
+} from '../../../../common/src/state';
 import type { ClientStateCityViewTab } from '../modules/menu/reducer/types';
-import { TAB_OVERVIEW, TAB_UNITS } from '../modules/menu/reducer/types';
+import { TAB_UNITS } from '../modules/menu/reducer/types';
 import { emptyClientState } from '../modules/types';
 import type { ClientState } from '../modules/root';
 
@@ -32,9 +32,9 @@ describe('citiesSelector', () => {
                     },
                     '2': {
                         ...emptyCityState,
-                    }
+                    },
                 },
-            }
+            },
         };
 
         const expected: ?CommonStateCities = {
@@ -43,7 +43,7 @@ describe('citiesSelector', () => {
             },
             '2': {
                 ...emptyCityState,
-            }
+            },
         };
 
         const actual = citiesSelector(state);
@@ -61,8 +61,8 @@ describe('activeCityTabSelector', () => {
                 cityView: {
                     ...emptyClientState.menu.cityView,
                     tab: TAB_UNITS,
-                }
-            }
+                },
+            },
         };
 
         const expected: ClientStateCityViewTab = TAB_UNITS;
@@ -91,7 +91,7 @@ describe('currentlyViewedCitySelector', () => {
                         ...emptyCityState,
                     },
                 },
-            }
+            },
         };
 
         const expected: ?CommonStateCity = null;
@@ -118,7 +118,7 @@ describe('currentlyViewedCitySelector', () => {
                         ...emptyCityState,
                     },
                 },
-            }
+            },
         };
 
         const expected: ?CommonStateCity = {
@@ -136,7 +136,7 @@ describe('citiesOwnedByPlayerSelector', () => {
         const state: ClientState = {
             ...emptyClientState,
             player: {
-                name: 'player1'
+                name: 'player1',
             },
             commonState: {
                 ...emptyCommonState,
@@ -152,9 +152,9 @@ describe('citiesOwnedByPlayerSelector', () => {
                     '3': {
                         ...emptyCityState,
                         ownerId: 'player1',
-                    }
+                    },
                 },
-            }
+            },
         };
 
         const expected: $ReadOnlyArray<string> = ['1', '3'];
@@ -165,12 +165,59 @@ describe('citiesOwnedByPlayerSelector', () => {
     });
 });
 
+describe('cityDistancesSelector', () => {
+    it('returns distances between cities', () => {
+        const state: ClientState = {
+            ...emptyClientState,
+            commonState: {
+                ...emptyCommonState,
+                cities: {
+                    '1': {
+                        ...emptyCityState,
+                        location: { x: -2, y: 0 },
+                    },
+                    '2': {
+                        ...emptyCityState,
+                        location: { x: 0, y: 0 },
+                    },
+                    '3': {
+                        ...emptyCityState,
+                        location: { x: 1, y: 0 },
+                    },
+                },
+            },
+        };
+
+        const expected: { [string]: { [string]: number, ... }, ... } = {
+            '1': {
+                '1': 0,
+                '2': 2,
+                '3': 3,
+            },
+            '2': {
+                '1': 2,
+                '2': 0,
+                '3': 1,
+            },
+            '3': {
+                '1': 3,
+                '2': 1,
+                '3': 0,
+            },
+        };
+
+        const actual = cityDistancesSelector(state);
+
+        expect(actual).toEqual(expected);
+    });
+});
+
 describe('isGameStartingSelector', () => {
     it('returns true when player is loaded and they do not have any cities', () => {
         const state: ClientState = {
             ...emptyClientState,
             player: {
-                name: 'player1'
+                name: 'player1',
             },
             commonState: {
                 ...emptyCommonState,
@@ -182,9 +229,9 @@ describe('isGameStartingSelector', () => {
                     '2': {
                         ...emptyCityState,
                         ownerId: 'player3',
-                    }
+                    },
                 },
-            }
+            },
         };
 
         const expected: boolean = true;
@@ -210,9 +257,9 @@ describe('isGameStartingSelector', () => {
                     '2': {
                         ...emptyCityState,
                         ownerId: 'player3',
-                    }
+                    },
                 },
-            }
+            },
         };
 
         const expected: boolean = false;
@@ -226,7 +273,7 @@ describe('isGameStartingSelector', () => {
         const state: ClientState = {
             ...emptyClientState,
             player: {
-                name: 'player1'
+                name: 'player1',
             },
             commonState: {
                 ...emptyCommonState,
@@ -238,9 +285,9 @@ describe('isGameStartingSelector', () => {
                     '2': {
                         ...emptyCityState,
                         ownerId: 'player2',
-                    }
+                    },
                 },
-            }
+            },
         };
 
         const expected: boolean = false;

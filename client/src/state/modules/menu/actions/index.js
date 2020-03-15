@@ -8,6 +8,7 @@ export const CLOSE_ATTACK_VIEW: 'CLOSE_ATTACK_VIEW' = 'CLOSE_ATTACK_VIEW';
 export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = 'CLOSE_CITY_VIEW';
 export const OPEN_ATTACK_VIEW: 'OPEN_ATTACK_VIEW' = 'OPEN_ATTACK_VIEW';
 export const OPEN_CITY_VIEW: 'OPEN_CITY_VIEW' = 'OPEN_CITY_VIEW';
+export const SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB: 'SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB' = 'SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB';
 export const SELECT_CITY_VIEW_TAB: 'SELECT_CITY_VIEW_TAB' = 'SELECT_CITY_VIEW_TAB';
 export const SELECT_CITY_VIEW_UNIT_TAB: 'SELECT_CITY_VIEW_UNIT_TAB' = 'SELECT_CITY_VIEW_UNIT_TAB';
 
@@ -16,8 +17,9 @@ export type ClientCloseAttackViewAction = ClientBaseAction<typeof CLOSE_ATTACK_V
 export type ClientCloseCityViewAction = ClientBaseAction<typeof CLOSE_CITY_VIEW, void>;
 export type ClientOpenAttackViewAction = ClientBaseAction<typeof OPEN_ATTACK_VIEW, $ReadOnly<{ cityId: string, }>>;
 export type ClientOpenCityViewAction = ClientBaseAction<typeof OPEN_CITY_VIEW, $ReadOnly<{ cityId: string, }>>;
+export type ClientSelectAttackViewAttackingCityAction = ClientBaseAction<typeof SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB, $ReadOnly<{ cityId: string, }>>;
 export type ClientSelectCityViewTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_TAB, $ReadOnly<{ tab: ClientStateCityViewTab, }>>;
-export type ClientSelectCityViewUnitTabTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_UNIT_TAB, $ReadOnly<{ unitType: $Keys<CommonStateUnits>, }>>;
+export type ClientSelectCityViewUnitTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_UNIT_TAB, $ReadOnly<{ unitType: $Keys<CommonStateUnits>, }>>;
 
 
 export const closeAttackView: ClientActionCreator<ClientCloseAttackViewAction> = () => {
@@ -53,9 +55,16 @@ export const selectCityViewTab: ClientActionCreator<ClientSelectCityViewTabActio
     };
 };
 
-export const selectCityViewUnitTab: ClientActionCreator<ClientSelectCityViewUnitTabTabAction> = (payload) => {
+export const selectCityViewUnitTab: ClientActionCreator<ClientSelectCityViewUnitTabAction> = (payload) => {
     return {
         type: SELECT_CITY_VIEW_UNIT_TAB,
+        payload,
+    };
+};
+
+export const selectAttackViewAttackingCity: ClientActionCreator<ClientSelectAttackViewAttackingCityAction> = (payload) => {
+    return {
+        type: SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
         payload,
     };
 };

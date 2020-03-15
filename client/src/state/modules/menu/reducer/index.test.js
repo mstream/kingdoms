@@ -9,12 +9,13 @@ import { openAttackViewTestScenarios } from './open-attack-view-test-scenarios';
 import { openCityViewTestScenarios } from './open-city-view-test-scenarios';
 import { requestCityCreationTestScenarios } from './request-city-creation-test-scenarios';
 import { selectCityViewTabTestScenarios } from './select-city-view-tab-test-scenarios';
-import { selectCityViewUnitTabTestScenarios } from './select-city-view-unit-test-scenarios';
+import { selectCityViewUnitTabTestScenarios } from './select-city-view-unit-tab-test-scenarios';
 import { updateStateTestScenarios } from './update-state.test-scenarios';
 import { emptyClientState } from '../../types';
 import { TAB_OVERVIEW } from './types';
 import { UNIT_PEASANT } from '../../../../../../common/src/state';
 import type { ClientStateMenuReducerTestScenario } from './types';
+import { selectAttackViewAttackingCityTestScenarios } from './select-attack-view-attacking-city-test-scenarios';
 
 const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientAction>> }): void => {
     scenarios.forEach(
@@ -66,6 +67,7 @@ describe('menuReducer', () => {
             ...openAttackViewTestScenarios,
             ...openCityViewTestScenarios,
             ...requestCityCreationTestScenarios,
+            ...selectAttackViewAttackingCityTestScenarios,
             ...selectCityViewTabTestScenarios,
             ...selectCityViewUnitTabTestScenarios,
             ...updateStateTestScenarios,

@@ -7,7 +7,7 @@ import { closeCityViewMenuReducer } from './close-city-view';
 import { openCityViewMenuReducer } from './open-city-view';
 import { requestCityCreationMenuReducer } from './request-city-creation';
 import { selectCityViewTabMenuReducer } from './select-city-view-tab';
-import { selectCityViewUnitTabMenuReducer } from './select-city-view-unit';
+import { selectCityViewUnitTabMenuReducer } from './select-city-view-unit-tab';
 import { closeAttackViewMenuReducer } from './close-attack-view';
 import { openAttackViewMenuReducer } from './open-attack-view';
 import type { ClientStateMenu } from './types';
@@ -18,7 +18,7 @@ import {
     CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
     OPEN_ATTACK_VIEW,
-    OPEN_CITY_VIEW,
+    OPEN_CITY_VIEW, SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
     SELECT_CITY_VIEW_TAB,
     SELECT_CITY_VIEW_UNIT_TAB,
 } from '../actions';
@@ -26,6 +26,7 @@ import {
     REQUEST_CITY_CREATION,
     UPDATE_STATE,
 } from '../../common-state/actions';
+import { selectAttackViewAttackingCityReducer } from './select-attack-view-attacking-city';
 
 export const initialMenuState = {
     attackView: {
@@ -79,6 +80,13 @@ export const menuReducer = (
         }
         case REQUEST_CITY_CREATION: {
             return requestCityCreationMenuReducer({
+                action,
+                localState,
+                globalState,
+            });
+        }
+        case SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB: {
+            return selectAttackViewAttackingCityReducer({
                 action,
                 localState,
                 globalState,

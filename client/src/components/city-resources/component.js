@@ -39,6 +39,8 @@ export const Component = (
         const parentClassName = classNames(
             'parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 border-solid border-l border-r border-t border-gray-900 rounded-t-lg shadow-2xs',
             {
+                'cursor-pointer': !isSelected,
+                'cursor-default': isSelected,
                 'border-0': isSelected,
                 'border-b': !isSelected,
                 'bg-gray-400': !isSelected,

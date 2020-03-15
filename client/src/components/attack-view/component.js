@@ -128,11 +128,13 @@ export const Component = (
                     <div className="flex flex-col m-1">
                         <div className="flex flex-row justify-end">
                             <label>from</label>
-                            <input type="number" min="0" max="9999" maxLength="4" className={inputClassName}/>
+                            <input type="number" min="0" max="9999"
+                                   maxLength="4" className={inputClassName}/>
                         </div>
                         <div className="flex flex-row justify-end">
                             <label>to</label>
-                            <input type="number" min="0" max="9999" maxLength="4" className={inputClassName}/>
+                            <input type="number" min="0" max="9999"
+                                   maxLength="4" className={inputClassName}/>
                         </div>
                     </div>
                 </div>
@@ -181,7 +183,7 @@ export const Component = (
                 <div
                     className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
                     <button
-                        className="p-1 bg-green-500 rounded-lg">Attack
+                        className="p-1 bg-green-500 rounded-lg cursor-pointer">Attack
                     </button>
                 </div>
             </div>

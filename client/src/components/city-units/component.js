@@ -21,7 +21,6 @@ import { unitsOrder, unitVisuals } from '../../assets/images/units';
 import { ChangeInfoComponent } from '../change-info';
 import classNames from 'classnames';
 import type { Props } from './props';
-import { selectCityViewUnitsTab } from '../../state/modules/menu/actions';
 
 export const testId = 'city-units';
 
@@ -64,6 +63,8 @@ export const Component = (
         const parentClassName = classNames(
             'parchment-bg relative group flex flex-col w-8 sm:w-12 md:w-16 lg:w-20 xl:w-24 border-solid border-l border-r border-t border-gray-900 rounded-t-lg shadow-2xs',
             {
+                'cursor-pointer': !isSelected,
+                'cursor-default': isSelected,
                 'border-0': isSelected,
                 'border-b': !isSelected,
                 'bg-gray-400': !isSelected,

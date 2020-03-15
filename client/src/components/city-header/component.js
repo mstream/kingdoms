@@ -105,7 +105,7 @@ export const Component = (
 
         return (
             <button
-                className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
+                className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center cursor-pointer focus:outline-none bg-gray-400 hover:bg-gray-300"
                 onClick={onNavigateToNextCityClick}
             >
                 <i className="icofont icofont-arrow-right"/>
@@ -120,7 +120,7 @@ export const Component = (
 
         return (
             <button
-                className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none bg-gray-400 hover:bg-gray-300"
+                className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none cursor-pointer bg-gray-400 hover:bg-gray-300"
                 onClick={onNavigateToPreviousCityClick}
             >
                 <i className="icofont icofont-arrow-left"/>

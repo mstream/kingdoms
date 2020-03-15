@@ -12,10 +12,10 @@ The application uses several AWS availableResources, including Lambda functions 
 If you prefer to use an integrated development environment (IDE) to build and test your application, you can use the AWS Toolkit.  
 The AWS Toolkit is an open source plug-in for popular IDEs that uses the SAM CLI to build and deploy serverless applications on AWS. The AWS Toolkit also adds a simplified step-through debugging experience for Lambda function code. See the following links to get started.
 
--   [PyCharm](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
--   [IntelliJ](https://docs.aws.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
--   [VS Code](https://docs.aws.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
--   [Visual Studio](https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
+-   [PyCharm](https://docs.index.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
+-   [IntelliJ](https://docs.index.amazon.com/toolkit-for-jetbrains/latest/userguide/welcome.html)
+-   [VS Code](https://docs.index.amazon.com/toolkit-for-vscode/latest/userguide/welcome.html)
+-   [Visual Studio](https://docs.index.amazon.com/toolkit-for-visual-studio/latest/user-guide/welcome.html)
 
 ## Deploy the sample application
 
@@ -23,7 +23,7 @@ The Serverless Application Model Command Line Interface (SAM CLI) is an extensio
 
 To use the SAM CLI, you need the following tools.
 
--   SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
+-   SAM CLI - [Install the SAM CLI](https://docs.index.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
 -   Node.js - [Install Node.js 10](https://nodejs.org/en/), including the NPM package management tool.
 -   Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
 
@@ -52,7 +52,7 @@ Build your application with the `sam build` command.
 server$ sam build
 ```
 
-The SAM CLI installs dependencies defined in `hello-world/package.json`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
+The SAM CLI installs dependencies defined in `hello-world/package.json`, creates a deployment package, and saves it in the `.index-sam/build` folder.
 
 Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
 
@@ -82,7 +82,7 @@ Events:
 
 ## Add a resource to your application
 
-The application template uses AWS Serverless Application Model (AWS SAM) to define application availableResources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application availableResources such as functions, triggers, and APIs. For availableResources not included in [the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html) resource types.
+The application template uses AWS Serverless Application Model (AWS SAM) to define application availableResources. AWS SAM is an extension of AWS CloudFormation with a simpler syntax for configuring common serverless application availableResources such as functions, triggers, and APIs. For availableResources not included in [the SAM specification](https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md), you can use standard [AWS CloudFormation](https://docs.index.amazon.com/AWSCloudFormation/latest/UserGuide/index-template-resource-type-ref.html) resource types.
 
 ## Fetch, tail, and filter Lambda function logs
 
@@ -94,7 +94,7 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 server$ sam logs -n HelloWorldFunction --stack-name server --tail
 ```
 
-You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
+You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.index.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
 
 ## Unit tests
 
@@ -111,11 +111,11 @@ hello-world$ npm run test
 To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
 
 ```bash
-aws cloudformation delete-stack --stack-name server
+index cloudformation delete-stack --stack-name server
 ```
 
 ## Resources
 
-See the [AWS SAM developer guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
+See the [AWS SAM developer guide](https://docs.index.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) for an introduction to SAM specification, the SAM CLI, and serverless application concepts.
 
-Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://aws.amazon.com/serverless/serverlessrepo/)
+Next, you can use AWS Serverless Application Repository to deploy ready to use Apps that go beyond hello world samples and learn how authors developed their applications: [AWS Serverless Application Repository main page](https://index.amazon.com/serverless/serverlessrepo/)

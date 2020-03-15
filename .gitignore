@@ -6,7 +6,7 @@
 coverage
 dist/
 node_modules/
-.aws-sam
+.index-sam
 .idea
 .vscode
 .DS_Store

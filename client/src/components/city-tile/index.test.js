@@ -6,7 +6,6 @@ import configureStore from 'redux-mock-store';
 import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { CityTileComponent } from './index';
-import { cityStatusBarComponentTestId } from '../city-status-bar';
 import { emptyCityState } from '../../../../common/src/state';
 import { emptyClientStateCityTile } from '../../state/modules/tiles/reducer/types';
 import { emptyClientState } from '../../state/modules/types';
@@ -50,7 +49,9 @@ describe('CityTileComponent', () => {
 
         const cityLabel = queryByText('Cityone');
 
-        expect(cityLabel).toBeTruthy();
+        if (cityLabel == null) {
+            throw Error('city label not found');
+        }
 
         fireEvent.click(cityLabel);
 
@@ -93,7 +94,9 @@ describe('CityTileComponent', () => {
 
         const cityLabel = queryByText('Cityone');
 
-        expect(cityLabel).toBeTruthy();
+        if (cityLabel == null) {
+            throw Error('city label not found');
+        }
 
         fireEvent.click(cityLabel);
 

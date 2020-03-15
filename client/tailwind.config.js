@@ -3,7 +3,13 @@ module.exports = {
         cursor: false,
     },
     theme: {
-        alphaColors: ['gray.100', 'gray.500', 'red.500', 'green.500'],
+        alphaColors: [
+            'gray.100',
+            'gray.500',
+            'gray.900',
+            'red.500',
+            'green.500',
+        ],
         extend: {
             gridRow: {
                 'span-11': 'span 11 / span 11',
@@ -14,7 +20,7 @@ module.exports = {
         },
         filter: {
             grayscale: 'grayscale(1)',
-            invert: 'invert(1)'
+            invert: 'invert(1)',
         },
         fontFamily: {
             gothic: ['NanumGothicCoding'],

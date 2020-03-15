@@ -3,7 +3,7 @@ version = 0.1
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "kingdoms"
-s3_bucket = "index-sam-cli-managed-default-samclisourcebucket-111qxavpo4kn6"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-111qxavpo4kn6"
 s3_prefix = "kingdoms"
 region = "eu-west-1"
 confirm_changeset = false

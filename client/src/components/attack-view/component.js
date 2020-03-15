@@ -60,7 +60,7 @@ export const Component = (
                 const isSelected = cityId === attackingCityId;
 
                 const className = classNames(
-                    'flex flex-col leading-tight cursor-pointer',
+                    'flex flex-col m-1 leading-tight cursor-pointer',
                     {
                         'bg-green-500': isSelected,
                     },
@@ -82,9 +82,12 @@ export const Component = (
         );
 
         return (
-            <div className="flex flex-row justify-around w-full">
-                <div
-                    className="flex flex-col justify-start text-2xl text-gray-100">
+            <div
+                className="flex flex-col justify-start text-xl text-gray-100">
+                <div className="mb-1">
+                    From city:
+                </div>
+                <div className="shadow-inner bg-gray-900-alpha-50">
                     {cityRows}
                 </div>
             </div>
@@ -152,16 +155,22 @@ export const Component = (
             />
             <div
                 className="bricks-bg absolute w-9/12 min-h-3/4 rounded-sm shadow-lg flex flex-col items-center justify-between bg-gray-800">
-                <div
-                    className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
+                <div className="w-full">
                     <div
-                        className="font-bold text-2xl text-center text-gray-100">
-                        {attackedCity.name}
+                        className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
+                        <div
+                            className="font-bold text-2xl text-center text-gray-100">
+                            {attackedCity.name}
+                        </div>
                     </div>
-                </div>
-                <div className="flex flex-row justify-left w-full">
-                    {createCityListComponent()}
-                    {createRegimentTemplateComponent()}
+                    <div className="flex flex-row justify-around w-full">
+                        <div className="w-1/3">
+                            {createCityListComponent()}
+                        </div>
+                        <div className="w-1/3">
+                            {createRegimentTemplateComponent()}
+                        </div>
+                    </div>
                 </div>
                 <div
                     className="flex flex-row justify-center p-1 mb-2 rounded-lg bg-green-500 text-gray-100">

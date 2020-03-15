@@ -13,7 +13,7 @@ import {
 } from '../../state/selectors';
 import { TAB_UNITS } from '../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../state/modules/root';
-import { selectCityViewUnitTab } from '../../state/modules/menu/actions';
+import { selectCityViewUnitsTab } from '../../state/modules/menu/actions';
 
 type OwnProps = {};
 
@@ -42,7 +42,7 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    selectCityViewUnitTab,
+     selectCityViewUnitsTab,
 });
 
 export const connectProps = connect<Props,

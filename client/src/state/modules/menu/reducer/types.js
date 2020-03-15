@@ -2,16 +2,23 @@
 
 import type { ClientAction } from '../../../actions';
 import type {
-    CommonStateUnits,
+    BuildingType,
     RegimentTemplate,
+    ResourceType,
+    UnitType,
 } from '../../../../../../common/src/state';
-import { UNIT_PEASANT } from '../../../../../../common/src/state';
+import {
+    BUILDING_WAREHOUSE,
+    RESOURCE_FOOD,
+    UNIT_PEASANT,
+} from '../../../../../../common/src/state';
 import type { ClientStateReducerTestScenario } from '../../types';
 
 export const TAB_OVERVIEW: 'TAB_OVERVIEW' = 'TAB_OVERVIEW';
 export const TAB_UNITS: 'TAB_UNITS' = 'TAB_UNITS';
 export const TAB_RESOURCES: 'TAB_RESOURCES' = 'TAB_RESOURCES';
 export const TAB_BUILDINGS: 'TAB_BUILDINGS' = 'TAB_BUILDINGS';
+
 export type ClientStateCityViewTab =
     | typeof TAB_BUILDINGS
     | typeof TAB_OVERVIEW
@@ -27,9 +34,11 @@ export type ClientStateAttackView = $ReadOnly<{
 }>;
 
 export type ClientStateCityView = $ReadOnly<{
+    building: BuildingType,
     currentCityId: ?string,
+    resource: ResourceType,
     tab: ClientStateCityViewTab,
-    unit: $Keys<CommonStateUnits>,
+    unit: UnitType,
 }>;
 
 export type ClientStateNewCity = $ReadOnly<{
@@ -49,7 +58,9 @@ export const emptyMenuState: ClientStateMenu = {
         regimentTemplate: {},
     },
     cityView: {
+        building: BUILDING_WAREHOUSE,
         currentCityId: null,
+        resource: RESOURCE_FOOD,
         tab: TAB_OVERVIEW,
         unit: UNIT_PEASANT,
     },

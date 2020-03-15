@@ -4,7 +4,7 @@ import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../root';
 import type {
     ClientSelectAttackViewAttackingCityAction,
-    ClientSelectCityViewUnitTabAction,
+    ClientSelectCityViewUnitsTabAction,
 } from '../actions';
 
 export const selectAttackViewAttackingCityReducer = (

@@ -83,7 +83,7 @@ export const Component = (
 
         return (
             <div
-                className="flex flex-col justify-start text-xl text-gray-100">
+                className="flex flex-col justify-start text-xl">
                 <div className="mb-1">
                     From city:
                 </div>
@@ -116,18 +116,24 @@ export const Component = (
             return (
                 <div key={unitType} className="flex flex-row flex-1 p-1">
                     <div className="h-10 w-10 m-1">
-                        <p className="text-sm text-center font-medium text-gray-100">
+                        <p className="text-sm text-center font-medium">
                             {numberToQuantityString({ value: unitQuantity })}
                         </p>
                         <ImageComponent
                             image={unitVisual.image}
                             ratio="100%"
                         />
-                        <p className="text-xs text-center text-gray-100">{unitVisual.name}</p>
+                        <p className="text-xs text-center">{unitVisual.name}</p>
                     </div>
                     <div className="flex flex-col m-1">
-                        <input type="number" className={inputClassName}/>
-                        <input type="number" className={inputClassName}/>
+                        <div className="flex flex-row justify-end">
+                            <label>from</label>
+                            <input type="number" min="0" max="9999" maxLength="4" className={inputClassName}/>
+                        </div>
+                        <div className="flex flex-row justify-end">
+                            <label>to</label>
+                            <input type="number" min="0" max="9999" maxLength="4" className={inputClassName}/>
+                        </div>
                     </div>
                 </div>
             );
@@ -135,7 +141,7 @@ export const Component = (
 
         return (
             <div
-                className="flex flex-col items-center justify-start">
+                className="flex flex-col items-center justify-start shadow-inner">
                 {unitRows}
             </div>
         );
@@ -148,7 +154,7 @@ export const Component = (
 
     return (
         <div data-testid={testId}
-             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t">
+             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t text-gray-100">
             <div
                 onClick={onBackgroundClick}
                 className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"
@@ -159,7 +165,7 @@ export const Component = (
                     <div
                         className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
                         <div
-                            className="font-bold text-2xl text-center text-gray-100">
+                            className="font-bold text-2xl text-center">
                             {attackedCity.name}
                         </div>
                     </div>
@@ -173,8 +179,10 @@ export const Component = (
                     </div>
                 </div>
                 <div
-                    className="flex flex-row justify-center p-1 mb-2 rounded-lg bg-green-500 text-gray-100">
-                    <button>Attack</button>
+                    className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
+                    <button
+                        className="p-1 bg-green-500 rounded-lg">Attack
+                    </button>
                 </div>
             </div>
         </div>

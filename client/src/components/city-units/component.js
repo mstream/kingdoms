@@ -21,6 +21,7 @@ import { unitsOrder, unitVisuals } from '../../assets/images/units';
 import { ChangeInfoComponent } from '../change-info';
 import classNames from 'classnames';
 import type { Props } from './props';
+import { selectCityViewUnitsTab } from '../../state/modules/menu/actions';
 
 export const testId = 'city-units';
 
@@ -41,7 +42,7 @@ export const Component = (
         city,
         isVisible,
         rules,
-        selectCityViewUnitTab,
+        selectCityViewUnitsTab,
         unitStats,
     }: Props,
 ) => {
@@ -55,7 +56,7 @@ export const Component = (
         const unitVisual = unitVisuals[unitType];
 
         const onClick = (event) => {
-            selectCityViewUnitTab({ unitType });
+            selectCityViewUnitsTab({ unitType });
         };
 
         const isSelected = unitType === activeUnit;

@@ -8,13 +8,13 @@ import type {
 } from './types';
 import { emptyClientState } from '../../types';
 import type { ClientStateReducerTestScenario } from '../../types';
-import type { ClientSelectCityViewUnitTabAction } from '../actions';
-import { selectCityViewUnitTab } from '../actions';
+import type { ClientSelectCityViewUnitsTabAction } from '../actions';
+import { selectCityViewUnitsTab } from '../actions';
 
-export const selectCityViewUnitTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitTabAction>> = [
+export const selectCityViewUnitsTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitsTabAction>> = [
     {
         name: 'select city view unit',
-        action: selectCityViewUnitTab({ unitType: UNIT_SWORDSMAN }),
+        action: selectCityViewUnitsTab({ unitType: UNIT_SWORDSMAN }),
         previousGlobalState: {
             ...emptyClientState,
             menu: {

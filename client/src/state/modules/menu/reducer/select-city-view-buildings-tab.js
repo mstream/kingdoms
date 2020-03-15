@@ -2,9 +2,12 @@
 
 import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../root';
-import type { ClientSelectCityViewUnitsTabAction } from '../actions';
+import type {
+    ClientSelectCityViewBuildingsTabAction,
+    ClientSelectCityViewResourceTabAction,
+} from '../actions';
 
-export const selectCityViewUnitTabMenuReducer = (
+export const selectCityViewBuildingsTabMenuReducer = (
     {
         localState,
         action,
@@ -12,7 +15,7 @@ export const selectCityViewUnitTabMenuReducer = (
     }:
         {
             localState: ClientStateMenu,
-            action: ClientSelectCityViewUnitsTabAction,
+            action: ClientSelectCityViewBuildingsTabAction,
             globalState: ClientState,
         },
 ): ClientStateMenu => {
@@ -20,7 +23,7 @@ export const selectCityViewUnitTabMenuReducer = (
         ...localState,
         cityView: {
             ...localState.cityView,
-            unit: action.payload.unitType,
+            building: action.payload.buildingType,
         },
     };
 };

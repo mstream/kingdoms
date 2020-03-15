@@ -10,9 +10,12 @@ import type {
     ClientCloseAttackViewAction,
     ClientCloseCityViewAction,
     ClientOpenAttackViewAction,
-    ClientOpenCityViewAction, ClientSelectAttackViewAttackingCityAction,
+    ClientOpenCityViewAction,
+    ClientSelectAttackViewAttackingCityAction,
+    ClientSelectCityViewBuildingsTabAction,
+    ClientSelectCityViewResourceTabAction,
     ClientSelectCityViewTabAction,
-    ClientSelectCityViewUnitTabAction,
+    ClientSelectCityViewUnitsTabAction,
 } from '../modules/menu/actions';
 import type {
     ClientRequestBuildingUpgradeAction,
@@ -44,7 +47,9 @@ export type ClientAction =
     | ClientRequestCityCreationAction
     | ClientRequestCityNameChangeAction
     | ClientSelectAttackViewAttackingCityAction
-    | ClientSelectCityViewUnitTabAction
+    | ClientSelectCityViewBuildingsTabAction
+    | ClientSelectCityViewResourceTabAction
+    | ClientSelectCityViewUnitsTabAction
     | ClientSelectCityViewTabAction
     | ClientUpdateStateAction
     | ClientZoomCameraAction

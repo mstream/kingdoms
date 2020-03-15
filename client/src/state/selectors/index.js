@@ -8,12 +8,14 @@ import {
     commonStateWorldSelector,
 } from '../../../../common/src/selectors/common-state';
 import type {
+    BuildingType,
     CommonStateCities,
     CommonStateCity,
     CommonStateRules,
-    CommonStateUnits,
     CommonStateUnitStats,
     CommonStateWorld,
+    ResourceType,
+    UnitType,
 } from '../../../../common/src/state';
 import type {
     ClientStateCityViewTab,
@@ -166,7 +168,21 @@ export const activeCityTabSelector = createSelector<ClientState, void, ClientSta
     },
 );
 
-export const activeUnitSelector = createSelector<ClientState, void, $Keys<CommonStateUnits>, ClientStateMenu>(
+export const activeBuildingSelector = createSelector<ClientState, void, BuildingType, ClientStateMenu>(
+    menuSelector,
+    (menu) => {
+        return menu.cityView.building;
+    },
+);
+
+export const activeResourceSelector = createSelector<ClientState, void, ResourceType, ClientStateMenu>(
+    menuSelector,
+    (menu) => {
+        return menu.cityView.resource;
+    },
+);
+
+export const activeUnitSelector = createSelector<ClientState, void, UnitType, ClientStateMenu>(
     menuSelector,
     (menu) => {
         return menu.cityView.unit;

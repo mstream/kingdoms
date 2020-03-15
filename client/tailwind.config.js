@@ -7,6 +7,7 @@ module.exports = {
             'gray.100',
             'gray.500',
             'gray.900',
+            'orange.500',
             'red.500',
             'green.500',
         ],

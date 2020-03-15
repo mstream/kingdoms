@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
 import {
+    activeBuildingSelector,
     activeCityTabSelector,
     currentlyViewedCitySelector,
     rulesSelector,
@@ -13,6 +14,7 @@ import { TAB_BUILDINGS } from '../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../state/modules/root';
 import { currentlyViewedCityIdSelector } from '../../state/modules/menu/selectors';
 import { requestBuildingUpgrade } from '../../state/modules/common-state/actions';
+import { selectCityViewBuildingsTab } from '../../state/modules/menu/actions';
 
 type OwnProps = {};
 
@@ -32,6 +34,7 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
+        activeBuilding: activeBuildingSelector(state),
         city: currentlyViewedCitySelector(state),
         cityId: currentlyViewedCityIdSelector(state),
         isVisible: activeCityTabSelector(state) === TAB_BUILDINGS,
@@ -41,6 +44,7 @@ const mapStateToProps = (state: ClientState) => {
 
 const actionCreators: DispatchProps = Object.freeze({
     requestBuildingUpgrade,
+    selectCityViewBuildingsTab,
 });
 
 export const connectProps = connect<Props,

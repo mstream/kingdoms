@@ -38,10 +38,12 @@ export const Component = (
                 className="bricks-bg absolute w-9/12 min-h-3/4 rounded-sm shadow-lg flex flex-col items-center justify-start text-2xl bg-gray-800">
                 <CityHeaderComponent/>
                 <CityViewTabsComponent/>
-                <CityOverviewComponent/>
-                <CityUnitsComponent/>
-                <CityResourcesComponent/>
-                <CityBuildingsComponent/>
+                <div className="m-auto">
+                    <CityOverviewComponent/>
+                    <CityUnitsComponent/>
+                    <CityResourcesComponent/>
+                    <CityBuildingsComponent/>
+                </div>
             </div>
         </div>
     );

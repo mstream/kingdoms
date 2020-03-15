@@ -12,21 +12,31 @@ import { closeAttackViewMenuReducer } from './close-attack-view';
 import { openAttackViewMenuReducer } from './open-attack-view';
 import type { ClientStateMenu } from './types';
 import { TAB_OVERVIEW } from './types';
-import { UNIT_PEASANT } from '../../../../../../common/src/state';
+import {
+    BUILDING_WAREHOUSE,
+    RESOURCE_FOOD,
+    UNIT_PEASANT,
+} from '../../../../../../common/src/state';
 import type { ClientState } from '../../root';
 import {
     CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
     OPEN_ATTACK_VIEW,
-    OPEN_CITY_VIEW, SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
+    OPEN_CITY_VIEW,
+    SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
+    SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNIT_TAB,
+    SELECT_CITY_VIEW_UNITS_TAB,
+    selectCityViewResourcesTab,
 } from '../actions';
 import {
     REQUEST_CITY_CREATION,
     UPDATE_STATE,
 } from '../../common-state/actions';
 import { selectAttackViewAttackingCityReducer } from './select-attack-view-attacking-city';
+import { selectCityViewResourcesTabMenuReducer } from './select-city-view-resources-tab';
+import { selectCityViewBuildingsTabMenuReducer } from './select-city-view-buildings-tab';
 
 export const initialMenuState = {
     attackView: {
@@ -35,7 +45,9 @@ export const initialMenuState = {
         regimentTemplate: {},
     },
     cityView: {
+        building: BUILDING_WAREHOUSE,
         currentCityId: null,
+        resource: RESOURCE_FOOD,
         tab: TAB_OVERVIEW,
         unit: UNIT_PEASANT,
     },
@@ -99,7 +111,21 @@ export const menuReducer = (
                 globalState,
             });
         }
-        case SELECT_CITY_VIEW_UNIT_TAB: {
+        case SELECT_CITY_VIEW_BUILDINGS_TAB: {
+            return selectCityViewBuildingsTabMenuReducer({
+                action,
+                localState,
+                globalState,
+            });
+        }
+        case SELECT_CITY_VIEW_RESOURCES_TAB: {
+            return selectCityViewResourcesTabMenuReducer({
+                action,
+                localState,
+                globalState,
+            });
+        }
+        case SELECT_CITY_VIEW_UNITS_TAB: {
             return selectCityViewUnitTabMenuReducer({
                 action,
                 localState,

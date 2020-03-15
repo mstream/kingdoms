@@ -45,7 +45,7 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
             const className = classNames(
                 'py-1 px-2',
                 {
-                    'hover:bg-orange-600': tab !== activeTab,
+                    'hover:bg-orange-500-alpha-50': tab !== activeTab,
                     'bg-orange-500': tab === activeTab,
                     'cursor-pointer': tab !== activeTab,
                     'cursor-default': tab === activeTab,
@@ -76,7 +76,7 @@ export const Component = ({ activeTab, selectCityViewTab }: Props) => {
     return (
         <div
             data-testid={testId}
-            className="flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100"
+            className="wood-bg flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100"
             role="tablist"
         >
             {tabComponents}

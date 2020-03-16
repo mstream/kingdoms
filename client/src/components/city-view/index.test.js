@@ -6,10 +6,10 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityViewComponent } from '.';
-import { cityUnitsComponentTestId } from '../city-units';
-import { cityResourcesComponentTestId } from '../city-resources';
-import { cityBuildingsComponentTestId } from '../city-buildings';
-import { cityOverviewComponentTestId } from '../city-overview';
+import { cityUnitsComponentTestId } from './units';
+import { cityResourcesComponentTestId } from './resources';
+import { cityBuildingsComponentTestId } from './buildings';
+import { cityOverviewComponentTestId } from './overview';
 import {
     emptyCityState,
     emptyCommonState, emptyUnitStatsState, UNIT_PEASANT,

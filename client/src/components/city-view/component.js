@@ -2,12 +2,12 @@
 
 import React from 'react';
 import type { Props } from './props';
-import { CityHeaderComponent } from '../city-header';
-import { CityViewTabsComponent } from '../city-view-tabs';
-import { CityUnitsComponent } from '../city-units';
-import { CityResourcesComponent } from '../city-resources';
-import { CityBuildingsComponent } from '../city-buildings';
-import { CityOverviewComponent } from '../city-overview';
+import { CityHeaderComponent } from './header';
+import { CityViewTabsComponent } from './view-tabs';
+import { CityUnitsComponent } from './units';
+import { CityResourcesComponent } from './resources';
+import { CityBuildingsComponent } from './buildings';
+import { CityOverviewComponent } from './overview';
 
 export const testId = 'city-view';
 

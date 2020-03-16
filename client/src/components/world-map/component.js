@@ -10,8 +10,8 @@ import {
 } from '../../../../common/src/vector';
 import type { Geometry } from '../../../../common/src/geometry';
 import { checkIfIntersect } from '../../../../common/src/geometry';
-import { TerrainTileComponent } from '../terrain-tile';
-import { CityTileComponent } from '../city-tile';
+import { TerrainTileComponent } from './terrain-tile';
+import { CityTileComponent } from './city-tile';
 import type { ClientStateTile } from '../../state/modules/tiles/reducer/types';
 
 

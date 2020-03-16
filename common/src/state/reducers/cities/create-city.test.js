@@ -240,6 +240,7 @@ describe(`createCityCitiesReducer`, () => {
                         y: 0,
                     },
                     name: `Name`,
+                    orders: {},
                     ownerId: `player1`,
                     resources: {
                         [RESOURCE_FOOD]: 0,

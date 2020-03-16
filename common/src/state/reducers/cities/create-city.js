@@ -66,6 +66,7 @@ export const createCityCitiesReducer = (
         },
         location: freeCitySpot,
         name: cityName,
+        orders: {},
         ownerId: playerId,
         resources: {
             [RESOURCE_FOOD]: 0,

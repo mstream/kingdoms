@@ -28,6 +28,15 @@ export type ServerCreateCityAction = $ReadOnly<{
     },
 }>;
 
+export type ServerCreateOrderAction = $ReadOnly<{
+    type: 'CREATE_ORDER',
+    payload: {
+        originCityId: string,
+        regimentTemplate: string,
+        targetCityId: string,
+    },
+}>;
+
 export type ServerGetCurrentStateAction = $ReadOnly<{
     type: 'GET_CURRENT_STATE',
 }>;
@@ -61,12 +70,13 @@ export type ServerChangeCityNameAction = $ReadOnly<{
 
 export type ServerAction =
     | ServerAbandonCityAction
-    | ServerCreateCityAction
     | ServerChangeCityNameAction
+    | ServerCreateCityAction
+    | ServerCreateOrderAction
     | ServerDummyAction
+    | ServerExecuteTimeStepAction
     | ServerGetCurrentStateAction
     | ServerResetStateAction
-    | ServerExecuteTimeStepAction
     | ServerUpgradeBuildingAction;
 
 export const abandonCity = ({ cityId, playerId }: { cityId: string, playerId: string }): ServerAbandonCityAction => {
@@ -96,6 +106,27 @@ export const createCity = (
             cityId,
             cityName,
             playerId,
+        },
+    };
+};
+
+export const createOrder = (
+    {
+        originCityId,
+        regimentTemplate,
+        targetCityId,
+    }: {
+        originCityId: string,
+        regimentTemplate: string,
+        targetCityId: string,
+    },
+): ServerCreateOrderAction => {
+    return {
+        type: 'CREATE_ORDER',
+        payload: {
+            originCityId,
+            regimentTemplate,
+            targetCityId,
         },
     };
 };

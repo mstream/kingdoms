@@ -6,8 +6,8 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { WorldMapComponent } from './index';
-import { terrainTileComponentTestId } from '../terrain-tile';
-import { cityTileComponentTestId } from '../city-tile';
+import { terrainTileComponentTestId } from './terrain-tile';
+import { cityTileComponentTestId } from './city-tile';
 import {
     emptyCityState,
     emptyCommonState,

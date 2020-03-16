@@ -4,8 +4,8 @@ import type { ClientAction } from '../../../actions';
 import type {
     BuildingType,
     CommonStateRegimentTemplate,
-    ResourceType,
     CommonStateUnit,
+    ResourceType,
 } from '../../../../../../common/src/state';
 import {
     BUILDING_WAREHOUSE,
@@ -14,13 +14,15 @@ import {
 } from '../../../../../../common/src/state';
 import type { ClientStateReducerTestScenario } from '../../types';
 
-export const TAB_OVERVIEW: 'TAB_OVERVIEW' = 'TAB_OVERVIEW';
-export const TAB_UNITS: 'TAB_UNITS' = 'TAB_UNITS';
-export const TAB_RESOURCES: 'TAB_RESOURCES' = 'TAB_RESOURCES';
 export const TAB_BUILDINGS: 'TAB_BUILDINGS' = 'TAB_BUILDINGS';
+export const TAB_ORDERS: 'TAB_ORDERS' = 'TAB_ORDERS';
+export const TAB_OVERVIEW: 'TAB_OVERVIEW' = 'TAB_OVERVIEW';
+export const TAB_RESOURCES: 'TAB_RESOURCES' = 'TAB_RESOURCES';
+export const TAB_UNITS: 'TAB_UNITS' = 'TAB_UNITS';
 
 export type ClientStateCityViewTab =
     | typeof TAB_BUILDINGS
+    | typeof TAB_ORDERS
     | typeof TAB_OVERVIEW
     | typeof TAB_RESOURCES
     | typeof TAB_UNITS;

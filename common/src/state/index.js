@@ -109,12 +109,21 @@ export const emptyResourcesState: { [ResourceType]: number, ... } = {
 export type CommonStateResources = typeof emptyResourcesState;
 
 
+const emptyOrderState = {};
+
+export type CommonStateOrder = typeof emptyOrderState;
+
+export const emptyOrdersState: { [string]: CommonStateOrder, ... } = Object.freeze({});
+
+export type CommonStateOrders = typeof emptyOrdersState
+
 const emptyCityStateWithoutOptionals = {
     buildings: emptyBuildingsState,
-    units: emptyUnitsState,
     location: zeroVector,
     name: '',
+    orders: emptyOrdersState,
     resources: emptyResourcesState,
+    units: emptyUnitsState,
 };
 
 export const emptyCityState = {

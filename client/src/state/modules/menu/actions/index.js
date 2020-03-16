@@ -5,7 +5,7 @@ import type { ClientStateCityViewTab } from '../reducer/types';
 import type {
     BuildingType,
     ResourceType,
-    UnitType,
+    CommonStateUnit,
 } from '../../../../../../common/src/state';
 
 export const CLOSE_ATTACK_VIEW: 'CLOSE_ATTACK_VIEW' = 'CLOSE_ATTACK_VIEW';
@@ -27,7 +27,7 @@ export type ClientSelectAttackViewAttackingCityAction = ClientBaseAction<typeof 
 export type ClientSelectCityViewTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_TAB, $ReadOnly<{ tab: ClientStateCityViewTab, }>>;
 export type ClientSelectCityViewBuildingsTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_BUILDINGS_TAB, $ReadOnly<{ buildingType: BuildingType, }>>;
 export type ClientSelectCityViewResourceTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_RESOURCES_TAB, $ReadOnly<{ resourceType: ResourceType, }>>;
-export type ClientSelectCityViewUnitsTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_UNITS_TAB, $ReadOnly<{ unitType: UnitType, }>>;
+export type ClientSelectCityViewUnitsTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_UNITS_TAB, $ReadOnly<{ unitType: CommonStateUnit, }>>;
 
 
 export const closeAttackView: ClientActionCreator<ClientCloseAttackViewAction> = () => {

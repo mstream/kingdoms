@@ -48,7 +48,7 @@ export const UNIT_PEASANT: 'UNIT_PEASANT' = 'UNIT_PEASANT';
 export const UNIT_PIKEMAN: 'UNIT_PIKEMAN' = 'UNIT_PIKEMAN';
 export const UNIT_SWORDSMAN: 'UNIT_SWORDSMAN' = 'UNIT_SWORDSMAN';
 
-export type UnitType =
+export type CommonStateUnit =
     | typeof UNIT_ARCHER
     | typeof UNIT_CATAPULT
     | typeof UNIT_KNIGHT
@@ -57,6 +57,7 @@ export type UnitType =
     | typeof UNIT_PIKEMAN
     | typeof UNIT_SWORDSMAN;
 
+export const CommonStateUnitType = (reify: Type<CommonStateUnit>);
 
 export const emptyBuildingState = {
     tier: 0,
@@ -74,7 +75,7 @@ export const emptyBuildingsState: { [BuildingType]: CommonStateBuilding, ... } =
 export type CommonStateBuildings = typeof emptyBuildingsState;
 
 
-export const emptyUnitsState: { [UnitType]: number, ... } = {
+export const emptyUnitsState: { [CommonStateUnit]: number, ... } = {
     [UNIT_ARCHER]: 0,
     [UNIT_CATAPULT]: 0,
     [UNIT_KNIGHT]: 0,
@@ -87,7 +88,7 @@ export const emptyUnitsState: { [UnitType]: number, ... } = {
 export type CommonStateUnits = typeof emptyUnitsState;
 
 
-export const emptyRegimentTemplateState: { [UnitType]: Range, ... } = {
+export const emptyRegimentTemplateState: { [CommonStateUnit]: Range, ... } = {
     [UNIT_ARCHER]: emptyRange,
     [UNIT_CATAPULT]: emptyRange,
     [UNIT_KNIGHT]: emptyRange,
@@ -97,7 +98,7 @@ export const emptyRegimentTemplateState: { [UnitType]: Range, ... } = {
     [UNIT_SWORDSMAN]: emptyRange,
 };
 
-export type RegimentTemplate = typeof emptyRegimentTemplateState;
+export type CommonStateRegimentTemplate = typeof emptyRegimentTemplateState;
 
 
 export const emptyResourcesState: { [ResourceType]: number, ... } = {
@@ -170,7 +171,7 @@ export const emptyUnitStatState = {
 export type CommonStateUnitStat = { ...typeof emptyUnitStatState, armor: ArmorType, };
 
 
-export const emptyUnitStatsState: { [UnitType]: CommonStateUnitStat, ... } = {
+export const emptyUnitStatsState: { [CommonStateUnit]: CommonStateUnitStat, ... } = {
     [UNIT_ARCHER]: emptyUnitStatState,
     [UNIT_CATAPULT]: emptyUnitStatState,
     [UNIT_KNIGHT]: emptyUnitStatState,

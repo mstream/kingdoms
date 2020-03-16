@@ -3,9 +3,9 @@
 import type { ClientAction } from '../../../actions';
 import type {
     BuildingType,
-    RegimentTemplate,
+    CommonStateRegimentTemplate,
     ResourceType,
-    UnitType,
+    CommonStateUnit,
 } from '../../../../../../common/src/state';
 import {
     BUILDING_WAREHOUSE,
@@ -30,7 +30,7 @@ export type ClientStateMenuReducerTestScenario<A: ClientAction> = ClientStateRed
 export type ClientStateAttackView = $ReadOnly<{
     attackedCityId: ?string,
     attackingCityId: ?string,
-    regimentTemplate: RegimentTemplate,
+    regimentTemplate: CommonStateRegimentTemplate,
 }>;
 
 export type ClientStateCityView = $ReadOnly<{
@@ -38,7 +38,7 @@ export type ClientStateCityView = $ReadOnly<{
     currentCityId: ?string,
     resource: ResourceType,
     tab: ClientStateCityViewTab,
-    unit: UnitType,
+    unit: CommonStateUnit,
 }>;
 
 export type ClientStateNewCity = $ReadOnly<{

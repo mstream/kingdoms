@@ -11,7 +11,7 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN, UNIT_SWORDSMAN,
 } from '../../../../../common/src/state';
-import type { BuildingType, UnitType } from '../../../../../common/src/state';
+import type { BuildingType, CommonStateUnit } from '../../../../../common/src/state';
 
 export const buildingVisuals = {
     [BUILDING_LUMBER_MILL]: {

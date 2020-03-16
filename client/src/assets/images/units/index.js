@@ -7,7 +7,7 @@ import noble from './noble.png';
 import peasant from './peasant.png';
 import pikeman from './pikeman.png';
 import swordsman from './swordsman.png';
-import type { UnitType } from '../../../../../common/src/state';
+import type { CommonStateUnit } from '../../../../../common/src/state';
 import {
     UNIT_ARCHER,
     UNIT_CATAPULT,
@@ -51,12 +51,12 @@ export const unitVisuals = {
     },
     [UNIT_SWORDSMAN]: {
         description: 'TODO',
-        name: 'Swordmen',
+        name: 'Swordsmen',
         image: swordsman,
     },
 };
 
-export const unitsOrder: $ReadOnlyArray<UnitType> = [
+export const unitsOrder: $ReadOnlyArray<CommonStateUnit> = [
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_ARCHER,

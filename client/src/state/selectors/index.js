@@ -15,7 +15,7 @@ import type {
     CommonStateUnitStats,
     CommonStateWorld,
     ResourceType,
-    UnitType,
+    CommonStateUnit,
 } from '../../../../common/src/state';
 import type {
     ClientStateCityViewTab,
@@ -27,6 +27,7 @@ import type { ClientStateCommonState } from '../modules/common-state/reducer/typ
 import { playerNameSelector } from '../modules/player/selectors';
 import {
     attackedCityIdSelector,
+    attackingCityIdSelector,
     currentlyViewedCityIdSelector,
     menuSelector,
 } from '../modules/menu/selectors';
@@ -115,6 +116,18 @@ export const cityDistancesSelector = createSelector<ClientState, void, { [string
     },
 );
 
+export const distancesToAttackedCitySelector = createSelector<ClientState, void, { [string]: number, ... }, ?string, { [string]: { [string]: number, ... }, ... }>(
+    attackedCityIdSelector,
+    cityDistancesSelector,
+    (attackedCityId, cityDistances) => {
+        if (attackedCityId == null) {
+            return {};
+        }
+
+        return cityDistances[attackedCityId];
+    },
+);
+
 export const currentlyViewedCitySelector = createSelector<ClientState, void, ?CommonStateCity, CommonStateCities, ?string>(
     citiesSelector,
     currentlyViewedCityIdSelector,
@@ -182,7 +195,7 @@ export const activeResourceSelector = createSelector<ClientState, void, Resource
     },
 );
 
-export const activeUnitSelector = createSelector<ClientState, void, UnitType, ClientStateMenu>(
+export const activeUnitSelector = createSelector<ClientState, void, CommonStateUnit, ClientStateMenu>(
     menuSelector,
     (menu) => {
         return menu.cityView.unit;
@@ -245,5 +258,16 @@ export const previousCityIdSelector = createSelector<ClientState, void, ?string,
         const sortedCityIds = [...citiesOwnedByPlayer].sort();
         const currentlyViewedCityIndex = sortedCityIds.indexOf(currentlyViewedCity);
         return currentlyViewedCityIndex === citiesOwnedByPlayer.length - 1 ? sortedCityIds[0] : sortedCityIds[currentlyViewedCityIndex + 1];
+    },
+);
+
+export const attackingCitySelector = createSelector<ClientState, void, ?CommonStateCity, ?string, CommonStateCities>(
+    attackingCityIdSelector,
+    citiesSelector,
+    (attackingCityId, cities) => {
+        if (attackingCityId == null) {
+            return null;
+        }
+        return cities[attackingCityId];
     },
 );

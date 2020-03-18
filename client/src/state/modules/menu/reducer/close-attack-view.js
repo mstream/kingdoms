@@ -1,9 +1,8 @@
 // @flow
 
 import type { ClientStateMenu } from './types';
-import { initialClientState } from '../../root';
-import type { ClientState } from '../../root';
 import type { ClientCloseAttackViewAction } from '../actions';
+import type { ClientState } from '../../types';
 
 export const closeAttackViewMenuReducer = (
     {

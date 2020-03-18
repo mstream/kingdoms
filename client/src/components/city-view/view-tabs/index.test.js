@@ -8,7 +8,7 @@ import configureStore from 'redux-mock-store';
 import { CityViewTabsComponent } from './index';
 import { TAB_OVERVIEW } from '../../../state/modules/menu/reducer/types';
 import { emptyClientState } from '../../../state/modules/types';
-import type { ClientState } from '../../../state/modules/root';
+import type { ClientState } from '../../../state/modules/types';
 
 const mockStore = configureStore([]);
 

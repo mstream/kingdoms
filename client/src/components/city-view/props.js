@@ -7,9 +7,9 @@ import type { ClientAction } from '../../state/actions';
 import {
     currentlyViewedCitySelector,
 } from '../../state/selectors';
-import type { ClientState } from '../../state/modules/root';
 import { currentlyViewedCityIdSelector } from '../../state/modules/menu/selectors';
 import { closeCityView } from '../../state/modules/menu/actions';
+import type { ClientState } from '../../state/modules/types';
 
 type OwnProps = {};
 

@@ -10,8 +10,8 @@ import {
     distancesToAttackedCitySelector,
 } from '../../../state/selectors';
 import type { ActionCreatorsProps, StateToProps } from '../../types';
-import type { ClientState } from '../../../state/modules/root';
 import type { ClientAction } from '../../../state/actions';
+import type { ClientState } from '../../../state/modules/types';
 
 type OwnProps = {};
 

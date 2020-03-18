@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../../state/actions';
 import { activeCityTabSelector } from '../../../state/selectors';
-import type { ClientState } from '../../../state/modules/root';
 import { selectCityViewTab } from '../../../state/modules/menu/actions';
+import type { ClientState } from '../../../state/modules/types';
 
 type OwnProps = {};
 

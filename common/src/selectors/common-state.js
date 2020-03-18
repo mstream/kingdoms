@@ -1,18 +1,20 @@
 // @flow
 
 import { createSelector } from 'reselect';
-import type {
-    CommonState,
-    CommonStateCities,
-    CommonStateCity,
-    CommonStateRules,
-    CommonStateTime,
-    CommonStateUnitStats,
-    CommonStateWorld,
-} from '../state';
 
 import type { Vector } from '../vector';
 import { addVectors, getDistanceBetweenVectors, zeroVector } from '../vector';
+import type {
+    CommonStateCities,
+    CommonStateCity,
+} from '../state/modules/cities/reducer/types';
+import type {
+    CommonStateRules,
+    CommonStateUnitStats,
+} from '../state/modules/rules/reducer/types';
+import type { CommonStateTime } from '../state/modules/time/reducer/types';
+import type { CommonStateWorld } from '../state/modules/world/reducer/types';
+import type { CommonState} from '../state/modules/types';
 
 export const commonStateCitiesSelector = (state: CommonState): CommonStateCities => {
     return state.cities;

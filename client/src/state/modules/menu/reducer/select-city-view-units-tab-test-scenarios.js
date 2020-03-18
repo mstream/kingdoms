@@ -1,7 +1,6 @@
 // @flow
 
 
-import { UNIT_CATAPULT, UNIT_SWORDSMAN } from '../../../../../../common/src/state';
 import type {
     ClientStateMenu,
     ClientStateMenuReducerTestScenario,
@@ -10,6 +9,10 @@ import { emptyClientState } from '../../types';
 import type { ClientStateReducerTestScenario } from '../../types';
 import type { ClientSelectCityViewUnitsTabAction } from '../actions';
 import { selectCityViewUnitsTab } from '../actions';
+import {
+    UNIT_CATAPULT,
+    UNIT_SWORDSMAN,
+} from '../../../../../../common/src/state/modules/rules/reducer/types';
 
 export const selectCityViewUnitsTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitsTabAction>> = [
     {

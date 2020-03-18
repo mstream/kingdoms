@@ -1,8 +1,8 @@
 // @flow
 
 import type { ClientAction } from '../../../actions';
-import type { CommonState } from '../../../../../../common/src/state';
 import type { ClientStateReducerTestScenario } from '../../types';
+import type { CommonState } from '../../../../../../common/src/state/modules/types';
 
 export type ClientStateCommonState = ?CommonState
 

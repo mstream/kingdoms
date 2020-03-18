@@ -7,18 +7,16 @@ import {
     currentlyViewedCitySelector,
     isGameStartingSelector,
 } from './index';
-import type {
-    CommonStateCities,
-    CommonStateCity,
-} from '../../../../common/src/state';
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../common/src/state';
 import type { ClientStateCityViewTab } from '../modules/menu/reducer/types';
 import { TAB_UNITS } from '../modules/menu/reducer/types';
 import { emptyClientState } from '../modules/types';
-import type { ClientState } from '../modules/root';
+import type {
+    CommonStateCities,
+    CommonStateCity,
+} from '../../../../common/src/state/modules/cities/reducer/types';
+import type { ClientState } from '../modules/types';
+import { emptyCommonState } from '../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

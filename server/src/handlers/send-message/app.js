@@ -3,14 +3,14 @@
 import {createRedisClient} from '../../clients/redis';
 import {createApiGatewayClient} from '../../clients/api-gateway';
 import {executeAction, sendResponse} from '../../util';
-import type {
-    ServerRequest,
-    ServerResponse
-} from '../../../../common/src/actions';
-import {ServerRequestType} from '../../../../common/src/actions';
 import {parseJson} from '../../../../common/src/util';
 import type {ProxyHandler} from '../types';
 import {getState} from '../../connectors/database';
+import type {
+    ServerRequest,
+    ServerResponse,
+} from '../../../../common/src/types';
+import { ServerRequestType } from '../../../../common/src/types';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient();

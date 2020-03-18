@@ -1,13 +1,16 @@
 // @flow
 
-import type {ServerAction, ServerResponse} from '../../common/src/actions';
 import verror from 'verror';
 import type {ApiGateway} from './clients/api-gateway';
 import type {Redis} from './clients/redis';
 import {getState} from './connectors/database';
 import {sendServerResponse} from './connectors/api';
-import { rootReducer } from '../../common/src/state/reducers/root';
-import type { CommonState } from '../../common/src/state';
+import { rootReducer } from '../../common/src/state/modules/root';
+import type { ServerResponse } from '../../common/src/types';
+import type {
+    CommonState,
+} from '../../common/src/state/modules/types';
+import type { CommonAction } from '../../common/src/state/actions/types';
 
 
 const optimisticLockingAttempts = 3;
@@ -49,7 +52,7 @@ const serializeState = ({state}: { state: CommonState }): string => {
     return JSON.stringify(state);
 };
 
-export const executeAction = async ({action, redis}: { action: ServerAction, redis: Redis }): Promise<ServerResponse> => {
+export const executeAction = async ({action, redis}: { action: CommonAction, redis: Redis }): Promise<ServerResponse> => {
     try {
         console.group(`executing action`);
         for (let i = 0; i < optimisticLockingAttempts; i++) {

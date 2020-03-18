@@ -2,9 +2,9 @@
 
 import React from 'react';
 import type { Props } from './props';
-import type { CommonStateCity } from '../../../../../common/src/state';
 import classNames from 'classnames';
 import { numberToQuantityString } from '../../../../../common/src/util';
+import type { CommonStateCity } from '../../../../../common/src/state/modules/cities/reducer/types';
 
 export const testId = 'attack-view-city-list';
 

@@ -1,12 +1,14 @@
 // @flow
 
-import type { CommonState, CommonStateCities } from '../state';
-import { emptyCityState, emptyCommonState } from '../state';
 import {
     commonStateCitiesSelector,
     nextCitySpotSelector,
 } from './common-state';
 import { areVectorsEqual, zeroVector } from '../vector';
+import type { CommonStateCities } from '../state/modules/cities/reducer/types';
+import type { CommonState } from '../state/modules/types';
+import { emptyCommonState } from '../state/modules/state';
+import { emptyCityState } from '../state/modules/cities/reducer/state';
 
 describe('commonStateCitiesSelector', () => {
     it('returns all the cities', () => {

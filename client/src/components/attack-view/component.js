@@ -3,15 +3,13 @@
 import React, { useState } from 'react';
 import type { Props } from './props';
 import { unitsOrder } from '../../assets/images/units';
-import type {
-    CommonStateRegimentTemplate,
-    CommonStateUnit,
-} from '../../../../common/src/state';
 import { AttackViewRegimentTemplateFormComponent } from './regiment-template-form';
 import { AttackViewCityListComponent } from './city-list';
+import type { CommonStateUnitKey } from '../../../../common/src/state/modules/rules/reducer/types';
+import type { CommonStateRegimentTemplate } from '../../../../common/src/state/modules/types';
 
 const initialRegimentTemplate: CommonStateRegimentTemplate = unitsOrder.reduce(
-    (initialQuantities, unitType: CommonStateUnit) => {
+    (initialQuantities, unitType: CommonStateUnitKey) => {
         return {
             ...initialQuantities,
             // $FlowFixMe

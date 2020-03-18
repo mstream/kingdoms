@@ -2,15 +2,13 @@
 
 
 import { addVectors, negateVector } from '../../../../../../common/src/vector';
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../../../common/src/state';
 import { tileVectorToPixelVector } from '../../../../util';
 import type { ClientStateCameraReducerTestScenario } from './types';
 import { emptyClientState } from '../../types';
 import type { ClientUpdateStateAction } from '../../common-state/actions';
 import { updateState } from '../../common-state/actions';
+import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
 
 
 export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientUpdateStateAction>> = [

@@ -56,3 +56,15 @@ export const numberToQuantityString = ({ value }: { value: number }): string => 
     );
     return `${quantity.value.toString().substring(0, 4)}${quantity.suffix != null ? quantity.suffix : ''}`;
 };
+
+export const calculateTimeDelta = (
+    {
+        fromTime,
+        toTime,
+    }: {
+        fromTime: string,
+        toTime: string,
+    },
+): number => {
+    return (Date.parse(toTime) - Date.parse(fromTime)) / 1000;
+};

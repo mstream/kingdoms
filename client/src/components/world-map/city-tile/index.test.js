@@ -6,11 +6,11 @@ import configureStore from 'redux-mock-store';
 import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { CityTileComponent } from './index';
-import { emptyCityState } from '../../../../../common/src/state';
 import { emptyClientStateCityTile } from '../../../state/modules/tiles/reducer/types';
 import { emptyClientState } from '../../../state/modules/types';
-import type { ClientState } from '../../../state/modules/root';
 import { openAttackView, openCityView } from '../../../state/modules/menu/actions';
+import type { ClientState } from '../../../state/modules/types';
+import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
 
 const mockStore = configureStore([]);
 

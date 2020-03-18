@@ -1,14 +1,12 @@
 // @flow
 
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../../../common/src/state';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import { TAB_OVERVIEW } from './types';
 import { emptyClientState } from '../../types';
 import type { ClientOpenCityViewAction } from '../actions';
 import { openCityView } from '../actions';
+import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
 
 export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientOpenCityViewAction>> = [
     {

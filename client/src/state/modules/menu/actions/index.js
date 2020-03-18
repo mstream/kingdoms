@@ -1,12 +1,12 @@
 // @flow
 
-import type { ClientActionCreator, ClientBaseAction } from '../../types';
 import type { ClientStateCityViewTab } from '../reducer/types';
+import type { ClientActionCreator } from '../../../actions/types';
 import type {
-    BuildingType,
-    ResourceType,
-    CommonStateUnit,
-} from '../../../../../../common/src/state';
+    CommonStateBuildingKey,
+    CommonStateUnitKey, CommonStateResourceKey,
+} from '../../../../../../common/src/state/modules/rules/reducer/types';
+import type { BaseAction } from '../../../../../../common/src/state/actions/types';
 
 export const CLOSE_ATTACK_VIEW: 'CLOSE_ATTACK_VIEW' = 'CLOSE_ATTACK_VIEW';
 export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = 'CLOSE_CITY_VIEW';
@@ -19,26 +19,28 @@ export const SELECT_CITY_VIEW_RESOURCES_TAB: 'SELECT_CITY_VIEW_RESOURCES_TAB' = 
 export const SELECT_CITY_VIEW_UNITS_TAB: 'SELECT_CITY_VIEW_UNITS_TAB' = 'SELECT_CITY_VIEW_UNITS_TAB';
 
 
-export type ClientCloseAttackViewAction = ClientBaseAction<typeof CLOSE_ATTACK_VIEW, void>;
-export type ClientCloseCityViewAction = ClientBaseAction<typeof CLOSE_CITY_VIEW, void>;
-export type ClientOpenAttackViewAction = ClientBaseAction<typeof OPEN_ATTACK_VIEW, $ReadOnly<{ cityId: string, }>>;
-export type ClientOpenCityViewAction = ClientBaseAction<typeof OPEN_CITY_VIEW, $ReadOnly<{ cityId: string, }>>;
-export type ClientSelectAttackViewAttackingCityAction = ClientBaseAction<typeof SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB, $ReadOnly<{ cityId: string, }>>;
-export type ClientSelectCityViewTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_TAB, $ReadOnly<{ tab: ClientStateCityViewTab, }>>;
-export type ClientSelectCityViewBuildingsTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_BUILDINGS_TAB, $ReadOnly<{ buildingType: BuildingType, }>>;
-export type ClientSelectCityViewResourceTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_RESOURCES_TAB, $ReadOnly<{ resourceType: ResourceType, }>>;
-export type ClientSelectCityViewUnitsTabAction = ClientBaseAction<typeof SELECT_CITY_VIEW_UNITS_TAB, $ReadOnly<{ unitType: CommonStateUnit, }>>;
+export type ClientCloseAttackViewAction = BaseAction<typeof CLOSE_ATTACK_VIEW, void>;
+export type ClientCloseCityViewAction = BaseAction<typeof CLOSE_CITY_VIEW, void>;
+export type ClientOpenAttackViewAction = BaseAction<typeof OPEN_ATTACK_VIEW, $ReadOnly<{ cityId: string, }>>;
+export type ClientOpenCityViewAction = BaseAction<typeof OPEN_CITY_VIEW, $ReadOnly<{ cityId: string, }>>;
+export type ClientSelectAttackViewAttackingCityAction = BaseAction<typeof SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB, $ReadOnly<{ cityId: string, }>>;
+export type ClientSelectCityViewTabAction = BaseAction<typeof SELECT_CITY_VIEW_TAB, $ReadOnly<{ tab: ClientStateCityViewTab, }>>;
+export type ClientSelectCityViewBuildingsTabAction = BaseAction<typeof SELECT_CITY_VIEW_BUILDINGS_TAB, $ReadOnly<{ buildingType: CommonStateBuildingKey, }>>;
+export type ClientSelectCityViewResourceTabAction = BaseAction<typeof SELECT_CITY_VIEW_RESOURCES_TAB, $ReadOnly<{ resourceType: CommonStateResourceKey, }>>;
+export type ClientSelectCityViewUnitsTabAction = BaseAction<typeof SELECT_CITY_VIEW_UNITS_TAB, $ReadOnly<{ unitType: CommonStateUnitKey, }>>;
 
 
 export const closeAttackView: ClientActionCreator<ClientCloseAttackViewAction> = () => {
     return {
-        type: CLOSE_ATTACK_VIEW, payload: undefined,
+        type: CLOSE_ATTACK_VIEW,
+        payload: undefined,
     };
 };
 
 export const closeCityView: ClientActionCreator<ClientCloseCityViewAction> = () => {
     return {
-        type: CLOSE_CITY_VIEW, payload: undefined,
+        type: CLOSE_CITY_VIEW,
+        payload: undefined,
     };
 };
 

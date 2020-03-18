@@ -9,7 +9,7 @@ import { TerrainTileComponent } from './index';
 import { emptyClientStateTerrainTile } from '../../../state/modules/tiles/reducer/types';
 import type { ClientStateTile } from '../../../state/modules/tiles/reducer/types';
 import { emptyClientState } from '../../../state/modules/types';
-import type { ClientState } from '../../../state/modules/root';
+import type { ClientState } from '../../../state/modules/types';
 
 const mockStore = configureStore([]);
 

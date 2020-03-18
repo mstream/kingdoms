@@ -14,14 +14,13 @@ import { updateStateTestScenarios } from './update-state.test-scenarios';
 import { emptyClientState } from '../../types';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import { TAB_BUILDINGS, TAB_OVERVIEW } from './types';
-import {
-    BUILDING_WAREHOUSE,
-    RESOURCE_FOOD,
-    UNIT_PEASANT,
-} from '../../../../../../common/src/state';
 import { selectAttackViewAttackingCityTestScenarios } from './select-attack-view-attacking-city-test-scenarios';
 import { selectCityViewBuildingsTabTestScenarios } from './select-city-view-buildings-tab-test-scenarios';
 import { selectCityViewResourcesTabTestScenarios } from './select-city-view-resources-tab-test-scenarios';
+import {
+    BUILDING_WAREHOUSE, RESOURCE_FOOD,
+    UNIT_PEASANT,
+} from '../../../../../../common/src/state/modules/rules/reducer/types';
 
 const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientAction>> }): void => {
     scenarios.forEach(

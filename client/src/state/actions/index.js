@@ -1,6 +1,5 @@
 // @flow
 
-import type { ClientActionCreator, ClientBaseAction } from '../modules/types';
 import type {
     ClientMoveCameraAction,
     ClientZoomCameraAction,
@@ -23,10 +22,12 @@ import type {
     ClientRequestCityNameChangeAction,
     ClientUpdateStateAction,
 } from '../modules/common-state/actions';
+import type { ClientActionCreator } from './types';
+import type { BaseAction } from '../../../../common/src/state/actions/types';
 
 
 export const DUMMY: 'DUMMY' = 'DUMMY';
-export type ClientDummyAction = ClientBaseAction<typeof DUMMY, void>;
+export type ClientDummyAction = BaseAction<typeof DUMMY, void>;
 
 export const dummy: ClientActionCreator<ClientDummyAction> = (payload) => {
     return {

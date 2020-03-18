@@ -2,7 +2,7 @@
 
 
 import { playerReducer } from './index';
-import { dummy } from '../../../../../../common/src/actions';
+import { dummy } from '../../../../../../common/src/state/actions';
 import type { ClientAction, ClientDummyAction } from '../../../actions';
 import { loadPlayerTestScenarios } from './load-player-test-scenarios';
 import { emptyClientState } from '../../types';

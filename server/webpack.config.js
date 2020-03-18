@@ -1,4 +1,5 @@
 const AwsSamPlugin = require('aws-sam-webpack-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const awsSamPlugin = new AwsSamPlugin();
 
@@ -36,5 +37,14 @@ module.exports = {
         ],
     },
 
-    plugins: [awsSamPlugin],
+    plugins: [
+        awsSamPlugin,
+        new CircularDependencyPlugin({
+            allowAsyncCycles: false,
+            cwd: process.cwd(),
+            exclude: /node_modules/,
+            // TODO remove circular dependencies
+            // failOnError: true,
+        }),
+    ],
 };

@@ -1,3 +1,5 @@
+const CircularDependencyPlugin = require('circular-dependency-plugin');
+
 module.exports = {
     devtool: 'source-map',
     resolve: {
@@ -17,4 +19,12 @@ module.exports = {
             },
         ],
     },
+    plugins: [
+        new CircularDependencyPlugin({
+            allowAsyncCycles: false,
+            cwd: process.cwd(),
+            exclude: /node_modules/,
+            failOnError: true,
+        }),
+    ],
 };

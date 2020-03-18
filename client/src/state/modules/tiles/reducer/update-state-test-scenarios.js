@@ -3,12 +3,10 @@
 
 import { emptyClientState } from '../../types';
 import type { ClientStateTilesReducerTestScenario } from './types';
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../../../common/src/state';
 import { updateState } from '../../common-state/actions';
 import type { ClientUpdateStateAction } from '../../common-state/actions';
+import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
 
 
 export const updateStateTestScenarios: $ReadOnlyArray<ClientStateTilesReducerTestScenario<ClientUpdateStateAction>> = [

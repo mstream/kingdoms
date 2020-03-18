@@ -5,6 +5,7 @@ const glob = require('glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const PurgecssPlugin = require('purgecss-webpack-plugin');
 const MinimizeFontsPlugin = require('./webpack/minimize-fonts-plugin');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 const webpack = require('webpack');
 
 const PATHS = {
@@ -74,5 +75,11 @@ module.exports = {
             template: './src/assets/html/error.html',
         }),
         new MinimizeFontsPlugin(),
+        new CircularDependencyPlugin({
+            allowAsyncCycles: false,
+            cwd: process.cwd(),
+            exclude: /node_modules/,
+            failOnError: true,
+        }),
     ],
 };

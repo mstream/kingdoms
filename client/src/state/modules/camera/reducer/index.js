@@ -6,10 +6,10 @@ import { zoomCameraCameraReducer } from './zoom-camera';
 import { updateStateCameraReducer } from './update-state';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import type { ClientStateCamera } from './types';
-import type { ClientState } from '../../root';
 import { zeroVector } from '../../../../../../common/src/vector';
 import { UPDATE_STATE } from '../../common-state/actions';
 import { MOVE_CAMERA, ZOOM_CAMERA } from '../actions';
+import type { ClientState } from '../../types';
 
 export const initialCameraState: ClientStateCamera = {
     geometry: {

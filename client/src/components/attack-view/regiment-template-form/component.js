@@ -5,11 +5,11 @@ import type { Props } from './props';
 import { unitsOrder, unitVisuals } from '../../../assets/images/units';
 import { numberToQuantityString } from '../../../../../common/src/util';
 import { ImageComponent } from '../../image';
-import type { CommonStateUnit } from '../../../../../common/src/state';
 import {
     CommonStateUnitType,
     UNIT_PEASANT,
-} from '../../../../../common/src/state';
+} from '../../../../../common/src/state/modules/rules/reducer/types';
+import type { CommonStateUnitKey } from '../../../../../common/src/state/modules/rules/reducer/types';
 
 type BoundaryType = 'from' | 'to';
 
@@ -19,7 +19,7 @@ const serializeInputName = (
         unitType,
     }: {
         boundaryType: BoundaryType,
-        unitType: CommonStateUnit
+        unitType: CommonStateUnitKey
     },
 ): string => {
     return `${unitType}-${boundaryType}`;
@@ -31,7 +31,7 @@ const deserializeInputName = (
     }: {
         inputName: string
     },
-): { boundaryType: BoundaryType, unitType: CommonStateUnit } => {
+): { boundaryType: BoundaryType, unitType: CommonStateUnitKey } => {
     const [unitType, boundaryType] = inputName.split('-');
 
     if (boundaryType !== 'from' && boundaryType !== 'to') {

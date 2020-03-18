@@ -6,8 +6,7 @@ import { cameraReducer } from './index';
 import { zoomCameraTestScenarios } from './zoom-camera-test-scenarios';
 import { updateStateTestScenarios } from './update-state-test-scenarios';
 import { moveCameraTestScenarios } from './move-camera-test-scenarios';
-import { emptyClientState } from '../../types';
-import { initialClientState } from '../../root';
+import { emptyClientState, initialClientState } from '../../types';
 import { zeroVector } from '../../../../../../common/src/vector';
 import type { ClientStateCameraReducerTestScenario } from './types';
 

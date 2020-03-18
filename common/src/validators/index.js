@@ -1,6 +1,9 @@
 // @flow
 
-export const validateCityName = ({name}: { name: string }): $ReadOnlyArray<string> => {
+import type { CommonStateTime } from '../state/modules/time/reducer/types';
+import type { CommonExecuteTimeStepAction } from '../state/modules/time/actions';
+
+export const validateCityName = ({ name }: { name: string }): $ReadOnlyArray<string> => {
     if (name.length < 3) {
         return [`the city name is too short`];
     }

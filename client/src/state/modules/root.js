@@ -2,12 +2,13 @@
 
 import type { Reducer } from 'redux';
 import combineReducers from 'combine-reducers-global-state';
-import { initialTilesState, tilesReducer } from './tiles/reducer';
-import { cameraReducer, initialCameraState } from './camera/reducer';
-import { initialMenuState, menuReducer } from './menu/reducer';
+import { tilesReducer } from './tiles/reducer';
+import { cameraReducer } from './camera/reducer';
+import { menuReducer } from './menu/reducer';
 import type { ClientAction } from '../actions';
-import { commonStateReducer, initialCommonStateState } from './common-state/reducer';
-import { initialPlayerState, playerReducer } from './player/reducer';
+import { commonStateReducer } from './common-state/reducer';
+import { playerReducer } from './player/reducer';
+import type { ClientState } from './types';
 
 
 export const rootReducer: Reducer<ClientState, ClientAction> = combineReducers({
@@ -18,12 +19,3 @@ export const rootReducer: Reducer<ClientState, ClientAction> = combineReducers({
     tiles: tilesReducer,
 });
 
-export const initialClientState = {
-    camera: initialCameraState,
-    menu: initialMenuState,
-    player: initialPlayerState,
-    commonState: initialCommonStateState,
-    tiles: initialTilesState,
-};
-
-export type ClientState = typeof initialClientState;

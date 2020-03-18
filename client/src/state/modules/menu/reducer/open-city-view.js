@@ -2,10 +2,10 @@
 
 import { cityIdsByOwnerSelector } from '../../../selectors';
 import type { ClientStateMenu } from './types';
-import type { ClientState } from '../../root';
 import { commonStateSelector } from '../../common-state/selectors';
 import { playerNameSelector } from '../../player/selectors';
 import type { ClientOpenCityViewAction } from '../actions';
+import type { ClientState } from '../../types';
 
 export const openCityViewMenuReducer = (
     {

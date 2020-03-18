@@ -7,18 +7,18 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityUnitsComponent } from './index';
 import {
-    emptyCityState,
-    emptyCommonState,
-    UNIT_PEASANT,
-    UNIT_PIKEMAN,
-} from '../../../../../common/src/state';
-import {
     TAB_RESOURCES,
     TAB_UNITS,
 } from '../../../state/modules/menu/reducer/types';
 import { emptyClientState } from '../../../state/modules/types';
-import type { ClientState } from '../../../state/modules/root';
 import { selectCityViewUnitsTab } from '../../../state/modules/menu/actions';
+import {
+    UNIT_PEASANT,
+    UNIT_PIKEMAN,
+} from '../../../../../common/src/state/modules/rules/reducer/types';
+import type { ClientState } from '../../../state/modules/types';
+import { emptyCommonState } from '../../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
 
 const mockStore = configureStore([]);
 
@@ -26,20 +26,20 @@ describe('CityUnitsComponent', () => {
     test('does not display when tab is not the units', async () => {
         const state: ClientState = {
             ...emptyClientState,
-            menu: {
-                ...emptyClientState.menu,
-                cityView: {
-                    ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
-                    tab: TAB_RESOURCES,
-                },
-            },
             commonState: {
                 ...emptyCommonState,
                 cities: {
                     '1': {
                         ...emptyCityState,
                     },
+                },
+            },
+            menu: {
+                ...emptyClientState.menu,
+                cityView: {
+                    ...emptyClientState.menu.cityView,
+                    currentCityId: '1',
+                    tab: TAB_RESOURCES,
                 },
             },
         };
@@ -58,6 +58,14 @@ describe('CityUnitsComponent', () => {
     test('switches to peasants view after clicking the peasants tab', async () => {
         const state: ClientState = {
             ...emptyClientState,
+            commonState: {
+                ...emptyCommonState,
+                cities: {
+                    '1': {
+                        ...emptyCityState,
+                    },
+                },
+            },
             menu: {
                 ...emptyClientState.menu,
                 cityView: {
@@ -65,14 +73,6 @@ describe('CityUnitsComponent', () => {
                     currentCityId: '1',
                     tab: TAB_UNITS,
                     unit: UNIT_PIKEMAN,
-                },
-            },
-            commonState: {
-                ...emptyCommonState,
-                cities: {
-                    '1': {
-                        ...emptyCityState,
-                    },
                 },
             },
         };

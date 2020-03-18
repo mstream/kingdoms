@@ -5,9 +5,23 @@ import { emptyMenuState } from './menu/reducer/types';
 import { emptyTilesState } from './tiles/reducer/types';
 import { emptyPlayerState } from './player/reducer/types';
 import type { ClientAction } from '../actions';
-import type { ClientState } from './root';
 import { emptyCommonStateState } from './common-state/reducer/types';
+import { initialCameraState } from './camera/reducer';
+import { initialMenuState } from './menu/reducer';
+import { initialPlayerState } from './player/reducer';
+import { initialCommonStateState } from './common-state/reducer';
+import { initialTilesState } from './tiles/reducer';
 
+
+export const initialClientState = {
+    camera: initialCameraState,
+    menu: initialMenuState,
+    player: initialPlayerState,
+    commonState: initialCommonStateState,
+    tiles: initialTilesState,
+};
+
+export type ClientState = typeof initialClientState;
 
 export type ClientStateReducerTestScenario<S, A: ClientAction> = {
     name: string,
@@ -15,6 +29,7 @@ export type ClientStateReducerTestScenario<S, A: ClientAction> = {
     previousGlobalState: ClientState,
     expectedLocalStateCreator: ({ previousLocalState: S }) => S,
 };
+
 export type ClientStateTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientState, A>;
 
 export const emptyClientState: ClientState = {
@@ -25,9 +40,3 @@ export const emptyClientState: ClientState = {
     tiles: emptyTilesState,
 };
 
-export type ClientBaseAction<T, P> = $ReadOnly<{
-    type: T,
-    payload: P,
-}>;
-
-export type ClientActionCreator<A: ClientAction> = ($PropertyType<A, 'payload'>) => A;

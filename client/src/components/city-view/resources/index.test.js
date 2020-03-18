@@ -6,19 +6,19 @@ import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityResourcesComponent } from './index';
-import {
-    emptyCityState,
-    emptyCommonState,
-     RESOURCE_FOOD,
-      RESOURCE_WOOD,
-} from '../../../../../common/src/state';
 import { TAB_RESOURCES, TAB_UNITS } from '../../../state/modules/menu/reducer/types';
 import { emptyClientState } from '../../../state/modules/types';
-import type { ClientState } from '../../../state/modules/root';
 import {
     selectCityViewResourcesTab,
     selectCityViewUnitsTab,
 } from '../../../state/modules/menu/actions';
+import {
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+} from '../../../../../common/src/state/modules/rules/reducer/types';
+import type { ClientState } from '../../../state/modules/types';
+import { emptyCommonState } from '../../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
 
 const mockStore = configureStore([]);
 

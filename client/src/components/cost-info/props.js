@@ -3,8 +3,8 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import type { CommonStateResources } from '../../../../common/src/state';
-import type { ClientState } from '../../state/modules/root';
+import type { CommonStateResources } from '../../../../common/src/state/modules/rules/reducer/types';
+import type { ClientState } from '../../state/modules/types';
 
 type OwnProps = {
     availableResources: CommonStateResources,

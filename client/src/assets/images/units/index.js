@@ -7,7 +7,7 @@ import noble from './noble.png';
 import peasant from './peasant.png';
 import pikeman from './pikeman.png';
 import swordsman from './swordsman.png';
-import type { CommonStateUnit } from '../../../../../common/src/state';
+import type { CommonStateUnitKey } from '../../../../../common/src/state/modules/rules/reducer/types';
 import {
     UNIT_ARCHER,
     UNIT_CATAPULT,
@@ -16,7 +16,7 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
-} from '../../../../../common/src/state';
+} from '../../../../../common/src/state/modules/rules/reducer/types';
 
 export const unitVisuals = {
     [UNIT_ARCHER]: {
@@ -56,7 +56,7 @@ export const unitVisuals = {
     },
 };
 
-export const unitsOrder: $ReadOnlyArray<CommonStateUnit> = [
+export const unitsOrder: $ReadOnlyArray<CommonStateUnitKey> = [
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_ARCHER,

@@ -1,18 +1,16 @@
 // @flow
 
 import type { ClientAction } from '../../../actions';
-import type {
-    BuildingType,
-    CommonStateRegimentTemplate,
-    CommonStateUnit,
-    ResourceType,
-} from '../../../../../../common/src/state';
-import {
-    BUILDING_WAREHOUSE,
-    RESOURCE_FOOD,
-    UNIT_PEASANT,
-} from '../../../../../../common/src/state';
 import type { ClientStateReducerTestScenario } from '../../types';
+import type {
+    CommonStateBuildingKey,
+    CommonStateUnitKey, CommonStateResourceKey,
+} from '../../../../../../common/src/state/modules/rules/reducer/types';
+import {
+    BUILDING_WAREHOUSE, RESOURCE_FOOD,
+    UNIT_PEASANT,
+} from '../../../../../../common/src/state/modules/rules/reducer/types';
+import type { CommonStateRegimentTemplate } from '../../../../../../common/src/state/modules/types';
 
 export const TAB_BUILDINGS: 'TAB_BUILDINGS' = 'TAB_BUILDINGS';
 export const TAB_ORDERS: 'TAB_ORDERS' = 'TAB_ORDERS';
@@ -36,11 +34,11 @@ export type ClientStateAttackView = $ReadOnly<{
 }>;
 
 export type ClientStateCityView = $ReadOnly<{
-    building: BuildingType,
+    building: CommonStateBuildingKey,
     currentCityId: ?string,
-    resource: ResourceType,
+    resource: CommonStateResourceKey,
     tab: ClientStateCityViewTab,
-    unit: CommonStateUnit,
+    unit: CommonStateUnitKey,
 }>;
 
 export type ClientStateNewCity = $ReadOnly<{

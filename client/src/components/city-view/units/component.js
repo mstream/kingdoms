@@ -2,17 +2,12 @@
 
 import React from 'react';
 import { numberToQuantityString } from '../../../../../common/src/util';
-import type { CommonStateDamage } from '../../../../../common/src/state';
 import {
-    ARMOR_HEAVY,
-    ARMOR_LIGHT,
-    ARMOR_MEDIUM,
-    ARMOR_NONE,
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
-    RESOURCE_FOOD,
+
 } from '../../../../../common/src/state';
 import { ImageComponent } from '../../image';
 import { CityItemsListComponent } from '../items-list';
@@ -21,6 +16,11 @@ import { unitsOrder, unitVisuals } from '../../../assets/images/units';
 import { ChangeInfoComponent } from '../../change-info';
 import classNames from 'classnames';
 import type { Props } from './props';
+import {
+    ARMOR_HEAVY, ARMOR_LIGHT,
+    ARMOR_MEDIUM, ARMOR_NONE, RESOURCE_FOOD,
+} from '../../../../../common/src/state/modules/rules/reducer/types';
+import type { CommonStateDamage } from '../../../../../common/src/state/modules/rules/reducer/types';
 
 export const testId = 'city-units';
 

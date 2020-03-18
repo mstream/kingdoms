@@ -1,238 +1,40 @@
 // @flow
-// @flow-runtime
 
 import type { Quantities } from '../quantity';
 import { multipleQuantitiesByScalar } from '../quantity';
-import type { Range } from '../range';
-import { emptyRange } from '../range';
 import { convertQuantitiesToResources } from '../resource';
-import { reify, Type } from 'flow-runtime';
-import { zeroVector } from '../vector';
+import type {
+    CommonStateBuildingKey,
+    CommonStateBuildings,
+    CommonStateResourceKey,
+    CommonStateResources,
+    CommonStateRules,
+} from './modules/rules/reducer/types';
+import {
+    ARMOR_HEAVY,
+    ARMOR_LIGHT,
+    ARMOR_MEDIUM,
+    ARMOR_NONE,
+    BUILDING_LUMBER_MILL,
+    BUILDING_PASTURE,
+    BUILDING_WAREHOUSE,
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+    UNIT_ARCHER,
+    UNIT_CATAPULT,
+    UNIT_KNIGHT,
+    UNIT_NOBLE,
+    UNIT_PEASANT,
+    UNIT_PIKEMAN,
+    UNIT_SWORDSMAN,
+} from './modules/rules/reducer/types';
+import type { CommonState} from './modules/types';
+import type { CommonStateCity } from './modules/cities/reducer/types';
+import { emptyCityState } from './modules/cities/reducer/state';
 
-
-export const ARMOR_NONE: 'ARMOR_NONE' = 'ARMOR_NONE';
-export const ARMOR_LIGHT: 'ARMOR_LIGHT' = 'ARMOR_LIGHT';
-export const ARMOR_MEDIUM: 'ARMOR_MEDIUM' = 'ARMOR_MEDIUM';
-export const ARMOR_HEAVY: 'ARMOR_HEAVY' = 'ARMOR_HEAVY';
-
-export type ArmorType =
-    | typeof ARMOR_NONE
-    | typeof ARMOR_LIGHT
-    | typeof ARMOR_MEDIUM
-    | typeof ARMOR_HEAVY
-
-
-export const BUILDING_LUMBER_MILL: 'BUILDING_LUMBER_MILL' = 'BUILDING_LUMBER_MILL';
-export const BUILDING_PASTURE: 'BUILDING_PASTURE' = 'BUILDING_PASTURE';
-export const BUILDING_WAREHOUSE: 'BUILDING_WAREHOUSE' = 'BUILDING_WAREHOUSE';
-
-export type BuildingType =
-    | typeof BUILDING_LUMBER_MILL
-    | typeof BUILDING_PASTURE
-    | typeof BUILDING_WAREHOUSE;
-
-
-export const RESOURCE_FOOD: 'RESOURCE_FOOD' = 'RESOURCE_FOOD';
-export const RESOURCE_WOOD: 'RESOURCE_WOOD' = 'RESOURCE_WOOD';
-
-export type ResourceType =
-    | typeof RESOURCE_FOOD
-    | typeof RESOURCE_WOOD
-
-
-export const UNIT_ARCHER: 'UNIT_ARCHER' = 'UNIT_ARCHER';
-export const UNIT_CATAPULT: 'UNIT_CATAPULT' = 'UNIT_CATAPULT';
-export const UNIT_KNIGHT: 'UNIT_KNIGHT' = 'UNIT_KNIGHT';
-export const UNIT_NOBLE: 'UNIT_NOBLE' = 'UNIT_NOBLE';
-export const UNIT_PEASANT: 'UNIT_PEASANT' = 'UNIT_PEASANT';
-export const UNIT_PIKEMAN: 'UNIT_PIKEMAN' = 'UNIT_PIKEMAN';
-export const UNIT_SWORDSMAN: 'UNIT_SWORDSMAN' = 'UNIT_SWORDSMAN';
-
-export type CommonStateUnit =
-    | typeof UNIT_ARCHER
-    | typeof UNIT_CATAPULT
-    | typeof UNIT_KNIGHT
-    | typeof UNIT_NOBLE
-    | typeof UNIT_PEASANT
-    | typeof UNIT_PIKEMAN
-    | typeof UNIT_SWORDSMAN;
-
-export const CommonStateUnitType = (reify: Type<CommonStateUnit>);
-
-export const emptyBuildingState = {
-    tier: 0,
-};
-
-export type CommonStateBuilding = typeof emptyBuildingState;
-
-
-export const emptyBuildingsState: { [BuildingType]: CommonStateBuilding, ... } = {
-    [BUILDING_LUMBER_MILL]: emptyBuildingState,
-    [BUILDING_PASTURE]: emptyBuildingState,
-    [BUILDING_WAREHOUSE]: emptyBuildingState,
-};
-
-export type CommonStateBuildings = typeof emptyBuildingsState;
-
-
-export const emptyUnitsState: { [CommonStateUnit]: number, ... } = {
-    [UNIT_ARCHER]: 0,
-    [UNIT_CATAPULT]: 0,
-    [UNIT_KNIGHT]: 0,
-    [UNIT_NOBLE]: 0,
-    [UNIT_PEASANT]: 0,
-    [UNIT_PIKEMAN]: 0,
-    [UNIT_SWORDSMAN]: 0,
-};
-
-export type CommonStateUnits = typeof emptyUnitsState;
-
-
-export const emptyRegimentTemplateState: { [CommonStateUnit]: Range, ... } = {
-    [UNIT_ARCHER]: emptyRange,
-    [UNIT_CATAPULT]: emptyRange,
-    [UNIT_KNIGHT]: emptyRange,
-    [UNIT_NOBLE]: emptyRange,
-    [UNIT_PEASANT]: emptyRange,
-    [UNIT_PIKEMAN]: emptyRange,
-    [UNIT_SWORDSMAN]: emptyRange,
-};
-
-export type CommonStateRegimentTemplate = typeof emptyRegimentTemplateState;
-
-
-export const emptyResourcesState: { [ResourceType]: number, ... } = {
-    [RESOURCE_FOOD]: 0,
-    [RESOURCE_WOOD]: 0,
-};
-
-export type CommonStateResources = typeof emptyResourcesState;
-
-
-const emptyOrderState = {};
-
-export type CommonStateOrder = typeof emptyOrderState;
-
-export const emptyOrdersState: { [string]: CommonStateOrder, ... } = Object.freeze({});
-
-export type CommonStateOrders = typeof emptyOrdersState
-
-const emptyCityStateWithoutOptionals = {
-    buildings: emptyBuildingsState,
-    location: zeroVector,
-    name: '',
-    orders: emptyOrdersState,
-    resources: emptyResourcesState,
-    units: emptyUnitsState,
-};
-
-export const emptyCityState = {
-    ...emptyCityStateWithoutOptionals,
-    ownerId: null,
-};
-
-export type CommonStateCity = {
-    ...typeof emptyCityStateWithoutOptionals,
-    ownerId: ?string,
-};
-
-
-export const emptyCitiesState: { [string]: CommonStateCity, ... } = Object.freeze({});
-
-export type CommonStateCities = typeof emptyCitiesState
-
-
-export const emptyBuildingUpgradeCostState: { [ResourceType]: number, ... } = {
-    [RESOURCE_FOOD]: 0,
-    [RESOURCE_WOOD]: 0,
-};
-
-export type CommonStateBuildingUpgradeCost = typeof emptyBuildingUpgradeCostState;
-
-
-export const emptyBuildingUpgradeCostsState: { [BuildingType]: CommonStateBuildingUpgradeCost, ... } = {
-    [BUILDING_LUMBER_MILL]: emptyBuildingUpgradeCostState,
-    [BUILDING_PASTURE]: emptyBuildingUpgradeCostState,
-    [BUILDING_WAREHOUSE]: emptyBuildingUpgradeCostState,
-};
-
-export type CommonStateBuildingUpgradeCosts = typeof emptyBuildingUpgradeCostsState;
-
-
-export const emptyDamageState: { [ArmorType]: number, ... } = {
-    [ARMOR_NONE]: 0,
-    [ARMOR_LIGHT]: 0,
-    [ARMOR_MEDIUM]: 0,
-    [ARMOR_HEAVY]: 0,
-};
-
-export type CommonStateDamage = typeof emptyDamageState;
-
-
-export const emptyUnitStatState = {
-    armor: ARMOR_NONE,
-    damage: emptyDamageState,
-    foodDemand: 0,
-    range: 0,
-    speed: 0,
-};
-
-export type CommonStateUnitStat = { ...typeof emptyUnitStatState, armor: ArmorType, };
-
-
-export const emptyUnitStatsState: { [CommonStateUnit]: CommonStateUnitStat, ... } = {
-    [UNIT_ARCHER]: emptyUnitStatState,
-    [UNIT_CATAPULT]: emptyUnitStatState,
-    [UNIT_KNIGHT]: emptyUnitStatState,
-    [UNIT_NOBLE]: emptyUnitStatState,
-    [UNIT_PEASANT]: emptyUnitStatState,
-    [UNIT_PIKEMAN]: emptyUnitStatState,
-    [UNIT_SWORDSMAN]: emptyUnitStatState,
-};
-
-export type CommonStateUnitStats = typeof emptyUnitStatsState;
-
-
-export const emptyRulesState = {
-    baseCityCapacity: 0,
-    basePeasantsMigrationRate: 0,
-    buildingUpgradeCoefficient: 0,
-    buildingUpgradeCosts: emptyBuildingUpgradeCostsState,
-    minimalCityMargin: {
-        x: 0,
-        y: 0,
-    },
-    populationGrowthChangeRateCoefficient: 0,
-    resourceIncreaseChangeRateCoefficient: 0,
-    unitFoodDemand: 0,
-    unitStarvingCoefficient: 0,
-    unitStats: emptyUnitStatsState,
-};
-
-export type CommonStateRules = typeof emptyRulesState;
-
-
-export const emptyTimeState = '';
-
-export type CommonStateTime = typeof emptyTimeState;
-
-
-export const emptyWorldState = { size: zeroVector };
-
-export type CommonStateWorld = typeof emptyWorldState;
-
-
-export const emptyCommonState = {
-    cities: emptyCitiesState,
-    rules: emptyRulesState,
-    time: emptyTimeState,
-    world: emptyWorldState,
-};
-
-export type CommonState = typeof emptyCommonState;
 
 export const initialCommonState: CommonState = {
-    cities: {},
+    cities: Object.freeze({}),
     rules: {
         baseCityCapacity: 1000,
         basePeasantsMigrationRate: 100,
@@ -351,8 +153,6 @@ export const initialCommonState: CommonState = {
 };
 
 
-export const CommonStateType = (reify: Type<CommonState>);
-
 export const calculateBuildingTierSum = ({ buildings }: { buildings: CommonStateBuildings }): number => {
     return Object.keys(buildings).reduce(
         (sum, buildingType) => {
@@ -363,7 +163,7 @@ export const calculateBuildingTierSum = ({ buildings }: { buildings: CommonState
 };
 
 
-export const calculateBuildingsUpgradeCost = ({ buildingTier, buildingType, rules }: { buildingTier: number, buildingType: BuildingType, rules: CommonStateRules }): CommonStateResources => {
+export const calculateBuildingsUpgradeCost = ({ buildingTier, buildingType, rules }: { buildingTier: number, buildingType: CommonStateBuildingKey, rules: CommonStateRules }): CommonStateResources => {
     const costFactor = 1 + buildingTier * rules.buildingUpgradeCoefficient;
 
     return convertQuantitiesToResources({
@@ -392,7 +192,7 @@ const calculateWoodChangeInfo = ({ unitsQuantity, lumberMillTier, rules }: { uni
 };
 
 
-export const calculateResourceChangeInfo = ({ city, resourceType, rules }: { city: CommonStateCity, resourceType: ResourceType, rules: CommonStateRules }): Quantities => {
+export const calculateResourceChangeInfo = ({ city, resourceType, rules }: { city: CommonStateCity, resourceType: CommonStateResourceKey, rules: CommonStateRules }): Quantities => {
     switch (resourceType) {
         case RESOURCE_FOOD: {
             return calculateFoodChangeInfo({

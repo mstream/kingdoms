@@ -11,16 +11,18 @@ import { cityResourcesComponentTestId } from './resources';
 import { cityBuildingsComponentTestId } from './buildings';
 import { cityOverviewComponentTestId } from './overview';
 import {
-    emptyCityState,
-    emptyCommonState, emptyUnitStatsState, UNIT_PEASANT,
-} from '../../../../common/src/state';
-import {
     TAB_BUILDINGS, TAB_OVERVIEW,
     TAB_RESOURCES,
     TAB_UNITS,
 } from '../../state/modules/menu/reducer/types';
 import { emptyClientState } from '../../state/modules/types';
-import type { ClientState } from '../../state/modules/root';
+import {
+    UNIT_PEASANT,
+} from '../../../../common/src/state/modules/rules/reducer/types';
+import type { ClientState } from '../../state/modules/types';
+import { emptyCommonState } from '../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
+import { emptyUnitStatsState } from '../../../../common/src/state/modules/rules/reducer/state';
 
 const mockStore = configureStore([]);
 

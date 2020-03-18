@@ -1,11 +1,11 @@
 // @flow
 
 import type { ClientStateMenu } from './types';
-import type { ClientState } from '../../root';
 import type {
     ClientSelectAttackViewAttackingCityAction,
     ClientSelectCityViewUnitsTabAction,
 } from '../actions';
+import type { ClientState } from '../../types';
 
 export const selectAttackViewAttackingCityReducer = (
     {

@@ -13,12 +13,6 @@ import { openAttackViewMenuReducer } from './open-attack-view';
 import type { ClientStateMenu } from './types';
 import { TAB_OVERVIEW } from './types';
 import {
-    BUILDING_WAREHOUSE,
-    RESOURCE_FOOD,
-    UNIT_PEASANT,
-} from '../../../../../../common/src/state';
-import type { ClientState } from '../../root';
-import {
     CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
     OPEN_ATTACK_VIEW,
@@ -37,6 +31,11 @@ import {
 import { selectAttackViewAttackingCityReducer } from './select-attack-view-attacking-city';
 import { selectCityViewResourcesTabMenuReducer } from './select-city-view-resources-tab';
 import { selectCityViewBuildingsTabMenuReducer } from './select-city-view-buildings-tab';
+import {
+    BUILDING_WAREHOUSE, RESOURCE_FOOD,
+    UNIT_PEASANT,
+} from '../../../../../../common/src/state/modules/rules/reducer/types';
+import type { ClientState } from '../../types';
 
 export const initialMenuState = {
     attackView: {

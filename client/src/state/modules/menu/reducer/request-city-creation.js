@@ -2,8 +2,8 @@
 
 
 import type { ClientStateMenu } from './types';
-import type { ClientState } from '../../root';
 import type { ClientRequestCityCreationAction } from '../../common-state/actions';
+import type { ClientState } from '../../types';
 
 export const requestCityCreationMenuReducer = (
     {

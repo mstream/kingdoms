@@ -9,10 +9,10 @@ import {
     nextCityIdSelector,
     previousCityIdSelector,
 } from '../../../state/selectors';
-import type { ClientState } from '../../../state/modules/root';
 import { currentlyViewedCityIdSelector } from '../../../state/modules/menu/selectors';
 import { openCityView } from '../../../state/modules/menu/actions';
 import { requestCityNameChange } from '../../../state/modules/common-state/actions';
+import type { ClientState } from '../../../state/modules/types';
 
 type OwnProps = {};
 

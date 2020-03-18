@@ -1,7 +1,7 @@
 // @flow
 
-import type { ClientState } from '../../root';
 import type { ClientStateMenu } from '../reducer/types';
+import type { ClientState } from '../../types';
 
 export const menuSelector = (state: ClientState): ClientStateMenu => {
     return state.menu;

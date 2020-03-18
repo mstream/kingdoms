@@ -8,13 +8,13 @@ import {
     citiesSelector,
 } from '../../state/selectors';
 import type { Vector } from '../../../../common/src/vector';
-import type { ClientState } from '../../state/modules/root';
 import { tilesSelector } from '../../state/modules/tiles/selectors';
 import { cameraSelector } from '../../state/modules/camera/selectors';
 import {
     moveCameraDown, moveCameraLeft, moveCameraRight,
     moveCameraUp, zoomCameraIn, zoomCameraOut,
 } from '../../state/modules/camera/actions';
+import type { ClientState } from '../../state/modules/types';
 
 type OwnProps = {
     windowSize: Vector,

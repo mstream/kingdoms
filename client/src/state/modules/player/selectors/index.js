@@ -1,7 +1,7 @@
 // @flow
 
-import type { ClientState } from '../../root';
 import type { ClientStatePlayer } from '../reducer/types';
+import type { ClientState } from '../../types';
 
 export const playerSelector = (state: ClientState): ClientStatePlayer => {
     return state.player;

@@ -11,10 +11,10 @@ import {
     rulesSelector,
 } from '../../../state/selectors';
 import { TAB_BUILDINGS } from '../../../state/modules/menu/reducer/types';
-import type { ClientState } from '../../../state/modules/root';
 import { currentlyViewedCityIdSelector } from '../../../state/modules/menu/selectors';
 import { requestBuildingUpgrade } from '../../../state/modules/common-state/actions';
 import { selectCityViewBuildingsTab } from '../../../state/modules/menu/actions';
+import type { ClientState } from '../../../state/modules/types';
 
 type OwnProps = {};
 

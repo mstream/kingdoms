@@ -10,7 +10,6 @@ import {
     cityDistancesSelector,
     cityIdsOwnedByPlayerSelector,
 } from '../../state/selectors';
-import type { ClientState } from '../../state/modules/root';
 import {
     attackedCityIdSelector,
     attackingCityIdSelector,
@@ -19,6 +18,7 @@ import {
     closeAttackView,
     selectAttackViewAttackingCity,
 } from '../../state/modules/menu/actions';
+import type { ClientState } from '../../state/modules/types';
 
 type OwnProps = {};
 

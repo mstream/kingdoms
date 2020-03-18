@@ -12,11 +12,11 @@ import {
 } from '../../../selectors';
 import { commonStateCitiesByOwnerSelector } from '../../../../../../common/src/selectors/common-state';
 import type { Vector } from '../../../../../../common/src/vector';
-import type { CommonStateCity } from '../../../../../../common/src/state';
 import type { ClientStateCamera } from './types';
-import type { ClientState } from '../../root';
 import { playerNameSelector } from '../../player/selectors';
 import type { ClientUpdateStateAction } from '../../common-state/actions';
+import type { ClientState } from '../../types';
+import type { CommonStateCity } from '../../../../../../common/src/state/modules/cities/reducer/types';
 
 export const updateStateCameraReducer = (
     {

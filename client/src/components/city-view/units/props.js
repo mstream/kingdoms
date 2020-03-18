@@ -12,8 +12,8 @@ import {
     unitStatsSelector,
 } from '../../../state/selectors';
 import { TAB_UNITS } from '../../../state/modules/menu/reducer/types';
-import type { ClientState } from '../../../state/modules/root';
 import { selectCityViewUnitsTab } from '../../../state/modules/menu/actions';
+import type { ClientState } from '../../../state/modules/types';
 
 type OwnProps = {};
 

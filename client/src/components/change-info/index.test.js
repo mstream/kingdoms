@@ -8,7 +8,7 @@ import configureStore from 'redux-mock-store';
 import { ChangeInfoComponent } from './index';
 import type { Quantities } from '../../../../common/src/quantity';
 import { emptyClientState } from '../../state/modules/types';
-import type { ClientState } from '../../state/modules/root';
+import type { ClientState } from '../../state/modules/types';
 
 const mockStore = configureStore([]);
 

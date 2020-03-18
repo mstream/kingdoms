@@ -3,13 +3,11 @@
 
 
 import { emptyClientState } from '../../types';
-import {
-    emptyCityState,
-    emptyCommonState,
-} from '../../../../../../common/src/state';
 import type { ClientStateCommonStateReducerTestScenario } from './types';
 import { updateState } from '../actions';
 import type { ClientUpdateStateAction } from '../actions';
+import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
+import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
 
 
 export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCommonStateReducerTestScenario<ClientUpdateStateAction>> = [

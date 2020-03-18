@@ -2,9 +2,9 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import type { Dispatch } from 'redux';
 import type { ClientAction } from '../../state/actions';
-import type { ClientState } from '../../state/modules/root';
 import { commonStateSelector } from '../../state/modules/common-state/selectors';
 import { connect } from 'react-redux';
+import type { ClientState } from '../../state/modules/types';
 
 type OwnProps = {};
 

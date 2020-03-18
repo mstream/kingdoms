@@ -7,9 +7,9 @@ import type { ClientAction } from '../../state/actions';
 import {
     isGameStartingSelector,
 } from '../../state/selectors';
-import type { ClientState } from '../../state/modules/root';
 import { isCityBeingCreatedSelector } from '../../state/modules/menu/selectors';
 import { requestCityCreation } from '../../state/modules/common-state/actions';
+import type { ClientState } from '../../state/modules/types';
 
 type OwnProps = {};
 

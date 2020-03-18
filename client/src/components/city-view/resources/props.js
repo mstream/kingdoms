@@ -11,8 +11,8 @@ import {
     rulesSelector,
 } from '../../../state/selectors';
 import { TAB_RESOURCES } from '../../../state/modules/menu/reducer/types';
-import type { ClientState } from '../../../state/modules/root';
 import { selectCityViewResourcesTab } from '../../../state/modules/menu/actions';
+import type { ClientState } from '../../../state/modules/types';
 
 type OwnProps = {};
 

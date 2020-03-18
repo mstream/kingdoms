@@ -3,28 +3,26 @@
 import Socket from 'simple-websocket';
 import type { Middleware } from 'redux';
 import type { ClientAction } from '../actions';
-import type {
-    ServerAction,
-    ServerResponse,
-} from '../../../../common/src/actions';
 import {
     changeCityName,
     createCity,
     getCurrentState,
-    parseServerResponse,
     upgradeBuilding,
-} from '../../../../common/src/actions';
+} from '../../../../common/src/state/actions';
 import jwt from 'jsonwebtoken';
 import { generateId, stringifyJson } from '../../../../common/src/util';
-import type { ClientState } from '../modules/root';
 import {
     REQUEST_BUILDING_UPGRADE, REQUEST_CITY_CREATION,
     REQUEST_CITY_NAME_CHANGE, updateState,
 } from '../modules/common-state/actions';
 import { loadPlayer } from '../modules/player/actions';
+import { parseServerResponse } from '../../util';
+import type { ServerResponse } from '../../../../common/src/types';
+import type { ClientState } from '../modules/types';
+import type { CommonAction } from '../../../../common/src/state/actions/types';
 
 
-const send = ({ action, socket }: { action: ServerAction, socket: Socket }): void => {
+const send = ({ action, socket }: { action: CommonAction, socket: Socket }): void => {
     socket.send(
         stringifyJson({
             value: {
@@ -120,7 +118,7 @@ export const websocketMiddleware = ({ token, url }: { token: string, url: string
                         send({
                             action: createCity({
                                 cityId: generateId(),
-                                cityName: action.payload.name,
+                                name: action.payload.name,
                                 playerId: username,
                             }), socket,
                         });

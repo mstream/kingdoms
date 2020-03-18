@@ -8,20 +8,9 @@ import {
     commonStateWorldSelector,
 } from '../../../../common/src/selectors/common-state';
 import type {
-    BuildingType,
-    CommonStateCities,
-    CommonStateCity,
-    CommonStateRules,
-    CommonStateUnitStats,
-    CommonStateWorld,
-    ResourceType,
-    CommonStateUnit,
-} from '../../../../common/src/state';
-import type {
     ClientStateCityViewTab,
     ClientStateMenu,
 } from '../modules/menu/reducer/types';
-import type { ClientState } from '../modules/root';
 import { commonStateSelector } from '../modules/common-state/selectors';
 import type { ClientStateCommonState } from '../modules/common-state/reducer/types';
 import { playerNameSelector } from '../modules/player/selectors';
@@ -32,6 +21,17 @@ import {
     menuSelector,
 } from '../modules/menu/selectors';
 import { getDistanceBetweenVectors } from '../../../../common/src/vector';
+import type {
+    CommonStateCities,
+    CommonStateCity,
+} from '../../../../common/src/state/modules/cities/reducer/types';
+import type {
+    CommonStateBuildingKey,
+    CommonStateRules, CommonStateUnitKey,
+    CommonStateUnitStats, CommonStateResourceKey,
+} from '../../../../common/src/state/modules/rules/reducer/types';
+import type { CommonStateWorld } from '../../../../common/src/state/modules/world/reducer/types';
+import type { ClientState } from '../modules/types';
 
 export const citiesSelector = createSelector<ClientState, void, CommonStateCities, ClientStateCommonState>(
     commonStateSelector,
@@ -181,21 +181,21 @@ export const activeCityTabSelector = createSelector<ClientState, void, ClientSta
     },
 );
 
-export const activeBuildingSelector = createSelector<ClientState, void, BuildingType, ClientStateMenu>(
+export const activeBuildingSelector = createSelector<ClientState, void, CommonStateBuildingKey, ClientStateMenu>(
     menuSelector,
     (menu) => {
         return menu.cityView.building;
     },
 );
 
-export const activeResourceSelector = createSelector<ClientState, void, ResourceType, ClientStateMenu>(
+export const activeResourceSelector = createSelector<ClientState, void, CommonStateResourceKey, ClientStateMenu>(
     menuSelector,
     (menu) => {
         return menu.cityView.resource;
     },
 );
 
-export const activeUnitSelector = createSelector<ClientState, void, CommonStateUnit, ClientStateMenu>(
+export const activeUnitSelector = createSelector<ClientState, void, CommonStateUnitKey, ClientStateMenu>(
     menuSelector,
     (menu) => {
         return menu.cityView.unit;

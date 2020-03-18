@@ -4,8 +4,8 @@ import type { ClientStateTiles } from './types';
 import type { ClientAction } from '../../../actions';
 import { updateStateTilesReducer } from './update-state';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
-import type { ClientState } from '../../root';
 import { UPDATE_STATE } from '../../common-state/actions';
+import type { ClientState } from '../../types';
 
 export const initialTilesState = {
     city: {},

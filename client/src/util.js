@@ -1,8 +1,11 @@
 // @flow
 
-import type {Geometry} from '../../common/src/geometry';
-import type {Vector} from '../../common/src/vector';
-import {multipleVectors} from '../../common/src/vector';
+import type { Geometry } from '../../common/src/geometry';
+import type { Vector } from '../../common/src/vector';
+import { multipleVectors } from '../../common/src/vector';
+import { parseJson } from '../../common/src/util';
+import type { ServerResponse } from '../../common/src/types';
+import { ServerResponseType } from '../../common/src/types';
 
 export type GeometryStyle = $ReadOnly<{
     height: number,
@@ -29,16 +32,31 @@ export const createGeometryStyle = ({
     };
 };
 
-export const getRefValue = <T>({ref}: { ref: { current: ?T, ... } }): T => {
+export const getRefValue = <T>({ ref }: { ref: { current: ?T, ... } }): T => {
     if (ref.current == null) {
         throw Error('ref value not set');
     }
     return ref.current;
 };
 
-export const tileVectorToPixelVector = ({tileVector}: { tileVector: Vector }): Vector => {
+export const tileVectorToPixelVector = ({ tileVector }: { tileVector: Vector }): Vector => {
     return multipleVectors({
         vector1: tileVector,
         vector2: tileSize,
     });
+};
+
+export const parseServerResponse = (
+    {
+        json,
+    }: {
+        json: string
+    },
+): ServerResponse => {
+    const object = parseJson(
+        {
+            json,
+        },
+    );
+    return ServerResponseType.assert(object);
 };

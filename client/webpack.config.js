@@ -53,9 +53,9 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            CLIENT_ID: JSON.stringify('78pgeo0bb3r0mg1hat0qajtrap'),
-            COGNITO_URL: JSON.stringify('https://kingdoms.auth.eu-west-1.amazoncognito.com'),
-            WEB_SOCKET_URI: JSON.stringify('wss://7yaiaw5zt7.execute-api.eu-west-1.amazonaws.com/Prod'),
+            CLIENT_ID: JSON.stringify('db45f04jpvg84h71ij9u46lgg'),
+            COGNITO_URL: JSON.stringify('https://dev-kingdoms.auth.eu-west-1.amazoncognito.com'),
+            WEB_SOCKET_URI: JSON.stringify('wss://55oob8wdab.execute-api.eu-west-1.amazonaws.com/Stage'),
         }),
         new PurgecssPlugin({
             defaultExtractor: content => content.match(/[\w-\/:]+(?<!:)/g) || [],

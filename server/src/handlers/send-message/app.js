@@ -1,30 +1,32 @@
 // @flow
 
-import {createRedisClient} from '../../clients/redis';
-import {createApiGatewayClient} from '../../clients/api-gateway';
-import {executeAction, sendResponse} from '../../util';
-import {parseJson} from '../../../../common/src/util';
-import type {ProxyHandler} from '../types';
-import {getState} from '../../connectors/database';
+import { createRedisClient } from '../../clients/redis';
+import { createApiGatewayClient } from '../../clients/api-gateway';
+import { executeAction, sendResponse } from '../../util';
+import { parseJson } from '../../../../common/src/util';
+import type { ProxyHandler } from '../types';
+import { getState } from '../../connectors/database';
 import type {
     ServerRequest,
     ServerResponse,
 } from '../../../../common/src/types';
 import { ServerRequestType } from '../../../../common/src/types';
+import {config} from '../../config';
+import { validateState } from '../../../../common/src/state/modules/utils';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient();
 
-const requestExecutionError = {statusCode: 500, body: 'Message send error.'};
-const requestAccepted = {statusCode: 200, body: 'Request accepted.'};
+const requestExecutionError = { statusCode: 500, body: 'Message send error.' };
+const requestAccepted = { statusCode: 200, body: 'Request accepted.' };
 
-const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerRequest => {
+const extractRequestFromBody = ({ bodyString }: { bodyString: ?string }): ?ServerRequest => {
     if (bodyString == null) {
         console.error('invalid api gateway body received');
         return null;
     }
     console.info(`received body string: ${bodyString}`);
-    const body = parseJson({json: bodyString});
+    const body = parseJson({ json: bodyString });
 
     if (typeof body !== 'object' || body == null || body.data == null || typeof body.data !== 'object') {
         console.error('invalid api gateway body received');
@@ -40,7 +42,7 @@ const extractRequestFromBody = ({bodyString}: { bodyString: ?string }): ?ServerR
 };
 
 export const handler: ProxyHandler = async (event, context) => {
-    const {authorizer, connectionId} = event.requestContext;
+    const { authorizer, connectionId } = event.requestContext;
 
     if (authorizer == null) {
         console.error('authorizer is missing');
@@ -53,13 +55,13 @@ export const handler: ProxyHandler = async (event, context) => {
     }
 
     try {
-        const request = extractRequestFromBody({bodyString: event.body});
+        const request = extractRequestFromBody({ bodyString: event.body });
 
         if (request == null) {
             return requestExecutionError;
         }
 
-        const sendResponseBackToClient = async ({response}: { response: ServerResponse }) => await sendResponse({
+        const sendResponseBackToClient = async ({ response }: { response: ServerResponse }) => await sendResponse({
             apiGateway,
             connectionId,
             redis,
@@ -70,34 +72,42 @@ export const handler: ProxyHandler = async (event, context) => {
 
         switch (request.type) {
             case 'GET_CURRENT_STATE': {
-                const state = await getState({redis});
+                const state = await getState({
+                    environment: config.environment,
+                    redis,
+                    validateState,
+                });
                 await sendResponseBackToClient({
                     response: {
                         errors: [],
                         request,
                         state,
-                    }
+                    },
                 });
                 return requestAccepted;
             }
             case 'UPGRADE_BUILDING':
             case 'CHANGE_CITY_NAME':
             case 'CREATE_CITY': {
-                const response = await executeAction({action: request, redis});
-                await sendResponseBackToClient({response});
+                const response = await executeAction({
+                    action: request,
+                    environment: config.environment,
+                    redis,
+                });
+                await sendResponseBackToClient({ response });
                 return requestAccepted;
             }
             default: {
                 console.error(`unsupported request type: ${request.type}`);
-                const state = await getState({redis});
+                const state = await getState({ environment: config.environment, redis, validateState: validateState });
                 await sendResponseBackToClient({
                     response: {
                         errors: ['unsupported action'],
                         request,
                         state: state,
-                    }
+                    },
                 });
-                return {statusCode: 400, body: 'Request rejected.'};
+                return { statusCode: 400, body: 'Request rejected.' };
             }
         }
     } catch (error) {

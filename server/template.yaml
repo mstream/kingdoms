@@ -1,165 +1,34 @@
 AWSTemplateFormatVersion: '2010-09-09'
+
+
 Transform: 'AWS::Serverless-2016-10-31'
 
+
 Parameters:
+
+    NetworkStackName:
+        Type: 'String'
+
+    PersistenceStackName:
+        Type: 'String'
+
+    Environment:
+        Type: 'String'
+
     StageName:
         Type: 'String'
-        Default: 'Prod'
-    DomainName:
+        Default: 'Stage'
+
+    NodeRuntime:
         Type: 'String'
-        Default: 'www.maciej-laciak.com'
+        Default: 'nodejs12.x'
+
     LayerArn:
         Type: 'String'
         Default: 'arn:aws:lambda:eu-west-1:235338379175:layer:common:1'
 
+
 Resources:
-    Vpc:
-        Type: 'AWS::EC2::VPC'
-        Properties:
-            CidrBlock: '10.0.0.0/16'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}'
-
-    PrivateSubnet:
-        Type: 'AWS::EC2::Subnet'
-        Properties:
-            VpcId: !Sub '${Vpc}'
-            AvailabilityZone: 'eu-west-1a'
-            CidrBlock: '10.0.0.0/24'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-private-eu-west-1a'
-
-    PublicSubnet:
-        Type: 'AWS::EC2::Subnet'
-        Properties:
-            VpcId: !Sub '${Vpc}'
-            AvailabilityZone: 'eu-west-1a'
-            CidrBlock: '10.0.1.0/24'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-public-eu-west-1a'
-
-    InternetGateway:
-        Type: 'AWS::EC2::InternetGateway'
-        Properties:
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}'
-
-    VpcInternetGatewayAttachment:
-        Type: 'AWS::EC2::VPCGatewayAttachment'
-        Properties:
-            InternetGatewayId: !Sub '${InternetGateway}'
-            VpcId: !Sub '${Vpc}'
-
-    NatPublicIpAddress:
-        Type: 'AWS::EC2::EIP'
-        DependsOn:
-            - 'VpcInternetGatewayAttachment'
-        Properties:
-            Domain: 'vpc'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}'
-
-    NatGateway:
-        Type: 'AWS::EC2::NatGateway'
-        Properties:
-            AllocationId: !Sub '${NatPublicIpAddress.AllocationId}'
-            SubnetId: !Sub '${PublicSubnet}'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}'
-
-    PrivateRouteTable:
-        Type: 'AWS::EC2::RouteTable'
-        Properties:
-            VpcId: !Sub '${Vpc}'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-private'
-
-    PublicRouteTable:
-        Type: 'AWS::EC2::RouteTable'
-        Properties:
-            VpcId: !Sub '${Vpc}'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-public'
-
-    PrivateRouteTableAssociation:
-        Type: 'AWS::EC2::SubnetRouteTableAssociation'
-        Properties:
-            RouteTableId: !Sub '${PrivateRouteTable}'
-            SubnetId: !Sub '${PrivateSubnet}'
-
-    PublicRouteTableAssociation:
-        Type: 'AWS::EC2::SubnetRouteTableAssociation'
-        Properties:
-            RouteTableId: !Sub '${PublicRouteTable}'
-            SubnetId: !Sub '${PublicSubnet}'
-
-    PrivateRoute:
-        Type: 'AWS::EC2::Route'
-        Properties:
-            RouteTableId: !Sub '${PrivateRouteTable}'
-            DestinationCidrBlock: '0.0.0.0/0'
-            NatGatewayId: !Sub '${NatGateway}'
-
-    PublicRoute:
-        Type: 'AWS::EC2::Route'
-        Properties:
-            RouteTableId: !Sub '${PublicRouteTable}'
-            DestinationCidrBlock: '0.0.0.0/0'
-            GatewayId: !Sub '${InternetGateway}'
-
-    FunctionSecurityGroup:
-        Type: 'AWS::EC2::SecurityGroup'
-        Properties:
-            GroupName: 'function'
-            GroupDescription: 'Function Security Group'
-            VpcId: !Sub '${Vpc}'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-function'
-
-    RedisSecurityGroup:
-        Type: 'AWS::EC2::SecurityGroup'
-        Properties:
-            GroupName: 'redis'
-            GroupDescription: 'Redis security group'
-            VpcId: !Sub '${Vpc}'
-            SecurityGroupIngress:
-                - IpProtocol: 'tcp'
-                  FromPort: 6379
-                  ToPort: 6379
-                  SourceSecurityGroupId: !Sub '${FunctionSecurityGroup.GroupId}'
-            Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-redis'
-
-    RedisSubnetGroup:
-        Type: 'AWS::ElastiCache::SubnetGroup'
-        Properties:
-            CacheSubnetGroupName: 'redis'
-            Description: 'Redis Subnet Group'
-            SubnetIds:
-                - !Sub '${PrivateSubnet}'
-
-    RedisCluster:
-        Type: 'AWS::ElastiCache::CacheCluster'
-        DependsOn:
-            - 'RedisSubnetGroup'
-        Properties:
-            ClusterName: 'redis'
-            CacheSubnetGroupName: 'redis'
-            CacheNodeType: 'cache.t3.micro'
-            NumCacheNodes: 1
-            Engine: 'redis'
-            VpcSecurityGroupIds:
-                - !Sub '${RedisSecurityGroup.GroupId}'
 
     AuthenticateFunction:
         Type: 'AWS::Serverless::Function'
@@ -172,9 +41,9 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - !Sub '${FunctionSecurityGroup.GroupId}'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - !Sub '${PrivateSubnet}'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
 
     OnConnectFunction:
         Type: 'AWS::Serverless::Function'
@@ -187,13 +56,16 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - !Sub '${FunctionSecurityGroup.GroupId}'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - !Sub '${PrivateSubnet}'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    REDIS_HOST: !Sub '${RedisCluster.RedisEndpoint.Address}'
-                    REDIS_PORT: !Sub '${RedisCluster.RedisEndpoint.Port}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
 
     OnDisconnectFunction:
         Type: 'AWS::Serverless::Function'
@@ -206,13 +78,16 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - !Sub '${FunctionSecurityGroup.GroupId}'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - !Sub '${PrivateSubnet}'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    REDIS_HOST: !Sub '${RedisCluster.RedisEndpoint.Address}'
-                    REDIS_PORT: !Sub '${RedisCluster.RedisEndpoint.Port}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
 
     SendMessageFunction:
         Type: 'AWS::Serverless::Function'
@@ -225,21 +100,24 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - !Sub '${FunctionSecurityGroup.GroupId}'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - !Sub '${PrivateSubnet}'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
-                    REDIS_HOST: !Sub '${RedisCluster.RedisEndpoint.Address}'
-                    REDIS_PORT: !Sub '${RedisCluster.RedisEndpoint.Port}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
             Policies:
-                - Statement:
-                      - Effect: 'Allow'
-                        Action:
-                            - 'execute-api:ManageConnections'
-                        Resource:
-                            - !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
+                -   Statement:
+                        -   Effect: 'Allow'
+                            Action:
+                                - 'execute-api:ManageConnections'
+                            Resource:
+                                - !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
 
     UpdateStateFunction:
         Type: 'AWS::Serverless::Function'
@@ -252,9 +130,9 @@ Resources:
                 - 'arn:aws:lambda:eu-west-1:235338379175:layer:common:1'
             VpcConfig:
                 SecurityGroupIds:
-                    - !Sub '${FunctionSecurityGroup.GroupId}'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - !Sub '${PrivateSubnet}'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Events:
                 StateUpdateScheduledEvent:
                     Type: 'Schedule'
@@ -263,15 +141,18 @@ Resources:
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
-                    REDIS_HOST: !Sub '${RedisCluster.RedisEndpoint.Address}'
-                    REDIS_PORT: !Sub '${RedisCluster.RedisEndpoint.Port}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
             Policies:
-                - Statement:
-                      - Effect: 'Allow'
-                        Action:
-                            - 'execute-api:ManageConnections'
-                        Resource:
-                            - !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
+                -   Statement:
+                        -   Effect: 'Allow'
+                            Action:
+                                - 'execute-api:ManageConnections'
+                            Resource:
+                                - !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
 
     ResetStateFunction:
         Type: 'AWS::Serverless::Function'
@@ -284,13 +165,16 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - !Sub '${FunctionSecurityGroup.GroupId}'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - !Sub '${PrivateSubnet}'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    REDIS_HOST: !Sub '${RedisCluster.RedisEndpoint.Address}'
-                    REDIS_PORT: !Sub '${RedisCluster.RedisEndpoint.Port}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
 
     WebSocket:
         Type: 'AWS::ApiGatewayV2::Api'
@@ -411,7 +295,7 @@ Resources:
         Type: 'AWS::ApiGatewayV2::Stage'
         Properties:
             StageName: !Sub '${StageName}'
-            Description: !Sub '${StageName} Stage'
+            Description: 'Default stage'
             DeploymentId: !Sub '${Deployment}'
             ApiId: !Sub '${WebSocket}'
 
@@ -419,14 +303,14 @@ Resources:
         Type: 'AWS::S3::Bucket'
         DeletionPolicy: 'Delete'
         Properties:
-            BucketName: !Sub '${DomainName}'
+            BucketName: !Sub 'www.${Environment}.kingdoms.maciej-laciak.com'
             AccessControl: 'PublicRead'
             WebsiteConfiguration:
                 ErrorDocument: 'error.html'
                 IndexDocument: 'index.html'
             Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-website'
+                -   Key: 'Name'
+                    Value: !Sub '${AWS::StackName}-website'
 
     OriginAccessIdentity:
         Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
@@ -450,10 +334,10 @@ Resources:
                     TargetOriginId: 's3-origin'
                     ViewerProtocolPolicy: 'redirect-to-https'
                 Origins:
-                    - Id: 's3-origin'
-                      DomainName: !Sub '${WebsiteBucket}.s3.amazonaws.com'
-                      S3OriginConfig:
-                          OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${OriginAccessIdentity}'
+                    -   Id: 's3-origin'
+                        DomainName: !Sub '${WebsiteBucket}.s3.amazonaws.com'
+                        S3OriginConfig:
+                            OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${OriginAccessIdentity}'
 
     UserPool:
         Type: 'AWS::Cognito::UserPool'
@@ -485,12 +369,28 @@ Resources:
         Type: 'AWS::Cognito::UserPoolDomain'
         Properties:
             UserPoolId: !Sub '${UserPool}'
-            Domain: !Sub '${AWS::StackName}'
+            Domain: !Sub '${Environment}-kingdoms'
+
 
 Outputs:
-    WebSocketURI:
-        Description: 'The WSS Protocol URI to connect to'
+
+    WebSocketUrl:
+        Description: 'The WSS Protocol URL'
         Value: !Sub 'wss://${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${Stage}'
-    WebsiteURI:
-        Description: 'The website URI'
+
+    WebsiteUrl:
+        Description: 'The website URL'
         Value: !Sub 'https://${WebsiteDistribution.DomainName}'
+
+    AuthWebsiteUrl:
+        Description: 'The auth website URL'
+        Value: !Sub 'https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
+
+    UserPoolId:
+        Description: 'User pool ID'
+        Value: !Sub '${UserPool}'
+
+    UserPoolClientId:
+        Description: 'User pool client ID'
+        Value: !Sub '${UserPoolClient}'
+

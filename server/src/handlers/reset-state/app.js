@@ -2,11 +2,12 @@
 
 import { createRedisClient } from '../../clients/redis';
 import type { ProxyHandler } from '../types';
-import { stringifyJson } from '../../../../common/src/util';
 import {
     initialCommonState,
     testCommonState,
 } from '../../../../common/src/state';
+import { setState } from '../../connectors/database';
+import { config } from '../../config';
 
 const states = {
     'initial': initialCommonState,
@@ -38,12 +39,11 @@ export const handler: ProxyHandler = async (event, context) => {
 
     try {
         console.info('forcing state reset');
-        const serializedState = stringifyJson({ value: state });
-        if (serializedState == null) {
-            throw Error('state is missing');
-        }
-        await redis.set('state', serializedState);
-        console.info(`successfully initialized the state: ${serializedState}`);
+        await setState({
+            environment: config.environment,
+            redis,
+            state,
+        });
         return stateResetSuccess;
     } catch (error) {
         console.error(error.stack);

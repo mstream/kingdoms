@@ -1,16 +1,15 @@
 // @flow
 
 import verror from 'verror';
-import type {ApiGateway} from './clients/api-gateway';
-import type {Redis} from './clients/redis';
-import {getState} from './connectors/database';
-import {sendServerResponse} from './connectors/api';
+import type { ApiGateway } from './clients/api-gateway';
+import type { Redis } from './clients/redis';
+import { casState } from './connectors/database';
+import { sendServerResponse } from './connectors/api';
 import { rootReducer } from '../../common/src/state/modules/root';
 import type { ServerResponse } from '../../common/src/types';
-import type {
-    CommonState,
-} from '../../common/src/state/modules/types';
+import type { CommonState } from '../../common/src/state/modules/types';
 import type { CommonAction } from '../../common/src/state/actions/types';
+import { validateState } from '../../common/src/state/modules/utils';
 
 
 const optimisticLockingAttempts = 3;
@@ -30,7 +29,7 @@ export const sendResponse = async ({
         console.group(`sending response`);
         console.info(`sending response back to the api gateway`);
 
-        await sendServerResponse({apiGateway, connectionId, response});
+        await sendServerResponse({ apiGateway, connectionId, response });
     } catch (error) {
         if (error.statusCode === 410) {
             console.info(`Found stale connection, deleting ${connectionId}`);
@@ -48,50 +47,47 @@ export const sendResponse = async ({
     }
 };
 
-const serializeState = ({state}: { state: CommonState }): string => {
-    return JSON.stringify(state);
-};
-
-export const executeAction = async ({action, redis}: { action: CommonAction, redis: Redis }): Promise<ServerResponse> => {
+export const executeAction = async (
+    {
+        action,
+        environment,
+        redis,
+    }: {
+        action: CommonAction,
+        environment: string,
+        redis: Redis
+    },
+): Promise<ServerResponse> => {
     try {
         console.group(`executing action`);
         for (let i = 0; i < optimisticLockingAttempts; i++) {
             console.group(`optimistic locking attempt ${i + 1}/${optimisticLockingAttempts}`);
             console.info(`watching state`);
 
-            await redis.watch(`state`);
+            const stateTransformer = ({ state }: { state: CommonState }): { errors: $ReadOnlyArray<string>, state: ?CommonState } => {
+                console.info(`applying action to the state`);
+                return rootReducer({ action, state });
+            };
 
-            const state = await getState({redis});
+            const casResult = await casState({
+                environment,
+                redis,
+                stateTransformer,
+                validateState: validateState,
+            });
 
-            console.info(`applying action to the state`);
-            const reducerResult = rootReducer({action, state});
-
-            if (reducerResult.errors.length > 0) {
-                console.info(`returning validation error`);
+            if (casResult.errors.length > 0) {
                 return {
-                    state,
-                    errors: reducerResult.errors,
+                    errors: casResult.errors,
                     request: action,
+                    state: casResult.previousState,
                 };
             }
 
-            const newState = reducerResult.state;
-
-            if (newState == null) {
-                throw Error(`new state missing`);
-            }
-
-            console.info(`serializing state`);
-            const serializedState: string = serializeState({state: newState});
-
-            console.info(`persisting new state`);
-
-            const result = await redis.multi().set(`state`, serializedState).exec();
-
-            if (result != null) {
+            if (casResult.savedState != null) {
                 return {
-                    state: newState,
                     errors: [],
+                    state: casResult.savedState,
                     request: action,
                 };
             }
@@ -105,10 +101,11 @@ export const executeAction = async ({action, redis}: { action: CommonAction, red
                 name: 'ActionExecutionError',
                 cause: error,
             },
-            'execution failed'
+            'execution failed',
         );
     } finally {
         console.groupEnd();
         console.groupEnd();
     }
 };
+

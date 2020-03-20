@@ -21,8 +21,8 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            CLIENT_ID: JSON.stringify('78pgeo0bb3r0mg1hat0qajtrap'),
-            USER_POOL_ID: JSON.stringify('eu-west-1_mkASaFh00'),
+            CLIENT_ID: JSON.stringify('db45f04jpvg84h71ij9u46lgg'),
+            USER_POOL_ID: JSON.stringify('eu-west-1_51o0hoJwW'),
         }),
     ],
 };

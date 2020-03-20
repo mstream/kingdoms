@@ -1,6 +1,7 @@
 // @flow
 
 import { v4 } from 'uuid';
+import type { CommonState } from './state/modules/types';
 
 const suffixes: $ReadOnlyArray<string> = [
     'k',
@@ -67,4 +68,8 @@ export const calculateTimeDelta = (
     },
 ): number => {
     return (Date.parse(toTime) - Date.parse(fromTime)) / 1000;
+};
+
+export const serializeState = ({ state }: { state: CommonState }): string => {
+    return JSON.stringify(state);
 };

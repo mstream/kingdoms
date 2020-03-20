@@ -1,12 +1,27 @@
 // @flow
 
 jest.mock(
+    '../../config',
+    () => {
+        return {
+            config: {
+                environment: 'env1',
+                redis: {
+                    host: 'redis',
+                    port: 1234,
+                },
+            },
+        };
+    },
+);
+
+jest.mock(
     '../../clients/redis',
     () => {
         return {
             createRedisClient: () => {
                 return {
-                    sadd: () => undefined,
+                    sadd: () => Promise.resolve(1),
                 };
             },
         };

@@ -11,7 +11,10 @@
     },
     "scripts": {
         "build": "webpack --mode production",
-        "deploy": "npm run build && aws s3 cp --recursive --acl public-read dist/ s3://www.maciej-laciak.com/",
+        "predeploy-dev": "npm run build",
+        "deploy-dev": "aws s3 cp --recursive --acl public-read dist/ s3://www.dev.kingdoms.maciej-laciak.com/",
+        "predeploy-prod": "npm run build",
+        "deploy-prod": "aws s3 cp --recursive --acl public-read dist/ s3://www.prod.kingdoms.maciej-laciak.com/",
         "prebuild": "rimraf dist",
         "start": "webpack-dev-server --open --mode development",
         "test": "jest --coverage"

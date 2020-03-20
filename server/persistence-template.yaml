@@ -1,0 +1,76 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+
+Parameters:
+
+    NetworkStackName:
+        Type: 'String'
+
+
+Resources:
+
+    RedisClientSecurityGroup:
+        Type: 'AWS::EC2::SecurityGroup'
+        Properties:
+            GroupName: 'function'
+            GroupDescription: 'Function Security Group'
+            VpcId:
+                Fn::ImportValue: !Sub '${NetworkStackName}-Vpc'
+            Tags:
+                -   Key: 'Name'
+                    Value: !Sub '${AWS::StackName}-function'
+
+    RedisClusterSecurityGroup:
+        Type: 'AWS::EC2::SecurityGroup'
+        Properties:
+            GroupName: 'redis'
+            GroupDescription: 'Redis security group'
+            VpcId:
+                Fn::ImportValue: !Sub '${NetworkStackName}-Vpc'
+            SecurityGroupIngress:
+                -   IpProtocol: 'tcp'
+                    FromPort: 6379
+                    ToPort: 6379
+                    SourceSecurityGroupId: !Sub '${RedisClientSecurityGroup.GroupId}'
+            Tags:
+                -   Key: 'Name'
+                    Value: !Sub '${AWS::StackName}-redis'
+
+    RedisSubnetGroup:
+        Type: 'AWS::ElastiCache::SubnetGroup'
+        Properties:
+            CacheSubnetGroupName: 'redis'
+            Description: 'Redis Subnet Group'
+            SubnetIds:
+                -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+
+    RedisCluster:
+        Type: 'AWS::ElastiCache::CacheCluster'
+        DependsOn:
+            - 'RedisSubnetGroup'
+        Properties:
+            ClusterName: 'redis'
+            CacheSubnetGroupName: 'redis'
+            CacheNodeType: 'cache.t3.micro'
+            NumCacheNodes: 1
+            Engine: 'redis'
+            VpcSecurityGroupIds:
+                - !Sub '${RedisClusterSecurityGroup.GroupId}'
+
+
+Outputs:
+
+    RedisClientSecurityGroupId:
+        Value: !Sub "${RedisClientSecurityGroup.GroupId}"
+        Export:
+            Name: !Sub "${AWS::StackName}-RedisClientSecurityGroupId"
+
+    RedisHost:
+        Value: !Sub "${RedisCluster.RedisEndpoint.Address}"
+        Export:
+            Name: !Sub "${AWS::StackName}-RedisHost"
+
+    RedisPort:
+        Value: !Sub "${RedisCluster.RedisEndpoint.Port}"
+        Export:
+            Name: !Sub "${AWS::StackName}-RedisPort"

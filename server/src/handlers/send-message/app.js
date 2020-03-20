@@ -12,10 +12,10 @@ import type {
 } from '../../../../common/src/types';
 import { ServerRequestType } from '../../../../common/src/types';
 import {config} from '../../config';
-import { validateState } from '../../../../common/src/state/modules/utils';
+import { validateCommonStateType } from '../../../../common/src/validators';
 
 const apiGateway = createApiGatewayClient();
-const redis = createRedisClient();
+const redis = createRedisClient({config});
 
 const requestExecutionError = { statusCode: 500, body: 'Message send error.' };
 const requestAccepted = { statusCode: 200, body: 'Request accepted.' };
@@ -75,7 +75,7 @@ export const handler: ProxyHandler = async (event, context) => {
                 const state = await getState({
                     environment: config.environment,
                     redis,
-                    validateState,
+                    validateState: validateCommonStateType,
                 });
                 await sendResponseBackToClient({
                     response: {
@@ -99,7 +99,7 @@ export const handler: ProxyHandler = async (event, context) => {
             }
             default: {
                 console.error(`unsupported request type: ${request.type}`);
-                const state = await getState({ environment: config.environment, redis, validateState: validateState });
+                const state = await getState({ environment: config.environment, redis, validateState: validateCommonStateType });
                 await sendResponseBackToClient({
                     response: {
                         errors: ['unsupported action'],

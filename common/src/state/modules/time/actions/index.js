@@ -1,6 +1,6 @@
 // @flow
 
-import type { BaseAction } from '../../../actions/types';
+import type { BaseAction } from '../../../types';
 
 export const EXECUTE_TIME_STEP: 'EXECUTE_TIME_STEP' = 'EXECUTE_TIME_STEP';
 

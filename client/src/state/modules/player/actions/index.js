@@ -2,7 +2,7 @@
 
 
 import type { ClientActionCreator } from '../../../actions/types';
-import type { BaseAction } from '../../../../../../common/src/state/actions/types';
+import type { BaseAction } from '../../../../../../common/src/state/types';
 
 
 export const LOAD_PLAYER: 'LOAD_PLAYER' = 'LOAD_PLAYER';

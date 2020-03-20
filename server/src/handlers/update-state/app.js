@@ -8,7 +8,7 @@ import type { ScheduledHandler } from '../types';
 import { config } from '../../config';
 
 const apiGateway = createApiGatewayClient();
-const redis = createRedisClient();
+const redis = createRedisClient({config});
 
 export const handler: ScheduledHandler = async (event, context) => {
     try {

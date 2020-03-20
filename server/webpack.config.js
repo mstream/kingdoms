@@ -43,8 +43,7 @@ module.exports = {
             allowAsyncCycles: false,
             cwd: process.cwd(),
             exclude: /node_modules/,
-            // TODO remove circular dependencies
-            // failOnError: true,
+            failOnError: true,
         }),
     ],
 };

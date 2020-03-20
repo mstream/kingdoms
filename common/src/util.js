@@ -58,6 +58,23 @@ export const numberToQuantityString = ({ value }: { value: number }): string => 
     return `${quantity.value.toString().substring(0, 4)}${quantity.suffix != null ? quantity.suffix : ''}`;
 };
 
+export const numberToDurationString = ({ value }: { value: number }): string => {
+    if (value < 0) {
+        throw Error('value cannot be negative');
+    }
+    if (value === 0) {
+        return '0';
+    }
+    const hours = Math.floor(value / 60);
+    const minutes = value % 60;
+
+    const hoursStr = hours > 0 ? `${hours}h` : '';
+    const minutesStr = minutes > 0 ? `${minutes}m` : '';
+    const delimiterStr = hours > 0 && minutes > 0 ? ' ' : '';
+
+    return `${hoursStr}${delimiterStr}${minutesStr}`;
+};
+
 export const calculateTimeDelta = (
     {
         fromTime,

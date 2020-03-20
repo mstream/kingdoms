@@ -1,7 +1,7 @@
 // @flow
 
 import RedisClient from 'ioredis';
-import { config } from '../config';
+import type { Config } from '../config';
 
 type Get = (string) => Promise<?string>;
 type Sadd = (string, string) => Promise<number>;
@@ -78,7 +78,7 @@ export const dummyRedisClient: Redis = {
     },
 };
 
-export const createRedisClient = (): Redis => {
+export const createRedisClient = ({ config }: { config: Config }): Redis => {
     return new RedisClient({
         host: config.redis.host,
         port: config.redis.port,

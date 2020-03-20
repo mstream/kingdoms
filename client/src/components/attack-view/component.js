@@ -7,6 +7,7 @@ import { AttackViewRegimentTemplateFormComponent } from './regiment-template-for
 import { AttackViewCityListComponent } from './city-list';
 import type { CommonStateUnitKey } from '../../../../common/src/state/modules/rules/reducer/types';
 import type { CommonStateRegimentTemplate } from '../../../../common/src/state/modules/types';
+import { AttackViewSchedulerFormComponent } from './scheduler-form';
 
 const initialRegimentTemplate: CommonStateRegimentTemplate = unitsOrder.reduce(
     (initialQuantities, unitType: CommonStateUnitKey) => {
@@ -21,6 +22,8 @@ const initialRegimentTemplate: CommonStateRegimentTemplate = unitsOrder.reduce(
     },
     {},
 );
+
+const initialMinimumDelay = 0;
 
 export const testId = 'attack-view';
 
@@ -39,6 +42,11 @@ export const Component = (
         setRegimentTemplate,
     ] = useState(initialRegimentTemplate);
 
+    const [
+        minimumDelay,
+        setMinimumDelay,
+    ] = useState(initialMinimumDelay);
+
     const onBackgroundClick = () => {
         closeAttackView();
     };
@@ -51,20 +59,28 @@ export const Component = (
                 className="modal-overlay absolute w-full h-full bg-gray-900 opacity-75 top-0 left-0 cursor-pointer"
             />
             <div
-                className="bricks-bg absolute w-9/12 min-h-3/4 rounded-sm shadow-lg flex flex-col items-center justify-between bg-gray-800">
-                <div className="w-full">
+                className="bricks-bg absolute w-9/12 min-h-3/4 rounded-sm shadow-lg flex flex-col items-center justify-between overflow-hidden bg-gray-800">
+                <div
+                    className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
                     <div
-                        className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
-                        <div
-                            className="font-bold text-2xl text-center">
-                            {attackedCity.name}
-                        </div>
+                        className="font-bold text-2xl text-center">
+                        {attackedCity.name}
                     </div>
-                    <div className="flex flex-row justify-around w-full">
-                        <div className="w-1/3">
-                            <AttackViewCityListComponent/>
+                </div>
+                <div className="w-full">
+                    <div className="flex flex-col justify-around w-full">
+                        <div className="flex flex-row justify-around">
+                            <div className="w-1/3 m-1">
+                                <AttackViewCityListComponent/>
+                            </div>
+                            <div className="w-1/3 m-1">
+                                <AttackViewSchedulerFormComponent
+                                    minimumDelay={minimumDelay}
+                                    setMinimumDelay={setMinimumDelay}
+                                />
+                            </div>
                         </div>
-                        <div className="w-1/3">
+                        <div className="w-full m-1">
                             <AttackViewRegimentTemplateFormComponent
                                 regimentTemplate={regimentTemplate}
                                 setRegimentTemplate={setRegimentTemplate}
@@ -75,7 +91,7 @@ export const Component = (
                 <div
                     className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
                     <button
-                        className="p-1 bg-green-500 rounded-lg cursor-pointer focus:outline-none">Attack
+                        className="p-1 bg-green-500 rounded-lg cursor-pointer focus:outline-none">Schedule Attack
                     </button>
                 </div>
             </div>

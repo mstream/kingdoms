@@ -1,4 +1,5 @@
 // @flow
+// @flow-runtime
 
 import { reify, Type } from 'flow-runtime';
 
@@ -88,4 +89,4 @@ export type CommonStateBuildings = $ReadOnly<{ [CommonStateBuildingKey]: CommonS
 
 export type CommonStateUnits = $ReadOnly<{ [CommonStateUnitKey]: number, ... }>;
 
-export const CommonStateUnitType = (reify: Type<CommonStateUnitKey>);
+export const CommonStateUnitKeyType = (reify: Type<CommonStateUnitKey>);

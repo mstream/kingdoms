@@ -23,7 +23,7 @@ import type {
     ClientUpdateStateAction,
 } from '../modules/common-state/actions';
 import type { ClientActionCreator } from './types';
-import type { BaseAction } from '../../../../common/src/state/actions/types';
+import type { BaseAction } from '../../../../common/src/state/types';
 
 
 export const DUMMY: 'DUMMY' = 'DUMMY';

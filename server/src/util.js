@@ -9,7 +9,7 @@ import { rootReducer } from '../../common/src/state/modules/root';
 import type { ServerResponse } from '../../common/src/types';
 import type { CommonState } from '../../common/src/state/modules/types';
 import type { CommonAction } from '../../common/src/state/actions/types';
-import { validateState } from '../../common/src/state/modules/utils';
+import { validateCommonStateType } from '../../common/src/validators';
 
 
 const optimisticLockingAttempts = 3;
@@ -73,7 +73,7 @@ export const executeAction = async (
                 environment,
                 redis,
                 stateTransformer,
-                validateState: validateState,
+                validateState: validateCommonStateType,
             });
 
             if (casResult.errors.length > 0) {

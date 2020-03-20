@@ -6,7 +6,7 @@ import type {
     CommonStateBuildingKey,
     CommonStateUnitKey, CommonStateResourceKey,
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
-import type { BaseAction } from '../../../../../../common/src/state/actions/types';
+import type { BaseAction } from '../../../../../../common/src/state/types';
 
 export const CLOSE_ATTACK_VIEW: 'CLOSE_ATTACK_VIEW' = 'CLOSE_ATTACK_VIEW';
 export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = 'CLOSE_CITY_VIEW';

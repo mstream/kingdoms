@@ -1,7 +1,18 @@
 // @flow
 
-import type { CommonStateTime } from '../state/modules/time/reducer/types';
-import type { CommonExecuteTimeStepAction } from '../state/modules/time/actions';
+import type { CommonState } from '../state/modules/types';
+import { CommonStateType } from '../state/modules/types';
+import { CommonStateUnitKeyType } from '../state/modules/rules/reducer/types';
+import type { TypeValidator } from './types';
+import type { CommonStateUnitKey } from '../state/modules/rules/reducer/types';
+
+export const validateCommonStateType: TypeValidator<CommonState> = ({ toValidate }) => {
+    return CommonStateType.assert(toValidate);
+};
+
+export const validateUnitType: TypeValidator<CommonStateUnitKey> = ({ toValidate }) => {
+    return CommonStateUnitKeyType.assert(toValidate);
+};
 
 export const validateCityName = ({ name }: { name: string }): $ReadOnlyArray<string> => {
     if (name.length < 3) {

@@ -14,7 +14,7 @@ const states = {
     'test': testCommonState,
 };
 
-const redis = createRedisClient();
+const redis = createRedisClient({config});
 
 const stateResetSuccess = { statusCode: 200, body: 'State reset.' };
 

@@ -16,9 +16,3 @@ export const failure = <S>({ errors }: { errors: $ReadOnlyArray<string> }): Comm
         errors,
     };
 };
-
-export type CommonStateValidator = ({ toValidate: mixed }) => CommonState;
-
-export const validateState: CommonStateValidator = ({ toValidate }) => {
-    return CommonStateType.assert(toValidate);
-};

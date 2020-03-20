@@ -7,15 +7,11 @@ import type {
     CommonUpgradeBuildingAction,
 } from '../modules/cities/actions';
 import type { CommonExecuteTimeStepAction } from '../modules/time/actions';
+import type { BaseAction } from '../types';
 
 export const DUMMY: 'DUMMY' = 'DUMMY';
 export const GET_CURRENT_STATE: 'GET_CURRENT_STATE' = 'GET_CURRENT_STATE';
 export const RESET_STATE: 'RESET_STATE' = 'RESET_STATE';
-
-export type BaseAction<T, P> = $ReadOnly<{
-    type: T,
-    payload: P,
-}>;
 
 export type CommonDummyAction = BaseAction<typeof DUMMY, void>;
 

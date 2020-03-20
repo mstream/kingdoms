@@ -1,6 +1,6 @@
 // @flow
 
-type Config = {
+export type Config = {
     environment: string,
     redis: {
         host: string,

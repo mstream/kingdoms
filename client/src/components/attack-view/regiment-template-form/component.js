@@ -5,11 +5,9 @@ import type { Props } from './props';
 import { unitsOrder, unitVisuals } from '../../../assets/images/units';
 import { numberToQuantityString } from '../../../../../common/src/util';
 import { ImageComponent } from '../../image';
-import {
-    CommonStateUnitType,
-    UNIT_PEASANT,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
 import type { CommonStateUnitKey } from '../../../../../common/src/state/modules/rules/reducer/types';
+import { UNIT_PEASANT } from '../../../../../common/src/state/modules/rules/reducer/types';
+import { validateUnitType } from '../../../../../common/src/validators';
 
 type BoundaryType = 'from' | 'to';
 
@@ -40,7 +38,7 @@ const deserializeInputName = (
 
     return {
         boundaryType,
-        unitType: CommonStateUnitType.assert(unitType),
+        unitType: validateUnitType({ toValidate: unitType }),
     };
 };
 
@@ -131,7 +129,7 @@ export const Component = (
         const inputClassName = 'm-1 text-xl cursor-text text-center bg-gray-900 border border-gray-100';
 
         return (
-            <div key={unitType} className="flex flex-row flex-1 p-1">
+            <div key={unitType} className="flex flex-row flex-1 p-1 my-1 mx-2">
                 <div className="h-10 w-10 m-1">
                     <p className="text-sm text-center font-medium">
                         {numberToQuantityString({ value: unitQuantity })}
@@ -185,8 +183,15 @@ export const Component = (
     return (
         <div
             data-testid={testId}
-            className="flex flex-col items-center justify-start shadow-inner">
-            {unitRows}
+            className="flex flex-col"
+        >
+            <div className="flex flex-row justify-center text-xl">
+                Regiment
+            </div>
+            <div
+                className="flex flex-row flex-wrap justify-start shadow-inner">
+                {unitRows}
+            </div>
         </div>
     );
 };

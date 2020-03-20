@@ -4,7 +4,7 @@ import { parseJson, serializeState } from '../../../common/src/util';
 import type { Redis } from '../clients/redis';
 import verror from 'verror';
 import type { CommonState } from '../../../common/src/state/modules/types';
-import type { CommonStateValidator } from '../../../common/src/state/modules/utils';
+import type { TypeValidator } from '../../../common/src/validators/types';
 
 const createStateKey = ({ environment }: { environment: string }): string => {
     return `state:${environment}`;
@@ -58,7 +58,7 @@ export const getState = async (
     }: {
         environment: string,
         redis: Redis,
-        validateState: CommonStateValidator,
+        validateState: TypeValidator<CommonState>,
     },
 ): Promise<CommonState> => {
     try {
@@ -109,7 +109,7 @@ export const casState = async (
         environment: string,
         redis: Redis,
         stateTransformer: ({ state: CommonState }) => $ReadOnly<{ errors: $ReadOnlyArray<string>, state: ?CommonState }>,
-        validateState: CommonStateValidator,
+        validateState: TypeValidator<CommonState>,
     }): Promise<$ReadOnly<{ errors: $ReadOnlyArray<string>, previousState: CommonState, savedState: ?CommonState }>> => {
     try {
         const stateKey = createStateKey({ environment });

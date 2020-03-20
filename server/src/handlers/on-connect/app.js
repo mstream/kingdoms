@@ -5,7 +5,7 @@ import type { ProxyHandler } from '../types';
 import { addConnection } from '../../connectors/database';
 import { config } from '../../config';
 
-const redis = createRedisClient();
+const redis = createRedisClient({config});
 
 export const handler: ProxyHandler = async (event, context) => {
     try {

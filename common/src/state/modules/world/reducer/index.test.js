@@ -49,7 +49,6 @@ const stateInitializationScenario: CommonStateWorldReducerTestScenarios<CommonDu
 };
 
 describe('worldReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

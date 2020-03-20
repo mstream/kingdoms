@@ -25,7 +25,7 @@ export type ClientStateCityViewTab =
     | typeof TAB_RESOURCES
     | typeof TAB_UNITS;
 
-export type ClientStateMenuReducerTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientStateMenu, A>;
+export type ClientStateMenuReducerTestScenario<+A: ClientAction> = ClientStateReducerTestScenario<ClientStateMenu, A>;
 
 export type ClientStateAttackView = $ReadOnly<{
     attackedCityId: ?string,

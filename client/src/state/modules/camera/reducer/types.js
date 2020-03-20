@@ -4,7 +4,7 @@ import type { ClientAction } from '../../../actions';
 import { zeroVector } from '../../../../../../common/src/vector';
 import type { ClientStateReducerTestScenario } from '../../types';
 
-export type ClientStateCameraReducerTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientStateCamera, A>;
+export type ClientStateCameraReducerTestScenario<+A: ClientAction> = ClientStateReducerTestScenario<ClientStateCamera, A>;
 
 export const emptyCameraState: ClientStateCamera = {
     locationLimit: {

@@ -37,7 +37,6 @@ const stateInitializationScenario: ClientStateTilesReducerTestScenario<ClientDum
 };
 
 describe('tilesReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

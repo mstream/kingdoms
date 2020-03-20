@@ -2,7 +2,8 @@
 
 import {
     addConnection,
-    casState, getConnections,
+    casState,
+    getConnections,
     getState,
     removeConnection,
     setState,
@@ -10,13 +11,14 @@ import {
 import { emptyCommonState } from '../../../common/src/state/modules/state';
 import verror from 'verror';
 import type { CommonState } from '../../../common/src/state/modules/types';
+import { dummyMultiRedis, dummyRedisClient } from '../clients/redis';
 
 describe('getConnections', () => {
     it('gets connections', async () => {
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             smembers: jest.fn(() => {
                 return Promise.resolve(['connection1', 'connection2']);
             }),
@@ -43,8 +45,8 @@ describe('getConnections', () => {
     it('fails on redis members failure', async () => {
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             smembers: jest.fn(() => {
                 return Promise.reject(Error('smembers error'));
             }),
@@ -72,8 +74,8 @@ describe('addConnection', () => {
         const connectionId = 'connection1';
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             sadd: jest.fn(() => {
                 return Promise.resolve(1);
             }),
@@ -99,8 +101,8 @@ describe('addConnection', () => {
         const connectionId = 'connection1';
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             sadd: jest.fn(() => {
                 return Promise.reject(Error('sadd error'));
             }),
@@ -130,8 +132,8 @@ describe('removeConnection', () => {
         const connectionId = 'connection1';
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             srem: jest.fn(() => {
                 return Promise.resolve(1);
             }),
@@ -157,8 +159,8 @@ describe('removeConnection', () => {
         const connectionId = 'connection1';
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             srem: jest.fn(() => {
                 return Promise.reject(Error('srem error'));
             }),
@@ -191,8 +193,8 @@ describe('getState', () => {
 
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.resolve(JSON.stringify(state));
             }),
@@ -238,8 +240,8 @@ describe('getState', () => {
 
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.reject(Error('database error'));
             }),
@@ -285,8 +287,8 @@ describe('getState', () => {
 
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.resolve(JSON.stringify(state));
             }),
@@ -341,8 +343,8 @@ describe('setState', () => {
 
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             set: jest.fn(() => {
                 return Promise.resolve('OK');
             }),
@@ -371,8 +373,8 @@ describe('setState', () => {
 
         const environment = 'env1';
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             set: jest.fn(() => {
                 return Promise.reject(Error('database error'));
             }),
@@ -436,21 +438,21 @@ describe('casState', () => {
         });
 
         const set = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 exec,
             };
         });
 
         const multi = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 set,
             };
         });
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.resolve(JSON.stringify(state));
             }),
@@ -549,21 +551,21 @@ describe('casState', () => {
         });
 
         const set = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 exec,
             };
         });
 
         const multi = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 set,
             };
         });
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.resolve(JSON.stringify(state));
             }),
@@ -639,11 +641,6 @@ describe('casState', () => {
             time: 'time1',
         };
 
-        const transformedState = {
-            ...emptyCommonState,
-            time: 'time2',
-        };
-
         const validateState = jest.fn(({ toValidate }) => {
             return state;
         });
@@ -662,21 +659,21 @@ describe('casState', () => {
         });
 
         const set = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 exec,
             };
         });
 
         const multi = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 set,
             };
         });
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.resolve(JSON.stringify(state));
             }),
@@ -766,21 +763,21 @@ describe('casState', () => {
         });
 
         const set = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 exec,
             };
         });
 
         const multi = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 set,
             };
         });
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.resolve(JSON.stringify(state));
             }),
@@ -868,21 +865,21 @@ describe('casState', () => {
         });
 
         const set = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 exec,
             };
         });
 
         const multi = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 set,
             };
         });
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.reject(Error('state read failed'));
             }),
@@ -966,21 +963,21 @@ describe('casState', () => {
         });
 
         const set = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 exec,
             };
         });
 
         const multi = jest.fn(() => {
-            // $FlowFixMe
             return {
+                ...dummyMultiRedis,
                 set,
             };
         });
 
-        // $FlowFixMe
         const redis = {
+            ...dummyRedisClient,
             get: jest.fn(() => {
                 return Promise.resolve(JSON.stringify(state));
             }),

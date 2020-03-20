@@ -65,7 +65,6 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDumm
 };
 
 describe('menuReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

@@ -50,7 +50,6 @@ const stateInitializationScenario: CommonStateTimeReducerTestScenarios<CommonDum
 };
 
 describe('timeReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

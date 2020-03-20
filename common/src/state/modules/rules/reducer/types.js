@@ -46,25 +46,25 @@ export type CommonStateUnitKey =
     | typeof UNIT_PIKEMAN
     | typeof UNIT_SWORDSMAN;
 
-export type CommonStateResources = { [CommonStateResourceKey]: number, ... };
+export type CommonStateResources = $ReadOnly<{ [CommonStateResourceKey]: number, ... }>;
 
-export type CommonStateBuildingUpgradeCost = { [CommonStateResourceKey]: number, ... };
+export type CommonStateBuildingUpgradeCost = $ReadOnly<{ [CommonStateResourceKey]: number, ... }>;
 
-export type CommonStateDamage = { [CommonStateArmorKey]: number, ... };
+export type CommonStateDamage = $ReadOnly<{ [CommonStateArmorKey]: number, ... }>;
 
-export type CommonStateBuildingUpgradeCosts = { [CommonStateBuildingKey]: CommonStateBuildingUpgradeCost, ... };
+export type CommonStateBuildingUpgradeCosts = $ReadOnly<{ [CommonStateBuildingKey]: CommonStateBuildingUpgradeCost, ... }>;
 
-export type CommonStateUnitStat = {
+export type CommonStateUnitStat = $ReadOnly<{
     armor: CommonStateArmorKey,
     damage: CommonStateDamage,
     foodDemand: number,
     range: number,
     speed: number,
-};
+}>;
 
-export type CommonStateUnitStats = { [CommonStateUnitKey]: CommonStateUnitStat, ... };
+export type CommonStateUnitStats = $ReadOnly<{ [CommonStateUnitKey]: CommonStateUnitStat, ... }>;
 
-export type CommonStateRules = {
+export type CommonStateRules = $ReadOnly<{
     baseCityCapacity: number,
     basePeasantsMigrationRate: number,
     buildingUpgradeCoefficient: number,
@@ -78,14 +78,14 @@ export type CommonStateRules = {
     unitFoodDemand: number,
     unitStarvingCoefficient: number,
     unitStats: CommonStateUnitStats,
-};
+}>;
 
-export type CommonStateBuilding = {
+export type CommonStateBuilding = $ReadOnly<{
     tier: number,
-};
+}>;
 
-export type CommonStateBuildings = { [CommonStateBuildingKey]: CommonStateBuilding, ... };
+export type CommonStateBuildings = $ReadOnly<{ [CommonStateBuildingKey]: CommonStateBuilding, ... }>;
 
-export type CommonStateUnits = { [CommonStateUnitKey]: number, ... };
+export type CommonStateUnits = $ReadOnly<{ [CommonStateUnitKey]: number, ... }>;
 
 export const CommonStateUnitType = (reify: Type<CommonStateUnitKey>);

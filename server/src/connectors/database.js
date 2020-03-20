@@ -108,9 +108,9 @@ export const casState = async (
     }: {
         environment: string,
         redis: Redis,
-        stateTransformer: ({ state: CommonState }) => { errors: $ReadOnlyArray<string>, state: ?CommonState },
+        stateTransformer: ({ state: CommonState }) => $ReadOnly<{ errors: $ReadOnlyArray<string>, state: ?CommonState }>,
         validateState: CommonStateValidator,
-    }): Promise<{ errors: $ReadOnlyArray<string>, previousState: CommonState, savedState: ?CommonState }> => {
+    }): Promise<$ReadOnly<{ errors: $ReadOnlyArray<string>, previousState: CommonState, savedState: ?CommonState }>> => {
     try {
         const stateKey = createStateKey({ environment });
         await redis.watch(stateKey);

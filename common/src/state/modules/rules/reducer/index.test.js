@@ -49,7 +49,6 @@ const stateInitializationScenario: CommonStateRulesReducerTestScenarios<CommonDu
 };
 
 describe('rulesReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

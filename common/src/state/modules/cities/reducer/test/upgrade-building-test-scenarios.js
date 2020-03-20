@@ -1,15 +1,15 @@
 // @flow
 
-import { upgradeBuilding } from '../../../actions';
+import { upgradeBuilding } from '../../../../actions';
 import {
     BUILDING_PASTURE,
     RESOURCE_FOOD,
     RESOURCE_WOOD,
-} from '../../rules/reducer/types';
-import { failure, success } from '../../utils';
-import { emptyCommonState } from '../../state';
-import { emptyCityState } from '../reducer/state';
-import type { CommonUpgradeBuildingAction } from '../actions';
+} from '../../../rules/reducer/types';
+import { failure, success } from '../../../utils';
+import { emptyCommonState } from '../../../state';
+import { emptyCityState } from '../state';
+import type { CommonUpgradeBuildingAction } from '../../actions';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 

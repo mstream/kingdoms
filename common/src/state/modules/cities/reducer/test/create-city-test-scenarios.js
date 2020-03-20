@@ -1,6 +1,6 @@
 // @flow
 
-import { createCity } from '../../../actions';
+import { createCity } from '../../../../actions';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
@@ -12,14 +12,14 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
-} from '../../rules/reducer/types';
-import { failure, success } from '../../utils';
-import { emptyCommonState } from '../../state';
-import { emptyCityState } from '../reducer/state';
+} from '../../../rules/reducer/types';
+import { failure, success } from '../../../utils';
+import { emptyCommonState } from '../../../state';
+import { emptyCityState } from '../state';
 import type {
     CommonChangeCityNameAction,
     CommonCreateCityAction,
-} from '../actions';
+} from '../../actions';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 

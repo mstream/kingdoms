@@ -8,7 +8,7 @@ import type { ClientStateReducerTestScenario } from '../../types';
 
 export type TileType = 'CITY' | 'PLAINS';
 
-export type ClientStateTilesReducerTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientStateTiles, A>;
+export type ClientStateTilesReducerTestScenario<+A: ClientAction> = ClientStateReducerTestScenario<ClientStateTiles, A>;
 
 export type ClientStateTile = $ReadOnly<{
     geometry: Geometry,

@@ -1,10 +1,10 @@
 // @flow
 
-import { abandonCity } from '../../../actions';
-import { failure, success } from '../../utils';
-import { emptyCommonState } from '../../state';
-import { emptyCityState } from '../reducer/state';
-import type { CommonAbandonCityAction } from '../actions';
+import { abandonCity } from '../../../../actions';
+import { failure, success } from '../../../utils';
+import { emptyCommonState } from '../../../state';
+import { emptyCityState } from '../state';
+import type { CommonAbandonCityAction } from '../../actions';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 

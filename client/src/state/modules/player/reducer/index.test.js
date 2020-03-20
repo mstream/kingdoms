@@ -37,7 +37,6 @@ const stateInitializationScenario: ClientStatePlayerReducerTestScenario<ClientDu
 };
 
 describe('playerReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

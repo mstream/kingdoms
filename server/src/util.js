@@ -64,7 +64,7 @@ export const executeAction = async (
             console.group(`optimistic locking attempt ${i + 1}/${optimisticLockingAttempts}`);
             console.info(`watching state`);
 
-            const stateTransformer = ({ state }: { state: CommonState }): { errors: $ReadOnlyArray<string>, state: ?CommonState } => {
+            const stateTransformer = ({ state }: { state: CommonState }): $ReadOnly<{ errors: $ReadOnlyArray<string>, state: ?CommonState }> => {
                 console.info(`applying action to the state`);
                 return rootReducer({ action, state });
             };

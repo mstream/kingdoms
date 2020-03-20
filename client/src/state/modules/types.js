@@ -23,14 +23,12 @@ export const initialClientState = {
 
 export type ClientState = typeof initialClientState;
 
-export type ClientStateReducerTestScenario<S, A: ClientAction> = {
+export type ClientStateReducerTestScenario<S, +A: ClientAction> = $ReadOnly<{
     name: string,
     action: A,
     previousGlobalState: ClientState,
     expectedLocalStateCreator: ({ previousLocalState: S }) => S,
-};
-
-export type ClientStateTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientState, A>;
+}>;
 
 export const emptyClientState: ClientState = {
     camera: emptyCameraState,

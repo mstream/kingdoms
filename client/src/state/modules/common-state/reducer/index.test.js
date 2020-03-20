@@ -34,7 +34,6 @@ const stateInitializationScenario: ClientStateCommonStateReducerTestScenario<Cli
 };
 
 describe('commonStateReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

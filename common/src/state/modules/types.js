@@ -12,27 +12,27 @@ import type { CommonStateWorld } from './world/reducer/types';
 import type { Range } from '../../range';
 import type { CommonAction } from '../actions/types';
 
-export type CommonState = {
+export type CommonState = $ReadOnly<{
     cities: CommonStateCities,
     rules: CommonStateRules,
     time: CommonStateTime,
     world: CommonStateWorld,
-};
+}>;
 
-export type CommonStateReducerResult<S> = {
+export type CommonStateReducerResult<S> = $ReadOnly<{
     errors: $ReadOnlyArray<string>,
     state: ?S,
-};
+}>;
 
 export type CommonStateReducer<S> = (S, CommonAction, CommonState) => CommonStateReducerResult<S>;
 
-export type CommonStateReducerTestScenario<S, A: CommonAction> = {
+export type CommonStateReducerTestScenario<S, +A: CommonAction> = $ReadOnly<{
     name: string,
     action: A,
     previousGlobalState: CommonState,
     expectedReductionResultCreator: ({ previousLocalState: S }) => CommonStateReducerResult<S>,
-};
+}>;
 
-export type CommonStateRegimentTemplate = { [CommonStateUnitKey]: Range, ... };
+export type CommonStateRegimentTemplate = $ReadOnly<{ [CommonStateUnitKey]: Range, ... }>;
 
 export const CommonStateType = (reify: Type<CommonState>);

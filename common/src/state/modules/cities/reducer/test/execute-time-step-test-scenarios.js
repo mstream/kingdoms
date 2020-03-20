@@ -1,20 +1,20 @@
 // @flow
 
-import { executeTimeStep } from '../../../actions';
-import { executeTimeStepCitiesReducer } from '../reducer/execute-time-step';
+import { executeTimeStep } from '../../../../actions';
+import { executeTimeStepCitiesReducer } from '../execute-time-step';
 import type {
     CommonStateCities,
 
-} from '../reducer/types';
-import { UNIT_PEASANT } from '../../rules/reducer/types';
+} from '../types';
+import { UNIT_PEASANT } from '../../../rules/reducer/types';
 import type {
     CommonState,
     CommonStateReducerResult,
-} from '../../types';
-import { failure, success } from '../../utils';
-import { emptyCommonState } from '../../state';
-import { emptyCityState } from '../reducer/state';
-import type { CommonExecuteTimeStepAction } from '../../time/actions';
+} from '../../../types';
+import { failure, success } from '../../../utils';
+import { emptyCommonState } from '../../../state';
+import { emptyCityState } from '../state';
+import type { CommonExecuteTimeStepAction } from '../../../time/actions';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 

@@ -7,11 +7,11 @@ import type {
 } from '../../rules/reducer/types';
 import type { Vector } from '../../../../vector';
 
-export type CommonStateOrder = {};
+export type CommonStateOrder = $ReadOnly<{}>;
 
-export type CommonStateOrders = { [string]: CommonStateOrder, ... };
+export type CommonStateOrders = $ReadOnly<{ [string]: CommonStateOrder, ... }>;
 
-export type CommonStateCity = {
+export type CommonStateCity = $ReadOnly<{
     buildings: CommonStateBuildings,
     location: Vector,
     name: string,
@@ -19,7 +19,7 @@ export type CommonStateCity = {
     ownerId: ?string,
     resources: CommonStateResources,
     units: CommonStateUnits,
-};
+}>;
 
-export type CommonStateCities = { [string]: CommonStateCity, ... };
+export type CommonStateCities = $ReadOnly<{ [string]: CommonStateCity, ... }>;
 

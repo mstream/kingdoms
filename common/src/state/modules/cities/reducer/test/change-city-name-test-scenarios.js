@@ -1,10 +1,10 @@
 // @flow
 
-import { changeCityName } from '../../../actions';
-import { failure, success } from '../../utils';
-import { emptyCommonState } from '../../state';
-import { emptyCityState } from '../reducer/state';
-import type { CommonChangeCityNameAction } from '../actions';
+import { changeCityName } from '../../../../actions';
+import { failure, success } from '../../../utils';
+import { emptyCommonState } from '../../../state';
+import { emptyCityState } from '../state';
+import type { CommonChangeCityNameAction } from '../../actions';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 

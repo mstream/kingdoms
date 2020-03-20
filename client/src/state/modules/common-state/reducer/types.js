@@ -6,6 +6,6 @@ import type { CommonState } from '../../../../../../common/src/state/modules/typ
 
 export type ClientStateCommonState = ?CommonState
 
-export type ClientStateCommonStateReducerTestScenario<A: ClientAction> = ClientStateReducerTestScenario<ClientStateCommonState, A>;
+export type ClientStateCommonStateReducerTestScenario<+A: ClientAction> = ClientStateReducerTestScenario<ClientStateCommonState, A>;
 
 export const emptyCommonStateState: ClientStateCommonState = null;

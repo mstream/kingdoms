@@ -64,7 +64,6 @@ const stateInitializationScenario: ClientStateCameraReducerTestScenario<ClientDu
 };
 
 describe('cameraReducer', () => {
-    // $FlowFixMe
     runScenarios({
         scenarios: [
             stateInitializationScenario,

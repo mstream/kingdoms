@@ -1,13 +1,13 @@
 // @flow
 
-import { resetState } from '../../../actions';
+import { resetState } from '../../../../actions';
 import {
     initialCommonState,
-} from '../../../index';
-import { success } from '../../utils';
-import { emptyCommonState } from '../../state';
-import { emptyCityState } from '../reducer/state';
-import type { CommonResetStateAction } from '../../../actions/types';
+} from '../../../../index';
+import { success } from '../../../utils';
+import { emptyCommonState } from '../../../state';
+import { emptyCityState } from '../state';
+import type { CommonResetStateAction } from '../../../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 

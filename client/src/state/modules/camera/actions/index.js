@@ -3,7 +3,7 @@
 
 import type { Vector } from '../../../../../../common/src/vector';
 import type { ClientActionCreator } from '../../../actions/types';
-import type { BaseAction } from '../../../../../../common/src/state/types';
+import type { BaseAction } from '../../../../../../common/src/types/actions';
 
 export const MOVE_CAMERA: 'MOVE_CAMERA' = 'MOVE_CAMERA';
 export const ZOOM_CAMERA: 'ZOOM_CAMERA' = 'ZOOM_CAMERA';

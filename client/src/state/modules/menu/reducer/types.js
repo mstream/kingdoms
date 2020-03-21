@@ -10,7 +10,7 @@ import {
     BUILDING_WAREHOUSE, RESOURCE_FOOD,
     UNIT_PEASANT,
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
-import type { CommonStateRegimentTemplate } from '../../../../../../common/src/state/modules/types';
+import type { CommonStateRegimentTemplate } from '../../../../../../common/src/state/modules/orders/reducer/types';
 
 export const TAB_BUILDINGS: 'TAB_BUILDINGS' = 'TAB_BUILDINGS';
 export const TAB_ORDERS: 'TAB_ORDERS' = 'TAB_ORDERS';

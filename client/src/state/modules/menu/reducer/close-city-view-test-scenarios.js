@@ -16,7 +16,7 @@ export const closeCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTe
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                 },
             },
         },

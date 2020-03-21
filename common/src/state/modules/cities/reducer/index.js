@@ -19,10 +19,12 @@ import {
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
-} from '../actions';
+} from '../actions/types';
 import { EXECUTE_TIME_STEP } from '../../time/actions';
-import type { CommonAction } from '../../../actions/types';
 import { RESET_STATE } from '../../../actions/types';
+import type { CommonAction } from '../../../types';
+import { CREATE_ORDER } from '../../orders/actions/types';
+import { createOrderCitiesReducer } from './create-order';
 
 export const initialCitiesState = emptyCitiesState;
 
@@ -48,6 +50,13 @@ export const citiesReducer = (
         }
         case CREATE_CITY: {
             return createCityCitiesReducer({
+                action,
+                globalState,
+                localState,
+            });
+        }
+        case CREATE_ORDER: {
+            return createOrderCitiesReducer({
                 action,
                 globalState,
                 localState,

@@ -3,7 +3,7 @@
 
 import { reify, Type } from 'flow-runtime';
 import type { CommonState } from './state/modules/types';
-import type { CommonAction } from './state/actions/types';
+import type { CommonAction } from './state/types';
 
 export type ServerRequest = CommonAction
 

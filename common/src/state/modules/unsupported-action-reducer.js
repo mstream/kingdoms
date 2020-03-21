@@ -5,7 +5,7 @@ import type {
     CommonStateReducerResult,
 } from './types';
 import { success } from './utils';
-import type { CommonAction } from '../actions/types';
+import type { CommonAction } from '../types';
 
 export const unsupportedActionReducer = <S, A: CommonAction>(
     {

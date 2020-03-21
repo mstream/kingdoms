@@ -58,11 +58,11 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTe
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         location: {
                             ...emptyCityState.location,
@@ -100,7 +100,7 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTe
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },

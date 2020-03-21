@@ -2,11 +2,11 @@
 
 
 import { playerReducer } from './index';
-import { dummy } from '../../../../../../common/src/state/actions';
 import type { ClientAction, ClientDummyAction } from '../../../actions';
 import { loadPlayerTestScenarios } from './load-player-test-scenarios';
 import { emptyClientState } from '../../types';
 import type { ClientStatePlayerReducerTestScenario } from './types';
+import { dummy } from '../../../actions';
 
 const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStatePlayerReducerTestScenario<ClientAction>> }): void => {
     scenarios.forEach(

@@ -8,8 +8,8 @@ import { sendServerResponse } from './connectors/api';
 import { rootReducer } from '../../common/src/state/modules/root';
 import type { ServerResponse } from '../../common/src/types';
 import type { CommonState } from '../../common/src/state/modules/types';
-import type { CommonAction } from '../../common/src/state/actions/types';
 import { validateCommonStateType } from '../../common/src/validators';
+import type { CommonAction } from '../../common/src/state/types';
 
 
 const optimisticLockingAttempts = 3;

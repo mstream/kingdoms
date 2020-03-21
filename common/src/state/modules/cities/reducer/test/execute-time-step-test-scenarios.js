@@ -1,6 +1,6 @@
 // @flow
 
-import { executeTimeStep } from '../../../../actions';
+import { executeTimeStep } from '../../actions';
 import { executeTimeStepCitiesReducer } from '../execute-time-step';
 import type {
     CommonStateCities,
@@ -40,7 +40,7 @@ export const executeTimeStepTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     units: {
                         ...emptyCityState.units,
@@ -63,10 +63,10 @@ export const executeTimeStepTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
                 {
                     state: {
                         ...previousLocalState,
-                        '1': {
-                            ...previousLocalState['1'],
+                        'city1': {
+                            ...previousLocalState['city1'],
                             units: {
-                                ...previousLocalState['1'].units,
+                                ...previousLocalState['city1'].units,
                                 [UNIT_PEASANT]: 100,
                             },
                         },

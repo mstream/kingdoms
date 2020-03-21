@@ -44,7 +44,7 @@ describe('AppComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
@@ -54,7 +54,7 @@ describe('AppComponent', () => {
                 ...emptyClientState.tiles,
                 city: {
                     ...emptyClientState.tiles.city,
-                    '1': {
+                    'city1': {
                         ...emptyClientStateCityTile,
                     },
                 },
@@ -83,11 +83,11 @@ describe('AppComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
@@ -97,10 +97,10 @@ describe('AppComponent', () => {
                 ...emptyClientState.tiles,
                 city: {
                     ...emptyClientState.tiles.city,
-                    '1': {
+                    'city1': {
                         ...emptyClientStateCityTile,
                     },
-                    '2': {
+                    'city2': {
                         ...emptyClientStateCityTile,
                     },
                 },

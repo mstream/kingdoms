@@ -6,9 +6,8 @@ import type { ClientAction } from '../actions';
 import {
     changeCityName,
     createCity,
-    getCurrentState,
     upgradeBuilding,
-} from '../../../../common/src/state/actions';
+} from '../../../../common/src/state/modules/cities/actions';
 import jwt from 'jsonwebtoken';
 import { generateId, stringifyJson } from '../../../../common/src/util';
 import {
@@ -19,7 +18,8 @@ import { loadPlayer } from '../modules/player/actions';
 import { parseServerResponse } from '../../util';
 import type { ServerResponse } from '../../../../common/src/types';
 import type { ClientState } from '../modules/types';
-import type { CommonAction } from '../../../../common/src/state/actions/types';
+import { getCurrentState } from '../../../../common/src/state/actions';
+import type { CommonAction } from '../../../../common/src/state/types';
 
 
 const send = ({ action, socket }: { action: CommonAction, socket: Socket }): void => {

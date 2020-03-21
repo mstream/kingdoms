@@ -22,14 +22,14 @@ describe('CityOverviewComponent', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                     tab: TAB_UNITS,
                 },
             },
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },
@@ -54,14 +54,14 @@ describe('CityOverviewComponent', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                     tab: TAB_OVERVIEW,
                 },
             },
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },

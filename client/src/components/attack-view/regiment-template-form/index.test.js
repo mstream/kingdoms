@@ -10,9 +10,10 @@ import { emptyClientState } from '../../../state/modules/types';
 import type { ClientState } from '../../../state/modules/types';
 import {
     emptyCommonState,
-    emptyRegimentTemplateState,
+
 } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
+import { emptyRegimentTemplateState } from '../../../../../common/src/state/modules/orders/reducer/state';
 
 const mockStore = configureStore([]);
 
@@ -23,7 +24,7 @@ describe('AttackViewRegimentTemplateFormComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },
@@ -32,7 +33,7 @@ describe('AttackViewRegimentTemplateFormComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackingCityId: '1',
+                    attackingCityId: 'city1',
                 },
             },
         };

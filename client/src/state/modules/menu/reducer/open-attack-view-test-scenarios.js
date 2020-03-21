@@ -10,7 +10,7 @@ import { emptyCityState } from '../../../../../../common/src/state/modules/citie
 export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientOpenAttackViewAction>> = [
     {
         name: 'opens attack view',
-        action: openAttackView({ cityId: '2' }),
+        action: openAttackView({ cityId: 'city2' }),
         previousGlobalState: {
             ...emptyClientState,
             player: {
@@ -19,11 +19,11 @@ export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerT
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
@@ -42,7 +42,7 @@ export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerT
                 ...previousLocalState,
                 attackView: {
                     ...previousLocalState.attackView,
-                    attackedCityId: '2',
+                    attackedCityId: 'city2',
                 },
             };
         },

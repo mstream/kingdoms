@@ -8,8 +8,8 @@ import type {
     CommonState,
     CommonStateReducerResult,
 } from '../../types';
-import type { CommonAction } from '../../../actions/types';
 import { RESET_STATE } from '../../../actions/types';
+import type { CommonAction } from '../../../types';
 
 export const worldReducer = (
     localState: CommonStateWorld = initialCommonState.world,

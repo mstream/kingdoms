@@ -20,7 +20,7 @@ import type {
     CommonStateReducerResult,
 } from '../../types';
 import { failure, success } from '../../utils';
-import type { CommonCreateCityAction } from '../actions';
+import type { CommonCreateCityAction } from '../actions/types';
 
 export const createCityCitiesReducer = (
     {
@@ -65,7 +65,6 @@ export const createCityCitiesReducer = (
         },
         location: freeCitySpot,
         name,
-        orders: {},
         ownerId: playerId,
         resources: {
             [RESOURCE_FOOD]: 0,

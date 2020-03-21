@@ -11,7 +11,7 @@ import { emptyCityState } from '../../../../../../common/src/state/modules/citie
 export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientOpenCityViewAction>> = [
     {
         name: 'opens city view',
-        action: openCityView({ cityId: '1' }),
+        action: openCityView({ cityId: 'city1' }),
         previousGlobalState: {
             ...emptyClientState,
             player: {
@@ -20,7 +20,7 @@ export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTes
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
@@ -39,7 +39,7 @@ export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTes
                 ...previousLocalState,
                 cityView: {
                     ...previousLocalState.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                     tab: TAB_OVERVIEW,
                 },
             };

@@ -104,7 +104,7 @@ export const zoomCameraTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTes
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                 },
             },
         },
@@ -157,7 +157,7 @@ export const zoomCameraTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTes
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackedCityId: '1',
+                    attackedCityId: 'city1',
                 },
             },
         },

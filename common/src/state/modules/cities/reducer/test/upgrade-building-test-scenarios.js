@@ -1,6 +1,6 @@
 // @flow
 
-import { upgradeBuilding } from '../../../../actions';
+import { upgradeBuilding } from '../../actions';
 import {
     BUILDING_PASTURE,
     RESOURCE_FOOD,
@@ -9,7 +9,7 @@ import {
 import { failure, success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import { emptyCityState } from '../state';
-import type { CommonUpgradeBuildingAction } from '../../actions';
+import type { CommonUpgradeBuildingAction } from '../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 
@@ -18,13 +18,13 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         name: 'upgrades the building',
         action: upgradeBuilding({
             buildingType: BUILDING_PASTURE,
-            cityId: '1',
+            cityId: 'city1',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     ownerId: 'player1',
                     buildings: {
@@ -58,17 +58,17 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
                     state:
                         {
                             ...previousLocalState,
-                            '1': {
-                                ...previousLocalState['1'],
+                            'city1': {
+                                ...previousLocalState['city1'],
                                 buildings: {
-                                    ...previousLocalState['1'].buildings,
+                                    ...previousLocalState['city1'].buildings,
                                     [BUILDING_PASTURE]: {
-                                        ...previousLocalState['1'].buildings[BUILDING_PASTURE],
+                                        ...previousLocalState['city1'].buildings[BUILDING_PASTURE],
                                         tier: 1,
                                     },
                                 },
                                 resources: {
-                                    ...previousLocalState['1'].resources,
+                                    ...previousLocalState['city1'].resources,
                                     [RESOURCE_FOOD]: 200,
                                     [RESOURCE_WOOD]: 100,
                                 },
@@ -82,7 +82,7 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         name: 'fails when city does not exist',
         action: upgradeBuilding({
             buildingType: BUILDING_PASTURE,
-            cityId: '1',
+            cityId: 'city1',
             playerId: 'player1',
         }),
         previousGlobalState: {
@@ -101,13 +101,13 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         name: 'fails when city does not belong to the player',
         action: upgradeBuilding({
             buildingType: BUILDING_PASTURE,
-            cityId: '1',
+            cityId: 'city1',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     ownerId: 'player2',
                 },
@@ -125,13 +125,13 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         name: 'fails when the resources are insufficient',
         action: upgradeBuilding({
             buildingType: BUILDING_PASTURE,
-            cityId: '1',
+            cityId: 'city1',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     ownerId: 'player1',
                     buildings: {

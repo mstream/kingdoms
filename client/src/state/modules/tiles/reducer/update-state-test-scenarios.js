@@ -16,10 +16,10 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateTilesReducerTes
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                     },
                 },

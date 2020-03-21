@@ -5,7 +5,7 @@ import type { CommonStateBuildingKey } from '../../../../../../common/src/state/
 import type {
     CommonState,
 } from '../../../../../../common/src/state/modules/types';
-import type { BaseAction } from '../../../../../../common/src/state/types';
+import type { BaseAction } from '../../../../../../common/src/types/actions';
 
 export const REQUEST_BUILDING_UPGRADE: 'REQUEST_BUILDING_UPGRADE' = 'REQUEST_BUILDING_UPGRADE';
 export const REQUEST_CITY_CREATION: 'REQUEST_CITY_CREATION' = 'REQUEST_CITY_CREATION';

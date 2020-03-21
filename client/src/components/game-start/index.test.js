@@ -20,7 +20,7 @@ describe('GameStartComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
@@ -48,7 +48,7 @@ describe('GameStartComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },

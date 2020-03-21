@@ -1,16 +1,55 @@
 // @flow
 
-import type { CommonStateBuildingKey } from '../../rules/reducer/types';
-import type { BaseAction } from '../../../types';
+import type {
+    CommonAbandonCityAction,
+    CommonChangeCityNameAction,
+    CommonCreateCityAction,
+    CommonUpgradeBuildingAction,
+} from './types';
+import {
+    ABANDON_CITY,
+    CHANGE_CITY_NAME,
+    CREATE_CITY,
+    UPGRADE_BUILDING,
+} from './types';
+import type { CommonExecuteTimeStepAction } from '../../time/actions';
+import { EXECUTE_TIME_STEP } from '../../time/actions';
+import type { CommonActionCreator } from '../../../types';
 
-export const ABANDON_CITY: 'ABANDON_CITY' = 'ABANDON_CITY';
-export const CHANGE_CITY_NAME: 'CHANGE_CITY_NAME' = 'CHANGE_CITY_NAME';
-export const CREATE_CITY: 'CREATE_CITY' = 'CREATE_CITY';
-export const CREATE_ORDER: 'CREATE_ORDER' = 'CREATE_ORDER';
-export const UPGRADE_BUILDING: 'UPGRADE_BUILDING' = 'UPGRADE_BUILDING';
 
-export type CommonAbandonCityAction = BaseAction<typeof ABANDON_CITY, $ReadOnly<{ cityId: string, playerId: string, }>>;
-export type CommonChangeCityNameAction = BaseAction<typeof CHANGE_CITY_NAME, $ReadOnly<{ cityId: string, name: string, playerId: string, }>>;
-export type CommonCreateCityAction = BaseAction<typeof CREATE_CITY, $ReadOnly<{ cityId: string, name: string, playerId: string, }>>;
-export type CommonCreateOrderAction = BaseAction<typeof CREATE_ORDER, $ReadOnly<{ originCityId: string, regimentTemplate: string, targetCityId: string, }>>;
-export type CommonUpgradeBuildingAction = BaseAction<typeof UPGRADE_BUILDING, $ReadOnly<{ buildingType: CommonStateBuildingKey, cityId: string, playerId: string, }>>;
+export const abandonCity: CommonActionCreator<CommonAbandonCityAction> = (payload) => {
+    return {
+        type: ABANDON_CITY,
+        payload,
+    };
+};
+
+export const changeCityName: CommonActionCreator<CommonChangeCityNameAction> = (payload) => {
+    return {
+        type: CHANGE_CITY_NAME,
+        payload,
+    };
+};
+
+export const createCity: CommonActionCreator<CommonCreateCityAction> = (payload) => {
+    return {
+        type: CREATE_CITY,
+        payload,
+    };
+};
+
+export const executeTimeStep: CommonActionCreator<CommonExecuteTimeStepAction> = (payload) => {
+    return {
+        type: EXECUTE_TIME_STEP,
+        payload,
+    };
+};
+
+export const upgradeBuilding: CommonActionCreator<CommonUpgradeBuildingAction> = (payload) => {
+    return {
+        type: UPGRADE_BUILDING,
+        payload,
+    };
+};
+
+

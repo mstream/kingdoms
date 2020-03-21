@@ -1,13 +1,6 @@
 // @flow
-import type {
-    CommonAbandonCityAction,
-    CommonChangeCityNameAction,
-    CommonCreateCityAction,
-    CommonCreateOrderAction,
-    CommonUpgradeBuildingAction,
-} from '../modules/cities/actions';
-import type { CommonExecuteTimeStepAction } from '../modules/time/actions';
-import type { BaseAction } from '../types';
+
+import type { BaseAction } from '../../types/actions';
 
 export const DUMMY: 'DUMMY' = 'DUMMY';
 export const GET_CURRENT_STATE: 'GET_CURRENT_STATE' = 'GET_CURRENT_STATE';
@@ -19,15 +12,3 @@ export type CommonGetCurrentStateAction = BaseAction<typeof GET_CURRENT_STATE, v
 
 export type CommonResetStateAction = BaseAction<typeof RESET_STATE, void>;
 
-export type CommonAction =
-    | CommonAbandonCityAction
-    | CommonChangeCityNameAction
-    | CommonCreateCityAction
-    | CommonCreateOrderAction
-    | CommonDummyAction
-    | CommonExecuteTimeStepAction
-    | CommonGetCurrentStateAction
-    | CommonResetStateAction
-    | CommonUpgradeBuildingAction;
-
-export type CommonActionCreator<A: CommonAction> = ($PropertyType<A, 'payload'>) => A;

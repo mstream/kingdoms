@@ -1,10 +1,10 @@
 // @flow
 
-import { abandonCity } from '../../../../actions';
+import { abandonCity } from '../../actions';
 import { failure, success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import { emptyCityState } from '../state';
-import type { CommonAbandonCityAction } from '../../actions';
+import type { CommonAbandonCityAction } from '../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 
@@ -12,13 +12,13 @@ export const abandonCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
     {
         name: 'abandons city',
         action: abandonCity({
-            cityId: '1',
+            cityId: 'city1',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     ownerId: 'player1',
                 },
@@ -29,8 +29,8 @@ export const abandonCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
                 {
                     state: {
                         ...previousLocalState,
-                        '1': {
-                            ...previousLocalState['1'],
+                        'city1': {
+                            ...previousLocalState['city1'],
                             ownerId: null,
                         },
                     },
@@ -41,7 +41,7 @@ export const abandonCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
     {
         name: 'fails when city does not exist',
         action: abandonCity({
-            cityId: '1',
+            cityId: 'city1',
             playerId: 'player1',
         }),
         previousGlobalState: {
@@ -59,13 +59,13 @@ export const abandonCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
     {
         name: 'fails when the city does not belong to the player',
         action: abandonCity({
-            cityId: '1',
+            cityId: 'city1',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     ownerId: 'player2',
                 },

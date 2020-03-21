@@ -6,8 +6,8 @@ import { unitsOrder } from '../../assets/images/units';
 import { AttackViewRegimentTemplateFormComponent } from './regiment-template-form';
 import { AttackViewCityListComponent } from './city-list';
 import type { CommonStateUnitKey } from '../../../../common/src/state/modules/rules/reducer/types';
-import type { CommonStateRegimentTemplate } from '../../../../common/src/state/modules/types';
 import { AttackViewSchedulerFormComponent } from './scheduler-form';
+import type { CommonStateRegimentTemplate } from '../../../../common/src/state/modules/orders/reducer/types';
 
 const initialRegimentTemplate: CommonStateRegimentTemplate = unitsOrder.reduce(
     (initialQuantities, unitType: CommonStateUnitKey) => {

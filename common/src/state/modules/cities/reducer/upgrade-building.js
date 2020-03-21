@@ -13,7 +13,7 @@ import type {
     CommonStateReducerResult,
 } from '../../types';
 import { failure, success } from '../../utils';
-import type { CommonUpgradeBuildingAction } from '../actions';
+import type { CommonUpgradeBuildingAction } from '../actions/types';
 
 export const upgradeBuildingCitiesReducer = (
     {

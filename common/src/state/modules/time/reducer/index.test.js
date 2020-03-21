@@ -2,13 +2,14 @@
 
 import { initialCommonState } from '../../../index';
 import { timeReducer } from './index';
-import { dummy } from '../../../actions';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
 import { success } from '../../utils';
 import { emptyCommonState } from '../../state';
-import type { CommonAction, CommonDummyAction } from '../../../actions/types';
+import type { CommonDummyAction } from '../../../actions/types';
 import type { CommonStateTimeReducerTestScenarios } from './test/types';
+import { dummy } from '../../../actions';
+import type { CommonAction } from '../../../types';
 
 const runScenarios = (
     {

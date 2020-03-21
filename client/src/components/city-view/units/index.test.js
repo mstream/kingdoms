@@ -29,7 +29,7 @@ describe('CityUnitsComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },
@@ -38,7 +38,7 @@ describe('CityUnitsComponent', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                     tab: TAB_RESOURCES,
                 },
             },
@@ -61,7 +61,7 @@ describe('CityUnitsComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },
@@ -70,7 +70,7 @@ describe('CityUnitsComponent', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                     tab: TAB_UNITS,
                     unit: UNIT_PIKEMAN,
                 },

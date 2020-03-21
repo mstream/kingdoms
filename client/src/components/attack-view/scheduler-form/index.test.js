@@ -49,7 +49,7 @@ describe('AttackViewSchedulerFormComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackingCityId: '1',
+                    attackingCityId: 'city1',
                 },
             },
         };
@@ -78,7 +78,7 @@ describe('AttackViewSchedulerFormComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackingCityId: '1',
+                    attackingCityId: 'city1',
                 },
             },
         };
@@ -108,7 +108,7 @@ describe('AttackViewSchedulerFormComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackingCityId: '1',
+                    attackingCityId: 'city1',
                 },
             },
         };

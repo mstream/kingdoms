@@ -5,7 +5,7 @@ import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientCloseAttackViewAction } from '../actions';
 import { closeAttackView } from '../actions';
 import { UNIT_PIKEMAN } from '../../../../../../common/src/state/modules/rules/reducer/types';
-import { emptyRegimentTemplateState } from '../../../../../../common/src/state/modules/state';
+import { emptyRegimentTemplateState } from '../../../../../../common/src/state/modules/orders/reducer/state';
 
 
 export const closeAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientCloseAttackViewAction>> = [
@@ -18,8 +18,8 @@ export const closeAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducer
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackedCityId: '1',
-                    attackingCityId: '2',
+                    attackedCityId: 'city1',
+                    attackingCityId: 'city2',
                     regimentTemplate: {
                         ...emptyRegimentTemplateState,
                         [UNIT_PIKEMAN]: {

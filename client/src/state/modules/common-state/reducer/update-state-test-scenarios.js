@@ -17,10 +17,10 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCommonStateRedu
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                     },
                 },
@@ -40,10 +40,10 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCommonStateRedu
             return {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                     },
                 },

@@ -15,11 +15,11 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTest
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
@@ -45,7 +45,7 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTest
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },

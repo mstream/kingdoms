@@ -1,6 +1,6 @@
 // @flow
 
-import { createCity } from '../../../../actions';
+import { createCity } from '../../actions';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
@@ -19,15 +19,15 @@ import { emptyCityState } from '../state';
 import type {
     CommonChangeCityNameAction,
     CommonCreateCityAction,
-} from '../../actions';
+} from '../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 
-export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonCreateCityAction>> = [
+export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonCreateCityAction>> = [
     {
         name: 'creates a city',
         action: createCity({
-            cityId: `1`,
+            cityId: `city1`,
             name: `Name`,
             playerId: `player1`,
         }),
@@ -53,7 +53,7 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
                     state:
                         {
                             ...previousLocalState,
-                            '1': {
+                            'city1': {
                                 buildings: {
                                     [BUILDING_LUMBER_MILL]: {
                                         tier: 0,
@@ -70,7 +70,6 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
                                     y: 0,
                                 },
                                 name: `Name`,
-                                orders: {},
                                 ownerId: `player1`,
                                 resources: {
                                     [RESOURCE_FOOD]: 0,
@@ -94,7 +93,7 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when there is not enough space for the city',
         action: createCity({
-            cityId: '1',
+            cityId: 'city1',
             name: 'Newname',
             playerId: 'player1',
         }),
@@ -125,7 +124,7 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the name is too short',
         action: createCity({
-            cityId: '1',
+            cityId: 'city1',
             name: 'Ne',
             playerId: 'player1',
         }),
@@ -156,7 +155,7 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the name is too long',
         action: createCity({
-            cityId: '1',
+            cityId: 'city1',
             name: 'NewnameNewnameNewnameNewnameNewname',
             playerId: 'player1',
         }),
@@ -187,7 +186,7 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the name does not start with a capital letter',
         action: createCity({
-            cityId: '1',
+            cityId: 'city1',
             name: 'newname',
             playerId: 'player1',
         }),
@@ -218,7 +217,7 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the player already owns a city',
         action: createCity({
-            cityId: '1',
+            cityId: 'city1',
             name: 'newname',
             playerId: 'player1',
         }),
@@ -226,7 +225,7 @@ export const createCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     location: {
                         x: 0,

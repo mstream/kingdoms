@@ -20,25 +20,25 @@ describe('AttackViewCityListComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         location: { x: 0, y: 0 },
                         name: 'Cityone',
                         ownerId: 'player2',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         location: { x: 0, y: -4 },
                         name: 'Citytwo',
                         ownerId: 'player3',
                     },
-                    '3': {
+                    'city3': {
                         ...emptyCityState,
                         location: { x: 2, y: 0 },
                         name: 'Citythree',
                         ownerId: 'player1',
                     },
-                    '4': {
+                    'city4': {
                         ...emptyCityState,
                         location: { x: 0, y: 3 },
                         name: 'Cityfour',
@@ -50,7 +50,7 @@ describe('AttackViewCityListComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackedCityId: '1',
+                    attackedCityId: 'city1',
                 },
             },
             player: {

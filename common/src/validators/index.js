@@ -2,9 +2,9 @@
 
 import type { CommonState } from '../state/modules/types';
 import { CommonStateType } from '../state/modules/types';
+import type { CommonStateUnitKey } from '../state/modules/rules/reducer/types';
 import { CommonStateUnitKeyType } from '../state/modules/rules/reducer/types';
 import type { TypeValidator } from './types';
-import type { CommonStateUnitKey } from '../state/modules/rules/reducer/types';
 
 export const validateCommonStateType: TypeValidator<CommonState> = ({ toValidate }) => {
     return CommonStateType.assert(toValidate);
@@ -12,6 +12,12 @@ export const validateCommonStateType: TypeValidator<CommonState> = ({ toValidate
 
 export const validateUnitType: TypeValidator<CommonStateUnitKey> = ({ toValidate }) => {
     return CommonStateUnitKeyType.assert(toValidate);
+};
+
+export const validateTime = ({ time }: { time: string }): $ReadOnlyArray<string> => {
+    return isNaN(Date.parse(time)) ?
+        ['time does not have a valid format'] :
+        [];
 };
 
 export const validateCityName = ({ name }: { name: string }): $ReadOnlyArray<string> => {

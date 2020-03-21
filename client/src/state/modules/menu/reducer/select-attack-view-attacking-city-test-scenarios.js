@@ -9,14 +9,14 @@ import { selectAttackViewAttackingCity } from '../actions';
 export const selectAttackViewAttackingCityTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectAttackViewAttackingCityAction>> = [
     {
         name: 'select attack view attacking city',
-        action: selectAttackViewAttackingCity({ cityId: '2' }),
+        action: selectAttackViewAttackingCity({ cityId: 'city2' }),
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackingCityId: '1',
+                    attackingCityId: 'city1',
                 },
             },
         },
@@ -25,7 +25,7 @@ export const selectAttackViewAttackingCityTestScenarios: $ReadOnlyArray<ClientSt
                 ...previousLocalState,
                 attackView: {
                     ...previousLocalState.attackView,
-                    attackingCityId: '2',
+                    attackingCityId: 'city2',
                 },
             };
         },

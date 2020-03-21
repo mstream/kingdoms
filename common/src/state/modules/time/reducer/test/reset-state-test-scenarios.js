@@ -1,14 +1,16 @@
 // @flow
 
-import { resetState } from '../../../../actions';
 import { initialCommonState } from '../../../../index';
 import { success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import type { CommonResetStateAction } from '../../../../actions/types';
 import type { CommonStateTimeReducerTestScenarios } from './types';
+import { resetState } from '../../../../actions';
 
 
-export const resetStateTestScenarios: $ReadOnlyArray<CommonStateTimeReducerTestScenarios<CommonResetStateAction>> = [
+type Scenarios = $ReadOnlyArray<CommonStateTimeReducerTestScenarios<CommonResetStateAction>>;
+
+export const resetStateTestScenarios: Scenarios = [
     {
         name: 'resets its state',
         action: resetState(),

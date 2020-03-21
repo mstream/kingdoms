@@ -10,8 +10,8 @@ import type {
     CommonStateReducerResult,
 } from '../../types';
 import { EXECUTE_TIME_STEP } from '../actions';
-import type { CommonAction } from '../../../actions/types';
 import { RESET_STATE } from '../../../actions/types';
+import type { CommonAction } from '../../../types';
 
 export const timeReducer = (
     localState: CommonStateTime = initialCommonState.time,

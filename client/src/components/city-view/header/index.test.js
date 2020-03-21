@@ -44,7 +44,7 @@ describe('CityHeaderComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         name: 'Cityone',
                         ownerId: 'player1',
@@ -55,7 +55,7 @@ describe('CityHeaderComponent', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                 },
             },
             player: {

@@ -16,20 +16,20 @@ describe('commonStateCitiesSelector', () => {
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
-                '1': {
+                'city1': {
                     ...emptyCityState,
                 },
-                '2': {
+                'city2': {
                     ...emptyCityState,
                 },
             },
         };
 
         const expected: CommonStateCities = {
-            '1': {
+            'city1': {
                 ...emptyCityState,
             },
-            '2': {
+            'city2': {
                 ...emptyCityState,
             },
         };
@@ -73,7 +73,7 @@ describe('nextCitySpotSelector', () => {
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     location: zeroVector,
                 },
@@ -113,39 +113,39 @@ describe('nextCitySpotSelector', () => {
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     location: zeroVector,
                 },
-                '2': {
+                'city2': {
                     ...emptyCityState,
                     location: { x: 0, y: -2 },
                 },
-                '3': {
+                'city3': {
                     ...emptyCityState,
                     location: { x: 2, y: 0 },
                 },
-                '4': {
+                'city4': {
                     ...emptyCityState,
                     location: { x: 0, y: 2 },
                 },
-                '5': {
+                'city5': {
                     ...emptyCityState,
                     location: { x: -2, y: 0 },
                 },
-                '6': {
+                'city6': {
                     ...emptyCityState,
                     location: { x: -2, y: -2 },
                 },
-                '7': {
+                'city7': {
                     ...emptyCityState,
                     location: { x: 2, y: -2 },
                 },
-                '8': {
+                'city8': {
                     ...emptyCityState,
                     location: { x: 2, y: 2 },
                 },
-                '9': {
+                'city9': {
                     ...emptyCityState,
                     location: { x: -2, y: 2 },
                 },

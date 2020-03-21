@@ -7,7 +7,7 @@ import type {
     CommonStateReducerResult,
 } from '../../types';
 import { failure, success } from '../../utils';
-import type { CommonChangeCityNameAction } from '../actions';
+import type { CommonChangeCityNameAction } from '../actions/types';
 
 export const changeCityNameCitiesReducer = (
     {

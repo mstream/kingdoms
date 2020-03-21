@@ -14,10 +14,13 @@ import type {
     CommonStateReducerResult,
 } from './types';
 import { emptyCommonState } from './state';
-import type { CommonAction } from '../actions/types';
+import { ordersReducer } from './orders/reducer';
+import type { CommonStateOrders } from './orders/reducer/types';
+import type { CommonAction } from '../types';
 
 type StateToReducersMapping = {
     cities: CommonStateReducer<CommonStateCities>,
+    orders: CommonStateReducer<CommonStateOrders>,
     rules: CommonStateReducer<CommonStateRules>,
     time: CommonStateReducer<CommonStateTime>,
     world: CommonStateReducer<CommonStateWorld>,
@@ -68,6 +71,7 @@ const combineCommonStateReducers = ({ stateToReducersMapping }: { stateToReducer
 
 const stateToReducersMapping: StateToReducersMapping = {
     cities: citiesReducer,
+    orders: ordersReducer,
     rules: rulesReducer,
     time: timeReducer,
     world: worldReducer,

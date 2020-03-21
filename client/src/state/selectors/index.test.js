@@ -25,10 +25,10 @@ describe('citiesSelector', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                     },
                 },
@@ -36,10 +36,10 @@ describe('citiesSelector', () => {
         };
 
         const expected: ?CommonStateCities = {
-            '1': {
+            'city1': {
                 ...emptyCityState,
             },
-            '2': {
+            'city2': {
                 ...emptyCityState,
             },
         };
@@ -85,7 +85,7 @@ describe('currentlyViewedCitySelector', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },
@@ -106,13 +106,13 @@ describe('currentlyViewedCitySelector', () => {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: '1',
+                    currentCityId: 'city1',
                 },
             },
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },
@@ -139,15 +139,15 @@ describe('citiesOwnedByPlayerSelector', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    '3': {
+                    'city3': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
@@ -155,7 +155,7 @@ describe('citiesOwnedByPlayerSelector', () => {
             },
         };
 
-        const expected: $ReadOnlyArray<string> = ['1', '3'];
+        const expected: $ReadOnlyArray<string> = ['city1', 'city3'];
 
         const actual = cityIdsOwnedByPlayerSelector(state);
 
@@ -170,15 +170,15 @@ describe('cityDistancesSelector', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         location: { x: -2, y: 0 },
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         location: { x: 0, y: 0 },
                     },
-                    '3': {
+                    'city3': {
                         ...emptyCityState,
                         location: { x: 1, y: 0 },
                     },
@@ -187,20 +187,20 @@ describe('cityDistancesSelector', () => {
         };
 
         const expected: { [string]: { [string]: number, ... }, ... } = {
-            '1': {
-                '1': 0,
-                '2': 2,
-                '3': 3,
+            'city1': {
+                'city1': 0,
+                'city2': 2,
+                'city3': 3,
             },
-            '2': {
-                '1': 2,
-                '2': 0,
-                '3': 1,
+            'city2': {
+                'city1': 2,
+                'city2': 0,
+                'city3': 1,
             },
-            '3': {
-                '1': 3,
-                '2': 1,
-                '3': 0,
+            'city3': {
+                'city1': 3,
+                'city2': 1,
+                'city3': 0,
             },
         };
 
@@ -220,11 +220,11 @@ describe('isGameStartingSelector', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         ownerId: 'player3',
                     },
@@ -248,11 +248,11 @@ describe('isGameStartingSelector', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         ownerId: 'player3',
                     },
@@ -276,11 +276,11 @@ describe('isGameStartingSelector', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },

@@ -62,7 +62,7 @@ describe('WorldMapComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                     },
                 },
@@ -70,7 +70,7 @@ describe('WorldMapComponent', () => {
             tiles: {
                 ...emptyClientState.tiles,
                 city: {
-                    '1': {
+                    'city1': {
                         ...emptyClientStateCityTile,
                     },
                 },

@@ -1,6 +1,5 @@
 // @flow
 
-import { resetState } from '../../../../actions';
 import {
     initialCommonState,
 } from '../../../../index';
@@ -9,16 +8,18 @@ import { emptyCommonState } from '../../../state';
 import { emptyCityState } from '../state';
 import type { CommonResetStateAction } from '../../../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
+import { resetState } from '../../../../actions';
 
+type State = $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonResetStateAction>>
 
-export const resetStateTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonResetStateAction>> = [
+export const resetStateTestScenarios: State  = [
     {
         name: 'resets its state',
         action: resetState(),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                 },
             },

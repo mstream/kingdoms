@@ -33,7 +33,7 @@ describe('CityTileComponent', () => {
             ...emptyClientStateCityTile,
         };
 
-        const cityId = '1';
+        const cityId = 'city1';
 
         const store = mockStore(state);
 
@@ -57,7 +57,7 @@ describe('CityTileComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(openCityView({ cityId: '1' }));
+        expect(actions[0]).toEqual(openCityView({ cityId: 'city1' }));
     });
 
     test('opens attack view on click if does not belongs to the player', async () => {
@@ -78,7 +78,7 @@ describe('CityTileComponent', () => {
             ...emptyClientStateCityTile,
         };
 
-        const cityId = '1';
+        const cityId = 'city1';
 
         const store = mockStore(state);
 
@@ -102,6 +102,6 @@ describe('CityTileComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(openAttackView({ cityId: '1' }));
+        expect(actions[0]).toEqual(openAttackView({ cityId: 'city1' }));
     });
 });

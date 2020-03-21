@@ -46,11 +46,11 @@ describe('AttackViewComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         name: 'Cityone',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                     },
                 },
@@ -59,7 +59,7 @@ describe('AttackViewComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackedCityId: '1',
+                    attackedCityId: 'city1',
                 },
             },
         };
@@ -84,11 +84,11 @@ describe('AttackViewComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    '1': {
+                    'city1': {
                         ...emptyCityState,
                         name: 'Cityone',
                     },
-                    '2': {
+                    'city2': {
                         ...emptyCityState,
                     },
                 },
@@ -97,8 +97,8 @@ describe('AttackViewComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackedCityId: '1',
-                    attackingCityId: '2',
+                    attackedCityId: 'city1',
+                    attackingCityId: 'city2',
                 },
             },
         };

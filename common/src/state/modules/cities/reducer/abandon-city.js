@@ -6,7 +6,7 @@ import type {
     CommonStateReducerResult,
 } from '../../types';
 import { failure, success } from '../../utils';
-import type { CommonAbandonCityAction } from '../actions';
+import type { CommonAbandonCityAction } from '../actions/types';
 
 export const abandonCityCitiesReducer = (
     {

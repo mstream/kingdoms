@@ -1,10 +1,10 @@
 // @flow
 
-import { changeCityName } from '../../../../actions';
+import { changeCityName } from '../../actions';
 import { failure, success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import { emptyCityState } from '../state';
-import type { CommonChangeCityNameAction } from '../../actions';
+import type { CommonChangeCityNameAction } from '../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
 
@@ -12,14 +12,14 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'changes the name',
         action: changeCityName({
-            cityId: '1',
+            cityId: 'city1',
             name: 'Newname',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player1',
@@ -32,8 +32,8 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
                     state:
                         {
                             ...previousLocalState,
-                            '1': {
-                                ...previousLocalState['1'],
+                            'city1': {
+                                ...previousLocalState['city1'],
                                 name: 'Newname',
                             },
                         },
@@ -44,7 +44,7 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when city does not exist',
         action: changeCityName({
-            cityId: '1',
+            cityId: 'city1',
             name: 'Newname',
             playerId: 'player1',
         }),
@@ -63,14 +63,14 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the city does not belong to the player',
         action: changeCityName({
-            cityId: '1',
+            cityId: 'city1',
             name: 'Newname',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player2',
@@ -88,14 +88,14 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the name is too short',
         action: changeCityName({
-            cityId: '1',
+            cityId: 'city1',
             name: 'Ne',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player1',
@@ -113,14 +113,14 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the name is too long',
         action: changeCityName({
-            cityId: '1',
+            cityId: 'city1',
             name: 'NewnameNewnameNewnameNewnameNewname',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player1',
@@ -138,14 +138,14 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
     {
         name: 'fails when the name does not start with a capital letter',
         action: changeCityName({
-            cityId: '1',
+            cityId: 'city1',
             name: 'newname',
             playerId: 'player1',
         }),
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                '1': {
+                'city1': {
                     ...emptyCityState,
                     ownerId: 'player1',
                 },

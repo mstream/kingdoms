@@ -28,13 +28,27 @@ import {
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
 } from './modules/rules/reducer/types';
-import type { CommonState} from './modules/types';
+import type { CommonState } from './modules/types';
 import type { CommonStateCity } from './modules/cities/reducer/types';
-import { emptyCityState } from './modules/cities/reducer/state';
+import {
+    emptyCitiesState,
+    emptyCityState,
+} from './modules/cities/reducer/state';
+import { emptyOrdersState } from './modules/orders/reducer/state';
+import { emptyPlayersState } from './modules/players/reducer/state';
+import { PLAYER_STATUS_PLAYING } from './modules/players/reducer/types';
 
 
 export const initialCommonState: CommonState = {
-    cities: Object.freeze({}),
+    cities: {
+        ...emptyCitiesState,
+    },
+    orders: {
+        ...emptyOrdersState,
+    },
+    players: {
+        ...emptyPlayersState,
+    },
     rules: {
         baseCityCapacity: 1000,
         basePeasantsMigrationRate: 100,
@@ -277,6 +291,12 @@ export const testCommonState: CommonState = {
             name: 'Poznan',
             ownerId: 'test3',
         },
+    },
+    orders: {},
+    players: {
+        test1: PLAYER_STATUS_PLAYING,
+        test2: PLAYER_STATUS_PLAYING,
+        test3: PLAYER_STATUS_PLAYING,
     },
     rules: {
         baseCityCapacity: 1000,

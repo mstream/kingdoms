@@ -1,19 +1,19 @@
 // @flow
 // @flow-runtime
 
-import type {
-    CommonStateRules,
-    CommonStateUnitKey,
-} from './rules/reducer/types';
+import type { CommonStateRules } from './rules/reducer/types';
 import { reify, Type } from 'flow-runtime';
 import type { CommonStateCities } from './cities/reducer/types';
 import type { CommonStateTime } from './time/reducer/types';
 import type { CommonStateWorld } from './world/reducer/types';
-import type { Range } from '../../range';
-import type { CommonAction } from '../actions/types';
+import type { CommonStateOrders } from './orders/reducer/types';
+import type { CommonAction } from '../types';
+import type { CommonStatePlayers } from './players/reducer/types';
 
 export type CommonState = $ReadOnly<{
     cities: CommonStateCities,
+    orders: CommonStateOrders,
+    players: CommonStatePlayers,
     rules: CommonStateRules,
     time: CommonStateTime,
     world: CommonStateWorld,
@@ -32,7 +32,5 @@ export type CommonStateReducerTestScenario<S, +A: CommonAction> = $ReadOnly<{
     previousGlobalState: CommonState,
     expectedReductionResultCreator: ({ previousLocalState: S }) => CommonStateReducerResult<S>,
 }>;
-
-export type CommonStateRegimentTemplate = $ReadOnly<{ [CommonStateUnitKey]: Range, ... }>;
 
 export const CommonStateType = (reify: Type<CommonState>);

@@ -6,36 +6,28 @@ import {
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
     convertChangeRateToDelta,
-
-
-
 } from '../../../index';
 import type { CommonStateCities } from './types';
 import { calculateTimeDelta } from '../../../../util';
+import type { CommonStateUnits } from '../../rules/reducer/types';
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
     UNIT_PEASANT,
 } from '../../rules/reducer/types';
-import type { CommonStateUnits } from '../../rules/reducer/types';
-import type {
-    CommonState,
-    CommonStateReducerResult,
-} from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonExecuteTimeStepAction } from '../../time/actions';
 
-export const executeTimeStepCitiesReducer = (
+type Reducer = CommonStateActionReducer<CommonStateCities, CommonExecuteTimeStepAction>;
+
+export const executeTimeStepCitiesReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonExecuteTimeStepAction,
-        globalState: CommonState,
-        localState: CommonStateCities,
     },
-): CommonStateReducerResult<CommonStateCities> => {
+) => {
 
     const timeDelta = calculateTimeDelta({
         fromTime: globalState.time,

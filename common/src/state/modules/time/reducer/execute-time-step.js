@@ -2,28 +2,26 @@
 
 import type { CommonStateTime } from './types';
 import { calculateTimeDelta } from '../../../../util';
-import type { CommonState, CommonStateReducerResult } from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
-import type { CommonExecuteTimeStepAction } from '../actions';
 import { validateTime } from '../../../../validators';
+import type { CommonExecuteTimeStepAction } from '../actions';
 
-export const executeTimeStepTimeReducer = (
+type Reducer = CommonStateActionReducer<CommonStateTime, CommonExecuteTimeStepAction>;
+
+export const executeTimeStepTimeReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonExecuteTimeStepAction,
-        globalState: CommonState,
-        localState: CommonStateTime,
     },
-): CommonStateReducerResult<CommonStateTime> => {
+) => {
     const { time } = action.payload;
 
-    const timeValidationErrors = validateTime({time});
+    const timeValidationErrors = validateTime({ time });
 
     if (timeValidationErrors.length > 0) {
-        return failure({ errors: timeValidationErrors});
+        return failure({ errors: timeValidationErrors });
     }
 
     const timeDelta = calculateTimeDelta({

@@ -1,24 +1,19 @@
 // @flow
 
 import { initialCommonState } from '../../../index';
-import type { CommonStateRules } from './types';
-import type {
-    CommonState,
-    CommonStateReducerResult,
-} from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { success } from '../../utils';
 import type { CommonResetStateAction } from '../../../actions/types';
+import type { CommonStateRules } from './types';
 
-export const resetStateRulesReducer = (
+type Reducer = CommonStateActionReducer<CommonStateRules, CommonResetStateAction>;
+
+export const resetStateRulesReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonResetStateAction,
-        globalState: CommonState,
-        localState: CommonStateRules,
     },
-): CommonStateReducerResult<CommonStateRules> => {
+) => {
     return success({ state: initialCommonState.rules });
 };

@@ -4,39 +4,17 @@ import type { CommonStatePlayersReducerTestScenario } from './test/types';
 import { dummy } from '../../../actions';
 import { emptyCommonState } from '../../state';
 import { initialCommonState } from '../../../index';
-import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
-import { createCityStepTestScenarios } from './test/create-city-step-test-scenarios';
-import { success } from '../../utils';
+import { runTestScenarios, success } from '../../utils';
 import type { CommonDummyAction } from '../../../actions/types';
-import type { CommonAction } from '../../../types';
+import { RESET_STATE } from '../../../actions/types';
 import { playersReducer } from './index';
+import { DUMMY } from '../../../../../../client/src/state/actions';
+import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
+import { CREATE_CITY } from '../../cities/actions/types';
+import { CREATE_ORDER } from '../../orders/actions/types';
+import { createCityTestScenarios } from './test/create-city-test-scenarios';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
 
-const runScenarios = (
-    {
-        scenarios,
-    }: {
-        scenarios: $ReadOnlyArray<CommonStatePlayersReducerTestScenario<CommonAction>>
-    },
-): void => {
-    scenarios.forEach(
-        (scenario) => {
-            it(scenario.name, () => {
-                const previousLocalState = scenario.previousGlobalState.players;
-
-                const actual = playersReducer(
-                    previousLocalState,
-                    scenario.action,
-                    scenario.previousGlobalState,
-                );
-
-                const expectedReductionResult = scenario.expectedReductionResultCreator({ previousLocalState });
-
-                expect(actual).toEqual(expectedReductionResult);
-            });
-        },
-    );
-};
 
 const stateInitializationScenario: CommonStatePlayersReducerTestScenario<CommonDummyAction> = {
     name: 'initializes its state',
@@ -52,12 +30,14 @@ const stateInitializationScenario: CommonStatePlayersReducerTestScenario<CommonD
 };
 
 describe('playersReducer', () => {
-    runScenarios({
-        scenarios: [
-            stateInitializationScenario,
-            ...createCityStepTestScenarios,
-            ...createOrderTestScenarios,
-            ...resetStateTestScenarios,
-        ],
+    runTestScenarios({
+        reducer: playersReducer,
+        reducerKey: 'players',
+        scenarios: {
+            [CREATE_CITY]: createCityTestScenarios,
+            [CREATE_ORDER]: createOrderTestScenarios,
+            [DUMMY]: [stateInitializationScenario],
+            [RESET_STATE]: resetStateTestScenarios,
+        },
     });
 });

@@ -1,24 +1,19 @@
 // @flow
 
 import type { CommonStateCities } from './types';
-import type {
-    CommonState,
-    CommonStateReducerResult,
-} from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonAbandonCityAction } from '../actions/types';
 
-export const abandonCityCitiesReducer = (
+type Reducer = CommonStateActionReducer<CommonStateCities, CommonAbandonCityAction>;
+
+export const abandonCityCitiesReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonAbandonCityAction,
-        globalState: CommonState,
-        localState: CommonStateCities,
     },
-): CommonStateReducerResult<CommonStateCities> => {
+) => {
     const { cityId, playerId } = action.payload;
     const city = localState[cityId];
 

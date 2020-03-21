@@ -1,42 +1,20 @@
 // @flow
 
 import { initialCommonState } from '../../../index';
-import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
-import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
-import { success } from '../../utils';
+import { runTestScenarios, success } from '../../utils';
 import { emptyCommonState } from '../../state';
 import type { CommonDummyAction } from '../../../actions/types';
+import { RESET_STATE } from '../../../actions/types';
 import type { CommonStateOrdersReducerTestScenarios } from './test/types';
 import { ordersReducer } from './index';
 import { dummy } from '../../../actions';
+import { DUMMY } from '../../../../../../client/src/state/actions';
+import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
+import { CREATE_ORDER } from '../actions/types';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
-import type { CommonAction } from '../../../types';
+import { EXECUTE_TIME_STEP } from '../../time/actions';
+import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
 
-const runScenarios = (
-    {
-        scenarios,
-    }: {
-        scenarios: $ReadOnlyArray<CommonStateOrdersReducerTestScenarios<CommonAction>>
-    },
-): void => {
-    scenarios.forEach(
-        (scenario) => {
-            it(scenario.name, () => {
-                const previousLocalState = scenario.previousGlobalState.orders;
-
-                const actual = ordersReducer(
-                    previousLocalState,
-                    scenario.action,
-                    scenario.previousGlobalState,
-                );
-
-                const expectedReductionResult = scenario.expectedReductionResultCreator({ previousLocalState });
-
-                expect(actual).toEqual(expectedReductionResult);
-            });
-        },
-    );
-};
 
 const stateInitializationScenario: CommonStateOrdersReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',
@@ -51,13 +29,16 @@ const stateInitializationScenario: CommonStateOrdersReducerTestScenarios<CommonD
     },
 };
 
+
 describe('ordersReducer', () => {
-    runScenarios({
-        scenarios: [
-            stateInitializationScenario,
-            ...createOrderTestScenarios,
-            ...executeTimeStepTestScenarios,
-            ...resetStateTestScenarios,
-        ],
+    runTestScenarios({
+        reducer: ordersReducer,
+        reducerKey: 'orders',
+        scenarios: {
+            [CREATE_ORDER]: createOrderTestScenarios,
+            [DUMMY]: [stateInitializationScenario],
+            [EXECUTE_TIME_STEP]: executeTimeStepTestScenarios,
+            [RESET_STATE]: resetStateTestScenarios,
+        },
     });
 });

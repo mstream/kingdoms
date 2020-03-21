@@ -3,38 +3,12 @@
 import { initialCommonState } from '../../../index';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { worldReducer } from './index';
-import { success } from '../../utils';
+import { runTestScenarios, success } from '../../utils';
 import { emptyCommonState } from '../../state';
 import type { CommonDummyAction } from '../../../actions/types';
+import { DUMMY, RESET_STATE } from '../../../actions/types';
 import type { CommonStateWorldReducerTestScenarios } from './test/types';
 import { dummy } from '../../../actions';
-import type { CommonAction } from '../../../types';
-
-const runScenarios = (
-    {
-        scenarios,
-    }: {
-        scenarios: $ReadOnlyArray<CommonStateWorldReducerTestScenarios<CommonAction>>
-    },
-): void => {
-    scenarios.forEach(
-        (scenario) => {
-            it(scenario.name, () => {
-                const previousLocalState = scenario.previousGlobalState.world;
-
-                const actual = worldReducer(
-                    previousLocalState,
-                    scenario.action,
-                    scenario.previousGlobalState,
-                );
-
-                const expectedReductionResult = scenario.expectedReductionResultCreator({ previousLocalState });
-
-                expect(actual).toEqual(expectedReductionResult);
-            });
-        },
-    );
-};
 
 const stateInitializationScenario: CommonStateWorldReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',
@@ -50,10 +24,12 @@ const stateInitializationScenario: CommonStateWorldReducerTestScenarios<CommonDu
 };
 
 describe('worldReducer', () => {
-    runScenarios({
-        scenarios: [
-            stateInitializationScenario,
-            ...resetStateTestScenarios,
-        ],
+    runTestScenarios({
+        reducer: worldReducer,
+        reducerKey: 'world',
+        scenarios: {
+            [DUMMY]: [stateInitializationScenario],
+            [RESET_STATE]: resetStateTestScenarios,
+        },
     });
 });

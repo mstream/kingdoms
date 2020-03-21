@@ -10,22 +10,24 @@ import type {
 } from '../../rules/reducer/types';
 import type {
     CommonState,
+    CommonStateActionReducer,
     CommonStateReducerResult,
 } from '../../types';
 import { failure, success } from '../../utils';
-import type { CommonUpgradeBuildingAction } from '../actions/types';
+import type {
+    CommonAbandonCityAction,
+    CommonUpgradeBuildingAction,
+} from '../actions/types';
 
-export const upgradeBuildingCitiesReducer = (
+type Reducer = CommonStateActionReducer<CommonStateCities, CommonUpgradeBuildingAction>;
+
+export const upgradeBuildingCitiesReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonUpgradeBuildingAction,
-        globalState: CommonState,
-        localState: CommonStateCities,
-    },
-): CommonStateReducerResult<CommonStateCities> => {
+    }
+)=> {
     const { buildingType, cityId, playerId } = action.payload;
 
     const city = localState[cityId];

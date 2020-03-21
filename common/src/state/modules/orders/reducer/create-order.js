@@ -1,22 +1,20 @@
 // @flow
 
-import type { CommonState, CommonStateReducerResult } from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonCreateOrderAction } from '../actions/types';
 import type { CommonStateOrders } from './types';
 import { commonStateTimeSelector } from '../../../../selectors/common-state';
 
-export const createOrderOrdersReducer = (
+type Reducer = CommonStateActionReducer<CommonStateOrders, CommonCreateOrderAction>;
+
+export const createOrderOrdersReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonCreateOrderAction,
-        globalState: CommonState,
-        localState: CommonStateOrders,
     },
-): CommonStateReducerResult<CommonStateOrders> => {
+) => {
     const order = localState[action.payload.orderId];
 
     if (order != null) {

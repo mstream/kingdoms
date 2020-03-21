@@ -19,3 +19,5 @@ export const emptyCityState: CommonStateCity = {
 };
 
 export const emptyCitiesState: CommonStateCities = Object.freeze({});
+
+export const initialCitiesState = emptyCitiesState;

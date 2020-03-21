@@ -90,3 +90,5 @@ export const calculateTimeDelta = (
 export const serializeState = ({ state }: { state: CommonState }): string => {
     return JSON.stringify(state);
 };
+
+

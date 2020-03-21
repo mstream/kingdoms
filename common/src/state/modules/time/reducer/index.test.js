@@ -1,41 +1,15 @@
-// @flow
-
-import { initialCommonState } from '../../../index';
-import { timeReducer } from './index';
+import { runTestScenarios, success } from '../../utils';
+import { DUMMY } from '../../../../../../client/src/state/actions';
+import { RESET_STATE } from '../../../actions/types';
+import { EXECUTE_TIME_STEP } from '../actions';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
-import { success } from '../../utils';
-import { emptyCommonState } from '../../state';
-import type { CommonDummyAction } from '../../../actions/types';
 import type { CommonStateTimeReducerTestScenarios } from './test/types';
+import type { CommonDummyAction } from '../../../actions/types';
 import { dummy } from '../../../actions';
-import type { CommonAction } from '../../../types';
-
-const runScenarios = (
-    {
-        scenarios,
-    }: {
-        scenarios: $ReadOnlyArray<CommonStateTimeReducerTestScenarios<CommonAction>>
-    },
-): void => {
-    scenarios.forEach(
-        (scenario) => {
-            it(scenario.name, () => {
-                const previousLocalState = scenario.previousGlobalState.time;
-
-                const actual = timeReducer(
-                    previousLocalState,
-                    scenario.action,
-                    scenario.previousGlobalState,
-                );
-
-                const expectedReductionResult = scenario.expectedReductionResultCreator({ previousLocalState });
-
-                expect(actual).toEqual(expectedReductionResult);
-            });
-        },
-    );
-};
+import { emptyCommonState } from '../../state';
+import { initialCommonState } from '../../../index';
+import { timeReducer } from './index';
 
 const stateInitializationScenario: CommonStateTimeReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',
@@ -51,11 +25,13 @@ const stateInitializationScenario: CommonStateTimeReducerTestScenarios<CommonDum
 };
 
 describe('timeReducer', () => {
-    runScenarios({
-        scenarios: [
-            stateInitializationScenario,
-            ...resetStateTestScenarios,
-            ...executeTimeStepTestScenarios,
-        ],
+    runTestScenarios({
+        reducer: timeReducer,
+        reducerKey: 'time',
+        scenarios: {
+            [DUMMY]: [stateInitializationScenario],
+            [RESET_STATE]: resetStateTestScenarios,
+            [EXECUTE_TIME_STEP]: executeTimeStepTestScenarios,
+        },
     });
 });

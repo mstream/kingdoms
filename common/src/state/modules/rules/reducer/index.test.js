@@ -1,40 +1,15 @@
 // @flow
 
-import { rulesReducer } from './index';
-import { initialCommonState } from '../../../index';
-import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
-import { success } from '../../utils';
-import { emptyCommonState } from '../../state';
+import { runTestScenarios, success } from '../../utils';
+import { DUMMY } from '../../../../../../client/src/state/actions';
 import type { CommonDummyAction } from '../../../actions/types';
+import { RESET_STATE } from '../../../actions/types';
 import type { CommonStateRulesReducerTestScenarios } from './test/types';
+import { emptyCommonState } from '../../state';
+import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { dummy } from '../../../actions';
-import type { CommonAction } from '../../../types';
-
-const runScenarios = (
-    {
-        scenarios,
-    }: {
-        scenarios: $ReadOnlyArray<CommonStateRulesReducerTestScenarios<CommonAction>>
-    },
-): void => {
-    scenarios.forEach(
-        (scenario) => {
-            it(scenario.name, () => {
-                const previousLocalState = scenario.previousGlobalState.rules;
-
-                const actual = rulesReducer(
-                    previousLocalState,
-                    scenario.action,
-                    scenario.previousGlobalState,
-                );
-
-                const expectedReductionResult = scenario.expectedReductionResultCreator({ previousLocalState });
-
-                expect(actual).toEqual(expectedReductionResult);
-            });
-        },
-    );
-};
+import { initialCommonState } from '../../../index';
+import { rulesReducer } from './index';
 
 const stateInitializationScenario: CommonStateRulesReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',
@@ -50,10 +25,13 @@ const stateInitializationScenario: CommonStateRulesReducerTestScenarios<CommonDu
 };
 
 describe('rulesReducer', () => {
-    runScenarios({
-        scenarios: [
-            stateInitializationScenario,
-            ...resetStateTestScenarios,
-        ],
+    runTestScenarios({
+        reducer: rulesReducer,
+        reducerKey: 'rules',
+        scenarios: {
+            [DUMMY]: [stateInitializationScenario],
+            [RESET_STATE]: resetStateTestScenarios,
+        },
     });
 });
+

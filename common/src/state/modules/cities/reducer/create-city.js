@@ -6,7 +6,9 @@ import { nextCitySpotSelector } from '../../../../selectors/common-state';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
-    BUILDING_WAREHOUSE, RESOURCE_FOOD, RESOURCE_WOOD,
+    BUILDING_WAREHOUSE,
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
     UNIT_ARCHER,
     UNIT_CATAPULT,
     UNIT_KNIGHT,
@@ -15,24 +17,20 @@ import {
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
 } from '../../rules/reducer/types';
-import type {
-    CommonState,
-    CommonStateReducerResult,
-} from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonCreateCityAction } from '../actions/types';
 
-export const createCityCitiesReducer = (
+type Reducer = CommonStateActionReducer<CommonStateCities, CommonCreateCityAction>;
+
+
+export const createCityCitiesReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }:
-        {
-            action: CommonCreateCityAction,
-            globalState: CommonState,
-            localState: CommonStateCities,
-        }): CommonStateReducerResult<CommonStateCities> => {
+    },
+) => {
     const { cityId, name, playerId } = action.payload;
 
     const cityValidationErrors = validateCityName({ name });

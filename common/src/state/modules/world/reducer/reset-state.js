@@ -2,23 +2,18 @@
 
 import { initialCommonState } from '../../../index';
 import type { CommonStateWorld } from './types';
-import type {
-    CommonState,
-    CommonStateReducerResult,
-} from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { success } from '../../utils';
 import type { CommonResetStateAction } from '../../../actions/types';
 
-export const resetStateWorldReducer = (
+type Reducer = CommonStateActionReducer<CommonStateWorld, CommonResetStateAction>;
+
+export const resetStateWorldReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonResetStateAction,
-        globalState: CommonState,
-        localState: CommonStateWorld,
     },
-): CommonStateReducerResult<CommonStateWorld> => {
+) => {
     return success({ state: initialCommonState.world });
 };

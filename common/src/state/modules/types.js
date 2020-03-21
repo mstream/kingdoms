@@ -26,6 +26,8 @@ export type CommonStateReducerResult<S> = $ReadOnly<{
 
 export type CommonStateReducer<S> = (S, CommonAction, CommonState) => CommonStateReducerResult<S>;
 
+export type CommonStateActionReducer<S, +A: CommonAction> = ($ReadOnly<{ action: A, globalState: CommonState, localState: S, }>) => CommonStateReducerResult<S>;
+
 export type CommonStateReducerTestScenario<S, +A: CommonAction> = $ReadOnly<{
     name: string,
     action: A,

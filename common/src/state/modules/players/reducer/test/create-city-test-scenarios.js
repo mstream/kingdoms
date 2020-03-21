@@ -9,7 +9,7 @@ import type { CommonStatePlayersReducerTestScenario } from './types';
 
 type Scenarios = $ReadOnlyArray<CommonStatePlayersReducerTestScenario<CommonCreateCityAction>>;
 
-export const createCityStepTestScenarios: Scenarios = [
+export const createCityTestScenarios: Scenarios = [
     {
         name: `adds the first player`,
         action: createCity({

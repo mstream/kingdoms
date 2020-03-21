@@ -2,21 +2,20 @@
 
 import type { CommonStatePlayers } from './types';
 import { PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING } from './types';
-import type { CommonState, CommonStateReducerResult } from '../../types';
+import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
+import type { CommonResetStateAction } from '../../../actions/types';
 import type { CommonCreateCityAction } from '../../cities/actions/types';
 
-export const createCityPlayersReducer = (
+type Reducer = CommonStateActionReducer<CommonStatePlayers, CommonCreateCityAction>;
+
+export const createCityPlayersReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: CommonCreateCityAction,
-        globalState: CommonState,
-        localState: CommonStatePlayers,
     },
-): CommonStateReducerResult<CommonStatePlayers> => {
+) => {
     const { playerId } = action.payload;
 
     const playerStatus = localState[playerId];

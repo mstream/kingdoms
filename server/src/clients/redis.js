@@ -1,7 +1,7 @@
 // @flow
 
 import RedisClient from 'ioredis';
-import type { Config } from '../config';
+import type { Config } from '../config/types';
 
 type Get = (string) => Promise<?string>;
 type Sadd = (string, string) => Promise<number>;

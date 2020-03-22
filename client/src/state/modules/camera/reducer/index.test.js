@@ -1,14 +1,15 @@
 // @flow
 
-import type { ClientAction, ClientDummyAction } from '../../../actions';
 import { dummy } from '../../../actions';
 import { cameraReducer } from './index';
-import { zoomCameraTestScenarios } from './zoom-camera-test-scenarios';
-import { updateStateTestScenarios } from './update-state-test-scenarios';
-import { moveCameraTestScenarios } from './move-camera-test-scenarios';
+import { zoomCameraTestScenarios } from './test/zoom-camera-test-scenarios';
+import { updateStateTestScenarios } from './test/update-state-test-scenarios';
+import { moveCameraTestScenarios } from './test/move-camera-test-scenarios';
 import { emptyClientState, initialClientState } from '../../types';
 import { zeroVector } from '../../../../../../common/src/vector';
-import type { ClientStateCameraReducerTestScenario } from './types';
+import type { ClientAction } from '../../../types';
+import type { ClientDummyAction } from '../../../actions/types';
+import type { ClientStateCameraReducerTestScenario } from './test/types';
 
 const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientAction>> }): void => {
     scenarios.forEach(

@@ -1,14 +1,9 @@
 // @flow
 
-import type { ClientAction } from '../../../actions';
-import type { ClientStateReducerTestScenario } from '../../types';
 import type {
     CommonStateBuildingKey,
-    CommonStateUnitKey, CommonStateResourceKey,
-} from '../../../../../../common/src/state/modules/rules/reducer/types';
-import {
-    BUILDING_WAREHOUSE, RESOURCE_FOOD,
-    UNIT_PEASANT,
+    CommonStateResourceKey,
+    CommonStateUnitKey,
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
 import type { CommonStateRegimentTemplate } from '../../../../../../common/src/state/modules/orders/reducer/types';
 
@@ -24,8 +19,6 @@ export type ClientStateCityViewTab =
     | typeof TAB_OVERVIEW
     | typeof TAB_RESOURCES
     | typeof TAB_UNITS;
-
-export type ClientStateMenuReducerTestScenario<+A: ClientAction> = ClientStateReducerTestScenario<ClientStateMenu, A>;
 
 export type ClientStateAttackView = $ReadOnly<{
     attackedCityId: ?string,
@@ -50,22 +43,4 @@ export type ClientStateMenu = $ReadOnly<{
     cityView: ClientStateCityView,
     newCity: ClientStateNewCity,
 }>;
-
-export const emptyMenuState: ClientStateMenu = {
-    attackView: {
-        attackedCityId: null,
-        attackingCityId: null,
-        regimentTemplate: {},
-    },
-    cityView: {
-        building: BUILDING_WAREHOUSE,
-        currentCityId: null,
-        resource: RESOURCE_FOOD,
-        tab: TAB_OVERVIEW,
-        unit: UNIT_PEASANT,
-    },
-    newCity: {
-        isCityBeingCreated: false,
-    },
-};
 

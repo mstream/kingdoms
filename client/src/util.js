@@ -3,9 +3,6 @@
 import type { Geometry } from '../../common/src/geometry';
 import type { Vector } from '../../common/src/vector';
 import { multipleVectors } from '../../common/src/vector';
-import { parseJson } from '../../common/src/util';
-import type { ServerResponse } from '../../common/src/types';
-import { ServerResponseType } from '../../common/src/types';
 
 export type GeometryStyle = $ReadOnly<{
     height: number,
@@ -46,17 +43,3 @@ export const tileVectorToPixelVector = ({ tileVector }: { tileVector: Vector }):
     });
 };
 
-export const parseServerResponse = (
-    {
-        json,
-    }: {
-        json: string
-    },
-): ServerResponse => {
-    const object = parseJson(
-        {
-            json,
-        },
-    );
-    return ServerResponseType.assert(object);
-};

@@ -2,8 +2,8 @@
 
 
 import type { ClientStatePlayer } from './types';
-import type { ClientLoadPlayerAction } from '../actions';
 import type { ClientState } from '../../types';
+import type { ClientLoadPlayerAction } from '../actions/types';
 
 export const loadPlayerPlayerReducer = (
     {

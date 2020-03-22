@@ -1,11 +1,12 @@
 // @flow
 
+
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import type { ClientAction } from '../../state/actions';
 import type { Node } from 'react';
 import type { ClientState } from '../../state/modules/types';
+import type { ClientAction } from '../../state/types';
 
 type OwnProps = {
     children?: Node,

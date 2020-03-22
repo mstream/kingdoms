@@ -2,9 +2,9 @@
 
 import type { ClientStateMenu } from './types';
 import { TAB_OVERVIEW } from './types';
-import type { ClientCloseCityViewAction } from '../actions';
 import { UNIT_PEASANT } from '../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientState } from '../../types';
+import type { ClientCloseCityViewAction } from '../actions/types';
 
 export const closeCityViewMenuReducer = (
     {

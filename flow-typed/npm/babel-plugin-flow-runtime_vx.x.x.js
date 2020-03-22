@@ -1791,7 +1791,7 @@ declare module 'babel-plugin-flow-runtime/babel-plugin-flow-runtime.js' {
   declare module.exports: $Exports<'babel-plugin-flow-runtime/babel-plugin-flow-runtime'>;
 }
 declare module 'babel-plugin-flow-runtime/config/eslint.js' {
-  declare module.exports: $Exports<'babel-plugin-flow-runtime/config/eslint'>;
+  declare module.exports: $Exports<'babel-plugin-flow-runtime/index/eslint'>;
 }
 declare module 'babel-plugin-flow-runtime/flow-typed/npm/@babel/cli_vx.x.x.js' {
   declare module.exports: $Exports<'babel-plugin-flow-runtime/flow-typed/npm/@babel/cli_vx.x.x'>;
@@ -1866,7 +1866,7 @@ declare module 'babel-plugin-flow-runtime/flow-typed/npm/flow-bin_v0.x.x.js' {
   declare module.exports: $Exports<'babel-plugin-flow-runtime/flow-typed/npm/flow-bin_v0.x.x'>;
 }
 declare module 'babel-plugin-flow-runtime/flow-typed/npm/flow-config-parser_vx.x.x.js' {
-  declare module.exports: $Exports<'babel-plugin-flow-runtime/flow-typed/npm/flow-config-parser_vx.x.x'>;
+  declare module.exports: $Exports<'babel-plugin-flow-runtime/flow-typed/npm/flow-index-parser_vx.x.x'>;
 }
 declare module 'babel-plugin-flow-runtime/flow-typed/npm/json-loader_vx.x.x.js' {
   declare module.exports: $Exports<'babel-plugin-flow-runtime/flow-typed/npm/json-loader_vx.x.x'>;

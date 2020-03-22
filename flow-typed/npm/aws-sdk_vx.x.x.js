@@ -2216,13 +2216,13 @@ declare module 'aws-sdk/dist-tools/transform.js' {
   declare module.exports: $Exports<'aws-sdk/dist-tools/transform'>;
 }
 declare module 'aws-sdk/dist-tools/webpack.config.rn-core.js' {
-  declare module.exports: $Exports<'aws-sdk/dist-tools/webpack.config.rn-core'>;
+  declare module.exports: $Exports<'aws-sdk/dist-tools/webpack.index.rn-core'>;
 }
 declare module 'aws-sdk/dist-tools/webpack.config.rn-dep.js' {
-  declare module.exports: $Exports<'aws-sdk/dist-tools/webpack.config.rn-dep'>;
+  declare module.exports: $Exports<'aws-sdk/dist-tools/webpack.index.rn-dep'>;
 }
 declare module 'aws-sdk/dist-tools/webpack.config.rn.js' {
-  declare module.exports: $Exports<'aws-sdk/dist-tools/webpack.config.rn'>;
+  declare module.exports: $Exports<'aws-sdk/dist-tools/webpack.index.rn'>;
 }
 declare module 'aws-sdk/dist/aws-sdk-core-react-native.js' {
   declare module.exports: $Exports<'aws-sdk/dist/aws-sdk-core-react-native'>;
@@ -2285,7 +2285,7 @@ declare module 'aws-sdk/lib/config_regional_endpoint.js' {
   declare module.exports: $Exports<'aws-sdk/lib/config_regional_endpoint'>;
 }
 declare module 'aws-sdk/lib/config.js' {
-  declare module.exports: $Exports<'aws-sdk/lib/config'>;
+  declare module.exports: $Exports<'aws-sdk/lib/index'>;
 }
 declare module 'aws-sdk/lib/core.js' {
   declare module.exports: $Exports<'aws-sdk/lib/core'>;

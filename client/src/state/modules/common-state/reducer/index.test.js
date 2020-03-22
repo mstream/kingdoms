@@ -1,11 +1,12 @@
 // @flow
 
-import { updateStateTestScenarios } from './update-state-test-scenarios';
-import type { ClientAction, ClientDummyAction } from '../../../actions';
+import { updateStateTestScenarios } from './test/update-state-test-scenarios';
 import { dummy } from '../../../actions';
-import type { ClientStateCommonStateReducerTestScenario } from './types';
 import { emptyClientState } from '../../types';
 import { commonStateReducer } from './index';
+import type { ClientAction } from '../../../types';
+import type { ClientDummyAction } from '../../../actions/types';
+import type { ClientStateCommonStateReducerTestScenario } from './test/types';
 
 const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateCommonStateReducerTestScenario<ClientAction>> }): void => {
     scenarios.forEach(

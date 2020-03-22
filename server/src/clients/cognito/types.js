@@ -20,6 +20,7 @@ export type GetJwks = () => Promise<Jwks>
 
 export type Cognito = {
     getJwks: GetJwks,
+    userPoolUrl: string,
 };
 
 export const JwksType = (reify: Type<Jwks>);

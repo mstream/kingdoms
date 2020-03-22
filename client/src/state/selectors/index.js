@@ -32,6 +32,15 @@ import type {
 } from '../../../../common/src/state/modules/rules/reducer/types';
 import type { CommonStateWorld } from '../../../../common/src/state/modules/world/reducer/types';
 import type { ClientState } from '../modules/types';
+import type { ClientStateErrors } from '../modules/errors/reducer/types';
+import { errorsSelector } from '../modules/errors/selectors';
+
+export const anyErrorsSelector = createSelector<ClientState, void, boolean, ClientStateErrors>(
+    errorsSelector,
+    (errors) => {
+        return errors.length > 0;
+    },
+);
 
 export const citiesSelector = createSelector<ClientState, void, CommonStateCities, ClientStateCommonState>(
     commonStateSelector,

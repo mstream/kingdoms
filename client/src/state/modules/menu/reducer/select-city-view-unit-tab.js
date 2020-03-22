@@ -1,8 +1,8 @@
 // @flow
 
 import type { ClientStateMenu } from './types';
-import type { ClientSelectCityViewUnitsTabAction } from '../actions';
 import type { ClientState } from '../../types';
+import type { ClientSelectCityViewUnitsTabAction } from '../actions/types';
 
 export const selectCityViewUnitTabMenuReducer = (
     {

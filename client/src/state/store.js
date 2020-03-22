@@ -4,11 +4,11 @@ import type { Dispatch } from 'redux';
 import { applyMiddleware, createStore } from 'redux';
 import { rootReducer } from './modules/root';
 import { websocketMiddleware } from './middleware/websocket';
-import type { ClientAction } from './actions';
 import queryString from 'query-string';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '../config';
 import type { ClientState } from './modules/types';
+import type { ClientAction } from './types';
 
 const getIdToken = (): string => {
     const locationHash = queryString.parse(window.location.hash);

@@ -204,85 +204,85 @@ declare module '@babel/core/lib/transformation/plugin-pass' {
 
 // Filename aliases
 declare module '@babel/core/lib/config/caching.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/caching'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/caching'>;
 }
 declare module '@babel/core/lib/config/config-chain.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/config-chain'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/index-chain'>;
 }
 declare module '@babel/core/lib/config/config-descriptors.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/config-descriptors'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/index-descriptors'>;
 }
 declare module '@babel/core/lib/config/files/configuration.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/configuration'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/configuration'>;
 }
 declare module '@babel/core/lib/config/files/import.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/import'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/import'>;
 }
 declare module '@babel/core/lib/config/files/index-browser.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/index-browser'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/index-browser'>;
 }
 declare module '@babel/core/lib/config/files/index' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files'>;
 }
 declare module '@babel/core/lib/config/files/index.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files'>;
 }
 declare module '@babel/core/lib/config/files/module-types.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/module-types'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/module-types'>;
 }
 declare module '@babel/core/lib/config/files/package.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/package'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/package'>;
 }
 declare module '@babel/core/lib/config/files/plugins.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/plugins'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/plugins'>;
 }
 declare module '@babel/core/lib/config/files/types.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/types'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/types'>;
 }
 declare module '@babel/core/lib/config/files/utils.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/files/utils'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/files/utils'>;
 }
 declare module '@babel/core/lib/config/full.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/full'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/full'>;
 }
 declare module '@babel/core/lib/config/helpers/config-api.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/helpers/config-api'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/helpers/index-api'>;
 }
 declare module '@babel/core/lib/config/helpers/environment.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/helpers/environment'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/helpers/environment'>;
 }
 declare module '@babel/core/lib/config/index' {
-  declare module.exports: $Exports<'@babel/core/lib/config'>;
+  declare module.exports: $Exports<'@babel/core/lib/index'>;
 }
 declare module '@babel/core/lib/config/index.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config'>;
+  declare module.exports: $Exports<'@babel/core/lib/index'>;
 }
 declare module '@babel/core/lib/config/item.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/item'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/item'>;
 }
 declare module '@babel/core/lib/config/partial.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/partial'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/partial'>;
 }
 declare module '@babel/core/lib/config/pattern-to-regex.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/pattern-to-regex'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/pattern-to-regex'>;
 }
 declare module '@babel/core/lib/config/plugin.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/plugin'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/plugin'>;
 }
 declare module '@babel/core/lib/config/util.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/util'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/util'>;
 }
 declare module '@babel/core/lib/config/validation/option-assertions.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/validation/option-assertions'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/validation/option-assertions'>;
 }
 declare module '@babel/core/lib/config/validation/options.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/validation/options'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/validation/options'>;
 }
 declare module '@babel/core/lib/config/validation/plugins.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/validation/plugins'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/validation/plugins'>;
 }
 declare module '@babel/core/lib/config/validation/removed.js' {
-  declare module.exports: $Exports<'@babel/core/lib/config/validation/removed'>;
+  declare module.exports: $Exports<'@babel/core/lib/index/validation/removed'>;
 }
 declare module '@babel/core/lib/gensync-utils/async.js' {
   declare module.exports: $Exports<'@babel/core/lib/gensync-utils/async'>;

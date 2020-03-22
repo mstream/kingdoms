@@ -1,6 +1,5 @@
 // @flow
 
-import type { ClientAction } from '../../../actions';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import { updateStateMenuReducer } from './update-state';
 import { closeCityViewMenuReducer } from './close-city-view';
@@ -11,7 +10,15 @@ import { selectCityViewUnitTabMenuReducer } from './select-city-view-unit-tab';
 import { closeAttackViewMenuReducer } from './close-attack-view';
 import { openAttackViewMenuReducer } from './open-attack-view';
 import type { ClientStateMenu } from './types';
-import { TAB_OVERVIEW } from './types';
+import { selectAttackViewAttackingCityReducer } from './select-attack-view-attacking-city';
+import { selectCityViewResourcesTabMenuReducer } from './select-city-view-resources-tab';
+import { selectCityViewBuildingsTabMenuReducer } from './select-city-view-buildings-tab';
+import type { ClientState } from '../../types';
+import type { ClientAction } from '../../../types';
+import {
+    REQUEST_CITY_CREATION,
+    UPDATE_STATE,
+} from '../../common-state/actions/types';
 import {
     CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
@@ -22,38 +29,8 @@ import {
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
     SELECT_CITY_VIEW_UNITS_TAB,
-    selectCityViewResourcesTab,
-} from '../actions';
-import {
-    REQUEST_CITY_CREATION,
-    UPDATE_STATE,
-} from '../../common-state/actions';
-import { selectAttackViewAttackingCityReducer } from './select-attack-view-attacking-city';
-import { selectCityViewResourcesTabMenuReducer } from './select-city-view-resources-tab';
-import { selectCityViewBuildingsTabMenuReducer } from './select-city-view-buildings-tab';
-import {
-    BUILDING_WAREHOUSE, RESOURCE_FOOD,
-    UNIT_PEASANT,
-} from '../../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../types';
-
-export const initialMenuState = {
-    attackView: {
-        attackedCityId: null,
-        attackingCityId: null,
-        regimentTemplate: {},
-    },
-    cityView: {
-        building: BUILDING_WAREHOUSE,
-        currentCityId: null,
-        resource: RESOURCE_FOOD,
-        tab: TAB_OVERVIEW,
-        unit: UNIT_PEASANT,
-    },
-    newCity: {
-        isCityBeingCreated: false,
-    },
-};
+} from '../actions/types';
+import { initialMenuState } from './state';
 
 export const menuReducer = (
     localState: ClientStateMenu = initialMenuState,

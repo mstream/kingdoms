@@ -1,12 +1,11 @@
 // @flow
-import type { ClientAction } from '../../../actions';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import { updateStateCommonStateReducer } from './update-state';
 import type { ClientStateCommonState } from './types';
-import { UPDATE_STATE } from '../actions';
 import type { ClientState } from '../../types';
-
-export const initialCommonStateState = null;
+import type { ClientAction } from '../../../types';
+import { UPDATE_STATE } from '../actions/types';
+import { initialCommonStateState } from './state';
 
 export const commonStateReducer = (
     localState: ClientStateCommonState = initialCommonStateState,

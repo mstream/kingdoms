@@ -1,16 +1,13 @@
 // @flow
 
 
-import type { ClientAction } from '../../../actions';
 import { loadPlayerPlayerReducer } from './load-player';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import type { ClientStatePlayer } from './types';
-import { LOAD_PLAYER } from '../actions';
 import type { ClientState } from '../../types';
-
-export const initialPlayerState = {
-    name: null,
-};
+import type { ClientAction } from '../../../types';
+import { LOAD_PLAYER } from '../actions/types';
+import { initialPlayerState } from './state';
 
 export const playerReducer = (
     localState: ClientStatePlayer = initialPlayerState,

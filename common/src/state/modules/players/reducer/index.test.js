@@ -8,12 +8,12 @@ import { runTestScenarios, success } from '../../utils';
 import type { CommonDummyAction } from '../../../actions/types';
 import { RESET_STATE } from '../../../actions/types';
 import { playersReducer } from './index';
-import { DUMMY } from '../../../../../../client/src/state/actions';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { CREATE_CITY } from '../../cities/actions/types';
 import { CREATE_ORDER } from '../../orders/actions/types';
 import { createCityTestScenarios } from './test/create-city-test-scenarios';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
+import { DUMMY } from '../../../../../../client/src/state/actions/types';
 
 
 const stateInitializationScenario: CommonStatePlayersReducerTestScenario<CommonDummyAction> = {

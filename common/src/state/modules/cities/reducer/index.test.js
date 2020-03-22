@@ -7,7 +7,6 @@ import { emptyCommonState } from '../../state';
 import type { CommonDummyAction } from '../../../actions/types';
 import { RESET_STATE } from '../../../actions/types';
 import { dummy } from '../../../actions';
-import { DUMMY } from '../../../../../../client/src/state/actions';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import {
     ABANDON_CITY,
@@ -22,6 +21,7 @@ import { EXECUTE_TIME_STEP } from '../../time/actions';
 import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
 import { upgradeBuildingTestScenarios } from './test/upgrade-building-test-scenarios';
 import type { CommonStateCitiesReducerTestScenarios } from './test/types';
+import { DUMMY } from '../../../../../../client/src/state/actions/types';
 
 
 const stateInitializationScenario: CommonStateCitiesReducerTestScenarios<CommonDummyAction> = {

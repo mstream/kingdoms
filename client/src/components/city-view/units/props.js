@@ -1,9 +1,9 @@
 // @flow
 
+
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import type { ClientAction } from '../../../state/actions';
 import {
     activeCityTabSelector,
     activeUnitSelector,
@@ -14,6 +14,7 @@ import {
 import { TAB_UNITS } from '../../../state/modules/menu/reducer/types';
 import { selectCityViewUnitsTab } from '../../../state/modules/menu/actions';
 import type { ClientState } from '../../../state/modules/types';
+import type { ClientAction } from '../../../state/types';
 
 type OwnProps = {};
 

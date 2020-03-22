@@ -11,8 +11,8 @@ import type {
     ServerResponse,
 } from '../../../../common/src/types';
 import { ServerRequestType } from '../../../../common/src/types';
-import {config} from '../../config';
 import { validateCommonStateType } from '../../../../common/src/validators';
+import {config} from '../../config';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient({config});

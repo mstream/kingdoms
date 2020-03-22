@@ -2,8 +2,8 @@
 
 
 import type { ClientStateCommonState } from './types';
-import type { ClientUpdateStateAction } from '../actions';
 import type { ClientState } from '../../types';
+import type { ClientUpdateStateAction } from '../actions/types';
 
 export const updateStateCommonStateReducer = (
     {

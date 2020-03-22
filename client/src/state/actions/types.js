@@ -1,5 +1,8 @@
 // @flow
 
-import type { ClientAction } from './index';
 
-export type ClientActionCreator<A: ClientAction> = ($PropertyType<A, 'payload'>) => A;
+import type { BaseAction } from '../../../../common/src/types/actions';
+
+export const DUMMY: 'DUMMY' = 'DUMMY';
+
+export type ClientDummyAction = BaseAction<typeof DUMMY, void>;

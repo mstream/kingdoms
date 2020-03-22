@@ -1,44 +1,15 @@
 // @flow
 
-import type { ClientAction } from '../../../actions';
 import { moveCameraCameraReducer } from './move-camera';
 import { zoomCameraCameraReducer } from './zoom-camera';
 import { updateStateCameraReducer } from './update-state';
 import { unsupportedActionReducer } from '../../unsupported-action-reducer';
 import type { ClientStateCamera } from './types';
-import { zeroVector } from '../../../../../../common/src/vector';
-import { UPDATE_STATE } from '../../common-state/actions';
-import { MOVE_CAMERA, ZOOM_CAMERA } from '../actions';
 import type { ClientState } from '../../types';
-
-export const initialCameraState: ClientStateCamera = {
-    geometry: {
-        location: {
-            x: 0,
-            y: 0,
-        },
-        size: {
-            x: 1280,
-            y: 800,
-        },
-    },
-    locationLimit: {
-        min: zeroVector,
-        max: zeroVector,
-    },
-    movementSpeed: {
-        x: 0.1,
-        y: 0.1,
-    },
-    sizeLimit: {
-        min: { x: 640, y: 400 },
-        max: { x: 3200, y: 2000 },
-    },
-    zoomingSpeed: {
-        x: 100,
-        y: 100,
-    },
-};
+import type { ClientAction } from '../../../types';
+import { MOVE_CAMERA, ZOOM_CAMERA } from '../actions/types';
+import { UPDATE_STATE } from '../../common-state/actions/types';
+import { initialCameraState } from './state';
 
 export const cameraReducer = (
     localState: ClientStateCamera = initialCameraState,

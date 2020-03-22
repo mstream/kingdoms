@@ -1,26 +1,14 @@
 // @flow
 
-import type { ClientAction } from '../../../actions';
-import { zeroVector } from '../../../../../../common/src/vector';
-import type { ClientStateReducerTestScenario } from '../../types';
+import type { Vector } from '../../../../../../common/src/vector';
+import type { Boundary } from '../../../../../../common/src/boundary';
+import type { Geometry } from '../../../../../../common/src/geometry';
 
-export type ClientStateCameraReducerTestScenario<+A: ClientAction> = ClientStateReducerTestScenario<ClientStateCamera, A>;
 
-export const emptyCameraState: ClientStateCamera = {
-    locationLimit: {
-        min: zeroVector,
-        max: zeroVector,
-    },
-    geometry: {
-        location: zeroVector,
-        size: zeroVector,
-    },
-    movementSpeed: zeroVector,
-    sizeLimit: {
-        min: zeroVector,
-        max: zeroVector,
-    },
-    zoomingSpeed: zeroVector,
+export type ClientStateCamera = {
+    locationLimit: Boundary,
+    geometry: Geometry,
+    movementSpeed: Vector,
+    sizeLimit: Boundary,
+    zoomingSpeed: Vector,
 };
-
-export type ClientStateCamera = typeof emptyCameraState;

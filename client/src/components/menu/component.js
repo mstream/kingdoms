@@ -12,7 +12,7 @@ export const Component = ({ player }: Props) => {
     }
     return (
         <div data-testid={testId}
-             className="wood2-bg relative flex flex-row items-end justify-start h-20 w-full z-10 shadow-lg bg-gray-500 text-gray-100">
+             className="wood2-bg relative flex flex-row items-end justify-start h-20 w-full shadow-lg bg-gray-500 text-gray-100">
             <div className="group ml-1 cursor-pointer">
                 <div className="h-full p-2">
                     <i className="icofont icofont-ui-user mr-1"/>

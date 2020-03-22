@@ -6,8 +6,8 @@ import {
 import type { ClientStateMenu } from './types';
 import { playerNameSelector } from '../../player/selectors';
 import { commonStateSelector } from '../../common-state/selectors';
-import type { ClientOpenAttackViewAction } from '../actions';
 import type { ClientState } from '../../types';
+import type { ClientOpenAttackViewAction } from '../actions/types';
 
 export const openAttackViewMenuReducer = (
     {

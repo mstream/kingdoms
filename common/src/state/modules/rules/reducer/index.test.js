@@ -1,7 +1,6 @@
 // @flow
 
 import { runTestScenarios, success } from '../../utils';
-import { DUMMY } from '../../../../../../client/src/state/actions';
 import type { CommonDummyAction } from '../../../actions/types';
 import { RESET_STATE } from '../../../actions/types';
 import type { CommonStateRulesReducerTestScenarios } from './test/types';
@@ -10,6 +9,7 @@ import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { dummy } from '../../../actions';
 import { initialCommonState } from '../../../index';
 import { rulesReducer } from './index';
+import { DUMMY } from '../../../../../../client/src/state/actions/types';
 
 const stateInitializationScenario: CommonStateRulesReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',

@@ -1,5 +1,4 @@
 import { runTestScenarios, success } from '../../utils';
-import { DUMMY } from '../../../../../../client/src/state/actions';
 import { RESET_STATE } from '../../../actions/types';
 import { EXECUTE_TIME_STEP } from '../actions';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
@@ -10,6 +9,7 @@ import { dummy } from '../../../actions';
 import { emptyCommonState } from '../../state';
 import { initialCommonState } from '../../../index';
 import { timeReducer } from './index';
+import { DUMMY } from '../../../../../../client/src/state/actions/types';
 
 const stateInitializationScenario: CommonStateTimeReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',

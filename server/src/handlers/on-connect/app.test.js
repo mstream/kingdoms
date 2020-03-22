@@ -1,9 +1,5 @@
 // @flow
 
-import { emptyApiGatewayProxyEvent, emptyContext } from '../util';
-import type { APIGatewayProxyEvent, Context } from '../types';
-import { handler } from './app';
-
 jest.mock(
     '../../config',
     () => {
@@ -31,6 +27,10 @@ jest.mock(
         };
     },
 );
+
+import { emptyApiGatewayProxyEvent, emptyContext } from '../util';
+import type { APIGatewayProxyEvent, Context } from '../types';
+import { handler } from './app';
 
 describe('onConnectHandler', () => {
     it('', async () => {

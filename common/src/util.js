@@ -2,6 +2,8 @@
 
 import { v4 } from 'uuid';
 import type { CommonState } from './state/modules/types';
+import type { ServerResponse } from './types';
+import { validateServerResponseType } from './validators';
 
 const suffixes: $ReadOnlyArray<string> = [
     'k',
@@ -92,3 +94,17 @@ export const serializeState = ({ state }: { state: CommonState }): string => {
 };
 
 
+export const parseServerResponse = (
+    {
+        json,
+    }: {
+        json: string
+    },
+): ServerResponse => {
+    const object = parseJson(
+        {
+            json,
+        },
+    );
+    return validateServerResponseType({ toValidate: object });
+};

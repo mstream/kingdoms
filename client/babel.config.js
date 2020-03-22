@@ -1,5 +1,12 @@
 module.exports = {
-    plugins: ['@babel/plugin-transform-runtime'],
+    plugins: [
+        [
+            'flow-runtime',
+            {
+                optInOnly: true,
+            },
+        ],
+        '@babel/plugin-transform-runtime'],
     presets: [
         [
             '@babel/preset-env',

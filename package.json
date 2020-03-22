@@ -44,6 +44,7 @@
         "flow-runtime": "0.17.0",
         "ioredis": "4.16.0",
         "jsonwebtoken": "8.5.1",
+        "jwk-to-pem": "2.0.3",
         "query-string": "6.11.1",
         "react": "16.13.1",
         "react-dom": "16.13.1",

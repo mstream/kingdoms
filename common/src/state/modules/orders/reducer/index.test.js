@@ -8,12 +8,12 @@ import { RESET_STATE } from '../../../actions/types';
 import type { CommonStateOrdersReducerTestScenarios } from './test/types';
 import { ordersReducer } from './index';
 import { dummy } from '../../../actions';
-import { DUMMY } from '../../../../../../client/src/state/actions';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { CREATE_ORDER } from '../actions/types';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
 import { EXECUTE_TIME_STEP } from '../../time/actions';
 import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
+import { DUMMY } from '../../../../../../client/src/state/actions/types';
 
 
 const stateInitializationScenario: CommonStateOrdersReducerTestScenarios<CommonDummyAction> = {

@@ -46,8 +46,14 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
+                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
 
     OnConnectFunction:
         Type: 'AWS::Serverless::Function'
@@ -65,6 +71,9 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
+                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
@@ -87,6 +96,9 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
+                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
@@ -110,6 +122,8 @@ Resources:
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
@@ -145,6 +159,8 @@ Resources:
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
@@ -174,6 +190,9 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
+                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
@@ -344,12 +363,12 @@ Resources:
                             OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${OriginAccessIdentity}'
 
     UserPool:
-        Type: 'AWS::Index::UserPool'
+        Type: 'AWS::Cognito::UserPool'
         Properties:
             UserPoolName: !Sub '${AWS::StackName}'
 
     UserPoolClient:
-        Type: 'AWS::Index::UserPoolClient'
+        Type: 'AWS::Cognito::UserPoolClient'
         Properties:
             ClientName: !Sub '${AWS::StackName}'
             UserPoolId: !Sub '${UserPool}'
@@ -370,7 +389,7 @@ Resources:
             DefaultRedirectURI: !Sub 'https://${WebsiteDistribution.DomainName}'
 
     UserPoolDomain:
-        Type: 'AWS::Index::UserPoolDomain'
+        Type: 'AWS::Cognito::UserPoolDomain'
         Properties:
             UserPoolId: !Sub '${UserPool}'
             Domain: !Sub '${Environment}-kingdoms'
@@ -380,7 +399,7 @@ Outputs:
 
     WebSocketUrl:
         Description: 'The WSS Protocol URL'
-        Value: !Sub 'wss://${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${Stage}'
+        Value: !Sub 'wss://${WebSocket}.execute-api.${AWS::Region}.amdazonaws.com/${Stage}'
 
     WebsiteUrl:
         Description: 'The website URL'

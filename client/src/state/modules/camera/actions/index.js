@@ -1,15 +1,9 @@
 // @flow
 
 
-import type { Vector } from '../../../../../../common/src/vector';
-import type { ClientActionCreator } from '../../../actions/types';
-import type { BaseAction } from '../../../../../../common/src/types/actions';
-
-export const MOVE_CAMERA: 'MOVE_CAMERA' = 'MOVE_CAMERA';
-export const ZOOM_CAMERA: 'ZOOM_CAMERA' = 'ZOOM_CAMERA';
-
-export type ClientMoveCameraAction = BaseAction<typeof MOVE_CAMERA, $ReadOnly<{ vector: Vector }>>;
-export type ClientZoomCameraAction = BaseAction<typeof ZOOM_CAMERA, $ReadOnly<{ vector: Vector }>>;
+import type { ClientActionCreator } from '../../../types';
+import type { ClientMoveCameraAction, ClientZoomCameraAction } from './types';
+import { MOVE_CAMERA, ZOOM_CAMERA } from './types';
 
 
 const moveCamera: ClientActionCreator<ClientMoveCameraAction> = (payload) => {

@@ -2,26 +2,32 @@
 
 import Socket from 'simple-websocket';
 import type { Middleware } from 'redux';
-import type { ClientAction } from '../actions';
 import {
     changeCityName,
     createCity,
     upgradeBuilding,
 } from '../../../../common/src/state/modules/cities/actions';
 import jwt from 'jsonwebtoken';
-import { generateId, stringifyJson } from '../../../../common/src/util';
 import {
-    REQUEST_BUILDING_UPGRADE,
-    REQUEST_CITY_CREATION,
-    REQUEST_CITY_NAME_CHANGE,
+    generateId,
+    parseServerResponse,
+    stringifyJson,
+} from '../../../../common/src/util';
+import {
     updateState,
 } from '../modules/common-state/actions';
 import { loadPlayer } from '../modules/player/actions';
-import { parseServerResponse } from '../../util';
 import type { ServerResponse } from '../../../../common/src/types';
 import type { ClientState } from '../modules/types';
 import { getCurrentState } from '../../../../common/src/state/actions';
 import type { CommonAction } from '../../../../common/src/state/types';
+import { reportErrors } from '../modules/errors/actions';
+import type { ClientAction } from '../types';
+import {
+    REQUEST_BUILDING_UPGRADE,
+    REQUEST_CITY_CREATION,
+    REQUEST_CITY_NAME_CHANGE,
+} from '../modules/common-state/actions/types';
 
 
 const send = ({ action, socket }: { action: CommonAction, socket: Socket }): void => {
@@ -61,6 +67,14 @@ const createOnDataHandler = (store) => {
     };
 };
 
+const createOnErrorHandler = (store) => {
+    return (error) => {
+        const errorMessage = error.message;
+        console.error(errorMessage);
+        store.dispatch(reportErrors([errorMessage]));
+    };
+};
+
 export const websocketMiddleware = ({ token, url }: { token: string, url: string }) => {
 
     // TODO verify using a public key
@@ -86,11 +100,7 @@ export const websocketMiddleware = ({ token, url }: { token: string, url: string
             console.log(`ws connection closed: ${url}`);
         });
 
-        socket.on('error', error => {
-            console.error('ws error: ' + error.message);
-            console.error(error.stack);
-        });
-
+        socket.on('error', createOnErrorHandler(store));
         socket.on('data', createOnDataHandler(store));
 
         return next => {

@@ -1,7 +1,7 @@
 // @flow
 
-import type { ClientAction } from '../actions';
 import type { ClientState } from './types';
+import type { ClientAction } from '../types';
 
 export const unsupportedActionReducer = <S, A: ClientAction>(
     {

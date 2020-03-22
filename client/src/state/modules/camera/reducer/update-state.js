@@ -14,9 +14,9 @@ import { commonStateCitiesByOwnerSelector } from '../../../../../../common/src/s
 import type { Vector } from '../../../../../../common/src/vector';
 import type { ClientStateCamera } from './types';
 import { playerNameSelector } from '../../player/selectors';
-import type { ClientUpdateStateAction } from '../../common-state/actions';
 import type { ClientState } from '../../types';
 import type { CommonStateCity } from '../../../../../../common/src/state/modules/cities/reducer/types';
+import type { ClientUpdateStateAction } from '../../common-state/actions/types';
 
 export const updateStateCameraReducer = (
     {

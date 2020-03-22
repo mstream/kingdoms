@@ -1,36 +1,61 @@
 // @flow
 
-import { emptyContext, emptyCustomAuthorizerEvent } from '../util';
-import type { Context, CustomAuthorizerEvent } from '../types';
-import { handler } from './app';
-
 jest.mock(
     '../../config',
     () => {
         return {
-            config: {
-                environment: 'env1',
-                redis: {
-                    host: 'redis',
-                    port: 1234,
-                },
-            },
+            config: {},
         };
     },
 );
 
 jest.mock(
-    '../../clients/redis',
+    '../../clients/cognito',
     () => {
         return {
-            createRedisClient: () => {
+            createCognitoClient: () => {
                 return {
-                    sadd: () => Promise.resolve(1),
+                    getJwks: () => Promise.resolve([
+                        {
+                            alg: '',
+                            e: '',
+                            kid: 'key1',
+                            kty: '',
+                            n: 'publicKey1',
+                            use: '',
+                        },
+                        {
+                            alg: '',
+                            e: '',
+                            kid: 'key2',
+                            kty: '',
+                            n: 'publicKey2',
+                            use: '',
+                        },
+                    ]),
                 };
             },
         };
     },
 );
+
+jest.mock(
+    '../../jwt',
+    () => {
+        return {
+            buildUserProfile: () => Promise.resolve({
+                errors: [],
+                userProfile: {
+                    name: 'user1',
+                }
+            }),
+        };
+    },
+);
+
+import { emptyContext, emptyCustomAuthorizerEvent } from '../util';
+import type { Context, CustomAuthorizerEvent } from '../types';
+import { handler } from './app';
 
 describe('authenticateHandler', () => {
     it('', async () => {
@@ -49,7 +74,7 @@ describe('authenticateHandler', () => {
         };
 
         const expected = {
-            principalId: `user`,
+            principalId: `user1`,
             policyDocument: {
                 Version: `2012-10-17`,
                 Statement: [

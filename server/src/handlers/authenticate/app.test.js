@@ -1,7 +1,7 @@
 // @flow
 
-import { emptyApiGatewayProxyEvent, emptyContext } from '../util';
-import type { APIGatewayProxyEvent, Context } from '../types';
+import { emptyContext, emptyCustomAuthorizerEvent } from '../util';
+import type { Context, CustomAuthorizerEvent } from '../types';
 import { handler } from './app';
 
 jest.mock(
@@ -32,7 +32,7 @@ jest.mock(
     },
 );
 
-describe('onConnectHandler', () => {
+describe('authenticateHandler', () => {
     it('', async () => {
         const context: Context = {
             ...emptyContext,
@@ -40,17 +40,26 @@ describe('onConnectHandler', () => {
 
         const callback = () => undefined;
 
-        const event: APIGatewayProxyEvent = {
-            ...emptyApiGatewayProxyEvent,
-            requestContext: {
-                ...emptyApiGatewayProxyEvent.requestContext,
-                connectionId: 'connection1',
+        const event: CustomAuthorizerEvent = {
+            ...emptyCustomAuthorizerEvent,
+            queryStringParameters: {
+                token: 'token',
             },
+            methodArn: 'methodArn',
         };
 
         const expected = {
-            statusCode: 200,
-            body: `Connected.`,
+            principalId: `user`,
+            policyDocument: {
+                Version: `2012-10-17`,
+                Statement: [
+                    {
+                        Action: `execute-api:Invoke`,
+                        Effect: `Allow`,
+                        Resource: 'methodArn',
+                    },
+                ],
+            },
         };
 
         const actual = await handler(event, context, callback);

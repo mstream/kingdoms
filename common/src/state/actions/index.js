@@ -15,10 +15,10 @@ export const dummy: CommonActionCreator<CommonDummyAction> = () => {
     };
 };
 
-export const getCurrentState: CommonActionCreator<CommonGetCurrentStateAction> = () => {
+export const getCurrentState: CommonActionCreator<CommonGetCurrentStateAction> = (payload) => {
     return {
         type: GET_CURRENT_STATE,
-        payload: undefined,
+        payload: payload,
     };
 };
 

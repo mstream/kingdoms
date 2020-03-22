@@ -44,6 +44,10 @@ Resources:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+            Environment:
+                Variables:
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
 
     OnConnectFunction:
         Type: 'AWS::Serverless::Function'
@@ -340,12 +344,12 @@ Resources:
                             OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${OriginAccessIdentity}'
 
     UserPool:
-        Type: 'AWS::Cognito::UserPool'
+        Type: 'AWS::Index::UserPool'
         Properties:
             UserPoolName: !Sub '${AWS::StackName}'
 
     UserPoolClient:
-        Type: 'AWS::Cognito::UserPoolClient'
+        Type: 'AWS::Index::UserPoolClient'
         Properties:
             ClientName: !Sub '${AWS::StackName}'
             UserPoolId: !Sub '${UserPool}'
@@ -366,7 +370,7 @@ Resources:
             DefaultRedirectURI: !Sub 'https://${WebsiteDistribution.DomainName}'
 
     UserPoolDomain:
-        Type: 'AWS::Cognito::UserPoolDomain'
+        Type: 'AWS::Index::UserPoolDomain'
         Properties:
             UserPoolId: !Sub '${UserPool}'
             Domain: !Sub '${Environment}-kingdoms'

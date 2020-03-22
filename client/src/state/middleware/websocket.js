@@ -11,8 +11,10 @@ import {
 import jwt from 'jsonwebtoken';
 import { generateId, stringifyJson } from '../../../../common/src/util';
 import {
-    REQUEST_BUILDING_UPGRADE, REQUEST_CITY_CREATION,
-    REQUEST_CITY_NAME_CHANGE, updateState,
+    REQUEST_BUILDING_UPGRADE,
+    REQUEST_CITY_CREATION,
+    REQUEST_CITY_NAME_CHANGE,
+    updateState,
 } from '../modules/common-state/actions';
 import { loadPlayer } from '../modules/player/actions';
 import { parseServerResponse } from '../../util';
@@ -76,7 +78,7 @@ export const websocketMiddleware = ({ token, url }: { token: string, url: string
 
         socket.on('connect', () => {
             console.log(`ws connection established: ${url}`);
-            send({ action: getCurrentState(), socket });
+            send({ action: getCurrentState({ playerId: username }), socket });
             store.dispatch(loadPlayer({ name: username }));
         });
 

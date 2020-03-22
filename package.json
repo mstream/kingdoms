@@ -38,6 +38,7 @@
     "dependencies": {
         "await-exec": "0.1.2",
         "aws-sdk": "2.642.0",
+        "axios": "0.19.2",
         "classnames": "2.2.6",
         "combine-reducers-global-state": "1.0.1",
         "flow-runtime": "0.17.0",

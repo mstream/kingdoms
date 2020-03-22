@@ -1,13 +1,15 @@
 // @flow
 
-import type { CustomAuthorizerHandler } from '../types';
+import type { CustomAuthorizerHandler, CustomAuthorizerResult } from '../types';
 
-const createAllowPolicy = ({ methodArn }: { methodArn: string }) => {
+const createAllowPolicy = ({ methodArn }: { methodArn: string }): CustomAuthorizerResult  => {
     return {
         principalId: `user`,
         policyDocument: {
             Version: `2012-10-17`,
+            // $FlowFixMe
             Statement: [
+                // $FlowFixMe
                 {
                     Action: `execute-api:Invoke`,
                     Effect: `Allow`,

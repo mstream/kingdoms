@@ -30,6 +30,10 @@ export const regimentTemplateSelector = (state: ClientState): CommonStateRegimen
     return state.menu.attackView.regimentTemplate;
 };
 
+export const minimumDelaySelector = (state: ClientState): number => {
+    return state.menu.attackView.minimumDelay;
+};
+
 export const minimumRegimentSizeSelector = createSelector<ClientState, void, number, CommonStateRegimentTemplate>(
     regimentTemplateSelector,
     (regimentTemplate) => {

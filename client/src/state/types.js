@@ -16,11 +16,13 @@ import type {
     ClientCloseCityViewAction,
     ClientOpenAttackViewAction,
     ClientOpenCityViewAction,
+    ClientRequestOrderCreationAction,
     ClientSelectAttackViewAttackingCityAction,
     ClientSelectCityViewBuildingsTabAction,
     ClientSelectCityViewResourceTabAction,
     ClientSelectCityViewTabAction,
     ClientSelectCityViewUnitsTabAction,
+    ClientUpdateAttackViewMinimumDelayAction,
     ClientUpdateAttackViewRegimentTemplateAction,
 } from './modules/menu/actions/types';
 import type { ClientLoadPlayerAction } from './modules/player/actions/types';
@@ -37,12 +39,14 @@ export type ClientAction =
     | ClientRequestBuildingUpgradeAction
     | ClientRequestCityCreationAction
     | ClientRequestCityNameChangeAction
+    | ClientRequestOrderCreationAction
     | ClientSelectAttackViewAttackingCityAction
     | ClientSelectCityViewBuildingsTabAction
     | ClientSelectCityViewResourceTabAction
     | ClientSelectCityViewUnitsTabAction
     | ClientSelectCityViewTabAction
     | ClientUpdateAttackViewRegimentTemplateAction
+    | ClientUpdateAttackViewMinimumDelayAction
     | ClientUpdateStateAction
     | ClientZoomCameraAction
 

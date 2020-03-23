@@ -11,7 +11,7 @@ export const Component = (
     {
         isVisible,
         minimumDelay,
-        setMinimumDelay,
+        updateAttackViewMinimumDelay,
     }: Props,
 ) => {
     if (!isVisible) {
@@ -19,7 +19,7 @@ export const Component = (
     }
 
     const onChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-        setMinimumDelay(parseInt(event.target.value));
+        updateAttackViewMinimumDelay({ minimumDelay: parseInt(event.target.value) });
     };
 
     const durationClassName = classNames({

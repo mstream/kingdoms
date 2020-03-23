@@ -13,6 +13,7 @@ export const emptyMenuState: ClientStateMenu = {
     attackView: {
         attackedCityId: null,
         attackingCityId: null,
+        minimumDelay: 0,
         regimentTemplate: emptyRegimentTemplateState,
     },
     cityView: {
@@ -31,6 +32,7 @@ export const initialMenuState = {
     attackView: {
         attackedCityId: null,
         attackingCityId: null,
+        minimumDelay: 0,
         regimentTemplate: emptyRegimentTemplateState,
     },
     cityView: {

@@ -1,51 +1,41 @@
 // @flow
 
-import React, { useState } from 'react';
+import React from 'react';
 import type { Props } from './props';
-import { unitsOrder } from '../../assets/images/units';
 import { AttackViewRegimentTemplateFormComponent } from './regiment-template-form';
 import { AttackViewCityListComponent } from './city-list';
-import type { CommonStateUnitKey } from '../../../../common/src/state/modules/rules/reducer/types';
 import { AttackViewSchedulerFormComponent } from './scheduler-form';
-import type { CommonStateRegimentTemplate } from '../../../../common/src/state/modules/orders/reducer/types';
 import classNames from 'classnames';
-
-const initialRegimentTemplate: CommonStateRegimentTemplate = unitsOrder.reduce(
-    (initialQuantities, unitType: CommonStateUnitKey) => {
-        return {
-            ...initialQuantities,
-            // $FlowFixMe
-            [unitType]: {
-                from: 0,
-                to: 0,
-            },
-        };
-    },
-    {},
-);
-
-const initialMinimumDelay = 0;
 
 export const testId = 'attack-view';
 
 export const Component = (
     {
         attackedCity,
+        attackedCityId,
+        attackingCityId,
         closeAttackView,
         isFormValid,
+        minimumDelay,
+        regimentTemplate,
+        requestOrderCreation,
     }: Props,
 ) => {
     if (attackedCity == null) {
         return null;
     }
 
-    const [
-        minimumDelay,
-        setMinimumDelay,
-    ] = useState(initialMinimumDelay);
-
     const onBackgroundClick = () => {
         closeAttackView();
+    };
+
+    const onScheduleActionClick = () => {
+        requestOrderCreation({
+            minimumDelay,
+            originCityId: attackingCityId,
+            regimentTemplate,
+            targetCityId: attackedCityId,
+        });
     };
 
     const buttonClassName = classNames(
@@ -81,10 +71,7 @@ export const Component = (
                                 <AttackViewCityListComponent/>
                             </div>
                             <div className="w-1/3 m-1">
-                                <AttackViewSchedulerFormComponent
-                                    minimumDelay={minimumDelay}
-                                    setMinimumDelay={setMinimumDelay}
-                                />
+                                <AttackViewSchedulerFormComponent/>
                             </div>
                         </div>
                         <div className="w-full m-1">
@@ -94,7 +81,10 @@ export const Component = (
                 </div>
                 <div
                     className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
-                    <button className={buttonClassName}>
+                    <button
+                        className={buttonClassName}
+                        onClick={onScheduleActionClick}
+                    >
                         Schedule Attack
                     </button>
                 </div>

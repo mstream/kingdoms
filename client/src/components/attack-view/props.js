@@ -6,10 +6,14 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { attackedCitySelector } from '../../state/selectors';
 import {
-    attackingCityIdSelector,
-    minimumRegimentSizeSelector,
+    attackedCityIdSelector,
+    attackingCityIdSelector, minimumDelaySelector,
+    minimumRegimentSizeSelector, regimentTemplateSelector,
 } from '../../state/modules/menu/selectors';
-import { closeAttackView } from '../../state/modules/menu/actions';
+import {
+    closeAttackView,
+    requestOrderCreation,
+} from '../../state/modules/menu/actions';
 import type { ClientState } from '../../state/modules/types';
 import type { ClientAction } from '../../state/types';
 
@@ -32,12 +36,17 @@ export type Props = {
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         attackedCity: attackedCitySelector(state),
+        attackedCityId: attackedCityIdSelector(state),
+        attackingCityId: attackingCityIdSelector(state),
         isFormValid: attackingCityIdSelector(state) != null && minimumRegimentSizeSelector(state) > 0,
+        minimumDelay: minimumDelaySelector(state),
+        regimentTemplate: regimentTemplateSelector(state),
     });
 };
 
 const actionCreators: DispatchProps = Object.freeze({
     closeAttackView,
+    requestOrderCreation,
 });
 
 export const connectProps = connect<Props,

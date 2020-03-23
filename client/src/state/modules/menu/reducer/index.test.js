@@ -29,6 +29,8 @@ import type { ClientDummyAction } from '../../../actions/types';
 import type { ClientStateMenuReducerTestScenario } from './test/types';
 import { updateAttackViewRegimentTemplateTestScenarios } from './test/update-attack-view-regiment-template-test-scenarios';
 import { emptyRange } from '../../../../../../common/src/range';
+import { updateAttackViewMinimumDelay } from '../actions';
+import { updateAttackViewMinimumDelayTestScenarios } from './test/update-attack-view-minimum-delay-test-scenarios';
 
 const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientAction>> }): void => {
     scenarios.forEach(
@@ -56,6 +58,7 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDumm
             attackView: {
                 attackedCityId: null,
                 attackingCityId: null,
+                minimumDelay: 0,
                 regimentTemplate: {
                     [UNIT_ARCHER]: {
                         from: 0,
@@ -115,6 +118,7 @@ describe('menuReducer', () => {
             ...selectCityViewBuildingsTabTestScenarios,
             ...selectCityViewResourcesTabTestScenarios,
             ...selectCityViewUnitsTabTestScenarios,
+            ...updateAttackViewMinimumDelayTestScenarios,
             ...updateAttackViewRegimentTemplateTestScenarios,
             ...updateStateTestScenarios,
         ],

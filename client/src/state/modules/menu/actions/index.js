@@ -7,11 +7,13 @@ import type {
     ClientCloseCityViewAction,
     ClientOpenAttackViewAction,
     ClientOpenCityViewAction,
+    ClientRequestOrderCreationAction,
     ClientSelectAttackViewAttackingCityAction,
     ClientSelectCityViewBuildingsTabAction,
     ClientSelectCityViewResourceTabAction,
     ClientSelectCityViewTabAction,
     ClientSelectCityViewUnitsTabAction,
+    ClientUpdateAttackViewMinimumDelayAction,
     ClientUpdateAttackViewRegimentTemplateAction,
 } from './types';
 import {
@@ -19,11 +21,14 @@ import {
     CLOSE_CITY_VIEW,
     OPEN_ATTACK_VIEW,
     OPEN_CITY_VIEW,
+    REQUEST_ORDER_CREATION,
     SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
     SELECT_CITY_VIEW_BUILDINGS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNITS_TAB, UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
+    SELECT_CITY_VIEW_UNITS_TAB,
+    UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
+    UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from './types';
 
 
@@ -51,6 +56,13 @@ export const openAttackView: ClientActionCreator<ClientOpenAttackViewAction> = (
 export const openCityView: ClientActionCreator<ClientOpenCityViewAction> = (payload) => {
     return {
         type: OPEN_CITY_VIEW,
+        payload,
+    };
+};
+
+export const requestOrderCreation: ClientActionCreator<ClientRequestOrderCreationAction> = (payload) => {
+    return {
+        type: REQUEST_ORDER_CREATION,
         payload,
     };
 };
@@ -95,6 +107,13 @@ export const selectAttackViewAttackingCity: ClientActionCreator<ClientSelectAtta
 export const updateAttackViewRegimentTemplate: ClientActionCreator<ClientUpdateAttackViewRegimentTemplateAction> = (payload) => {
     return {
         type: UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
+        payload,
+    };
+};
+
+export const updateAttackViewMinimumDelay: ClientActionCreator<ClientUpdateAttackViewMinimumDelayAction> = (payload) => {
+    return {
+        type: UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
         payload,
     };
 };

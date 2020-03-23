@@ -25,17 +25,11 @@ describe('AttackViewSchedulerFormComponent', () => {
             },
         };
 
-        const minimumDelay = 2;
-        const setMinimumDelay = jest.fn();
-
         const store = mockStore(state);
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <AttackViewSchedulerFormComponent
-                    minimumDelay={minimumDelay}
-                    setMinimumDelay={setMinimumDelay}
-                />
+                <AttackViewSchedulerFormComponent/>
             </Provider>,
         );
 
@@ -50,21 +44,16 @@ describe('AttackViewSchedulerFormComponent', () => {
                 attackView: {
                     ...emptyClientState.menu.attackView,
                     attackingCityId: 'city1',
+                    minimumDelay: 0,
                 },
             },
         };
-
-        const minimumDelay = 0;
-        const setMinimumDelay = jest.fn();
 
         const store = mockStore(state);
 
         const { queryByText } = render(
             <Provider store={store}>
-                <AttackViewSchedulerFormComponent
-                    minimumDelay={minimumDelay}
-                    setMinimumDelay={setMinimumDelay}
-                />
+                <AttackViewSchedulerFormComponent/>
             </Provider>,
         );
 
@@ -79,21 +68,16 @@ describe('AttackViewSchedulerFormComponent', () => {
                 attackView: {
                     ...emptyClientState.menu.attackView,
                     attackingCityId: 'city1',
+                    minimumDelay: 2,
                 },
             },
         };
-
-        const minimumDelay = 2;
-        const setMinimumDelay = jest.fn();
 
         const store = mockStore(state);
 
         const { queryByText } = render(
             <Provider store={store}>
-                <AttackViewSchedulerFormComponent
-                    minimumDelay={minimumDelay}
-                    setMinimumDelay={setMinimumDelay}
-                />
+                <AttackViewSchedulerFormComponent />
             </Provider>,
         );
 
@@ -109,21 +93,16 @@ describe('AttackViewSchedulerFormComponent', () => {
                 attackView: {
                     ...emptyClientState.menu.attackView,
                     attackingCityId: 'city1',
+                    minimumDelay: 122,
                 },
             },
         };
-
-        const minimumDelay = 122;
-        const setMinimumDelay = jest.fn();
 
         const store = mockStore(state);
 
         const { queryByText } = render(
             <Provider store={store}>
-                <AttackViewSchedulerFormComponent
-                    minimumDelay={minimumDelay}
-                    setMinimumDelay={setMinimumDelay}
-                />
+                <AttackViewSchedulerFormComponent/>
             </Provider>,
         );
 

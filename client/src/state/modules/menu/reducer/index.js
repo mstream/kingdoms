@@ -28,11 +28,12 @@ import {
     SELECT_CITY_VIEW_BUILDINGS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNITS_TAB,
+    SELECT_CITY_VIEW_UNITS_TAB, UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
     UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from '../actions/types';
 import { initialMenuState } from './state';
 import { updateAttackViewRegimentTemplateReducer } from './update-attack-view-regiment-template';
+import { updateAttackViewMinimumDelayReducer } from './update-attack-view-minimum-delay-template';
 
 export const menuReducer = (
     localState: ClientStateMenu = initialMenuState,
@@ -105,6 +106,13 @@ export const menuReducer = (
         }
         case SELECT_CITY_VIEW_UNITS_TAB: {
             return selectCityViewUnitTabMenuReducer({
+                action,
+                localState,
+                globalState,
+            });
+        }
+        case UPDATE_ATTACK_VIEW_MINIMUM_DELAY: {
+            return updateAttackViewMinimumDelayReducer({
                 action,
                 localState,
                 globalState,

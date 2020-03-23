@@ -13,9 +13,7 @@ import {
     parseServerResponse,
     stringifyJson,
 } from '../../../../common/src/util';
-import {
-    updateState,
-} from '../modules/common-state/actions';
+import { updateState } from '../modules/common-state/actions';
 import { loadPlayer } from '../modules/player/actions';
 import type { ServerResponse } from '../../../../common/src/types';
 import type { ClientState } from '../modules/types';
@@ -28,6 +26,16 @@ import {
     REQUEST_CITY_CREATION,
     REQUEST_CITY_NAME_CHANGE,
 } from '../modules/common-state/actions/types';
+import {
+    CHANGE_CITY_NAME,
+    CREATE_CITY,
+    UPGRADE_BUILDING,
+} from '../../../../common/src/state/modules/cities/actions/types';
+import { GET_CURRENT_STATE } from '../../../../common/src/state/actions/types';
+import { EXECUTE_TIME_STEP } from '../../../../common/src/state/modules/time/actions';
+import { CREATE_ORDER } from '../../../../common/src/state/modules/orders/actions/types';
+import { REQUEST_ORDER_CREATION } from '../modules/menu/actions/types';
+import { createOrder } from '../../../../common/src/state/modules/orders/actions';
 
 
 const send = ({ action, socket }: { action: CommonAction, socket: Socket }): void => {
@@ -50,11 +58,12 @@ const createOnDataHandler = (store) => {
         const serverResponse: ServerResponse = parseServerResponse({ json: dataString });
 
         switch (serverResponse.request.type) {
-            case 'CHANGE_CITY_NAME':
-            case 'CREATE_CITY':
-            case 'GET_CURRENT_STATE':
-            case 'EXECUTE_TIME_STEP':
-            case 'UPGRADE_BUILDING': {
+            case CHANGE_CITY_NAME:
+            case CREATE_CITY:
+            case CREATE_ORDER:
+            case GET_CURRENT_STATE:
+            case EXECUTE_TIME_STEP:
+            case UPGRADE_BUILDING: {
                 store.dispatch(updateState({ commonState: serverResponse.state }));
                 return;
             }
@@ -131,6 +140,16 @@ export const websocketMiddleware = ({ token, url }: { token: string, url: string
                             action: createCity({
                                 cityId: generateId(),
                                 name: action.payload.name,
+                                playerId: username,
+                            }), socket,
+                        });
+                        break;
+                    }
+                    case REQUEST_ORDER_CREATION: {
+                        send({
+                            action: createOrder({
+                                ...action.payload,
+                                orderId: generateId(),
                                 playerId: username,
                             }), socket,
                         });

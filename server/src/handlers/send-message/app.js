@@ -11,6 +11,13 @@ import { CommonPlayerActionType } from '../../../../common/src/types';
 import { validateCommonStateType } from '../../../../common/src/validators';
 import { config } from '../../config';
 import type { CommonPlayerAction } from '../../../../common/src/state/types';
+import { GET_CURRENT_STATE } from '../../../../common/src/state/actions/types';
+import {
+    CHANGE_CITY_NAME,
+    CREATE_CITY,
+    UPGRADE_BUILDING,
+} from '../../../../common/src/state/modules/cities/actions/types';
+import { CREATE_ORDER } from '../../../../common/src/state/modules/orders/actions/types';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient({ config });
@@ -75,7 +82,7 @@ export const handler: ProxyHandler = async (event, context) => {
             return requestExecutionError;
         }
 
-        const {playerId} = action.payload;
+        const { playerId } = action.payload;
 
         if (playerId !== username) {
             console.warn(`username '${username}' does not match the playerId '${playerId}'`);
@@ -92,7 +99,7 @@ export const handler: ProxyHandler = async (event, context) => {
         // TODO action authorization
 
         switch (action.type) {
-            case 'GET_CURRENT_STATE': {
+            case GET_CURRENT_STATE: {
                 const state = await getState({
                     environment: config.environment,
                     redis,
@@ -107,9 +114,10 @@ export const handler: ProxyHandler = async (event, context) => {
                 });
                 return requestAccepted;
             }
-            case 'UPGRADE_BUILDING':
-            case 'CHANGE_CITY_NAME':
-            case 'CREATE_CITY': {
+            case UPGRADE_BUILDING:
+            case CHANGE_CITY_NAME:
+            case CREATE_CITY:
+            case CREATE_ORDER: {
                 const response = await executeAction({
                     action,
                     environment: config.environment,

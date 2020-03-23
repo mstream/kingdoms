@@ -6,13 +6,12 @@ import type { Dispatch } from 'redux';
 import { attackingCitySelector } from '../../../state/selectors';
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import type { ClientState } from '../../../state/modules/types';
-import type { CommonStateRegimentTemplate } from '../../../../../common/src/state/modules/orders/reducer/types';
 import type { ClientAction } from '../../../state/types';
+import { regimentTemplateSelector } from '../../../state/modules/menu/selectors';
+import { updateAttackViewRegimentTemplate } from '../../../state/modules/menu/actions';
 
 type OwnProps = {
     onQuantityChange: (SyntheticInputEvent<HTMLInputElement>) => void,
-    regimentTemplate: CommonStateRegimentTemplate,
-    setRegimentTemplate: (CommonStateRegimentTemplate) => void,
 };
 
 type StateProps = $ReadOnly<{
@@ -32,10 +31,13 @@ export type Props = {
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         attackingCity: attackingCitySelector(state),
+        regimentTemplate: regimentTemplateSelector(state),
     });
 };
 
-const actionCreators: DispatchProps = Object.freeze({});
+const actionCreators: DispatchProps = Object.freeze({
+    updateAttackViewRegimentTemplate,
+});
 
 export const connectProps = connect<Props,
     OwnProps,

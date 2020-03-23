@@ -7,12 +7,13 @@ import {
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientStateMenu } from './types';
 import { TAB_OVERVIEW } from './types';
+import { emptyRegimentTemplateState } from '../../../../../../common/src/state/modules/orders/reducer/state';
 
 export const emptyMenuState: ClientStateMenu = {
     attackView: {
         attackedCityId: null,
         attackingCityId: null,
-        regimentTemplate: {},
+        regimentTemplate: emptyRegimentTemplateState,
     },
     cityView: {
         building: BUILDING_WAREHOUSE,
@@ -30,7 +31,7 @@ export const initialMenuState = {
     attackView: {
         attackedCityId: null,
         attackingCityId: null,
-        regimentTemplate: {},
+        regimentTemplate: emptyRegimentTemplateState,
     },
     cityView: {
         building: BUILDING_WAREHOUSE,

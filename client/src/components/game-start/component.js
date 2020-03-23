@@ -20,7 +20,7 @@ export const Component = (
     const [nameDraft, setNameDraft] = useState('');
 
     const buttonClassName = classNames(
-        'text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600',
+        'p-1 text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600',
         {
             'cursor-not-allowed': nameDraft.length === 0,
             'filter-grayscale': nameDraft.length === 0,

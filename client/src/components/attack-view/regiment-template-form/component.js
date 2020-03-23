@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { Props } from './props';
 import { unitsOrder, unitVisuals } from '../../../assets/images/units';
 import { numberToQuantityString } from '../../../../../common/src/util';
@@ -48,7 +48,7 @@ export const Component = (
     {
         attackingCity,
         regimentTemplate,
-        setRegimentTemplate,
+        updateAttackViewRegimentTemplate,
     }: Props,
 ) => {
     if (attackingCity == null) {
@@ -60,61 +60,55 @@ export const Component = (
         const { boundaryType, unitType } = deserializeInputName({ inputName: name });
 
         try {
-            setRegimentTemplate(
-                {
-                    ...regimentTemplate,
+            const newTemplateDraft = {
+                ...regimentTemplate,
+                // $FlowFixMe
+                [unitType]: {
+                    ...regimentTemplate[unitType],
                     // $FlowFixMe
-                    [unitType]: {
-                        ...regimentTemplate[unitType],
-                        // $FlowFixMe
-                        [boundaryType]: parseInt(value),
-                    },
+                    [boundaryType]: parseInt(value),
                 },
-            );
-        } catch (error) {
-            // do nothing on number parsing error
-        }
-    };
+            };
 
-    const onBlur = (event: SyntheticInputEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        const { boundaryType, unitType } = deserializeInputName({ inputName: name });
-        const previousRange = regimentTemplate[unitType];
+            const calculateNewRange = (): Range => {
+                const previousRange = newTemplateDraft[unitType];
+                const parsedValue = parseInt(value);
+                if (boundaryType === 'from') {
+                    const toValue = newTemplateDraft[unitType].to;
+                    const newFromValue = parsedValue;
+                    const newToValue = newFromValue > toValue ? newFromValue : toValue;
+                    return {
+                        ...previousRange,
+                        from: newFromValue,
+                        to: newToValue,
+                    };
+                }
+                if (boundaryType === 'to') {
+                    const fromValue = newTemplateDraft[unitType].from;
+                    const newToValue = parsedValue;
+                    const newFromValue = newToValue < fromValue ? newToValue : fromValue;
+                    return {
+                        ...previousRange,
+                        from: newFromValue,
+                        to: newToValue,
+                    };
+                }
+                throw Error(`unsupported boundary type: ${boundaryType}`);
+            };
 
-        const calculateNewRange = (): Range => {
-            const parsedValue = parseInt(value);
-            if (boundaryType === 'from') {
-                const toValue = regimentTemplate[unitType].to;
-                const newFromValue = parsedValue;
-                const newToValue = newFromValue > toValue ? newFromValue : toValue;
-                return {
-                    ...previousRange,
-                    from: newFromValue,
-                    to: newToValue,
-                };
-            }
-            if (boundaryType === 'to') {
-                const fromValue = regimentTemplate[unitType].from;
-                const newToValue = parsedValue;
-                const newFromValue = newToValue < fromValue ? newToValue : fromValue;
-                return {
-                    ...previousRange,
-                    from: newFromValue,
-                    to: newToValue,
-                };
-            }
-            throw Error(`unsupported boundary type: ${boundaryType}`);
-        };
+            const newRange = calculateNewRange();
 
-        const newRange = calculateNewRange();
-
-        setRegimentTemplate(
-            {
+            const newTemplate = {
                 ...regimentTemplate,
                 // $FlowFixMe
                 [unitType]: newRange,
-            },
-        );
+            };
+
+            updateAttackViewRegimentTemplate({ regimentTemplate: newTemplate });
+
+        } catch (error) {
+            // do nothing on number parsing error
+        }
     };
 
     const unitRows = unitsOrder.map(unitType => {
@@ -154,7 +148,6 @@ export const Component = (
                             maxLength="4"
                             value={regimentTemplate[unitType].from}
                             className={inputClassName}
-                            onBlur={onBlur}
                             onChange={onChange}
                         />
                     </div>
@@ -171,7 +164,6 @@ export const Component = (
                             maxLength="4"
                             value={regimentTemplate[unitType].to}
                             className={inputClassName}
-                            onBlur={onBlur}
                             onChange={onChange}
                         />
                     </div>

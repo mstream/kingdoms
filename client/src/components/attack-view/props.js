@@ -4,20 +4,12 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
+import { attackedCitySelector } from '../../state/selectors';
 import {
-    attackedCitySelector,
-    citiesSelector,
-    cityDistancesSelector,
-    cityIdsOwnedByPlayerSelector,
-} from '../../state/selectors';
-import {
-    attackedCityIdSelector,
     attackingCityIdSelector,
+    minimumRegimentSizeSelector,
 } from '../../state/modules/menu/selectors';
-import {
-    closeAttackView,
-    selectAttackViewAttackingCity,
-} from '../../state/modules/menu/actions';
+import { closeAttackView } from '../../state/modules/menu/actions';
 import type { ClientState } from '../../state/modules/types';
 import type { ClientAction } from '../../state/types';
 
@@ -39,7 +31,8 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        attackedCity: attackedCitySelector(state)
+        attackedCity: attackedCitySelector(state),
+        isFormValid: attackingCityIdSelector(state) != null && minimumRegimentSizeSelector(state) > 0,
     });
 };
 

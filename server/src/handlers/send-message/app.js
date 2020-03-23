@@ -6,21 +6,28 @@ import { executeAction, sendResponse } from '../../util';
 import { parseJson } from '../../../../common/src/util';
 import type { ProxyHandler } from '../types';
 import { getState } from '../../connectors/database';
-import type {
-    ServerRequest,
-    ServerResponse,
-} from '../../../../common/src/types';
-import { ServerRequestType } from '../../../../common/src/types';
+import type { ServerResponse } from '../../../../common/src/types';
+import { CommonPlayerActionType } from '../../../../common/src/types';
 import { validateCommonStateType } from '../../../../common/src/validators';
-import {config} from '../../config';
+import { config } from '../../config';
+import type { CommonPlayerAction } from '../../../../common/src/state/types';
 
 const apiGateway = createApiGatewayClient();
-const redis = createRedisClient({config});
+const redis = createRedisClient({ config });
 
-const requestExecutionError = { statusCode: 500, body: 'Message send error.' };
 const requestAccepted = { statusCode: 200, body: 'Request accepted.' };
 
-const extractRequestFromBody = ({ bodyString }: { bodyString: ?string }): ?ServerRequest => {
+const requestAuthorizationError = {
+    statusCode: 400,
+    body: 'Request not accepted.',
+};
+
+const requestExecutionError = {
+    statusCode: 500,
+    body: 'Request processing error.',
+};
+
+const extractActionFromBody = ({ bodyString }: { bodyString: ?string }): ?CommonPlayerAction => {
     if (bodyString == null) {
         console.error('invalid api gateway body received');
         return null;
@@ -34,7 +41,7 @@ const extractRequestFromBody = ({ bodyString }: { bodyString: ?string }): ?Serve
     }
 
     try {
-        return ServerRequestType.assert(body.data);
+        return CommonPlayerActionType.assert(body.data);
     } catch (error) {
         console.info(error.message);
         return null;
@@ -54,11 +61,25 @@ export const handler: ProxyHandler = async (event, context) => {
         return requestExecutionError;
     }
 
-    try {
-        const request = extractRequestFromBody({ bodyString: event.body });
+    const username = authorizer.principalId;
 
-        if (request == null) {
+    if (username == null || typeof username !== 'string') {
+        console.error('username is missing');
+        return requestExecutionError;
+    }
+
+    try {
+        const action = extractActionFromBody({ bodyString: event.body });
+
+        if (action == null) {
             return requestExecutionError;
+        }
+
+        const {playerId} = action.payload;
+
+        if (playerId !== username) {
+            console.warn(`username '${username}' does not match the playerId '${playerId}'`);
+            return requestAuthorizationError;
         }
 
         const sendResponseBackToClient = async ({ response }: { response: ServerResponse }) => await sendResponse({
@@ -70,7 +91,7 @@ export const handler: ProxyHandler = async (event, context) => {
 
         // TODO action authorization
 
-        switch (request.type) {
+        switch (action.type) {
             case 'GET_CURRENT_STATE': {
                 const state = await getState({
                     environment: config.environment,
@@ -80,7 +101,7 @@ export const handler: ProxyHandler = async (event, context) => {
                 await sendResponseBackToClient({
                     response: {
                         errors: [],
-                        request,
+                        request: action,
                         state,
                     },
                 });
@@ -90,7 +111,7 @@ export const handler: ProxyHandler = async (event, context) => {
             case 'CHANGE_CITY_NAME':
             case 'CREATE_CITY': {
                 const response = await executeAction({
-                    action: request,
+                    action,
                     environment: config.environment,
                     redis,
                 });
@@ -98,12 +119,16 @@ export const handler: ProxyHandler = async (event, context) => {
                 return requestAccepted;
             }
             default: {
-                console.error(`unsupported request type: ${request.type}`);
-                const state = await getState({ environment: config.environment, redis, validateState: validateCommonStateType });
+                console.error(`unsupported request type: ${action.type}`);
+                const state = await getState({
+                    environment: config.environment,
+                    redis,
+                    validateState: validateCommonStateType,
+                });
                 await sendResponseBackToClient({
                     response: {
                         errors: ['unsupported action'],
-                        request,
+                        request: action,
                         state: state,
                     },
                 });

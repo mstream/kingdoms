@@ -12,6 +12,7 @@ import type {
     ClientSelectCityViewResourceTabAction,
     ClientSelectCityViewTabAction,
     ClientSelectCityViewUnitsTabAction,
+    ClientUpdateAttackViewRegimentTemplateAction,
 } from './types';
 import {
     CLOSE_ATTACK_VIEW,
@@ -22,7 +23,7 @@ import {
     SELECT_CITY_VIEW_BUILDINGS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNITS_TAB,
+    SELECT_CITY_VIEW_UNITS_TAB, UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from './types';
 
 
@@ -86,6 +87,14 @@ export const selectCityViewUnitsTab: ClientActionCreator<ClientSelectCityViewUni
 export const selectAttackViewAttackingCity: ClientActionCreator<ClientSelectAttackViewAttackingCityAction> = (payload) => {
     return {
         type: SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
+        payload,
+    };
+};
+
+
+export const updateAttackViewRegimentTemplate: ClientActionCreator<ClientUpdateAttackViewRegimentTemplateAction> = (payload) => {
+    return {
+        type: UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
         payload,
     };
 };

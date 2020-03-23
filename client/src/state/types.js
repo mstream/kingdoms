@@ -18,8 +18,10 @@ import type {
     ClientOpenCityViewAction,
     ClientSelectAttackViewAttackingCityAction,
     ClientSelectCityViewBuildingsTabAction,
-    ClientSelectCityViewResourceTabAction, ClientSelectCityViewTabAction,
+    ClientSelectCityViewResourceTabAction,
+    ClientSelectCityViewTabAction,
     ClientSelectCityViewUnitsTabAction,
+    ClientUpdateAttackViewRegimentTemplateAction,
 } from './modules/menu/actions/types';
 import type { ClientLoadPlayerAction } from './modules/player/actions/types';
 
@@ -40,6 +42,7 @@ export type ClientAction =
     | ClientSelectCityViewResourceTabAction
     | ClientSelectCityViewUnitsTabAction
     | ClientSelectCityViewTabAction
+    | ClientUpdateAttackViewRegimentTemplateAction
     | ClientUpdateStateAction
     | ClientZoomCameraAction
 

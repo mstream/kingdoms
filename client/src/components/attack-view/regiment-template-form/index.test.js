@@ -6,12 +6,9 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { AttackViewRegimentTemplateFormComponent } from '.';
-import { emptyClientState } from '../../../state/modules/types';
 import type { ClientState } from '../../../state/modules/types';
-import {
-    emptyCommonState,
-
-} from '../../../../../common/src/state/modules/state';
+import { emptyClientState } from '../../../state/modules/types';
+import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
 import { emptyRegimentTemplateState } from '../../../../../common/src/state/modules/orders/reducer/state';
 
@@ -34,23 +31,22 @@ describe('AttackViewRegimentTemplateFormComponent', () => {
                 attackView: {
                     ...emptyClientState.menu.attackView,
                     attackingCityId: 'city1',
+                    regimentTemplate: {
+                        ...emptyRegimentTemplateState,
+                    },
                 },
             },
         };
 
-        const onQuantityChange = () => undefined;
 
-        const regimentTemplate = {
-            ...emptyRegimentTemplateState,
-        };
+        const updateAttackViewRegimentTemplate = jest.fn();
 
         const store = mockStore(state);
 
         const { queryByText } = render(
             <Provider store={store}>
                 <AttackViewRegimentTemplateFormComponent
-                    onQuantityChange={onQuantityChange}
-                    regimentTemplate={regimentTemplate}
+                    updateAttackViewRegimentTemplate={updateAttackViewRegimentTemplate}
                 />
             </Provider>,
         );

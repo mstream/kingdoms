@@ -16,12 +16,19 @@ import { selectAttackViewAttackingCityTestScenarios } from './test/select-attack
 import { selectCityViewBuildingsTabTestScenarios } from './test/select-city-view-buildings-tab-test-scenarios';
 import { selectCityViewResourcesTabTestScenarios } from './test/select-city-view-resources-tab-test-scenarios';
 import {
-    BUILDING_WAREHOUSE, RESOURCE_FOOD,
-    UNIT_PEASANT,
+    BUILDING_WAREHOUSE,
+    RESOURCE_FOOD,
+    UNIT_ARCHER,
+    UNIT_CATAPULT,
+    UNIT_KNIGHT,
+    UNIT_NOBLE,
+    UNIT_PEASANT, UNIT_PIKEMAN, UNIT_SWORDSMAN,
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientAction } from '../../../types';
 import type { ClientDummyAction } from '../../../actions/types';
 import type { ClientStateMenuReducerTestScenario } from './test/types';
+import { updateAttackViewRegimentTemplateTestScenarios } from './test/update-attack-view-regiment-template-test-scenarios';
+import { emptyRange } from '../../../../../../common/src/range';
 
 const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientAction>> }): void => {
     scenarios.forEach(
@@ -49,7 +56,36 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDumm
             attackView: {
                 attackedCityId: null,
                 attackingCityId: null,
-                regimentTemplate: {},
+                regimentTemplate: {
+                    [UNIT_ARCHER]: {
+                        from: 0,
+                        to: 0,
+                    },
+                    [UNIT_CATAPULT]: {
+                        from: 0,
+                        to: 0,
+                    },
+                    [UNIT_KNIGHT]: {
+                        from: 0,
+                        to: 0,
+                    },
+                    [UNIT_NOBLE]: {
+                        from: 0,
+                        to: 0,
+                    },
+                    [UNIT_PEASANT]: {
+                        from: 0,
+                        to: 0,
+                    },
+                    [UNIT_PIKEMAN]: {
+                        from: 0,
+                        to: 0,
+                    },
+                    [UNIT_SWORDSMAN]: {
+                        from: 0,
+                        to: 0,
+                    },
+                },
             },
             cityView: {
                 building: BUILDING_WAREHOUSE,
@@ -79,6 +115,7 @@ describe('menuReducer', () => {
             ...selectCityViewBuildingsTabTestScenarios,
             ...selectCityViewResourcesTabTestScenarios,
             ...selectCityViewUnitsTabTestScenarios,
+            ...updateAttackViewRegimentTemplateTestScenarios,
             ...updateStateTestScenarios,
         ],
     });

@@ -2,10 +2,9 @@
 
 import type { ClientStateMenu } from './types';
 import type { ClientState } from '../../types';
-import type { ClientCloseAttackViewAction } from '../actions/types';
-import { emptyRegimentTemplateState } from '../../../../../../common/src/state/modules/orders/reducer/state';
+import type { ClientUpdateAttackViewRegimentTemplateAction } from '../actions/types';
 
-export const closeAttackViewMenuReducer = (
+export const updateAttackViewRegimentTemplateReducer = (
     {
         localState,
         action,
@@ -13,7 +12,7 @@ export const closeAttackViewMenuReducer = (
     }:
         {
             localState: ClientStateMenu,
-            action: ClientCloseAttackViewAction,
+            action: ClientUpdateAttackViewRegimentTemplateAction,
             globalState: ClientState,
         },
 ): ClientStateMenu => {
@@ -21,9 +20,7 @@ export const closeAttackViewMenuReducer = (
         ...localState,
         attackView: {
             ...localState.attackView,
-            attackedCityId: null,
-            attackingCityId: null,
-            regimentTemplate: emptyRegimentTemplateState,
+            regimentTemplate: action.payload.regimentTemplate,
         },
     };
 };

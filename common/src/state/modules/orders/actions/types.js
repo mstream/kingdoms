@@ -1,7 +1,7 @@
 // @flow
 
 import type { CommonStateRegimentTemplate } from '../reducer/types';
-import type { BaseAction } from '../../../../types/actions';
+import type { BasePlayerAction } from '../../../../types/actions';
 
 
 export const CREATE_ORDER: 'CREATE_ORDER' = 'CREATE_ORDER';
@@ -15,4 +15,4 @@ type Payload = $ReadOnly<{
     targetCityId: string,
 }>;
 
-export type CommonCreateOrderAction = BaseAction<typeof CREATE_ORDER, Payload>;
+export type CommonCreateOrderAction = BasePlayerAction<typeof CREATE_ORDER, Payload>;

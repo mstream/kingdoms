@@ -8,6 +8,7 @@ import { AttackViewCityListComponent } from './city-list';
 import type { CommonStateUnitKey } from '../../../../common/src/state/modules/rules/reducer/types';
 import { AttackViewSchedulerFormComponent } from './scheduler-form';
 import type { CommonStateRegimentTemplate } from '../../../../common/src/state/modules/orders/reducer/types';
+import classNames from 'classnames';
 
 const initialRegimentTemplate: CommonStateRegimentTemplate = unitsOrder.reduce(
     (initialQuantities, unitType: CommonStateUnitKey) => {
@@ -31,16 +32,12 @@ export const Component = (
     {
         attackedCity,
         closeAttackView,
+        isFormValid,
     }: Props,
 ) => {
     if (attackedCity == null) {
         return null;
     }
-
-    const [
-        regimentTemplate,
-        setRegimentTemplate,
-    ] = useState(initialRegimentTemplate);
 
     const [
         minimumDelay,
@@ -50,6 +47,16 @@ export const Component = (
     const onBackgroundClick = () => {
         closeAttackView();
     };
+
+    const buttonClassName = classNames(
+        'p-1 text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600',
+        {
+            'cursor-not-allowed': !isFormValid,
+            'cursor-pointer': isFormValid,
+            'filter-grayscale': !isFormValid,
+            'hover:bg-green-400': isFormValid,
+        },
+    );
 
     return (
         <div data-testid={testId}
@@ -81,17 +88,14 @@ export const Component = (
                             </div>
                         </div>
                         <div className="w-full m-1">
-                            <AttackViewRegimentTemplateFormComponent
-                                regimentTemplate={regimentTemplate}
-                                setRegimentTemplate={setRegimentTemplate}
-                            />
+                            <AttackViewRegimentTemplateFormComponent/>
                         </div>
                     </div>
                 </div>
                 <div
                     className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
-                    <button
-                        className="p-1 bg-green-500 rounded-lg cursor-pointer focus:outline-none">Schedule Attack
+                    <button className={buttonClassName}>
+                        Schedule Attack
                     </button>
                 </div>
             </div>

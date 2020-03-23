@@ -34,15 +34,18 @@ export type CommonActionKey =
     | typeof RESET_STATE
     | typeof UPGRADE_BUILDING
 
-export type CommonAction =
+export type CommonPlayerAction =
     | CommonAbandonCityAction
     | CommonChangeCityNameAction
     | CommonCreateCityAction
     | CommonCreateOrderAction
+    | CommonGetCurrentStateAction
+    | CommonUpgradeBuildingAction;
+
+export type CommonAction =
+    | CommonPlayerAction
     | CommonDummyAction
     | CommonExecuteTimeStepAction
-    | CommonGetCurrentStateAction
     | CommonResetStateAction
-    | CommonUpgradeBuildingAction;
 
 export type CommonActionCreator<A: CommonAction> = ($PropertyType<A, 'payload'>) => A;

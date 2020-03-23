@@ -7,8 +7,8 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { attackViewSchedulerFormComponentTestId } from '.';
 import type { ClientState } from '../../../state/modules/types';
-import { emptyClientState } from '../../../state/modules/types';
 import { AttackViewSchedulerFormComponent } from './index';
+import { emptyClientState } from '../../../state/modules/state';
 
 const mockStore = configureStore([]);
 

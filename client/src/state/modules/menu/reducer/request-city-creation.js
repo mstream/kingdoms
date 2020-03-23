@@ -2,21 +2,18 @@
 
 
 import type { ClientStateMenu } from './types';
-import type { ClientState } from '../../types';
+import type { ClientStateActionReducer } from '../../types';
 import type { ClientRequestCityCreationAction } from '../../common-state/actions/types';
 
-export const requestCityCreationMenuReducer = (
+type Reducer = ClientStateActionReducer<ClientStateMenu, ClientRequestCityCreationAction>;
+
+export const requestCityCreationMenuReducer: Reducer = (
     {
         localState,
         action,
         globalState,
-    }:
-        {
-            localState: ClientStateMenu,
-            action: ClientRequestCityCreationAction,
-            globalState: ClientState,
-        },
-): ClientStateMenu => {
+    },
+) => {
     return {
         ...localState,
         newCity: {

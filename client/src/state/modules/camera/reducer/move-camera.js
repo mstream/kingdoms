@@ -1,24 +1,24 @@
 // @flow
 
 import { clipToBoundary } from '../../../../../../common/src/boundary';
-import { addVectors, multipleVectors } from '../../../../../../common/src/vector';
+import {
+    addVectors,
+    multipleVectors,
+} from '../../../../../../common/src/vector';
 import { isAnyMenuOpen } from '../../../selectors';
 import type { ClientStateCamera } from './types';
-import type { ClientState } from '../../types';
+import type { ClientStateActionReducer } from '../../types';
 import type { ClientMoveCameraAction } from '../actions/types';
 
-export const moveCameraCameraReducer = (
+type Reducer = ClientStateActionReducer<ClientStateCamera, ClientMoveCameraAction>;
+
+export const moveCameraCameraReducer: Reducer = (
     {
         action,
         localState,
         globalState,
-    }:
-        {
-            localState: ClientStateCamera,
-            action: ClientMoveCameraAction,
-            globalState: ClientState,
-        },
-): ClientStateCamera => {
+    },
+) => {
     if (isAnyMenuOpen(globalState)) {
         return localState;
     }

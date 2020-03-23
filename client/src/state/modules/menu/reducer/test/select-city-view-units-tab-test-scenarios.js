@@ -5,7 +5,6 @@ import type {
     ClientStateMenu,
 
 } from '../types';
-import { emptyClientState } from '../../../types';
 import type { ClientStateReducerTestScenario } from '../../../types';
 import { selectCityViewUnitsTab } from '../../actions';
 import {
@@ -14,6 +13,7 @@ import {
 } from '../../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientSelectCityViewUnitsTabAction } from '../../actions/types';
+import { emptyClientState } from '../../../state';
 
 export const selectCityViewUnitsTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitsTabAction>> = [
     {

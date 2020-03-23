@@ -5,24 +5,15 @@ import { cameraReducer } from './index';
 import { zoomCameraTestScenarios } from './test/zoom-camera-test-scenarios';
 import { updateStateTestScenarios } from './test/update-state-test-scenarios';
 import { moveCameraTestScenarios } from './test/move-camera-test-scenarios';
-import { emptyClientState, initialClientState } from '../../types';
 import { zeroVector } from '../../../../../../common/src/vector';
-import type { ClientAction } from '../../../types';
 import type { ClientDummyAction } from '../../../actions/types';
+import { DUMMY } from '../../../actions/types';
 import type { ClientStateCameraReducerTestScenario } from './test/types';
+import { emptyClientState } from '../../state';
+import { runTestScenarios } from '../../utils';
+import { MOVE_CAMERA, ZOOM_CAMERA } from '../actions/types';
+import { UPDATE_STATE } from '../../common-state/actions/types';
 
-const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientAction>> }): void => {
-    scenarios.forEach(
-        (scenario) => {
-            it(scenario.name, () => {
-                const previousLocalState = scenario.previousGlobalState.camera;
-                const actual = cameraReducer(previousLocalState, scenario.action, scenario.previousGlobalState);
-                const expectedLocalState = scenario.expectedLocalStateCreator({ previousLocalState });
-                expect(actual).toEqual(expectedLocalState);
-            });
-        },
-    );
-};
 
 const stateInitializationScenario: ClientStateCameraReducerTestScenario<ClientDummyAction> = {
     name: 'initializes its state',
@@ -64,13 +55,16 @@ const stateInitializationScenario: ClientStateCameraReducerTestScenario<ClientDu
     },
 };
 
+
 describe('cameraReducer', () => {
-    runScenarios({
-        scenarios: [
-            stateInitializationScenario,
-            ...moveCameraTestScenarios,
-            ...updateStateTestScenarios,
-            ...zoomCameraTestScenarios,
-        ],
+    runTestScenarios({
+        reducer: cameraReducer,
+        reducerKey: 'camera',
+        scenarios: {
+            [DUMMY]: [stateInitializationScenario],
+            [MOVE_CAMERA]: moveCameraTestScenarios,
+            [UPDATE_STATE]: updateStateTestScenarios,
+            [ZOOM_CAMERA]: zoomCameraTestScenarios,
+        },
     });
 });

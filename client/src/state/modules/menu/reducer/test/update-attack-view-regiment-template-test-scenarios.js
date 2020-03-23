@@ -1,7 +1,6 @@
 // @flow
 
 
-import { emptyClientState } from '../../../types';
 import { updateAttackViewRegimentTemplate } from '../../actions';
 import {
     UNIT_ARCHER,
@@ -10,6 +9,7 @@ import {
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientUpdateAttackViewRegimentTemplateAction } from '../../actions/types';
 import { emptyRegimentTemplateState } from '../../../../../../../common/src/state/modules/orders/reducer/state';
+import { emptyClientState } from '../../../state';
 
 export const updateAttackViewRegimentTemplateTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientUpdateAttackViewRegimentTemplateAction>> = [
     {

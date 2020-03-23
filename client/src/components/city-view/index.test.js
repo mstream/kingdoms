@@ -15,7 +15,6 @@ import {
     TAB_RESOURCES,
     TAB_UNITS,
 } from '../../state/modules/menu/reducer/types';
-import { emptyClientState } from '../../state/modules/types';
 import {
     UNIT_PEASANT,
 } from '../../../../common/src/state/modules/rules/reducer/types';
@@ -23,6 +22,7 @@ import type { ClientState } from '../../state/modules/types';
 import { emptyCommonState } from '../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
 import { emptyUnitStatsState } from '../../../../common/src/state/modules/rules/reducer/state';
+import { emptyClientState } from '../../state/modules/state';
 
 const mockStore = configureStore([]);
 

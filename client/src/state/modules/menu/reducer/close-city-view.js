@@ -3,21 +3,22 @@
 import type { ClientStateMenu } from './types';
 import { TAB_OVERVIEW } from './types';
 import { UNIT_PEASANT } from '../../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../types';
-import type { ClientCloseCityViewAction } from '../actions/types';
+import type { ClientState, ClientStateActionReducer } from '../../types';
+import type {
+    ClientCloseAttackViewAction,
+    ClientCloseCityViewAction,
+} from '../actions/types';
 
-export const closeCityViewMenuReducer = (
+type Reducer = ClientStateActionReducer<ClientStateMenu, ClientCloseCityViewAction>;
+
+
+export const closeCityViewMenuReducer: Reducer = (
     {
         localState,
         action,
         globalState,
-    }:
-        {
-            localState: ClientStateMenu,
-            action: ClientCloseCityViewAction,
-            globalState: ClientState,
-        },
-): ClientStateMenu => {
+    }
+)=> {
     return {
         ...localState,
         cityView: {

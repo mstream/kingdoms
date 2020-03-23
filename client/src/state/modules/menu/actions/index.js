@@ -22,7 +22,7 @@ import {
     OPEN_ATTACK_VIEW,
     OPEN_CITY_VIEW,
     REQUEST_ORDER_CREATION,
-    SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
+    SELECT_ATTACK_VIEW_ATTACKING_CITY,
     SELECT_CITY_VIEW_BUILDINGS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
@@ -98,7 +98,7 @@ export const selectCityViewUnitsTab: ClientActionCreator<ClientSelectCityViewUni
 
 export const selectAttackViewAttackingCity: ClientActionCreator<ClientSelectAttackViewAttackingCityAction> = (payload) => {
     return {
-        type: SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB,
+        type: SELECT_ATTACK_VIEW_ATTACKING_CITY,
         payload,
     };
 };

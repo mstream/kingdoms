@@ -2,20 +2,19 @@
 
 
 import type { ClientStatePlayer } from './types';
-import type { ClientState } from '../../types';
+import type { ClientStateActionReducer } from '../../types';
 import type { ClientLoadPlayerAction } from '../actions/types';
 
-export const loadPlayerPlayerReducer = (
+type Reducer = ClientStateActionReducer<ClientStatePlayer, ClientLoadPlayerAction>;
+
+
+export const loadPlayerPlayerReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: ClientLoadPlayerAction,
-        globalState: ClientState,
-        localState: ClientStatePlayer,
     },
-): ClientStatePlayer => {
+) => {
     return {
         ...localState,
         name: action.payload.name,

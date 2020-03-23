@@ -10,7 +10,6 @@ import {
     TAB_RESOURCES,
     TAB_UNITS,
 } from '../../../state/modules/menu/reducer/types';
-import { emptyClientState } from '../../../state/modules/types';
 import { selectCityViewUnitsTab } from '../../../state/modules/menu/actions';
 import {
     UNIT_PEASANT,
@@ -19,6 +18,7 @@ import {
 import type { ClientState } from '../../../state/modules/types';
 import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
+import { emptyClientState } from '../../../state/modules/state';
 
 const mockStore = configureStore([]);
 

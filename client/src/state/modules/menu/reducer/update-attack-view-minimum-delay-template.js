@@ -1,24 +1,18 @@
 // @flow
 
 import type { ClientStateMenu } from './types';
-import type { ClientState } from '../../types';
-import type {
-    ClientUpdateAttackViewMinimumDelayAction,
-    ClientUpdateAttackViewRegimentTemplateAction,
-} from '../actions/types';
+import type { ClientStateActionReducer } from '../../types';
+import type { ClientUpdateAttackViewMinimumDelayAction } from '../actions/types';
 
-export const updateAttackViewMinimumDelayReducer = (
+type Reducer = ClientStateActionReducer<ClientStateMenu, ClientUpdateAttackViewMinimumDelayAction>;
+
+export const updateAttackViewMinimumDelayReducer: Reducer = (
     {
         localState,
         action,
         globalState,
-    }:
-        {
-            localState: ClientStateMenu,
-            action: ClientUpdateAttackViewMinimumDelayAction,
-            globalState: ClientState,
-        },
-): ClientStateMenu => {
+    },
+) => {
     return {
         ...localState,
         attackView: {

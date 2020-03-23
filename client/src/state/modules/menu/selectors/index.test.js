@@ -1,13 +1,13 @@
 // @flow
 
 import type { ClientState } from '../../types';
-import { emptyClientState } from '../../types';
 import {
     UNIT_ARCHER,
     UNIT_KNIGHT,
     UNIT_PIKEMAN,
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
 import { minimumRegimentSizeSelector } from './index';
+import { emptyClientState } from '../../state';
 
 describe('minimumRegimentSizeSelector', () => {
     it('returns a sum of minimum quantities of each unit', () => {

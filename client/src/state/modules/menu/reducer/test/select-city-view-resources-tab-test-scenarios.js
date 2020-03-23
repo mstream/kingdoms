@@ -1,7 +1,6 @@
 // @flow
 
 
-import { emptyClientState } from '../../../types';
 import { selectCityViewResourcesTab } from '../../actions';
 import {
     RESOURCE_FOOD,
@@ -9,6 +8,7 @@ import {
 } from '../../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientSelectCityViewResourceTabAction } from '../../actions/types';
+import { emptyClientState } from '../../../state';
 
 export const selectCityViewResourcesTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewResourceTabAction>> = [
     {

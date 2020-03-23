@@ -6,8 +6,11 @@ import { tileVectorToPixelVector } from '../../../../util';
 import tumult from 'tumult';
 import type { Vector } from '../../../../../../common/src/vector';
 import { surfaceImages } from '../../../../assets/images/terrain';
-import type { ClientState } from '../../types';
+import type { ClientStateActionReducer } from '../../types';
 import type { ClientUpdateStateAction } from '../../common-state/actions/types';
+
+type Reducer = ClientStateActionReducer<ClientStateTiles, ClientUpdateStateAction>;
+
 
 const perlin2 = new tumult.Simplex2('qwerty');
 
@@ -15,17 +18,13 @@ const calculateTextureIndex = ({ index }: { index: Vector }): number => {
     return Math.round(Math.abs(perlin2.gen(Math.abs(index.x), Math.abs(index.y))) * (surfaceImages.length - 1));
 };
 
-export const updateStateTilesReducer = (
+export const updateStateTilesReducer: Reducer = (
     {
         action,
         globalState,
         localState,
-    }: {
-        action: ClientUpdateStateAction,
-        globalState: ClientState,
-        localState: ClientStateTiles,
     },
-): ClientStateTiles => {
+) => {
     const newCityTiles = Object.keys(action.payload.commonState.cities).reduce(
         (newCityTiles, cityId) => {
             const city = action.payload.commonState.cities[cityId];

@@ -4,21 +4,19 @@ import { commonStateCityIdsByOwnerSelector } from '../../../../../../common/src/
 import type { ClientStateMenu } from './types';
 import { playerNameSelector } from '../../player/selectors';
 import { isCityBeingCreatedSelector } from '../selectors';
-import type { ClientState } from '../../types';
+import type { ClientStateActionReducer } from '../../types';
 import type { ClientUpdateStateAction } from '../../common-state/actions/types';
 
-export const updateStateMenuReducer = (
+type Reducer = ClientStateActionReducer<ClientStateMenu, ClientUpdateStateAction>;
+
+
+export const updateStateMenuReducer: Reducer = (
     {
         localState,
         action,
         globalState,
-    }:
-        {
-            localState: ClientStateMenu,
-            action: ClientUpdateStateAction,
-            globalState: ClientState,
-        },
-): ClientStateMenu => {
+    },
+) => {
     const playerId = playerNameSelector(globalState);
 
     if (playerId == null) {

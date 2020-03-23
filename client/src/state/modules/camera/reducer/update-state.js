@@ -11,25 +11,22 @@ import {
     worldSelector,
 } from '../../../selectors';
 import { commonStateCitiesByOwnerSelector } from '../../../../../../common/src/selectors/common-state';
-import type { Vector } from '../../../../../../common/src/vector';
 import type { ClientStateCamera } from './types';
 import { playerNameSelector } from '../../player/selectors';
-import type { ClientState } from '../../types';
+import type { ClientStateActionReducer } from '../../types';
 import type { CommonStateCity } from '../../../../../../common/src/state/modules/cities/reducer/types';
 import type { ClientUpdateStateAction } from '../../common-state/actions/types';
 
-export const updateStateCameraReducer = (
+type Reducer = ClientStateActionReducer<ClientStateCamera, ClientUpdateStateAction>;
+
+
+export const updateStateCameraReducer: Reducer = (
     {
         localState,
         action,
         globalState,
-    }:
-        {
-            localState: ClientStateCamera,
-            action: ClientUpdateStateAction,
-            globalState: ClientState,
-        },
-): ClientStateCamera => {
+    },
+) => {
 
     const calculateNewLocation = () => {
         const playerName = playerNameSelector(globalState);

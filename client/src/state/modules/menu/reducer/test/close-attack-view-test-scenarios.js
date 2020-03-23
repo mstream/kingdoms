@@ -1,11 +1,11 @@
 // @flow
 
-import { emptyClientState } from '../../../types';
 import { closeAttackView } from '../../actions';
 import { UNIT_PIKEMAN } from '../../../../../../../common/src/state/modules/rules/reducer/types';
 import { emptyRegimentTemplateState } from '../../../../../../../common/src/state/modules/orders/reducer/state';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientCloseAttackViewAction } from '../../actions/types';
+import { emptyClientState } from '../../../state';
 
 
 export const closeAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientCloseAttackViewAction>> = [

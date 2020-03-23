@@ -9,7 +9,6 @@ import {
 } from './index';
 import type { ClientStateCityViewTab } from '../modules/menu/reducer/types';
 import { TAB_UNITS } from '../modules/menu/reducer/types';
-import { emptyClientState } from '../modules/types';
 import type {
     CommonStateCities,
     CommonStateCity,
@@ -17,6 +16,7 @@ import type {
 import type { ClientState } from '../modules/types';
 import { emptyCommonState } from '../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
+import { emptyClientState } from '../modules/state';
 
 describe('citiesSelector', () => {
     it('returns all the cities', () => {

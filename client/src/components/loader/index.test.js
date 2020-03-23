@@ -6,9 +6,9 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { LoaderComponent } from '.';
-import { emptyClientState } from '../../state/modules/types';
 import type { ClientState } from '../../state/modules/types';
 import { emptyCommonState } from '../../../../common/src/state/modules/state';
+import { emptyClientState } from '../../state/modules/state';
 
 const mockStore = configureStore([]);
 

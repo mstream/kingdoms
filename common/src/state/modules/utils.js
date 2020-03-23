@@ -23,7 +23,7 @@ export const failure = <S>({ errors }: { errors: $ReadOnlyArray<string> }): Comm
     };
 };
 
-export type ActionReducers<S> = $ReadOnly<{
+type ActionReducers<S> = $ReadOnly<{
     [CommonActionKey]: CommonStateActionReducer<S, CommonAction>, ...
 }>;
 

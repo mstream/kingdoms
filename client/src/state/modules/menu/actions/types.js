@@ -14,7 +14,7 @@ export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = 'CLOSE_CITY_VIEW';
 export const OPEN_ATTACK_VIEW: 'OPEN_ATTACK_VIEW' = 'OPEN_ATTACK_VIEW';
 export const OPEN_CITY_VIEW: 'OPEN_CITY_VIEW' = 'OPEN_CITY_VIEW';
 export const REQUEST_ORDER_CREATION: 'REQUEST_ORDER_CREATION' = 'REQUEST_ORDER_CREATION';
-export const SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB: 'SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB' = 'SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB';
+export const SELECT_ATTACK_VIEW_ATTACKING_CITY: 'SELECT_ATTACK_VIEW_ATTACKING_CITY' = 'SELECT_ATTACK_VIEW_ATTACKING_CITY';
 export const SELECT_CITY_VIEW_TAB: 'SELECT_CITY_VIEW_TAB' = 'SELECT_CITY_VIEW_TAB';
 export const SELECT_CITY_VIEW_BUILDINGS_TAB: 'SELECT_CITY_VIEW_BUILDINGS_TAB' = 'SELECT_CITY_VIEW_BUILDINGS_TAB';
 export const SELECT_CITY_VIEW_RESOURCES_TAB: 'SELECT_CITY_VIEW_RESOURCES_TAB' = 'SELECT_CITY_VIEW_RESOURCES_TAB';
@@ -34,7 +34,7 @@ export type ClientRequestOrderCreationAction = BaseAction<typeof REQUEST_ORDER_C
     targetCityId: string,
 }>>;
 
-export type ClientSelectAttackViewAttackingCityAction = BaseAction<typeof SELECT_ATTACK_VIEW_ATTACKING_CITY_TAB, $ReadOnly<{ cityId: string, }>>;
+export type ClientSelectAttackViewAttackingCityAction = BaseAction<typeof SELECT_ATTACK_VIEW_ATTACKING_CITY, $ReadOnly<{ cityId: string, }>>;
 export type ClientSelectCityViewTabAction = BaseAction<typeof SELECT_CITY_VIEW_TAB, $ReadOnly<{ tab: ClientStateCityViewTab, }>>;
 export type ClientSelectCityViewBuildingsTabAction = BaseAction<typeof SELECT_CITY_VIEW_BUILDINGS_TAB, $ReadOnly<{ buildingType: CommonStateBuildingKey, }>>;
 export type ClientSelectCityViewResourceTabAction = BaseAction<typeof SELECT_CITY_VIEW_RESOURCES_TAB, $ReadOnly<{ resourceType: CommonStateResourceKey, }>>;

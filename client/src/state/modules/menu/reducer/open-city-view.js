@@ -4,21 +4,18 @@ import { cityIdsByOwnerSelector } from '../../../selectors';
 import type { ClientStateMenu } from './types';
 import { commonStateSelector } from '../../common-state/selectors';
 import { playerNameSelector } from '../../player/selectors';
-import type { ClientState } from '../../types';
+import type { ClientStateActionReducer } from '../../types';
 import type { ClientOpenCityViewAction } from '../actions/types';
 
-export const openCityViewMenuReducer = (
+type Reducer = ClientStateActionReducer<ClientStateMenu, ClientOpenCityViewAction>;
+
+export const openCityViewMenuReducer: Reducer = (
     {
         localState,
         action,
         globalState,
-    }:
-        {
-            localState: ClientStateMenu,
-            action: ClientOpenCityViewAction,
-            globalState: ClientState,
-        },
-): ClientStateMenu => {
+    },
+) => {
     if (commonStateSelector(globalState) == null) {
         console.warn(`opening city view without the server state loaded`);
         return localState;

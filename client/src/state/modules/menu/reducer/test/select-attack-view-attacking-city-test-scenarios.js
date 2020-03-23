@@ -1,10 +1,10 @@
 // @flow
 
 
-import { emptyClientState } from '../../../types';
 import { selectAttackViewAttackingCity } from '../../actions';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientSelectAttackViewAttackingCityAction } from '../../actions/types';
+import { emptyClientState } from '../../../state';
 
 export const selectAttackViewAttackingCityTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectAttackViewAttackingCityAction>> = [
     {

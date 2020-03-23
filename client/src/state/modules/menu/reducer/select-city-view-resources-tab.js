@@ -1,21 +1,22 @@
 // @flow
 
 import type { ClientStateMenu } from './types';
-import type { ClientState } from '../../types';
-import type { ClientSelectCityViewResourceTabAction } from '../actions/types';
+import type { ClientState, ClientStateActionReducer } from '../../types';
+import type {
+    ClientSelectAttackViewAttackingCityAction,
+    ClientSelectCityViewResourceTabAction,
+} from '../actions/types';
 
-export const selectCityViewResourcesTabMenuReducer = (
+type Reducer = ClientStateActionReducer<ClientStateMenu, ClientSelectCityViewResourceTabAction>;
+
+
+export const selectCityViewResourcesTabMenuReducer: Reducer = (
     {
         localState,
         action,
         globalState,
-    }:
-        {
-            localState: ClientStateMenu,
-            action: ClientSelectCityViewResourceTabAction,
-            globalState: ClientState,
-        },
-): ClientStateMenu => {
+    }
+    )=> {
     return {
         ...localState,
         cityView: {

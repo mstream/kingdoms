@@ -5,10 +5,10 @@ import type {
 
 } from '../types';
 import { TAB_BUILDINGS, TAB_UNITS } from '../types';
-import { emptyClientState } from '../../../types';
 import { selectCityViewTab } from '../../actions';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientSelectCityViewTabAction } from '../../actions/types';
+import { emptyClientState } from '../../../state';
 
 export const selectCityViewTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewTabAction>> = [
     {

@@ -2,24 +2,14 @@
 
 import { updateStateTestScenarios } from './test/update-state-test-scenarios';
 import { dummy } from '../../../actions';
-import { emptyClientState } from '../../types';
 import { commonStateReducer } from './index';
-import type { ClientAction } from '../../../types';
 import type { ClientDummyAction } from '../../../actions/types';
+import { DUMMY } from '../../../actions/types';
 import type { ClientStateCommonStateReducerTestScenario } from './test/types';
+import { emptyClientState } from '../../state';
+import { runTestScenarios } from '../../utils';
+import { UPDATE_STATE } from '../actions/types';
 
-const runScenarios = ({ scenarios }: { scenarios: $ReadOnlyArray<ClientStateCommonStateReducerTestScenario<ClientAction>> }): void => {
-    scenarios.forEach(
-        (scenario) => {
-            it(scenario.name, () => {
-                const previousLocalState = scenario.previousGlobalState.commonState;
-                const actual = commonStateReducer(previousLocalState, scenario.action, scenario.previousGlobalState);
-                const expectedLocalState = scenario.expectedLocalStateCreator({ previousLocalState });
-                expect(actual).toEqual(expectedLocalState);
-            });
-        },
-    );
-};
 
 const stateInitializationScenario: ClientStateCommonStateReducerTestScenario<ClientDummyAction> = {
     name: 'initializes its state',
@@ -34,11 +24,14 @@ const stateInitializationScenario: ClientStateCommonStateReducerTestScenario<Cli
     },
 };
 
+
 describe('commonStateReducer', () => {
-    runScenarios({
-        scenarios: [
-            stateInitializationScenario,
-            ...updateStateTestScenarios,
-        ],
+    runTestScenarios({
+        reducer: commonStateReducer,
+        reducerKey: 'commonState',
+        scenarios: {
+            [DUMMY]: [stateInitializationScenario],
+            [UPDATE_STATE]: updateStateTestScenarios,
+        },
     });
 });

@@ -4,11 +4,11 @@ import type {
     ClientStateMenu,
 
 } from '../types';
-import { emptyClientState } from '../../../types';
 import type { ClientStateReducerTestScenario } from '../../../types';
 import { requestCityCreation } from '../../../common-state/actions';
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientRequestCityCreationAction } from '../../../common-state/actions/types';
+import { emptyClientState } from '../../../state';
 
 export const requestCityCreationTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientRequestCityCreationAction>> = [
     {

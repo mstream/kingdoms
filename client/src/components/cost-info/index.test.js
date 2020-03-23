@@ -6,7 +6,6 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CostInfoComponent } from '.';
-import { emptyClientState } from '../../state/modules/types';
 import type { CommonStateResources } from '../../../../common/src/state/modules/rules/reducer/types';
 import {
     RESOURCE_FOOD,
@@ -14,6 +13,7 @@ import {
 } from '../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientState } from '../../state/modules/types';
 import { emptyResourcesState } from '../../../../common/src/state/modules/rules/reducer/state';
+import { emptyClientState } from '../../state/modules/state';
 
 const mockStore = configureStore([]);
 

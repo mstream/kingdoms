@@ -1,9 +1,9 @@
 // @flow
 
-import { emptyClientState } from '../../../types';
 import { moveCameraUp } from '../../actions';
 import type { ClientStateCameraReducerTestScenario } from './types';
 import type { ClientMoveCameraAction } from '../../actions/types';
+import { emptyClientState } from '../../../state';
 
 export const moveCameraTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientMoveCameraAction>> = [
     {

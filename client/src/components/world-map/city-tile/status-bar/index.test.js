@@ -6,7 +6,6 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityStatusBarComponent } from './index';
-import { emptyClientState } from '../../../../state/modules/types';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
@@ -14,6 +13,7 @@ import {
 import type { ClientState } from '../../../../state/modules/types';
 import type { CommonStateCity } from '../../../../../../common/src/state/modules/cities/reducer/types';
 import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
+import { emptyClientState } from '../../../../state/modules/state';
 
 const mockStore = configureStore([]);
 

@@ -22,28 +22,28 @@ import { CREATE_ORDER } from '../../../../common/src/state/modules/orders/action
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient({ config });
 
-const requestAccepted = { statusCode: 200, body: 'Request accepted.' };
+const requestAccepted = { statusCode: 200, body: `Request accepted.` };
 
 const requestAuthorizationError = {
     statusCode: 400,
-    body: 'Request not accepted.',
+    body: `Request not accepted.`,
 };
 
 const requestExecutionError = {
     statusCode: 500,
-    body: 'Request processing error.',
+    body: `Request processing error.`,
 };
 
 const extractActionFromBody = ({ bodyString }: { bodyString: ?string }): ?CommonPlayerAction => {
     if (bodyString == null) {
-        console.error('invalid api gateway body received');
+        console.error(`invalid api gateway body received`);
         return null;
     }
     console.info(`received body string: ${bodyString}`);
     const body = parseJson({ json: bodyString });
 
-    if (typeof body !== 'object' || body == null || body.data == null || typeof body.data !== 'object') {
-        console.error('invalid api gateway body received');
+    if (typeof body !== `object` || body == null || body.data == null || typeof body.data !== `object`) {
+        console.error(`invalid api gateway body received`);
         return null;
     }
 
@@ -59,19 +59,19 @@ export const handler: ProxyHandler = async (event, context) => {
     const { authorizer, connectionId } = event.requestContext;
 
     if (authorizer == null) {
-        console.error('authorizer is missing');
+        console.error(`authorizer is missing`);
         return requestExecutionError;
     }
 
     if (connectionId == null) {
-        console.error('connectionId is missing');
+        console.error(`connectionId is missing`);
         return requestExecutionError;
     }
 
     const username = authorizer.principalId;
 
-    if (username == null || typeof username !== 'string') {
-        console.error('username is missing');
+    if (username == null || typeof username !== `string`) {
+        console.error(`username is missing`);
         return requestExecutionError;
     }
 
@@ -135,12 +135,12 @@ export const handler: ProxyHandler = async (event, context) => {
                 });
                 await sendResponseBackToClient({
                     response: {
-                        errors: ['unsupported action'],
+                        errors: [`unsupported action`],
                         request: action,
                         state: state,
                     },
                 });
-                return { statusCode: 400, body: 'Request rejected.' };
+                return requestAuthorizationError;
             }
         }
     } catch (error) {

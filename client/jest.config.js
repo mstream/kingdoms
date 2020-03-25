@@ -1,6 +1,6 @@
 module.exports = {
     clearMocks: true,
-    coverageDirectory: 'coverage',
+    collectCoverage: true,
     globals: {
         'CLIENT_ID': 'CLIENT_ID',
         'COGNITO_URL': 'COGNITO_URL',
@@ -12,4 +12,7 @@ module.exports = {
         '\\.(css|less)$': '<rootDir>/__mocks__/style-mock.js',
     },
     testEnvironment: 'jsdom',
+    transform: {
+        '\\.js$': ['babel-jest', { configFile: './babel-client.config.js' }],
+    },
 };

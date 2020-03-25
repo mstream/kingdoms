@@ -37,4 +37,4 @@ const createConfig = (): Config => {
     };
 };
 
-export const config = createConfig();
+export const config: Config = createConfig();

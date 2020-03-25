@@ -1,5 +1,8 @@
 module.exports = {
     clearMocks: true,
-    coverageDirectory: 'coverage',
+    collectCoverage: true,
     testEnvironment: 'node',
+    transform: {
+        '\\.js$': ['babel-jest', { configFile: './babel-common.config.js' }],
+    },
 };

@@ -8,17 +8,19 @@ import type { ScheduledHandler } from '../types';
 import { config } from '../../config';
 
 const apiGateway = createApiGatewayClient();
-const redis = createRedisClient({config});
+const redis = createRedisClient({ config });
 
 export const handler: ScheduledHandler = async (event, context) => {
     try {
         const response = await executeAction({
-            action: executeTimeStep({ time: new Date().toISOString() }),
+            action: executeTimeStep({
+                time: new Date().toISOString(),
+            }),
             environment: config.environment,
             redis,
         });
 
-        const connectionIds = await redis.smembers('connection-ids');
+        const connectionIds = await redis.smembers(`connection-ids`);
 
         const sendStatueUpdatePromises = connectionIds.map(connectionId => {
             return sendResponse({

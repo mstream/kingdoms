@@ -5,14 +5,24 @@ import type { ProxyHandler } from '../types';
 import { addConnection } from '../../connectors/database';
 import { config } from '../../config';
 
-const redis = createRedisClient({config});
+const redis = createRedisClient({ config });
+
+const requestExecutionError = {
+    body: `Connection error.`,
+    statusCode: 500,
+};
+
+const requestAccepted = {
+    body: `Connected.`,
+    statusCode: 200,
+};
 
 export const handler: ProxyHandler = async (event, context) => {
     try {
         const connectionId = event.requestContext.connectionId;
 
         if (connectionId == null) {
-            throw Error('connectionId is missing');
+            throw Error(`connectionId is missing`);
         }
 
         await addConnection({
@@ -22,7 +32,7 @@ export const handler: ProxyHandler = async (event, context) => {
         });
     } catch (error) {
         console.error(error.stack);
-        return { statusCode: 500, body: `Connection error.` };
+        return requestExecutionError;
     }
-    return { statusCode: 200, body: `Connected.` };
+    return requestAccepted;
 };

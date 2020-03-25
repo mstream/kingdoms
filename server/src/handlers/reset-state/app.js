@@ -14,9 +14,17 @@ const states = {
     'test': testCommonState,
 };
 
-const redis = createRedisClient({config});
+const redis = createRedisClient({ config });
 
-const stateResetSuccess = { statusCode: 200, body: 'State reset.' };
+const requestAccepted = {
+    body: `State reset.`,
+    statusCode: 200,
+};
+
+const requestExecutionError = {
+    body: `State reset error.`,
+    statusCode: 500,
+};
 
 export const handler: ProxyHandler = async (event, context) => {
     const stateType = event.body;
@@ -38,15 +46,15 @@ export const handler: ProxyHandler = async (event, context) => {
     }
 
     try {
-        console.info('forcing state reset');
+        console.info(`forcing state reset`);
         await setState({
             environment: config.environment,
             redis,
             state,
         });
-        return stateResetSuccess;
+        return requestAccepted;
     } catch (error) {
         console.error(error.stack);
-        return { statusCode: 500, body: 'State reset error.' };
+        return requestExecutionError;
     }
 };

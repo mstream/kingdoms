@@ -35,7 +35,7 @@ export const Component = ({}: Props) => {
     return (
         <div data-testid={testId}>
             <div
-                className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic cursor-default">
+                className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic cursor-default select-none">
                 <div className="row-span-1">
                     <MenuComponent/>
                 </div>

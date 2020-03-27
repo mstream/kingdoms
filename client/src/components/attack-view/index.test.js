@@ -52,9 +52,12 @@ describe('AttackViewComponent', () => {
                     'city1': {
                         ...emptyCityState,
                         name: 'Cityone',
+                        ownerId: 'player2',
                     },
                     'city2': {
                         ...emptyCityState,
+                        name: 'Citytwo',
+                        ownerId: 'player1',
                     },
                 },
             },
@@ -64,6 +67,9 @@ describe('AttackViewComponent', () => {
                     ...emptyClientState.menu.attackView,
                     attackedCityId: 'city1',
                 },
+            },
+            player: {
+                name: 'player1',
             },
         };
 
@@ -90,9 +96,12 @@ describe('AttackViewComponent', () => {
                     'city1': {
                         ...emptyCityState,
                         name: 'Cityone',
+                        ownerId: 'player2',
                     },
                     'city2': {
                         ...emptyCityState,
+                        name: 'Citytwo',
+                        ownerId: 'player2',
                     },
                 },
             },
@@ -103,6 +112,9 @@ describe('AttackViewComponent', () => {
                     attackedCityId: 'city1',
                     attackingCityId: 'city2',
                 },
+            },
+            player: {
+                name: 'player1',
             },
         };
 
@@ -129,9 +141,12 @@ describe('AttackViewComponent', () => {
                     'city1': {
                         ...emptyCityState,
                         name: 'Cityone',
+                        ownerId: 'player2',
                     },
                     'city2': {
                         ...emptyCityState,
+                        name: 'Citytwo',
+                        ownerId: 'player1',
                     },
                 },
             },
@@ -150,6 +165,9 @@ describe('AttackViewComponent', () => {
                         },
                     },
                 },
+            },
+            player: {
+                name: 'player1',
             },
         };
 

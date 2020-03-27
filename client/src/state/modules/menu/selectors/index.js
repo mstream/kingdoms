@@ -1,42 +1,34 @@
 // @flow
 
-import type { ClientStateMenu } from '../reducer/types';
-import type { ClientState } from '../../types';
-import type { CommonStateRegimentTemplate } from '../../../../../../common/src/state/modules/orders/reducer/types';
-import { createSelector } from 'reselect';
-import { commonStateMinimumRegimentSizeSelector } from '../../../../../../common/src/state/modules/orders/selectors';
 
-export const menuSelector = (state: ClientState): ClientStateMenu => {
-    return state.menu;
+import { isNewCityBeingCreatedSelector } from './_impl/is-new-city-being-created';
+import { regimentTemplateSelector } from './_impl/regiment-template';
+import { attackedCityIdSelector } from './_impl/attacked-city-id';
+import { attackingCityIdSelector } from './_impl/attacking-city-id';
+import { currentlyViewedCityIdSelector } from './_impl/currently-viewed-city-id';
+import { minimumAttackDelaySelector } from './_impl/minimum-attack-delay';
+import { isAttackViewMenuOpenSelector } from './_impl/is-attack-view-menu-open';
+import { isCityViewMenuOpenSelector } from './_impl/is-city-view-menu-open';
+import { isAnyMenuOpenSelector } from './_impl/is-any-menu-open';
+import { activeCityViewTabSelector } from './_impl/active-city-view-tab';
+import { activeCityViewBuildingSelector } from './_impl/active-city-view-building';
+import { activeCityViewResourceSelector } from './_impl/active-city-view-resource';
+import { activeCityViewUnitSelector } from './_impl/active-city-view-unit';
+import { isAttackFormValidSelector } from './_impl/is-attack-form-valid';
+
+export const clientStateMenuSelectors = {
+    activeCityViewBuilding: activeCityViewBuildingSelector,
+    activeCityViewResource: activeCityViewResourceSelector,
+    activeCityViewUnit: activeCityViewUnitSelector,
+    activeCityViewTab: activeCityViewTabSelector,
+    attackedCityId: attackedCityIdSelector,
+    attackingCityId: attackingCityIdSelector,
+    currentlyViewedCityId: currentlyViewedCityIdSelector,
+    isAnyMenuOpen: isAnyMenuOpenSelector,
+    isAttackFormValid: isAttackFormValidSelector,
+    isAttackViewMenuOpen: isAttackViewMenuOpenSelector,
+    isCityViewMenuOpen: isCityViewMenuOpenSelector,
+    isNewCityBeingCreated: isNewCityBeingCreatedSelector,
+    minimumAttackDelay: minimumAttackDelaySelector,
+    regimentTemplate: regimentTemplateSelector,
 };
-
-export const isCityBeingCreatedSelector = (state: ClientState): boolean => {
-    return state.menu.newCity.isCityBeingCreated;
-};
-
-export const currentlyViewedCityIdSelector = (state: ClientState): ?string => {
-    return state.menu.cityView.currentCityId;
-};
-
-export const attackedCityIdSelector = (state: ClientState): ?string => {
-    return state.menu.attackView.attackedCityId;
-};
-
-export const attackingCityIdSelector = (state: ClientState): ?string => {
-    return state.menu.attackView.attackingCityId;
-};
-
-export const regimentTemplateSelector = (state: ClientState): CommonStateRegimentTemplate => {
-    return state.menu.attackView.regimentTemplate;
-};
-
-export const minimumDelaySelector = (state: ClientState): number => {
-    return state.menu.attackView.minimumDelay;
-};
-
-export const minimumRegimentSizeSelector = createSelector<ClientState, void, number, CommonStateRegimentTemplate>(
-    regimentTemplateSelector,
-    (regimentTemplate) => {
-        return commonStateMinimumRegimentSizeSelector(regimentTemplate);
-    },
-);

@@ -4,13 +4,11 @@
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import {
-    activeCityTabSelector,
-    currentlyViewedCitySelector,
-} from '../../../state/selectors';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 import { TAB_OVERVIEW } from '../../../state/modules/menu/reducer/types';
 import type { ClientState } from '../../../state/modules/types';
 import type { ClientAction } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
 
 type OwnProps = {};
 
@@ -30,8 +28,8 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        city: currentlyViewedCitySelector(state),
-        isVisible: activeCityTabSelector(state) === TAB_OVERVIEW,
+        city: clientStateSelectors.currentlyViewedCity(state),
+        isVisible: clientStateMenuSelectors.activeCityViewTab(state) === TAB_OVERVIEW,
     });
 };
 

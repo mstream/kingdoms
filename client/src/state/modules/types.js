@@ -8,14 +8,14 @@ import type { ClientStateCommonState } from './common-state/reducer/types';
 import type { ClientStateErrors } from './errors/reducer/types';
 import type { ClientAction } from '../types';
 
-export type ClientState = {
+export type ClientState = $ReadOnly<{
     camera: ClientStateCamera,
     errors: ClientStateErrors,
     menu: ClientStateMenu,
     player: ClientStatePlayer,
     commonState: ClientStateCommonState,
     tiles: ClientStateTiles,
-};
+}>;
 
 export type ClientStateReducer<S> = (S, ClientAction, ClientState) => S;
 
@@ -28,3 +28,13 @@ export type ClientStateReducerTestScenario<S, +A: ClientAction> = $ReadOnly<{
     expectedLocalStateCreator: ({ previousLocalState: S }) => S,
 }>;
 
+
+export type ClientStateSelector<T> = (state: ClientState) => T;
+
+export type ClientStateSelectorTestScenario<T> = $ReadOnly<{
+    name: string,
+    state: ClientState,
+    expectedValue: T,
+}>;
+
+export type ClientStateSelectors = $ReadOnly<{ [string]: ClientStateSelector<mixed>, ... }>;

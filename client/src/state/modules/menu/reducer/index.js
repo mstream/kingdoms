@@ -1,16 +1,16 @@
 // @flow
 
-import { updateStateMenuReducer } from './update-state';
-import { closeCityViewMenuReducer } from './close-city-view';
-import { openCityViewMenuReducer } from './open-city-view';
-import { requestCityCreationMenuReducer } from './request-city-creation';
-import { selectCityViewUnitTabMenuReducer } from './select-city-view-unit-tab';
-import { closeAttackViewMenuReducer } from './close-attack-view';
-import { openAttackViewMenuReducer } from './open-attack-view';
+import { updateStateMenuReducer } from './_impl/update-state';
+import { closeCityViewMenuReducer } from './_impl/close-city-view';
+import { openCityViewMenuReducer } from './_impl/open-city-view';
+import { requestCityCreationMenuReducer } from './_impl/request-city-creation';
+import { selectCityViewUnitTabMenuReducer } from './_impl/select-city-view-unit-tab';
+import { closeAttackViewMenuReducer } from './_impl/close-attack-view';
+import { openAttackViewMenuReducer } from './_impl/open-attack-view';
 import type { ClientStateMenu } from './types';
-import { selectAttackViewAttackingCityReducer } from './select-attack-view-attacking-city';
-import { selectCityViewResourcesTabMenuReducer } from './select-city-view-resources-tab';
-import { selectCityViewBuildingsTabMenuReducer } from './select-city-view-buildings-tab';
+import { selectAttackViewAttackingCityReducer } from './_impl/select-attack-view-attacking-city';
+import { selectCityViewResourcesTabMenuReducer } from './_impl/select-city-view-resources-tab';
+import { selectCityViewBuildingsTabMenuReducer } from './_impl/select-city-view-buildings-tab';
 import {
     REQUEST_CITY_CREATION,
     UPDATE_STATE,
@@ -28,12 +28,12 @@ import {
     UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
     UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from '../actions/types';
-import { updateAttackViewRegimentTemplateReducer } from './update-attack-view-regiment-template';
-import { updateAttackViewMinimumDelayReducer } from './update-attack-view-minimum-delay-template';
+import { updateAttackViewRegimentTemplateReducer } from './_impl/update-attack-view-regiment-template';
+import { updateAttackViewMinimumDelayReducer } from './_impl/update-attack-view-minimum-delay-template';
 import { createClientStateReducer } from '../../utils';
 import { initialClientState } from '../../state';
 import { selectCityViewTab } from '../actions';
-import { selectCityViewTabMenuReducer } from './select-city-view-tab';
+import { selectCityViewTabMenuReducer } from './_impl/select-city-view-tab';
 
 
 export const menuReducer = createClientStateReducer<ClientStateMenu>({

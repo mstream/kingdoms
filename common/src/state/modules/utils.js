@@ -6,6 +6,9 @@ import type {
     CommonStateReducer,
     CommonStateReducerResult,
     CommonStateReducerTestScenario,
+    CommonStateSelector,
+    CommonStateSelectors,
+    CommonStateSelectorTestScenario,
 } from './types';
 import type { CommonAction, CommonActionKey } from '../types';
 
@@ -62,6 +65,11 @@ export const createCommonStateReducer = <S>({ actionReducers, initialState }: { 
 
 type Scenarios<S> = { [CommonActionKey]: $ReadOnlyArray<CommonStateReducerTestScenario<S, CommonAction>>, ... };
 
+type SelectorScenarios = $ReadOnly<{
+    [string]: $ReadOnlyArray<CommonStateSelectorTestScenario<mixed>>,
+    ...
+}>;
+
 export const runTestScenarios = <S>(
     {
         reducer,
@@ -97,3 +105,41 @@ export const runTestScenarios = <S>(
         },
     );
 };
+
+export const runCommonStateSelectorsTestScenarios = (
+    {
+        moduleSelectors,
+        scenarios,
+    }: {
+        moduleSelectors: CommonStateSelectors,
+        scenarios: SelectorScenarios,
+    },
+): void => {
+    Object.keys(scenarios).forEach(
+        (selectorKey: string) => {
+            describe(selectorKey, () => {
+                const scenariosForSelector = scenarios[selectorKey];
+
+                scenariosForSelector.forEach(
+                    (scenario: CommonStateSelectorTestScenario<mixed>) => {
+                        const selector: CommonStateSelector<mixed> = moduleSelectors[selectorKey];
+
+                        if (selector == null) {
+                            throw Error(`selector '${selectorKey}' is missing`)
+                        }
+
+                        it(scenario.name, () => {
+                            const state: CommonState = scenario.state;
+                            const expected: mixed = scenario.expectedValue;
+
+                            const actual: mixed = selector(state);
+
+                            expect(actual).toEqual(expected);
+                        });
+                    },
+                );
+            });
+        },
+    );
+};
+

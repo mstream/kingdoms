@@ -8,6 +8,7 @@ import { CityUnitsComponent } from './units';
 import { CityResourcesComponent } from './resources';
 import { CityBuildingsComponent } from './buildings';
 import { CityOverviewComponent } from './overview';
+import { CityOrdersComponent } from './orders';
 
 export const testId = 'city-view';
 
@@ -43,6 +44,7 @@ export const Component = (
                     <CityUnitsComponent/>
                     <CityResourcesComponent/>
                     <CityBuildingsComponent/>
+                    <CityOrdersComponent/>
                 </div>
             </div>
         </div>

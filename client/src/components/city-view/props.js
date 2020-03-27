@@ -4,13 +4,11 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import {
-    currentlyViewedCitySelector,
-} from '../../state/selectors';
-import { currentlyViewedCityIdSelector } from '../../state/modules/menu/selectors';
+import { clientStateSelectors } from '../../state/modules/selectors';
 import { closeCityView } from '../../state/modules/menu/actions';
 import type { ClientState } from '../../state/modules/types';
 import type { ClientAction } from '../../state/types';
+import { clientStateMenuSelectors } from '../../state/modules/menu/selectors';
 
 type OwnProps = {};
 
@@ -30,8 +28,8 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState): StateProps => {
     return Object.freeze({
-        city: currentlyViewedCitySelector(state),
-        cityId: currentlyViewedCityIdSelector(state),
+        city: clientStateSelectors.currentlyViewedCity(state),
+        cityId: clientStateMenuSelectors.currentlyViewedCityId(state),
     });
 };
 

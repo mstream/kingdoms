@@ -2,18 +2,18 @@
 
 import { dummy } from '../../../actions';
 import { menuReducer } from './index';
-import { closeAttackViewTestScenarios } from './test/close-attack-view-test-scenarios';
-import { closeCityViewTestScenarios } from './test/close-city-view-test-scenarios';
-import { openAttackViewTestScenarios } from './test/open-attack-view-test-scenarios';
-import { openCityViewTestScenarios } from './test/open-city-view-test-scenarios';
-import { requestCityCreationTestScenarios } from './test/request-city-creation-test-scenarios';
-import { selectCityViewTabTestScenarios } from './test/select-city-view-tab-test-scenarios';
-import { selectCityViewUnitsTabTestScenarios } from './test/select-city-view-units-tab-test-scenarios';
-import { updateStateTestScenarios } from './test/update-state.test-scenarios';
+import { closeAttackViewTestScenarios } from './_test/close-attack-view-test-scenarios';
+import { closeCityViewTestScenarios } from './_test/close-city-view-test-scenarios';
+import { openAttackViewTestScenarios } from './_test/open-attack-view-test-scenarios';
+import { openCityViewTestScenarios } from './_test/open-city-view-test-scenarios';
+import { requestCityCreationTestScenarios } from './_test/request-city-creation-test-scenarios';
+import { selectCityViewTabTestScenarios } from './_test/select-city-view-tab-test-scenarios';
+import { selectCityViewUnitsTabTestScenarios } from './_test/select-city-view-units-tab-test-scenarios';
+import { updateStateTestScenarios } from './_test/update-state.test-scenarios';
 import { TAB_OVERVIEW } from './types';
-import { selectAttackViewAttackingCityTestScenarios } from './test/select-attack-view-attacking-city-test-scenarios';
-import { selectCityViewBuildingsTabTestScenarios } from './test/select-city-view-buildings-tab-test-scenarios';
-import { selectCityViewResourcesTabTestScenarios } from './test/select-city-view-resources-tab-test-scenarios';
+import { selectAttackViewAttackingCityTestScenarios } from './_test/select-attack-view-attacking-city-test-scenarios';
+import { selectCityViewBuildingsTabTestScenarios } from './_test/select-city-view-buildings-tab-test-scenarios';
+import { selectCityViewResourcesTabTestScenarios } from './_test/select-city-view-resources-tab-test-scenarios';
 import {
     BUILDING_WAREHOUSE,
     RESOURCE_FOOD,
@@ -27,11 +27,11 @@ import {
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientDummyAction } from '../../../actions/types';
 import { DUMMY } from '../../../actions/types';
-import type { ClientStateMenuReducerTestScenario } from './test/types';
-import { updateAttackViewRegimentTemplateTestScenarios } from './test/update-attack-view-regiment-template-test-scenarios';
-import { updateAttackViewMinimumDelayTestScenarios } from './test/update-attack-view-minimum-delay-test-scenarios';
+import type { ClientStateMenuReducerTestScenario } from './_test/types';
+import { updateAttackViewRegimentTemplateTestScenarios } from './_test/update-attack-view-regiment-template-test-scenarios';
+import { updateAttackViewMinimumDelayTestScenarios } from './_test/update-attack-view-minimum-delay-test-scenarios';
 import { emptyClientState } from '../../state';
-import { runTestScenarios } from '../../utils';
+import { runReducerTestScenarios } from '../../utils';
 import {
     REQUEST_CITY_CREATION,
     UPDATE_STATE,
@@ -112,7 +112,7 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDumm
 
 
 describe('menuReducer', () => {
-    runTestScenarios({
+    runReducerTestScenarios({
         reducer: menuReducer,
         reducerKey: 'menu',
         scenarios: {

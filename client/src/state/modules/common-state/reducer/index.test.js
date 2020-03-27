@@ -1,13 +1,13 @@
 // @flow
 
-import { updateStateTestScenarios } from './test/update-state-test-scenarios';
+import { updateStateTestScenarios } from './_test/update-state-test-scenarios';
 import { dummy } from '../../../actions';
 import { commonStateReducer } from './index';
 import type { ClientDummyAction } from '../../../actions/types';
 import { DUMMY } from '../../../actions/types';
-import type { ClientStateCommonStateReducerTestScenario } from './test/types';
+import type { ClientStateCommonStateReducerTestScenario } from './_test/types';
 import { emptyClientState } from '../../state';
-import { runTestScenarios } from '../../utils';
+import { runReducerTestScenarios } from '../../utils';
 import { UPDATE_STATE } from '../actions/types';
 
 
@@ -26,7 +26,7 @@ const stateInitializationScenario: ClientStateCommonStateReducerTestScenario<Cli
 
 
 describe('commonStateReducer', () => {
-    runTestScenarios({
+    runReducerTestScenarios({
         reducer: commonStateReducer,
         reducerKey: 'commonState',
         scenarios: {

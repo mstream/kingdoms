@@ -1,9 +1,9 @@
 // @flow
 
-import { moveCameraCameraReducer } from './move-camera';
-import { zoomCameraCameraReducer } from './zoom-camera';
-import { updateStateCameraReducer } from './update-state';
 import type { ClientStateCamera } from './types';
+import { moveCameraCameraReducer } from './_impl/move-camera';
+import { zoomCameraCameraReducer } from './_impl/zoom-camera';
+import { updateStateCameraReducer } from './_impl/update-state';
 import { MOVE_CAMERA, ZOOM_CAMERA } from '../actions/types';
 import { UPDATE_STATE } from '../../common-state/actions/types';
 import { createClientStateReducer } from '../../utils';

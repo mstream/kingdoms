@@ -1,8 +1,10 @@
 // @flow
 
-import type { ClientState } from '../../types';
-import type { ClientStateErrors } from '../reducer/types';
 
-export const errorsSelector = (state: ClientState): ClientStateErrors => {
-    return state.errors;
+import { errorsSelector } from './_impl/errors';
+import { anyErrorsSelector } from './_impl/any-errors';
+
+export const clientStateErrorsSelectors = {
+    anyErrors: anyErrorsSelector,
+    errors: errorsSelector,
 };

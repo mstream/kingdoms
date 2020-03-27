@@ -87,8 +87,9 @@ export const testId = 'world-map';
 
 export const Component = (
     {
-        camera,
+        cameraGeometry,
         cities,
+        isVisible,
         tiles,
         moveCameraUp,
         moveCameraDown,
@@ -98,6 +99,10 @@ export const Component = (
         zoomCameraIn,
         zoomCameraOut,
     }: Props) => {
+
+    if (!isVisible) {
+        return null;
+    }
 
     useEffect(() => {
         window.addEventListener('keydown', event => {
@@ -146,12 +151,12 @@ export const Component = (
 
     const cameraLocationToWindowCenterLocationVector = subtractVectors({
         vector1: windowCenterLocation,
-        vector2: camera.geometry.location,
+        vector2: cameraGeometry.location,
     });
 
     const desiredDimensionRatio = Math.max(
-        windowSize.x / camera.geometry.size.x,
-        windowSize.y / camera.geometry.size.y,
+        windowSize.x / cameraGeometry.size.x,
+        windowSize.y / cameraGeometry.size.y,
     );
 
     const desiredCameraSizeToWorldCameraSizeRatioVector = {
@@ -160,7 +165,7 @@ export const Component = (
     };
 
     const visibleTerrainTiles = cullObjects({
-        cameraGeometry: camera.geometry,
+        cameraGeometry: cameraGeometry,
         objects: tiles.terrain,
     });
 
@@ -170,7 +175,7 @@ export const Component = (
 
             const isVisible = checkIfIntersect({
                 geometry1: tile.geometry,
-                geometry2: camera.geometry,
+                geometry2: cameraGeometry,
             });
 
             return [...visibleCityIds, ...(isVisible ? [cityId] : [])];
@@ -184,11 +189,11 @@ export const Component = (
 
     const cameraWindowGeometry = {
         location: addVectors({
-            vector1: camera.geometry.location,
+            vector1: cameraGeometry.location,
             vector2: cameraLocationToWindowCenterLocationVector,
         }),
         size: multipleVectors({
-            vector1: camera.geometry.size,
+            vector1: cameraGeometry.size,
             vector2: desiredCameraSizeToWorldCameraSizeRatioVector,
         }),
     };

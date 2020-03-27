@@ -6,13 +6,20 @@ import type {
     ClientStateActionReducer,
     ClientStateReducer,
     ClientStateReducerTestScenario,
+    ClientStateSelector,
+    ClientStateSelectors,
+    ClientStateSelectorTestScenario,
 } from './types';
 
 export type ActionReducers<S> = $ReadOnly<{
     [ClientActionKey]: ClientStateActionReducer<S, ClientAction>, ...
 }>;
 
-type Scenarios<S> = { [ClientActionKey]: $ReadOnlyArray<ClientStateReducerTestScenario<S, ClientAction>>, ... };
+type ReducerScenarios<S> = { [ClientActionKey]: $ReadOnlyArray<ClientStateReducerTestScenario<S, ClientAction>>, ... };
+type SelectorScenarios = $ReadOnly<{
+    [string]: $ReadOnlyArray<ClientStateSelectorTestScenario<mixed>>,
+    ...
+}>;
 
 const unsupportedActionReducer = <S, A: ClientAction>(
     {
@@ -48,7 +55,7 @@ export const createClientStateReducer = <S>({ actionReducers, initialState }: { 
 };
 
 
-export const runTestScenarios = <S>(
+export const runReducerTestScenarios = <S>(
     {
         reducer,
         reducerKey,
@@ -56,7 +63,7 @@ export const runTestScenarios = <S>(
     }: {
         reducer: ClientStateReducer<S>,
         reducerKey: string,
-        scenarios: Scenarios<S>,
+        scenarios: ReducerScenarios<S>,
     },
 ): void => {
     Object.keys(scenarios).forEach(
@@ -76,6 +83,44 @@ export const runTestScenarios = <S>(
                             const expectedReductionResult = scenario.expectedLocalStateCreator({ previousLocalState });
 
                             expect(actual).toEqual(expectedReductionResult);
+                        });
+                    },
+                );
+            });
+        },
+    );
+};
+
+
+export const runClientStateSelectorsTestScenarios = (
+    {
+        moduleSelectors,
+        scenarios,
+    }: {
+        moduleSelectors: ClientStateSelectors,
+        scenarios: SelectorScenarios,
+    },
+): void => {
+    Object.keys(scenarios).forEach(
+        (selectorKey: string) => {
+            describe(selectorKey, () => {
+                const scenariosForSelector = scenarios[selectorKey];
+
+                scenariosForSelector.forEach(
+                    (scenario: ClientStateSelectorTestScenario<mixed>) => {
+                        const selector: ClientStateSelector<mixed> = moduleSelectors[selectorKey];
+
+                        if (selector == null) {
+                            throw Error(`selector '${selectorKey}' is missing`);
+                        }
+
+                        it(scenario.name, () => {
+                            const state: ClientState = scenario.state;
+                            const expected: mixed = scenario.expectedValue;
+
+                            const actual: mixed = selector(state);
+
+                            expect(actual).toEqual(expected);
                         });
                     },
                 );

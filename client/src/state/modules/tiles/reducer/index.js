@@ -1,7 +1,7 @@
 // @flow
 
 import type { ClientStateTiles } from './types';
-import { updateStateTilesReducer } from './update-state';
+import { updateStateTilesReducer } from './_impl/update-state';
 import { UPDATE_STATE } from '../../common-state/actions/types';
 import { createClientStateReducer } from '../../utils';
 import { initialClientState } from '../../state';

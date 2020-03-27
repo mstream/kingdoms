@@ -35,4 +35,14 @@ export type CommonStateReducerTestScenario<S, +A: CommonAction> = $ReadOnly<{
     expectedReductionResultCreator: ({ previousLocalState: S }) => CommonStateReducerResult<S>,
 }>;
 
+export type CommonStateSelector<T> = (state: CommonState) => T;
+
+export type CommonStateSelectorTestScenario<T> = $ReadOnly<{
+    name: string,
+    state: CommonState,
+    expectedValue: T,
+}>;
+
+export type CommonStateSelectors = $ReadOnly<{[string]: CommonStateSelector<mixed>, ...}>;
+
 export const CommonStateType = (reify: Type<CommonState>);

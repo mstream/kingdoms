@@ -43,6 +43,7 @@ describe('AttackViewSchedulerFormComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
+                    attackedCityId: 'city2',
                     attackingCityId: 'city1',
                     minimumDelay: 0,
                 },
@@ -67,6 +68,7 @@ describe('AttackViewSchedulerFormComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
+                    attackedCityId: 'city2',
                     attackingCityId: 'city1',
                     minimumDelay: 2,
                 },
@@ -92,6 +94,7 @@ describe('AttackViewSchedulerFormComponent', () => {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
+                    attackedCityId: 'city2',
                     attackingCityId: 'city1',
                     minimumDelay: 122,
                 },

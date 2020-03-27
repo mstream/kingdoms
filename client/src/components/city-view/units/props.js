@@ -4,17 +4,13 @@
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import {
-    activeCityTabSelector,
-    activeUnitSelector,
-    currentlyViewedCitySelector,
-    rulesSelector,
-    unitStatsSelector,
-} from '../../../state/selectors';
 import { TAB_UNITS } from '../../../state/modules/menu/reducer/types';
 import { selectCityViewUnitsTab } from '../../../state/modules/menu/actions';
 import type { ClientState } from '../../../state/modules/types';
 import type { ClientAction } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
+import { clientStateCommonStateSelectors } from '../../../state/modules/common-state/selectors';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 
 type OwnProps = {};
 
@@ -34,16 +30,16 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        activeUnit: activeUnitSelector(state),
-        city: currentlyViewedCitySelector(state),
-        isVisible: activeCityTabSelector(state) === TAB_UNITS,
-        rules: rulesSelector(state),
-        unitStats: unitStatsSelector(state),
+        activeUnit: clientStateMenuSelectors.activeCityViewUnit(state),
+        city: clientStateSelectors.currentlyViewedCity(state),
+        isVisible: clientStateMenuSelectors.activeCityViewTab(state) === TAB_UNITS,
+        rules: clientStateCommonStateSelectors.rules(state),
+        unitStats: clientStateCommonStateSelectors.unitStats(state),
     });
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-     selectCityViewUnitsTab,
+    selectCityViewUnitsTab,
 });
 
 export const connectProps = connect<Props,

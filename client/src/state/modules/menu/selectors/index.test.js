@@ -1,44 +1,57 @@
 // @flow
 
-import type { ClientState } from '../../types';
-import {
-    UNIT_ARCHER,
-    UNIT_KNIGHT,
-    UNIT_PIKEMAN,
-} from '../../../../../../common/src/state/modules/rules/reducer/types';
-import { minimumRegimentSizeSelector } from './index';
-import { emptyClientState } from '../../state';
 
-describe('minimumRegimentSizeSelector', () => {
-    it('returns a sum of minimum quantities of each unit', () => {
-        const state: ClientState = {
-            ...emptyClientState,
-            menu: {
-                ...emptyClientState.menu,
-                attackView: {
-                    ...emptyClientState.menu.attackView,
-                    regimentTemplate: {
-                        [UNIT_PIKEMAN]: {
-                            from: 100,
-                            to: 200,
-                        },
-                        [UNIT_ARCHER]: {
-                            from: 50,
-                            to: 100,
-                        },
-                        [UNIT_KNIGHT]: {
-                            from: 1,
-                            to: 2,
-                        },
-                    },
-                },
+import { runClientStateSelectorsTestScenarios } from '../../utils';
+import { attackingCityIdSelectorTestScenarios } from './_test/attacking-city-id-test-scenarios';
+import { clientStateMenuSelectors } from './index';
+import { attackedCityIdSelectorTestScenarios } from './_test/attacked-city-id-test-scenarios';
+import { currentlyViewedCityIdSelectorTestScenarios } from './_test/currently-viewed-city-id-test-scenarios';
+import { isNewCityBeingCreatedSelectorTestScenarios } from './_test/is-new-city-being-created-test-scenarios';
+import { regimentTemplateSelectorTestScenarios } from './_test/regiment-template-test-scenarios';
+import { minimumAttackDelaySelectorTestScenarios } from './_test/minimum-attack-delay-test-scenarios';
+import { isCityViewMenuOpenSelectorTestScenarios } from './_test/is-city-view-menu-open-test-scenarios';
+import { isAttackViewMenuOpenSelectorTestScenarios } from './_test/is-attack-view-menu-open-test-scenarios';
+import { isAnyMenuOpenSelectorTestScenarios } from './_test/is-any-menu-open-test-scenarios';
+import { activeCityViewTabSelectorTestScenarios } from './_test/active-city-view-tab-test-scenarios';
+import { activeCityViewBuildingSelectorTestScenarios } from './_test/active-city-view-building-test-scenarios';
+import { activeCityViewResourceSelectorTestScenarios } from './_test/active-city-view-resource-test-scenarios';
+import { activeCityViewUnitSelectorTestScenarios } from './_test/active-city-view-unit-test-scenarios';
+import { isAttackFormValidSelectorTestScenarios } from './_test/is-attack-form-valid-test-scenarios';
+
+describe('clientStateMenuSelectors', () => {
+        runClientStateSelectorsTestScenarios({
+            // $FlowFixMe
+            moduleSelectors: clientStateMenuSelectors,
+            scenarios: {
+                // $FlowFixMe
+                activeCityViewBuilding: activeCityViewBuildingSelectorTestScenarios,
+                // $FlowFixMe
+                activeCityViewResource: activeCityViewResourceSelectorTestScenarios,
+                // $FlowFixMe
+                activeCityViewUnit: activeCityViewUnitSelectorTestScenarios,
+                // $FlowFixMe
+                activeCityViewTab: activeCityViewTabSelectorTestScenarios,
+                // $FlowFixMe
+                attackedCityId: attackedCityIdSelectorTestScenarios,
+                // $FlowFixMe
+                attackingCityId: attackingCityIdSelectorTestScenarios,
+                // $FlowFixMe
+                currentlyViewedCityId: currentlyViewedCityIdSelectorTestScenarios,
+                // $FlowFixMe
+                isAnyMenuOpen: isAnyMenuOpenSelectorTestScenarios,
+                // $FlowFixMe
+                isAttackFormValid: isAttackFormValidSelectorTestScenarios,
+                // $FlowFixMe
+                isAttackViewMenuOpen: isAttackViewMenuOpenSelectorTestScenarios,
+                // $FlowFixMe
+                isCityViewMenuOpen: isCityViewMenuOpenSelectorTestScenarios,
+                // $FlowFixMe
+                isNewCityBeingCreated: isNewCityBeingCreatedSelectorTestScenarios,
+                // $FlowFixMe
+                minimumAttackDelay: minimumAttackDelaySelectorTestScenarios,
+                // $FlowFixMe
+                regimentTemplate: regimentTemplateSelectorTestScenarios,
             },
-        };
-
-        const expected: number = 151;
-
-        const actual = minimumRegimentSizeSelector(state);
-
-        expect(actual).toEqual(expected);
-    });
-});
+        });
+    },
+);

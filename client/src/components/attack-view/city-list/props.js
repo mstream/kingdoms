@@ -4,15 +4,12 @@
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { selectAttackViewAttackingCity } from '../../../state/modules/menu/actions';
-import { attackingCityIdSelector } from '../../../state/modules/menu/selectors';
-import {
-    citiesSelector,
-    cityIdsOwnedByPlayerSelector,
-    distancesToAttackedCitySelector,
-} from '../../../state/selectors';
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import type { ClientState } from '../../../state/modules/types';
 import type { ClientAction } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
+import { clientStateCommonStateSelectors } from '../../../state/modules/common-state/selectors';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 
 type OwnProps = {};
 
@@ -32,10 +29,10 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        attackingCityId: attackingCityIdSelector(state),
-        cities: citiesSelector(state),
-        cityIdsOwnedByPlayer: cityIdsOwnedByPlayerSelector(state),
-        distancesToAttackedCity: distancesToAttackedCitySelector(state),
+        attackingCityId: clientStateMenuSelectors.attackingCityId(state),
+        cities: clientStateCommonStateSelectors.cities(state),
+        cityIdsOwnedByPlayer: clientStateSelectors.cityIdsOwnedByPlayer(state),
+        distancesToAttackedCity: clientStateSelectors.distancesToAttackedCity(state),
     });
 };
 

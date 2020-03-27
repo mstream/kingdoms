@@ -3,11 +3,11 @@
 
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import type { Dispatch } from 'redux';
-import { commonStateSelector } from '../../state/modules/common-state/selectors';
 import { connect } from 'react-redux';
 import type { ClientState } from '../../state/modules/types';
-import { anyErrorsSelector } from '../../state/selectors';
 import type { ClientAction } from '../../state/types';
+import { clientStateErrorsSelectors } from '../../state/modules/errors/selectors';
+import { clientStateCommonStateSelectors } from '../../state/modules/common-state/selectors';
 
 type OwnProps = {};
 
@@ -27,7 +27,9 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        isCommonStateBeingLoaded: commonStateSelector(state) == null && !anyErrorsSelector(state),
+        isCommonStateBeingLoaded:
+            !clientStateCommonStateSelectors.isLoaded(state) &&
+            !clientStateErrorsSelectors.anyErrors(state),
     });
 };
 

@@ -4,7 +4,9 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import { playerSelector } from '../../state/modules/player/selectors';
+import {
+    clientStatePlayerSelectors,
+} from '../../state/modules/player/selectors';
 import type { ClientState } from '../../state/modules/types';
 import type { ClientAction } from '../../state/types';
 
@@ -26,7 +28,7 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        player: playerSelector(state),
+        playerName: clientStatePlayerSelectors.name(state),
     });
 };
 

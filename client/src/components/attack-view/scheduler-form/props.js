@@ -5,12 +5,9 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import type { ClientState } from '../../../state/modules/types';
-import {
-    attackingCityIdSelector,
-    minimumDelaySelector,
-} from '../../../state/modules/menu/selectors';
 import type { ClientAction } from '../../../state/types';
 import { updateAttackViewMinimumDelay } from '../../../state/modules/menu/actions';
+import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
 
 type OwnProps = {};
 
@@ -30,8 +27,9 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return {
-        isVisible: attackingCityIdSelector(state) != null,
-        minimumDelay: minimumDelaySelector(state),
+        isVisible: clientStateMenuSelectors.isAttackViewMenuOpen(state)
+            && clientStateMenuSelectors.attackingCityId != null,
+        minimumDelay: clientStateMenuSelectors.minimumAttackDelay(state),
     };
 };
 

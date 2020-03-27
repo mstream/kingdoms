@@ -3,12 +3,12 @@
 
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import { attackingCitySelector } from '../../../state/selectors';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import type { ClientState } from '../../../state/modules/types';
 import type { ClientAction } from '../../../state/types';
-import { regimentTemplateSelector } from '../../../state/modules/menu/selectors';
 import { updateAttackViewRegimentTemplate } from '../../../state/modules/menu/actions';
+import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
 
 type OwnProps = {
     onQuantityChange: (SyntheticInputEvent<HTMLInputElement>) => void,
@@ -30,8 +30,8 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        attackingCity: attackingCitySelector(state),
-        regimentTemplate: regimentTemplateSelector(state),
+        attackingCity: clientStateSelectors.attackingCity(state),
+        regimentTemplate: clientStateMenuSelectors.regimentTemplate(state),
     });
 };
 

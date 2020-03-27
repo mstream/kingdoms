@@ -2,13 +2,13 @@
 
 
 import { playerReducer } from './index';
-import { loadPlayerTestScenarios } from './test/load-player-test-scenarios';
+import { loadPlayerTestScenarios } from './_test/load-player-test-scenarios';
 import { dummy } from '../../../actions';
 import type { ClientDummyAction } from '../../../actions/types';
 import { DUMMY } from '../../../actions/types';
-import type { ClientStatePlayerReducerTestScenario } from './test/types';
+import type { ClientStatePlayerReducerTestScenario } from './_test/types';
 import { emptyClientState } from '../../state';
-import { runTestScenarios } from '../../utils';
+import { runReducerTestScenarios } from '../../utils';
 import { LOAD_PLAYER } from '../actions/types';
 
 
@@ -29,7 +29,7 @@ const stateInitializationScenario: ClientStatePlayerReducerTestScenario<ClientDu
 
 
 describe('playerReducer', () => {
-    runTestScenarios({
+    runReducerTestScenarios({
         reducer: playerReducer,
         reducerKey: 'player',
         scenarios: {

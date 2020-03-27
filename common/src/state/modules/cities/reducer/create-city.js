@@ -2,7 +2,6 @@
 
 import { validateCityName } from '../../../../validators';
 import type { CommonStateCities, CommonStateCity } from './types';
-import { nextCitySpotSelector } from '../../../../selectors/common-state';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
@@ -20,6 +19,7 @@ import {
 import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonCreateCityAction } from '../actions/types';
+import { commonStateSelectors } from '../../selectors';
 
 type Reducer = CommonStateActionReducer<CommonStateCities, CommonCreateCityAction>;
 
@@ -43,7 +43,7 @@ export const createCityCitiesReducer: Reducer = (
         return failure({ errors: [`player already owns a city`] });
     }
 
-    const freeCitySpot = nextCitySpotSelector(globalState);
+    const freeCitySpot = commonStateSelectors.nextCitySpot(globalState);
 
     if (freeCitySpot == null) {
         return failure({ errors: [`there is no space for another city`] });

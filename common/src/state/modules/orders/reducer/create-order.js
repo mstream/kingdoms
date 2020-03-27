@@ -4,7 +4,7 @@ import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonCreateOrderAction } from '../actions/types';
 import type { CommonStateOrders } from './types';
-import { commonStateTimeSelector } from '../../../../selectors/common-state';
+import { commonStateTimeSelectors } from '../../time/selectors';
 
 type Reducer = CommonStateActionReducer<CommonStateOrders, CommonCreateOrderAction>;
 
@@ -27,7 +27,7 @@ export const createOrderOrdersReducer: Reducer = (
         ...localState,
         [action.payload.orderId]: {
             authorityId: action.payload.playerId,
-            creationTime: commonStateTimeSelector(globalState),
+            creationTime: commonStateTimeSelectors.time(globalState),
             minimumDelay: action.payload.minimumDelay,
             originCityId: action.payload.originCityId,
             regimentTemplate: action.payload.regimentTemplate,

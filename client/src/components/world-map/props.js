@@ -4,18 +4,20 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import {
-    citiesSelector,
-} from '../../state/selectors';
 import type { Vector } from '../../../../common/src/vector';
-import { tilesSelector } from '../../state/modules/tiles/selectors';
-import { cameraSelector } from '../../state/modules/camera/selectors';
 import {
-    moveCameraDown, moveCameraLeft, moveCameraRight,
-    moveCameraUp, zoomCameraIn, zoomCameraOut,
+    moveCameraDown,
+    moveCameraLeft,
+    moveCameraRight,
+    moveCameraUp,
+    zoomCameraIn,
+    zoomCameraOut,
 } from '../../state/modules/camera/actions';
 import type { ClientState } from '../../state/modules/types';
 import type { ClientAction } from '../../state/types';
+import { clientStateCameraSelectors } from '../../state/modules/camera/selectors';
+import { clientStateTilesSelectors } from '../../state/modules/tiles/selectors';
+import { clientStateCommonStateSelectors } from '../../state/modules/common-state/selectors';
 
 type OwnProps = {
     windowSize: Vector,
@@ -37,9 +39,10 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        camera: cameraSelector(state),
-        cities: citiesSelector(state),
-        tiles: tilesSelector(state),
+        cameraGeometry: clientStateCameraSelectors.geometry(state),
+        cities: clientStateCommonStateSelectors.cities(state),
+        isVisible: clientStateCommonStateSelectors.isLoaded(state),
+        tiles: clientStateTilesSelectors.tiles(state),
     });
 };
 

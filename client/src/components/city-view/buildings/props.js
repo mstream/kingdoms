@@ -4,18 +4,14 @@
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import {
-    activeBuildingSelector,
-    activeCityTabSelector,
-    currentlyViewedCitySelector,
-    rulesSelector,
-} from '../../../state/selectors';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 import { TAB_BUILDINGS } from '../../../state/modules/menu/reducer/types';
-import { currentlyViewedCityIdSelector } from '../../../state/modules/menu/selectors';
 import { requestBuildingUpgrade } from '../../../state/modules/common-state/actions';
 import { selectCityViewBuildingsTab } from '../../../state/modules/menu/actions';
 import type { ClientState } from '../../../state/modules/types';
 import type { ClientAction } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
+import { clientStateCommonStateSelectors } from '../../../state/modules/common-state/selectors';
 
 type OwnProps = {};
 
@@ -35,11 +31,11 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        activeBuilding: activeBuildingSelector(state),
-        city: currentlyViewedCitySelector(state),
-        cityId: currentlyViewedCityIdSelector(state),
-        isVisible: activeCityTabSelector(state) === TAB_BUILDINGS,
-        rules: rulesSelector(state),
+        activeBuilding: clientStateMenuSelectors.activeCityViewBuilding(state),
+        city: clientStateSelectors.currentlyViewedCity(state),
+        cityId: clientStateMenuSelectors.currentlyViewedCityId(state),
+        isVisible: clientStateMenuSelectors.activeCityViewTab(state) === TAB_BUILDINGS,
+        rules: clientStateCommonStateSelectors.rules(state),
     });
 };
 

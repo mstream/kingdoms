@@ -13,9 +13,9 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 
 const exclusions = [
-    /coverage/,
-    /dist/,
-    /node_modules/,
+    /coverage\//,
+    /dist\//,
+    /node_modules\//,
 ];
 
 

@@ -4,18 +4,14 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import { attackedCitySelector } from '../../state/selectors';
-import {
-    attackedCityIdSelector,
-    attackingCityIdSelector, minimumDelaySelector,
-    minimumRegimentSizeSelector, regimentTemplateSelector,
-} from '../../state/modules/menu/selectors';
+import { clientStateSelectors } from '../../state/modules/selectors';
 import {
     closeAttackView,
     requestOrderCreation,
 } from '../../state/modules/menu/actions';
 import type { ClientState } from '../../state/modules/types';
 import type { ClientAction } from '../../state/types';
+import { clientStateMenuSelectors } from '../../state/modules/menu/selectors';
 
 type OwnProps = {};
 
@@ -35,12 +31,12 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        attackedCity: attackedCitySelector(state),
-        attackedCityId: attackedCityIdSelector(state),
-        attackingCityId: attackingCityIdSelector(state),
-        isFormValid: attackingCityIdSelector(state) != null && minimumRegimentSizeSelector(state) > 0,
-        minimumDelay: minimumDelaySelector(state),
-        regimentTemplate: regimentTemplateSelector(state),
+        attackedCity: clientStateSelectors.attackedCity(state),
+        attackedCityId: clientStateMenuSelectors.attackedCityId(state),
+        attackingCityId: clientStateMenuSelectors.attackingCityId(state),
+        isFormValid: clientStateMenuSelectors.isAttackFormValid(state),
+        minimumDelay: clientStateMenuSelectors.minimumAttackDelay(state),
+        regimentTemplate: clientStateMenuSelectors.regimentTemplate(state),
     });
 };
 

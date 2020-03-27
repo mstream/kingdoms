@@ -4,9 +4,9 @@ import { dummy } from '../../../actions';
 import { tilesReducer } from './index';
 import type { ClientDummyAction } from '../../../actions/types';
 import { DUMMY } from '../../../actions/types';
-import type { ClientStateTilesReducerTestScenario } from './test/types';
+import type { ClientStateTilesReducerTestScenario } from './_test/types';
 import { emptyClientState } from '../../state';
-import { runTestScenarios } from '../../utils';
+import { runReducerTestScenarios } from '../../utils';
 
 
 const stateInitializationScenario: ClientStateTilesReducerTestScenario<ClientDummyAction> = {
@@ -27,7 +27,7 @@ const stateInitializationScenario: ClientStateTilesReducerTestScenario<ClientDum
 
 
 describe('tilesReducer', () => {
-    runTestScenarios({
+    runReducerTestScenarios({
         reducer: tilesReducer,
         reducerKey: 'tiles',
         scenarios: {

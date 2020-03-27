@@ -48,6 +48,7 @@ module.exports = {
         },
     },
     variants: {
+        borderWidth: ['hover'],
         visibility: ['hover', 'group-hover'],
     },
     plugins: [

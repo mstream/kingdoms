@@ -82,7 +82,7 @@ export const Component = (
             />
         ) : (
             <p
-                className="font-bold text-2xl text-center cursor-text text-gray-100"
+                className="font-bold text-2xl text-center cursor-text hover:border text-gray-100"
                 onClick={onCityNameInputClick}>
                 {city.name}
             </p>

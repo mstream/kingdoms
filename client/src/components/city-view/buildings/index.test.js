@@ -9,16 +9,16 @@ import { CityBuildingsComponent } from './index';
 import {
     TAB_BUILDINGS,
     TAB_UNITS,
-} from '../../../state/modules/menu/reducer/types';
-import { selectCityViewBuildingsTab } from '../../../state/modules/menu/actions';
+} from '../../../state/modules/_children/menu/reducer/types';
 import {
     BUILDING_PASTURE,
     BUILDING_WAREHOUSE,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../../state/modules/types';
 import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientState } from '../../../state/modules/state';
+import { emptyClientState } from '../../../state/state';
+import type { ClientState } from '../../../state/types';
+import { clientActions } from '../../../state/modules/actions';
 
 const mockStore = configureStore([]);
 
@@ -96,6 +96,8 @@ describe('CityResourcesComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(selectCityViewBuildingsTab({ buildingType: BUILDING_WAREHOUSE }));
+        expect(actions[0]).toEqual(clientActions.menu.selectCityViewBuildingsTab({
+            buildingType: BUILDING_WAREHOUSE,
+        }));
     });
 });

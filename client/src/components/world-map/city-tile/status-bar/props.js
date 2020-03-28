@@ -2,9 +2,8 @@
 import type {ActionCreatorsProps, StateToProps} from '../../../types';
 import {connect} from 'react-redux';
 import type {Dispatch} from 'redux';
-import type { ClientState } from '../../../../state/modules/types';
 import type { CommonStateCity } from '../../../../../../common/src/state/modules/cities/reducer/types';
-import type { ClientAction } from '../../../../state/types';
+import type { ClientAction, ClientState } from '../../../../state/types';
 
 type OwnProps = {
     city: CommonStateCity,

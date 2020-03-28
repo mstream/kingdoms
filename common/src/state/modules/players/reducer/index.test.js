@@ -13,7 +13,7 @@ import { CREATE_CITY } from '../../cities/actions/types';
 import { CREATE_ORDER } from '../../orders/actions/types';
 import { createCityTestScenarios } from './test/create-city-test-scenarios';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
-import { DUMMY } from '../../../../../../client/src/state/actions/types';
+import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
 
 const stateInitializationScenario: CommonStatePlayersReducerTestScenario<CommonDummyAction> = {

@@ -6,19 +6,16 @@ import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityResourcesComponent } from './index';
-import { TAB_RESOURCES, TAB_UNITS } from '../../../state/modules/menu/reducer/types';
-import {
-    selectCityViewResourcesTab,
-    selectCityViewUnitsTab,
-} from '../../../state/modules/menu/actions';
+import { TAB_RESOURCES, TAB_UNITS } from '../../../state/modules/_children/menu/reducer/types';
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../../state/modules/types';
 import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientState } from '../../../state/modules/state';
+import { emptyClientState } from '../../../state/state';
+import type { ClientState } from '../../../state/types';
+import { clientActions } from '../../../state/modules/actions';
 
 const mockStore = configureStore([]);
 
@@ -96,6 +93,8 @@ describe('CityResourcesComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(selectCityViewResourcesTab({ resourceType: RESOURCE_FOOD }));
+        expect(actions[0]).toEqual(clientActions.menu.selectCityViewResourcesTab({
+            resourceType: RESOURCE_FOOD
+        }));
     });
 });

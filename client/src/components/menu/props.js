@@ -6,9 +6,8 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import {
     clientStatePlayerSelectors,
-} from '../../state/modules/player/selectors';
-import type { ClientState } from '../../state/modules/types';
-import type { ClientAction } from '../../state/types';
+} from '../../state/modules/_children/player/selectors';
+import type { ClientAction, ClientState } from '../../state/types';
 
 type OwnProps = {};
 

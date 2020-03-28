@@ -1,7 +1,7 @@
 // @flow
 
 import { clientStateSelectors } from './index';
-import { runClientStateSelectorsTestScenarios } from '../utils';
+import { runClientStateSelectorsTestScenarios } from '../../utils';
 import { cityIdsOwnedByPlayersSelectorTestScenarios } from './_test/city-ids-owned-by-player-test-scenarios';
 import { currentlyViewedCitySelectorTestScenarios } from './_test/currently-viewed-city-test-scenarios';
 import { isGameStartingSelectorTestScenarios } from './_test/is-game-starting-scenarios';

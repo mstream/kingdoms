@@ -1,10 +1,10 @@
 // @flow
 
 import { createSelector } from 'reselect';
-import type { ClientState, ClientStateSelector } from '../../types';
-import { clientStateCommonStateSelectors } from '../../common-state/selectors';
-import { clientStatePlayerSelectors } from '../../player/selectors';
+import { clientStateCommonStateSelectors } from '../../_children/common-state/selectors';
+import { clientStatePlayerSelectors } from '../../_children/player/selectors';
 import type { CityIdsByOwner } from '../../../../../../common/src/state/modules/cities/selectors/types';
+import type { ClientState, ClientStateSelector } from '../../../types';
 
 
 export const cityIdsOwnedByPlayerSelector: ClientStateSelector<?$ReadOnlyArray<string>> =

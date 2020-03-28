@@ -13,7 +13,7 @@ import { CREATE_ORDER } from '../actions/types';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
 import { EXECUTE_TIME_STEP } from '../../time/actions';
 import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
-import { DUMMY } from '../../../../../../client/src/state/actions/types';
+import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
 
 const stateInitializationScenario: CommonStateOrdersReducerTestScenarios<CommonDummyAction> = {

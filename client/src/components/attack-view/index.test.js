@@ -6,15 +6,15 @@ import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { AttackViewComponent, attackViewComponentTestId } from '.';
-import type { ClientState } from '../../state/modules/types';
 import { attackViewCityListComponentTestId } from './city-list';
 import { attackViewRegimentTemplateFormComponentTestId } from './regiment-template-form';
 import { emptyCommonState } from '../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
-import { requestOrderCreation } from '../../state/modules/menu/actions';
 import { UNIT_PIKEMAN } from '../../../../common/src/state/modules/rules/reducer/types';
 import { emptyRegimentTemplateState } from '../../../../common/src/state/modules/orders/reducer/state';
-import { emptyClientState } from '../../state/modules/state';
+import { emptyClientState } from '../../state/state';
+import type { ClientState } from '../../state/types';
+import { clientActions } from '../../state/modules/actions';
 
 const mockStore = configureStore([]);
 
@@ -189,7 +189,7 @@ describe('AttackViewComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(requestOrderCreation({
+        expect(actions[0]).toEqual(clientActions.commonState.requestOrderCreation({
             minimumDelay: 60,
             originCityId: 'city2',
             regimentTemplate: {

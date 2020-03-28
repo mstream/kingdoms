@@ -3,9 +3,9 @@
 
 import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
-import type { ClientStateSelectorTestScenario } from '../../types';
-import { emptyClientState } from '../../state';
+import { emptyClientState } from '../../../state';
 import type { CityDistances } from '../../../../../../common/src/state/modules/cities/selectors/types';
+import type { ClientStateSelectorTestScenario } from '../../../types';
 
 type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<?CityDistances>>;
 

@@ -4,9 +4,8 @@
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import type { ClientStateTile } from '../../../state/modules/tiles/reducer/types';
-import type { ClientState } from '../../../state/modules/types';
-import type { ClientAction } from '../../../state/types';
+import type { ClientStateTile } from '../../../state/modules/_children/tiles/reducer/types';
+import type { ClientAction, ClientState } from '../../../state/types';
 
 type OwnProps = {
     tile: ClientStateTile,

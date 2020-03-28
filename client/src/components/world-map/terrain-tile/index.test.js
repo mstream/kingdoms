@@ -6,10 +6,10 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { TerrainTileComponent } from './index';
-import type { ClientStateTile } from '../../../state/modules/tiles/reducer/types';
-import type { ClientState } from '../../../state/modules/types';
-import { emptyClientStateTerrainTile } from '../../../state/modules/tiles/reducer/state';
-import { emptyClientState } from '../../../state/modules/state';
+import type { ClientStateTile } from '../../../state/modules/_children/tiles/reducer/types';
+import { emptyClientStateTerrainTile } from '../../../state/modules/_children/tiles/reducer/state';
+import { emptyClientState } from '../../../state/state';
+import type { ClientState } from '../../../state/types';
 
 const mockStore = configureStore([]);
 

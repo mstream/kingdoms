@@ -4,13 +4,12 @@
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import { TAB_UNITS } from '../../../state/modules/menu/reducer/types';
-import { selectCityViewUnitsTab } from '../../../state/modules/menu/actions';
-import type { ClientState } from '../../../state/modules/types';
-import type { ClientAction } from '../../../state/types';
-import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
-import { clientStateCommonStateSelectors } from '../../../state/modules/common-state/selectors';
+import { TAB_UNITS } from '../../../state/modules/_children/menu/reducer/types';
+import type { ClientAction, ClientState } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/_children/menu/selectors';
+import { clientStateCommonStateSelectors } from '../../../state/modules/_children/common-state/selectors';
 import { clientStateSelectors } from '../../../state/modules/selectors';
+import { clientActions } from '../../../state/modules/actions';
 
 type OwnProps = {};
 
@@ -39,7 +38,7 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    selectCityViewUnitsTab,
+    selectCityViewUnitsTab: clientActions.menu.selectCityViewUnitsTab,
 });
 
 export const connectProps = connect<Props,

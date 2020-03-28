@@ -5,10 +5,9 @@ import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { clientStateSelectors } from '../../../state/modules/selectors';
-import { TAB_OVERVIEW } from '../../../state/modules/menu/reducer/types';
-import type { ClientState } from '../../../state/modules/types';
-import type { ClientAction } from '../../../state/types';
-import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
+import { TAB_OVERVIEW } from '../../../state/modules/_children/menu/reducer/types';
+import type { ClientAction, ClientState } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/_children/menu/selectors';
 
 type OwnProps = {};
 

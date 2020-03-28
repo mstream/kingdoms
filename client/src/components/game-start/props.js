@@ -4,11 +4,10 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import { requestCityCreation } from '../../state/modules/common-state/actions';
-import type { ClientState } from '../../state/modules/types';
-import type { ClientAction } from '../../state/types';
-import { clientStateMenuSelectors } from '../../state/modules/menu/selectors';
+import type { ClientAction, ClientState } from '../../state/types';
+import { clientStateMenuSelectors } from '../../state/modules/_children/menu/selectors';
 import { clientStateSelectors } from '../../state/modules/selectors';
+import { clientActions } from '../../state/modules/actions';
 
 type OwnProps = {};
 
@@ -34,7 +33,7 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    requestCityCreation,
+    requestCityCreation: clientActions.commonState.requestCityCreation,
 });
 
 export const connectProps = connect<Props,

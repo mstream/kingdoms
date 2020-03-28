@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { clientStateSelectors } from '../../../state/modules/selectors';
 import type { ActionCreatorsProps, StateToProps } from '../../types';
-import type { ClientState } from '../../../state/modules/types';
-import type { ClientAction } from '../../../state/types';
-import { updateAttackViewRegimentTemplate } from '../../../state/modules/menu/actions';
-import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
+import type { ClientAction, ClientState } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/_children/menu/selectors';
+import { clientActions } from '../../../state/modules/actions';
 
 type OwnProps = {
     onQuantityChange: (SyntheticInputEvent<HTMLInputElement>) => void,
@@ -36,7 +35,7 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    updateAttackViewRegimentTemplate,
+    updateAttackViewRegimentTemplate: clientActions.menu.updateAttackViewRegimentTemplate,
 });
 
 export const connectProps = connect<Props,

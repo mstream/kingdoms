@@ -9,7 +9,7 @@ import { dummy } from '../../../actions';
 import { emptyCommonState } from '../../state';
 import { initialCommonState } from '../../../index';
 import { timeReducer } from './index';
-import { DUMMY } from '../../../../../../client/src/state/actions/types';
+import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
 const stateInitializationScenario: CommonStateTimeReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',

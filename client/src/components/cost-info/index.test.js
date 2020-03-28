@@ -11,9 +11,9 @@ import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
 } from '../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../state/modules/types';
 import { emptyResourcesState } from '../../../../common/src/state/modules/rules/reducer/state';
-import { emptyClientState } from '../../state/modules/state';
+import { emptyClientState } from '../../state/state';
+import type { ClientState } from '../../state/types';
 
 const mockStore = configureStore([]);
 

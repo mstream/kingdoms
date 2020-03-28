@@ -2,11 +2,11 @@
 
 import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
-import { TAB_ORDERS } from '../../menu/reducer/types';
+import { TAB_ORDERS } from '../../_children/menu/reducer/types';
 import { emptyOrderState } from '../../../../../../common/src/state/modules/orders/reducer/state';
-import type { ClientStateSelectorTestScenario } from '../../types';
 import type { CommonStateOrders } from '../../../../../../common/src/state/modules/orders/reducer/types';
-import { emptyClientState } from '../../state';
+import { emptyClientState } from '../../../state';
+import type { ClientStateSelectorTestScenario } from '../../../types';
 
 type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<?CommonStateOrders>>;
 

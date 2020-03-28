@@ -5,13 +5,11 @@ import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { clientStateSelectors } from '../../../state/modules/selectors';
-import { TAB_BUILDINGS } from '../../../state/modules/menu/reducer/types';
-import { requestBuildingUpgrade } from '../../../state/modules/common-state/actions';
-import { selectCityViewBuildingsTab } from '../../../state/modules/menu/actions';
-import type { ClientState } from '../../../state/modules/types';
-import type { ClientAction } from '../../../state/types';
-import { clientStateMenuSelectors } from '../../../state/modules/menu/selectors';
-import { clientStateCommonStateSelectors } from '../../../state/modules/common-state/selectors';
+import { TAB_BUILDINGS } from '../../../state/modules/_children/menu/reducer/types';
+import type { ClientAction, ClientState } from '../../../state/types';
+import { clientStateMenuSelectors } from '../../../state/modules/_children/menu/selectors';
+import { clientStateCommonStateSelectors } from '../../../state/modules/_children/common-state/selectors';
+import { clientActions } from '../../../state/modules/actions';
 
 type OwnProps = {};
 
@@ -40,8 +38,8 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    requestBuildingUpgrade,
-    selectCityViewBuildingsTab,
+    requestBuildingUpgrade: clientActions.commonState.requestBuildingUpgrade,
+    selectCityViewBuildingsTab: clientActions.menu.selectCityViewBuildingsTab,
 });
 
 export const connectProps = connect<Props,

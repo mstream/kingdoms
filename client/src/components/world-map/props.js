@@ -5,19 +5,11 @@ import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { Vector } from '../../../../common/src/vector';
-import {
-    moveCameraDown,
-    moveCameraLeft,
-    moveCameraRight,
-    moveCameraUp,
-    zoomCameraIn,
-    zoomCameraOut,
-} from '../../state/modules/camera/actions';
-import type { ClientState } from '../../state/modules/types';
-import type { ClientAction } from '../../state/types';
-import { clientStateCameraSelectors } from '../../state/modules/camera/selectors';
-import { clientStateTilesSelectors } from '../../state/modules/tiles/selectors';
-import { clientStateCommonStateSelectors } from '../../state/modules/common-state/selectors';
+import type { ClientAction, ClientState } from '../../state/types';
+import { clientStateCameraSelectors } from '../../state/modules/_children/camera/selectors';
+import { clientStateTilesSelectors } from '../../state/modules/_children/tiles/selectors';
+import { clientStateCommonStateSelectors } from '../../state/modules/_children/common-state/selectors';
+import { clientActions } from '../../state/modules/actions';
 
 type OwnProps = {
     windowSize: Vector,
@@ -47,12 +39,12 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    moveCameraUp,
-    moveCameraDown,
-    moveCameraLeft,
-    moveCameraRight,
-    zoomCameraIn,
-    zoomCameraOut,
+    moveCameraUp: clientActions.camera.moveCameraUp,
+    moveCameraDown: clientActions.camera.moveCameraDown,
+    moveCameraLeft: clientActions.camera.moveCameraLeft,
+    moveCameraRight: clientActions.camera.moveCameraRight,
+    zoomCameraIn: clientActions.camera.zoomCameraIn,
+    zoomCameraOut: clientActions.camera.zoomCameraOut,
 });
 
 export const connectProps = connect<Props,

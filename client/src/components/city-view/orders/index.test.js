@@ -9,12 +9,12 @@ import { CityOrdersComponent, cityOrdersComponentTestId } from './index';
 import {
     TAB_ORDERS,
     TAB_UNITS,
-} from '../../../state/modules/menu/reducer/types';
-import type { ClientState } from '../../../state/modules/types';
+} from '../../../state/modules/_children/menu/reducer/types';
 import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientState } from '../../../state/modules/state';
+import { emptyClientState } from '../../../state/state';
 import { emptyOrderState } from '../../../../../common/src/state/modules/orders/reducer/state';
+import type { ClientState } from '../../../state/types';
 
 const mockStore = configureStore([]);
 

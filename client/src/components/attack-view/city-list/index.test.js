@@ -6,10 +6,10 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { AttackViewCityListComponent } from './index';
-import type { ClientState } from '../../../state/modules/types';
 import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientState } from '../../../state/modules/state';
+import { emptyClientState } from '../../../state/state';
+import type { ClientState } from '../../../state/types';
 
 const mockStore = configureStore([]);
 

@@ -14,15 +14,15 @@ import {
     TAB_BUILDINGS, TAB_OVERVIEW,
     TAB_RESOURCES,
     TAB_UNITS,
-} from '../../state/modules/menu/reducer/types';
+} from '../../state/modules/_children/menu/reducer/types';
 import {
     UNIT_PEASANT,
 } from '../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../state/modules/types';
 import { emptyCommonState } from '../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
 import { emptyUnitStatsState } from '../../../../common/src/state/modules/rules/reducer/state';
-import { emptyClientState } from '../../state/modules/state';
+import { emptyClientState } from '../../state/state';
+import type { ClientState } from '../../state/types';
 
 const mockStore = configureStore([]);
 

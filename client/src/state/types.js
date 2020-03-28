@@ -1,32 +1,34 @@
 // @flow
 
-import type { ClientDummyAction } from './actions/types';
-import { DUMMY } from './actions/types';
-import type { ClientReportErrorsAction } from './modules/errors/actions/types';
-import { REPORT_ERRORS } from './modules/errors/actions/types';
+import type { ClientDummyAction } from './modules/actions/types';
+import { DUMMY } from './modules/actions/types';
+import type { ClientReportErrorsAction } from './modules/_children/errors/actions/types';
+import { REPORT_ERRORS } from './modules/_children/errors/actions/types';
 import type {
     ClientMoveCameraAction,
     ClientZoomCameraAction,
-} from './modules/camera/actions/types';
-import { MOVE_CAMERA, ZOOM_CAMERA } from './modules/camera/actions/types';
+} from './modules/_children/camera/actions/types';
+import {
+    MOVE_CAMERA,
+    ZOOM_CAMERA,
+} from './modules/_children/camera/actions/types';
 import type {
     ClientRequestBuildingUpgradeAction,
     ClientRequestCityCreationAction,
-    ClientRequestCityNameChangeAction,
+    ClientRequestCityNameChangeAction, ClientRequestOrderCreationAction,
     ClientUpdateStateAction,
-} from './modules/common-state/actions/types';
+} from './modules/_children/common-state/actions/types';
 import {
     REQUEST_BUILDING_UPGRADE,
     REQUEST_CITY_CREATION,
-    REQUEST_CITY_NAME_CHANGE,
+    REQUEST_CITY_NAME_CHANGE, REQUEST_ORDER_CREATION,
     UPDATE_STATE,
-} from './modules/common-state/actions/types';
+} from './modules/_children/common-state/actions/types';
 import type {
     ClientCloseAttackViewAction,
     ClientCloseCityViewAction,
     ClientOpenAttackViewAction,
     ClientOpenCityViewAction,
-    ClientRequestOrderCreationAction,
     ClientSelectAttackViewAttackingCityAction,
     ClientSelectCityViewBuildingsTabAction,
     ClientSelectCityViewResourceTabAction,
@@ -34,13 +36,12 @@ import type {
     ClientSelectCityViewUnitsTabAction,
     ClientUpdateAttackViewMinimumDelayAction,
     ClientUpdateAttackViewRegimentTemplateAction,
-} from './modules/menu/actions/types';
+} from './modules/_children/menu/actions/types';
 import {
     CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
     OPEN_ATTACK_VIEW,
     OPEN_CITY_VIEW,
-    REQUEST_ORDER_CREATION,
     SELECT_ATTACK_VIEW_ATTACKING_CITY,
     SELECT_CITY_VIEW_BUILDINGS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
@@ -48,9 +49,17 @@ import {
     SELECT_CITY_VIEW_UNITS_TAB,
     UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
     UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
-} from './modules/menu/actions/types';
-import type { ClientLoadPlayerAction } from './modules/player/actions/types';
-import { LOAD_PLAYER } from './modules/player/actions/types';
+} from './modules/_children/menu/actions/types';
+import type { ClientLoadPlayerAction } from './modules/_children/player/actions/types';
+import { LOAD_PLAYER } from './modules/_children/player/actions/types';
+import type { Dispatch, Store } from 'redux';
+import type { ClientStateCamera } from './modules/_children/camera/reducer/types';
+import type { ClientStateErrors } from './modules/_children/errors/reducer/types';
+import type { ClientStateMenu } from './modules/_children/menu/reducer/types';
+import type { ClientStatePlayer } from './modules/_children/player/reducer/types';
+import type { ClientStateCommonState } from './modules/_children/common-state/reducer/types';
+import type { ClientStateTiles } from './modules/_children/tiles/reducer/types';
+
 
 export type ClientActionKey =
     | typeof CLOSE_ATTACK_VIEW
@@ -99,4 +108,49 @@ export type ClientAction =
     | ClientUpdateStateAction
     | ClientZoomCameraAction
 
+
 export type ClientActionCreator<A: ClientAction> = ($PropertyType<A, 'payload'>) => A;
+
+export type ClientState = $ReadOnly<{
+    camera: ClientStateCamera,
+    errors: ClientStateErrors,
+    menu: ClientStateMenu,
+    player: ClientStatePlayer,
+    commonState: ClientStateCommonState,
+    tiles: ClientStateTiles,
+}>;
+
+export type ClientStateReducer<S> = (S, ClientAction, ClientState) => S;
+
+export type ClientStateActionReducer<S, +A: ClientAction> = ($ReadOnly<{ action: A, globalState: ClientState, localState: S, }>) => S;
+
+export type ClientStateReducerTestScenario<S, +A: ClientAction> = $ReadOnly<{
+    name: string,
+    action: A,
+    previousGlobalState: ClientState,
+    expectedLocalStateCreator: ({ previousLocalState: S }) => S,
+}>;
+
+export type ClientStateSelector<T> = (state: ClientState) => T;
+
+export type ClientStateSelectorTestScenario<T> = $ReadOnly<{
+    name: string,
+    state: ClientState,
+    expectedValue: T,
+}>;
+
+export type ClientStateSelectors = $ReadOnly<{ [string]: ClientStateSelector<mixed>, ... }>;
+
+// $FlowFixMe
+export type ClientStore = Store<ClientState, ClientAction, Dispatch<ClientAction>>
+
+export type ActionReducers<S> = $ReadOnly<{
+    [ClientActionKey]: ClientStateActionReducer<S, ClientAction>, ...
+}>;
+
+export type ReducerScenarios<S> = { [ClientActionKey]: $ReadOnlyArray<ClientStateReducerTestScenario<S, ClientAction>>, ... };
+
+export type SelectorScenarios = $ReadOnly<{
+    [string]: $ReadOnlyArray<ClientStateSelectorTestScenario<mixed>>,
+    ...
+}>;

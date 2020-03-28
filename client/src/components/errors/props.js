@@ -4,9 +4,8 @@
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import type { Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import type { ClientState } from '../../state/modules/types';
-import type { ClientAction } from '../../state/types';
-import { clientStateErrorsSelectors } from '../../state/modules/errors/selectors';
+import type { ClientAction, ClientState } from '../../state/types';
+import { clientStateErrorsSelectors } from '../../state/modules/_children/errors/selectors';
 
 type OwnProps = {};
 

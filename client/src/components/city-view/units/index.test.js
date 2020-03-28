@@ -9,16 +9,16 @@ import { CityUnitsComponent } from './index';
 import {
     TAB_RESOURCES,
     TAB_UNITS,
-} from '../../../state/modules/menu/reducer/types';
-import { selectCityViewUnitsTab } from '../../../state/modules/menu/actions';
+} from '../../../state/modules/_children/menu/reducer/types';
 import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../../state/modules/types';
 import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientState } from '../../../state/modules/state';
+import { emptyClientState } from '../../../state/state';
+import type { ClientState } from '../../../state/types';
+import { clientActions } from '../../../state/modules/actions';
 
 const mockStore = configureStore([]);
 
@@ -95,6 +95,8 @@ describe('CityUnitsComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(selectCityViewUnitsTab({ unitType: UNIT_PEASANT }));
+        expect(actions[0]).toEqual(clientActions.menu.selectCityViewUnitsTab({
+            unitType: UNIT_PEASANT,
+        }));
     });
 });

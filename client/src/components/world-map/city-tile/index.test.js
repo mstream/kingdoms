@@ -6,11 +6,11 @@ import configureStore from 'redux-mock-store';
 import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { CityTileComponent } from './index';
-import { openAttackView, openCityView } from '../../../state/modules/menu/actions';
-import type { ClientState } from '../../../state/modules/types';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientStateCityTile } from '../../../state/modules/tiles/reducer/state';
-import { emptyClientState } from '../../../state/modules/state';
+import { emptyClientStateCityTile } from '../../../state/modules/_children/tiles/reducer/state';
+import { emptyClientState } from '../../../state/state';
+import type { ClientState } from '../../../state/types';
+import { clientActions } from '../../../state/modules/actions';
 
 const mockStore = configureStore([]);
 
@@ -57,7 +57,7 @@ describe('CityTileComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(openCityView({ cityId: 'city1' }));
+        expect(actions[0]).toEqual(clientActions.menu.openCityView({ cityId: 'city1' }));
     });
 
     test('opens attack view on click if does not belongs to the player', async () => {
@@ -102,6 +102,6 @@ describe('CityTileComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(openAttackView({ cityId: 'city1' }));
+        expect(actions[0]).toEqual(clientActions.menu.openAttackView({ cityId: 'city1' }));
     });
 });

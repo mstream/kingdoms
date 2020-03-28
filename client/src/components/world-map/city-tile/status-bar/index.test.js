@@ -10,10 +10,10 @@ import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
 } from '../../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientState } from '../../../../state/modules/types';
 import type { CommonStateCity } from '../../../../../../common/src/state/modules/cities/reducer/types';
 import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientState } from '../../../../state/modules/state';
+import { emptyClientState } from '../../../../state/state';
+import type { ClientState } from '../../../../state/types';
 
 const mockStore = configureStore([]);
 

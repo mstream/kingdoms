@@ -8,14 +8,14 @@ import configureStore from 'redux-mock-store';
 import { WorldMapComponent } from './index';
 import { terrainTileComponentTestId } from './terrain-tile';
 import { cityTileComponentTestId } from './city-tile';
-import type { ClientState } from '../../state/modules/types';
 import { emptyCommonState } from '../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
 import {
     emptyClientStateCityTile,
     emptyClientStateTerrainTile,
-} from '../../state/modules/tiles/reducer/state';
-import { emptyClientState } from '../../state/modules/state';
+} from '../../state/modules/_children/tiles/reducer/state';
+import { emptyClientState } from '../../state/state';
+import type { ClientState } from '../../state/types';
 
 const mockStore = configureStore([]);
 

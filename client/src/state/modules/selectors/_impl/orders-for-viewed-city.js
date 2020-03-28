@@ -1,10 +1,10 @@
 // @flow
 
 import { createSelector } from 'reselect';
-import type { ClientState, ClientStateSelector } from '../../types';
 import type { CommonStateOrders } from '../../../../../../common/src/state/modules/orders/reducer/types';
-import { clientStateMenuSelectors } from '../../menu/selectors';
-import { clientStateCommonStateSelectors } from '../../common-state/selectors';
+import { clientStateMenuSelectors } from '../../_children/menu/selectors';
+import { clientStateCommonStateSelectors } from '../../_children/common-state/selectors';
+import type { ClientState, ClientStateSelector } from '../../../types';
 
 
 export const ordersForViewedCitySelector: ClientStateSelector<CommonStateOrders> =

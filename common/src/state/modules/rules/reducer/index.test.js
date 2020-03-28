@@ -9,7 +9,7 @@ import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { dummy } from '../../../actions';
 import { initialCommonState } from '../../../index';
 import { rulesReducer } from './index';
-import { DUMMY } from '../../../../../../client/src/state/actions/types';
+import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
 const stateInitializationScenario: CommonStateRulesReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',

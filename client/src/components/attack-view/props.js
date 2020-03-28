@@ -30,6 +30,7 @@ const mapStateToProps = (state: ClientState) => {
         attackedCity: clientStateSelectors.attackedCity(state),
         attackedCityId: clientStateMenuSelectors.attackedCityId(state),
         attackingCityId: clientStateMenuSelectors.attackingCityId(state),
+        isFormSubmitting: clientStateMenuSelectors.isAttackFormSubmitting(state),
         isFormValid: clientStateMenuSelectors.isAttackFormValid(state),
         minimumDelay: clientStateMenuSelectors.minimumAttackDelay(state),
         regimentTemplate: clientStateMenuSelectors.regimentTemplate(state),

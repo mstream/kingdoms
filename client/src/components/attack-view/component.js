@@ -15,6 +15,7 @@ export const Component = (
         attackedCityId,
         attackingCityId,
         closeAttackView,
+        isFormSubmitting,
         isFormValid,
         minimumDelay,
         regimentTemplate,
@@ -41,10 +42,12 @@ export const Component = (
     const buttonClassName = classNames(
         'p-1 text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600',
         {
-            'cursor-not-allowed': !isFormValid,
-            'cursor-pointer': isFormValid,
-            'filter-grayscale': !isFormValid,
-            'hover:bg-green-400': isFormValid,
+            'cursor-wait': isFormSubmitting,
+            'cursor-not-allowed': !isFormValid && !isFormSubmitting,
+            'cursor-pointer': isFormValid && !isFormSubmitting,
+            'filter-grayscale': !isFormValid && !isFormSubmitting,
+            'hover:bg-green-400': isFormValid && !isFormSubmitting,
+            'spinner': isFormSubmitting,
         },
     );
 

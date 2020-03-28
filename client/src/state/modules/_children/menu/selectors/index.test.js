@@ -17,6 +17,8 @@ import { activeCityViewBuildingSelectorTestScenarios } from './_test/active-city
 import { activeCityViewResourceSelectorTestScenarios } from './_test/active-city-view-resource-test-scenarios';
 import { activeCityViewUnitSelectorTestScenarios } from './_test/active-city-view-unit-test-scenarios';
 import { isAttackFormValidSelectorTestScenarios } from './_test/is-attack-form-valid-test-scenarios';
+import { isAttackFormSubmittingSelector } from './_impl/is-attack-form-submitting';
+import { isAttackFormSubmittingSelectorTestScenarios } from './_test/is-attack-form-submitting-test-scenarios';
 
 describe('clientStateMenuSelectors', () => {
         runClientStateSelectorsTestScenarios({
@@ -39,6 +41,8 @@ describe('clientStateMenuSelectors', () => {
                 currentlyViewedCityId: currentlyViewedCityIdSelectorTestScenarios,
                 // $FlowFixMe
                 isAnyMenuOpen: isAnyMenuOpenSelectorTestScenarios,
+                // $FlowFixMe
+                isAttackFormSubmitting: isAttackFormSubmittingSelectorTestScenarios,
                 // $FlowFixMe
                 isAttackFormValid: isAttackFormValidSelectorTestScenarios,
                 // $FlowFixMe

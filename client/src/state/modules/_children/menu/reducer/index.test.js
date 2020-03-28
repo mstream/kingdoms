@@ -32,7 +32,7 @@ import { updateAttackViewMinimumDelayTestScenarios } from './_test/update-attack
 import { emptyClientState } from '../../../../state';
 import { runReducerTestScenarios } from '../../../../utils';
 import {
-    REQUEST_CITY_CREATION,
+    REQUEST_CITY_CREATION, REQUEST_ORDER_CREATION,
     UPDATE_STATE,
 } from '../../common-state/actions/types';
 import {
@@ -49,6 +49,7 @@ import {
     UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from '../actions/types';
 import { clientActions } from '../../../actions';
+import { requestOrderCreationTestScenarios } from './_test/request-order-creation-test-scenarios';
 
 
 const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDummyAction> = {
@@ -64,6 +65,7 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDumm
             attackView: {
                 attackedCityId: null,
                 attackingCityId: null,
+                isSubmitting: false,
                 minimumDelay: 0,
                 regimentTemplate: {
                     [UNIT_ARCHER]: {
@@ -122,6 +124,7 @@ describe('menuReducer', () => {
             [OPEN_ATTACK_VIEW]: openAttackViewTestScenarios,
             [OPEN_CITY_VIEW]: openCityViewTestScenarios,
             [REQUEST_CITY_CREATION]: requestCityCreationTestScenarios,
+            [REQUEST_ORDER_CREATION]: requestOrderCreationTestScenarios,
             [SELECT_ATTACK_VIEW_ATTACKING_CITY]: selectAttackViewAttackingCityTestScenarios,
             [SELECT_CITY_VIEW_TAB]: selectCityViewTabTestScenarios,
             [SELECT_CITY_VIEW_BUILDINGS_TAB]: selectCityViewBuildingsTabTestScenarios,

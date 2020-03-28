@@ -23,6 +23,7 @@ export type ClientStateCityViewTab =
 export type ClientStateAttackView = $ReadOnly<{
     attackedCityId: ?string,
     attackingCityId: ?string,
+    isSubmitting: boolean,
     minimumDelay: number,
     regimentTemplate: CommonStateRegimentTemplate,
 }>;

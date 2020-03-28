@@ -1,10 +1,10 @@
 // @flow
 
-import { getCurrentState } from '../../../../../../common/src/state/actions';
-import type { ClientStore } from '../../../types';
-import type { Socket } from '../types';
-import { clientActions } from '../../../modules/actions';
-import { sendMessage } from '../utils';
+import { getCurrentState } from '../../../../../../../common/src/state/actions';
+import type { ClientStore } from '../../../../types';
+import type { Socket } from '../../types';
+import { clientActions } from '../../../../modules/actions';
+import { sendMessage } from '../../utils';
 
 export const createOnConnectHandler = (
     {

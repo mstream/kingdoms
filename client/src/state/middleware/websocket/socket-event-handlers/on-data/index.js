@@ -1,22 +1,22 @@
 // @flow
 
-import type { ServerResponse } from '../../../../../../common/src/types';
-import { parseServerResponse } from '../../../../../../common/src/util';
+import type { ServerResponse } from '../../../../../../../common/src/types';
+import { parseServerResponse } from '../../../../../../../common/src/util';
 import {
     ABANDON_CITY,
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
-} from '../../../../../../common/src/state/modules/cities/actions/types';
-import { CREATE_ORDER } from '../../../../../../common/src/state/modules/orders/actions/types';
-import { EXECUTE_TIME_STEP } from '../../../../../../common/src/state/modules/time/actions';
+} from '../../../../../../../common/src/state/modules/cities/actions/types';
+import { CREATE_ORDER } from '../../../../../../../common/src/state/modules/orders/actions/types';
+import { EXECUTE_TIME_STEP } from '../../../../../../../common/src/state/modules/time/actions';
 import {
     DUMMY,
     GET_CURRENT_STATE,
     RESET_STATE,
-} from '../../../../../../common/src/state/actions/types';
-import type { ClientStore } from '../../../types';
-import { clientActions } from '../../../modules/actions';
+} from '../../../../../../../common/src/state/actions/types';
+import type { ClientStore } from '../../../../types';
+import { clientActions } from '../../../../modules/actions';
 
 type ServerResponseHandler = ({ serverResponse: ServerResponse, store: ClientStore }) => void;
 

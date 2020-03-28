@@ -1,7 +1,7 @@
 // @flow
 
-import type { ClientStore } from '../../../types';
-import { clientActions } from '../../../modules/actions';
+import type { ClientStore } from '../../../../types';
+import { clientActions } from '../../../../modules/actions';
 
 export const createOnErrorHandler = (
     {

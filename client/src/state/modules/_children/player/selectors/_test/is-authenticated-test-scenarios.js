@@ -1,10 +1,9 @@
 // @flow
 
 import { emptyClientState } from '../../../../../state';
-import { bool } from 'aws-sdk/clients/signer';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<bool>>
+type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<boolean>>;
 
 export const isAuthenticatedSelectorTestScenarios: Scenarios = [
     {

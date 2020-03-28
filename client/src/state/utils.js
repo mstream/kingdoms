@@ -3,7 +3,8 @@
 import type {
     ActionReducers,
     ClientAction,
-    ClientActionKey, ClientState,
+    ClientActionKey,
+    ClientState,
     ClientStateActionReducer,
     ClientStateReducer,
     ClientStateReducerTestScenario,

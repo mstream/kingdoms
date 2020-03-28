@@ -1,6 +1,6 @@
 // @flow
 
-import type { ClientStore } from '../../../types';
+import type { ClientStore } from '../../../../types';
 
 export const createOnCloseHandler = (
     {

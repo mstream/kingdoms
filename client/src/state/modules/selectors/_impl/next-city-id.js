@@ -1,9 +1,9 @@
 // @flow
 
 import { createSelector } from 'reselect';
-import { clientStateMenuSelectors } from '../../_children/menu/selectors';
 import { cityIdsOwnedByPlayerSelector } from './city-ids-owned-by-player';
 import type { ClientState, ClientStateSelector } from '../../../types';
+import { clientStateMenuSelectors } from '../../_children/menu/selectors';
 
 
 export const nextCityIdSelector: ClientStateSelector<?string> =

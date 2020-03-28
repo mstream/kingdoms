@@ -28,7 +28,7 @@ export type Props = {
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         city: clientStateSelectors.currentlyViewedCity(state),
-        isVisible: clientStateMenuSelectors.activeCityViewTab(state) === TAB_OVERVIEW,
+        isVisible: clientStateSelectors.menu.activeCityViewTab(state) === TAB_OVERVIEW,
     });
 };
 

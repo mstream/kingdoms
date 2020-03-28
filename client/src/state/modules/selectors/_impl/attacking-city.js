@@ -5,9 +5,9 @@ import type {
     CommonStateCities,
     CommonStateCity,
 } from '../../../../../../common/src/state/modules/cities/reducer/types';
+import type { ClientState, ClientStateSelector } from '../../../types';
 import { clientStateMenuSelectors } from '../../_children/menu/selectors';
 import { clientStateCommonStateSelectors } from '../../_children/common-state/selectors';
-import type { ClientState, ClientStateSelector } from '../../../types';
 
 
 export const attackingCitySelector: ClientStateSelector<?CommonStateCity> =

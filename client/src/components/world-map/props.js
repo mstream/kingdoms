@@ -6,10 +6,8 @@ import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { Vector } from '../../../../common/src/vector';
 import type { ClientAction, ClientState } from '../../state/types';
-import { clientStateCameraSelectors } from '../../state/modules/_children/camera/selectors';
-import { clientStateTilesSelectors } from '../../state/modules/_children/tiles/selectors';
-import { clientStateCommonStateSelectors } from '../../state/modules/_children/common-state/selectors';
 import { clientActions } from '../../state/modules/actions';
+import { clientStateSelectors } from '../../state/modules/selectors';
 
 type OwnProps = {
     windowSize: Vector,
@@ -31,10 +29,10 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        cameraGeometry: clientStateCameraSelectors.geometry(state),
-        cities: clientStateCommonStateSelectors.cities(state),
-        isVisible: clientStateCommonStateSelectors.isLoaded(state),
-        tiles: clientStateTilesSelectors.tiles(state),
+        cameraGeometry: clientStateSelectors.camera.geometry(state),
+        cities: clientStateSelectors.commonState.cities(state),
+        isVisible: clientStateSelectors.commonState.isLoaded(state),
+        tiles: clientStateSelectors.tiles.tiles(state),
     });
 };
 

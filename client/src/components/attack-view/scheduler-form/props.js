@@ -7,6 +7,7 @@ import type { ActionCreatorsProps, StateToProps } from '../../types';
 import type { ClientAction, ClientState } from '../../../state/types';
 import { clientStateMenuSelectors } from '../../../state/modules/_children/menu/selectors';
 import { clientActions } from '../../../state/modules/actions';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 
 type OwnProps = {};
 
@@ -26,9 +27,9 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return {
-        isVisible: clientStateMenuSelectors.isAttackViewMenuOpen(state)
-            && clientStateMenuSelectors.attackingCityId != null,
-        minimumDelay: clientStateMenuSelectors.minimumAttackDelay(state),
+        isVisible: clientStateSelectors.menu.isAttackViewMenuOpen(state)
+            && clientStateSelectors.menu.attackingCityId != null,
+        minimumDelay: clientStateSelectors.menu.minimumAttackDelay(state),
     };
 };
 

@@ -28,7 +28,7 @@ export type Props = {
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         isGameStarting: clientStateSelectors.isGameStarting(state),
-        isCityBeingCreated: clientStateMenuSelectors.isNewCityBeingCreated(state),
+        isCityBeingCreated: clientStateSelectors.menu.isNewCityBeingCreated(state),
     });
 };
 

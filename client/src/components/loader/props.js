@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import type { ClientAction, ClientState } from '../../state/types';
 import { clientStateErrorsSelectors } from '../../state/modules/_children/errors/selectors';
 import { clientStateCommonStateSelectors } from '../../state/modules/_children/common-state/selectors';
+import { clientStateSelectors } from '../../state/modules/selectors';
 
 type OwnProps = {};
 
@@ -27,8 +28,8 @@ export type Props = {
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         isCommonStateBeingLoaded:
-            !clientStateCommonStateSelectors.isLoaded(state) &&
-            !clientStateErrorsSelectors.anyErrors(state),
+            !clientStateSelectors.commonState.isLoaded(state) &&
+            !clientStateSelectors.errors.anyErrors(state),
     });
 };
 

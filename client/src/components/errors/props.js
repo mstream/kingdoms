@@ -6,6 +6,7 @@ import type { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import type { ClientAction, ClientState } from '../../state/types';
 import { clientStateErrorsSelectors } from '../../state/modules/_children/errors/selectors';
+import { clientStateSelectors } from '../../state/modules/selectors';
 
 type OwnProps = {};
 
@@ -25,7 +26,7 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        errors: clientStateErrorsSelectors.errors(state),
+        errors: clientStateSelectors.errors.errors(state),
     });
 };
 

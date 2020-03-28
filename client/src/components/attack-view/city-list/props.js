@@ -28,8 +28,8 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        attackingCityId: clientStateMenuSelectors.attackingCityId(state),
-        cities: clientStateCommonStateSelectors.cities(state),
+        attackingCityId: clientStateSelectors.menu.attackingCityId(state),
+        cities: clientStateSelectors.commonState.cities(state),
         cityIdsOwnedByPlayer: clientStateSelectors.cityIdsOwnedByPlayer(state),
         distancesToAttackedCity: clientStateSelectors.distancesToAttackedCity(state),
     });

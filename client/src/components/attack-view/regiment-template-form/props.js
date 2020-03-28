@@ -30,7 +30,7 @@ export type Props = {
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         attackingCity: clientStateSelectors.attackingCity(state),
-        regimentTemplate: clientStateMenuSelectors.regimentTemplate(state),
+        regimentTemplate: clientStateSelectors.menu.regimentTemplate(state),
     });
 };
 

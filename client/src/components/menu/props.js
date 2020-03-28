@@ -8,6 +8,7 @@ import {
     clientStatePlayerSelectors,
 } from '../../state/modules/_children/player/selectors';
 import type { ClientAction, ClientState } from '../../state/types';
+import { clientStateSelectors } from '../../state/modules/selectors';
 
 type OwnProps = {};
 
@@ -27,7 +28,7 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        playerName: clientStatePlayerSelectors.name(state),
+        playerName: clientStateSelectors.player.name(state),
     });
 };
 

@@ -7,8 +7,8 @@ import {
 } from '../../../../../../../../common/src/vector';
 import type { ClientStateCamera } from '../types';
 import type { ClientZoomCameraAction } from '../../actions/types';
-import { clientStateMenuSelectors } from '../../../menu/selectors';
 import type { ClientStateActionReducer } from '../../../../../types';
+import { clientStateSelectors } from '../../../../selectors';
 
 type Reducer = ClientStateActionReducer<ClientStateCamera, ClientZoomCameraAction>;
 
@@ -19,7 +19,7 @@ export const zoomCameraCameraReducer: Reducer = (
         globalState,
     },
 ) => {
-    if (clientStateMenuSelectors.isAnyMenuOpen(globalState)) {
+    if (clientStateSelectors.menu.isAnyMenuOpen(globalState)) {
         return localState;
     }
 

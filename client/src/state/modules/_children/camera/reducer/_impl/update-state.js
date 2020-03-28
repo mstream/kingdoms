@@ -27,7 +27,7 @@ export const updateStateCameraReducer: Reducer = (
 ) => {
 
     const calculateNewLocation = () => {
-        const playerName = clientStatePlayerSelectors.name(globalState);
+        const playerName = clientStateSelectors.player.name(globalState);
 
         if (playerName == null) {
             return localState.geometry.location;
@@ -56,7 +56,7 @@ export const updateStateCameraReducer: Reducer = (
     };
 
     const calculateNewLocationLimit = () => {
-        const world = clientStateCommonStateSelectors.world(globalState);
+        const world = clientStateSelectors.commonState.world(globalState);
         const actionWorldSize = action.payload.commonState.world.size;
 
         if (world != null && areVectorsEqual({

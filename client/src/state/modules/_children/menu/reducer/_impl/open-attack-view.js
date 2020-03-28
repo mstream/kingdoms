@@ -6,6 +6,7 @@ import type { ClientOpenAttackViewAction } from '../../actions/types';
 import { clientStateCommonStateSelectors } from '../../../common-state/selectors';
 import { clientStatePlayerSelectors } from '../../../player/selectors';
 import type { ClientStateActionReducer } from '../../../../../types';
+import { clientStateSelectors } from '../../../../selectors';
 
 type Reducer = ClientStateActionReducer<ClientStateMenu, ClientOpenAttackViewAction>;
 
@@ -17,17 +18,17 @@ export const openAttackViewMenuReducer: Reducer = (
         globalState,
     },
 ) => {
-    if (clientStateCommonStateSelectors.isLoaded(globalState) == null) {
+    if (clientStateSelectors.commonState.isLoaded(globalState) == null) {
         throw Error(`opening city view without the server state loaded`);
     }
 
-    const playerName = clientStatePlayerSelectors.name(globalState);
+    const playerName = clientStateSelectors.player.name(globalState);
 
     if (playerName == null) {
         throw Error(`opening attack view for not loaded player`);
     }
 
-    const cityIdsByOwner = clientStateCommonStateSelectors.cityIdsByOwner(globalState);
+    const cityIdsByOwner = clientStateSelectors.commonState.cityIdsByOwner(globalState);
 
     const playerCityIds = cityIdsByOwner != null ? cityIdsByOwner[playerName] : null;
 

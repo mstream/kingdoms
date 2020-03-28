@@ -8,7 +8,6 @@ import { clientStateSelectors } from '../../../state/modules/selectors';
 import { TAB_BUILDINGS } from '../../../state/modules/_children/menu/reducer/types';
 import type { ClientAction, ClientState } from '../../../state/types';
 import { clientStateMenuSelectors } from '../../../state/modules/_children/menu/selectors';
-import { clientStateCommonStateSelectors } from '../../../state/modules/_children/common-state/selectors';
 import { clientActions } from '../../../state/modules/actions';
 
 type OwnProps = {};
@@ -29,11 +28,11 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        activeBuilding: clientStateMenuSelectors.activeCityViewBuilding(state),
+        activeBuilding: clientStateSelectors.menu.activeCityViewBuilding(state),
         city: clientStateSelectors.currentlyViewedCity(state),
-        cityId: clientStateMenuSelectors.currentlyViewedCityId(state),
-        isVisible: clientStateMenuSelectors.activeCityViewTab(state) === TAB_BUILDINGS,
-        rules: clientStateCommonStateSelectors.rules(state),
+        cityId: clientStateSelectors.menu.currentlyViewedCityId(state),
+        isVisible: clientStateSelectors.menu.activeCityViewTab(state) === TAB_BUILDINGS,
+        rules: clientStateSelectors.commonState.rules(state),
     });
 };
 

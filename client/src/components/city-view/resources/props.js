@@ -29,10 +29,10 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        activeResource: clientStateMenuSelectors.activeCityViewResource(state),
+        activeResource: clientStateSelectors.menu.activeCityViewResource(state),
         city: clientStateSelectors.currentlyViewedCity(state),
-        isVisible: clientStateMenuSelectors.activeCityViewTab(state) === TAB_RESOURCES,
-        rules: clientStateCommonStateSelectors.rules(state),
+        isVisible: clientStateSelectors.menu.activeCityViewTab(state) === TAB_RESOURCES,
+        rules: clientStateSelectors.commonState.rules(state),
     });
 };
 

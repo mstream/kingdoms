@@ -28,12 +28,12 @@ export type Props = {
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         attackedCity: clientStateSelectors.attackedCity(state),
-        attackedCityId: clientStateMenuSelectors.attackedCityId(state),
-        attackingCityId: clientStateMenuSelectors.attackingCityId(state),
-        isFormSubmitting: clientStateMenuSelectors.isAttackFormSubmitting(state),
-        isFormValid: clientStateMenuSelectors.isAttackFormValid(state),
-        minimumDelay: clientStateMenuSelectors.minimumAttackDelay(state),
-        regimentTemplate: clientStateMenuSelectors.regimentTemplate(state),
+        attackedCityId: clientStateSelectors.menu.attackedCityId(state),
+        attackingCityId: clientStateSelectors.menu.attackingCityId(state),
+        isFormSubmitting: clientStateSelectors.menu.isAttackFormSubmitting(state),
+        isFormValid: clientStateSelectors.menu.isAttackFormValid(state),
+        minimumDelay: clientStateSelectors.menu.minimumAttackDelay(state),
+        regimentTemplate: clientStateSelectors.menu.regimentTemplate(state),
     });
 };
 

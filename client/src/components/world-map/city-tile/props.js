@@ -9,6 +9,7 @@ import type { CommonStateCity } from '../../../../../common/src/state/modules/ci
 import type { ClientAction, ClientState } from '../../../state/types';
 import { clientStatePlayerSelectors } from '../../../state/modules/_children/player/selectors';
 import { clientActions } from '../../../state/modules/actions';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 
 type OwnProps = {
     city: CommonStateCity,
@@ -32,7 +33,7 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        playerName: clientStatePlayerSelectors.name(state),
+        playerName: clientStateSelectors.player.name(state),
     });
 };
 

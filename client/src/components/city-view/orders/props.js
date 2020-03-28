@@ -8,6 +8,7 @@ import { TAB_ORDERS } from '../../../state/modules/_children/menu/reducer/types'
 import type { ClientAction, ClientState } from '../../../state/types';
 import { clientStateCommonStateSelectors } from '../../../state/modules/_children/common-state/selectors';
 import { clientStateMenuSelectors } from '../../../state/modules/_children/menu/selectors';
+import { clientStateSelectors } from '../../../state/modules/selectors';
 
 type OwnProps = {};
 
@@ -27,9 +28,9 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
-        cities: clientStateCommonStateSelectors.cities(state),
-        isVisible: clientStateMenuSelectors.activeCityViewTab(state) === TAB_ORDERS,
-        orders: clientStateCommonStateSelectors.orders(state),
+        cities: clientStateSelectors.commonState.cities(state),
+        isVisible: clientStateSelectors.menu.activeCityViewTab(state) === TAB_ORDERS,
+        orders: clientStateSelectors.commonState.orders(state),
     });
 };
 

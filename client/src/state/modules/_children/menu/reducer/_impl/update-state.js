@@ -1,11 +1,10 @@
 // @flow
 
 import type { ClientStateMenu } from '../types';
-import { clientStatePlayerSelectors } from '../../../player/selectors';
 import type { ClientUpdateStateAction } from '../../../common-state/actions/types';
-import { clientStateMenuSelectors } from '../../selectors';
 import { commonStateCitiesSelectors } from '../../../../../../../../common/src/state/modules/cities/selectors';
 import type { ClientStateActionReducer } from '../../../../../types';
+import { clientStateSelectors } from '../../../../selectors';
 
 type Reducer = ClientStateActionReducer<ClientStateMenu, ClientUpdateStateAction>;
 
@@ -17,13 +16,13 @@ export const updateStateMenuReducer: Reducer = (
         globalState,
     },
 ) => {
-    const playerName = clientStatePlayerSelectors.name(globalState);
+    const playerName = clientStateSelectors.player.name(globalState);
 
     if (playerName == null) {
         return localState;
     }
 
-    const isNewCityBeingCreated = clientStateMenuSelectors.isNewCityBeingCreated(globalState);
+    const isNewCityBeingCreated = clientStateSelectors.menu.isNewCityBeingCreated(globalState);
 
     if (isNewCityBeingCreated) {
         return localState;

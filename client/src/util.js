@@ -3,6 +3,8 @@
 import type { Geometry } from '../../common/src/geometry';
 import type { Vector } from '../../common/src/vector';
 import { multipleVectors } from '../../common/src/vector';
+import { config } from './config';
+import queryString from 'query-string';
 
 export type GeometryStyle = $ReadOnly<{
     height: number,
@@ -43,3 +45,19 @@ export const tileVectorToPixelVector = ({ tileVector }: { tileVector: Vector }):
     });
 };
 
+export const signOut = ({ location }: { location: Location }): void => {
+    location.replace(config.cognitoSignOutUrl);
+};
+
+export const getIdToken = ({ location }: { location: Location }): ?string => {
+    const locationHash = queryString.parse(location.hash);
+    const idToken = locationHash['id_token'];
+
+    if (typeof idToken !== 'string') {
+        console.log('no id token: redirecting to the authentication website');
+        location.replace(config.cognitoSignInUrl);
+        return null;
+    } else {
+        return idToken;
+    }
+};

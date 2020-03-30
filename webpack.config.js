@@ -1,6 +1,7 @@
 const path = require('path');
 const glob = require('glob');
 const webpack = require('webpack');
+const globals = require('./globals');
 
 const AwsSamPlugin = require('aws-sam-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
@@ -33,12 +34,17 @@ const circularDependencyPlugin = new CircularDependencyPlugin({
     failOnError: true,
 });
 
-const definePlugin = new webpack.DefinePlugin({
-    CLIENT_ID: JSON.stringify('db45f04jpvg84h71ij9u46lgg'),
-    COGNITO_URL: JSON.stringify('https://dev-kingdoms.auth.eu-west-1.amazoncognito.com'),
-    USER_POOL_ID: JSON.stringify('eu-west-1_51o0hoJwW'),
-    WEB_SOCKET_URI: JSON.stringify('wss://55oob8wdab.execute-api.eu-west-1.amazonaws.com/Stage'),
-});
+const definitions = Object.keys(globals.variables).reduce(
+    (definitions, name: string) => {
+        return {
+            ...definitions,
+            [name]: JSON.stringify(globals.variables[name]),
+        };
+    },
+    {},
+);
+
+const definePlugin = new webpack.DefinePlugin(definitions);
 
 const htmlIndexPlugin = new HtmlWebPackPlugin({
     favicon: './client/src/assets/images/favicon.ico',

@@ -8,7 +8,7 @@ import type {
     ClientOpenAttackViewAction,
     ClientOpenCityViewAction,
     ClientSelectAttackViewAttackingCityAction,
-    ClientSelectCityViewBuildingsTabAction,
+    ClientSelectCityViewBuildingsTabAction, ClientSelectCityViewOrdersTabAction,
     ClientSelectCityViewResourceTabAction,
     ClientSelectCityViewTabAction,
     ClientSelectCityViewUnitsTabAction,
@@ -21,7 +21,7 @@ import {
     OPEN_ATTACK_VIEW,
     OPEN_CITY_VIEW,
     SELECT_ATTACK_VIEW_ATTACKING_CITY,
-    SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_BUILDINGS_TAB, SELECT_CITY_VIEW_ORDERS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
     SELECT_CITY_VIEW_UNITS_TAB,
@@ -72,6 +72,13 @@ const selectCityViewBuildingsTab: ClientActionCreator<ClientSelectCityViewBuildi
     };
 };
 
+const selectCityViewOrdersTab: ClientActionCreator<ClientSelectCityViewOrdersTabAction> = (payload) => {
+    return {
+        type: SELECT_CITY_VIEW_ORDERS_TAB,
+        payload,
+    };
+};
+
 const selectCityViewResourcesTab: ClientActionCreator<ClientSelectCityViewResourceTabAction> = (payload) => {
     return {
         type: SELECT_CITY_VIEW_RESOURCES_TAB,
@@ -116,6 +123,7 @@ export const menuActions = {
     openCityView,
     selectAttackViewAttackingCity,
     selectCityViewBuildingsTab,
+    selectCityViewOrdersTab,
     selectCityViewResourcesTab,
     selectCityViewTab,
     selectCityViewUnitsTab,

@@ -14,8 +14,8 @@ import {
 } from '../actions/types';
 import { EXECUTE_TIME_STEP } from '../../time/actions';
 import { RESET_STATE } from '../../../actions/types';
-import { CREATE_ORDER } from '../../orders/actions/types';
-import { createOrderCitiesReducer } from './create-order';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from '../../orders/actions/types';
+import { createScheduledAttackOrderCitiesReducer } from './create-order';
 import { resetStateCitiesReducer } from './reset-state';
 import { createCommonStateReducer } from '../../utils';
 import { initialCommonState } from '../../../index';
@@ -27,7 +27,7 @@ export const citiesReducer = createCommonStateReducer<CommonStateCities>({
         [ABANDON_CITY]: abandonCityCitiesReducer,
         [CHANGE_CITY_NAME]: changeCityNameCitiesReducer,
         [CREATE_CITY]: createCityCitiesReducer,
-        [CREATE_ORDER]: createOrderCitiesReducer,
+        [CREATE_SCHEDULED_ATTACK_ORDER]: createScheduledAttackOrderCitiesReducer,
         [EXECUTE_TIME_STEP]: executeTimeStepCitiesReducer,
         [RESET_STATE]: resetStateCitiesReducer,
         [UPGRADE_BUILDING]: upgradeBuildingCitiesReducer,

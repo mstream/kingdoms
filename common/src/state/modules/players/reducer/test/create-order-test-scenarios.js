@@ -4,20 +4,20 @@ import { failure, success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import { PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING } from '../types';
 import type { CommonStatePlayersReducerTestScenario } from './types';
-import type { CommonCreateOrderAction } from '../../../orders/actions/types';
-import { createOrder } from '../../../orders/actions';
+import type { CommonCreateScheduledAttackOrderAction } from '../../../orders/actions/types';
+import { createScheduledAttackOrder } from '../../../orders/actions';
 import { emptyRegimentTemplateState } from '../../../orders/reducer/state';
 
-type Scenarios = $ReadOnlyArray<CommonStatePlayersReducerTestScenario<CommonCreateOrderAction>>;
+type Scenarios = $ReadOnlyArray<CommonStatePlayersReducerTestScenario<CommonCreateScheduledAttackOrderAction>>;
 
 export const createOrderTestScenarios: Scenarios = [
     {
         name: `players is playing`,
-        action: createOrder({
-            playerId: 'player1',
+        action: createScheduledAttackOrder({
             minimumDelay: 0,
             orderId: 'order1',
             originCityId: 'city1',
+            playerId: 'player1',
             regimentTemplate: {
                 ...emptyRegimentTemplateState,
             },
@@ -39,11 +39,11 @@ export const createOrderTestScenarios: Scenarios = [
     },
     {
         name: `players is defeated`,
-        action: createOrder({
-            playerId: 'player1',
+        action: createScheduledAttackOrder({
             minimumDelay: 0,
             orderId: 'order1',
             originCityId: 'city1',
+            playerId: 'player1',
             regimentTemplate: {
                 ...emptyRegimentTemplateState,
             },
@@ -63,11 +63,11 @@ export const createOrderTestScenarios: Scenarios = [
     },
     {
         name: `players does not exist`,
-        action: createOrder({
-            playerId: 'player1',
+        action: createScheduledAttackOrder({
             minimumDelay: 0,
             orderId: 'order1',
             originCityId: 'city1',
+            playerId: 'player1',
             regimentTemplate: {
                 ...emptyRegimentTemplateState,
             },

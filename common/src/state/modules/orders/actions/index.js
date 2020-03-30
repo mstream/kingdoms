@@ -1,12 +1,12 @@
 // @flow
 
-import { CREATE_ORDER } from './types';
-import type { CommonCreateOrderAction } from './types';
+import type { CommonCreateScheduledAttackOrderAction } from './types';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from './types';
 import type { CommonActionCreator } from '../../../types';
 
-export const createOrder: CommonActionCreator<CommonCreateOrderAction> = (payload) => {
+export const createScheduledAttackOrder: CommonActionCreator<CommonCreateScheduledAttackOrderAction> = (payload) => {
     return {
-        type: CREATE_ORDER,
+        type: CREATE_SCHEDULED_ATTACK_ORDER,
         payload,
     };
 };

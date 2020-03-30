@@ -16,9 +16,11 @@ import { activeCityViewResourceSelector } from './_impl/active-city-view-resourc
 import { activeCityViewUnitSelector } from './_impl/active-city-view-unit';
 import { isAttackFormValidSelector } from './_impl/is-attack-form-valid';
 import { isAttackFormSubmittingSelector } from './_impl/is-attack-form-submitting';
+import { activeCityViewOrderIdSelector } from './_impl/active-city-view-order-id';
 
 export const clientStateMenuSelectors = {
     activeCityViewBuilding: activeCityViewBuildingSelector,
+    activeCityViewOrderId: activeCityViewOrderIdSelector,
     activeCityViewResource: activeCityViewResourceSelector,
     activeCityViewUnit: activeCityViewUnitSelector,
     activeCityViewTab: activeCityViewTabSelector,

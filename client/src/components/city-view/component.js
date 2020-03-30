@@ -39,12 +39,14 @@ export const Component = (
                 className="bricks-bg absolute w-9/12 min-h-3/4 rounded-sm shadow-lg flex flex-col items-center justify-start overflow-hidden text-2xl bg-gray-800">
                 <CityHeaderComponent/>
                 <CityViewTabsComponent/>
-                <div className="m-auto">
-                    <CityOverviewComponent/>
-                    <CityUnitsComponent/>
-                    <CityResourcesComponent/>
-                    <CityBuildingsComponent/>
-                    <CityOrdersComponent/>
+                <div className="flex flex-col justify-around w-full h-full m-auto">
+                    <div className="flex flex-row justify-around w-full h-full">
+                        <CityBuildingsComponent/>
+                        <CityOrdersComponent/>
+                        <CityOverviewComponent/>
+                        <CityResourcesComponent/>
+                        <CityUnitsComponent/>
+                    </div>
                 </div>
             </div>
         </div>

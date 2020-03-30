@@ -7,4 +7,4 @@ export type CommonStatePlayerStatus =
     | typeof PLAYER_STATUS_DEFEATED
     | typeof PLAYER_STATUS_PLAYING;
 
-export type CommonStatePlayers = $ReadOnly<{ [string]: CommonStatePlayerStatus, ... }>;
+export type CommonStatePlayers = $ReadOnly<{ [string]: CommonStatePlayerStatus }>;

@@ -4,18 +4,18 @@ import { UNIT_PIKEMAN } from '../../../rules/reducer/types';
 import { failure, success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
-import type { CommonCreateOrderAction } from '../../../orders/actions/types';
-import { createOrder } from '../../../orders/actions';
+import type { CommonCreateScheduledAttackOrderAction } from '../../../orders/actions/types';
+import { createScheduledAttackOrder } from '../../../orders/actions';
 import { emptyRegimentTemplateState } from '../../../orders/reducer/state';
 import { emptyCityState } from '../state';
 
 
-export const createOrderTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonCreateOrderAction>> = [
+export const createOrderTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonCreateScheduledAttackOrderAction>> = [
     {
         name: 'accepts a valid order',
-        action: createOrder({
-            minimumDelay: 10,
+        action: createScheduledAttackOrder({
             orderId: 'order1',
+            minimumDelay: 10,
             originCityId: 'city1',
             playerId: 'player1',
             regimentTemplate: {
@@ -54,9 +54,9 @@ export const createOrderTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
     },
     {
         name: 'fails when the origin city does not exist',
-        action: createOrder({
-            minimumDelay: 10,
+        action: createScheduledAttackOrder({
             orderId: 'order1',
+            minimumDelay: 10,
             originCityId: 'city1',
             playerId: 'player1',
             regimentTemplate: {
@@ -81,16 +81,16 @@ export const createOrderTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
         expectedReductionResultCreator: ({ previousLocalState }) => {
             return failure(
                 {
-                    errors: ['the origin city does not exist']
+                    errors: ['the origin city does not exist'],
                 },
             );
         },
     },
     {
         name: 'fails when the origin city does not belong to the player',
-        action: createOrder({
-            minimumDelay: 10,
+        action: createScheduledAttackOrder({
             orderId: 'order1',
+            minimumDelay: 10,
             originCityId: 'city1',
             playerId: 'player1',
             regimentTemplate: {
@@ -119,16 +119,16 @@ export const createOrderTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
         expectedReductionResultCreator: ({ previousLocalState }) => {
             return failure(
                 {
-                    errors: ['the origin city does not belong to the player']
+                    errors: ['the origin city does not belong to the player'],
                 },
             );
         },
     },
     {
         name: 'fails when the target city does not exist',
-        action: createOrder({
-            minimumDelay: 10,
+        action: createScheduledAttackOrder({
             orderId: 'order1',
+            minimumDelay: 10,
             originCityId: 'city1',
             playerId: 'player1',
             regimentTemplate: {
@@ -153,7 +153,7 @@ export const createOrderTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTe
         expectedReductionResultCreator: ({ previousLocalState }) => {
             return failure(
                 {
-                    errors: ['the target city does not exist']
+                    errors: ['the target city does not exist'],
                 },
             );
         },

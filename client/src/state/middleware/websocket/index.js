@@ -29,9 +29,10 @@ export const websocketMiddleware = (
 
     const username = userInfo['cognito:username'];
 
+    const socket = new Socket(`${url}?token=${token}`);
+
     // $FlowFixMe
     const middleware: Middleware<ClientState, ClientAction> = (store: ClientStore) => {
-        const socket = new Socket(`${url}?token=${token}`);
 
         socket.on('connect', createOnConnectHandler({
             store,
@@ -40,8 +41,8 @@ export const websocketMiddleware = (
         }));
 
         socket.on('close', createOnCloseHandler({ store }));
-        socket.on('error', createOnErrorHandler({ store }));
         socket.on('data', createOnDataHandler({ store }));
+        socket.on('error', createOnErrorHandler({ store }));
 
         return next => {
             return action => {

@@ -15,7 +15,7 @@ import { CityTileComponent } from './city-tile';
 import type { ClientStateTile } from '../../state/modules/_children/tiles/reducer/types';
 
 
-const cullObjects = <T: $ReadOnly<{ geometry: Geometry, ... }>>(
+const cullObjects = <T: $ReadOnly<{ geometry: Geometry }>>(
     {
         objects,
         cameraGeometry,
@@ -31,7 +31,7 @@ const cullObjects = <T: $ReadOnly<{ geometry: Geometry, ... }>>(
     });
 };
 
-const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry, ... }>>(
+const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry }>>(
     {
         objects,
         cameraWindowGeometry,

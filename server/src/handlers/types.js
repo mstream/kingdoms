@@ -115,15 +115,15 @@ export type ProxyResult = APIGatewayProxyResult;
 
 export type APIGatewayProxyEvent = $ReadOnly<{
     body: ?string,
-    headers: $ReadOnly<{ [string]: string, ... }>,
-    multiValueHeaders: $ReadOnly<{ [string]: string[], ... }>,
+    headers: $ReadOnly<{ [string]: string }>,
+    multiValueHeaders: $ReadOnly<{ [string]: string[] }>,
     httpMethod: string,
     isBase64Encoded: boolean,
     path: string,
-    pathParameters: ?$ReadOnly<{ [string]: string, ... }>,
-    queryStringParameters: ?$ReadOnly<{ [string]: string, ... }>,
-    multiValueQueryStringParameters: ?$ReadOnly<{ [string]: string[], ... }>,
-    stageVariables: ?$ReadOnly<{ [string]: string, ... }>,
+    pathParameters: ?$ReadOnly<{ [string]: string }>,
+    queryStringParameters: ?$ReadOnly<{ [string]: string }>,
+    multiValueQueryStringParameters: ?$ReadOnly<{ [string]: string[] }>,
+    stageVariables: ?$ReadOnly<{ [string]: string }>,
     requestContext: APIGatewayEventRequestContext,
     resource: string,
 }>;
@@ -153,12 +153,12 @@ export type CustomAuthorizerEvent = $ReadOnly<{
     resource?: string,
     path?: string,
     httpMethod?: string,
-    headers?: { [name: string]: string, ... },
-    multiValueHeaders?: { [name: string]: string[], ... },
-    pathParameters?: ?{ [name: string]: string, ... },
-    queryStringParameters?: ?{ [name: string]: string, ... },
-    multiValueQueryStringParameters?: ?{ [name: string]: string[], ... },
-    stageVariables?: { [name: string]: string, ... },
+    headers?: { [name: string]: string },
+    multiValueHeaders?: { [name: string]: string[] },
+    pathParameters?: ?{ [name: string]: string },
+    queryStringParameters?: ?{ [name: string]: string },
+    multiValueQueryStringParameters?: ?{ [name: string]: string[] },
+    stageVariables?: { [name: string]: string },
     requestContext?: APIGatewayEventRequestContext,
     domainName?: string,
     apiId?: string,
@@ -213,14 +213,14 @@ export type MaybeStatementResource = $ReadOnly<{
 }>;
 
 export type StatementAction =
-    | $ReadOnly<{ Action: string | string[], ... }>
-    | $ReadOnly<{ NotAction: string | string[], ... }>;
+    | $ReadOnly<{ Action: string | string[] }>
+    | $ReadOnly<{ NotAction: string | string[] }>;
 
 export type StatementResource = MaybeStatementPrincipal &
-    ($ReadOnly<{ Resource: string | string[], ... }> | $ReadOnly<{ NotResource: string | string[], ... }>);
+    ($ReadOnly<{ Resource: string | string[] }> | $ReadOnly<{ NotResource: string | string[] }>);
 
 export type StatementPrincipal = MaybeStatementResource &
-    ($ReadOnly<{ Principal: PrincipalValue, ... }> | $ReadOnly<{ NotPrincipal: PrincipalValue, ... }>);
+    ($ReadOnly<{ Principal: PrincipalValue }> | $ReadOnly<{ NotPrincipal: PrincipalValue }>);
 
 export type ScheduledHandler = Handler<ScheduledEvent, void>;
 

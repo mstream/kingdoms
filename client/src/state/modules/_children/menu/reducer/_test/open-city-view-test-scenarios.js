@@ -1,6 +1,5 @@
 // @flow
 
-import { TAB_OVERVIEW } from '../types';
 import { emptyCommonState } from '../../../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../../../common/src/state/modules/cities/reducer/state';
 import type { ClientStateMenuReducerTestScenario } from './types';
@@ -12,7 +11,7 @@ export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTes
     {
         name: 'opens city view',
         action: clientActions.menu.openCityView({
-            cityId: 'city1'
+            cityId: 'city1',
         }),
         previousGlobalState: {
             ...emptyClientState,
@@ -32,7 +31,8 @@ export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTes
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: null,
+                    currentCityId: 'city2',
+                    orderId: 'order1',
                 },
             },
         },
@@ -42,7 +42,7 @@ export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTes
                 cityView: {
                     ...previousLocalState.cityView,
                     currentCityId: 'city1',
-                    tab: TAB_OVERVIEW,
+                    orderId: null,
                 },
             };
         },

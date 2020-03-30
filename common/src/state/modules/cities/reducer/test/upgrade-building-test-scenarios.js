@@ -44,9 +44,7 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
                 buildingUpgradeCosts: {
                     ...emptyCommonState.rules.buildingUpgradeCosts,
                     [BUILDING_PASTURE]: {
-                        // $FlowFixMe
                         [RESOURCE_FOOD]: 200,
-                        // $FlowFixMe
                         [RESOURCE_WOOD]: 200,
                     },
                 },
@@ -151,9 +149,7 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
                 buildingUpgradeCosts: {
                     ...emptyCommonState.rules.buildingUpgradeCosts,
                     [BUILDING_PASTURE]: {
-                        // $FlowFixMe
                         [RESOURCE_FOOD]: 200,
-                        // $FlowFixMe
                         [RESOURCE_WOOD]: 200,
                     },
                 },

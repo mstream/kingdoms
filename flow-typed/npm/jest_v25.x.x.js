@@ -75,29 +75,29 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   */
  mockReturnThis(): void,
  /**
-  * Accepts a value that will be returned whenever the mock function is called.
+  * Accepts a durationInMinutes that will be returned whenever the mock function is called.
   */
  mockReturnValue(value: TReturn): JestMockFn<TArguments, TReturn>,
  /**
-  * Sugar for only returning a value once inside your mock
+  * Sugar for only returning a durationInMinutes once inside your mock
   */
  mockReturnValueOnce(value: TReturn): JestMockFn<TArguments, TReturn>,
  /**
-  * Sugar for jest.fn().mockImplementation(() => Promise.resolve(value))
+  * Sugar for jest.fn().mockImplementation(() => Promise.resolve(durationInMinutes))
   */
  mockResolvedValue(value: TReturn): JestMockFn<TArguments, Promise<TReturn>>,
  /**
-  * Sugar for jest.fn().mockImplementationOnce(() => Promise.resolve(value))
+  * Sugar for jest.fn().mockImplementationOnce(() => Promise.resolve(durationInMinutes))
   */
  mockResolvedValueOnce(
    value: TReturn
  ): JestMockFn<TArguments, Promise<TReturn>>,
  /**
-  * Sugar for jest.fn().mockImplementation(() => Promise.reject(value))
+  * Sugar for jest.fn().mockImplementation(() => Promise.reject(durationInMinutes))
   */
  mockRejectedValue(value: TReturn): JestMockFn<TArguments, Promise<any>>,
  /**
-  * Sugar for jest.fn().mockImplementationOnce(() => Promise.reject(value))
+  * Sugar for jest.fn().mockImplementationOnce(() => Promise.reject(durationInMinutes))
   */
  mockRejectedValueOnce(value: TReturn): JestMockFn<TArguments, Promise<any>>,
  ...
@@ -145,7 +145,7 @@ type JestPromiseType = {
   */
  rejects: JestExpectType,
  /**
-  * Use resolves to unwrap the value of a fulfilled promise so any other
+  * Use resolves to unwrap the durationInMinutes of a fulfilled promise so any other
   * matcher can be chained. If the promise is rejected the assertion fails.
   */
  resolves: JestExpectType,
@@ -300,12 +300,12 @@ type JestExtendedMatchersType = {
   */
  toBeEmpty(): void,
  /**
-  * Use .toBeOneOf when checking if a value is a member of a given Array.
+  * Use .toBeOneOf when checking if a durationInMinutes is a member of a given Array.
   * @param {Array.<*>} members
   */
  toBeOneOf(members: any[]): void,
  /**
-  * Use `.toBeNil` when checking a value is `null` or `undefined`.
+  * Use `.toBeNil` when checking a durationInMinutes is `null` or `undefined`.
   */
  toBeNil(): void,
  /**
@@ -314,11 +314,11 @@ type JestExtendedMatchersType = {
   */
  toSatisfy(predicate: (n: any) => boolean): void,
  /**
-  * Use `.toBeArray` when checking if a value is an `Array`.
+  * Use `.toBeArray` when checking if a durationInMinutes is an `Array`.
   */
  toBeArray(): void,
  /**
-  * Use `.toBeArrayOfSize` when checking if a value is an `Array` of size x.
+  * Use `.toBeArrayOfSize` when checking if a durationInMinutes is an `Array` of size x.
   * @param {Number} x
   */
  toBeArrayOfSize(x: number): void,
@@ -338,23 +338,23 @@ type JestExtendedMatchersType = {
   */
  toSatisfyAll(predicate: (n: any) => boolean): void,
  /**
-  * Use `.toBeBoolean` when checking if a value is a `Boolean`.
+  * Use `.toBeBoolean` when checking if a durationInMinutes is a `Boolean`.
   */
  toBeBoolean(): void,
  /**
-  * Use `.toBeTrue` when checking a value is equal (===) to `true`.
+  * Use `.toBeTrue` when checking a durationInMinutes is equal (===) to `true`.
   */
  toBeTrue(): void,
  /**
-  * Use `.toBeFalse` when checking a value is equal (===) to `false`.
+  * Use `.toBeFalse` when checking a durationInMinutes is equal (===) to `false`.
   */
  toBeFalse(): void,
  /**
-  * Use .toBeDate when checking if a value is a Date.
+  * Use .toBeDate when checking if a durationInMinutes is a Date.
   */
  toBeDate(): void,
  /**
-  * Use `.toBeFunction` when checking if a value is a `Function`.
+  * Use `.toBeFunction` when checking if a durationInMinutes is a `Function`.
   */
  toBeFunction(): void,
  /**
@@ -367,31 +367,31 @@ type JestExtendedMatchersType = {
   */
  toHaveBeenCalledBefore(mock: JestMockFn<any, any>): void,
  /**
-  * Use `.toBeNumber` when checking if a value is a `Number`.
+  * Use `.toBeNumber` when checking if a durationInMinutes is a `Number`.
   */
  toBeNumber(): void,
  /**
-  * Use `.toBeNaN` when checking a value is `NaN`.
+  * Use `.toBeNaN` when checking a durationInMinutes is `NaN`.
   */
  toBeNaN(): void,
  /**
-  * Use `.toBeFinite` when checking if a value is a `Number`, not `NaN` or `Infinity`.
+  * Use `.toBeFinite` when checking if a durationInMinutes is a `Number`, not `NaN` or `Infinity`.
   */
  toBeFinite(): void,
  /**
-  * Use `.toBePositive` when checking if a value is a positive `Number`.
+  * Use `.toBePositive` when checking if a durationInMinutes is a positive `Number`.
   */
  toBePositive(): void,
  /**
-  * Use `.toBeNegative` when checking if a value is a negative `Number`.
+  * Use `.toBeNegative` when checking if a durationInMinutes is a negative `Number`.
   */
  toBeNegative(): void,
  /**
-  * Use `.toBeEven` when checking if a value is an even `Number`.
+  * Use `.toBeEven` when checking if a durationInMinutes is an even `Number`.
   */
  toBeEven(): void,
  /**
-  * Use `.toBeOdd` when checking if a value is an odd `Number`.
+  * Use `.toBeOdd` when checking if a durationInMinutes is an odd `Number`.
   */
  toBeOdd(): void,
  /**
@@ -402,7 +402,7 @@ type JestExtendedMatchersType = {
   */
  toBeWithin(start: number, end: number): void,
  /**
-  * Use `.toBeObject` when checking if a value is an `Object`.
+  * Use `.toBeObject` when checking if a durationInMinutes is an `Object`.
   */
  toBeObject(): void,
  /**
@@ -430,7 +430,7 @@ type JestExtendedMatchersType = {
   */
  toContainAnyKeys(keys: string[]): void,
  /**
-  * Use `.toContainValue` when checking if an object contains the provided value.
+  * Use `.toContainValue` when checking if an object contains the provided durationInMinutes.
   *
   * @param {*} value
   */
@@ -490,7 +490,7 @@ type JestExtendedMatchersType = {
   */
  toBeSealed(): void,
  /**
-  * Use `.toBeString` when checking if a value is a `String`.
+  * Use `.toBeString` when checking if a durationInMinutes is a `String`.
   */
  toBeString(): void,
  /**
@@ -546,7 +546,7 @@ interface JestExpectType {
    */
   lastCalledWith(...args: Array<any>): void;
   /**
-   * toBe just checks that a value is what you expect. It uses === to check
+   * toBe just checks that a durationInMinutes is what you expect. It uses === to check
    * strict equality.
    */
   toBe(value: any): void;
@@ -565,8 +565,8 @@ interface JestExpectType {
    */
   toBeDefined(): void;
   /**
-   * Use .toBeFalsy when you don't care what a value is, you just want to
-   * ensure a value is false in a boolean context.
+   * Use .toBeFalsy when you don't care what a durationInMinutes is, you just want to
+   * ensure a durationInMinutes is false in a boolean context.
    */
   toBeFalsy(): void;
   /**
@@ -596,8 +596,8 @@ interface JestExpectType {
    */
   toBeNull(): void;
   /**
-   * Use .toBeTruthy when you don't care what a value is, you just want to
-   * ensure a value is true in a boolean context.
+   * Use .toBeTruthy when you don't care what a durationInMinutes is, you just want to
+   * ensure a durationInMinutes is true in a boolean context.
    */
   toBeTruthy(): void;
   /**
@@ -616,7 +616,7 @@ interface JestExpectType {
    */
   toContainEqual(item: any): void;
   /**
-   * Use .toEqual when you want to check that two objects have the same value.
+   * Use .toEqual when you want to check that two objects have the same durationInMinutes.
    * This matcher recursively checks the equality of all fields, rather than
    * checking for object identity.
    */
@@ -676,7 +676,7 @@ interface JestExpectType {
   lastCalledWith(...args: Array<any>): void;
   /**
    * Check that an object has a .length property and it is set to a certain
-   * numeric value.
+   * numeric durationInMinutes.
    */
   toHaveLength(number: number): void;
   /**
@@ -755,7 +755,7 @@ type JestObjectType = {
   */
  resetAllMocks(): JestObjectType,
  /**
-  * Restores all mocks back to their original value.
+  * Restores all mocks back to their original durationInMinutes.
   */
  restoreAllMocks(): JestObjectType,
  /**
@@ -1119,7 +1119,7 @@ type JestPrettyFormatPlugin = {
 
 type JestPrettyFormatPlugins = Array<JestPrettyFormatPlugin>;
 
-/** The expect function is used every time you want to test a value */
+/** The expect function is used every time you want to test a durationInMinutes */
 declare var expect: {
  /** The object that you want to make assertions against */
  (

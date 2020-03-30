@@ -5,14 +5,14 @@ import { runTestScenarios, success } from '../../utils';
 import { emptyCommonState } from '../../state';
 import type { CommonDummyAction } from '../../../actions/types';
 import { RESET_STATE } from '../../../actions/types';
-import type { CommonStateOrdersReducerTestScenarios } from './test/types';
+import type { CommonStateOrdersReducerTestScenarios } from './_test/types';
 import { ordersReducer } from './index';
 import { dummy } from '../../../actions';
-import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
-import { CREATE_ORDER } from '../actions/types';
-import { createOrderTestScenarios } from './test/create-order-test-scenarios';
+import { resetStateTestScenarios } from './_test/reset-state-test-scenarios';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from '../actions/types';
+import { createScheduledAttackOrderTestScenarios } from './_test/create-scheduled-attack-order-test-scenarios';
 import { EXECUTE_TIME_STEP } from '../../time/actions';
-import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
+import { executeTimeStepTestScenarios } from './_test/execute-time-step-test-scenarios';
 import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
 
@@ -35,7 +35,7 @@ describe('ordersReducer', () => {
         reducer: ordersReducer,
         reducerKey: 'orders',
         scenarios: {
-            [CREATE_ORDER]: createOrderTestScenarios,
+            [CREATE_SCHEDULED_ATTACK_ORDER]: createScheduledAttackOrderTestScenarios,
             [DUMMY]: [stateInitializationScenario],
             [EXECUTE_TIME_STEP]: executeTimeStepTestScenarios,
             [RESET_STATE]: resetStateTestScenarios,

@@ -30,7 +30,7 @@ describe('createClientStateCommonStateSelector', () => {
         expect(actual).toEqual(expected);
     });
 
-    it('returns desired value using the provided common state selector', () => {
+    it('returns desired durationInMinutes using the provided common state selector', () => {
         const state: ClientState = {
             ...emptyClientState,
             commonState: {

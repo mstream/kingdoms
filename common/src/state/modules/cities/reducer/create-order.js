@@ -3,11 +3,11 @@
 import type { CommonStateCities } from './types';
 import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
-import type { CommonCreateOrderAction } from '../../orders/actions/types';
+import type { CommonCreateScheduledAttackOrderAction } from '../../orders/actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStateCities, CommonCreateOrderAction>;
+type Reducer = CommonStateActionReducer<CommonStateCities, CommonCreateScheduledAttackOrderAction>;
 
-export const createOrderCitiesReducer: Reducer = (
+export const createScheduledAttackOrderCitiesReducer: Reducer = (
     {
         action,
         globalState,

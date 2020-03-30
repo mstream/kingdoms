@@ -176,7 +176,7 @@ declare module '@testing-library/jest-dom/dist/to-have-text-content.js' {
   declare module.exports: $Exports<'@testing-library/jest-dom/dist/to-have-text-content'>;
 }
 declare module '@testing-library/jest-dom/dist/to-have-value.js' {
-  declare module.exports: $Exports<'@testing-library/jest-dom/dist/to-have-value'>;
+  declare module.exports: $Exports<'@testing-library/jest-dom/dist/to-have-durationInMinutes'>;
 }
 declare module '@testing-library/jest-dom/dist/utils.js' {
   declare module.exports: $Exports<'@testing-library/jest-dom/dist/utils'>;

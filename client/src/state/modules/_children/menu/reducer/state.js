@@ -20,6 +20,7 @@ export const emptyMenuState: ClientStateMenu = {
     cityView: {
         building: BUILDING_WAREHOUSE,
         currentCityId: null,
+        orderId: null,
         resource: RESOURCE_FOOD,
         tab: TAB_OVERVIEW,
         unit: UNIT_PEASANT,
@@ -40,6 +41,7 @@ export const initialMenuState = {
     cityView: {
         building: BUILDING_WAREHOUSE,
         currentCityId: null,
+        orderId: null,
         resource: RESOURCE_FOOD,
         tab: TAB_OVERVIEW,
         unit: UNIT_PEASANT,

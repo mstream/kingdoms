@@ -9,10 +9,10 @@ import type {
 } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonCreateCityAction } from '../../cities/actions/types';
-import type { CommonCreateOrderAction } from '../../orders/actions/types';
+import type { CommonCreateScheduledAttackOrderAction } from '../../orders/actions/types';
 import type { CommonResetStateAction } from '../../../actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStatePlayers, CommonCreateOrderAction>;
+type Reducer = CommonStateActionReducer<CommonStatePlayers, CommonCreateScheduledAttackOrderAction>;
 
 export const createOrderPlayersReducer: Reducer = (
     {

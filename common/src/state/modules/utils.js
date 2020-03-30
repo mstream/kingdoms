@@ -27,7 +27,7 @@ export const failure = <S>({ errors }: { errors: $ReadOnlyArray<string> }): Comm
 };
 
 type ActionReducers<S> = $ReadOnly<{
-    [CommonActionKey]: CommonStateActionReducer<S, CommonAction>, ...
+    [CommonActionKey]: CommonStateActionReducer<S, CommonAction>
 }>;
 
 export const unsupportedActionReducer = <S, A: CommonAction>(
@@ -63,7 +63,7 @@ export const createCommonStateReducer = <S>({ actionReducers, initialState }: { 
     };
 };
 
-type Scenarios<S> = { [CommonActionKey]: $ReadOnlyArray<CommonStateReducerTestScenario<S, CommonAction>>, ... };
+type Scenarios<S> = { [CommonActionKey]: $ReadOnlyArray<CommonStateReducerTestScenario<S, CommonAction>> };
 
 type SelectorScenarios = $ReadOnly<{
     [string]: $ReadOnlyArray<CommonStateSelectorTestScenario<mixed>>,

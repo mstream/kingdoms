@@ -58,7 +58,6 @@ export const upgradeBuildingCitiesReducer: Reducer = (
                     [resourceType]: resources[resourceType],
                 };
             },
-            // $FlowFixMe
             {},
         );
 

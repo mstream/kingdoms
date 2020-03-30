@@ -1,26 +1,24 @@
 // @flow
 
 import type { CommonStateOrdersReducerTestScenarios } from './types';
-import type { CommonCreateOrderAction } from '../../actions/types';
+import type { CommonCreateScheduledAttackOrderAction } from '../../actions/types';
 import { emptyCommonState } from '../../../state';
-import { emptyCityState } from '../../../cities/reducer/state';
-import { createOrder } from '../../actions';
+import { createScheduledAttackOrder } from '../../actions';
 import {
-    emptyOrdersState,
-    emptyOrderState,
     emptyRegimentTemplateState,
+    emptyScheduledAttackOrderState,
 } from '../state';
 import { UNIT_PIKEMAN } from '../../../rules/reducer/types';
 import { failure, success } from '../../../utils';
 
-type Scenarios = $ReadOnlyArray<CommonStateOrdersReducerTestScenarios<CommonCreateOrderAction>>;
+type Scenarios = $ReadOnlyArray<CommonStateOrdersReducerTestScenarios<CommonCreateScheduledAttackOrderAction>>;
 
-export const createOrderTestScenarios: Scenarios = [
+export const createScheduledAttackOrderTestScenarios: Scenarios = [
     {
         name: 'creates order',
-        action: createOrder({
-            minimumDelay: 10,
+        action: createScheduledAttackOrder({
             orderId: 'order1',
+            minimumDelay: 10,
             originCityId: 'city1',
             playerId: 'player1',
             regimentTemplate: {
@@ -41,19 +39,27 @@ export const createOrderTestScenarios: Scenarios = [
                 {
                     state: {
                         ...previousLocalState,
-                        'order1': {
-                            authorityId: 'player1',
-                            creationTime: '2000-01-01T01:00:00Z',
-                            minimumDelay: 10,
-                            originCityId: 'city1',
-                            regimentTemplate: {
-                                ...emptyRegimentTemplateState,
-                                [UNIT_PIKEMAN]: {
-                                    from: 10,
-                                    to: 20,
+                        creationTimes: {
+                            'order1': '2000-01-01T01:00:00Z',
+                        },
+                        ownerships: {
+                            'order1': 'player1',
+                        },
+                        items: {
+                            scheduledAttack: {
+                                'order1': {
+                                    minimumDelay: 10,
+                                    originCityId: 'city1',
+                                    regimentTemplate: {
+                                        ...emptyRegimentTemplateState,
+                                        [UNIT_PIKEMAN]: {
+                                            from: 10,
+                                            to: 20,
+                                        },
+                                    },
+                                    targetCityId: 'city2',
                                 },
                             },
-                            targetCityId: 'city2',
                         },
                     },
                 },
@@ -62,9 +68,9 @@ export const createOrderTestScenarios: Scenarios = [
     },
     {
         name: 'fails when order with the same id already exists',
-        action: createOrder({
-            minimumDelay: 10,
+        action: createScheduledAttackOrder({
             orderId: 'order1',
+            minimumDelay: 10,
             originCityId: 'city1',
             playerId: 'player1',
             regimentTemplate: {
@@ -80,10 +86,14 @@ export const createOrderTestScenarios: Scenarios = [
             ...emptyCommonState,
             orders: {
                 ...emptyCommonState.orders,
-                'order1': {
-                    ...emptyOrderState,
-                }
-
+                items: {
+                    ...emptyCommonState.orders.items,
+                    scheduledAttack: {
+                        'order1': {
+                            ...emptyScheduledAttackOrderState,
+                        },
+                    },
+                },
             },
             time: '2000-01-01T01:00:00Z',
         },

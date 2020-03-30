@@ -4,7 +4,7 @@ import { cityIdsOwnedByPlayerSelector } from './_impl/city-ids-owned-by-player';
 import { currentlyViewedCitySelector } from './_impl/currently-viewed-city';
 import { isGameStartingSelector } from './_impl/is-game-starting';
 import { attackingCitySelector } from './_impl/attacking-city';
-import { ordersForViewedCitySelector } from './_impl/orders-for-viewed-city';
+import { scheduledAttackOrdersForViewedCitySelector } from './_impl/scheduled-attack-orders-for-viewed-city';
 import { playerOwnsAnyCitySelector } from './_impl/player-owns-any-city';
 import { nextCityIdSelector } from './_impl/next-city-id';
 import { previousCityIdSelector } from './_impl/previous-city-id';
@@ -34,5 +34,5 @@ export const clientStateSelectors = {
     nextCityId: nextCityIdSelector,
     playerOwnsAnyCity: playerOwnsAnyCitySelector,
     previousCityId: previousCityIdSelector,
-    ordersForViewedCity: ordersForViewedCitySelector,
+    scheduledAttackOrdersForViewedCity: scheduledAttackOrdersForViewedCitySelector,
 };

@@ -1,11 +1,11 @@
 // @flow
 
 import type { CommonStateTime } from './types';
-import { calculateTimeDelta } from '../../../../util';
 import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import { validateTime } from '../../../../validators';
 import type { CommonExecuteTimeStepAction } from '../actions';
+import { calculateTimeDeltaInSeconds } from '../../../../time';
 
 type Reducer = CommonStateActionReducer<CommonStateTime, CommonExecuteTimeStepAction>;
 
@@ -24,7 +24,7 @@ export const executeTimeStepTimeReducer: Reducer = (
         return failure({ errors: timeValidationErrors });
     }
 
-    const timeDelta = calculateTimeDelta({
+    const timeDelta = calculateTimeDeltaInSeconds({
         fromTime: globalState.time,
         toTime: time,
     });

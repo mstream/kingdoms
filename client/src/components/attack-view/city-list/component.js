@@ -8,6 +8,12 @@ import type { CommonStateCity } from '../../../../../common/src/state/modules/ci
 
 export const testId = 'attack-view-city-list';
 
+type CityWithDistance = {
+    city: CommonStateCity,
+    cityId: string,
+    distance: number
+};
+
 export const Component = (
     {
         attackingCityId,
@@ -17,31 +23,28 @@ export const Component = (
         selectAttackViewAttackingCity,
     }: Props,
 ) => {
-    const playerCitiesWithDistance: $ReadOnlyArray<{
-        city: CommonStateCity,
-        cityId: string,
-        distance: number
-    }> = cityIdsOwnedByPlayer
-        .reduce(
-            (playerCitiesWithDistance, cityId: string) => {
-                return [
-                    ...playerCitiesWithDistance,
-                    {
-                        city: cities[cityId],
-                        cityId,
-                        distance: distancesToAttackedCity[cityId],
-                    },
-                ];
-            },
-            [],
-        ).sort(
-            (cityWithDistance1, cityWithDistance2) => {
+    const playerCitiesWithDistance: $ReadOnlyArray<CityWithDistance> =
+        cityIdsOwnedByPlayer
+            .reduce(
+                (playerCitiesWithDistance, cityId: string) => {
+                    return [
+                        ...playerCitiesWithDistance,
+                        {
+                            city: cities[cityId],
+                            cityId,
+                            distance: distancesToAttackedCity[cityId],
+                        },
+                    ];
+                },
+                [],
+            ).sort(
+            (cityWithDistance1: CityWithDistance, cityWithDistance2: CityWithDistance) => {
                 return cityWithDistance1.distance - cityWithDistance2.distance;
             },
         );
 
     const cityRows = playerCitiesWithDistance.map(
-        (cityWithDistance: { city: CommonStateCity, cityId: string, distance: number }) => {
+        (cityWithDistance: CityWithDistance) => {
             const { city, cityId, distance } = cityWithDistance;
             const isSelected = cityId === attackingCityId;
 

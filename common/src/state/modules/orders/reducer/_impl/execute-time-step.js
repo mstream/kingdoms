@@ -1,10 +1,10 @@
 // @flow
 
-import { calculateTimeDelta } from '../../../../util';
-import type { CommonStateActionReducer } from '../../types';
-import { failure, success } from '../../utils';
-import type { CommonExecuteTimeStepAction } from '../../time/actions';
-import type { CommonStateOrders } from './types';
+import type { CommonStateActionReducer } from '../../../types';
+import { failure, success } from '../../../utils';
+import type { CommonExecuteTimeStepAction } from '../../../time/actions';
+import type { CommonStateOrders } from '../types';
+import { calculateTimeDeltaInSeconds } from '../../../../../time';
 
 type Reducer = CommonStateActionReducer<CommonStateOrders, CommonExecuteTimeStepAction>;
 
@@ -16,7 +16,7 @@ export const executeTimeStepOrdersReducer: Reducer = (
         localState,
     },
 ) => {
-    const timeDelta = calculateTimeDelta({
+    const timeDelta = calculateTimeDeltaInSeconds({
         fromTime: globalState.time,
         toTime: action.payload.time,
     });

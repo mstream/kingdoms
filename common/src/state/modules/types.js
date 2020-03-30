@@ -43,6 +43,6 @@ export type CommonStateSelectorTestScenario<T> = $ReadOnly<{
     expectedValue: T,
 }>;
 
-export type CommonStateSelectors = $ReadOnly<{[string]: CommonStateSelector<mixed>, ...}>;
+export type CommonStateSelectors = $ReadOnly<{[string]: CommonStateSelector<mixed>}>;
 
 export const CommonStateType = (reify: Type<CommonState>);

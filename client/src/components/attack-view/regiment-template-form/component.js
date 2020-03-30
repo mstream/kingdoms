@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState } from 'react';
+import React from 'react';
 import type { Props } from './props';
 import { unitsOrder, unitVisuals } from '../../../assets/images/units';
 import { numberToQuantityString } from '../../../../../common/src/util';
@@ -124,7 +124,7 @@ export const Component = (
 
         return (
             <div key={unitType} className="flex flex-row flex-1 p-1 my-1 mx-2">
-                <div className="h-10 w-10 m-1">
+                <div className="m-1">
                     <p className="text-sm text-center font-medium">
                         {numberToQuantityString({ value: unitQuantity })}
                     </p>

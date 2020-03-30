@@ -1,18 +1,13 @@
 // @flow
 
-import type { CommonStateRegimentTemplate } from '../reducer/types';
+
 import type { BasePlayerAction } from '../../../../types/actions';
+import type { CommonStateScheduledAttackOrder } from '../reducer/types';
 
+export const CREATE_SCHEDULED_ATTACK_ORDER: 'CREATE_SCHEDULED_ATTACK_ORDER' = 'CREATE_SCHEDULED_ATTACK_ORDER';
 
-export const CREATE_ORDER: 'CREATE_ORDER' = 'CREATE_ORDER';
-
-type Payload = $ReadOnly<{
-    minimumDelay: number,
+export type CommonCreateScheduledAttackOrderAction = BasePlayerAction<typeof CREATE_SCHEDULED_ATTACK_ORDER, $ReadOnly<{
+    ...CommonStateScheduledAttackOrder,
     orderId: string,
-    originCityId: string,
     playerId: string,
-    regimentTemplate: CommonStateRegimentTemplate,
-    targetCityId: string,
-}>;
-
-export type CommonCreateOrderAction = BasePlayerAction<typeof CREATE_ORDER, Payload>;
+}>>;

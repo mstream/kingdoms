@@ -2,7 +2,7 @@
 
 
 import { emptyCommonState } from '../../../state';
-import { emptyOrderState } from '../../reducer/state';
+import { emptyScheduledAttackOrderState } from '../../reducer/state';
 import type { CommonStateOrders } from '../../reducer/types';
 import type { CommonStateSelectorTestScenario } from '../../../types';
 
@@ -14,20 +14,30 @@ export const ordersSelectorTestScenarios: Scenarios = [
         state: {
             ...emptyCommonState,
             orders: {
-                'order1': {
-                    ...emptyOrderState,
-                },
-                'order2': {
-                    ...emptyOrderState,
+                ...emptyCommonState.orders,
+                items: {
+                    scheduledAttack: {
+                        'order1': {
+                            ...emptyScheduledAttackOrderState,
+                        },
+                        'order2': {
+                            ...emptyScheduledAttackOrderState,
+                        },
+                    },
                 },
             },
         },
         expectedValue: {
-            'order1': {
-                ...emptyOrderState,
-            },
-            'order2': {
-                ...emptyOrderState,
+            ...emptyCommonState.orders,
+            items: {
+                scheduledAttack: {
+                    'order1': {
+                        ...emptyScheduledAttackOrderState,
+                    },
+                    'order2': {
+                        ...emptyScheduledAttackOrderState,
+                    },
+                },
             },
         },
     },

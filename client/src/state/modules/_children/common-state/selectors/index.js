@@ -9,6 +9,7 @@ import { ordersSelector } from './_impl/orders';
 import { rulesSelector } from './_impl/rules';
 import { worldSelector } from './_impl/world';
 import { unitStatsSelector } from './_impl/unit-stats';
+import { timeSelector } from './_impl/time';
 
 export const clientStateCommonStateSelectors = {
     cities: citiesSelector,
@@ -18,6 +19,7 @@ export const clientStateCommonStateSelectors = {
     isLoaded: isLoadedSelector,
     orders: ordersSelector,
     rules: rulesSelector,
+    time: timeSelector,
     unitStats: unitStatsSelector,
     world: worldSelector,
 };

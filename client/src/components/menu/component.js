@@ -24,7 +24,7 @@ export const Component = ({ playerName }: Props) => {
                     <div
                         className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
                         onClick={
-                            (event) => {
+                            (event: MouseEvent<HTMLDivElement>) => {
                                 signOut();
                             }
                         }>

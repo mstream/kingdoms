@@ -32,7 +32,8 @@ import { updateAttackViewMinimumDelayTestScenarios } from './_test/update-attack
 import { emptyClientState } from '../../../../state';
 import { runReducerTestScenarios } from '../../../../utils';
 import {
-    REQUEST_CITY_CREATION, REQUEST_ORDER_CREATION,
+    REQUEST_CITY_CREATION,
+    REQUEST_ORDER_CREATION,
     UPDATE_STATE,
 } from '../../common-state/actions/types';
 import {
@@ -42,6 +43,7 @@ import {
     OPEN_CITY_VIEW,
     SELECT_ATTACK_VIEW_ATTACKING_CITY,
     SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_ORDERS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
     SELECT_CITY_VIEW_UNITS_TAB,
@@ -50,6 +52,7 @@ import {
 } from '../actions/types';
 import { clientActions } from '../../../actions';
 import { requestOrderCreationTestScenarios } from './_test/request-order-creation-test-scenarios';
+import { selectCityViewOrdersTabTestScenarios } from './_test/select-city-view-orders-tab-test-scenarios';
 
 
 const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDummyAction> = {
@@ -101,6 +104,7 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDumm
             cityView: {
                 building: BUILDING_WAREHOUSE,
                 currentCityId: null,
+                orderId: null,
                 tab: TAB_OVERVIEW,
                 unit: UNIT_PEASANT,
                 resource: RESOURCE_FOOD,
@@ -128,6 +132,7 @@ describe('menuReducer', () => {
             [SELECT_ATTACK_VIEW_ATTACKING_CITY]: selectAttackViewAttackingCityTestScenarios,
             [SELECT_CITY_VIEW_TAB]: selectCityViewTabTestScenarios,
             [SELECT_CITY_VIEW_BUILDINGS_TAB]: selectCityViewBuildingsTabTestScenarios,
+            [SELECT_CITY_VIEW_ORDERS_TAB]: selectCityViewOrdersTabTestScenarios,
             [SELECT_CITY_VIEW_RESOURCES_TAB]: selectCityViewResourcesTabTestScenarios,
             [SELECT_CITY_VIEW_UNITS_TAB]: selectCityViewUnitsTabTestScenarios,
             [UPDATE_ATTACK_VIEW_MINIMUM_DELAY]: updateAttackViewMinimumDelayTestScenarios,

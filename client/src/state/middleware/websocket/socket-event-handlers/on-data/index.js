@@ -8,7 +8,7 @@ import {
     CREATE_CITY,
     UPGRADE_BUILDING,
 } from '../../../../../../../common/src/state/modules/cities/actions/types';
-import { CREATE_ORDER } from '../../../../../../../common/src/state/modules/orders/actions/types';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from '../../../../../../../common/src/state/modules/orders/actions/types';
 import { EXECUTE_TIME_STEP } from '../../../../../../../common/src/state/modules/time/actions';
 import {
     DUMMY,
@@ -52,7 +52,7 @@ const serverResponseHandlers = {
     [ABANDON_CITY]: handleAbandonCity,
     [CHANGE_CITY_NAME]: handleChangeCityName,
     [CREATE_CITY]: handlerCreateCity,
-    [CREATE_ORDER]: handlerCreateOrder,
+    [CREATE_SCHEDULED_ATTACK_ORDER]: handlerCreateOrder,
     [DUMMY]: handleDummy,
     [GET_CURRENT_STATE]: handleGetCurrentState,
     [EXECUTE_TIME_STEP]: handleExecuteTimeStep,

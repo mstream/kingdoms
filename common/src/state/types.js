@@ -12,8 +12,8 @@ import {
     CREATE_CITY,
     UPGRADE_BUILDING,
 } from './modules/cities/actions/types';
-import type { CommonCreateOrderAction } from './modules/orders/actions/types';
-import { CREATE_ORDER } from './modules/orders/actions/types';
+import type { CommonCreateScheduledAttackOrderAction } from './modules/orders/actions/types';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from './modules/orders/actions/types';
 import type { CommonExecuteTimeStepAction } from './modules/time/actions';
 import { EXECUTE_TIME_STEP } from './modules/time/actions';
 import type {
@@ -27,7 +27,7 @@ export type CommonActionKey =
     | typeof ABANDON_CITY
     | typeof CHANGE_CITY_NAME
     | typeof CREATE_CITY
-    | typeof CREATE_ORDER
+    | typeof CREATE_SCHEDULED_ATTACK_ORDER
     | typeof DUMMY
     | typeof EXECUTE_TIME_STEP
     | typeof GET_CURRENT_STATE
@@ -38,7 +38,7 @@ export type CommonPlayerAction =
     | CommonAbandonCityAction
     | CommonChangeCityNameAction
     | CommonCreateCityAction
-    | CommonCreateOrderAction
+    | CommonCreateScheduledAttackOrderAction
     | CommonGetCurrentStateAction
     | CommonUpgradeBuildingAction;
 

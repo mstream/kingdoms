@@ -15,7 +15,7 @@ import {
 } from '../actions/types';
 import { abandonCityTestScenarios } from './test/abandon-city-test-scenarios';
 import { changeCityNameTestScenarios } from './test/change-city-name-test-scenarios';
-import { CREATE_ORDER } from '../../orders/actions/types';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from '../../orders/actions/types';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
 import { EXECUTE_TIME_STEP } from '../../time/actions';
 import { executeTimeStepTestScenarios } from './test/execute-time-step-test-scenarios';
@@ -45,7 +45,7 @@ describe('citiesReducer', () => {
         scenarios: {
             [ABANDON_CITY]: abandonCityTestScenarios,
             [CHANGE_CITY_NAME]: changeCityNameTestScenarios,
-            [CREATE_ORDER]: createOrderTestScenarios,
+            [CREATE_SCHEDULED_ATTACK_ORDER]: createOrderTestScenarios,
             [DUMMY]: [stateInitializationScenario],
             [EXECUTE_TIME_STEP]: executeTimeStepTestScenarios,
             [RESET_STATE]: resetStateTestScenarios,

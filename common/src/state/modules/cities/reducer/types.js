@@ -16,5 +16,5 @@ export type CommonStateCity = $ReadOnly<{
     units: CommonStateUnits,
 }>;
 
-export type CommonStateCities = $ReadOnly<{ [string]: CommonStateCity, ... }>;
+export type CommonStateCities = $ReadOnly<{ [string]: CommonStateCity }>;
 

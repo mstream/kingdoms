@@ -61,7 +61,7 @@ describe('AttackViewSchedulerFormComponent', () => {
         await expect(queryByText('As soon as possible')).toBeInTheDocument();
     });
 
-    test('displays a scheduled delay - 2 minutes delay', async () => {
+    test('displays a scheduled delay - 2 durationInMinutes delay', async () => {
         const state: ClientState = {
             ...emptyClientState,
             menu: {
@@ -87,7 +87,7 @@ describe('AttackViewSchedulerFormComponent', () => {
         await expect(queryByText('2m')).toBeInTheDocument();
     });
 
-    test('displays a scheduled delay - 2 hours and two minutes delay', async () => {
+    test('displays a scheduled delay - 2 hours and two durationInMinutes delay', async () => {
         const state: ClientState = {
             ...emptyClientState,
             menu: {

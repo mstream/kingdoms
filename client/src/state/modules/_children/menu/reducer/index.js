@@ -12,7 +12,8 @@ import { selectAttackViewAttackingCityReducer } from './_impl/select-attack-view
 import { selectCityViewResourcesTabMenuReducer } from './_impl/select-city-view-resources-tab';
 import { selectCityViewBuildingsTabMenuReducer } from './_impl/select-city-view-buildings-tab';
 import {
-    REQUEST_CITY_CREATION, REQUEST_ORDER_CREATION,
+    REQUEST_CITY_CREATION,
+    REQUEST_ORDER_CREATION,
     UPDATE_STATE,
 } from '../../common-state/actions/types';
 import {
@@ -22,6 +23,7 @@ import {
     OPEN_CITY_VIEW,
     SELECT_ATTACK_VIEW_ATTACKING_CITY,
     SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_ORDERS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
     SELECT_CITY_VIEW_UNITS_TAB,
@@ -34,6 +36,7 @@ import { createClientStateReducer } from '../../../../utils';
 import { initialClientState } from '../../../../state';
 import { selectCityViewTabMenuReducer } from './_impl/select-city-view-tab';
 import { requestOrderCreationMenuReducer } from './_impl/request-order-creation';
+import { selectCityViewOrdersTabMenuReducer } from './_impl/select-city-view-orders-tab';
 
 
 export const menuReducer = createClientStateReducer<ClientStateMenu>({
@@ -47,6 +50,7 @@ export const menuReducer = createClientStateReducer<ClientStateMenu>({
         [SELECT_ATTACK_VIEW_ATTACKING_CITY]: selectAttackViewAttackingCityReducer,
         [SELECT_CITY_VIEW_TAB]: selectCityViewTabMenuReducer,
         [SELECT_CITY_VIEW_BUILDINGS_TAB]: selectCityViewBuildingsTabMenuReducer,
+        [SELECT_CITY_VIEW_ORDERS_TAB]: selectCityViewOrdersTabMenuReducer,
         [SELECT_CITY_VIEW_RESOURCES_TAB]: selectCityViewResourcesTabMenuReducer,
         [SELECT_CITY_VIEW_UNITS_TAB]: selectCityViewUnitTabMenuReducer,
         [UPDATE_ATTACK_VIEW_MINIMUM_DELAY]: updateAttackViewMinimumDelayReducer,

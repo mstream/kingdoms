@@ -19,6 +19,7 @@ import { activeCityViewUnitSelectorTestScenarios } from './_test/active-city-vie
 import { isAttackFormValidSelectorTestScenarios } from './_test/is-attack-form-valid-test-scenarios';
 import { isAttackFormSubmittingSelector } from './_impl/is-attack-form-submitting';
 import { isAttackFormSubmittingSelectorTestScenarios } from './_test/is-attack-form-submitting-test-scenarios';
+import { activeCityViewOrderIdSelectorTestScenarios } from './_test/active-city-view-order-id-test-scenarios';
 
 describe('clientStateMenuSelectors', () => {
         runClientStateSelectorsTestScenarios({
@@ -27,6 +28,8 @@ describe('clientStateMenuSelectors', () => {
             scenarios: {
                 // $FlowFixMe
                 activeCityViewBuilding: activeCityViewBuildingSelectorTestScenarios,
+                // $FlowFixMe
+                activeCityViewOrderId: activeCityViewOrderIdSelectorTestScenarios,
                 // $FlowFixMe
                 activeCityViewResource: activeCityViewResourceSelectorTestScenarios,
                 // $FlowFixMe

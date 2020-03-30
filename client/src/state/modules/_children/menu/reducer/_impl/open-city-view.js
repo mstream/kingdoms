@@ -46,6 +46,7 @@ export const openCityViewMenuReducer: Reducer = (
         cityView: {
             ...localState.cityView,
             currentCityId: action.payload.cityId,
+            orderId: null,
         },
     };
 };

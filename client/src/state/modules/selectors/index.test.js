@@ -5,7 +5,7 @@ import { runClientStateSelectorsTestScenarios } from '../../utils';
 import { cityIdsOwnedByPlayersSelectorTestScenarios } from './_test/city-ids-owned-by-player-test-scenarios';
 import { currentlyViewedCitySelectorTestScenarios } from './_test/currently-viewed-city-test-scenarios';
 import { isGameStartingSelectorTestScenarios } from './_test/is-game-starting-scenarios';
-import { ordersForViewedCitySelectorTestScenarios } from './_test/orders-for-viewed-city-test-scenarios';
+import { scheduledAttackOrdersForViewedCitySelectorTestScenarios } from './_test/scheduled-attack-orders-for-viewed-city-test-scenarios';
 import { playerOwnsAnyCitySelectorTestScenarios } from './_test/player-owns-any-city-test-scenarios';
 import { attackedCitySelectorTestScenarios } from './_test/attacked-city-test-scenarios';
 import { attackingCitySelectorTestScenarios } from './_test/attacking-city-test-scenarios';
@@ -38,7 +38,7 @@ describe('clientStateSelectors', () => {
             // $FlowFixMe
             previousCityId: previousCityIdTestScenarios,
             // $FlowFixMe
-            ordersForViewedCity: ordersForViewedCitySelectorTestScenarios,
+            scheduledAttackOrdersForViewedCity: scheduledAttackOrdersForViewedCitySelectorTestScenarios,
         },
     });
 });

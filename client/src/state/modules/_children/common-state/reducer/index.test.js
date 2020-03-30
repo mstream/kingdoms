@@ -16,7 +16,6 @@ const stateInitializationScenario: ClientStateCommonStateReducerTestScenario<Cli
     action: clientActions.dummy.dummy(),
     previousGlobalState: {
         ...emptyClientState,
-        // $FlowFixMe
         commonState: undefined,
     },
     expectedLocalStateCreator: ({ previousLocalState }) => {

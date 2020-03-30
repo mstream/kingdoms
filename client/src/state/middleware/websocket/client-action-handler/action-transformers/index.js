@@ -21,13 +21,13 @@ import {
     upgradeBuilding,
 } from '../../../../../../../common/src/state/modules/cities/actions';
 import { generateId } from '../../../../../../../common/src/util';
-import type { CommonCreateOrderAction } from '../../../../../../../common/src/state/modules/orders/actions/types';
+import type { CommonCreateScheduledAttackOrderAction } from '../../../../../../../common/src/state/modules/orders/actions/types';
 import type {
     CommonChangeCityNameAction,
     CommonCreateCityAction,
     CommonUpgradeBuildingAction,
 } from '../../../../../../../common/src/state/modules/cities/actions/types';
-import { createOrder } from '../../../../../../../common/src/state/modules/orders/actions';
+import { createScheduledAttackOrder } from '../../../../../../../common/src/state/modules/orders/actions';
 
 type ActionTransformer<+A: ClientAction, +B: CommonAction> =
     ($ReadOnly<{ clientAction: A, username: string }>) => CommonAction;
@@ -69,20 +69,20 @@ const transformRequestCityCreation: ActionTransformer<ClientRequestCityCreationA
     });
 };
 
-const transformRequestOrderCreation: ActionTransformer<ClientRequestOrderCreationAction, CommonCreateOrderAction> = (
+const transformRequestOrderCreation: ActionTransformer<ClientRequestOrderCreationAction, CommonCreateScheduledAttackOrderAction> = (
     {
         clientAction,
         username,
     },
 ) => {
-    return createOrder({
+    return createScheduledAttackOrder({
         ...clientAction.payload,
         orderId: generateId(),
         playerId: username,
     });
 };
 
-export const actionTransformers: { [ClientActionKey]: ActionTransformer<ClientAction, CommonAction>, ... } = {
+export const actionTransformers: { [ClientActionKey]: ActionTransformer<ClientAction, CommonAction> } = {
     [REQUEST_BUILDING_UPGRADE]: transformRequestBuildingUpgrade,
     [REQUEST_CITY_NAME_CHANGE]: transformRequestCityNameChange,
     [REQUEST_CITY_CREATION]: transformRequestCityCreation,

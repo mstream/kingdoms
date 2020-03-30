@@ -15,13 +15,15 @@ import {
 import type {
     ClientRequestBuildingUpgradeAction,
     ClientRequestCityCreationAction,
-    ClientRequestCityNameChangeAction, ClientRequestOrderCreationAction,
+    ClientRequestCityNameChangeAction,
+    ClientRequestOrderCreationAction,
     ClientUpdateStateAction,
 } from './modules/_children/common-state/actions/types';
 import {
     REQUEST_BUILDING_UPGRADE,
     REQUEST_CITY_CREATION,
-    REQUEST_CITY_NAME_CHANGE, REQUEST_ORDER_CREATION,
+    REQUEST_CITY_NAME_CHANGE,
+    REQUEST_ORDER_CREATION,
     UPDATE_STATE,
 } from './modules/_children/common-state/actions/types';
 import type {
@@ -31,6 +33,7 @@ import type {
     ClientOpenCityViewAction,
     ClientSelectAttackViewAttackingCityAction,
     ClientSelectCityViewBuildingsTabAction,
+    ClientSelectCityViewOrdersTabAction,
     ClientSelectCityViewResourceTabAction,
     ClientSelectCityViewTabAction,
     ClientSelectCityViewUnitsTabAction,
@@ -43,7 +46,7 @@ import {
     OPEN_ATTACK_VIEW,
     OPEN_CITY_VIEW,
     SELECT_ATTACK_VIEW_ATTACKING_CITY,
-    SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_BUILDINGS_TAB, SELECT_CITY_VIEW_ORDERS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
     SELECT_CITY_VIEW_UNITS_TAB,
@@ -76,6 +79,7 @@ export type ClientActionKey =
     | typeof REQUEST_ORDER_CREATION
     | typeof SELECT_ATTACK_VIEW_ATTACKING_CITY
     | typeof SELECT_CITY_VIEW_BUILDINGS_TAB
+    | typeof SELECT_CITY_VIEW_ORDERS_TAB
     | typeof SELECT_CITY_VIEW_RESOURCES_TAB
     | typeof SELECT_CITY_VIEW_UNITS_TAB
     | typeof SELECT_CITY_VIEW_TAB
@@ -100,6 +104,7 @@ export type ClientAction =
     | ClientRequestOrderCreationAction
     | ClientSelectAttackViewAttackingCityAction
     | ClientSelectCityViewBuildingsTabAction
+    | ClientSelectCityViewOrdersTabAction
     | ClientSelectCityViewResourceTabAction
     | ClientSelectCityViewUnitsTabAction
     | ClientSelectCityViewTabAction
@@ -139,18 +144,17 @@ export type ClientStateSelectorTestScenario<T> = $ReadOnly<{
     expectedValue: T,
 }>;
 
-export type ClientStateSelectors = $ReadOnly<{ [string]: ClientStateSelector<mixed>, ... }>;
+export type ClientStateSelectors = $ReadOnly<{ [string]: ClientStateSelector<mixed> }>;
 
 // $FlowFixMe
 export type ClientStore = Store<ClientState, ClientAction, Dispatch<ClientAction>>
 
 export type ActionReducers<S> = $ReadOnly<{
-    [ClientActionKey]: ClientStateActionReducer<S, ClientAction>, ...
+    [ClientActionKey]: ClientStateActionReducer<S, ClientAction>
 }>;
 
-export type ReducerScenarios<S> = { [ClientActionKey]: $ReadOnlyArray<ClientStateReducerTestScenario<S, ClientAction>>, ... };
+export type ReducerScenarios<S> = { [ClientActionKey]: $ReadOnlyArray<ClientStateReducerTestScenario<S, ClientAction>> };
 
 export type SelectorScenarios = $ReadOnly<{
     [string]: $ReadOnlyArray<ClientStateSelectorTestScenario<mixed>>,
-    ...
 }>;

@@ -31,6 +31,7 @@ export type ClientStateAttackView = $ReadOnly<{
 export type ClientStateCityView = $ReadOnly<{
     building: CommonStateBuildingKey,
     currentCityId: ?string,
+    orderId: ?string,
     resource: CommonStateResourceKey,
     tab: ClientStateCityViewTab,
     unit: CommonStateUnitKey,

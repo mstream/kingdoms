@@ -17,7 +17,7 @@ import {
     CREATE_CITY,
     UPGRADE_BUILDING,
 } from '../../../../common/src/state/modules/cities/actions/types';
-import { CREATE_ORDER } from '../../../../common/src/state/modules/orders/actions/types';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from '../../../../common/src/state/modules/orders/actions/types';
 
 const apiGateway = createApiGatewayClient();
 const redis = createRedisClient({ config });
@@ -117,7 +117,7 @@ export const handler: ProxyHandler = async (event, context) => {
             case UPGRADE_BUILDING:
             case CHANGE_CITY_NAME:
             case CREATE_CITY:
-            case CREATE_ORDER: {
+            case CREATE_SCHEDULED_ATTACK_ORDER: {
                 const response = await executeAction({
                     action,
                     environment: config.environment,

@@ -6,4 +6,4 @@ export type BaseAction<T, P> = $ReadOnly<{
     payload: P,
 }>;
 
-export type BasePlayerAction<T, P: $ReadOnly<{ playerId: string, ... }>> = BaseAction<T, P>;
+export type BasePlayerAction<T, P: $ReadOnly<{ playerId: string }>> = BaseAction<T, P>;

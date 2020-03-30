@@ -19,9 +19,7 @@ const createAllowPolicy = (
         principalId: username,
         policyDocument: {
             Version: `2012-10-17`,
-            // $FlowFixMe
             Statement: [
-                // $FlowFixMe
                 {
                     Action: `execute-api:Invoke`,
                     Effect: `Allow`,

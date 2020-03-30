@@ -2,9 +2,9 @@
 
 
 import type {
-    CommonStateOrder,
     CommonStateOrders,
     CommonStateRegimentTemplate,
+    CommonStateScheduledAttackOrder,
 } from './types';
 import {
     UNIT_ARCHER,
@@ -27,9 +27,7 @@ export const emptyRegimentTemplateState: CommonStateRegimentTemplate = {
     [UNIT_SWORDSMAN]: emptyRange,
 };
 
-export const emptyOrderState: CommonStateOrder = {
-    authorityId: '',
-    creationTime: '',
+export const emptyScheduledAttackOrderState: CommonStateScheduledAttackOrder = {
     minimumDelay: 0,
     originCityId: '',
     regimentTemplate: {
@@ -38,4 +36,10 @@ export const emptyOrderState: CommonStateOrder = {
     targetCityId: '',
 };
 
-export const emptyOrdersState: CommonStateOrders = {};
+export const emptyOrdersState: CommonStateOrders = {
+    creationTimes: {},
+    items: {
+        scheduledAttack: {},
+    },
+    ownerships: {},
+};

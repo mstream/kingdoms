@@ -10,7 +10,7 @@ import { RESET_STATE } from '../../../actions/types';
 import { playersReducer } from './index';
 import { resetStateTestScenarios } from './test/reset-state-test-scenarios';
 import { CREATE_CITY } from '../../cities/actions/types';
-import { CREATE_ORDER } from '../../orders/actions/types';
+import { CREATE_SCHEDULED_ATTACK_ORDER } from '../../orders/actions/types';
 import { createCityTestScenarios } from './test/create-city-test-scenarios';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
 import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
@@ -35,7 +35,7 @@ describe('playersReducer', () => {
         reducerKey: 'players',
         scenarios: {
             [CREATE_CITY]: createCityTestScenarios,
-            [CREATE_ORDER]: createOrderTestScenarios,
+            [CREATE_SCHEDULED_ATTACK_ORDER]: createOrderTestScenarios,
             [DUMMY]: [stateInitializationScenario],
             [RESET_STATE]: resetStateTestScenarios,
         },

@@ -47,13 +47,13 @@ export type CommonStateUnitKey =
     | typeof UNIT_PIKEMAN
     | typeof UNIT_SWORDSMAN;
 
-export type CommonStateResources = $ReadOnly<{ [CommonStateResourceKey]: number, ... }>;
+export type CommonStateResources = $ReadOnly<{ [CommonStateResourceKey]: number }>;
 
-export type CommonStateBuildingUpgradeCost = $ReadOnly<{ [CommonStateResourceKey]: number, ... }>;
+export type CommonStateBuildingUpgradeCost = $ReadOnly<{ [CommonStateResourceKey]: number }>;
 
-export type CommonStateDamage = $ReadOnly<{ [CommonStateArmorKey]: number, ... }>;
+export type CommonStateDamage = $ReadOnly<{ [CommonStateArmorKey]: number }>;
 
-export type CommonStateBuildingUpgradeCosts = $ReadOnly<{ [CommonStateBuildingKey]: CommonStateBuildingUpgradeCost, ... }>;
+export type CommonStateBuildingUpgradeCosts = $ReadOnly<{ [CommonStateBuildingKey]: CommonStateBuildingUpgradeCost }>;
 
 export type CommonStateUnitStat = $ReadOnly<{
     armor: CommonStateArmorKey,
@@ -63,7 +63,7 @@ export type CommonStateUnitStat = $ReadOnly<{
     speed: number,
 }>;
 
-export type CommonStateUnitStats = $ReadOnly<{ [CommonStateUnitKey]: CommonStateUnitStat, ... }>;
+export type CommonStateUnitStats = $ReadOnly<{ [CommonStateUnitKey]: CommonStateUnitStat }>;
 
 export type CommonStateRules = $ReadOnly<{
     baseCityCapacity: number,
@@ -85,8 +85,8 @@ export type CommonStateBuilding = $ReadOnly<{
     tier: number,
 }>;
 
-export type CommonStateBuildings = $ReadOnly<{ [CommonStateBuildingKey]: CommonStateBuilding, ... }>;
+export type CommonStateBuildings = $ReadOnly<{ [CommonStateBuildingKey]: CommonStateBuilding }>;
 
-export type CommonStateUnits = $ReadOnly<{ [CommonStateUnitKey]: number, ... }>;
+export type CommonStateUnits = $ReadOnly<{ [CommonStateUnitKey]: number }>;
 
 export const CommonStateUnitKeyType = (reify: Type<CommonStateUnitKey>);

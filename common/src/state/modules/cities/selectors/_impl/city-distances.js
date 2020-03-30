@@ -25,7 +25,6 @@ export const citiesDistancesSelector: CommonStateSelector<CitiesDistances> =
 
                             return {
                                 ...distances,
-                                // $FlowFixMe
                                 [otherCityId]: distance,
                             };
                         },

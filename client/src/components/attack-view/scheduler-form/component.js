@@ -2,8 +2,8 @@
 
 import React from 'react';
 import type { Props } from './props';
-import { numberToDurationString } from '../../../../../common/src/util';
 import classNames from 'classnames';
+import { minutesToDurationString } from '../../../../../common/src/time';
 
 export const testId = 'attack-view-scheduler-form';
 
@@ -47,7 +47,7 @@ export const Component = (
                         onChange={onChange}
                     />
                     <div className={durationClassName}>
-                        {numberToDurationString({ value: minimumDelay })}
+                        {minutesToDurationString({ durationInMinutes: minimumDelay })}
                     </div>
                 </div>
 

@@ -29,9 +29,9 @@ export const createGeometryStyle = ({
     };
 };
 
-export const getRefValue = <T>({ ref }: { ref: { current: ?T, ... } }): T => {
+export const getRefValue = <T>({ ref }: { ref: { current: ?T } }): T => {
     if (ref.current == null) {
-        throw Error('ref value not set');
+        throw Error('ref durationInMinutes not set');
     }
     return ref.current;
 };

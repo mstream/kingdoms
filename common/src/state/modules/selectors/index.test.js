@@ -8,7 +8,6 @@ import { commonStateSelectors } from './index';
 
 describe('commonStateCitiesSelectors', () => {
     runCommonStateSelectorsTestScenarios({
-        // $FlowFixMe
         moduleSelectors: commonStateSelectors,
         scenarios: {
             // $FlowFixMe

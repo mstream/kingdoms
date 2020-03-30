@@ -38,7 +38,6 @@ import { emptyOrdersState } from './modules/orders/reducer/state';
 import { emptyPlayersState } from './modules/players/reducer/state';
 import { PLAYER_STATUS_PLAYING } from './modules/players/reducer/types';
 
-
 export const initialCommonState: CommonState = {
     cities: {
         ...emptyCitiesState,
@@ -292,7 +291,13 @@ export const testCommonState: CommonState = {
             ownerId: 'test3',
         },
     },
-    orders: {},
+    orders: {
+        creationTimes: {},
+        items: {
+            scheduledAttack: {},
+        },
+        ownerships: {},
+    },
     players: {
         test1: PLAYER_STATUS_PLAYING,
         test2: PLAYER_STATUS_PLAYING,

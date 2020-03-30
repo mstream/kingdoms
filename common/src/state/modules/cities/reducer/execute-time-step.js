@@ -8,7 +8,6 @@ import {
     convertChangeRateToDelta,
 } from '../../../index';
 import type { CommonStateCities } from './types';
-import { calculateTimeDelta } from '../../../../util';
 import type { CommonStateUnits } from '../../rules/reducer/types';
 import {
     RESOURCE_FOOD,
@@ -18,6 +17,7 @@ import {
 import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonExecuteTimeStepAction } from '../../time/actions';
+import { calculateTimeDeltaInSeconds } from '../../../../time';
 
 type Reducer = CommonStateActionReducer<CommonStateCities, CommonExecuteTimeStepAction>;
 
@@ -29,7 +29,7 @@ export const executeTimeStepCitiesReducer: Reducer = (
     },
 ) => {
 
-    const timeDelta = calculateTimeDelta({
+    const timeDelta = calculateTimeDeltaInSeconds({
         fromTime: globalState.time,
         toTime: action.payload.time,
     });

@@ -1,10 +1,29 @@
-const variables = {
-    CLIENT_ID: 'db45f04jpvg84h71ij9u46lgg',
-    COGNITO_URL: 'https://dev-kingdoms.auth.eu-west-1.amazoncognito.com',
-    USER_POOL_ID: 'eu-west-1_51o0hoJwW',
-    WEB_SOCKET_URI: 'wss://55oob8wdab.execute-api.eu-west-1.amazonaws.com/Stage',
+const createDevVariables = () => {
+    const devVariables = require('./server/dist/dev/service.js');
+
+    return {
+        APP_URL: devVariables['WebsiteUrl'],
+        CLIENT_ID: devVariables['UserPoolClientId'],
+        COGNITO_URL: devVariables['AuthWebsiteUrl'],
+        USER_POOL_ID: devVariables['UserPoolId'],
+        WEB_SOCKET_URL: devVariables['WebSocketUrl'],
+    };
+};
+
+
+const createProdVariables = () => {
+    const prodVariables = require('./server/dist/prod/service.js');
+
+    return {
+        APP_URL: prodVariables['WebsiteUrl'],
+        CLIENT_ID: prodVariables['UserPoolClientId'],
+        COGNITO_URL: prodVariables['AuthWebsiteUrl'],
+        USER_POOL_ID: prodVariables['UserPoolId'],
+        WEB_SOCKET_URL: prodVariables['WebSocketUrl'],
+    };
 };
 
 module.exports = {
-    variables
+    createDevVariables,
+    createProdVariables,
 };

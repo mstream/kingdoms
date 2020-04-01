@@ -169,6 +169,7 @@ const confirmUsersSignUp = async (
 };
 
 export const createTestUsers = async ({ config, exec }: { config: Config, exec: (string) => Promise<void> }) => {
+    console.info(`creating test users in '${config.userPoolId}' user pool`);
     const usernames = await signUpUsers({ config, exec });
     await confirmUsersSignUp({ config, exec, usernames });
 };

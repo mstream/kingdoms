@@ -14,10 +14,16 @@ Parameters:
 
     Environment:
         Type: 'String'
+        AllowedValues:
+            - 'dev'
+            - 'prod'
 
     StageName:
         Type: 'String'
         Default: 'Stage'
+
+    WebContentTtl:
+        Type: 'Number'
 
     NodeRuntime:
         Type: 'String'
@@ -145,7 +151,7 @@ Resources:
             MemorySize: 1024
             Runtime: 'nodejs12.x'
             Layers:
-                - 'arn:aws:lambda:eu-west-1:235338379175:layer:common:1'
+                - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -352,13 +358,16 @@ Resources:
                 DefaultRootObject: index.html
                 DefaultCacheBehavior:
                     Compress: 'true'
+                    MinTTL: !Sub '${WebContentTtl}'
+                    MaxTTL: !Sub '${WebContentTtl}'
+                    DefaultTTL: !Sub '${WebContentTtl}'
                     ForwardedValues:
                         QueryString: true
                     TargetOriginId: 's3-origin'
                     ViewerProtocolPolicy: 'redirect-to-https'
                 Origins:
                     -   Id: 's3-origin'
-                        DomainName: !Sub '${WebsiteBucket}.s3.amazonaws.com'
+                        DomainName: !Sub '${WebsiteBucket}.s3-${AWS::Region}.amazonaws.com'
                         S3OriginConfig:
                             OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${OriginAccessIdentity}'
 
@@ -399,7 +408,7 @@ Outputs:
 
     WebSocketUrl:
         Description: 'The WSS Protocol URL'
-        Value: !Sub 'wss://${WebSocket}.execute-api.${AWS::Region}.amdazonaws.com/${Stage}'
+        Value: !Sub 'wss://${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${Stage}'
 
     WebsiteUrl:
         Description: 'The website URL'

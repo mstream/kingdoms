@@ -14,7 +14,7 @@ export const Component = ({ playerName }: Props) => {
         <div data-testid={testId}
              className="wood2-bg relative flex flex-row items-end justify-start h-20 w-full z-10 shadow-lg bg-gray-500 text-gray-100">
             <div className="group ml-1 cursor-pointer">
-                <div className="h-full p-2">
+                <div data-testid="user-menu-button" className="h-full p-2">
                     <i className="icofont icofont-ui-user mr-1"/>
                     {playerName}
                     <i className="icofont icofont-caret-down"/>
@@ -22,6 +22,7 @@ export const Component = ({ playerName }: Props) => {
                 <div
                     className="absolute invisible group-hover:visible text-gray-100">
                     <div
+                        data-testid="user-menu-sign-out-button"
                         className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
                         onClick={
                             (event: MouseEvent<HTMLDivElement>) => {

@@ -2,13 +2,31 @@
 
 import globals from '../globals';
 
-export const config = {
-    appUrl: `http://localhost:8080`,
-    clientId: globals.variables.CLIENT_ID,
-    cognitoUrl: globals.variables.COGNITO_URL,
-    userPoolId: globals.variables.USER_POOL_ID,
-    webScoketUri: globals.variables.WEB_SOCKET_URI,
+
+const env = process.env.NODE_ENV;
+
+if (env == null) {
+    throw Error(`missing NODE_ENV environmental variable`);
+}
+
+const globalVariablesCreators = {
+    dev: globals.createDevVariables,
+    prod: globals.createProdVariables,
 };
 
+const globalVariablesCreator = globalVariablesCreators[env];
+
+if (globalVariablesCreator == null) {
+    throw Error(`unsupported environment '${env}'`);
+}
+
+const globalVariables = globalVariablesCreator();
 
 
+export const config = {
+    ...globalVariables,
+    credentials: {
+        password: 'Test_123',
+        username: 'test1',
+    },
+};

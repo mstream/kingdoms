@@ -9,13 +9,13 @@ const selectors = {
 };
 
 
-const openWithToken = async (
+const open = async (
     {
         t,
         token,
     }: {
         t: TestController,
-        token: ?string
+        token?: string
     },
 ): Promise<void> => {
     const url = token == null ?
@@ -32,11 +32,11 @@ const signOut = async (
         t: TestController,
     },
 ): Promise<void> => {
-    await t.setTestSpeed(0.01).hover(selectors.userMenuButton).hover(selectors.signOutButton).click(selectors.signOutButton);
+    await t.hover(selectors.userMenuButton).click(selectors.signOutButton);
 };
 
 const actions = {
-    openWithToken,
+    open,
     signOut,
 };
 

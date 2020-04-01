@@ -2,34 +2,28 @@
 
 import Socket from 'simple-websocket';
 import type { Middleware } from 'redux';
-import jwt from 'jsonwebtoken';
 import type { ClientAction, ClientState, ClientStore } from '../../types';
 import { createOnCloseHandler } from './socket-event-handlers/on-close';
 import { createOnDataHandler } from './socket-event-handlers/on-data';
 import { createOnConnectHandler } from './socket-event-handlers/on-connect';
 import { createOnErrorHandler } from './socket-event-handlers/on-error';
 import { clientActionHandler } from './client-action-handler';
+import type { IdTokenInfo } from '../../../types';
 
 
 export const websocketMiddleware = (
     {
-        token,
+        location,
+        tokenInfo,
         url,
     }: {
-        token: string,
+        location: Location,
+        tokenInfo: IdTokenInfo,
         url: string
     },
 ): Middleware<ClientState, ClientAction> => {
 
-    const userInfo = jwt.decode(token);
-
-    if (userInfo == null || userInfo['cognito:username'] == null) {
-        throw Error(`cannot retrieve the username from the token`);
-    }
-
-    const username = userInfo['cognito:username'];
-
-    const socket = new Socket(`${url}?token=${token}`);
+    const socket = new Socket(`${url}?token=${tokenInfo.token}`);
 
     // $FlowFixMe
     const middleware: Middleware<ClientState, ClientAction> = (store: ClientStore) => {
@@ -37,7 +31,7 @@ export const websocketMiddleware = (
         socket.on('connect', createOnConnectHandler({
             store,
             socket,
-            username,
+            username: tokenInfo.username,
         }));
 
         socket.on('close', createOnCloseHandler({ store }));
@@ -49,7 +43,7 @@ export const websocketMiddleware = (
                 clientActionHandler({
                     action,
                     socket,
-                    username,
+                    username: tokenInfo.username,
                 });
 
                 return next(action);

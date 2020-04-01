@@ -2,7 +2,7 @@
 
 import React from 'react';
 import type { Props } from './props';
-import { signOut } from '../../util';
+import { redirectToLoginPage } from '../../util';
 
 export const testId = 'menu';
 
@@ -26,7 +26,7 @@ export const Component = ({ playerName }: Props) => {
                         className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
                         onClick={
                             (event: MouseEvent<HTMLDivElement>) => {
-                                signOut({ location: window.location });
+                                redirectToLoginPage({ location: window.location });
                             }
                         }>
                         <i className="icofont icofont-ui-power"/>

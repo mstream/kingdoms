@@ -7,13 +7,22 @@ import { websocketMiddleware } from './middleware/websocket';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { config } from '../config';
 import type { ClientAction, ClientState, ClientStore } from './types';
+import type { IdTokenInfo } from '../types';
 
 
 const composeEnhancers = composeWithDevTools({
     trace: true,
 });
 
-export const createClientStore = ({ token }: { token: string }): ClientStore => {
+export const createClientStore = (
+    {
+        location,
+        tokenInfo,
+    }: {
+        location: Location,
+        tokenInfo: IdTokenInfo
+    },
+): ClientStore => {
     return createStore<ClientState,
         ClientAction,
         Dispatch<ClientAction>>(
@@ -21,7 +30,8 @@ export const createClientStore = ({ token }: { token: string }): ClientStore => 
         composeEnhancers(
             applyMiddleware(
                 websocketMiddleware({
-                    token,
+                    location,
+                    tokenInfo,
                     url: config.wsUrl,
                 }),
             ),

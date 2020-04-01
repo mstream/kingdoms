@@ -5,6 +5,8 @@ import type { Vector } from '../../common/src/vector';
 import { multipleVectors } from '../../common/src/vector';
 import { config } from './config';
 import queryString from 'query-string';
+import type { IdTokenInfo } from './types';
+import jwt from 'jsonwebtoken';
 
 export type GeometryStyle = $ReadOnly<{
     height: number,
@@ -45,19 +47,33 @@ export const tileVectorToPixelVector = ({ tileVector }: { tileVector: Vector }):
     });
 };
 
-export const signOut = ({ location }: { location: Location }): void => {
+export const redirectToLoginPage = ({ location }: { location: Location }): void => {
+    console.log('redirecting to the authentication website');
     location.replace(config.cognitoSignOutUrl);
 };
 
-export const getIdToken = ({ location }: { location: Location }): ?string => {
+export const getIdTokenInfo = ({ location }: { location: Location }): ?IdTokenInfo => {
     const locationHash = queryString.parse(location.hash);
-    const idToken = locationHash['id_token'];
+    const token = locationHash['id_token'];
 
-    if (typeof idToken !== 'string') {
-        console.log('no id token: redirecting to the authentication website');
-        location.replace(config.cognitoSignInUrl);
+    if (typeof token !== 'string') {
+        console.log('no id token');
+        redirectToLoginPage({ location });
         return null;
-    } else {
-        return idToken;
     }
+
+    const userInfo = jwt.decode(token);
+
+    if (userInfo == null || userInfo['cognito:username'] == null) {
+        console.log(`cannot retrieve the username from the token`);
+        redirectToLoginPage({ location });
+        return;
+    }
+
+    const username = userInfo['cognito:username'];
+
+    return {
+        token,
+        username,
+    };
 };

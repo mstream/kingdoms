@@ -19,15 +19,41 @@ module.exports = {
         checkTypesOnly: {
             script: 'flow check',
         },
+        testOnly: {
+            remote: {
+                dev: {
+                    script: 'env NODE_ENV=dev testcafe chrome tests/scenarios/*.js',
+                },
+                prod: {
+                    script: 'env NODE_ENV=prod testcafe chrome tests/scenarios/*.js',
+                },
+            },
+        },
         test: {
-            script: npsUtils.series.nps(
-                'checkDepsOnly',
-                'checkTypesOnly',
-                'common.test',
-                'tools.test',
-                'server.test',
-                'client.test',
-            ),
+            local: {
+                script: npsUtils.series.nps(
+                    'checkDepsOnly',
+                    'checkTypesOnly',
+                    'common.test',
+                    'tools.test',
+                    'server.test',
+                    'client.test',
+                ),
+            },
+            remote: {
+                dev: {
+                    script: npsUtils.series.nps(
+                        'deploy.dev',
+                        'testOnly.remote.dev',
+                    ),
+                },
+                prod: {
+                    script: npsUtils.series.nps(
+                        'deploy.prod',
+                        'testOnly.remote.prod',
+                    ),
+                },
+            },
         },
         deploy: {
             dev: {

@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 // $FlowFixMe
 import * as serviceWorker from './service-worker';
 import { createClientStore } from './state/store';
-import { getIdToken } from './util';
+import { getIdTokenInfo } from './util';
 
 
 const rootElement = document.getElementById('root');
@@ -17,11 +17,17 @@ if (rootElement == null) {
     throw Error('no root element in the document');
 }
 
-const token = getIdToken({ location: window.location });
+const tokenInfo = getIdTokenInfo({ location: window.location });
 
-if (token != null) {
+if (tokenInfo != null) {
+    const store = createClientStore({
+        location: window.location,
+        tokenInfo,
+    });
+
     ReactDOM.render(
-        <Provider store={createClientStore({ token })}>
+        <Provider
+            store={store}>
             <AppComponent/>
         </Provider>,
         rootElement,

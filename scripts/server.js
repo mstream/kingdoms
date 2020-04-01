@@ -4,7 +4,7 @@ const npsUtils = require(`nps-utils`);
 
 module.exports = {
     testOnly: `jest --config server/jest.config.js server`,
-    cleanOnly: `rimraf server/.aws-sam && rimraf server/dist`,
+    cleanOnly: `rimraf server/.aws-sam`,
     buildOnly: {
         dev: `env TARGET=server NODE_ENV=dev webpack`,
         prod: `env TARGET=server NODE_ENV=prod webpack`,

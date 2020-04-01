@@ -1,5 +1,6 @@
 // @flow
 
+// $FlowFixMe
 import globals from '../globals';
 
 
@@ -22,9 +23,12 @@ if (globalVariablesCreator == null) {
 
 const globalVariables = globalVariablesCreator();
 
-
 export const config = {
-    ...globalVariables,
+    appUrl: globalVariables.APP_URL,
+    clientId: globalVariables.CLIENT_ID,
+    cognitoUrl: globalVariables.COGNITO_URL,
+    userPoolId: globalVariables.USER_POOL_ID,
+    webScoketUri: globalVariables.WEB_SOCKET_URI,
     credentials: {
         password: 'Test_123',
         username: 'test1',

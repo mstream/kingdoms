@@ -22,18 +22,16 @@ module.exports = {
         testOnly: {
             remote: {
                 dev: {
-                    script: 'env NODE_ENV=dev testcafe chrome tests/scenarios/*.js',
+                    script: 'env NODE_ENV=dev testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
                 },
                 prod: {
-                    script: 'env NODE_ENV=prod testcafe chrome tests/scenarios/*.js',
+                    script: 'env NODE_ENV=prod testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
                 },
             },
         },
         test: {
             local: {
                 script: npsUtils.series.nps(
-                    'checkDepsOnly',
-                    'checkTypesOnly',
                     'common.test',
                     'tools.test',
                     'server.test',

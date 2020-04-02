@@ -27,6 +27,8 @@ module.exports = {
     },
     test: {
         script: npsUtils.series.nps(
+            'checkDepsOnly',
+            'checkTypesOnly',
             'tools.testOnly',
         ),
     },

@@ -23,7 +23,7 @@ export const websocketMiddleware = (
     },
 ): Middleware<ClientState, ClientAction> => {
 
-    const socket = new Socket(`${url}?token=${tokenInfo.token}`);
+    let socket = new Socket(`${url}?token=${tokenInfo.token}`);
 
     // $FlowFixMe
     const middleware: Middleware<ClientState, ClientAction> = (store: ClientStore) => {
@@ -36,7 +36,7 @@ export const websocketMiddleware = (
 
         socket.on('close', createOnCloseHandler({ store }));
         socket.on('data', createOnDataHandler({ store }));
-        socket.on('error', createOnErrorHandler({ store }));
+        socket.on('error', createOnErrorHandler({ location, store }));
 
         return next => {
             return action => {

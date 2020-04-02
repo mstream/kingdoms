@@ -1,13 +1,8 @@
 // @flow
 
-import { Selector, TestController } from 'testcafe';
+import { TestController } from 'testcafe';
+import { selectors } from './selectors';
 
-
-const selectors = {
-    passwordInput: Selector('#signInFormPassword').nth(1),
-    signInButton: Selector('input[type="submit"]').nth(1),
-    usernameInput: Selector('#signInFormUsername').nth(1),
-};
 
 const signIn = async (
     {
@@ -25,11 +20,7 @@ const signIn = async (
     await t.click(selectors.signInButton);
 };
 
-const actions = {
-    signIn,
-};
 
-export const authModel = {
-    actions,
-    selectors,
+export const actions = {
+    signIn,
 };

@@ -1,12 +1,8 @@
 // @flow
 
-import { config } from '../config';
-import { Selector, TestController } from 'testcafe';
-
-const selectors = {
-    userMenuButton: Selector('*[data-testid="user-menu-button"]'),
-    signOutButton: Selector('*[data-testid="user-menu-sign-out-button"]'),
-};
+import { TestController } from 'testcafe';
+import { selectors } from './selectors';
+import { config } from '../../config';
 
 
 const open = async (
@@ -22,6 +18,8 @@ const open = async (
         config.appUrl :
         `${config.appUrl}/#id_token=${token}`;
 
+    console.info(`navigating to the app page using url: ${url}`);
+
     await t.navigateTo(url);
 };
 
@@ -35,11 +33,8 @@ const signOut = async (
     await t.hover(selectors.userMenuButton).click(selectors.signOutButton);
 };
 
-const actions = {
+
+export const actions = {
     open,
     signOut,
-};
-
-export const appModel = {
-    actions,
 };

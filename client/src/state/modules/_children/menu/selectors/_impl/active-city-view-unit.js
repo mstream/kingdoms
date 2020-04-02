@@ -1,7 +1,6 @@
 // @flow
 
 
-import type { ClientStateCityViewTab } from '../../reducer/types';
 import type { CommonStateUnitKey } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientStateSelector } from '../../../../../types';
 

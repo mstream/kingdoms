@@ -2,7 +2,7 @@
 
 import { createRedisClient } from '../../clients/redis';
 import type { ProxyHandler } from '../types';
-import { addConnection } from '../../connectors/database';
+import { database } from '../../connectors/database';
 import { config } from '../../config';
 
 const redis = createRedisClient({ config });
@@ -25,7 +25,7 @@ export const handler: ProxyHandler = async (event, context) => {
             throw Error(`connectionId is missing`);
         }
 
-        await addConnection({
+        await database.addConnection({
             connectionId,
             environment: config.environment,
             redis,

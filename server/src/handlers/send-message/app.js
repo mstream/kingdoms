@@ -5,7 +5,7 @@ import { createApiGatewayClient } from '../../clients/api-gateway';
 import { executeAction, sendResponse } from '../../util';
 import { parseJson } from '../../../../common/src/util';
 import type { ProxyHandler } from '../types';
-import { getState } from '../../connectors/database';
+import { database } from '../../connectors/database';
 import type { ServerResponse } from '../../../../common/src/types';
 import { CommonPlayerActionType } from '../../../../common/src/types';
 import { validateCommonStateType } from '../../../../common/src/validators';
@@ -100,10 +100,11 @@ export const handler: ProxyHandler = async (event, context) => {
 
         switch (action.type) {
             case GET_CURRENT_STATE: {
-                const state = await getState({
+                const state = await database.getState({
                     environment: config.environment,
                     redis,
                     validateState: validateCommonStateType,
+                    worldId: 'default',
                 });
                 await sendResponseBackToClient({
                     response: {
@@ -128,10 +129,11 @@ export const handler: ProxyHandler = async (event, context) => {
             }
             default: {
                 console.error(`unsupported request type: ${action.type}`);
-                const state = await getState({
+                const state = await database.getState({
                     environment: config.environment,
                     redis,
                     validateState: validateCommonStateType,
+                    worldId: 'default',
                 });
                 await sendResponseBackToClient({
                     response: {

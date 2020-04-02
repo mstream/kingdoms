@@ -6,7 +6,7 @@ import {
     initialCommonState,
     testCommonState,
 } from '../../../../common/src/state';
-import { setState } from '../../connectors/database';
+import { database } from '../../connectors/database';
 import { config } from '../../config';
 
 const states = {
@@ -47,10 +47,11 @@ export const handler: ProxyHandler = async (event, context) => {
 
     try {
         console.info(`forcing state reset`);
-        await setState({
+        await database.setState({
             environment: config.environment,
             redis,
             state,
+            worldId: 'default',
         });
         return requestAccepted;
     } catch (error) {

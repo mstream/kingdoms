@@ -3,7 +3,7 @@
 import verror from 'verror';
 import type { ApiGateway } from './clients/api-gateway';
 import type { Redis } from './clients/redis';
-import { casState } from './connectors/database';
+import { database } from './connectors/database';
 import { sendServerResponse } from './connectors/api';
 import { rootReducer } from '../../common/src/state/modules/root';
 import type { ServerResponse } from '../../common/src/types';
@@ -14,17 +14,19 @@ import type { CommonAction } from '../../common/src/state/types';
 
 const optimisticLockingAttempts = 3;
 
-export const sendResponse = async ({
-                                       apiGateway,
-                                       redis,
-                                       connectionId,
-                                       response,
-                                   }: {
-    apiGateway: ApiGateway,
-    redis: Redis,
-    connectionId: string,
-    response: ServerResponse,
-}): Promise<void> => {
+export const sendResponse = async (
+    {
+        apiGateway,
+        redis,
+        connectionId,
+        response,
+    }: {
+        apiGateway: ApiGateway,
+        redis: Redis,
+        connectionId: string,
+        response: ServerResponse,
+    },
+): Promise<void> => {
     try {
         console.group(`sending response`);
         console.info(`sending response back to the api gateway`);
@@ -69,11 +71,12 @@ export const executeAction = async (
                 return rootReducer({ action, state });
             };
 
-            const casResult = await casState({
+            const casResult = await database.casState({
                 environment,
                 redis,
                 stateTransformer,
                 validateState: validateCommonStateType,
+                worldId: 'default',
             });
 
             if (casResult.errors.length > 0) {

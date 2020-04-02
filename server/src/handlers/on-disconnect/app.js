@@ -2,7 +2,7 @@
 
 import { createRedisClient } from '../../clients/redis';
 import type { ProxyHandler } from '../types';
-import { removeConnection } from '../../connectors/database';
+import { database } from '../../connectors/database';
 import { config } from '../../config';
 
 const requestExecutionError = {
@@ -25,7 +25,7 @@ export const handler: ProxyHandler = async (event, context) => {
             throw Error(`connectionId is missing`);
         }
 
-        await removeConnection({
+        await database.removeConnection({
             connectionId,
             environment: config.environment,
             redis,

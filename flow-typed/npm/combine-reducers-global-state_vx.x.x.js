@@ -14,7 +14,7 @@
  */
 
 declare module 'combine-reducers-global-state' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,33 +23,33 @@ declare module 'combine-reducers-global-state' {
  * needed.
  */
 declare module 'combine-reducers-global-state/es' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'combine-reducers-global-state/lib' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'combine-reducers-global-state/src' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'combine-reducers-global-state/es/index' {
-  declare module.exports: $Exports<'combine-reducers-global-state/es'>;
+    declare module.exports: $Exports<'combine-reducers-global-state/es'>;
 }
 declare module 'combine-reducers-global-state/es/index.js' {
-  declare module.exports: $Exports<'combine-reducers-global-state/es'>;
+    declare module.exports: $Exports<'combine-reducers-global-state/es'>;
 }
 declare module 'combine-reducers-global-state/lib/index' {
-  declare module.exports: $Exports<'combine-reducers-global-state/lib'>;
+    declare module.exports: $Exports<'combine-reducers-global-state/lib'>;
 }
 declare module 'combine-reducers-global-state/lib/index.js' {
-  declare module.exports: $Exports<'combine-reducers-global-state/lib'>;
+    declare module.exports: $Exports<'combine-reducers-global-state/lib'>;
 }
 declare module 'combine-reducers-global-state/src/index' {
-  declare module.exports: $Exports<'combine-reducers-global-state/src'>;
+    declare module.exports: $Exports<'combine-reducers-global-state/src'>;
 }
 declare module 'combine-reducers-global-state/src/index.js' {
-  declare module.exports: $Exports<'combine-reducers-global-state/src'>;
+    declare module.exports: $Exports<'combine-reducers-global-state/src'>;
 }

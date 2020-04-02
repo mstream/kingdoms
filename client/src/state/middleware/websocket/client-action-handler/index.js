@@ -6,17 +6,15 @@ import type { CommonAction } from '../../../../../../common/src/state/types';
 import { actionTransformers } from './action-transformers';
 import { sendMessage } from '../utils';
 
-export const clientActionHandler = (
-    {
-        action,
-        socket,
-        username,
-    }: {
-        action: ClientAction,
-        socket: Socket,
-        username: string,
-    },
-) => {
+export const clientActionHandler = ({
+    action,
+    socket,
+    username,
+}: {
+    action: ClientAction,
+    socket: Socket,
+    username: string,
+}) => {
     const actionTransformer = actionTransformers[action.type];
 
     if (actionTransformer == null) {

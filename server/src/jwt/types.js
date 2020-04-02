@@ -1,6 +1,5 @@
 // @flow
 
-
 type UserProfile = $ReadOnly<{
     name: string,
 }>;

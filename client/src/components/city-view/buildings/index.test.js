@@ -22,7 +22,6 @@ import { clientActions } from '../../../state/modules/actions';
 
 const mockStore = configureStore([]);
 
-
 describe('CityResourcesComponent', () => {
     test('does not display when tab is not the buildings', async () => {
         const state: ClientState = {
@@ -38,7 +37,7 @@ describe('CityResourcesComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -49,7 +48,7 @@ describe('CityResourcesComponent', () => {
 
         const { queryByRole } = render(
             <Provider store={store}>
-                <CityBuildingsComponent/>
+                <CityBuildingsComponent />
             </Provider>,
         );
 
@@ -71,7 +70,7 @@ describe('CityResourcesComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -82,7 +81,7 @@ describe('CityResourcesComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityBuildingsComponent/>
+                <CityBuildingsComponent />
             </Provider>,
         );
 
@@ -96,8 +95,10 @@ describe('CityResourcesComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clientActions.menu.selectCityViewBuildingsTab({
-            buildingType: BUILDING_WAREHOUSE,
-        }));
+        expect(actions[0]).toEqual(
+            clientActions.menu.selectCityViewBuildingsTab({
+                buildingType: BUILDING_WAREHOUSE,
+            }),
+        );
     });
 });

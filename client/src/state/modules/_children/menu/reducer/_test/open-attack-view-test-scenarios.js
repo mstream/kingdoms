@@ -7,7 +7,9 @@ import type { ClientOpenAttackViewAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientOpenAttackViewAction>> = [
+export const openAttackViewTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientOpenAttackViewAction>,
+> = [
     {
         name: 'opens attack view',
         action: clientActions.menu.openAttackView({
@@ -21,11 +23,11 @@ export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerT
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
@@ -50,4 +52,3 @@ export const openAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerT
         },
     },
 ];
-

@@ -8,7 +8,6 @@ import {
 } from '../../rules/reducer/state';
 import type { CommonStateCities, CommonStateCity } from './types';
 
-
 export const emptyCityState: CommonStateCity = {
     buildings: emptyBuildingsState,
     location: zeroVector,

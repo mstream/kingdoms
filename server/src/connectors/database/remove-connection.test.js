@@ -21,14 +21,9 @@ describe('removeConnection', () => {
             redis,
         });
 
-        expect(redis.srem.mock.calls).toEqual(
-            [
-                [
-                    'connection-ids:env1',
-                    'connection1',
-                ],
-            ],
-        );
+        expect(redis.srem.mock.calls).toEqual([
+            ['connection-ids:env1', 'connection1'],
+        ]);
     });
 
     it('fails on redis remove failure', async () => {
@@ -50,13 +45,8 @@ describe('removeConnection', () => {
 
         await expect(actualPromise).rejects.toBeTruthy();
 
-        expect(redis.srem.mock.calls).toEqual(
-            [
-                [
-                    'connection-ids:env1',
-                    'connection1',
-                ],
-            ],
-        );
+        expect(redis.srem.mock.calls).toEqual([
+            ['connection-ids:env1', 'connection1'],
+        ]);
     });
 });

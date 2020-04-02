@@ -5,7 +5,9 @@ import { TAB_ORDERS } from '../../reducer/types';
 import type { ClientStateCityViewTab } from '../../reducer/types';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<ClientStateCityViewTab>>
+type Scenarios = $ReadOnlyArray<
+    ClientStateSelectorTestScenario<ClientStateCityViewTab>,
+>;
 
 export const activeCityViewTabSelectorTestScenarios: Scenarios = [
     {

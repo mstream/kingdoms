@@ -8,21 +8,28 @@ import type { TypeValidator } from '../../../../common/src/validators/types';
 import { createStateKey } from './utils';
 import { getState } from './get-state';
 
-
-export const casState = async (
-    {
-        environment,
-        redis,
-        stateTransformer,
-        validateState,
-        worldId,
-    }: {
-        environment: string,
-        redis: Redis,
-        stateTransformer: ({ state: CommonState }) => $ReadOnly<{ errors: $ReadOnlyArray<string>, state: ?CommonState }>,
-        validateState: TypeValidator<CommonState>,
-        worldId: string,
-    }): Promise<$ReadOnly<{ errors: $ReadOnlyArray<string>, previousState: CommonState, savedState: ?CommonState }>> => {
+export const casState = async ({
+    environment,
+    redis,
+    stateTransformer,
+    validateState,
+    worldId,
+}: {
+    environment: string,
+    redis: Redis,
+    stateTransformer: ({ state: CommonState }) => $ReadOnly<{
+        errors: $ReadOnlyArray<string>,
+        state: ?CommonState,
+    }>,
+    validateState: TypeValidator<CommonState>,
+    worldId: string,
+}): Promise<
+    $ReadOnly<{
+        errors: $ReadOnlyArray<string>,
+        previousState: CommonState,
+        savedState: ?CommonState,
+    }>,
+> => {
     try {
         const stateKey = createStateKey({ environment, worldId });
         await redis.watch(stateKey);
@@ -34,9 +41,14 @@ export const casState = async (
             worldId,
         });
 
-        const stateTransformationResult = stateTransformer({ state: previousState });
+        const stateTransformationResult = stateTransformer({
+            state: previousState,
+        });
 
-        if (stateTransformationResult.state == null || stateTransformationResult.errors.length > 0) {
+        if (
+            stateTransformationResult.state == null ||
+            stateTransformationResult.errors.length > 0
+        ) {
             return {
                 errors: stateTransformationResult.errors,
                 previousState,
@@ -44,14 +56,17 @@ export const casState = async (
             };
         }
 
-        const serializedState = serializeState({ state: stateTransformationResult.state });
+        const serializedState = serializeState({
+            state: stateTransformationResult.state,
+        });
 
         const result = await redis
             .multi()
             .set(stateKey, serializedState)
             .exec();
 
-        const savedState = result == null ? null : stateTransformationResult.state;
+        const savedState =
+            result == null ? null : stateTransformationResult.state;
 
         return {
             errors: [],

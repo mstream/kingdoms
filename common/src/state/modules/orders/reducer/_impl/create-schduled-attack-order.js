@@ -5,15 +5,16 @@ import { failure, success } from '../../../utils';
 import type { CommonCreateScheduledAttackOrderAction } from '../../actions/types';
 import type { CommonStateOrders } from '../types';
 
-type Reducer = CommonStateActionReducer<CommonStateOrders, CommonCreateScheduledAttackOrderAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateOrders,
+    CommonCreateScheduledAttackOrderAction,
+>;
 
-export const createScheduledAttackOrderOrdersReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const createScheduledAttackOrderOrdersReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const {
         minimumDelay,
         orderId,

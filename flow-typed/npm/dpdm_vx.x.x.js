@@ -14,7 +14,7 @@
  */
 
 declare module 'dpdm' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,48 +23,48 @@ declare module 'dpdm' {
  * needed.
  */
 declare module 'dpdm/lib/bin/dpdm' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'dpdm/lib' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'dpdm/lib/parser' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'dpdm/lib/types' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'dpdm/lib/utils' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'dpdm/lib/utils.spec' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'dpdm/lib/bin/dpdm.js' {
-  declare module.exports: $Exports<'dpdm/lib/bin/dpdm'>;
+    declare module.exports: $Exports<'dpdm/lib/bin/dpdm'>;
 }
 declare module 'dpdm/lib/index' {
-  declare module.exports: $Exports<'dpdm/lib'>;
+    declare module.exports: $Exports<'dpdm/lib'>;
 }
 declare module 'dpdm/lib/index.js' {
-  declare module.exports: $Exports<'dpdm/lib'>;
+    declare module.exports: $Exports<'dpdm/lib'>;
 }
 declare module 'dpdm/lib/parser.js' {
-  declare module.exports: $Exports<'dpdm/lib/parser'>;
+    declare module.exports: $Exports<'dpdm/lib/parser'>;
 }
 declare module 'dpdm/lib/types.js' {
-  declare module.exports: $Exports<'dpdm/lib/types'>;
+    declare module.exports: $Exports<'dpdm/lib/types'>;
 }
 declare module 'dpdm/lib/utils.js' {
-  declare module.exports: $Exports<'dpdm/lib/utils'>;
+    declare module.exports: $Exports<'dpdm/lib/utils'>;
 }
 declare module 'dpdm/lib/utils.spec.js' {
-  declare module.exports: $Exports<'dpdm/lib/utils.spec'>;
+    declare module.exports: $Exports<'dpdm/lib/utils.spec'>;
 }

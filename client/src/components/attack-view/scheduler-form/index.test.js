@@ -29,11 +29,13 @@ describe('AttackViewSchedulerFormComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <AttackViewSchedulerFormComponent/>
+                <AttackViewSchedulerFormComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(attackViewSchedulerFormComponentTestId)).not.toBeInTheDocument();
+        await expect(
+            queryByTestId(attackViewSchedulerFormComponentTestId),
+        ).not.toBeInTheDocument();
     });
 
     test('displays a scheduled delay - no delay', async () => {
@@ -54,7 +56,7 @@ describe('AttackViewSchedulerFormComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <AttackViewSchedulerFormComponent/>
+                <AttackViewSchedulerFormComponent />
             </Provider>,
         );
 
@@ -105,7 +107,7 @@ describe('AttackViewSchedulerFormComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <AttackViewSchedulerFormComponent/>
+                <AttackViewSchedulerFormComponent />
             </Provider>,
         );
 

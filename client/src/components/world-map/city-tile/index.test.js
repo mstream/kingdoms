@@ -57,7 +57,9 @@ describe('CityTileComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clientActions.menu.openCityView({ cityId: 'city1' }));
+        expect(actions[0]).toEqual(
+            clientActions.menu.openCityView({ cityId: 'city1' }),
+        );
     });
 
     test('opens attack view on click if does not belongs to the player', async () => {
@@ -102,6 +104,8 @@ describe('CityTileComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clientActions.menu.openAttackView({ cityId: 'city1' }));
+        expect(actions[0]).toEqual(
+            clientActions.menu.openAttackView({ cityId: 'city1' }),
+        );
     });
 });

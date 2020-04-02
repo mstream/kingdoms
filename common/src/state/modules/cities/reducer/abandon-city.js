@@ -5,15 +5,16 @@ import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonAbandonCityAction } from '../actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStateCities, CommonAbandonCityAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateCities,
+    CommonAbandonCityAction,
+>;
 
-export const abandonCityCitiesReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const abandonCityCitiesReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { cityId, playerId } = action.payload;
     const city = localState[cityId];
 

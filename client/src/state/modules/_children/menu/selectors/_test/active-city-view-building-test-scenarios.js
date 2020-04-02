@@ -6,7 +6,9 @@ import type { CommonStateBuildingKey } from '../../../../../../../../common/src/
 import { BUILDING_WAREHOUSE } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<CommonStateBuildingKey>>
+type Scenarios = $ReadOnlyArray<
+    ClientStateSelectorTestScenario<CommonStateBuildingKey>,
+>;
 
 export const activeCityViewBuildingSelectorTestScenarios: Scenarios = [
     {

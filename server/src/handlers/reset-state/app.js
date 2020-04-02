@@ -10,8 +10,8 @@ import { database } from '../../connectors/database';
 import { config } from '../../config';
 
 const states = {
-    'initial': initialCommonState,
-    'test': testCommonState,
+    initial: initialCommonState,
+    test: testCommonState,
 };
 
 const redis = createRedisClient({ config });
@@ -32,7 +32,9 @@ export const handler: ProxyHandler = async (event, context) => {
     if (stateType == null) {
         return {
             statusCode: 500,
-            body: `State type missing. Supported values: ${JSON.stringify(Object.keys(states))}`,
+            body: `State type missing. Supported values: ${JSON.stringify(
+                Object.keys(states),
+            )}`,
         };
     }
 
@@ -41,7 +43,9 @@ export const handler: ProxyHandler = async (event, context) => {
     if (state == null) {
         return {
             statusCode: 500,
-            body: `Unsupported test type. Supported values: ${JSON.stringify(Object.keys(states))}`,
+            body: `Unsupported test type. Supported values: ${JSON.stringify(
+                Object.keys(states),
+            )}`,
         };
     }
 

@@ -1,6 +1,5 @@
 // @flow
 
-
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction, ClientState } from '../../../../state/types';
@@ -17,7 +16,7 @@ type StateProps = $ReadOnly<{|
     cities: ?CommonStateCities,
     cityId: ?string,
     time: ?string,
-|}>
+|}>;
 
 type DispatchProps = $ReadOnly<{||}>;
 
@@ -37,12 +36,14 @@ const mapStateToProps = (state: ClientState): StateProps => {
 
 const actionCreators: DispatchProps = Object.freeze({});
 
-export const connectProps = connect<Props,
+export const connectProps = connect<
+    Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>>(
+    Dispatch<ClientAction>,
+>(
     mapStateToProps,
     // $FlowFixMe
     actionCreators,

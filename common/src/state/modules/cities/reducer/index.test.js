@@ -23,7 +23,6 @@ import { upgradeBuildingTestScenarios } from './test/upgrade-building-test-scena
 import type { CommonStateCitiesReducerTestScenarios } from './test/types';
 import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
-
 const stateInitializationScenario: CommonStateCitiesReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',
     action: dummy(),
@@ -36,7 +35,6 @@ const stateInitializationScenario: CommonStateCitiesReducerTestScenarios<CommonD
         return success({ state: initialCommonState.cities });
     },
 };
-
 
 describe('citiesReducer', () => {
     runTestScenarios({

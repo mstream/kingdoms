@@ -13,7 +13,6 @@ import { nextCityIdTestScenarios } from './_test/next-city-id-test-scenarios';
 import { previousCityIdTestScenarios } from './_test/previous-city-id-test-scenarios';
 import { distancesToAttackedCitySelectorTestScenarios } from './_test/distances-to-attacked-city-test-scenarios';
 
-
 describe('clientStateSelectors', () => {
     runClientStateSelectorsTestScenarios({
         // $FlowFixMe

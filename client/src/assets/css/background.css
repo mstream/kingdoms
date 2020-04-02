@@ -1,40 +1,39 @@
-
 .bricks-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/bricks.png");
+    background-image: url('../images/bricks.png');
 }
 
 .metal-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/metal.png");
+    background-image: url('../images/metal.png');
 }
 
 .metal-black-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/metal-black.png");
+    background-image: url('../images/metal-black.png');
 }
 
 .parchment-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/parchment.png");
+    background-image: url('../images/parchment.png');
 }
 
 .wallpaper-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/wallpaper.png");
+    background-image: url('../images/wallpaper.png');
 }
 
 .wallpaper2-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/wallpaper2.png");
+    background-image: url('../images/wallpaper2.png');
 }
 
 .wood-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/wood.png");
+    background-image: url('../images/wood.png');
 }
 
 .wood2-bg {
     background-blend-mode: multiply;
-    background-image: url("../images/wood2.png");
+    background-image: url('../images/wood2.png');
 }

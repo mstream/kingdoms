@@ -17,7 +17,6 @@ import { clientStateMenuSelectors } from '../_children/menu/selectors';
 import { clientStatePlayerSelectors } from '../_children/player/selectors';
 import { clientStateTilesSelectors } from '../_children/tiles/selectors';
 
-
 export const clientStateSelectors = {
     camera: clientStateCameraSelectors,
     commonState: clientStateCommonStateSelectors,

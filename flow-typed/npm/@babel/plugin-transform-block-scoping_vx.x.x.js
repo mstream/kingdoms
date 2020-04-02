@@ -14,7 +14,7 @@
  */
 
 declare module '@babel/plugin-transform-block-scoping' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,20 +23,26 @@ declare module '@babel/plugin-transform-block-scoping' {
  * needed.
  */
 declare module '@babel/plugin-transform-block-scoping/lib' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module '@babel/plugin-transform-block-scoping/lib/tdz' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module '@babel/plugin-transform-block-scoping/lib/index' {
-  declare module.exports: $Exports<'@babel/plugin-transform-block-scoping/lib'>;
+    declare module.exports: $Exports<
+        '@babel/plugin-transform-block-scoping/lib',
+    >;
 }
 declare module '@babel/plugin-transform-block-scoping/lib/index.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-block-scoping/lib'>;
+    declare module.exports: $Exports<
+        '@babel/plugin-transform-block-scoping/lib',
+    >;
 }
 declare module '@babel/plugin-transform-block-scoping/lib/tdz.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-block-scoping/lib/tdz'>;
+    declare module.exports: $Exports<
+        '@babel/plugin-transform-block-scoping/lib/tdz',
+    >;
 }

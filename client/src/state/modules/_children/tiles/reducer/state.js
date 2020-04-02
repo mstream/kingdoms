@@ -3,7 +3,6 @@
 import { zeroVector } from '../../../../../../../common/src/vector';
 import type { ClientStateTile, ClientStateTiles } from './types';
 
-
 export const emptyTilesState: ClientStateTiles = {
     city: Object.freeze({}),
     terrain: [],

@@ -8,7 +8,6 @@ import { calculateBuildingTierSum } from '../../../../../../common/src/state';
 export const testId = 'city-status-bar';
 
 export const Component = ({ city, player }: Props) => {
-
     if (player == null) {
         return null;
     }
@@ -29,18 +28,18 @@ export const Component = ({ city, player }: Props) => {
     );
 
     return (
-        <div data-testid={testId}
-             className={className}>
-            <div
-                className="flex items-center p-1 text-md font-bold border-r border-gray-900">{tiersSum}
+        <div data-testid={testId} className={className}>
+            <div className="flex items-center p-1 text-md font-bold border-r border-gray-900">
+                {tiersSum}
             </div>
             <div>
-                <div
-                    className="p-1 pb-0 text-sm font-normal border-b border-gray-900">{city.name}</div>
-                <div
-                    className="p-1 pt-0 text-xs font-hairline">{city.ownerId}</div>
+                <div className="p-1 pb-0 text-sm font-normal border-b border-gray-900">
+                    {city.name}
+                </div>
+                <div className="p-1 pt-0 text-xs font-hairline">
+                    {city.ownerId}
+                </div>
             </div>
-
         </div>
     );
 };

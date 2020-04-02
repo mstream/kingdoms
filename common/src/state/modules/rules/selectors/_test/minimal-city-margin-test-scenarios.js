@@ -1,13 +1,10 @@
 // @flow
 
-
-import type {
-    CommonStateSelectorTestScenario,
-} from '../../../types';
+import type { CommonStateSelectorTestScenario } from '../../../types';
 import { emptyCommonState } from '../../../state';
 import type { Vector } from '../../../../../vector';
 
-type Scenarios = $ReadOnlyArray<CommonStateSelectorTestScenario<Vector>>
+type Scenarios = $ReadOnlyArray<CommonStateSelectorTestScenario<Vector>>;
 
 export const minimalCityMarginSelectorTestScenarios: Scenarios = [
     {

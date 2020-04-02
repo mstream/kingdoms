@@ -1,6 +1,5 @@
 // @flow
 
-
 import { errorsSelector } from './_impl/errors';
 import { anyErrorsSelector } from './_impl/any-errors';
 

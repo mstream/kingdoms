@@ -30,11 +30,13 @@ describe('CityHeaderComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <CityHeaderComponent/>
+                <CityHeaderComponent />
             </Provider>,
         );
 
-        expect(queryByTestId(cityHeaderComponentTestId)).not.toBeInTheDocument();
+        expect(
+            queryByTestId(cityHeaderComponentTestId),
+        ).not.toBeInTheDocument();
     });
 
     test('shows up with no navigation buttons when the player has only one city', async () => {
@@ -44,7 +46,7 @@ describe('CityHeaderComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         name: 'Cityone',
                         ownerId: 'player1',
@@ -67,7 +69,7 @@ describe('CityHeaderComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityHeaderComponent/>
+                <CityHeaderComponent />
             </Provider>,
         );
 

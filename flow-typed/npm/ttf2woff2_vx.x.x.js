@@ -14,7 +14,7 @@
  */
 
 declare module 'ttf2woff2' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,58 +23,58 @@ declare module 'ttf2woff2' {
  * needed.
  */
 declare module 'ttf2woff2/bin/ttf2woff2' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'ttf2woff2/jssrc' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'ttf2woff2/jssrc/post' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'ttf2woff2/jssrc/ttf2woff2' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'ttf2woff2/src' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'ttf2woff2/tests/cli.mocha' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'ttf2woff2/tests/tests.mocha' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'ttf2woff2/bin/ttf2woff2.js' {
-  declare module.exports: $Exports<'ttf2woff2/bin/ttf2woff2'>;
+    declare module.exports: $Exports<'ttf2woff2/bin/ttf2woff2'>;
 }
 declare module 'ttf2woff2/jssrc/index' {
-  declare module.exports: $Exports<'ttf2woff2/jssrc'>;
+    declare module.exports: $Exports<'ttf2woff2/jssrc'>;
 }
 declare module 'ttf2woff2/jssrc/index.js' {
-  declare module.exports: $Exports<'ttf2woff2/jssrc'>;
+    declare module.exports: $Exports<'ttf2woff2/jssrc'>;
 }
 declare module 'ttf2woff2/jssrc/post.js' {
-  declare module.exports: $Exports<'ttf2woff2/jssrc/post'>;
+    declare module.exports: $Exports<'ttf2woff2/jssrc/post'>;
 }
 declare module 'ttf2woff2/jssrc/ttf2woff2.js' {
-  declare module.exports: $Exports<'ttf2woff2/jssrc/ttf2woff2'>;
+    declare module.exports: $Exports<'ttf2woff2/jssrc/ttf2woff2'>;
 }
 declare module 'ttf2woff2/src/index' {
-  declare module.exports: $Exports<'ttf2woff2/src'>;
+    declare module.exports: $Exports<'ttf2woff2/src'>;
 }
 declare module 'ttf2woff2/src/index.js' {
-  declare module.exports: $Exports<'ttf2woff2/src'>;
+    declare module.exports: $Exports<'ttf2woff2/src'>;
 }
 declare module 'ttf2woff2/tests/cli.mocha.js' {
-  declare module.exports: $Exports<'ttf2woff2/tests/cli.mocha'>;
+    declare module.exports: $Exports<'ttf2woff2/tests/cli.mocha'>;
 }
 declare module 'ttf2woff2/tests/tests.mocha.js' {
-  declare module.exports: $Exports<'ttf2woff2/tests/tests.mocha'>;
+    declare module.exports: $Exports<'ttf2woff2/tests/tests.mocha'>;
 }

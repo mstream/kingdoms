@@ -6,14 +6,15 @@ import type { CommonStateActionReducer } from '../../types';
 import { success } from '../../utils';
 import type { CommonResetStateAction } from '../../../actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStateWorld, CommonResetStateAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateWorld,
+    CommonResetStateAction,
+>;
 
-export const resetStateWorldReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const resetStateWorldReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     return success({ state: initialCommonState.world });
 };

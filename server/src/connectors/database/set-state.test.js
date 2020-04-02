@@ -29,14 +29,9 @@ describe('setState', () => {
             worldId,
         });
 
-        expect(redis.set.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                    JSON.stringify(state),
-                ],
-            ],
-        );
+        expect(redis.set.mock.calls).toEqual([
+            ['state:env1:world1', JSON.stringify(state)],
+        ]);
     });
 
     it('fails when cannot set the state', async () => {
@@ -71,14 +66,8 @@ describe('setState', () => {
             ),
         );
 
-        expect(redis.set.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                    JSON.stringify(state),
-                ],
-            ],
-        );
+        expect(redis.set.mock.calls).toEqual([
+            ['state:env1:world1', JSON.stringify(state)],
+        ]);
     });
 });
-

@@ -7,7 +7,9 @@ import { PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING } from '../types';
 import type { CommonCreateCityAction } from '../../../cities/actions/types';
 import type { CommonStatePlayersReducerTestScenario } from './types';
 
-type Scenarios = $ReadOnlyArray<CommonStatePlayersReducerTestScenario<CommonCreateCityAction>>;
+type Scenarios = $ReadOnlyArray<
+    CommonStatePlayersReducerTestScenario<CommonCreateCityAction>,
+>;
 
 export const createCityTestScenarios: Scenarios = [
     {
@@ -23,7 +25,7 @@ export const createCityTestScenarios: Scenarios = [
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
             return success({
-                state: { 'player1': PLAYER_STATUS_PLAYING },
+                state: { player1: PLAYER_STATUS_PLAYING },
             });
         },
     },
@@ -36,13 +38,13 @@ export const createCityTestScenarios: Scenarios = [
         }),
         previousGlobalState: {
             ...emptyCommonState,
-            players: { 'player1': PLAYER_STATUS_PLAYING },
+            players: { player1: PLAYER_STATUS_PLAYING },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
             return success({
                 state: {
-                    'player1': PLAYER_STATUS_PLAYING,
-                    'player2': PLAYER_STATUS_PLAYING,
+                    player1: PLAYER_STATUS_PLAYING,
+                    player2: PLAYER_STATUS_PLAYING,
                 },
             });
         },
@@ -56,7 +58,7 @@ export const createCityTestScenarios: Scenarios = [
         }),
         previousGlobalState: {
             ...emptyCommonState,
-            players: { 'player1': PLAYER_STATUS_PLAYING },
+            players: { player1: PLAYER_STATUS_PLAYING },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
             return failure({
@@ -73,7 +75,7 @@ export const createCityTestScenarios: Scenarios = [
         }),
         previousGlobalState: {
             ...emptyCommonState,
-            players: { 'player1': PLAYER_STATUS_DEFEATED },
+            players: { player1: PLAYER_STATUS_DEFEATED },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
             return failure({

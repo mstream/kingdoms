@@ -1,6 +1,5 @@
 // @flow
 
-
 import {
     UNIT_ARCHER,
     UNIT_PIKEMAN,
@@ -11,7 +10,9 @@ import { emptyRegimentTemplateState } from '../../../../../../../../common/src/s
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const updateAttackViewRegimentTemplateTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientUpdateAttackViewRegimentTemplateAction>> = [
+export const updateAttackViewRegimentTemplateTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientUpdateAttackViewRegimentTemplateAction>,
+> = [
     {
         name: 'updates the regiment template',
         action: clientActions.menu.updateAttackViewRegimentTemplate({
@@ -20,7 +21,7 @@ export const updateAttackViewRegimentTemplateTestScenarios: $ReadOnlyArray<Clien
                 [UNIT_PIKEMAN]: {
                     from: 100,
                     to: 200,
-                }
+                },
             },
         }),
         previousGlobalState: {
@@ -34,7 +35,7 @@ export const updateAttackViewRegimentTemplateTestScenarios: $ReadOnlyArray<Clien
                         [UNIT_ARCHER]: {
                             from: 50,
                             to: 100,
-                        }
+                        },
                     },
                 },
             },
@@ -49,7 +50,7 @@ export const updateAttackViewRegimentTemplateTestScenarios: $ReadOnlyArray<Clien
                         [UNIT_PIKEMAN]: {
                             from: 100,
                             to: 200,
-                        }
+                        },
                     },
                 },
             };

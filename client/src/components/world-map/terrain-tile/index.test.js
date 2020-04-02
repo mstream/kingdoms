@@ -27,7 +27,7 @@ describe('TerrainTile', () => {
 
         render(
             <Provider store={store}>
-                <TerrainTileComponent tile={tile}/>
+                <TerrainTileComponent tile={tile} />
             </Provider>,
         );
     });

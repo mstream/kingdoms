@@ -12,15 +12,16 @@ import type { CommonCreateCityAction } from '../../cities/actions/types';
 import type { CommonCreateScheduledAttackOrderAction } from '../../orders/actions/types';
 import type { CommonResetStateAction } from '../../../actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStatePlayers, CommonCreateScheduledAttackOrderAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStatePlayers,
+    CommonCreateScheduledAttackOrderAction,
+>;
 
-export const createOrderPlayersReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    }
-) => {
+export const createOrderPlayersReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { playerId } = action.payload;
 
     const playerStatus = localState[playerId];
@@ -34,5 +35,3 @@ export const createOrderPlayersReducer: Reducer = (
             return failure({ errors: ['the player is not playing'] });
     }
 };
-
-

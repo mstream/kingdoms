@@ -6,7 +6,9 @@ import { UNIT_PIKEMAN } from '../../../../../../../../common/src/state/modules/r
 import type { CommonStateRegimentTemplate } from '../../../../../../../../common/src/state/modules/orders/reducer/types';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<CommonStateRegimentTemplate>>
+type Scenarios = $ReadOnlyArray<
+    ClientStateSelectorTestScenario<CommonStateRegimentTemplate>,
+>;
 
 export const regimentTemplateSelectorTestScenarios: Scenarios = [
     {

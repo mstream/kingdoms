@@ -5,20 +5,9 @@ import type { CommonState } from './state/modules/types';
 import type { ServerResponse } from './types';
 import { validateServerResponseType } from './validators';
 
-const suffixes: $ReadOnlyArray<string> = [
-    'k',
-    'm',
-    'g',
-    't',
-];
+const suffixes: $ReadOnlyArray<string> = ['k', 'm', 'g', 't'];
 
-export const parseJson = (
-    {
-        json,
-    }: {
-        json: ?string
-    },
-): mixed => {
+export const parseJson = ({ json }: { json: ?string }): mixed => {
     if (json === undefined) {
         return undefined;
     }
@@ -30,13 +19,7 @@ export const parseJson = (
     return JSON.parse(json);
 };
 
-export const stringifyJson = (
-    {
-        value,
-    }: {
-        value: mixed
-    },
-): ?string => {
+export const stringifyJson = ({ value }: { value: mixed }): ?string => {
     return JSON.stringify(value);
 };
 
@@ -44,7 +27,11 @@ export const generateId = (): string => {
     return v4();
 };
 
-export const numberToQuantityString = ({ value }: { value: number }): string => {
+export const numberToQuantityString = ({
+    value,
+}: {
+    value: number,
+}): string => {
     const quantity = suffixes.reduce(
         (quantity, suffix) => {
             if (quantity.value / 10000 < 1) {
@@ -57,25 +44,22 @@ export const numberToQuantityString = ({ value }: { value: number }): string => 
         },
         { value, suffix: null },
     );
-    return `${quantity.value.toString().substring(0, 4)}${quantity.suffix != null ? quantity.suffix : ''}`;
+    return `${quantity.value.toString().substring(0, 4)}${
+        quantity.suffix != null ? quantity.suffix : ''
+    }`;
 };
 
 export const serializeState = ({ state }: { state: CommonState }): string => {
     return JSON.stringify(state);
 };
 
-
-export const parseServerResponse = (
-    {
+export const parseServerResponse = ({
+    json,
+}: {
+    json: string,
+}): ServerResponse => {
+    const object = parseJson({
         json,
-    }: {
-        json: string
-    },
-): ServerResponse => {
-    const object = parseJson(
-        {
-            json,
-        },
-    );
+    });
     return validateServerResponseType({ toValidate: object });
 };

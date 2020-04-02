@@ -20,7 +20,7 @@ describe('GameStartComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
@@ -35,11 +35,13 @@ describe('GameStartComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <GameStartComponent/>
+                <GameStartComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(gameStartComponentTestId)).not.toBeInTheDocument();
+        await expect(
+            queryByTestId(gameStartComponentTestId),
+        ).not.toBeInTheDocument();
     });
 
     test('does show up when game is starting', async () => {
@@ -48,7 +50,7 @@ describe('GameStartComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
@@ -63,7 +65,7 @@ describe('GameStartComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <GameStartComponent/>
+                <GameStartComponent />
             </Provider>,
         );
 

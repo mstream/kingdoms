@@ -11,34 +11,32 @@ export const testId = 'attack-view-city-list';
 type CityWithDistance = {
     city: CommonStateCity,
     cityId: string,
-    distance: number
+    distance: number,
 };
 
-export const Component = (
-    {
-        attackingCityId,
-        cities,
-        cityIdsOwnedByPlayer,
-        distancesToAttackedCity,
-        selectAttackViewAttackingCity,
-    }: Props,
-) => {
-    const playerCitiesWithDistance: $ReadOnlyArray<CityWithDistance> =
-        cityIdsOwnedByPlayer
-            .reduce(
-                (playerCitiesWithDistance, cityId: string) => {
-                    return [
-                        ...playerCitiesWithDistance,
-                        {
-                            city: cities[cityId],
-                            cityId,
-                            distance: distancesToAttackedCity[cityId],
-                        },
-                    ];
+export const Component = ({
+    attackingCityId,
+    cities,
+    cityIdsOwnedByPlayer,
+    distancesToAttackedCity,
+    selectAttackViewAttackingCity,
+}: Props) => {
+    const playerCitiesWithDistance: $ReadOnlyArray<CityWithDistance> = cityIdsOwnedByPlayer
+        .reduce((playerCitiesWithDistance, cityId: string) => {
+            return [
+                ...playerCitiesWithDistance,
+                {
+                    city: cities[cityId],
+                    cityId,
+                    distance: distancesToAttackedCity[cityId],
                 },
-                [],
-            ).sort(
-            (cityWithDistance1: CityWithDistance, cityWithDistance2: CityWithDistance) => {
+            ];
+        }, [])
+        .sort(
+            (
+                cityWithDistance1: CityWithDistance,
+                cityWithDistance2: CityWithDistance,
+            ) => {
                 return cityWithDistance1.distance - cityWithDistance2.distance;
             },
         );
@@ -63,7 +61,9 @@ export const Component = (
                 <div key={cityId} className={className} onClick={onClick}>
                     <div className="text-sm font-medium">{city.name}</div>
                     <div className="text-xs">
-                        {`${numberToQuantityString({ value: distance })} square${distance > 1 ? 's' : ''} away`}
+                        {`${numberToQuantityString({
+                            value: distance,
+                        })} square${distance > 1 ? 's' : ''} away`}
                     </div>
                 </div>
             );
@@ -73,13 +73,10 @@ export const Component = (
     return (
         <div
             data-testid={testId}
-            className="flex flex-col justify-start text-xl">
-            <div className="mb-1">
-                From city:
-            </div>
-            <div className="shadow-inner bg-gray-900-alpha-50">
-                {cityRows}
-            </div>
+            className="flex flex-col justify-start text-xl"
+        >
+            <div className="mb-1">From city:</div>
+            <div className="shadow-inner bg-gray-900-alpha-50">{cityRows}</div>
         </div>
     );
 };

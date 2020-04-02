@@ -11,7 +11,9 @@ import {
 import { UNIT_PIKEMAN } from '../../../rules/reducer/types';
 import { failure, success } from '../../../utils';
 
-type Scenarios = $ReadOnlyArray<CommonStateOrdersReducerTestScenarios<CommonCreateScheduledAttackOrderAction>>;
+type Scenarios = $ReadOnlyArray<
+    CommonStateOrdersReducerTestScenarios<CommonCreateScheduledAttackOrderAction>,
+>;
 
 export const createScheduledAttackOrderTestScenarios: Scenarios = [
     {
@@ -35,35 +37,33 @@ export const createScheduledAttackOrderTestScenarios: Scenarios = [
             time: '2000-01-01T01:00:00Z',
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return success(
-                {
-                    state: {
-                        ...previousLocalState,
-                        creationTimes: {
-                            'order1': '2000-01-01T01:00:00Z',
-                        },
-                        ownerships: {
-                            'order1': 'player1',
-                        },
-                        items: {
-                            scheduledAttack: {
-                                'order1': {
-                                    minimumDelay: 10,
-                                    originCityId: 'city1',
-                                    regimentTemplate: {
-                                        ...emptyRegimentTemplateState,
-                                        [UNIT_PIKEMAN]: {
-                                            from: 10,
-                                            to: 20,
-                                        },
+            return success({
+                state: {
+                    ...previousLocalState,
+                    creationTimes: {
+                        order1: '2000-01-01T01:00:00Z',
+                    },
+                    ownerships: {
+                        order1: 'player1',
+                    },
+                    items: {
+                        scheduledAttack: {
+                            order1: {
+                                minimumDelay: 10,
+                                originCityId: 'city1',
+                                regimentTemplate: {
+                                    ...emptyRegimentTemplateState,
+                                    [UNIT_PIKEMAN]: {
+                                        from: 10,
+                                        to: 20,
                                     },
-                                    targetCityId: 'city2',
                                 },
+                                targetCityId: 'city2',
                             },
                         },
                     },
                 },
-            );
+            });
         },
     },
     {
@@ -89,7 +89,7 @@ export const createScheduledAttackOrderTestScenarios: Scenarios = [
                 items: {
                     ...emptyCommonState.orders.items,
                     scheduledAttack: {
-                        'order1': {
+                        order1: {
                             ...emptyScheduledAttackOrderState,
                         },
                     },
@@ -98,11 +98,9 @@ export const createScheduledAttackOrderTestScenarios: Scenarios = [
             time: '2000-01-01T01:00:00Z',
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['order with the same id already exists'],
-                },
-            );
+            return failure({
+                errors: ['order with the same id already exists'],
+            });
         },
     },
 ];

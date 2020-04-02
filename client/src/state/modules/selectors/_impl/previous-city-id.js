@@ -5,7 +5,13 @@ import { cityIdsOwnedByPlayerSelector } from './city-ids-owned-by-player';
 import type { ClientState } from '../../../types';
 import { clientStateMenuSelectors } from '../../_children/menu/selectors';
 
-export const previousCityIdSelector = createSelector<ClientState, void, ?string, ?$ReadOnlyArray<string>, ?string>(
+export const previousCityIdSelector = createSelector<
+    ClientState,
+    void,
+    ?string,
+    ?$ReadOnlyArray<string>,
+    ?string,
+>(
     cityIdsOwnedByPlayerSelector,
     clientStateMenuSelectors.currentlyViewedCityId,
     (citiesOwnedByPlayer, currentlyViewedCity) => {
@@ -18,7 +24,11 @@ export const previousCityIdSelector = createSelector<ClientState, void, ?string,
         }
 
         const sortedCityIds = [...citiesOwnedByPlayer].sort();
-        const currentlyViewedCityIndex = sortedCityIds.indexOf(currentlyViewedCity);
-        return currentlyViewedCityIndex === 0 ? sortedCityIds[citiesOwnedByPlayer.length - 1] : sortedCityIds[currentlyViewedCityIndex - 1];
+        const currentlyViewedCityIndex = sortedCityIds.indexOf(
+            currentlyViewedCity,
+        );
+        return currentlyViewedCityIndex === 0
+            ? sortedCityIds[citiesOwnedByPlayer.length - 1]
+            : sortedCityIds[currentlyViewedCityIndex - 1];
     },
 );

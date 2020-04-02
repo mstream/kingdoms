@@ -14,7 +14,7 @@
  */
 
 declare module 'simple-websocket' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,23 +23,23 @@ declare module 'simple-websocket' {
  * needed.
  */
 declare module 'simple-websocket/server' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'simple-websocket/simplewebsocket.min' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'simple-websocket/index' {
-  declare module.exports: $Exports<'simple-websocket'>;
+    declare module.exports: $Exports<'simple-websocket'>;
 }
 declare module 'simple-websocket/index.js' {
-  declare module.exports: $Exports<'simple-websocket'>;
+    declare module.exports: $Exports<'simple-websocket'>;
 }
 declare module 'simple-websocket/server.js' {
-  declare module.exports: $Exports<'simple-websocket/server'>;
+    declare module.exports: $Exports<'simple-websocket/server'>;
 }
 declare module 'simple-websocket/simplewebsocket.min.js' {
-  declare module.exports: $Exports<'simple-websocket/simplewebsocket.min'>;
+    declare module.exports: $Exports<'simple-websocket/simplewebsocket.min'>;
 }

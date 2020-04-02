@@ -29,7 +29,7 @@ describe('ChangeInfoComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <ChangeInfoComponent changeInfo={changeInfo}/>
+                <ChangeInfoComponent changeInfo={changeInfo} />
             </Provider>,
         );
         await expect(queryByText('a a a:')).toBeInTheDocument();

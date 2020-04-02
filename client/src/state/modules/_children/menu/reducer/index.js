@@ -38,7 +38,6 @@ import { selectCityViewTabMenuReducer } from './_impl/select-city-view-tab';
 import { requestOrderCreationMenuReducer } from './_impl/request-order-creation';
 import { selectCityViewOrdersTabMenuReducer } from './_impl/select-city-view-orders-tab';
 
-
 export const menuReducer = createClientStateReducer<ClientStateMenu>({
     actionReducers: {
         [CLOSE_ATTACK_VIEW]: closeAttackViewMenuReducer,

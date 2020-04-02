@@ -5,7 +5,9 @@ import type { ClientMoveCameraAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const moveCameraTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientMoveCameraAction>> = [
+export const moveCameraTestScenarios: $ReadOnlyArray<
+    ClientStateCameraReducerTestScenario<ClientMoveCameraAction>,
+> = [
     {
         name: 'moves camera up',
         action: clientActions.camera.moveCameraUp(),

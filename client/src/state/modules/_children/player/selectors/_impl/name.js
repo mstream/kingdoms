@@ -1,9 +1,7 @@
 // @flow
 
-
 import type { ClientStateSelector } from '../../../../../types';
 
-export const nameSelector: ClientStateSelector<?string> =
-    (state) => {
-        return state.player.name;
-    };
+export const nameSelector: ClientStateSelector<?string> = (state) => {
+    return state.player.name;
+};

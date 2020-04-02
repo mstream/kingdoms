@@ -46,7 +46,8 @@ import {
     OPEN_ATTACK_VIEW,
     OPEN_CITY_VIEW,
     SELECT_ATTACK_VIEW_ATTACKING_CITY,
-    SELECT_CITY_VIEW_BUILDINGS_TAB, SELECT_CITY_VIEW_ORDERS_TAB,
+    SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_ORDERS_TAB,
     SELECT_CITY_VIEW_RESOURCES_TAB,
     SELECT_CITY_VIEW_TAB,
     SELECT_CITY_VIEW_UNITS_TAB,
@@ -62,7 +63,6 @@ import type { ClientStateMenu } from './modules/_children/menu/reducer/types';
 import type { ClientStatePlayer } from './modules/_children/player/reducer/types';
 import type { ClientStateCommonState } from './modules/_children/common-state/reducer/types';
 import type { ClientStateTiles } from './modules/_children/tiles/reducer/types';
-
 
 export type ClientActionKey =
     | typeof CLOSE_ATTACK_VIEW
@@ -86,8 +86,7 @@ export type ClientActionKey =
     | typeof UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE
     | typeof UPDATE_ATTACK_VIEW_MINIMUM_DELAY
     | typeof UPDATE_STATE
-    | typeof ZOOM_CAMERA
-
+    | typeof ZOOM_CAMERA;
 
 export type ClientAction =
     | ClientCloseAttackViewAction
@@ -111,10 +110,11 @@ export type ClientAction =
     | ClientUpdateAttackViewRegimentTemplateAction
     | ClientUpdateAttackViewMinimumDelayAction
     | ClientUpdateStateAction
-    | ClientZoomCameraAction
+    | ClientZoomCameraAction;
 
-
-export type ClientActionCreator<A: ClientAction> = ($PropertyType<A, 'payload'>) => A;
+export type ClientActionCreator<A: ClientAction> = (
+    $PropertyType<A, 'payload'>,
+) => A;
 
 export type ClientState = $ReadOnly<{
     camera: ClientStateCamera,
@@ -127,7 +127,9 @@ export type ClientState = $ReadOnly<{
 
 export type ClientStateReducer<S> = (S, ClientAction, ClientState) => S;
 
-export type ClientStateActionReducer<S, +A: ClientAction> = ($ReadOnly<{ action: A, globalState: ClientState, localState: S, }>) => S;
+export type ClientStateActionReducer<S, +A: ClientAction> = (
+    $ReadOnly<{ action: A, globalState: ClientState, localState: S }>,
+) => S;
 
 export type ClientStateReducerTestScenario<S, +A: ClientAction> = $ReadOnly<{
     name: string,
@@ -144,16 +146,26 @@ export type ClientStateSelectorTestScenario<T> = $ReadOnly<{
     expectedValue: T,
 }>;
 
-export type ClientStateSelectors = $ReadOnly<{ [string]: ClientStateSelector<mixed> }>;
-
-// $FlowFixMe
-export type ClientStore = Store<ClientState, ClientAction, Dispatch<ClientAction>>
-
-export type ActionReducers<S> = $ReadOnly<{
-    [ClientActionKey]: ClientStateActionReducer<S, ClientAction>
+export type ClientStateSelectors = $ReadOnly<{
+    [string]: ClientStateSelector<mixed>,
 }>;
 
-export type ReducerScenarios<S> = { [ClientActionKey]: $ReadOnlyArray<ClientStateReducerTestScenario<S, ClientAction>> };
+// $FlowFixMe
+export type ClientStore = Store<
+    ClientState,
+    ClientAction,
+    Dispatch<ClientAction>,
+>;
+
+export type ActionReducers<S> = $ReadOnly<{
+    [ClientActionKey]: ClientStateActionReducer<S, ClientAction>,
+}>;
+
+export type ReducerScenarios<S> = {
+    [ClientActionKey]: $ReadOnlyArray<
+        ClientStateReducerTestScenario<S, ClientAction>,
+    >,
+};
 
 export type SelectorScenarios = $ReadOnly<{
     [string]: $ReadOnlyArray<ClientStateSelectorTestScenario<mixed>>,

@@ -13,44 +13,49 @@ import type {
     ScheduledAttackOrderInfosById,
 } from '../types';
 
+export const scheduledAttackOrdersForViewedCitySelector: ClientStateSelector<ScheduledAttackOrderInfosById> = createSelector<
+    ClientState,
+    void,
+    ScheduledAttackOrderInfosById,
+    ?string,
+    ?CommonStateOrders,
+>(
+    clientStateMenuSelectors.currentlyViewedCityId,
+    clientStateCommonStateSelectors.orders,
+    (currentlyViewedCityId: ?string, orders: ?CommonStateOrders) => {
+        if (currentlyViewedCityId == null || orders == null) {
+            return {};
+        }
 
-export const scheduledAttackOrdersForViewedCitySelector: ClientStateSelector<ScheduledAttackOrderInfosById> =
-    createSelector<ClientState, void, ScheduledAttackOrderInfosById, ?string, ?CommonStateOrders>(
-        clientStateMenuSelectors.currentlyViewedCityId,
-        clientStateCommonStateSelectors.orders,
-        (currentlyViewedCityId: ?string, orders: ?CommonStateOrders) => {
-            if (currentlyViewedCityId == null || orders == null) {
-                return {};
-            }
+        return Object.keys(orders.items.scheduledAttack).reduce(
+            (
+                ordersForViewedCity: ScheduledAttackOrderInfosById,
+                orderId: string,
+            ) => {
+                const order: ?CommonStateScheduledAttackOrder =
+                    orders.items.scheduledAttack[orderId];
 
-            return Object
-                .keys(orders.items.scheduledAttack)
-                .reduce(
-                    (ordersForViewedCity: ScheduledAttackOrderInfosById, orderId: string) => {
-                        const order: ?CommonStateScheduledAttackOrder =
-                            orders.items.scheduledAttack[orderId];
+                if (order == null) {
+                    throw Error('order is missing');
+                }
 
-                        if (order == null) {
-                            throw Error('order is missing');
-                        }
+                const relevantForViewedCity: boolean =
+                    currentlyViewedCityId === order.originCityId;
 
-                        const relevantForViewedCity: boolean = currentlyViewedCityId === order.originCityId;
+                const orderInfo: ScheduledAttackOrderInfo = {
+                    ...order,
+                    creationTime: orders.creationTimes[orderId],
+                    playerId: orders.ownerships[orderId],
+                };
 
-                        const orderInfo: ScheduledAttackOrderInfo = {
-                            ...order,
-                            creationTime: orders.creationTimes[orderId],
-                            playerId: orders.ownerships[orderId],
-                        };
-
-                        return relevantForViewedCity ?
-                            {
-                                ...ordersForViewedCity,
-                                [orderId]: orderInfo,
-                            } :
-                            ordersForViewedCity;
-                    },
-                    {},
-                );
-        },
-    );
-
+                return relevantForViewedCity
+                    ? {
+                          ...ordersForViewedCity,
+                          [orderId]: orderInfo,
+                      }
+                    : ordersForViewedCity;
+            },
+            {},
+        );
+    },
+);

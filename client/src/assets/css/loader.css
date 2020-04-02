@@ -1,4 +1,3 @@
-
 .loader div {
     border-radius: 50%;
     background: #fff;
@@ -42,7 +41,8 @@
 }
 
 @keyframes loader {
-    0%, 100% {
+    0%,
+    100% {
         opacity: 1;
     }
     50% {

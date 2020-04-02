@@ -14,7 +14,7 @@
  */
 
 declare module 'postcss-loader' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,34 +23,34 @@ declare module 'postcss-loader' {
  * needed.
  */
 declare module 'postcss-loader/src/Error' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'postcss-loader/src' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'postcss-loader/src/options' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'postcss-loader/src/Warning' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'postcss-loader/src/Error.js' {
-  declare module.exports: $Exports<'postcss-loader/src/Error'>;
+    declare module.exports: $Exports<'postcss-loader/src/Error'>;
 }
 declare module 'postcss-loader/src/index' {
-  declare module.exports: $Exports<'postcss-loader/src'>;
+    declare module.exports: $Exports<'postcss-loader/src'>;
 }
 declare module 'postcss-loader/src/index.js' {
-  declare module.exports: $Exports<'postcss-loader/src'>;
+    declare module.exports: $Exports<'postcss-loader/src'>;
 }
 declare module 'postcss-loader/src/options.js' {
-  declare module.exports: $Exports<'postcss-loader/src/options'>;
+    declare module.exports: $Exports<'postcss-loader/src/options'>;
 }
 declare module 'postcss-loader/src/Warning.js' {
-  declare module.exports: $Exports<'postcss-loader/src/Warning'>;
+    declare module.exports: $Exports<'postcss-loader/src/Warning'>;
 }

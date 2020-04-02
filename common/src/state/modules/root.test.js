@@ -15,7 +15,9 @@ describe('rootReducer', () => {
             ...emptyCommonState,
         };
 
-        const expected: CommonStateReducerResult<CommonState> = success({ state: initialCommonState });
+        const expected: CommonStateReducerResult<CommonState> = success({
+            state: initialCommonState,
+        });
 
         const actual = rootReducer({ action, state: previousState });
 
@@ -29,7 +31,9 @@ describe('rootReducer', () => {
             ...emptyCommonState,
         };
 
-        const expected: CommonStateReducerResult<CommonState> = success({ state: previousState });
+        const expected: CommonStateReducerResult<CommonState> = success({
+            state: previousState,
+        });
 
         const actual = rootReducer({ action, state: previousState });
 

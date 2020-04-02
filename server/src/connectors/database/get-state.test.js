@@ -6,7 +6,6 @@ import { emptyCommonState } from '../../../../common/src/state/modules/state';
 import verror from 'verror';
 import { getState } from './get-state';
 
-
 describe('getState', () => {
     it('retrieves and validates state', async () => {
         const state: CommonState = {
@@ -38,23 +37,15 @@ describe('getState', () => {
 
         expect(actual).toEqual(expected);
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(validateState.mock.calls).toEqual(
+        expect(validateState.mock.calls).toEqual([
             [
-                [
-                    {
-                        toValidate: state,
-                    },
-                ],
+                {
+                    toValidate: state,
+                },
             ],
-        );
+        ]);
     });
 
     it('fails when cannot retrieve the state', async () => {
@@ -93,17 +84,9 @@ describe('getState', () => {
             ),
         );
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(validateState.mock.calls).toEqual(
-            [],
-        );
+        expect(validateState.mock.calls).toEqual([]);
     });
 
     it('fails when retrieved state does not pass a validation', async () => {
@@ -142,22 +125,14 @@ describe('getState', () => {
             ),
         );
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(validateState.mock.calls).toEqual(
+        expect(validateState.mock.calls).toEqual([
             [
-                [
-                    {
-                        toValidate: state,
-                    },
-                ],
+                {
+                    toValidate: state,
+                },
             ],
-        );
+        ]);
     });
 });

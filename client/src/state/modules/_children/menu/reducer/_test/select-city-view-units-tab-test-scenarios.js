@@ -1,6 +1,5 @@
 // @flow
 
-
 import {
     UNIT_CATAPULT,
     UNIT_SWORDSMAN,
@@ -10,7 +9,9 @@ import type { ClientSelectCityViewUnitsTabAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const selectCityViewUnitsTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitsTabAction>> = [
+export const selectCityViewUnitsTabTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitsTabAction>,
+> = [
     {
         name: 'select city view unit',
         action: clientActions.menu.selectCityViewUnitsTab({

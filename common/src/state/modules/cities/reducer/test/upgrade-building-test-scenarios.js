@@ -12,8 +12,9 @@ import { emptyCityState } from '../state';
 import type { CommonUpgradeBuildingAction } from '../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
-
-export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonUpgradeBuildingAction>> = [
+export const upgradeBuildingTestScenarios: $ReadOnlyArray<
+    CommonStateCitiesReducerTestScenarios<CommonUpgradeBuildingAction>,
+> = [
     {
         name: 'upgrades the building',
         action: upgradeBuilding({
@@ -24,7 +25,7 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     ownerId: 'player1',
                     buildings: {
@@ -51,29 +52,28 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return success(
-                {
-                    state:
-                        {
-                            ...previousLocalState,
-                            'city1': {
-                                ...previousLocalState['city1'],
-                                buildings: {
-                                    ...previousLocalState['city1'].buildings,
-                                    [BUILDING_PASTURE]: {
-                                        ...previousLocalState['city1'].buildings[BUILDING_PASTURE],
-                                        tier: 1,
-                                    },
-                                },
-                                resources: {
-                                    ...previousLocalState['city1'].resources,
-                                    [RESOURCE_FOOD]: 200,
-                                    [RESOURCE_WOOD]: 100,
-                                },
+            return success({
+                state: {
+                    ...previousLocalState,
+                    city1: {
+                        ...previousLocalState['city1'],
+                        buildings: {
+                            ...previousLocalState['city1'].buildings,
+                            [BUILDING_PASTURE]: {
+                                ...previousLocalState['city1'].buildings[
+                                    BUILDING_PASTURE
+                                ],
+                                tier: 1,
                             },
                         },
+                        resources: {
+                            ...previousLocalState['city1'].resources,
+                            [RESOURCE_FOOD]: 200,
+                            [RESOURCE_WOOD]: 100,
+                        },
+                    },
                 },
-            );
+            });
         },
     },
     {
@@ -88,11 +88,9 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
             cities: {},
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city does not exist'],
-                },
-            );
+            return failure({
+                errors: ['the city does not exist'],
+            });
         },
     },
     {
@@ -105,18 +103,16 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     ownerId: 'player2',
                 },
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city does not belong to the player'],
-                },
-            );
+            return failure({
+                errors: ['the city does not belong to the player'],
+            });
         },
     },
     {
@@ -129,7 +125,7 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     ownerId: 'player1',
                     buildings: {
@@ -156,14 +152,12 @@ export const upgradeBuildingTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: [
-                        'insufficient RESOURCE_FOOD',
-                        'insufficient RESOURCE_WOOD',
-                    ],
-                },
-            );
+            return failure({
+                errors: [
+                    'insufficient RESOURCE_FOOD',
+                    'insufficient RESOURCE_WOOD',
+                ],
+            });
         },
     },
 ];

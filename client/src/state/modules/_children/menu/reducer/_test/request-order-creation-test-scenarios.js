@@ -7,7 +7,9 @@ import { clientActions } from '../../../../actions';
 import { emptyRegimentTemplateState } from '../../../../../../../../common/src/state/modules/orders/reducer/state';
 import { UNIT_PIKEMAN } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 
-export const requestOrderCreationTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientRequestOrderCreationAction>> = [
+export const requestOrderCreationTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientRequestOrderCreationAction>,
+> = [
     {
         name: 'requests order creation',
         action: clientActions.commonState.requestOrderCreation({

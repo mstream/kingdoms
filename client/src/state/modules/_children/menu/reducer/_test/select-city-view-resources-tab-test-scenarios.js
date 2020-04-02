@@ -1,6 +1,5 @@
 // @flow
 
-
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
@@ -10,7 +9,9 @@ import type { ClientSelectCityViewResourceTabAction } from '../../actions/types'
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const selectCityViewResourcesTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewResourceTabAction>> = [
+export const selectCityViewResourcesTabTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientSelectCityViewResourceTabAction>,
+> = [
     {
         name: 'select city view resource',
         action: clientActions.menu.selectCityViewResourcesTab({

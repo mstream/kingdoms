@@ -11,7 +11,6 @@ const createConfig = (): Config => {
         throw Error('COGNITO_USER_POOL_ID required');
     }
 
-
     if (process.env.ENVIRONMENT == null) {
         throw Error('ENVIRONMENT required');
     }

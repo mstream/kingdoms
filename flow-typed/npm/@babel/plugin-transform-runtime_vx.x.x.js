@@ -14,7 +14,7 @@
  */
 
 declare module '@babel/plugin-transform-runtime' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,34 +23,40 @@ declare module '@babel/plugin-transform-runtime' {
  * needed.
  */
 declare module '@babel/plugin-transform-runtime/lib/helpers' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module '@babel/plugin-transform-runtime/lib' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module '@babel/plugin-transform-runtime/lib/runtime-corejs2-definitions' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module '@babel/plugin-transform-runtime/lib/runtime-corejs3-definitions' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module '@babel/plugin-transform-runtime/lib/helpers.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/helpers'>;
+    declare module.exports: $Exports<
+        '@babel/plugin-transform-runtime/lib/helpers',
+    >;
 }
 declare module '@babel/plugin-transform-runtime/lib/index' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib'>;
+    declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib'>;
 }
 declare module '@babel/plugin-transform-runtime/lib/index.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib'>;
+    declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib'>;
 }
 declare module '@babel/plugin-transform-runtime/lib/runtime-corejs2-definitions.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/runtime-corejs2-definitions'>;
+    declare module.exports: $Exports<
+        '@babel/plugin-transform-runtime/lib/runtime-corejs2-definitions',
+    >;
 }
 declare module '@babel/plugin-transform-runtime/lib/runtime-corejs3-definitions.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-runtime/lib/runtime-corejs3-definitions'>;
+    declare module.exports: $Exports<
+        '@babel/plugin-transform-runtime/lib/runtime-corejs3-definitions',
+    >;
 }

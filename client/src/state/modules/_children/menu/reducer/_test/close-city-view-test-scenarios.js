@@ -5,8 +5,9 @@ import type { ClientCloseCityViewAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-
-export const closeCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientCloseCityViewAction>> = [
+export const closeCityViewTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientCloseCityViewAction>,
+> = [
     {
         name: 'closes city view',
         action: clientActions.menu.closeCityView(),

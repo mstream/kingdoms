@@ -165,18 +165,25 @@ export const initialCommonState: CommonState = {
     world: { size: { x: 10, y: 10 } },
 };
 
-
-export const calculateBuildingTierSum = ({ buildings }: { buildings: CommonStateBuildings }): number => {
-    return Object.keys(buildings).reduce(
-        (sum, buildingType) => {
-            return sum + buildings[buildingType].tier;
-        },
-        0,
-    );
+export const calculateBuildingTierSum = ({
+    buildings,
+}: {
+    buildings: CommonStateBuildings,
+}): number => {
+    return Object.keys(buildings).reduce((sum, buildingType) => {
+        return sum + buildings[buildingType].tier;
+    }, 0);
 };
 
-
-export const calculateBuildingsUpgradeCost = ({ buildingTier, buildingType, rules }: { buildingTier: number, buildingType: CommonStateBuildingKey, rules: CommonStateRules }): CommonStateResources => {
+export const calculateBuildingsUpgradeCost = ({
+    buildingTier,
+    buildingType,
+    rules,
+}: {
+    buildingTier: number,
+    buildingType: CommonStateBuildingKey,
+    rules: CommonStateRules,
+}): CommonStateResources => {
     const costFactor = 1 + buildingTier * rules.buildingUpgradeCoefficient;
 
     return convertQuantitiesToResources({
@@ -187,25 +194,48 @@ export const calculateBuildingsUpgradeCost = ({ buildingTier, buildingType, rule
     });
 };
 
-
-const calculateFoodChangeInfo = ({ unitsQuantity, pastureTier, rules }: { unitsQuantity: number, pastureTier: number, rules: CommonStateRules }): Quantities => {
+const calculateFoodChangeInfo = ({
+    unitsQuantity,
+    pastureTier,
+    rules,
+}: {
+    unitsQuantity: number,
+    pastureTier: number,
+    rules: CommonStateRules,
+}): Quantities => {
     return {
         'units maintenance': -unitsQuantity * rules.unitFoodDemand,
-        'pasture production': rules.resourceIncreaseChangeRateCoefficient * pastureTier,
+        'pasture production':
+            rules.resourceIncreaseChangeRateCoefficient * pastureTier,
         'peasants production': unitsQuantity * rules.unitFoodDemand,
     };
 };
 
-
-const calculateWoodChangeInfo = ({ unitsQuantity, lumberMillTier, rules }: { unitsQuantity: number, lumberMillTier: number, rules: CommonStateRules }): Quantities => {
+const calculateWoodChangeInfo = ({
+    unitsQuantity,
+    lumberMillTier,
+    rules,
+}: {
+    unitsQuantity: number,
+    lumberMillTier: number,
+    rules: CommonStateRules,
+}): Quantities => {
     return {
-        'lumber mill production': rules.resourceIncreaseChangeRateCoefficient * lumberMillTier,
+        'lumber mill production':
+            rules.resourceIncreaseChangeRateCoefficient * lumberMillTier,
         'peasants production': unitsQuantity,
     };
 };
 
-
-export const calculateResourceChangeInfo = ({ city, resourceType, rules }: { city: CommonStateCity, resourceType: CommonStateResourceKey, rules: CommonStateRules }): Quantities => {
+export const calculateResourceChangeInfo = ({
+    city,
+    resourceType,
+    rules,
+}: {
+    city: CommonStateCity,
+    resourceType: CommonStateResourceKey,
+    rules: CommonStateRules,
+}): Quantities => {
     switch (resourceType) {
         case RESOURCE_FOOD: {
             return calculateFoodChangeInfo({
@@ -227,37 +257,67 @@ export const calculateResourceChangeInfo = ({ city, resourceType, rules }: { cit
     }
 };
 
-
-export const calculatePeasantChangeInfo = ({ buildingTiersSum, unitsQuantity, food, foodChangeRate, rules }: { buildingTiersSum: number, unitsQuantity: number, food: number, foodChangeRate: number, rules: CommonStateRules }) => {
-    const starvingPeopleQuantity = food > 0 || foodChangeRate > 0 ? 0 : Math.abs(foodChangeRate * rules.unitFoodDemand);
-    const cityCapacity = rules.baseCityCapacity + Math.max(0, rules.baseCityCapacity * buildingTiersSum - starvingPeopleQuantity * rules.unitStarvingCoefficient);
-    const growthFactorRate = rules.populationGrowthChangeRateCoefficient * unitsQuantity * (1 - (unitsQuantity / cityCapacity));
-    const percentageOfPeopleStarving = unitsQuantity === 0 ? 0 : starvingPeopleQuantity / unitsQuantity;
-    const migrationRate = starvingPeopleQuantity > 0 ? -rules.basePeasantsMigrationRate * percentageOfPeopleStarving : rules.basePeasantsMigrationRate;
+export const calculatePeasantChangeInfo = ({
+    buildingTiersSum,
+    unitsQuantity,
+    food,
+    foodChangeRate,
+    rules,
+}: {
+    buildingTiersSum: number,
+    unitsQuantity: number,
+    food: number,
+    foodChangeRate: number,
+    rules: CommonStateRules,
+}) => {
+    const starvingPeopleQuantity =
+        food > 0 || foodChangeRate > 0
+            ? 0
+            : Math.abs(foodChangeRate * rules.unitFoodDemand);
+    const cityCapacity =
+        rules.baseCityCapacity +
+        Math.max(
+            0,
+            rules.baseCityCapacity * buildingTiersSum -
+                starvingPeopleQuantity * rules.unitStarvingCoefficient,
+        );
+    const growthFactorRate =
+        rules.populationGrowthChangeRateCoefficient *
+        unitsQuantity *
+        (1 - unitsQuantity / cityCapacity);
+    const percentageOfPeopleStarving =
+        unitsQuantity === 0 ? 0 : starvingPeopleQuantity / unitsQuantity;
+    const migrationRate =
+        starvingPeopleQuantity > 0
+            ? -rules.basePeasantsMigrationRate * percentageOfPeopleStarving
+            : rules.basePeasantsMigrationRate;
     return {
-        'growth': growthFactorRate,
-        'migration': migrationRate,
+        growth: growthFactorRate,
+        migration: migrationRate,
     };
 };
 
-
-export const convertChangeInfoToChangeRate = ({ changeInfo }: { changeInfo: Quantities }): number => {
-    return Object
-        .keys(changeInfo)
-        .map(changeType => changeInfo[changeType])
-        .reduce(
-            (changeRate, partialChangeRate) => {
-                return changeRate + partialChangeRate;
-            },
-            0,
-        );
+export const convertChangeInfoToChangeRate = ({
+    changeInfo,
+}: {
+    changeInfo: Quantities,
+}): number => {
+    return Object.keys(changeInfo)
+        .map((changeType) => changeInfo[changeType])
+        .reduce((changeRate, partialChangeRate) => {
+            return changeRate + partialChangeRate;
+        }, 0);
 };
 
-
-export const convertChangeRateToDelta = ({ changeRate, timeDelta }: { changeRate: number, timeDelta: number }): number => {
+export const convertChangeRateToDelta = ({
+    changeRate,
+    timeDelta,
+}: {
+    changeRate: number,
+    timeDelta: number,
+}): number => {
     return (changeRate / 3600) * timeDelta;
 };
-
 
 export const testCommonState: CommonState = {
     cities: {

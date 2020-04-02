@@ -32,7 +32,7 @@ export type CommonActionKey =
     | typeof EXECUTE_TIME_STEP
     | typeof GET_CURRENT_STATE
     | typeof RESET_STATE
-    | typeof UPGRADE_BUILDING
+    | typeof UPGRADE_BUILDING;
 
 export type CommonPlayerAction =
     | CommonAbandonCityAction
@@ -46,6 +46,8 @@ export type CommonAction =
     | CommonPlayerAction
     | CommonDummyAction
     | CommonExecuteTimeStepAction
-    | CommonResetStateAction
+    | CommonResetStateAction;
 
-export type CommonActionCreator<A: CommonAction> = ($PropertyType<A, 'payload'>) => A;
+export type CommonActionCreator<A: CommonAction> = (
+    $PropertyType<A, 'payload'>,
+) => A;

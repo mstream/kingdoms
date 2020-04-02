@@ -10,15 +10,14 @@ const path = require('path');
 
 const utils = require('../utils');
 
-const exclusions = [
-    /coverage\//,
-    /dist\//,
-    /node_modules\//,
-];
+const exclusions = [/coverage\//, /dist\//, /node_modules\//];
 
-
-const createClientConfig = ({ env, globalVariablesCreator, mode, projectPath }) => {
-
+const createClientConfig = ({
+    env,
+    globalVariablesCreator,
+    mode,
+    projectPath,
+}) => {
     const circularDependencyPlugin = new CircularDependencyPlugin({
         allowAsyncCycles: false,
         cwd: process.cwd(),
@@ -49,8 +48,10 @@ const createClientConfig = ({ env, globalVariablesCreator, mode, projectPath }) 
     const minimizeFontsPlugin = new MinimizeFontsPlugin();
 
     const purgeCssPlugin = new PurgecssPlugin({
-        defaultExtractor: content => content.match(/[\w-\/:]+(?<!:)/g) || [],
-        paths: glob.sync(`${path.join(projectPath, 'client/src')}/**/*`, { nodir: true }),
+        defaultExtractor: (content) => content.match(/[\w-\/:]+(?<!:)/g) || [],
+        paths: glob.sync(`${path.join(projectPath, 'client/src')}/**/*`, {
+            nodir: true,
+        }),
     });
 
     return {
@@ -89,7 +90,9 @@ const createClientConfig = ({ env, globalVariablesCreator, mode, projectPath }) 
                                 ident: 'postcss',
                                 plugins: [
                                     postCssImportPlugin,
-                                    postCssTailwindCssPlugin('./client/tailwind.config.js'),
+                                    postCssTailwindCssPlugin(
+                                        './client/tailwind.config.js',
+                                    ),
                                 ],
                             },
                         },
@@ -108,6 +111,5 @@ const createClientConfig = ({ env, globalVariablesCreator, mode, projectPath }) 
         ],
     };
 };
-
 
 module.exports = createClientConfig;

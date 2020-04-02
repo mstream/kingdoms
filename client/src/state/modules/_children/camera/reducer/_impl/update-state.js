@@ -15,17 +15,16 @@ import { clientStateSelectors } from '../../../../selectors';
 import { clientStateCommonStateSelectors } from '../../../common-state/selectors';
 import type { ClientStateActionReducer } from '../../../../../types';
 
-type Reducer = ClientStateActionReducer<ClientStateCamera, ClientUpdateStateAction>;
+type Reducer = ClientStateActionReducer<
+    ClientStateCamera,
+    ClientUpdateStateAction,
+>;
 
-
-export const updateStateCameraReducer: Reducer = (
-    {
-        localState,
-        action,
-        globalState,
-    },
-) => {
-
+export const updateStateCameraReducer: Reducer = ({
+    localState,
+    action,
+    globalState,
+}) => {
     const calculateNewLocation = () => {
         const playerName = clientStateSelectors.player.name(globalState);
 
@@ -33,15 +32,22 @@ export const updateStateCameraReducer: Reducer = (
             return localState.geometry.location;
         }
 
-        const cityIdsOwnedByPlayer = clientStateSelectors.cityIdsOwnedByPlayer(globalState);
+        const cityIdsOwnedByPlayer = clientStateSelectors.cityIdsOwnedByPlayer(
+            globalState,
+        );
 
         if (cityIdsOwnedByPlayer == null || cityIdsOwnedByPlayer.length > 0) {
             return localState.geometry.location;
         }
 
-        const commonStatePlayerCities = commonStateCitiesSelectors.citiesByOwner(action.payload.commonState)[playerName];
+        const commonStatePlayerCities = commonStateCitiesSelectors.citiesByOwner(
+            action.payload.commonState,
+        )[playerName];
 
-        if (commonStatePlayerCities == null || commonStatePlayerCities.length === 0) {
+        if (
+            commonStatePlayerCities == null ||
+            commonStatePlayerCities.length === 0
+        ) {
             return localState.geometry.location;
         }
 
@@ -59,10 +65,13 @@ export const updateStateCameraReducer: Reducer = (
         const world = clientStateSelectors.commonState.world(globalState);
         const actionWorldSize = action.payload.commonState.world.size;
 
-        if (world != null && areVectorsEqual({
-            vector1: world.size,
-            vector2: actionWorldSize,
-        })) {
+        if (
+            world != null &&
+            areVectorsEqual({
+                vector1: world.size,
+                vector2: actionWorldSize,
+            })
+        ) {
             return localState.locationLimit;
         }
 

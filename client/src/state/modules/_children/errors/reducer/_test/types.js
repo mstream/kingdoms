@@ -6,4 +6,6 @@ import type {
 } from '../../../../../types';
 import type { ClientStateErrors } from '../types';
 
-export type ClientStateErrorsReducerTestScenario<+A: ClientAction> = ClientStateReducerTestScenario<ClientStateErrors, A>;
+export type ClientStateErrorsReducerTestScenario<
+    +A: ClientAction,
+> = ClientStateReducerTestScenario<ClientStateErrors, A>;

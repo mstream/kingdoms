@@ -6,7 +6,9 @@ import type { ClientSelectCityViewTabAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const selectCityViewTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewTabAction>> = [
+export const selectCityViewTabTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientSelectCityViewTabAction>,
+> = [
     {
         name: 'selects city view tab',
         action: clientActions.menu.selectCityViewTab({

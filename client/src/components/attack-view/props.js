@@ -1,6 +1,5 @@
 // @flow
 
-
 import type { ActionCreatorsProps, StateToProps } from '../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
@@ -13,7 +12,7 @@ type OwnProps = {};
 
 type StateProps = $ReadOnly<{
     ...StateToProps<typeof mapStateToProps>,
-}>
+}>;
 
 type DispatchProps = $ReadOnly<{
     ...ActionCreatorsProps<typeof actionCreators>,
@@ -30,7 +29,9 @@ const mapStateToProps = (state: ClientState) => {
         attackedCity: clientStateSelectors.attackedCity(state),
         attackedCityId: clientStateSelectors.menu.attackedCityId(state),
         attackingCityId: clientStateSelectors.menu.attackingCityId(state),
-        isFormSubmitting: clientStateSelectors.menu.isAttackFormSubmitting(state),
+        isFormSubmitting: clientStateSelectors.menu.isAttackFormSubmitting(
+            state,
+        ),
         isFormValid: clientStateSelectors.menu.isAttackFormValid(state),
         minimumDelay: clientStateSelectors.menu.minimumAttackDelay(state),
         regimentTemplate: clientStateSelectors.menu.regimentTemplate(state),
@@ -42,12 +43,11 @@ const actionCreators: DispatchProps = Object.freeze({
     requestOrderCreation: clientActions.commonState.requestOrderCreation,
 });
 
-export const connectProps = connect<Props,
+export const connectProps = connect<
+    Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>>(
-    mapStateToProps,
-    actionCreators,
-);
+    Dispatch<ClientAction>,
+>(mapStateToProps, actionCreators);

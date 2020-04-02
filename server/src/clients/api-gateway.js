@@ -4,7 +4,9 @@ import AWS from 'aws-sdk';
 
 type ApiGatewayPromise = () => Promise<void>;
 
-type PostToConnection = ({ ConnectionId: string, Data: string }) => { promise: ApiGatewayPromise }
+type PostToConnection = ({ ConnectionId: string, Data: string }) => {
+    promise: ApiGatewayPromise,
+};
 
 export type ApiGateway = {
     postToConnection: PostToConnection,

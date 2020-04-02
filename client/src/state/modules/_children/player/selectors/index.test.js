@@ -1,6 +1,5 @@
 // @flow
 
-
 import { runClientStateSelectorsTestScenarios } from '../../../../utils';
 import { clientStatePlayerSelectors } from './index';
 import { nameSelectorTestScenarios } from './_test/name-test-scenarios';

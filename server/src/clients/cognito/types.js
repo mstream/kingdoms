@@ -16,7 +16,7 @@ export type Jwks = $ReadOnly<{
     keys: $ReadOnlyArray<Jwk>,
 }>;
 
-export type GetJwks = () => Promise<Jwks>
+export type GetJwks = () => Promise<Jwks>;
 
 export type Cognito = {
     getJwks: GetJwks,

@@ -1,14 +1,10 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
-
 Parameters:
-
     NetworkStackName:
         Type: 'String'
 
-
 Resources:
-
     RedisClientSecurityGroup:
         Type: 'AWS::EC2::SecurityGroup'
         Properties:
@@ -17,8 +13,8 @@ Resources:
             VpcId:
                 Fn::ImportValue: !Sub '${NetworkStackName}-Vpc'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}-function'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}-function'
 
     RedisClusterSecurityGroup:
         Type: 'AWS::EC2::SecurityGroup'
@@ -28,13 +24,13 @@ Resources:
             VpcId:
                 Fn::ImportValue: !Sub '${NetworkStackName}-Vpc'
             SecurityGroupIngress:
-                -   IpProtocol: 'tcp'
-                    FromPort: 6379
-                    ToPort: 6379
-                    SourceSecurityGroupId: !Sub '${RedisClientSecurityGroup.GroupId}'
+                - IpProtocol: 'tcp'
+                  FromPort: 6379
+                  ToPort: 6379
+                  SourceSecurityGroupId: !Sub '${RedisClientSecurityGroup.GroupId}'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}-redis'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}-redis'
 
     RedisSubnetGroup:
         Type: 'AWS::ElastiCache::SubnetGroup'
@@ -42,7 +38,7 @@ Resources:
             CacheSubnetGroupName: 'redis'
             Description: 'Redis Subnet Group'
             SubnetIds:
-                -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+                - Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
 
     RedisCluster:
         Type: 'AWS::ElastiCache::CacheCluster'
@@ -57,20 +53,18 @@ Resources:
             VpcSecurityGroupIds:
                 - !Sub '${RedisClusterSecurityGroup.GroupId}'
 
-
 Outputs:
-
     RedisClientSecurityGroupId:
-        Value: !Sub "${RedisClientSecurityGroup.GroupId}"
+        Value: !Sub '${RedisClientSecurityGroup.GroupId}'
         Export:
-            Name: !Sub "${AWS::StackName}-RedisClientSecurityGroupId"
+            Name: !Sub '${AWS::StackName}-RedisClientSecurityGroupId'
 
     RedisHost:
-        Value: !Sub "${RedisCluster.RedisEndpoint.Address}"
+        Value: !Sub '${RedisCluster.RedisEndpoint.Address}'
         Export:
-            Name: !Sub "${AWS::StackName}-RedisHost"
+            Name: !Sub '${AWS::StackName}-RedisHost'
 
     RedisPort:
-        Value: !Sub "${RedisCluster.RedisEndpoint.Port}"
+        Value: !Sub '${RedisCluster.RedisEndpoint.Port}'
         Export:
-            Name: !Sub "${AWS::StackName}-RedisPort"
+            Name: !Sub '${AWS::StackName}-RedisPort'

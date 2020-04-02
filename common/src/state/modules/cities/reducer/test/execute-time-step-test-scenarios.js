@@ -2,23 +2,18 @@
 
 import { executeTimeStep } from '../../actions';
 import { executeTimeStepCitiesReducer } from '../execute-time-step';
-import type {
-    CommonStateCities,
-
-} from '../types';
+import type { CommonStateCities } from '../types';
 import { UNIT_PEASANT } from '../../../rules/reducer/types';
-import type {
-    CommonState,
-    CommonStateReducerResult,
-} from '../../../types';
+import type { CommonState, CommonStateReducerResult } from '../../../types';
 import { failure, success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import { emptyCityState } from '../state';
 import type { CommonExecuteTimeStepAction } from '../../../time/actions';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
-
-export const executeTimeStepTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonExecuteTimeStepAction>> = [
+export const executeTimeStepTestScenarios: $ReadOnlyArray<
+    CommonStateCitiesReducerTestScenarios<CommonExecuteTimeStepAction>,
+> = [
     {
         name: `previous time newer than the one from action`,
         action: executeTimeStep({ time: '2000-01-01T01:00:00Z' }),
@@ -27,11 +22,11 @@ export const executeTimeStepTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
             time: '2000-01-01T02:00:00Z',
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: [`the time from the action is not past the time from the state`],
-                },
-            );
+            return failure({
+                errors: [
+                    `the time from the action is not past the time from the state`,
+                ],
+            });
         },
     },
     {
@@ -40,7 +35,7 @@ export const executeTimeStepTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     units: {
                         ...emptyCityState.units,
@@ -59,20 +54,18 @@ export const executeTimeStepTestScenarios: $ReadOnlyArray<CommonStateCitiesReduc
             time: '2000-01-01T00:00:00Z',
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return success(
-                {
-                    state: {
-                        ...previousLocalState,
-                        'city1': {
-                            ...previousLocalState['city1'],
-                            units: {
-                                ...previousLocalState['city1'].units,
-                                [UNIT_PEASANT]: 100,
-                            },
+            return success({
+                state: {
+                    ...previousLocalState,
+                    city1: {
+                        ...previousLocalState['city1'],
+                        units: {
+                            ...previousLocalState['city1'].units,
+                            [UNIT_PEASANT]: 100,
                         },
                     },
                 },
-            );
+            });
         },
     },
 ];

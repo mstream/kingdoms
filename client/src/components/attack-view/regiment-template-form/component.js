@@ -11,25 +11,21 @@ import { validateUnitType } from '../../../../../common/src/validators';
 
 type BoundaryType = 'from' | 'to';
 
-const serializeInputName = (
-    {
-        boundaryType,
-        unitType,
-    }: {
-        boundaryType: BoundaryType,
-        unitType: CommonStateUnitKey
-    },
-): string => {
+const serializeInputName = ({
+    boundaryType,
+    unitType,
+}: {
+    boundaryType: BoundaryType,
+    unitType: CommonStateUnitKey,
+}): string => {
     return `${unitType}-${boundaryType}`;
 };
 
-const deserializeInputName = (
-    {
-        inputName,
-    }: {
-        inputName: string
-    },
-): { boundaryType: BoundaryType, unitType: CommonStateUnitKey } => {
+const deserializeInputName = ({
+    inputName,
+}: {
+    inputName: string,
+}): { boundaryType: BoundaryType, unitType: CommonStateUnitKey } => {
     const [unitType, boundaryType] = inputName.split('-');
 
     if (boundaryType !== 'from' && boundaryType !== 'to') {
@@ -44,20 +40,20 @@ const deserializeInputName = (
 
 export const testId = 'attack-view-regiment-template-form';
 
-export const Component = (
-    {
-        attackingCity,
-        regimentTemplate,
-        updateAttackViewRegimentTemplate,
-    }: Props,
-) => {
+export const Component = ({
+    attackingCity,
+    regimentTemplate,
+    updateAttackViewRegimentTemplate,
+}: Props) => {
     if (attackingCity == null) {
         return null;
     }
 
     const onChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
-        const { boundaryType, unitType } = deserializeInputName({ inputName: name });
+        const { boundaryType, unitType } = deserializeInputName({
+            inputName: name,
+        });
 
         try {
             const newTemplateDraft = {
@@ -76,7 +72,8 @@ export const Component = (
                 if (boundaryType === 'from') {
                     const toValue = newTemplateDraft[unitType].to;
                     const newFromValue = parsedValue;
-                    const newToValue = newFromValue > toValue ? newFromValue : toValue;
+                    const newToValue =
+                        newFromValue > toValue ? newFromValue : toValue;
                     return {
                         ...previousRange,
                         from: newFromValue,
@@ -86,7 +83,8 @@ export const Component = (
                 if (boundaryType === 'to') {
                     const fromValue = newTemplateDraft[unitType].from;
                     const newToValue = parsedValue;
-                    const newFromValue = newToValue < fromValue ? newToValue : fromValue;
+                    const newFromValue =
+                        newToValue < fromValue ? newToValue : fromValue;
                     return {
                         ...previousRange,
                         from: newFromValue,
@@ -105,14 +103,12 @@ export const Component = (
             };
 
             updateAttackViewRegimentTemplate({ regimentTemplate: newTemplate });
-
         } catch (error) {
             // do nothing on number parsing error
         }
     };
 
-    const unitRows = unitsOrder.map(unitType => {
-
+    const unitRows = unitsOrder.map((unitType) => {
         if (unitType === UNIT_PEASANT) {
             return null;
         }
@@ -120,7 +116,8 @@ export const Component = (
         const unitQuantity = attackingCity.units[unitType];
         const unitVisual = unitVisuals[unitType];
 
-        const inputClassName = 'm-1 text-xl cursor-text text-center bg-gray-900 border border-gray-100';
+        const inputClassName =
+            'm-1 text-xl cursor-text text-center bg-gray-900 border border-gray-100';
 
         return (
             <div key={unitType} className="flex flex-row flex-1 p-1 my-1 mx-2">
@@ -128,10 +125,7 @@ export const Component = (
                     <p className="text-sm text-center font-medium">
                         {numberToQuantityString({ value: unitQuantity })}
                     </p>
-                    <ImageComponent
-                        image={unitVisual.image}
-                        ratio="100%"
-                    />
+                    <ImageComponent image={unitVisual.image} ratio="100%" />
                     <p className="text-xs text-center">{unitVisual.name}</p>
                 </div>
                 <div className="flex flex-col m-1">
@@ -173,15 +167,9 @@ export const Component = (
     });
 
     return (
-        <div
-            data-testid={testId}
-            className="flex flex-col"
-        >
-            <div className="flex flex-row justify-center text-xl">
-                Regiment
-            </div>
-            <div
-                className="flex flex-row flex-wrap justify-start shadow-inner">
+        <div data-testid={testId} className="flex flex-col">
+            <div className="flex flex-row justify-center text-xl">Regiment</div>
+            <div className="flex flex-row flex-wrap justify-start shadow-inner">
                 {unitRows}
             </div>
         </div>

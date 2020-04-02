@@ -1,13 +1,12 @@
 // @flow
 
-
 import type { Vector } from '../../../../vector';
 import { emptyCityState } from '../../cities/reducer/state';
 import { zeroVector } from '../../../../vector';
 import type { CommonStateSelectorTestScenario } from '../../types';
 import { emptyCommonState } from '../../state';
 
-type Scenarios = $ReadOnlyArray<CommonStateSelectorTestScenario<?Vector>>
+type Scenarios = $ReadOnlyArray<CommonStateSelectorTestScenario<?Vector>>;
 
 export const nextCitySpotSelectorTestScenarios: Scenarios = [
     {
@@ -37,39 +36,39 @@ export const nextCitySpotSelectorTestScenarios: Scenarios = [
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     location: zeroVector,
                 },
-                'city2': {
+                city2: {
                     ...emptyCityState,
                     location: { x: 0, y: -2 },
                 },
-                'city3': {
+                city3: {
                     ...emptyCityState,
                     location: { x: 2, y: 0 },
                 },
-                'city4': {
+                city4: {
                     ...emptyCityState,
                     location: { x: 0, y: 2 },
                 },
-                'city5': {
+                city5: {
                     ...emptyCityState,
                     location: { x: -2, y: 0 },
                 },
-                'city6': {
+                city6: {
                     ...emptyCityState,
                     location: { x: -2, y: -2 },
                 },
-                'city7': {
+                city7: {
                     ...emptyCityState,
                     location: { x: 2, y: -2 },
                 },
-                'city8': {
+                city8: {
                     ...emptyCityState,
                     location: { x: 2, y: 2 },
                 },
-                'city9': {
+                city9: {
                     ...emptyCityState,
                     location: { x: -2, y: 2 },
                 },

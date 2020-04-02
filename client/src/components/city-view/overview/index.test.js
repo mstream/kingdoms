@@ -6,7 +6,10 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityOverviewComponent } from './index';
-import { TAB_OVERVIEW, TAB_UNITS } from '../../../state/modules/_children/menu/reducer/types';
+import {
+    TAB_OVERVIEW,
+    TAB_UNITS,
+} from '../../../state/modules/_children/menu/reducer/types';
 import { emptyCommonState } from '../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../common/src/state/modules/cities/reducer/state';
 import { emptyClientState } from '../../../state/state';
@@ -29,7 +32,7 @@ describe('CityOverviewComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -40,7 +43,7 @@ describe('CityOverviewComponent', () => {
 
         const { queryByRole } = render(
             <Provider store={store}>
-                <CityOverviewComponent/>
+                <CityOverviewComponent />
             </Provider>,
         );
 
@@ -61,7 +64,7 @@ describe('CityOverviewComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -72,7 +75,7 @@ describe('CityOverviewComponent', () => {
 
         const { queryByRole } = render(
             <Provider store={store}>
-                <CityOverviewComponent/>
+                <CityOverviewComponent />
             </Provider>,
         );
 

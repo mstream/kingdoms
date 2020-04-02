@@ -6,17 +6,15 @@ import type { Socket } from '../../types';
 import { clientActions } from '../../../../modules/actions';
 import { sendMessage } from '../../utils';
 
-export const createOnConnectHandler = (
-    {
-        socket,
-        store,
-        username,
-    }: {
-        socket: Socket,
-        store: ClientStore,
-        username: string,
-    },
-) => {
+export const createOnConnectHandler = ({
+    socket,
+    store,
+    username,
+}: {
+    socket: Socket,
+    store: ClientStore,
+    username: string,
+}) => {
     return (): void => {
         console.log(`ws connection established`);
 

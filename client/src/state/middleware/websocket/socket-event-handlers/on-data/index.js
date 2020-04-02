@@ -18,35 +18,54 @@ import {
 import type { ClientStore } from '../../../../types';
 import { clientActions } from '../../../../modules/actions';
 
-type ServerResponseHandler = ({ serverResponse: ServerResponse, store: ClientStore }) => void;
+type ServerResponseHandler = ({
+    serverResponse: ServerResponse,
+    store: ClientStore,
+}) => void;
 
-const handleAbandonCity: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handleAbandonCity: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {};
 
-const handleDummy: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handleDummy: ServerResponseHandler = ({ serverResponse, store }) => {};
 
-const handleChangeCityName: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handleChangeCityName: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {};
 
-const handlerCreateCity: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handlerCreateCity: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {};
 
-const handlerCreateOrder: ServerResponseHandler = ({ serverResponse, store }) => {
+const handlerCreateOrder: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {
     store.dispatch(clientActions.menu.closeAttackView());
 };
 
-const handleGetCurrentState: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handleGetCurrentState: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {};
 
-const handleExecuteTimeStep: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handleExecuteTimeStep: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {};
 
-const handleResetStateStep: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handleResetStateStep: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {};
 
-const handleUpgradeBuilding: ServerResponseHandler = ({ serverResponse, store }) => {
-};
+const handleUpgradeBuilding: ServerResponseHandler = ({
+    serverResponse,
+    store,
+}) => {};
 
 const serverResponseHandlers = {
     [ABANDON_CITY]: handleAbandonCity,
@@ -60,21 +79,18 @@ const serverResponseHandlers = {
     [UPGRADE_BUILDING]: handleUpgradeBuilding,
 };
 
-export const createOnDataHandler = (
-    {
-        store,
-    }: {
-        store: ClientStore
-    },
-) => {
+export const createOnDataHandler = ({ store }: { store: ClientStore }) => {
     return (data: Buffer): void => {
         const dataString = data.toString();
 
         console.info('ws data received: ' + dataString);
 
-        const serverResponse: ServerResponse = parseServerResponse({ json: dataString });
+        const serverResponse: ServerResponse = parseServerResponse({
+            json: dataString,
+        });
 
-        const serverResponseHandler = serverResponseHandlers[serverResponse.request.type];
+        const serverResponseHandler =
+            serverResponseHandlers[serverResponse.request.type];
 
         if (serverResponseHandler == null) {
             console.error(
@@ -84,9 +100,11 @@ export const createOnDataHandler = (
             return;
         }
 
-        store.dispatch(clientActions.commonState.updateState({
-            commonState: serverResponse.state,
-        }));
+        store.dispatch(
+            clientActions.commonState.updateState({
+                commonState: serverResponse.state,
+            }),
+        );
 
         serverResponseHandler({ serverResponse, store });
     };

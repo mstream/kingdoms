@@ -9,19 +9,9 @@ import {
 } from '../../../../../../common/src/time';
 import classNames from 'classnames';
 
-
 export const testId = 'city-orders-scheduled-attack-item';
 
-export const Component = (
-    {
-        cities,
-        cityId,
-        isActive,
-        item,
-        time,
-    }: Props,
-) => {
-
+export const Component = ({ cities, cityId, isActive, item, time }: Props) => {
     if (cities == null || cityId == null || time == null) {
         return null;
     }
@@ -38,7 +28,9 @@ export const Component = (
 
     const isDelayed = timeDeltaInSeconds < 0;
 
-    const durationString = minutesToDurationString({ durationInMinutes: Math.abs(timeDeltaInSeconds / 60) });
+    const durationString = minutesToDurationString({
+        durationInMinutes: Math.abs(timeDeltaInSeconds / 60),
+    });
 
     const attackedCityName = cities[item.targetCityId].name;
 
@@ -52,25 +44,15 @@ export const Component = (
         },
     );
 
-    const subheaderClassName = classNames(
-        'text-xs',
-        {
-            'text-green-300': !isDelayed,
-            'text-red-300': isDelayed,
-        },
-    );
+    const subheaderClassName = classNames('text-xs', {
+        'text-green-300': !isDelayed,
+        'text-red-300': isDelayed,
+    });
 
     return (
-        <div
-            data-testid={testId}
-            className={itemClassName}
-        >
-            <div className="text-sm font-medium">
-                {header}
-            </div>
-            <div className={subheaderClassName}>
-                {subheader}
-            </div>
+        <div data-testid={testId} className={itemClassName}>
+            <div className="text-sm font-medium">{header}</div>
+            <div className={subheaderClassName}>{subheader}</div>
         </div>
     );
 };

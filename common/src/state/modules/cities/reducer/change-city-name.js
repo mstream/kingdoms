@@ -6,15 +6,16 @@ import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonChangeCityNameAction } from '../actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStateCities, CommonChangeCityNameAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateCities,
+    CommonChangeCityNameAction,
+>;
 
-export const changeCityNameCitiesReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const changeCityNameCitiesReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { cityId, name, playerId } = action.payload;
     const city = localState[cityId];
 

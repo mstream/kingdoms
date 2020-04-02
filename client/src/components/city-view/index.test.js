@@ -11,13 +11,12 @@ import { cityResourcesComponentTestId } from './resources';
 import { cityBuildingsComponentTestId } from './buildings';
 import { cityOverviewComponentTestId } from './overview';
 import {
-    TAB_BUILDINGS, TAB_OVERVIEW,
+    TAB_BUILDINGS,
+    TAB_OVERVIEW,
     TAB_RESOURCES,
     TAB_UNITS,
 } from '../../state/modules/_children/menu/reducer/types';
-import {
-    UNIT_PEASANT,
-} from '../../../../common/src/state/modules/rules/reducer/types';
+import { UNIT_PEASANT } from '../../../../common/src/state/modules/rules/reducer/types';
 import { emptyCommonState } from '../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../common/src/state/modules/cities/reducer/state';
 import { emptyUnitStatsState } from '../../../../common/src/state/modules/rules/reducer/state';
@@ -41,7 +40,7 @@ describe('CityViewComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -52,11 +51,13 @@ describe('CityViewComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <CityViewComponent/>
+                <CityViewComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(cityOverviewComponentTestId)).toBeInTheDocument();
+        await expect(
+            queryByTestId(cityOverviewComponentTestId),
+        ).toBeInTheDocument();
     });
 
     test('displays units when the units tab is active', async () => {
@@ -73,7 +74,7 @@ describe('CityViewComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -84,11 +85,13 @@ describe('CityViewComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <CityViewComponent/>
+                <CityViewComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(cityUnitsComponentTestId)).toBeInTheDocument();
+        await expect(
+            queryByTestId(cityUnitsComponentTestId),
+        ).toBeInTheDocument();
     });
 
     test('displays buildings when the buildings tab is active', async () => {
@@ -105,7 +108,7 @@ describe('CityViewComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -116,11 +119,13 @@ describe('CityViewComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <CityViewComponent/>
+                <CityViewComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(cityBuildingsComponentTestId)).toBeInTheDocument();
+        await expect(
+            queryByTestId(cityBuildingsComponentTestId),
+        ).toBeInTheDocument();
     });
 
     test('displays resources when the resources tab is active', async () => {
@@ -137,7 +142,7 @@ describe('CityViewComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -148,10 +153,12 @@ describe('CityViewComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <CityViewComponent/>
+                <CityViewComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(cityResourcesComponentTestId)).toBeInTheDocument();
+        await expect(
+            queryByTestId(cityResourcesComponentTestId),
+        ).toBeInTheDocument();
     });
 });

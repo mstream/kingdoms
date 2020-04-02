@@ -8,7 +8,9 @@ import type { CommonResetStateAction } from '../../../../actions/types';
 import type { CommonStateRulesReducerTestScenarios } from './types';
 import { resetState } from '../../../../actions';
 
-type Scenarios = $ReadOnlyArray<CommonStateRulesReducerTestScenarios<CommonResetStateAction>>;
+type Scenarios = $ReadOnlyArray<
+    CommonStateRulesReducerTestScenarios<CommonResetStateAction>,
+>;
 
 export const resetStateTestScenarios: Scenarios = [
     {
@@ -21,11 +23,9 @@ export const resetStateTestScenarios: Scenarios = [
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return success(
-                {
-                    state: initialCommonState.rules,
-                },
-            );
+            return success({
+                state: initialCommonState.rules,
+            });
         },
     },
 ];

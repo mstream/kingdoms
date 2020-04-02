@@ -1,6 +1,5 @@
 // @flow
 
-
 import type { ActionCreatorsProps, StateToProps } from '../../types';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
@@ -15,7 +14,7 @@ type OwnProps = {};
 
 type StateProps = $ReadOnly<{
     ...StateToProps<typeof mapStateToProps>,
-}>
+}>;
 
 type DispatchProps = $ReadOnly<{
     ...ActionCreatorsProps<typeof actionCreators>,
@@ -31,7 +30,9 @@ const mapStateToProps = (state: ClientState) => {
     return Object.freeze({
         activeResource: clientStateSelectors.menu.activeCityViewResource(state),
         city: clientStateSelectors.currentlyViewedCity(state),
-        isVisible: clientStateSelectors.menu.activeCityViewTab(state) === TAB_RESOURCES,
+        isVisible:
+            clientStateSelectors.menu.activeCityViewTab(state) ===
+            TAB_RESOURCES,
         rules: clientStateSelectors.commonState.rules(state),
     });
 };
@@ -40,12 +41,11 @@ const actionCreators: DispatchProps = Object.freeze({
     selectCityViewResourcesTab: clientActions.menu.selectCityViewResourcesTab,
 });
 
-export const connectProps = connect<Props,
+export const connectProps = connect<
+    Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>>(
-    mapStateToProps,
-    actionCreators,
-);
+    Dispatch<ClientAction>,
+>(mapStateToProps, actionCreators);

@@ -2,7 +2,6 @@
 
 import { Selector } from 'testcafe';
 
-
 export const selectors = {
     passwordInput: Selector('#signInFormPassword').nth(1),
     signInButton: Selector('input[type="submit"]').nth(1),

@@ -10,7 +10,6 @@ import { playerReducer } from '../_children/player/reducer';
 import { errorsReducer } from '../_children/errors/reducer';
 import type { ClientAction, ClientState } from '../../types';
 
-
 export const rootReducer: Reducer<ClientState, ClientAction> = combineReducers({
     camera: cameraReducer,
     errors: errorsReducer,
@@ -19,4 +18,3 @@ export const rootReducer: Reducer<ClientState, ClientAction> = combineReducers({
     commonState: commonStateReducer,
     tiles: tilesReducer,
 });
-

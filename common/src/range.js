@@ -1,6 +1,5 @@
 // @flow
 
-
 export type Range = $ReadOnly<{
     from: number,
     to: number,

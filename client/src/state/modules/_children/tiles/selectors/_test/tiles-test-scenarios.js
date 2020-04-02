@@ -4,7 +4,9 @@ import { emptyClientState } from '../../../../../state';
 import type { ClientStateTiles } from '../../reducer/types';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<ClientStateTiles>>
+type Scenarios = $ReadOnlyArray<
+    ClientStateSelectorTestScenario<ClientStateTiles>,
+>;
 
 export const tilesSelectorTestScenarios: Scenarios = [
     {

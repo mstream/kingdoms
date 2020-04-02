@@ -1,6 +1,5 @@
 // @flow
 
-
 import { playerReducer } from './index';
 import { loadPlayerTestScenarios } from './_test/load-player-test-scenarios';
 import { clientActions } from '../../../actions';
@@ -10,7 +9,6 @@ import type { ClientStatePlayerReducerTestScenario } from './_test/types';
 import { emptyClientState } from '../../../../state';
 import { runReducerTestScenarios } from '../../../../utils';
 import { LOAD_PLAYER } from '../actions/types';
-
 
 const stateInitializationScenario: ClientStatePlayerReducerTestScenario<ClientDummyAction> = {
     name: 'initializes its state',
@@ -27,7 +25,6 @@ const stateInitializationScenario: ClientStatePlayerReducerTestScenario<ClientDu
     },
 };
 
-
 describe('playerReducer', () => {
     runReducerTestScenarios({
         reducer: playerReducer,
@@ -38,4 +35,3 @@ describe('playerReducer', () => {
         },
     });
 });
-

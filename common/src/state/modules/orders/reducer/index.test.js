@@ -15,7 +15,6 @@ import { EXECUTE_TIME_STEP } from '../../time/actions';
 import { executeTimeStepTestScenarios } from './_test/execute-time-step-test-scenarios';
 import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
-
 const stateInitializationScenario: CommonStateOrdersReducerTestScenarios<CommonDummyAction> = {
     name: 'initializes its state',
     action: dummy(),
@@ -28,7 +27,6 @@ const stateInitializationScenario: CommonStateOrdersReducerTestScenarios<CommonD
         return success({ state: initialCommonState.orders });
     },
 };
-
 
 describe('ordersReducer', () => {
     runTestScenarios({

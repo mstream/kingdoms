@@ -7,15 +7,16 @@ import { clientStatePlayerSelectors } from '../../../player/selectors';
 import type { ClientStateActionReducer } from '../../../../../types';
 import { clientStateSelectors } from '../../../../selectors';
 
-type Reducer = ClientStateActionReducer<ClientStateMenu, ClientOpenCityViewAction>;
+type Reducer = ClientStateActionReducer<
+    ClientStateMenu,
+    ClientOpenCityViewAction,
+>;
 
-export const openCityViewMenuReducer: Reducer = (
-    {
-        localState,
-        action,
-        globalState,
-    },
-) => {
+export const openCityViewMenuReducer: Reducer = ({
+    localState,
+    action,
+    globalState,
+}) => {
     if (clientStateSelectors.commonState.isLoaded(globalState) == null) {
         console.warn(`opening city view without the server state loaded`);
         return localState;
@@ -28,11 +29,16 @@ export const openCityViewMenuReducer: Reducer = (
         return localState;
     }
 
-    const cityIdsByOwner = clientStateSelectors.commonState.cityIdsByOwner(globalState);
-    const playerCityIds = cityIdsByOwner != null ? cityIdsByOwner[playerName] : null;
+    const cityIdsByOwner = clientStateSelectors.commonState.cityIdsByOwner(
+        globalState,
+    );
+    const playerCityIds =
+        cityIdsByOwner != null ? cityIdsByOwner[playerName] : null;
 
     if (playerCityIds == null) {
-        console.warn(`opening city view for player which does not own any city`);
+        console.warn(
+            `opening city view for player which does not own any city`,
+        );
         return localState;
     }
 

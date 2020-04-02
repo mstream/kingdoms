@@ -5,20 +5,16 @@ import type { Props } from './props';
 import { getRefValue } from '../../../util';
 import classNames from 'classnames';
 
-
 export const testId = 'city-header';
 
-export const Component = (
-    {
-        city,
-        cityId,
-        nextCityId,
-        openCityView,
-        previousCityId,
-        requestCityNameChange,
-    }: Props,
-) => {
-
+export const Component = ({
+    city,
+    cityId,
+    nextCityId,
+    openCityView,
+    previousCityId,
+    requestCityNameChange,
+}: Props) => {
     if (city == null || cityId == null) {
         return null;
     }
@@ -28,16 +24,11 @@ export const Component = (
     const [isNameBeingEdited, setNameBeingEdited] = useState(false);
     const [nameDraft, setNameDraft] = useState('');
 
-    useEffect(
-        () => {
-            if (isNameBeingEdited) {
-                getRefValue({ ref: nameInputRef }).focus();
-            }
-        },
-        [
-            isNameBeingEdited,
-        ],
-    );
+    useEffect(() => {
+        if (isNameBeingEdited) {
+            getRefValue({ ref: nameInputRef }).focus();
+        }
+    }, [isNameBeingEdited]);
 
     const onCityNameInputChange = (event) => {
         setNameDraft(event.target.value);
@@ -69,24 +60,24 @@ export const Component = (
         }
     };
 
-    const cityNameInput = isNameBeingEdited ?
-        (
-            <input
-                ref={nameInputRef}
-                type="text"
-                defaultValue={nameDraft}
-                className="text-center"
-                onChange={onCityNameInputChange}
-                onBlur={onCityNameInputBlur}
-                onKeyDown={onCityNameInputKeyDown}
-            />
-        ) : (
-            <p
-                className="font-bold text-2xl text-center cursor-text hover:border text-gray-100"
-                onClick={onCityNameInputClick}>
-                {city.name}
-            </p>
-        );
+    const cityNameInput = isNameBeingEdited ? (
+        <input
+            ref={nameInputRef}
+            type="text"
+            defaultValue={nameDraft}
+            className="text-center"
+            onChange={onCityNameInputChange}
+            onBlur={onCityNameInputBlur}
+            onKeyDown={onCityNameInputKeyDown}
+        />
+    ) : (
+        <p
+            className="font-bold text-2xl text-center cursor-text hover:border text-gray-100"
+            onClick={onCityNameInputClick}
+        >
+            {city.name}
+        </p>
+    );
 
     const isNavigationEnabled = previousCityId != null || nextCityId != null;
 
@@ -98,7 +89,13 @@ export const Component = (
         },
     );
 
-    const navigateToNextCityButton = ({ nextCityId, openCityView }: { nextCityId: string, openCityView: typeof openCityView }) => {
+    const navigateToNextCityButton = ({
+        nextCityId,
+        openCityView,
+    }: {
+        nextCityId: string,
+        openCityView: typeof openCityView,
+    }) => {
         const onNavigateToNextCityClick = () => {
             openCityView({ cityId: nextCityId });
         };
@@ -108,12 +105,18 @@ export const Component = (
                 className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center cursor-pointer focus:outline-none bg-gray-400 hover:bg-gray-300"
                 onClick={onNavigateToNextCityClick}
             >
-                <i className="icofont icofont-arrow-right"/>
+                <i className="icofont icofont-arrow-right" />
             </button>
         );
     };
 
-    const navigateToPreviousCityButton = ({ openCityView, previousCityId }: { previousCityId: string, openCityView: typeof openCityView }) => {
+    const navigateToPreviousCityButton = ({
+        openCityView,
+        previousCityId,
+    }: {
+        previousCityId: string,
+        openCityView: typeof openCityView,
+    }) => {
         const onNavigateToPreviousCityClick = () => {
             openCityView({ cityId: previousCityId });
         };
@@ -123,29 +126,26 @@ export const Component = (
                 className="metal-bg text-gray-100 font-bold py-2 px-4 rounded-tl inline-flex items-center focus:outline-none cursor-pointer bg-gray-400 hover:bg-gray-300"
                 onClick={onNavigateToPreviousCityClick}
             >
-                <i className="icofont icofont-arrow-left"/>
+                <i className="icofont icofont-arrow-left" />
             </button>
         );
     };
 
     return (
-        <div data-testid={testId}
-             className={className}>
-            {
-                previousCityId != null && navigateToPreviousCityButton({
+        <div data-testid={testId} className={className}>
+            {previousCityId != null &&
+                navigateToPreviousCityButton({
                     openCityView,
                     previousCityId,
-                })
-            }
+                })}
             <div className="flex flex-row items-center justify-center">
                 {cityNameInput}
             </div>
-            {
-                nextCityId != null && navigateToNextCityButton({
+            {nextCityId != null &&
+                navigateToNextCityButton({
                     nextCityId,
                     openCityView,
-                })
-            }
+                })}
         </div>
     );
 };

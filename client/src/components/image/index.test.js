@@ -23,9 +23,7 @@ describe('ImageComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <ImageComponent
-                    image={image}
-                    ratio={ratio}>
+                <ImageComponent image={image} ratio={ratio}>
                     <p>text1</p>
                     <p>text2</p>
                 </ImageComponent>

@@ -1,6 +1,5 @@
 // @flow
 
-
 import { emptyCommonState } from '../../../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../../../common/src/state/modules/cities/reducer/state';
 import type { ClientStateTilesReducerTestScenario } from './types';
@@ -8,18 +7,19 @@ import type { ClientUpdateStateAction } from '../../../common-state/actions/type
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-
-export const updateStateTestScenarios: $ReadOnlyArray<ClientStateTilesReducerTestScenario<ClientUpdateStateAction>> = [
+export const updateStateTestScenarios: $ReadOnlyArray<
+    ClientStateTilesReducerTestScenario<ClientUpdateStateAction>,
+> = [
     {
         name: 'updates state',
         action: clientActions.commonState.updateState({
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                     },
                 },

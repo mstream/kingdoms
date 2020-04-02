@@ -1,6 +1,5 @@
 // @flow
 
-
 import { runClientStateSelectorsTestScenarios } from '../../../../utils';
 import { attackingCityIdSelectorTestScenarios } from './_test/attacking-city-id-test-scenarios';
 import { clientStateMenuSelectors } from './index';
@@ -22,43 +21,42 @@ import { isAttackFormSubmittingSelectorTestScenarios } from './_test/is-attack-f
 import { activeCityViewOrderIdSelectorTestScenarios } from './_test/active-city-view-order-id-test-scenarios';
 
 describe('clientStateMenuSelectors', () => {
-        runClientStateSelectorsTestScenarios({
+    runClientStateSelectorsTestScenarios({
+        // $FlowFixMe
+        moduleSelectors: clientStateMenuSelectors,
+        scenarios: {
             // $FlowFixMe
-            moduleSelectors: clientStateMenuSelectors,
-            scenarios: {
-                // $FlowFixMe
-                activeCityViewBuilding: activeCityViewBuildingSelectorTestScenarios,
-                // $FlowFixMe
-                activeCityViewOrderId: activeCityViewOrderIdSelectorTestScenarios,
-                // $FlowFixMe
-                activeCityViewResource: activeCityViewResourceSelectorTestScenarios,
-                // $FlowFixMe
-                activeCityViewUnit: activeCityViewUnitSelectorTestScenarios,
-                // $FlowFixMe
-                activeCityViewTab: activeCityViewTabSelectorTestScenarios,
-                // $FlowFixMe
-                attackedCityId: attackedCityIdSelectorTestScenarios,
-                // $FlowFixMe
-                attackingCityId: attackingCityIdSelectorTestScenarios,
-                // $FlowFixMe
-                currentlyViewedCityId: currentlyViewedCityIdSelectorTestScenarios,
-                // $FlowFixMe
-                isAnyMenuOpen: isAnyMenuOpenSelectorTestScenarios,
-                // $FlowFixMe
-                isAttackFormSubmitting: isAttackFormSubmittingSelectorTestScenarios,
-                // $FlowFixMe
-                isAttackFormValid: isAttackFormValidSelectorTestScenarios,
-                // $FlowFixMe
-                isAttackViewMenuOpen: isAttackViewMenuOpenSelectorTestScenarios,
-                // $FlowFixMe
-                isCityViewMenuOpen: isCityViewMenuOpenSelectorTestScenarios,
-                // $FlowFixMe
-                isNewCityBeingCreated: isNewCityBeingCreatedSelectorTestScenarios,
-                // $FlowFixMe
-                minimumAttackDelay: minimumAttackDelaySelectorTestScenarios,
-                // $FlowFixMe
-                regimentTemplate: regimentTemplateSelectorTestScenarios,
-            },
-        });
-    },
-);
+            activeCityViewBuilding: activeCityViewBuildingSelectorTestScenarios,
+            // $FlowFixMe
+            activeCityViewOrderId: activeCityViewOrderIdSelectorTestScenarios,
+            // $FlowFixMe
+            activeCityViewResource: activeCityViewResourceSelectorTestScenarios,
+            // $FlowFixMe
+            activeCityViewUnit: activeCityViewUnitSelectorTestScenarios,
+            // $FlowFixMe
+            activeCityViewTab: activeCityViewTabSelectorTestScenarios,
+            // $FlowFixMe
+            attackedCityId: attackedCityIdSelectorTestScenarios,
+            // $FlowFixMe
+            attackingCityId: attackingCityIdSelectorTestScenarios,
+            // $FlowFixMe
+            currentlyViewedCityId: currentlyViewedCityIdSelectorTestScenarios,
+            // $FlowFixMe
+            isAnyMenuOpen: isAnyMenuOpenSelectorTestScenarios,
+            // $FlowFixMe
+            isAttackFormSubmitting: isAttackFormSubmittingSelectorTestScenarios,
+            // $FlowFixMe
+            isAttackFormValid: isAttackFormValidSelectorTestScenarios,
+            // $FlowFixMe
+            isAttackViewMenuOpen: isAttackViewMenuOpenSelectorTestScenarios,
+            // $FlowFixMe
+            isCityViewMenuOpen: isCityViewMenuOpenSelectorTestScenarios,
+            // $FlowFixMe
+            isNewCityBeingCreated: isNewCityBeingCreatedSelectorTestScenarios,
+            // $FlowFixMe
+            minimumAttackDelay: minimumAttackDelaySelectorTestScenarios,
+            // $FlowFixMe
+            regimentTemplate: regimentTemplateSelectorTestScenarios,
+        },
+    });
+});

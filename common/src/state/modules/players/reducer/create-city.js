@@ -7,15 +7,16 @@ import { failure, success } from '../../utils';
 import type { CommonResetStateAction } from '../../../actions/types';
 import type { CommonCreateCityAction } from '../../cities/actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStatePlayers, CommonCreateCityAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStatePlayers,
+    CommonCreateCityAction,
+>;
 
-export const createCityPlayersReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const createCityPlayersReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { playerId } = action.payload;
 
     const playerStatus = localState[playerId];
@@ -24,7 +25,9 @@ export const createCityPlayersReducer: Reducer = (
         case PLAYER_STATUS_PLAYING:
             return failure({ errors: ['the player is already playing'] });
         case PLAYER_STATUS_DEFEATED:
-            return failure({ errors: ['the player has already been defeated'] });
+            return failure({
+                errors: ['the player has already been defeated'],
+            });
         default:
             return success({
                 state: {
@@ -34,5 +37,3 @@ export const createCityPlayersReducer: Reducer = (
             });
     }
 };
-
-

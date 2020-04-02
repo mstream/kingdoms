@@ -18,14 +18,13 @@ describe('signUp', () => {
             username,
         });
 
-        expect(exec.mock.calls).toEqual(
+        expect(exec.mock.calls).toEqual([
             [
-                ['aws cognito-idp sign-up --region region1 --client-id id1 --username user1 --password password1'],
+                'aws cognito-idp sign-up --region region1 --client-id id1 --username user1 --password password1',
             ],
-        );
+        ]);
     });
 });
-
 
 describe('confirmSignUp', () => {
     it('produces a valid command', async () => {
@@ -35,10 +34,10 @@ describe('confirmSignUp', () => {
 
         await confirmSignUp({ exec, username, userPoolId });
 
-        expect(exec.mock.calls).toEqual(
+        expect(exec.mock.calls).toEqual([
             [
-                ['aws cognito-idp admin-confirm-sign-up --user-pool-id pool1 --username user1'],
+                'aws cognito-idp admin-confirm-sign-up --user-pool-id pool1 --username user1',
             ],
-        );
+        ]);
     });
 });

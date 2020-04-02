@@ -6,13 +6,11 @@ import classNames from 'classnames';
 
 export const testId = 'game-start';
 
-export const Component = (
-    {
-        isCityBeingCreated,
-        isGameStarting,
-        requestCityCreation,
-    }: Props) => {
-
+export const Component = ({
+    isCityBeingCreated,
+    isGameStarting,
+    requestCityCreation,
+}: Props) => {
     if (!isGameStarting) {
         return null;
     }
@@ -31,20 +29,16 @@ export const Component = (
         },
     );
 
-
     return (
-        <div data-testid={testId}
-             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t">
-            <div
-                className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"
-            />
-            <div
-                className="bricks-bg absolute w-6/12 rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl bg-gray-800">
-                <div
-                    className="wood-bg flex flex-row items-stretch flex-none justify-between w-full bg-orange-800">
+        <div
+            data-testid={testId}
+            className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t"
+        >
+            <div className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer" />
+            <div className="bricks-bg absolute w-6/12 rounded-sm shadow-lg flex flex-col items-center justify-center text-2xl bg-gray-800">
+                <div className="wood-bg flex flex-row items-stretch flex-none justify-between w-full bg-orange-800">
                     <div className="flex flex-row items-center justify-center">
-                        <p
-                            className="font-bold text-2xl text-center text-gray-100">
+                        <p className="font-bold text-2xl text-center text-gray-100">
                             Start game
                         </p>
                     </div>
@@ -54,7 +48,8 @@ export const Component = (
                         <div className="w-1/3">
                             <label
                                 className="text-gray-500 font-bold text-right"
-                                htmlFor="new-city-name">
+                                htmlFor="new-city-name"
+                            >
                                 City name
                             </label>
                         </div>
@@ -64,25 +59,21 @@ export const Component = (
                                 className="appearance-none border-none w-full leading-tight focus:outline-none text-gray-900 bg-gray-100 cursor-text"
                                 type="text"
                                 placeholder="London"
-                                onChange={
-                                    (event) => {
-                                        setNameDraft(event.target.value);
-                                    }
-                                }
-                            >
-                            </input>
+                                onChange={(event) => {
+                                    setNameDraft(event.target.value);
+                                }}
+                            ></input>
                         </div>
                     </div>
                     <button
                         className={buttonClassName}
-                        onClick={
-                            (event) => {
-                                if (nameDraft.length === 0) {
-                                    return;
-                                }
-                                requestCityCreation({ name: nameDraft });
+                        onClick={(event) => {
+                            if (nameDraft.length === 0) {
+                                return;
                             }
-                        }>
+                            requestCityCreation({ name: nameDraft });
+                        }}
+                    >
                         Start
                     </button>
                 </div>

@@ -46,4 +46,3 @@ export type ClientStateMenu = $ReadOnly<{
     cityView: ClientStateCityView,
     newCity: ClientStateNewCity,
 }>;
-

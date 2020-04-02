@@ -10,7 +10,6 @@ import * as serviceWorker from './service-worker';
 import { createClientStore } from './state/store';
 import { getIdTokenInfo } from './util';
 
-
 const rootElement = document.getElementById('root');
 
 if (rootElement == null) {
@@ -26,18 +25,14 @@ if (tokenInfo != null) {
     });
 
     ReactDOM.render(
-        <Provider
-            store={store}>
-            <AppComponent/>
+        <Provider store={store}>
+            <AppComponent />
         </Provider>,
         rootElement,
     );
-
 }
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
-

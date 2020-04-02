@@ -1,6 +1,5 @@
 // @flow
 
-
 export type Config = {
     clientId: string,
     password: string,

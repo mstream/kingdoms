@@ -7,8 +7,9 @@ import { emptyCityState } from '../state';
 import type { CommonChangeCityNameAction } from '../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
-
-export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonChangeCityNameAction>> = [
+export const changeCityNameTestScenarios: $ReadOnlyArray<
+    CommonStateCitiesReducerTestScenarios<CommonChangeCityNameAction>,
+> = [
     {
         name: 'changes the name',
         action: changeCityName({
@@ -19,7 +20,7 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player1',
@@ -27,18 +28,15 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return success(
-                {
-                    state:
-                        {
-                            ...previousLocalState,
-                            'city1': {
-                                ...previousLocalState['city1'],
-                                name: 'Newname',
-                            },
-                        },
+            return success({
+                state: {
+                    ...previousLocalState,
+                    city1: {
+                        ...previousLocalState['city1'],
+                        name: 'Newname',
+                    },
                 },
-            );
+            });
         },
     },
     {
@@ -53,11 +51,9 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
             cities: {},
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city does not exist'],
-                },
-            );
+            return failure({
+                errors: ['the city does not exist'],
+            });
         },
     },
     {
@@ -70,7 +66,7 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player2',
@@ -78,11 +74,9 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city does not belong to the player'],
-                },
-            );
+            return failure({
+                errors: ['the city does not belong to the player'],
+            });
         },
     },
     {
@@ -95,7 +89,7 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player1',
@@ -103,11 +97,9 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city name is too short'],
-                },
-            );
+            return failure({
+                errors: ['the city name is too short'],
+            });
         },
     },
     {
@@ -120,7 +112,7 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     name: 'Oldname',
                     ownerId: 'player1',
@@ -128,11 +120,9 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city name is too long'],
-                },
-            );
+            return failure({
+                errors: ['the city name is too long'],
+            });
         },
     },
     {
@@ -145,18 +135,16 @@ export const changeCityNameTestScenarios: $ReadOnlyArray<CommonStateCitiesReduce
         previousGlobalState: {
             ...emptyCommonState,
             cities: {
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     ownerId: 'player1',
                 },
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city name does not follow the convention'],
-                },
-            );
+            return failure({
+                errors: ['the city name does not follow the convention'],
+            });
         },
     },
 ];

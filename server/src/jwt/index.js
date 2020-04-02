@@ -5,14 +5,24 @@ import type { UserProfileResult } from './types';
 import { getKeyId, verifyToken } from './utils';
 import { getPublicKey } from '../connectors/auth';
 
-const buildErrorResult = ({ message }: { message: string }): UserProfileResult => {
+const buildErrorResult = ({
+    message,
+}: {
+    message: string,
+}): UserProfileResult => {
     return {
         errors: [message],
         userProfile: null,
     };
 };
 
-export const buildUserProfile = async ({ cognito, token }: { cognito: Cognito, token: string }): Promise<UserProfileResult> => {
+export const buildUserProfile = async ({
+    cognito,
+    token,
+}: {
+    cognito: Cognito,
+    token: string,
+}): Promise<UserProfileResult> => {
     try {
         const keyId = getKeyId({ token });
 
@@ -35,8 +45,9 @@ export const buildUserProfile = async ({ cognito, token }: { cognito: Cognito, t
             publicKey,
             token,
         });
-
     } catch (error) {
-        return buildErrorResult({ message: `unexpeted error: ${error.message}` });
+        return buildErrorResult({
+            message: `unexpeted error: ${error.message}`,
+        });
     }
 };

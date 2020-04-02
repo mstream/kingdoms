@@ -2,5 +2,4 @@
 
 import type { CommonState } from '../../../../../../../common/src/state/modules/types';
 
-export type ClientStateCommonState = ?CommonState
-
+export type ClientStateCommonState = ?CommonState;

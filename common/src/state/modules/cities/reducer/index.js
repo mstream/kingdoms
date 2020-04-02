@@ -1,6 +1,5 @@
 // @flow
 
-
 import { abandonCityCitiesReducer } from './abandon-city';
 import { changeCityNameCitiesReducer } from './change-city-name';
 import { upgradeBuildingCitiesReducer } from './upgrade-building';
@@ -21,7 +20,6 @@ import { createCommonStateReducer } from '../../utils';
 import { initialCommonState } from '../../../index';
 import type { CommonStateCities } from './types';
 
-
 export const citiesReducer = createCommonStateReducer<CommonStateCities>({
     actionReducers: {
         [ABANDON_CITY]: abandonCityCitiesReducer,
@@ -34,4 +32,3 @@ export const citiesReducer = createCommonStateReducer<CommonStateCities>({
     },
     initialState: initialCommonState.cities,
 });
-

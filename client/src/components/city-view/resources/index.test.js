@@ -6,7 +6,10 @@ import { fireEvent, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { CityResourcesComponent } from './index';
-import { TAB_RESOURCES, TAB_UNITS } from '../../../state/modules/_children/menu/reducer/types';
+import {
+    TAB_RESOURCES,
+    TAB_UNITS,
+} from '../../../state/modules/_children/menu/reducer/types';
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
@@ -18,7 +21,6 @@ import type { ClientState } from '../../../state/types';
 import { clientActions } from '../../../state/modules/actions';
 
 const mockStore = configureStore([]);
-
 
 describe('CityResourcesComponent', () => {
     test('does not display when tab is not the resources', async () => {
@@ -35,7 +37,7 @@ describe('CityResourcesComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -46,7 +48,7 @@ describe('CityResourcesComponent', () => {
 
         const { queryByRole } = render(
             <Provider store={store}>
-                <CityResourcesComponent/>
+                <CityResourcesComponent />
             </Provider>,
         );
 
@@ -68,7 +70,7 @@ describe('CityResourcesComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -79,7 +81,7 @@ describe('CityResourcesComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityResourcesComponent/>
+                <CityResourcesComponent />
             </Provider>,
         );
 
@@ -93,8 +95,10 @@ describe('CityResourcesComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clientActions.menu.selectCityViewResourcesTab({
-            resourceType: RESOURCE_FOOD
-        }));
+        expect(actions[0]).toEqual(
+            clientActions.menu.selectCityViewResourcesTab({
+                resourceType: RESOURCE_FOOD,
+            }),
+        );
     });
 });

@@ -1,32 +1,26 @@
 // @flow
 
-jest.mock(
-    '../../config',
-    () => {
-        return {
-            config: {
-                environment: 'env1',
-                redis: {
-                    host: 'redis',
-                    port: 1234,
-                },
+jest.mock('../../config', () => {
+    return {
+        config: {
+            environment: 'env1',
+            redis: {
+                host: 'redis',
+                port: 1234,
             },
-        };
-    },
-);
+        },
+    };
+});
 
-jest.mock(
-    '../../clients/redis',
-    () => {
-        return {
-            createRedisClient: () => {
-                return {
-                    sadd: () => Promise.resolve(1),
-                };
-            },
-        };
-    },
-);
+jest.mock('../../clients/redis', () => {
+    return {
+        createRedisClient: () => {
+            return {
+                sadd: () => Promise.resolve(1),
+            };
+        },
+    };
+});
 
 import { emptyApiGatewayProxyEvent, emptyContext } from '../util';
 import type { APIGatewayProxyEvent, Context } from '../types';
@@ -54,7 +48,6 @@ describe('onConnectHandler', () => {
         };
 
         const actual = await handler(event, context, callback);
-
 
         expect(actual).toEqual(expected);
     });

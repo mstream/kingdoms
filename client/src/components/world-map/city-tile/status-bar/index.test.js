@@ -48,7 +48,7 @@ describe('CityStatusBarComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityStatusBarComponent city={city}/>
+                <CityStatusBarComponent city={city} />
             </Provider>,
         );
 

@@ -17,4 +17,3 @@ export type CommonStateCity = $ReadOnly<{
 }>;
 
 export type CommonStateCities = $ReadOnly<{ [string]: CommonStateCity }>;
-

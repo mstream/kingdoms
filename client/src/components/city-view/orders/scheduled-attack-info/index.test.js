@@ -12,7 +12,6 @@ import { UNIT_PIKEMAN } from '../../../../../../common/src/state/modules/rules/r
 import { CityOrdersScheduledAttackInfoComponent } from './index';
 import type { CommonStateRegimentTemplate } from '../../../../../../common/src/state/modules/orders/reducer/types';
 
-
 const mockStore = configureStore([]);
 
 describe('CityOrdersScheduledAttackItemComponent', () => {

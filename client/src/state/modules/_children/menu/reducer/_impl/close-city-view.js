@@ -12,16 +12,16 @@ import type {
     ClientStateActionReducer,
 } from '../../../../../types';
 
-type Reducer = ClientStateActionReducer<ClientStateMenu, ClientCloseCityViewAction>;
+type Reducer = ClientStateActionReducer<
+    ClientStateMenu,
+    ClientCloseCityViewAction,
+>;
 
-
-export const closeCityViewMenuReducer: Reducer = (
-    {
-        localState,
-        action,
-        globalState,
-    }
-)=> {
+export const closeCityViewMenuReducer: Reducer = ({
+    localState,
+    action,
+    globalState,
+}) => {
     return {
         ...localState,
         cityView: {

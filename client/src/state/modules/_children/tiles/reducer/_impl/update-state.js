@@ -1,6 +1,5 @@
 // @flow
 
-
 import type { ClientStateTiles } from '../types';
 import { tileVectorToPixelVector } from '../../../../../../util';
 import tumult from 'tumult';
@@ -9,28 +8,33 @@ import { surfaceImages } from '../../../../../../assets/images/terrain';
 import type { ClientUpdateStateAction } from '../../../common-state/actions/types';
 import type { ClientStateActionReducer } from '../../../../../types';
 
-type Reducer = ClientStateActionReducer<ClientStateTiles, ClientUpdateStateAction>;
-
+type Reducer = ClientStateActionReducer<
+    ClientStateTiles,
+    ClientUpdateStateAction,
+>;
 
 const perlin2 = new tumult.Simplex2('qwerty');
 
 const calculateTextureIndex = ({ index }: { index: Vector }): number => {
-    return Math.round(Math.abs(perlin2.gen(Math.abs(index.x), Math.abs(index.y))) * (surfaceImages.length - 1));
+    return Math.round(
+        Math.abs(perlin2.gen(Math.abs(index.x), Math.abs(index.y))) *
+            (surfaceImages.length - 1),
+    );
 };
 
-export const updateStateTilesReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const updateStateTilesReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const newCityTiles = Object.keys(action.payload.commonState.cities).reduce(
         (newCityTiles, cityId) => {
             const city = action.payload.commonState.cities[cityId];
 
             const geometry = {
-                location: tileVectorToPixelVector({ tileVector: city.location }),
+                location: tileVectorToPixelVector({
+                    tileVector: city.location,
+                }),
                 size: tileVectorToPixelVector({
                     tileVector: {
                         x: 1,
@@ -54,8 +58,16 @@ export const updateStateTilesReducer: Reducer = (
 
     const newTerrainTiles = [];
 
-    for (let y = -action.payload.commonState.world.size.y; y <= action.payload.commonState.world.size.y; y++) {
-        for (let x = -action.payload.commonState.world.size.x; x <= action.payload.commonState.world.size.x; x++) {
+    for (
+        let y = -action.payload.commonState.world.size.y;
+        y <= action.payload.commonState.world.size.y;
+        y++
+    ) {
+        for (
+            let x = -action.payload.commonState.world.size.x;
+            x <= action.payload.commonState.world.size.x;
+            x++
+        ) {
             const index = { x, y };
             newTerrainTiles.push({
                 index,

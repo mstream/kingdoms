@@ -21,7 +21,7 @@ describe('AttackViewRegimentTemplateFormComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -38,7 +38,6 @@ describe('AttackViewRegimentTemplateFormComponent', () => {
             },
         };
 
-
         const updateAttackViewRegimentTemplate = jest.fn();
 
         const store = mockStore(state);
@@ -46,7 +45,9 @@ describe('AttackViewRegimentTemplateFormComponent', () => {
         const { queryByText } = render(
             <Provider store={store}>
                 <AttackViewRegimentTemplateFormComponent
-                    updateAttackViewRegimentTemplate={updateAttackViewRegimentTemplate}
+                    updateAttackViewRegimentTemplate={
+                        updateAttackViewRegimentTemplate
+                    }
                 />
             </Provider>,
         );

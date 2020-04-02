@@ -6,5 +6,6 @@ import type {
 } from '../../../../../types';
 import type { ClientStateMenu } from '../types';
 
-export type ClientStateMenuReducerTestScenario<+A: ClientAction> =
-    ClientStateReducerTestScenario<ClientStateMenu, A>;
+export type ClientStateMenuReducerTestScenario<
+    +A: ClientAction,
+> = ClientStateReducerTestScenario<ClientStateMenu, A>;

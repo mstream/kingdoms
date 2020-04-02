@@ -1,12 +1,13 @@
 // @flow
 
-
 import type { ClientStateMenuReducerTestScenario } from './types';
 import type { ClientUpdateAttackViewMinimumDelayAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const updateAttackViewMinimumDelayTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientUpdateAttackViewMinimumDelayAction>> = [
+export const updateAttackViewMinimumDelayTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientUpdateAttackViewMinimumDelayAction>,
+> = [
     {
         name: 'updates the minimum delay',
         action: clientActions.menu.updateAttackViewMinimumDelay({

@@ -9,7 +9,6 @@ import { UPDATE_STATE } from '../../common-state/actions/types';
 import { createClientStateReducer } from '../../../../utils';
 import { initialClientState } from '../../../../state';
 
-
 export const cameraReducer = createClientStateReducer<ClientStateCamera>({
     actionReducers: {
         [MOVE_CAMERA]: moveCameraCameraReducer,

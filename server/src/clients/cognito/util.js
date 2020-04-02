@@ -10,4 +10,3 @@ export const emptyJwk: Jwk = {
     n: '',
     use: '',
 };
-

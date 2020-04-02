@@ -1,6 +1,5 @@
 // @flow
 
-
 import { runCommonStateSelectorsTestScenarios } from '../../utils';
 import { commonStateRulesSelectors } from './index';
 import { unitStatsSelectorTestScenarios } from './_test/unit-stats-test-scenarios';

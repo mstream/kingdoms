@@ -4,7 +4,9 @@ import { createCity } from '../../actions';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
-    BUILDING_WAREHOUSE, RESOURCE_FOOD, RESOURCE_WOOD,
+    BUILDING_WAREHOUSE,
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
     UNIT_ARCHER,
     UNIT_CATAPULT,
     UNIT_KNIGHT,
@@ -22,8 +24,9 @@ import type {
 } from '../../actions/types';
 import type { CommonStateCitiesReducerTestScenarios } from './types';
 
-
-export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTestScenarios<CommonCreateCityAction>> = [
+export const createCityTestScenarios: $ReadOnlyArray<
+    CommonStateCitiesReducerTestScenarios<CommonCreateCityAction>,
+> = [
     {
         name: 'creates a city',
         action: createCity({
@@ -48,46 +51,43 @@ export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTes
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return success(
-                {
-                    state:
-                        {
-                            ...previousLocalState,
-                            'city1': {
-                                buildings: {
-                                    [BUILDING_LUMBER_MILL]: {
-                                        tier: 0,
-                                    },
-                                    [BUILDING_PASTURE]: {
-                                        tier: 0,
-                                    },
-                                    [BUILDING_WAREHOUSE]: {
-                                        tier: 0,
-                                    },
-                                },
-                                location: {
-                                    x: 0,
-                                    y: 0,
-                                },
-                                name: `Name`,
-                                ownerId: `player1`,
-                                resources: {
-                                    [RESOURCE_FOOD]: 0,
-                                    [RESOURCE_WOOD]: 0,
-                                },
-                                units: {
-                                    [UNIT_ARCHER]: 0,
-                                    [UNIT_CATAPULT]: 0,
-                                    [UNIT_KNIGHT]: 0,
-                                    [UNIT_NOBLE]: 0,
-                                    [UNIT_PEASANT]: 0,
-                                    [UNIT_PIKEMAN]: 0,
-                                    [UNIT_SWORDSMAN]: 0,
-                                },
+            return success({
+                state: {
+                    ...previousLocalState,
+                    city1: {
+                        buildings: {
+                            [BUILDING_LUMBER_MILL]: {
+                                tier: 0,
+                            },
+                            [BUILDING_PASTURE]: {
+                                tier: 0,
+                            },
+                            [BUILDING_WAREHOUSE]: {
+                                tier: 0,
                             },
                         },
+                        location: {
+                            x: 0,
+                            y: 0,
+                        },
+                        name: `Name`,
+                        ownerId: `player1`,
+                        resources: {
+                            [RESOURCE_FOOD]: 0,
+                            [RESOURCE_WOOD]: 0,
+                        },
+                        units: {
+                            [UNIT_ARCHER]: 0,
+                            [UNIT_CATAPULT]: 0,
+                            [UNIT_KNIGHT]: 0,
+                            [UNIT_NOBLE]: 0,
+                            [UNIT_PEASANT]: 0,
+                            [UNIT_PIKEMAN]: 0,
+                            [UNIT_SWORDSMAN]: 0,
+                        },
+                    },
                 },
-            );
+            });
         },
     },
     {
@@ -114,11 +114,9 @@ export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTes
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: [`there is no space for another city`],
-                },
-            );
+            return failure({
+                errors: [`there is no space for another city`],
+            });
         },
     },
     {
@@ -145,11 +143,9 @@ export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTes
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city name is too short'],
-                },
-            );
+            return failure({
+                errors: ['the city name is too short'],
+            });
         },
     },
     {
@@ -176,11 +172,9 @@ export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTes
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city name is too long'],
-                },
-            );
+            return failure({
+                errors: ['the city name is too long'],
+            });
         },
     },
     {
@@ -207,11 +201,9 @@ export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTes
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city name does not follow the convention'],
-                },
-            );
+            return failure({
+                errors: ['the city name does not follow the convention'],
+            });
         },
     },
     {
@@ -225,7 +217,7 @@ export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTes
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
-                'city1': {
+                city1: {
                     ...emptyCityState,
                     location: {
                         x: 0,
@@ -249,11 +241,9 @@ export const createCityTestScenarios: $ReadOnlyArray<CommonStateCitiesReducerTes
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: ['the city name does not follow the convention'],
-                },
-            );
+            return failure({
+                errors: ['the city name does not follow the convention'],
+            });
         },
     },
 ];

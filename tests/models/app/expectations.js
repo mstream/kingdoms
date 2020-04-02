@@ -1,10 +1,8 @@
 // @flow
 
-import { TestController } from "testcafe";
+import { TestController } from 'testcafe';
 
-const gotRedirectedFromAppToSignIn = async ({t}: {t: TestController}) => {
-};
-
+const gotRedirectedFromAppToSignIn = async ({ t }: { t: TestController }) => {};
 
 export const expectations = {
     gotRedirectedFromAppToSignIn,

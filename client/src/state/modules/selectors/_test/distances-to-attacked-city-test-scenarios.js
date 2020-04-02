@@ -1,13 +1,14 @@
 // @flow
 
-
 import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
 import { emptyClientState } from '../../../state';
 import type { CityDistances } from '../../../../../../common/src/state/modules/cities/selectors/types';
 import type { ClientStateSelectorTestScenario } from '../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<?CityDistances>>;
+type Scenarios = $ReadOnlyArray<
+    ClientStateSelectorTestScenario<?CityDistances>,
+>;
 
 export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
     {
@@ -24,7 +25,8 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
         expectedValue: null,
     },
     {
-        name: 'returns distances between attacked city and cities owned by player',
+        name:
+            'returns distances between attacked city and cities owned by player',
         state: {
             ...emptyClientState,
             menu: {
@@ -37,7 +39,7 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         location: {
                             x: 0,
@@ -45,7 +47,7 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
                         },
                         ownerId: 'player2',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         location: {
                             x: 2,
@@ -53,7 +55,7 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
                         },
                         ownerId: 'player1',
                     },
-                    'city3': {
+                    city3: {
                         ...emptyCityState,
                         location: {
                             x: 0,
@@ -65,9 +67,9 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
             },
         },
         expectedValue: {
-            'city1': 0,
-            'city2': 2,
-            'city3': 1,
+            city1: 0,
+            city2: 2,
+            city3: 1,
         },
     },
 ];

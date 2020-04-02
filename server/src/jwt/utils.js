@@ -1,6 +1,5 @@
 // @flow
 
-
 import jwt from 'jsonwebtoken';
 import type { UserProfileResult } from './types';
 
@@ -9,17 +8,15 @@ export const getKeyId = ({ token }: { token: string }): ?string => {
     return decodedToken.header.kid;
 };
 
-export const verifyToken = (
-    {
-        issuer,
-        publicKey,
-        token,
-    }: {
-        issuer: string,
-        publicKey: string,
-        token: string
-    },
-): UserProfileResult => {
+export const verifyToken = ({
+    issuer,
+    publicKey,
+    token,
+}: {
+    issuer: string,
+    publicKey: string,
+    token: string,
+}): UserProfileResult => {
     try {
         console.info(`verifying token using public key: ${publicKey}`);
         const decodedTokenPayload = jwt.verify(token, publicKey, { issuer });
@@ -44,6 +41,4 @@ export const verifyToken = (
             userProfile: null,
         };
     }
-
-
 };

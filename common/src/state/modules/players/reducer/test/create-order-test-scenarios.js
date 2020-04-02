@@ -8,7 +8,9 @@ import type { CommonCreateScheduledAttackOrderAction } from '../../../orders/act
 import { createScheduledAttackOrder } from '../../../orders/actions';
 import { emptyRegimentTemplateState } from '../../../orders/reducer/state';
 
-type Scenarios = $ReadOnlyArray<CommonStatePlayersReducerTestScenario<CommonCreateScheduledAttackOrderAction>>;
+type Scenarios = $ReadOnlyArray<
+    CommonStatePlayersReducerTestScenario<CommonCreateScheduledAttackOrderAction>,
+>;
 
 export const createOrderTestScenarios: Scenarios = [
     {
@@ -26,7 +28,7 @@ export const createOrderTestScenarios: Scenarios = [
         previousGlobalState: {
             ...emptyCommonState,
             players: {
-                'player1': PLAYER_STATUS_PLAYING,
+                player1: PLAYER_STATUS_PLAYING,
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
@@ -52,7 +54,7 @@ export const createOrderTestScenarios: Scenarios = [
         previousGlobalState: {
             ...emptyCommonState,
             players: {
-                'player1': PLAYER_STATUS_DEFEATED,
+                player1: PLAYER_STATUS_DEFEATED,
             },
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {

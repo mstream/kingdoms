@@ -1,6 +1,5 @@
 // @flow
 
-
 import { commonStateCitiesSelectors } from './index';
 import { citiesByOwnerSelectorTestScenarios } from './_test/cities-by-owner-test-scenarios';
 import { cityIdsByOwnerSelectorTestScenarios } from './_test/city-ids-by-owner-test-scenarios';

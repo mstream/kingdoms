@@ -10,15 +10,16 @@ import type { ClientMoveCameraAction } from '../../actions/types';
 import type { ClientStateActionReducer } from '../../../../../types';
 import { clientStateSelectors } from '../../../../selectors';
 
-type Reducer = ClientStateActionReducer<ClientStateCamera, ClientMoveCameraAction>;
+type Reducer = ClientStateActionReducer<
+    ClientStateCamera,
+    ClientMoveCameraAction,
+>;
 
-export const moveCameraCameraReducer: Reducer = (
-    {
-        action,
-        localState,
-        globalState,
-    },
-) => {
+export const moveCameraCameraReducer: Reducer = ({
+    action,
+    localState,
+    globalState,
+}) => {
     if (clientStateSelectors.menu.isAnyMenuOpen(globalState)) {
         return localState;
     }

@@ -23,13 +23,7 @@ describe('getConnections', () => {
 
         expect(actual).toEqual(expected);
 
-        expect(redis.smembers.mock.calls).toEqual(
-            [
-                [
-                    'connection-ids:env1',
-                ],
-            ],
-        );
+        expect(redis.smembers.mock.calls).toEqual([['connection-ids:env1']]);
     });
 
     it('fails on redis members failure', async () => {
@@ -49,12 +43,6 @@ describe('getConnections', () => {
 
         await expect(actualPromise).rejects.toBeTruthy();
 
-        expect(redis.smembers.mock.calls).toEqual(
-            [
-                [
-                    'connection-ids:env1',
-                ],
-            ],
-        );
+        expect(redis.smembers.mock.calls).toEqual([['connection-ids:env1']]);
     });
 });

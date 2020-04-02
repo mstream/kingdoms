@@ -19,15 +19,16 @@ import type {
     CommonUpgradeBuildingAction,
 } from '../actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStateCities, CommonUpgradeBuildingAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateCities,
+    CommonUpgradeBuildingAction,
+>;
 
-export const upgradeBuildingCitiesReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    }
-)=> {
+export const upgradeBuildingCitiesReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { buildingType, cityId, playerId } = action.payload;
 
     const city = localState[cityId];
@@ -49,17 +50,15 @@ export const upgradeBuildingCitiesReducer: Reducer = (
         rules: globalState.rules,
     });
 
-    const availableResources: CommonStateResources = Object
-        .keys(resources)
-        .reduce((availableResources, resourceType: CommonStateResourceKey) => {
-                return {
-                    ...availableResources,
-                    // $FlowFixMe
-                    [resourceType]: resources[resourceType],
-                };
-            },
-            {},
-        );
+    const availableResources: CommonStateResources = Object.keys(
+        resources,
+    ).reduce((availableResources, resourceType: CommonStateResourceKey) => {
+        return {
+            ...availableResources,
+            // $FlowFixMe
+            [resourceType]: resources[resourceType],
+        };
+    }, {});
 
     const resourcesAfter = convertQuantitiesToResources({
         quantities: subtractQuantities({
@@ -69,8 +68,8 @@ export const upgradeBuildingCitiesReducer: Reducer = (
     });
 
     const insufficientResourcesErrorMessages = Object.keys(resourcesAfter)
-        .filter(resourceType => resourcesAfter[resourceType] < 0)
-        .map(resourceType => `insufficient ${resourceType}`);
+        .filter((resourceType) => resourcesAfter[resourceType] < 0)
+        .map((resourceType) => `insufficient ${resourceType}`);
 
     if (insufficientResourcesErrorMessages.length > 0) {
         return failure({ errors: insufficientResourcesErrorMessages });

@@ -8,7 +8,9 @@ export const RESET_STATE: 'RESET_STATE' = 'RESET_STATE';
 
 export type CommonDummyAction = BaseAction<typeof DUMMY, void>;
 
-export type CommonGetCurrentStateAction = BasePlayerAction<typeof GET_CURRENT_STATE, $ReadOnly<{playerId: string}>>;
+export type CommonGetCurrentStateAction = BasePlayerAction<
+    typeof GET_CURRENT_STATE,
+    $ReadOnly<{ playerId: string }>,
+>;
 
 export type CommonResetStateAction = BaseAction<typeof RESET_STATE, void>;
-

@@ -14,7 +14,7 @@
  */
 
 declare module 'fontmin' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,93 +23,93 @@ declare module 'fontmin' {
  * needed.
  */
 declare module 'fontmin/cli' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/lib/mime-types' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/lib/util' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/css' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/glyph' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/otf2ttf' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/svg2ttf' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/svgs2ttf' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/ttf2eot' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/ttf2svg' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/ttf2woff' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'fontmin/plugins/ttf2woff2' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'fontmin/cli.js' {
-  declare module.exports: $Exports<'fontmin/cli'>;
+    declare module.exports: $Exports<'fontmin/cli'>;
 }
 declare module 'fontmin/index' {
-  declare module.exports: $Exports<'fontmin'>;
+    declare module.exports: $Exports<'fontmin'>;
 }
 declare module 'fontmin/index.js' {
-  declare module.exports: $Exports<'fontmin'>;
+    declare module.exports: $Exports<'fontmin'>;
 }
 declare module 'fontmin/lib/mime-types.js' {
-  declare module.exports: $Exports<'fontmin/lib/mime-types'>;
+    declare module.exports: $Exports<'fontmin/lib/mime-types'>;
 }
 declare module 'fontmin/lib/util.js' {
-  declare module.exports: $Exports<'fontmin/lib/util'>;
+    declare module.exports: $Exports<'fontmin/lib/util'>;
 }
 declare module 'fontmin/plugins/css.js' {
-  declare module.exports: $Exports<'fontmin/plugins/css'>;
+    declare module.exports: $Exports<'fontmin/plugins/css'>;
 }
 declare module 'fontmin/plugins/glyph.js' {
-  declare module.exports: $Exports<'fontmin/plugins/glyph'>;
+    declare module.exports: $Exports<'fontmin/plugins/glyph'>;
 }
 declare module 'fontmin/plugins/otf2ttf.js' {
-  declare module.exports: $Exports<'fontmin/plugins/otf2ttf'>;
+    declare module.exports: $Exports<'fontmin/plugins/otf2ttf'>;
 }
 declare module 'fontmin/plugins/svg2ttf.js' {
-  declare module.exports: $Exports<'fontmin/plugins/svg2ttf'>;
+    declare module.exports: $Exports<'fontmin/plugins/svg2ttf'>;
 }
 declare module 'fontmin/plugins/svgs2ttf.js' {
-  declare module.exports: $Exports<'fontmin/plugins/svgs2ttf'>;
+    declare module.exports: $Exports<'fontmin/plugins/svgs2ttf'>;
 }
 declare module 'fontmin/plugins/ttf2eot.js' {
-  declare module.exports: $Exports<'fontmin/plugins/ttf2eot'>;
+    declare module.exports: $Exports<'fontmin/plugins/ttf2eot'>;
 }
 declare module 'fontmin/plugins/ttf2svg.js' {
-  declare module.exports: $Exports<'fontmin/plugins/ttf2svg'>;
+    declare module.exports: $Exports<'fontmin/plugins/ttf2svg'>;
 }
 declare module 'fontmin/plugins/ttf2woff.js' {
-  declare module.exports: $Exports<'fontmin/plugins/ttf2woff'>;
+    declare module.exports: $Exports<'fontmin/plugins/ttf2woff'>;
 }
 declare module 'fontmin/plugins/ttf2woff2.js' {
-  declare module.exports: $Exports<'fontmin/plugins/ttf2woff2'>;
+    declare module.exports: $Exports<'fontmin/plugins/ttf2woff2'>;
 }

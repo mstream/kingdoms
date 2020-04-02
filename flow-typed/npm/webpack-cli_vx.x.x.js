@@ -14,7 +14,7 @@
  */
 
 declare module 'webpack-cli' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,59 +23,59 @@ declare module 'webpack-cli' {
  * needed.
  */
 declare module 'webpack-cli/bin/cli' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'webpack-cli/bin/config/config-yargs' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'webpack-cli/bin/utils/constants' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'webpack-cli/bin/utils/convert-argv' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'webpack-cli/bin/utils/errorHelpers' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'webpack-cli/bin/utils/prepareOptions' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'webpack-cli/bin/utils/prompt-command' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'webpack-cli/bin/utils/validate-options' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'webpack-cli/bin/cli.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/cli'>;
+    declare module.exports: $Exports<'webpack-cli/bin/cli'>;
 }
 declare module 'webpack-cli/bin/config/config-yargs.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/config/config-yargs'>;
+    declare module.exports: $Exports<'webpack-cli/bin/config/config-yargs'>;
 }
 declare module 'webpack-cli/bin/utils/constants.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/utils/constants'>;
+    declare module.exports: $Exports<'webpack-cli/bin/utils/constants'>;
 }
 declare module 'webpack-cli/bin/utils/convert-argv.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/utils/convert-argv'>;
+    declare module.exports: $Exports<'webpack-cli/bin/utils/convert-argv'>;
 }
 declare module 'webpack-cli/bin/utils/errorHelpers.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/utils/errorHelpers'>;
+    declare module.exports: $Exports<'webpack-cli/bin/utils/errorHelpers'>;
 }
 declare module 'webpack-cli/bin/utils/prepareOptions.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/utils/prepareOptions'>;
+    declare module.exports: $Exports<'webpack-cli/bin/utils/prepareOptions'>;
 }
 declare module 'webpack-cli/bin/utils/prompt-command.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/utils/prompt-command'>;
+    declare module.exports: $Exports<'webpack-cli/bin/utils/prompt-command'>;
 }
 declare module 'webpack-cli/bin/utils/validate-options.js' {
-  declare module.exports: $Exports<'webpack-cli/bin/utils/validate-options'>;
+    declare module.exports: $Exports<'webpack-cli/bin/utils/validate-options'>;
 }

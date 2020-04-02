@@ -4,16 +4,16 @@ import type { ClientStateMenu } from '../types';
 import type { ClientSelectAttackViewAttackingCityAction } from '../../actions/types';
 import type { ClientStateActionReducer } from '../../../../../types';
 
-type Reducer = ClientStateActionReducer<ClientStateMenu, ClientSelectAttackViewAttackingCityAction>;
+type Reducer = ClientStateActionReducer<
+    ClientStateMenu,
+    ClientSelectAttackViewAttackingCityAction,
+>;
 
-
-export const selectAttackViewAttackingCityReducer: Reducer = (
-    {
-        localState,
-        action,
-        globalState,
-    },
-) => {
+export const selectAttackViewAttackingCityReducer: Reducer = ({
+    localState,
+    action,
+    globalState,
+}) => {
     return {
         ...localState,
         attackView: {

@@ -7,8 +7,9 @@ import type { ClientCloseAttackViewAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { menuActions } from '../../actions';
 
-
-export const closeAttackViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientCloseAttackViewAction>> = [
+export const closeAttackViewTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientCloseAttackViewAction>,
+> = [
     {
         name: 'closes attack view',
         action: menuActions.closeAttackView(),

@@ -6,7 +6,9 @@ import { emptyCommonState } from '../../../state';
 import type { CommonExecuteTimeStepAction } from '../../actions';
 import type { CommonStateTimeReducerTestScenarios } from './types';
 
-type Scenarios = $ReadOnlyArray<CommonStateTimeReducerTestScenarios<CommonExecuteTimeStepAction>>;
+type Scenarios = $ReadOnlyArray<
+    CommonStateTimeReducerTestScenarios<CommonExecuteTimeStepAction>,
+>;
 
 export const executeTimeStepTestScenarios: Scenarios = [
     {
@@ -30,11 +32,11 @@ export const executeTimeStepTestScenarios: Scenarios = [
             time: '2000-01-01T02:00:00Z',
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: [`the time from the action is not past the time from the state`],
-                },
-            );
+            return failure({
+                errors: [
+                    `the time from the action is not past the time from the state`,
+                ],
+            });
         },
     },
     {
@@ -45,11 +47,9 @@ export const executeTimeStepTestScenarios: Scenarios = [
             time: '2000-01-01T02:00:00Z',
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return failure(
-                {
-                    errors: [`time does not have a valid format`],
-                },
-            );
+            return failure({
+                errors: [`time does not have a valid format`],
+            });
         },
     },
 ];

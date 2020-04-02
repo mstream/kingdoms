@@ -1,6 +1,5 @@
 // @flow
 
-
 import { isNewCityBeingCreatedSelector } from './_impl/is-new-city-being-created';
 import { regimentTemplateSelector } from './_impl/regiment-template';
 import { attackedCityIdSelector } from './_impl/attacked-city-id';

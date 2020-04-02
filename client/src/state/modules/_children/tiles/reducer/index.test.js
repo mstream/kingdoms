@@ -8,7 +8,6 @@ import { emptyClientState } from '../../../../state';
 import { runReducerTestScenarios } from '../../../../utils';
 import { clientActions } from '../../../actions';
 
-
 const stateInitializationScenario: ClientStateTilesReducerTestScenario<ClientDummyAction> = {
     name: 'initializes its state',
     action: clientActions.dummy.dummy(),
@@ -24,7 +23,6 @@ const stateInitializationScenario: ClientStateTilesReducerTestScenario<ClientDum
         };
     },
 };
-
 
 describe('tilesReducer', () => {
     runReducerTestScenarios({

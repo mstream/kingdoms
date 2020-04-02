@@ -16,11 +16,7 @@ const createConfig = (): Config => {
         password: 'Test_123',
         region: 'eu-west-1',
         userPoolId: USER_POOL_ID,
-        usernames: [
-            'test1',
-            'test2',
-            'test3',
-        ],
+        usernames: ['test1', 'test2', 'test3'],
     };
 };
 

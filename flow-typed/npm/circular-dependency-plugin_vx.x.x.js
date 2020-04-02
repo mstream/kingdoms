@@ -14,7 +14,7 @@
  */
 
 declare module 'circular-dependency-plugin' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,11 +23,10 @@ declare module 'circular-dependency-plugin' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'circular-dependency-plugin/index' {
-  declare module.exports: $Exports<'circular-dependency-plugin'>;
+    declare module.exports: $Exports<'circular-dependency-plugin'>;
 }
 declare module 'circular-dependency-plugin/index.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin'>;
+    declare module.exports: $Exports<'circular-dependency-plugin'>;
 }

@@ -56,7 +56,10 @@ export type ClientContextEnv = $ReadOnly<{
     locale: string,
 }>;
 
-export type Callback<TResult = mixed> = (error?: Error | string | null, result?: TResult) => void;
+export type Callback<TResult = mixed> = (
+    error?: Error | string | null,
+    result?: TResult,
+) => void;
 
 export type APIGatewayEventRequestContext = $ReadOnly<{
     accountId: string,
@@ -98,14 +101,17 @@ export type APIGatewayEventIdentity = $ReadOnly<{
     user: ?string,
     userAgent: ?string,
     userArn: ?string,
-}>
+}>;
 
 export type AuthResponseContext = $ReadOnly<{
     [string]: mixed,
-    ...
-}>
+    ...,
+}>;
 
-export type APIGatewayProxyHandler = Handler<APIGatewayProxyEvent, APIGatewayProxyResult>;
+export type APIGatewayProxyHandler = Handler<
+    APIGatewayProxyEvent,
+    APIGatewayProxyResult,
+>;
 export type APIGatewayProxyCallback = Callback<APIGatewayProxyResult>;
 
 export type ProxyHandler = APIGatewayProxyHandler;
@@ -132,17 +138,20 @@ export type APIGatewayProxyResult = $ReadOnly<{
     statusCode: number,
     headers?: {
         [header: string]: boolean | number | string,
-        ...
+        ...,
     },
     multiValueHeaders?: {
         [header: string]: Array<boolean | number | string>,
-        ...
+        ...,
     },
     body: string,
     isBase64Encoded?: boolean,
 }>;
 
-export type CustomAuthorizerHandler = Handler<CustomAuthorizerEvent, CustomAuthorizerResult>;
+export type CustomAuthorizerHandler = Handler<
+    CustomAuthorizerEvent,
+    CustomAuthorizerResult,
+>;
 
 export type CustomAuthorizerCallback = Callback<CustomAuthorizerResult>;
 
@@ -178,24 +187,23 @@ export type PolicyDocument = $ReadOnly<{
 }>;
 
 export type ConditionBlock = $ReadOnly<{
-    [condition: string]: Condition | Condition[];
+    [condition: string]: Condition | Condition[],
 }>;
 
 export type Condition = $ReadOnly<{
     [key: string]: string | string[],
-    ...
+    ...,
 }>;
 
-export type Statement =
-    BaseStatement
-    & StatementAction
-    & (StatementResource | StatementPrincipal);
+export type Statement = BaseStatement &
+    StatementAction &
+    (StatementResource | StatementPrincipal);
 
 export type BaseStatement = $ReadOnly<{
-    Effect: string;
-    Sid?: string;
-    Condition?: ConditionBlock;
-}>
+    Effect: string,
+    Sid?: string,
+    Condition?: ConditionBlock,
+}>;
 
 export type PrincipalValue =
     | $ReadOnly<{ [key: string]: string | string[] }>
@@ -203,13 +211,13 @@ export type PrincipalValue =
     | string[];
 
 export type MaybeStatementPrincipal = $ReadOnly<{
-    Principal?: PrincipalValue;
-    NotPrincipal?: PrincipalValue;
+    Principal?: PrincipalValue,
+    NotPrincipal?: PrincipalValue,
 }>;
 
 export type MaybeStatementResource = $ReadOnly<{
-    Resource?: string | string[];
-    NotResource?: string | string[];
+    Resource?: string | string[],
+    NotResource?: string | string[],
 }>;
 
 export type StatementAction =
@@ -217,10 +225,16 @@ export type StatementAction =
     | $ReadOnly<{ NotAction: string | string[] }>;
 
 export type StatementResource = MaybeStatementPrincipal &
-    ($ReadOnly<{ Resource: string | string[] }> | $ReadOnly<{ NotResource: string | string[] }>);
+    (
+        | $ReadOnly<{ Resource: string | string[] }>
+        | $ReadOnly<{ NotResource: string | string[] }>
+    );
 
 export type StatementPrincipal = MaybeStatementResource &
-    ($ReadOnly<{ Principal: PrincipalValue }> | $ReadOnly<{ NotPrincipal: PrincipalValue }>);
+    (
+        | $ReadOnly<{ Principal: PrincipalValue }>
+        | $ReadOnly<{ NotPrincipal: PrincipalValue }>
+    );
 
 export type ScheduledHandler = Handler<ScheduledEvent, void>;
 

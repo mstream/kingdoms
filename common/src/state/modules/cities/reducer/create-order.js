@@ -5,15 +5,16 @@ import type { CommonStateActionReducer } from '../../types';
 import { failure, success } from '../../utils';
 import type { CommonCreateScheduledAttackOrderAction } from '../../orders/actions/types';
 
-type Reducer = CommonStateActionReducer<CommonStateCities, CommonCreateScheduledAttackOrderAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateCities,
+    CommonCreateScheduledAttackOrderAction,
+>;
 
-export const createScheduledAttackOrderCitiesReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const createScheduledAttackOrderCitiesReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { originCityId, playerId, targetCityId } = action.payload;
 
     const originCity = localState[originCityId];
@@ -28,7 +29,9 @@ export const createScheduledAttackOrderCitiesReducer: Reducer = (
     }
 
     if (originCity.ownerId !== playerId) {
-        return failure({ errors: ['the origin city does not belong to the player'] });
+        return failure({
+            errors: ['the origin city does not belong to the player'],
+        });
     }
 
     return success({ state: localState });

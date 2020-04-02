@@ -1,9 +1,12 @@
 const AwsSamPlugin = require('aws-sam-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
-
-const createServerConfig = ({ env, globalVariablesCreator, mode, projectPath }) => {
-
+const createServerConfig = ({
+    env,
+    globalVariablesCreator,
+    mode,
+    projectPath,
+}) => {
     const awsSamPlugin = new AwsSamPlugin({
         projects: {
             server: './server/template.yaml',
@@ -33,10 +36,7 @@ const createServerConfig = ({ env, globalVariablesCreator, mode, projectPath }) 
 
         target: 'node',
 
-        externals: [
-            'aws-sdk',
-            'ioredis'
-        ],
+        externals: ['aws-sdk', 'ioredis'],
 
         mode,
 
@@ -53,12 +53,8 @@ const createServerConfig = ({ env, globalVariablesCreator, mode, projectPath }) 
             ],
         },
 
-        plugins: [
-            awsSamPlugin,
-            circularDependencyPlugin,
-        ],
+        plugins: [awsSamPlugin, circularDependencyPlugin],
     };
 };
-
 
 module.exports = createServerConfig;

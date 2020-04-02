@@ -10,7 +10,6 @@ import { EXECUTE_TIME_STEP } from '../../time/actions';
 import { resetStateOrdersReducer } from './_impl/reset-state';
 import { createCommonStateReducer } from '../../utils';
 
-
 export const ordersReducer = createCommonStateReducer<CommonStateOrders>({
     actionReducers: {
         [CREATE_SCHEDULED_ATTACK_ORDER]: createScheduledAttackOrderOrdersReducer,

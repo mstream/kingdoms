@@ -15,20 +15,41 @@ import { createSelector } from 'reselect';
 import { commonStateRulesSelectors } from '../../rules/selectors';
 import { commonStateWorldSelectors } from '../../world/selectors';
 
-export const nextCitySpotSelector = createSelector<CommonState, void, ?Vector, CommonStateCities, CommonStateRules, CommonStateWorld>(
+export const nextCitySpotSelector = createSelector<
+    CommonState,
+    void,
+    ?Vector,
+    CommonStateCities,
+    CommonStateRules,
+    CommonStateWorld,
+>(
     citiesSelector,
     commonStateRulesSelectors.rules,
     commonStateWorldSelectors.world,
     (cities, rules, world) => {
-        const takenSpots = Object.keys(cities).map(cityId => cities[cityId].location);
+        const takenSpots = Object.keys(cities).map(
+            (cityId) => cities[cityId].location,
+        );
 
-        const generateLocationHash = ({ location }: { location: Vector }): string => {
+        const generateLocationHash = ({
+            location,
+        }: {
+            location: Vector,
+        }): string => {
             return `${location.x}_${location.y}`;
         };
 
         const isSpotValid = ({ location }: { location: Vector }): boolean => {
-            for (let yOffset = -rules.minimalCityMargin.y; yOffset <= rules.minimalCityMargin.y; yOffset++) {
-                for (let xOffset = -rules.minimalCityMargin.x; xOffset <= rules.minimalCityMargin.x; xOffset++) {
+            for (
+                let yOffset = -rules.minimalCityMargin.y;
+                yOffset <= rules.minimalCityMargin.y;
+                yOffset++
+            ) {
+                for (
+                    let xOffset = -rules.minimalCityMargin.x;
+                    xOffset <= rules.minimalCityMargin.x;
+                    xOffset++
+                ) {
                     const offset = { x: xOffset, y: yOffset };
                     const neighbouringTileLocation = addVectors({
                         vector1: location,
@@ -46,7 +67,13 @@ export const nextCitySpotSelector = createSelector<CommonState, void, ?Vector, C
                     if (neighbouringTileLocation.y > world.size.y) {
                         return false;
                     }
-                    if (allocation[generateLocationHash({ location: neighbouringTileLocation })] === true) {
+                    if (
+                        allocation[
+                            generateLocationHash({
+                                location: neighbouringTileLocation,
+                            })
+                        ] === true
+                    ) {
                         return false;
                     }
                 }
@@ -54,15 +81,12 @@ export const nextCitySpotSelector = createSelector<CommonState, void, ?Vector, C
             return true;
         };
 
-        const allocation = takenSpots.reduce(
-            (allocation, location) => {
-                return {
-                    ...allocation,
-                    [generateLocationHash({ location })]: true,
-                };
-            },
-            {},
-        );
+        const allocation = takenSpots.reduce((allocation, location) => {
+            return {
+                ...allocation,
+                [generateLocationHash({ location })]: true,
+            };
+        }, {});
 
         const freeSpots = [];
 
@@ -75,15 +99,18 @@ export const nextCitySpotSelector = createSelector<CommonState, void, ?Vector, C
             }
         }
 
-        freeSpots.sort((freeSpotLocation1, freeSpotLocation2) => getDistanceBetweenVectors({
-            vector1: zeroVector,
-            vector2: freeSpotLocation1,
-        }) - getDistanceBetweenVectors({
-            vector1: zeroVector,
-            vector2: freeSpotLocation2,
-        }));
+        freeSpots.sort(
+            (freeSpotLocation1, freeSpotLocation2) =>
+                getDistanceBetweenVectors({
+                    vector1: zeroVector,
+                    vector2: freeSpotLocation1,
+                }) -
+                getDistanceBetweenVectors({
+                    vector1: zeroVector,
+                    vector2: freeSpotLocation2,
+                }),
+        );
 
         return freeSpots.length > 0 ? freeSpots[0] : null;
     },
 );
-

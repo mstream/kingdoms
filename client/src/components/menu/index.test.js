@@ -24,7 +24,7 @@ describe('MenuComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <MenuComponent/>
+                <MenuComponent />
             </Provider>,
         );
 

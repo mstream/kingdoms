@@ -1,6 +1,5 @@
 // @flow
 
-
 import { runClientStateSelectorsTestScenarios } from '../../../../utils';
 import { clientStateErrorsSelectors } from './index';
 import { errorsSelectorTestScenarios } from './_test/errorsTestScenarios';

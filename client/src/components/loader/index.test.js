@@ -25,7 +25,7 @@ describe('LoaderComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <LoaderComponent/>
+                <LoaderComponent />
             </Provider>,
         );
 
@@ -42,7 +42,7 @@ describe('LoaderComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <LoaderComponent/>
+                <LoaderComponent />
             </Provider>,
         );
 

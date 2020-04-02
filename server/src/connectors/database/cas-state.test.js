@@ -80,46 +80,19 @@ describe('casState', () => {
 
         expect(actual).toEqual(expected);
 
-        expect(redis.watch.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.watch.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.unwatch.mock.calls).toEqual(
-            [],
-        );
+        expect(redis.unwatch.mock.calls).toEqual([]);
 
-        expect(multi.mock.calls).toEqual(
-            [
-                [],
-            ],
-        );
+        expect(multi.mock.calls).toEqual([[]]);
 
-        expect(set.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                    JSON.stringify(transformedState),
-                ],
-            ],
-        );
+        expect(set.mock.calls).toEqual([
+            ['state:env1:world1', JSON.stringify(transformedState)],
+        ]);
 
-        expect(exec.mock.calls).toEqual(
-            [
-                [],
-            ],
-        );
+        expect(exec.mock.calls).toEqual([[]]);
     });
 
     it('returns false when the state has changed since started being watched', async () => {
@@ -195,46 +168,19 @@ describe('casState', () => {
 
         expect(actual).toEqual(expected);
 
-        expect(redis.watch.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.watch.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.unwatch.mock.calls).toEqual(
-            [],
-        );
+        expect(redis.unwatch.mock.calls).toEqual([]);
 
-        expect(multi.mock.calls).toEqual(
-            [
-                [],
-            ],
-        );
+        expect(multi.mock.calls).toEqual([[]]);
 
-        expect(set.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                    JSON.stringify(transformedState),
-                ],
-            ],
-        );
+        expect(set.mock.calls).toEqual([
+            ['state:env1:world1', JSON.stringify(transformedState)],
+        ]);
 
-        expect(exec.mock.calls).toEqual(
-            [
-                [],
-            ],
-        );
+        expect(exec.mock.calls).toEqual([[]]);
     });
 
     it('returns errors when state transformation returns errors', async () => {
@@ -305,37 +251,17 @@ describe('casState', () => {
 
         expect(actual).toEqual(expected);
 
-        expect(redis.watch.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.watch.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.unwatch.mock.calls).toEqual(
-            [],
-        );
+        expect(redis.unwatch.mock.calls).toEqual([]);
 
-        expect(multi.mock.calls).toEqual(
-            [],
-        );
+        expect(multi.mock.calls).toEqual([]);
 
-        expect(set.mock.calls).toEqual(
-            [],
-        );
+        expect(set.mock.calls).toEqual([]);
 
-        expect(exec.mock.calls).toEqual(
-            [],
-        );
+        expect(exec.mock.calls).toEqual([]);
     });
 
     it('fails when the state cannot be watched', async () => {
@@ -413,33 +339,17 @@ describe('casState', () => {
             ),
         );
 
-        expect(redis.watch.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.watch.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.get.mock.calls).toEqual(
-            [],
-        );
+        expect(redis.get.mock.calls).toEqual([]);
 
-        expect(redis.unwatch.mock.calls).toEqual(
-            [],
-        );
+        expect(redis.unwatch.mock.calls).toEqual([]);
 
-        expect(multi.mock.calls).toEqual(
-            [],
-        );
+        expect(multi.mock.calls).toEqual([]);
 
-        expect(set.mock.calls).toEqual(
-            [],
-        );
+        expect(set.mock.calls).toEqual([]);
 
-        expect(exec.mock.calls).toEqual(
-            [],
-        );
+        expect(exec.mock.calls).toEqual([]);
     });
 
     it('fails and removes the watch if state retrieval fails', async () => {
@@ -509,37 +419,17 @@ describe('casState', () => {
 
         await expect(actualPromise).rejects.toBeTruthy();
 
-        expect(redis.watch.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.watch.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.unwatch.mock.calls).toEqual(
-            [],
-        );
+        expect(redis.unwatch.mock.calls).toEqual([]);
 
-        expect(multi.mock.calls).toEqual(
-            [],
-        );
+        expect(multi.mock.calls).toEqual([]);
 
-        expect(set.mock.calls).toEqual(
-            [],
-        );
+        expect(set.mock.calls).toEqual([]);
 
-        expect(exec.mock.calls).toEqual(
-            [],
-        );
+        expect(exec.mock.calls).toEqual([]);
     });
 
     it('fails and removes the watch if state validation fails', async () => {
@@ -609,36 +499,16 @@ describe('casState', () => {
 
         await expect(actualPromise).rejects.toBeTruthy();
 
-        expect(redis.watch.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.watch.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.get.mock.calls).toEqual(
-            [
-                [
-                    'state:env1:world1',
-                ],
-            ],
-        );
+        expect(redis.get.mock.calls).toEqual([['state:env1:world1']]);
 
-        expect(redis.unwatch.mock.calls).toEqual(
-            [],
-        );
+        expect(redis.unwatch.mock.calls).toEqual([]);
 
-        expect(multi.mock.calls).toEqual(
-            [],
-        );
+        expect(multi.mock.calls).toEqual([]);
 
-        expect(set.mock.calls).toEqual(
-            [],
-        );
+        expect(set.mock.calls).toEqual([]);
 
-        expect(exec.mock.calls).toEqual(
-            [],
-        );
+        expect(exec.mock.calls).toEqual([]);
     });
 });

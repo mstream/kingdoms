@@ -38,7 +38,7 @@ describe('CityOrdersComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -49,11 +49,13 @@ describe('CityOrdersComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <CityOrdersComponent/>
+                <CityOrdersComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(cityOrdersComponentTestId)).not.toBeInTheDocument();
+        await expect(
+            queryByTestId(cityOrdersComponentTestId),
+        ).not.toBeInTheDocument();
     });
 
     test('displays orders which are related to the city', async () => {
@@ -71,23 +73,23 @@ describe('CityOrdersComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         name: 'Cityone',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         name: 'Citytwo',
                     },
-                    'city3': {
+                    city3: {
                         ...emptyCityState,
                         name: 'Citythree',
                     },
-                    'city4': {
+                    city4: {
                         ...emptyCityState,
                         name: 'Cityfour',
                     },
-                    'city5': {
+                    city5: {
                         ...emptyCityState,
                         name: 'Cityfive',
                     },
@@ -95,14 +97,14 @@ describe('CityOrdersComponent', () => {
                 orders: {
                     ...emptyCommonState.orders,
                     creationTimes: {
-                        'order1': '2000-01-01T01:00:00Z',
-                        'order2': '2000-01-01T02:00:00Z',
-                        'order3': '2000-01-01T03:00:00Z',
-                        'order4': '2000-01-01T04:00:00Z',
+                        order1: '2000-01-01T01:00:00Z',
+                        order2: '2000-01-01T02:00:00Z',
+                        order3: '2000-01-01T03:00:00Z',
+                        order4: '2000-01-01T04:00:00Z',
                     },
                     items: {
                         scheduledAttack: {
-                            'order1': {
+                            order1: {
                                 ...emptyScheduledAttackOrderState,
                                 originCityId: 'city1',
                                 regimentTemplate: {
@@ -114,17 +116,17 @@ describe('CityOrdersComponent', () => {
                                 },
                                 targetCityId: 'city2',
                             },
-                            'order2': {
+                            order2: {
                                 ...emptyScheduledAttackOrderState,
                                 originCityId: 'city3',
                                 targetCityId: 'city1',
                             },
-                            'order3': {
+                            order3: {
                                 ...emptyScheduledAttackOrderState,
                                 originCityId: 'city4',
                                 targetCityId: 'city4',
                             },
-                            'order4': {
+                            order4: {
                                 ...emptyScheduledAttackOrderState,
                                 originCityId: 'city1',
                                 regimentTemplate: {
@@ -147,7 +149,7 @@ describe('CityOrdersComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityOrdersComponent/>
+                <CityOrdersComponent />
             </Provider>,
         );
 
@@ -178,23 +180,23 @@ describe('CityOrdersComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         name: 'Cityone',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         name: 'Citytwo',
                     },
-                    'city3': {
+                    city3: {
                         ...emptyCityState,
                         name: 'Citythree',
                     },
-                    'city4': {
+                    city4: {
                         ...emptyCityState,
                         name: 'Cityfour',
                     },
-                    'city5': {
+                    city5: {
                         ...emptyCityState,
                         name: 'Cityfive',
                     },
@@ -202,17 +204,17 @@ describe('CityOrdersComponent', () => {
                 orders: {
                     ...emptyCommonState.orders,
                     creationTimes: {
-                        'order1': '2000-01-01T01:00:00Z',
-                        'order4': '2000-01-01T04:00:00Z',
+                        order1: '2000-01-01T01:00:00Z',
+                        order4: '2000-01-01T04:00:00Z',
                     },
                     items: {
                         scheduledAttack: {
-                            'order1': {
+                            order1: {
                                 ...emptyScheduledAttackOrderState,
                                 originCityId: 'city1',
                                 targetCityId: 'city2',
                             },
-                            'order4': {
+                            order4: {
                                 ...emptyScheduledAttackOrderState,
                                 originCityId: 'city1',
                                 targetCityId: 'city5',
@@ -228,7 +230,7 @@ describe('CityOrdersComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityOrdersComponent/>
+                <CityOrdersComponent />
             </Provider>,
         );
 
@@ -241,8 +243,10 @@ describe('CityOrdersComponent', () => {
         fireEvent.click(orderSummary);
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clientActions.menu.selectCityViewOrdersTab({
-            orderId: 'order1',
-        }));
+        expect(actions[0]).toEqual(
+            clientActions.menu.selectCityViewOrdersTab({
+                orderId: 'order1',
+            }),
+        );
     });
 });

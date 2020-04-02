@@ -10,7 +10,6 @@ const createDevVariables = () => {
     };
 };
 
-
 const createProdVariables = () => {
     const prodVariables = require('./server/dist/prod/service.js');
 

@@ -29,7 +29,7 @@ describe('CityUnitsComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -48,7 +48,7 @@ describe('CityUnitsComponent', () => {
 
         const { queryByRole } = render(
             <Provider store={store}>
-                <CityUnitsComponent/>
+                <CityUnitsComponent />
             </Provider>,
         );
 
@@ -61,7 +61,7 @@ describe('CityUnitsComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -81,7 +81,7 @@ describe('CityUnitsComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityUnitsComponent/>
+                <CityUnitsComponent />
             </Provider>,
         );
 
@@ -95,8 +95,10 @@ describe('CityUnitsComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clientActions.menu.selectCityViewUnitsTab({
-            unitType: UNIT_PEASANT,
-        }));
+        expect(actions[0]).toEqual(
+            clientActions.menu.selectCityViewUnitsTab({
+                unitType: UNIT_PEASANT,
+            }),
+        );
     });
 });

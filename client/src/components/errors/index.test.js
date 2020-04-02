@@ -22,11 +22,13 @@ describe('ErrorsComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <ErrorsComponent/>
+                <ErrorsComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(errorsComponentTestId)).not.toBeInTheDocument();
+        await expect(
+            queryByTestId(errorsComponentTestId),
+        ).not.toBeInTheDocument();
     });
 
     test('displays errors', async () => {
@@ -39,7 +41,7 @@ describe('ErrorsComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <ErrorsComponent/>
+                <ErrorsComponent />
             </Provider>,
         );
 

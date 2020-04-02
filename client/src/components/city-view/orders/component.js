@@ -8,22 +8,20 @@ import { CityOrdersScheduledAttackInfoComponent } from './scheduled-attack-info'
 
 export const testId = 'city-orders';
 
-export const Component = (
-    {
-        activeOrderId,
-        isVisible,
-        orderInfosById,
-        selectCityViewOrdersTab,
-    }: Props) => {
-
+export const Component = ({
+    activeOrderId,
+    isVisible,
+    orderInfosById,
+    selectCityViewOrdersTab,
+}: Props) => {
     if (!isVisible || orderInfosById == null) {
         return null;
     }
 
-    const orderRowComponents = Object
-        .keys(orderInfosById)
-        .map((orderId: string) => {
-            const orderInfo: ?ScheduledAttackOrderInfo = orderInfosById[orderId];
+    const orderRowComponents = Object.keys(orderInfosById).map(
+        (orderId: string) => {
+            const orderInfo: ?ScheduledAttackOrderInfo =
+                orderInfosById[orderId];
 
             if (orderInfo == null) {
                 throw Error('missing order info');
@@ -36,23 +34,22 @@ export const Component = (
             };
 
             return (
-                <div
-                    key={orderId}
-                    onClick={onClick}
-                >
+                <div key={orderId} onClick={onClick}>
                     <CityOrdersScheduledAttackItemComponent
                         isActive={isSelected}
                         item={orderInfo}
                     />
                 </div>
             );
-        });
+        },
+    );
 
-    const infoComponent = activeOrderId == null ?
-        null :
-        (
+    const infoComponent =
+        activeOrderId == null ? null : (
             <CityOrdersScheduledAttackInfoComponent
-                regimentTemplate={orderInfosById[activeOrderId].regimentTemplate}
+                regimentTemplate={
+                    orderInfosById[activeOrderId].regimentTemplate
+                }
             />
         );
 

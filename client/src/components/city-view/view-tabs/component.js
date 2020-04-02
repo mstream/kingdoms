@@ -46,39 +46,29 @@ const tabsVisuals = {
 export const testId = 'city-view-tabs';
 
 export const Component = ({ activeTab, selectCityViewTab }: Props) => {
+    const tabComponents = tabsOrder.map((tab: ClientStateCityViewTab) => {
+        const className = classNames('py-1 px-2', {
+            'hover:bg-orange-500-alpha-50': tab !== activeTab,
+            'bg-orange-500': tab === activeTab,
+            'cursor-pointer': tab !== activeTab,
+            'cursor-default': tab === activeTab,
+        });
 
-    const tabComponents = tabsOrder.map(
-        (tab: ClientStateCityViewTab) => {
-            const className = classNames(
-                'py-1 px-2',
-                {
-                    'hover:bg-orange-500-alpha-50': tab !== activeTab,
-                    'bg-orange-500': tab === activeTab,
-                    'cursor-pointer': tab !== activeTab,
-                    'cursor-default': tab === activeTab,
-                },
-            );
+        const { icon, name } = tabsVisuals[tab];
 
-            const { icon, name } = tabsVisuals[tab];
+        const iconClassName = `icofont ${icon}`;
 
-            const iconClassName = `icofont ${icon}`;
+        const onClick = (event) => {
+            selectCityViewTab({ tab });
+        };
 
-            const onClick = (event) => {
-                selectCityViewTab({ tab });
-            };
-
-            return (
-                <div key={tab}
-                     className={className}
-                     role="tab"
-                     onClick={onClick}
-                >
-                    <i className={iconClassName}/>
-                    {name}
-                </div>
-            );
-        },
-    );
+        return (
+            <div key={tab} className={className} role="tab" onClick={onClick}>
+                <i className={iconClassName} />
+                {name}
+            </div>
+        );
+    });
 
     return (
         <div

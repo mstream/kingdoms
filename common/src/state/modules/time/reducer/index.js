@@ -8,7 +8,6 @@ import { RESET_STATE } from '../../../actions/types';
 import { createCommonStateReducer } from '../../utils';
 import type { CommonStateTime } from './types';
 
-
 export const timeReducer = createCommonStateReducer<CommonStateTime>({
     actionReducers: {
         [EXECUTE_TIME_STEP]: executeTimeStepTimeReducer,

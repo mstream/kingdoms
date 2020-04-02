@@ -7,7 +7,9 @@ import type { ClientOpenCityViewAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientOpenCityViewAction>> = [
+export const openCityViewTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientOpenCityViewAction>,
+> = [
     {
         name: 'opens city view',
         action: clientActions.menu.openCityView({
@@ -21,7 +23,7 @@ export const openCityViewTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTes
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },

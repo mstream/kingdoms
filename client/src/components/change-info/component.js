@@ -8,12 +8,12 @@ import { numberToQuantityString } from '../../../../common/src/util';
 export const testId = 'change-info';
 
 export const Component = ({ changeInfo }: Props) => {
-    const changeRowComponents = Object
-        .keys(changeInfo)
-        .filter(changeType => Math.abs(changeInfo[changeType]) >= 1)
+    const changeRowComponents = Object.keys(changeInfo)
+        .filter((changeType) => Math.abs(changeInfo[changeType]) >= 1)
         .sort((changeType1, changeType2) => {
             return changeInfo[changeType2] - changeInfo[changeType1];
-        }).map(changeType => {
+        })
+        .map((changeType) => {
             const partialRate = changeInfo[changeType];
             const className = classNames({
                 'text-red-500': partialRate < 0,
@@ -21,19 +21,23 @@ export const Component = ({ changeInfo }: Props) => {
                 'text-green-500': partialRate > 0,
             });
             return (
-                <tr key={changeType}
-                    className="text-sm text-right font-medium text-gray-900">
+                <tr
+                    key={changeType}
+                    className="text-sm text-right font-medium text-gray-900"
+                >
                     <td>{changeType}:</td>
-                    <td className={className}>{numberToQuantityString({ value: partialRate })}/h</td>
+                    <td className={className}>
+                        {numberToQuantityString({ value: partialRate })}/h
+                    </td>
                 </tr>
             );
         });
     return (
-        <table data-testid={testId}
-               className="table-fixed border-separate shadow-inner">
-            <tbody>
-                {changeRowComponents}
-            </tbody>
+        <table
+            data-testid={testId}
+            className="table-fixed border-separate shadow-inner"
+        >
+            <tbody>{changeRowComponents}</tbody>
         </table>
     );
 };

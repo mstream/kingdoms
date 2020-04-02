@@ -24,15 +24,23 @@ export type CommonStateReducerResult<S> = $ReadOnly<{
     state: ?S,
 }>;
 
-export type CommonStateReducer<S> = (S, CommonAction, CommonState) => CommonStateReducerResult<S>;
+export type CommonStateReducer<S> = (
+    S,
+    CommonAction,
+    CommonState,
+) => CommonStateReducerResult<S>;
 
-export type CommonStateActionReducer<S, +A: CommonAction> = ($ReadOnly<{ action: A, globalState: CommonState, localState: S, }>) => CommonStateReducerResult<S>;
+export type CommonStateActionReducer<S, +A: CommonAction> = (
+    $ReadOnly<{ action: A, globalState: CommonState, localState: S }>,
+) => CommonStateReducerResult<S>;
 
 export type CommonStateReducerTestScenario<S, +A: CommonAction> = $ReadOnly<{
     name: string,
     action: A,
     previousGlobalState: CommonState,
-    expectedReductionResultCreator: ({ previousLocalState: S }) => CommonStateReducerResult<S>,
+    expectedReductionResultCreator: ({
+        previousLocalState: S,
+    }) => CommonStateReducerResult<S>,
 }>;
 
 export type CommonStateSelector<T> = (state: CommonState) => T;
@@ -43,6 +51,8 @@ export type CommonStateSelectorTestScenario<T> = $ReadOnly<{
     expectedValue: T,
 }>;
 
-export type CommonStateSelectors = $ReadOnly<{[string]: CommonStateSelector<mixed>}>;
+export type CommonStateSelectors = $ReadOnly<{
+    [string]: CommonStateSelector<mixed>,
+}>;
 
 export const CommonStateType = (reify: Type<CommonState>);

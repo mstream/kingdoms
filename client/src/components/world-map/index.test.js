@@ -32,13 +32,16 @@ describe('WorldMapComponent', () => {
 
         const { queryAllByTestId } = render(
             <Provider store={store}>
-                <WorldMapComponent windowSize={windowSize}/>
+                <WorldMapComponent windowSize={windowSize} />
             </Provider>,
         );
 
-        await expect(queryAllByTestId(cityTileComponentTestId).length).toEqual(0);
-        await expect(queryAllByTestId(terrainTileComponentTestId).length).toEqual(0);
-
+        await expect(queryAllByTestId(cityTileComponentTestId).length).toEqual(
+            0,
+        );
+        await expect(
+            queryAllByTestId(terrainTileComponentTestId).length,
+        ).toEqual(0);
     });
 
     test('shows up when common state is loaded', async () => {
@@ -62,7 +65,7 @@ describe('WorldMapComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                     },
                 },
@@ -70,7 +73,7 @@ describe('WorldMapComponent', () => {
             tiles: {
                 ...emptyClientState.tiles,
                 city: {
-                    'city1': {
+                    city1: {
                         ...emptyClientStateCityTile,
                     },
                 },
@@ -88,11 +91,15 @@ describe('WorldMapComponent', () => {
 
         const { queryAllByTestId } = render(
             <Provider store={store}>
-                <WorldMapComponent windowSize={windowSize}/>
+                <WorldMapComponent windowSize={windowSize} />
             </Provider>,
         );
 
-        await expect(queryAllByTestId(cityTileComponentTestId).length).toBeGreaterThan(0);
-        await expect(queryAllByTestId(terrainTileComponentTestId).length).toBeGreaterThan(0);
+        await expect(
+            queryAllByTestId(cityTileComponentTestId).length,
+        ).toBeGreaterThan(0);
+        await expect(
+            queryAllByTestId(terrainTileComponentTestId).length,
+        ).toBeGreaterThan(0);
     });
 });

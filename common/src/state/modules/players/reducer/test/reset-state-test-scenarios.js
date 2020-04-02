@@ -4,13 +4,12 @@ import { initialCommonState } from '../../../../index';
 import { success } from '../../../utils';
 import { emptyCommonState } from '../../../state';
 import type { CommonResetStateAction } from '../../../../actions/types';
-import type {
-    CommonStatePlayersReducerTestScenario,
-} from './types';
+import type { CommonStatePlayersReducerTestScenario } from './types';
 import { resetState } from '../../../../actions';
 
-
-type Scenarios = $ReadOnlyArray<CommonStatePlayersReducerTestScenario<CommonResetStateAction>>;
+type Scenarios = $ReadOnlyArray<
+    CommonStatePlayersReducerTestScenario<CommonResetStateAction>,
+>;
 
 export const resetStateTestScenarios: Scenarios = [
     {
@@ -21,11 +20,9 @@ export const resetStateTestScenarios: Scenarios = [
             players: emptyCommonState.players,
         },
         expectedReductionResultCreator: ({ previousLocalState }) => {
-            return success(
-                {
-                    state: initialCommonState.players,
-                },
-            );
+            return success({
+                state: initialCommonState.players,
+            });
         },
     },
 ];

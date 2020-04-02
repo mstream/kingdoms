@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 
-
 const createDefinitionPlugin = ({ globalVariablesCreator }) => {
     const globalVariables = globalVariablesCreator();
 
@@ -16,7 +15,6 @@ const createDefinitionPlugin = ({ globalVariablesCreator }) => {
 
     return new webpack.DefinePlugin(definitions);
 };
-
 
 module.exports = {
     createDefinitionPlugin,

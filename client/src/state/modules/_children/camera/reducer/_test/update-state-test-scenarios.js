@@ -1,7 +1,9 @@
 // @flow
 
-
-import { addVectors, negateVector } from '../../../../../../../../common/src/vector';
+import {
+    addVectors,
+    negateVector,
+} from '../../../../../../../../common/src/vector';
 import { tileVectorToPixelVector } from '../../../../../../util';
 import { emptyCommonState } from '../../../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../../../common/src/state/modules/cities/reducer/state';
@@ -10,8 +12,9 @@ import type { ClientUpdateStateAction } from '../../../common-state/actions/type
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-
-export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientUpdateStateAction>> = [
+export const updateStateTestScenarios: $ReadOnlyArray<
+    ClientStateCameraReducerTestScenario<ClientUpdateStateAction>,
+> = [
     {
         name: 'updates state',
         action: clientActions.commonState.updateState({
@@ -58,11 +61,11 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTe
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         location: {
                             ...emptyCityState.location,
@@ -100,7 +103,7 @@ export const updateStateTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTe
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },

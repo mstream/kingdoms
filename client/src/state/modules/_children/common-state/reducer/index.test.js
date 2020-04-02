@@ -10,7 +10,6 @@ import { runReducerTestScenarios } from '../../../../utils';
 import { UPDATE_STATE } from '../actions/types';
 import { clientActions } from '../../../actions';
 
-
 const stateInitializationScenario: ClientStateCommonStateReducerTestScenario<ClientDummyAction> = {
     name: 'initializes its state',
     action: clientActions.dummy.dummy(),
@@ -22,7 +21,6 @@ const stateInitializationScenario: ClientStateCommonStateReducerTestScenario<Cli
         return null;
     },
 };
-
 
 describe('commonStateReducer', () => {
     runReducerTestScenarios({

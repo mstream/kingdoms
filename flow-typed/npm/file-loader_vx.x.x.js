@@ -14,7 +14,7 @@
  */
 
 declare module 'file-loader' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,20 +23,20 @@ declare module 'file-loader' {
  * needed.
  */
 declare module 'file-loader/dist/cjs' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'file-loader/dist' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'file-loader/dist/cjs.js' {
-  declare module.exports: $Exports<'file-loader/dist/cjs'>;
+    declare module.exports: $Exports<'file-loader/dist/cjs'>;
 }
 declare module 'file-loader/dist/index' {
-  declare module.exports: $Exports<'file-loader/dist'>;
+    declare module.exports: $Exports<'file-loader/dist'>;
 }
 declare module 'file-loader/dist/index.js' {
-  declare module.exports: $Exports<'file-loader/dist'>;
+    declare module.exports: $Exports<'file-loader/dist'>;
 }

@@ -21,14 +21,9 @@ describe('addConnection', () => {
             redis,
         });
 
-        expect(redis.sadd.mock.calls).toEqual(
-            [
-                [
-                    'connection-ids:env1',
-                    'connection1',
-                ],
-            ],
-        );
+        expect(redis.sadd.mock.calls).toEqual([
+            ['connection-ids:env1', 'connection1'],
+        ]);
     });
 
     it('fails on redis add failure', async () => {
@@ -50,13 +45,8 @@ describe('addConnection', () => {
 
         await expect(actualPromise).rejects.toBeTruthy();
 
-        expect(redis.sadd.mock.calls).toEqual(
-            [
-                [
-                    'connection-ids:env1',
-                    'connection1',
-                ],
-            ],
-        );
+        expect(redis.sadd.mock.calls).toEqual([
+            ['connection-ids:env1', 'connection1'],
+        ]);
     });
 });

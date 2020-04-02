@@ -14,7 +14,7 @@
  */
 
 declare module 'await-exec' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,16 +23,16 @@ declare module 'await-exec' {
  * needed.
  */
 declare module 'await-exec/test' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'await-exec/index' {
-  declare module.exports: $Exports<'await-exec'>;
+    declare module.exports: $Exports<'await-exec'>;
 }
 declare module 'await-exec/index.js' {
-  declare module.exports: $Exports<'await-exec'>;
+    declare module.exports: $Exports<'await-exec'>;
 }
 declare module 'await-exec/test.js' {
-  declare module.exports: $Exports<'await-exec/test'>;
+    declare module.exports: $Exports<'await-exec/test'>;
 }

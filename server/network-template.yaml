@@ -1,15 +1,13 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
-
 Resources:
-
     Vpc:
         Type: 'AWS::EC2::VPC'
         Properties:
             CidrBlock: '10.0.0.0/16'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}'
 
     PrivateSubnet:
         Type: 'AWS::EC2::Subnet'
@@ -18,8 +16,8 @@ Resources:
             AvailabilityZone: 'eu-west-1a'
             CidrBlock: '10.0.0.0/24'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}-private-eu-west-1a'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}-private-eu-west-1a'
 
     PublicSubnet:
         Type: 'AWS::EC2::Subnet'
@@ -28,15 +26,15 @@ Resources:
             AvailabilityZone: 'eu-west-1a'
             CidrBlock: '10.0.1.0/24'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}-public-eu-west-1a'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}-public-eu-west-1a'
 
     InternetGateway:
         Type: 'AWS::EC2::InternetGateway'
         Properties:
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}'
 
     VpcInternetGatewayAttachment:
         Type: 'AWS::EC2::VPCGatewayAttachment'
@@ -51,8 +49,8 @@ Resources:
         Properties:
             Domain: 'vpc'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}'
 
     NatGateway:
         Type: 'AWS::EC2::NatGateway'
@@ -60,24 +58,24 @@ Resources:
             AllocationId: !Sub '${NatPublicIpAddress.AllocationId}'
             SubnetId: !Sub '${PublicSubnet}'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}'
 
     PrivateRouteTable:
         Type: 'AWS::EC2::RouteTable'
         Properties:
             VpcId: !Sub '${Vpc}'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}-private'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}-private'
 
     PublicRouteTable:
         Type: 'AWS::EC2::RouteTable'
         Properties:
             VpcId: !Sub '${Vpc}'
             Tags:
-                -   Key: 'Name'
-                    Value: !Sub '${AWS::StackName}-public'
+                - Key: 'Name'
+                  Value: !Sub '${AWS::StackName}-public'
 
     PrivateRouteTableAssociation:
         Type: 'AWS::EC2::SubnetRouteTableAssociation'
@@ -105,20 +103,18 @@ Resources:
             DestinationCidrBlock: '0.0.0.0/0'
             GatewayId: !Sub '${InternetGateway}'
 
-
 Outputs:
-
     Vpc:
-        Value: !Sub "${Vpc}"
+        Value: !Sub '${Vpc}'
         Export:
-            Name: !Sub "${AWS::StackName}-Vpc"
+            Name: !Sub '${AWS::StackName}-Vpc'
 
     PrivateSubnet:
-        Value: !Sub "${PrivateSubnet}"
+        Value: !Sub '${PrivateSubnet}'
         Export:
-            Name: !Sub "${AWS::StackName}-PrivateSubnet"
+            Name: !Sub '${AWS::StackName}-PrivateSubnet'
 
     PublicSubnet:
-        Value: !Sub "${PublicSubnet}"
+        Value: !Sub '${PublicSubnet}'
         Export:
-            Name: !Sub "${AWS::StackName}-PublicSubnet"
+            Name: !Sub '${AWS::StackName}-PublicSubnet'

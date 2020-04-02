@@ -13,10 +13,12 @@ export const Component = ({ tile }: Props) => {
         ...createGeometryStyle({ geometry: tile.geometry }),
     };
 
-    return <div data-testid={testId}
-                className="absolute"
-                style={style}
-    >
-        <ImageComponent image={surfaceImages[tile.textureIndex]} ratio="100%"/>
-    </div>;
+    return (
+        <div data-testid={testId} className="absolute" style={style}>
+            <ImageComponent
+                image={surfaceImages[tile.textureIndex]}
+                ratio="100%"
+            />
+        </div>
+    );
 };

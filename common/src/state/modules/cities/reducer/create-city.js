@@ -21,16 +21,16 @@ import { failure, success } from '../../utils';
 import type { CommonCreateCityAction } from '../actions/types';
 import { commonStateSelectors } from '../../selectors';
 
-type Reducer = CommonStateActionReducer<CommonStateCities, CommonCreateCityAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateCities,
+    CommonCreateCityAction,
+>;
 
-
-export const createCityCitiesReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const createCityCitiesReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { cityId, name, playerId } = action.payload;
 
     const cityValidationErrors = validateCityName({ name });
@@ -39,7 +39,11 @@ export const createCityCitiesReducer: Reducer = (
         return failure({ errors: cityValidationErrors });
     }
 
-    if (Object.keys(localState).find(cityId => localState[cityId].ownerId === playerId) != null) {
+    if (
+        Object.keys(localState).find(
+            (cityId) => localState[cityId].ownerId === playerId,
+        ) != null
+    ) {
         return failure({ errors: [`player already owns a city`] });
     }
 

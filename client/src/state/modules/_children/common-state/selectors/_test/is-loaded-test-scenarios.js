@@ -1,6 +1,5 @@
 // @flow
 
-
 import { emptyClientState } from '../../../../../state';
 import { emptyCommonState } from '../../../../../../../../common/src/state/modules/state';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';

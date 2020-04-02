@@ -21,8 +21,8 @@ const tileSize = {
 };
 
 export const createGeometryStyle = ({
-                                        geometry,
-                                    }: {
+    geometry,
+}: {
     geometry: Geometry,
 }): GeometryStyle => {
     return {
@@ -40,19 +40,31 @@ export const getRefValue = <T>({ ref }: { ref: { current: ?T } }): T => {
     return ref.current;
 };
 
-export const tileVectorToPixelVector = ({ tileVector }: { tileVector: Vector }): Vector => {
+export const tileVectorToPixelVector = ({
+    tileVector,
+}: {
+    tileVector: Vector,
+}): Vector => {
     return multipleVectors({
         vector1: tileVector,
         vector2: tileSize,
     });
 };
 
-export const redirectToLoginPage = ({ location }: { location: Location }): void => {
+export const redirectToLoginPage = ({
+    location,
+}: {
+    location: Location,
+}): void => {
     console.log('redirecting to the authentication website');
     location.replace(config.cognitoSignOutUrl);
 };
 
-export const getIdTokenInfo = ({ location }: { location: Location }): ?IdTokenInfo => {
+export const getIdTokenInfo = ({
+    location,
+}: {
+    location: Location,
+}): ?IdTokenInfo => {
     const locationHash = queryString.parse(location.hash);
     const token = locationHash['id_token'];
 

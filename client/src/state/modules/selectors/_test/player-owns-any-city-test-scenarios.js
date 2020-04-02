@@ -1,6 +1,5 @@
 // @flow
 
-
 import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
 import { emptyClientState } from '../../../state';
@@ -19,15 +18,15 @@ export const playerOwnsAnyCitySelectorTestScenarios: Scenarios = [
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    'city3': {
+                    city3: {
                         ...emptyCityState,
                         ownerId: 'player3',
                     },
@@ -46,15 +45,15 @@ export const playerOwnsAnyCitySelectorTestScenarios: Scenarios = [
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         ownerId: 'player3',
                     },
-                    'city3': {
+                    city3: {
                         ...emptyCityState,
                         ownerId: 'player4',
                     },

@@ -14,7 +14,7 @@
  */
 
 declare module 'tailwindcss-filters' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,16 +23,16 @@ declare module 'tailwindcss-filters' {
  * needed.
  */
 declare module 'tailwindcss-filters/test' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'tailwindcss-filters/index' {
-  declare module.exports: $Exports<'tailwindcss-filters'>;
+    declare module.exports: $Exports<'tailwindcss-filters'>;
 }
 declare module 'tailwindcss-filters/index.js' {
-  declare module.exports: $Exports<'tailwindcss-filters'>;
+    declare module.exports: $Exports<'tailwindcss-filters'>;
 }
 declare module 'tailwindcss-filters/test.js' {
-  declare module.exports: $Exports<'tailwindcss-filters/test'>;
+    declare module.exports: $Exports<'tailwindcss-filters/test'>;
 }

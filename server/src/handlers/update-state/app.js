@@ -22,7 +22,7 @@ export const handler: ScheduledHandler = async (event, context) => {
 
         const connectionIds = await redis.smembers(`connection-ids`);
 
-        const sendStatueUpdatePromises = connectionIds.map(connectionId => {
+        const sendStatueUpdatePromises = connectionIds.map((connectionId) => {
             return sendResponse({
                 apiGateway,
                 redis,

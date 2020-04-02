@@ -5,7 +5,9 @@ import type { ClientRequestCityCreationAction } from '../../../common-state/acti
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const requestCityCreationTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientRequestCityCreationAction>> = [
+export const requestCityCreationTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientRequestCityCreationAction>,
+> = [
     {
         name: 'requests city creation',
         action: clientActions.commonState.requestCityCreation({

@@ -13,7 +13,6 @@ import { emptyScheduledAttackOrderState } from '../../../../../../common/src/sta
 import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
 import type { ScheduledAttackOrderInfo } from '../../../../state/modules/selectors/types';
 
-
 const mockStore = configureStore([]);
 
 describe('CityOrdersScheduledAttackItemComponent', () => {
@@ -23,7 +22,7 @@ describe('CityOrdersScheduledAttackItemComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         name: 'Citytwo',
                     },
@@ -68,7 +67,7 @@ describe('CityOrdersScheduledAttackItemComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         name: 'Citytwo',
                     },

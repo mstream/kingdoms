@@ -15,7 +15,6 @@ import { createCityTestScenarios } from './test/create-city-test-scenarios';
 import { createOrderTestScenarios } from './test/create-order-test-scenarios';
 import { DUMMY } from '../../../../../../client/src/state/modules/actions/types';
 
-
 const stateInitializationScenario: CommonStatePlayersReducerTestScenario<CommonDummyAction> = {
     name: 'initializes its state',
     action: dummy(),

@@ -1,10 +1,8 @@
 // @flow
 
-
 import type { ClientActionCreator } from '../../../../types';
 import type { ClientMoveCameraAction, ClientZoomCameraAction } from './types';
 import { MOVE_CAMERA, ZOOM_CAMERA } from './types';
-
 
 const moveCamera: ClientActionCreator<ClientMoveCameraAction> = (payload) => {
     return {
@@ -19,7 +17,6 @@ const zoomCamera: ClientActionCreator<ClientZoomCameraAction> = (payload) => {
         payload,
     };
 };
-
 
 const moveCameraUp = () => {
     return moveCamera({

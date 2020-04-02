@@ -14,7 +14,7 @@ export type ClientStateTile = $ReadOnly<{
 
 export type ClientStateCityTiles = $ReadOnly<{
     [string]: ClientStateTile,
-    ...
+    ...,
 }>;
 
 export type ClientStateTerrainTiles = $ReadOnlyArray<ClientStateTile>;
@@ -23,4 +23,3 @@ export type ClientStateTiles = $ReadOnly<{
     city: ClientStateCityTiles,
     terrain: ClientStateTerrainTiles,
 }>;
-

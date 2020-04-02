@@ -1,6 +1,5 @@
 // @flow
 
-
 import type {
     CommonStateSelector,
     CommonStateSelectorTestScenario,
@@ -8,7 +7,9 @@ import type {
 import { emptyCommonState } from '../../../state';
 import type { CommonStateRules } from '../../reducer/types';
 
-type Scenarios = $ReadOnlyArray<CommonStateSelectorTestScenario<CommonStateRules>>
+type Scenarios = $ReadOnlyArray<
+    CommonStateSelectorTestScenario<CommonStateRules>,
+>;
 
 export const rulesSelectorTestScenarios: Scenarios = [
     {

@@ -1,6 +1,5 @@
 // @flow
 
-
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { clientStateSelectors } from '../../../state/modules/selectors';
@@ -15,7 +14,7 @@ type OwnProps = {
 
 type StateProps = $ReadOnly<{
     ...StateToProps<typeof mapStateToProps>,
-}>
+}>;
 
 type DispatchProps = $ReadOnly<{
     ...ActionCreatorsProps<typeof actionCreators>,
@@ -35,15 +34,15 @@ const mapStateToProps = (state: ClientState) => {
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    updateAttackViewRegimentTemplate: clientActions.menu.updateAttackViewRegimentTemplate,
+    updateAttackViewRegimentTemplate:
+        clientActions.menu.updateAttackViewRegimentTemplate,
 });
 
-export const connectProps = connect<Props,
+export const connectProps = connect<
+    Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>>(
-    mapStateToProps,
-    actionCreators,
-);
+    Dispatch<ClientAction>,
+>(mapStateToProps, actionCreators);

@@ -5,16 +5,16 @@ import type { ClientCloseAttackViewAction } from '../../actions/types';
 import { emptyRegimentTemplateState } from '../../../../../../../../common/src/state/modules/orders/reducer/state';
 import type { ClientStateActionReducer } from '../../../../../types';
 
-type Reducer = ClientStateActionReducer<ClientStateMenu, ClientCloseAttackViewAction>;
+type Reducer = ClientStateActionReducer<
+    ClientStateMenu,
+    ClientCloseAttackViewAction,
+>;
 
-
-export const closeAttackViewMenuReducer: Reducer = (
-    {
-        localState,
-        action,
-        globalState,
-    },
-) => {
+export const closeAttackViewMenuReducer: Reducer = ({
+    localState,
+    action,
+    globalState,
+}) => {
     return {
         ...localState,
         attackView: {

@@ -1,12 +1,13 @@
 // @flow
 
-
 import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
 import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
 import { emptyClientState } from '../../../state';
 import type { ClientStateSelectorTestScenario } from '../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<?$ReadOnlyArray<string>>>;
+type Scenarios = $ReadOnlyArray<
+    ClientStateSelectorTestScenario<?$ReadOnlyArray<string>>,
+>;
 
 export const cityIdsOwnedByPlayersSelectorTestScenarios: Scenarios = [
     {
@@ -27,24 +28,21 @@ export const cityIdsOwnedByPlayersSelectorTestScenarios: Scenarios = [
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         ownerId: 'player2',
                     },
-                    'city3': {
+                    city3: {
                         ...emptyCityState,
                         ownerId: 'player1',
                     },
                 },
             },
         },
-        expectedValue: [
-            'city1',
-            'city3',
-        ],
+        expectedValue: ['city1', 'city3'],
     },
 ];

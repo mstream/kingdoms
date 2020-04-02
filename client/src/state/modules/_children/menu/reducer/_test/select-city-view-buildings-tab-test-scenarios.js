@@ -1,6 +1,5 @@
 // @flow
 
-
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
@@ -10,7 +9,9 @@ import type { ClientSelectCityViewBuildingsTabAction } from '../../actions/types
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-export const selectCityViewBuildingsTabTestScenarios: $ReadOnlyArray<ClientStateMenuReducerTestScenario<ClientSelectCityViewBuildingsTabAction>> = [
+export const selectCityViewBuildingsTabTestScenarios: $ReadOnlyArray<
+    ClientStateMenuReducerTestScenario<ClientSelectCityViewBuildingsTabAction>,
+> = [
     {
         name: 'selects city view building',
         action: clientActions.menu.selectCityViewBuildingsTab({

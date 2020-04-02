@@ -14,7 +14,7 @@
  */
 
 declare module 'roman-decimal' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,10 +23,10 @@ declare module 'roman-decimal' {
  * needed.
  */
 declare module 'roman-decimal/roman' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'roman-decimal/roman.js' {
-  declare module.exports: $Exports<'roman-decimal/roman'>;
+    declare module.exports: $Exports<'roman-decimal/roman'>;
 }

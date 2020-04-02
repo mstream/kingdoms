@@ -26,9 +26,21 @@ type StateToReducersMapping = {
     world: CommonStateReducer<CommonStateWorld>,
 };
 
-const combineCommonStateReducers = ({ stateToReducersMapping }: { stateToReducersMapping: StateToReducersMapping }) => {
-    const combinedReducer = ({ action, state }: { action: CommonAction, state: CommonState }): CommonStateReducerResult<CommonState> => {
-        const reducibleState: CommonState = Object.keys(stateToReducersMapping).reduce(
+const combineCommonStateReducers = ({
+    stateToReducersMapping,
+}: {
+    stateToReducersMapping: StateToReducersMapping,
+}) => {
+    const combinedReducer = ({
+        action,
+        state,
+    }: {
+        action: CommonAction,
+        state: CommonState,
+    }): CommonStateReducerResult<CommonState> => {
+        const reducibleState: CommonState = Object.keys(
+            stateToReducersMapping,
+        ).reduce(
             (reducibleState, stateProperty: $Keys<StateToReducersMapping>) => {
                 return {
                     ...reducibleState,
@@ -39,32 +51,31 @@ const combineCommonStateReducers = ({ stateToReducersMapping }: { stateToReducer
             emptyCommonState,
         );
 
-        return Object
-            .keys(stateToReducersMapping)
-            .reduce((result, stateProperty: string) => {
-                    const reducer = stateToReducersMapping[stateProperty];
-                    const newPropertyReduceResult = reducer(
-                        state[stateProperty],
-                        action,
-                        state,
-                    );
+        return Object.keys(stateToReducersMapping).reduce(
+            (result, stateProperty: string) => {
+                const reducer = stateToReducersMapping[stateProperty];
+                const newPropertyReduceResult = reducer(
+                    state[stateProperty],
+                    action,
+                    state,
+                );
 
-                    return {
-                        errors: [
-                            ...result.errors,
-                            ...newPropertyReduceResult.errors,
-                        ],
-                        state: {
-                            ...result.state,
-                            [stateProperty]: newPropertyReduceResult.state,
-                        },
-                    };
-                },
-                {
-                    errors: [],
-                    state: reducibleState,
-                },
-            );
+                return {
+                    errors: [
+                        ...result.errors,
+                        ...newPropertyReduceResult.errors,
+                    ],
+                    state: {
+                        ...result.state,
+                        [stateProperty]: newPropertyReduceResult.state,
+                    },
+                };
+            },
+            {
+                errors: [],
+                state: reducibleState,
+            },
+        );
     };
     return combinedReducer;
 };
@@ -77,5 +88,6 @@ const stateToReducersMapping: StateToReducersMapping = {
     world: worldReducer,
 };
 
-
-export const rootReducer = combineCommonStateReducers({ stateToReducersMapping });
+export const rootReducer = combineCommonStateReducers({
+    stateToReducersMapping,
+});

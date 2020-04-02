@@ -1,6 +1,5 @@
 // @flow
 
-
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ActionCreatorsProps, StateToProps } from '../../types';
@@ -13,7 +12,7 @@ type OwnProps = {};
 
 type StateProps = $ReadOnly<{
     ...StateToProps<typeof mapStateToProps>,
-}>
+}>;
 
 type DispatchProps = $ReadOnly<{
     ...ActionCreatorsProps<typeof actionCreators>,
@@ -27,22 +26,23 @@ export type Props = {
 
 const mapStateToProps = (state: ClientState) => {
     return {
-        isVisible: clientStateSelectors.menu.isAttackViewMenuOpen(state)
-            && clientStateSelectors.menu.attackingCityId != null,
+        isVisible:
+            clientStateSelectors.menu.isAttackViewMenuOpen(state) &&
+            clientStateSelectors.menu.attackingCityId != null,
         minimumDelay: clientStateSelectors.menu.minimumAttackDelay(state),
     };
 };
 
 const actionCreators: DispatchProps = Object.freeze({
-    updateAttackViewMinimumDelay: clientActions.menu.updateAttackViewMinimumDelay,
+    updateAttackViewMinimumDelay:
+        clientActions.menu.updateAttackViewMinimumDelay,
 });
 
-export const connectProps = connect<Props,
+export const connectProps = connect<
+    Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>>(
-    mapStateToProps,
-    actionCreators,
-);
+    Dispatch<ClientAction>,
+>(mapStateToProps, actionCreators);

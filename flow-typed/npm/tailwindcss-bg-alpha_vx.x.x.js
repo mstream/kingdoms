@@ -14,7 +14,7 @@
  */
 
 declare module 'tailwindcss-bg-alpha' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,16 +23,16 @@ declare module 'tailwindcss-bg-alpha' {
  * needed.
  */
 declare module 'tailwindcss-bg-alpha/test' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'tailwindcss-bg-alpha/index' {
-  declare module.exports: $Exports<'tailwindcss-bg-alpha'>;
+    declare module.exports: $Exports<'tailwindcss-bg-alpha'>;
 }
 declare module 'tailwindcss-bg-alpha/index.js' {
-  declare module.exports: $Exports<'tailwindcss-bg-alpha'>;
+    declare module.exports: $Exports<'tailwindcss-bg-alpha'>;
 }
 declare module 'tailwindcss-bg-alpha/test.js' {
-  declare module.exports: $Exports<'tailwindcss-bg-alpha/test'>;
+    declare module.exports: $Exports<'tailwindcss-bg-alpha/test'>;
 }

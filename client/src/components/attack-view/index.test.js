@@ -35,11 +35,13 @@ describe('AttackViewComponent', () => {
 
         const { queryByTestId } = render(
             <Provider store={store}>
-                <AttackViewComponent/>
+                <AttackViewComponent />
             </Provider>,
         );
 
-        await expect(queryByTestId(attackViewComponentTestId)).not.toBeInTheDocument();
+        await expect(
+            queryByTestId(attackViewComponentTestId),
+        ).not.toBeInTheDocument();
     });
 
     test('displays only cities list when attacking city is not selected', async () => {
@@ -49,12 +51,12 @@ describe('AttackViewComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         name: 'Cityone',
                         ownerId: 'player2',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         name: 'Citytwo',
                         ownerId: 'player1',
@@ -77,13 +79,17 @@ describe('AttackViewComponent', () => {
 
         const { queryByTestId, queryByText } = render(
             <Provider store={store}>
-                <AttackViewComponent/>
+                <AttackViewComponent />
             </Provider>,
         );
 
         await expect(queryByText('Cityone')).toBeInTheDocument();
-        await expect(queryByTestId(attackViewCityListComponentTestId)).toBeInTheDocument();
-        await expect(queryByTestId(attackViewRegimentTemplateFormComponentTestId)).not.toBeInTheDocument();
+        await expect(
+            queryByTestId(attackViewCityListComponentTestId),
+        ).toBeInTheDocument();
+        await expect(
+            queryByTestId(attackViewRegimentTemplateFormComponentTestId),
+        ).not.toBeInTheDocument();
     });
 
     test('displays both cities list and regiment template form when attacking city is selected', async () => {
@@ -93,12 +99,12 @@ describe('AttackViewComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         name: 'Cityone',
                         ownerId: 'player2',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         name: 'Citytwo',
                         ownerId: 'player2',
@@ -122,13 +128,17 @@ describe('AttackViewComponent', () => {
 
         const { queryByTestId, queryByText } = render(
             <Provider store={store}>
-                <AttackViewComponent/>
+                <AttackViewComponent />
             </Provider>,
         );
 
         await expect(queryByText('Cityone')).toBeInTheDocument();
-        await expect(queryByTestId(attackViewCityListComponentTestId)).toBeInTheDocument();
-        await expect(queryByTestId(attackViewRegimentTemplateFormComponentTestId)).toBeInTheDocument();
+        await expect(
+            queryByTestId(attackViewCityListComponentTestId),
+        ).toBeInTheDocument();
+        await expect(
+            queryByTestId(attackViewRegimentTemplateFormComponentTestId),
+        ).toBeInTheDocument();
     });
 
     test('requests an order creation on a button click when the form is valid', async () => {
@@ -138,12 +148,12 @@ describe('AttackViewComponent', () => {
                 ...emptyCommonState,
                 cities: {
                     ...emptyCommonState.cities,
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         name: 'Cityone',
                         ownerId: 'player2',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         name: 'Citytwo',
                         ownerId: 'player1',
@@ -175,7 +185,7 @@ describe('AttackViewComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <AttackViewComponent/>
+                <AttackViewComponent />
             </Provider>,
         );
 
@@ -189,17 +199,19 @@ describe('AttackViewComponent', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(clientActions.commonState.requestOrderCreation({
-            minimumDelay: 60,
-            originCityId: 'city2',
-            regimentTemplate: {
-                ...emptyRegimentTemplateState,
-                [UNIT_PIKEMAN]: {
-                    from: 50,
-                    to: 100,
+        expect(actions[0]).toEqual(
+            clientActions.commonState.requestOrderCreation({
+                minimumDelay: 60,
+                originCityId: 'city2',
+                regimentTemplate: {
+                    ...emptyRegimentTemplateState,
+                    [UNIT_PIKEMAN]: {
+                        from: 50,
+                        to: 100,
+                    },
                 },
-            },
-            targetCityId: 'city1',
-        }));
+                targetCityId: 'city1',
+            }),
+        );
     });
 });

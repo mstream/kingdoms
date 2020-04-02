@@ -14,7 +14,7 @@
  */
 
 declare module 'purgecss-webpack-plugin' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,17 +23,21 @@ declare module 'purgecss-webpack-plugin' {
  * needed.
  */
 declare module 'purgecss-webpack-plugin/lib/purgecss-webpack-plugin.esm' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'purgecss-webpack-plugin/lib/purgecss-webpack-plugin' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'purgecss-webpack-plugin/lib/purgecss-webpack-plugin.esm.js' {
-  declare module.exports: $Exports<'purgecss-webpack-plugin/lib/purgecss-webpack-plugin.esm'>;
+    declare module.exports: $Exports<
+        'purgecss-webpack-plugin/lib/purgecss-webpack-plugin.esm',
+    >;
 }
 declare module 'purgecss-webpack-plugin/lib/purgecss-webpack-plugin.js' {
-  declare module.exports: $Exports<'purgecss-webpack-plugin/lib/purgecss-webpack-plugin'>;
+    declare module.exports: $Exports<
+        'purgecss-webpack-plugin/lib/purgecss-webpack-plugin',
+    >;
 }

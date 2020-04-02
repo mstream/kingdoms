@@ -6,29 +6,33 @@ import { commonStateCitiesSelectors } from '../../../../../../../../common/src/s
 import type { ClientStateActionReducer } from '../../../../../types';
 import { clientStateSelectors } from '../../../../selectors';
 
-type Reducer = ClientStateActionReducer<ClientStateMenu, ClientUpdateStateAction>;
+type Reducer = ClientStateActionReducer<
+    ClientStateMenu,
+    ClientUpdateStateAction,
+>;
 
-
-export const updateStateMenuReducer: Reducer = (
-    {
-        localState,
-        action,
-        globalState,
-    },
-) => {
+export const updateStateMenuReducer: Reducer = ({
+    localState,
+    action,
+    globalState,
+}) => {
     const playerName = clientStateSelectors.player.name(globalState);
 
     if (playerName == null) {
         return localState;
     }
 
-    const isNewCityBeingCreated = clientStateSelectors.menu.isNewCityBeingCreated(globalState);
+    const isNewCityBeingCreated = clientStateSelectors.menu.isNewCityBeingCreated(
+        globalState,
+    );
 
     if (isNewCityBeingCreated) {
         return localState;
     }
 
-    const playerCities = commonStateCitiesSelectors.cityIdsByOwner(action.payload.commonState)[playerName];
+    const playerCities = commonStateCitiesSelectors.cityIdsByOwner(
+        action.payload.commonState,
+    )[playerName];
 
     if (playerCities == null || playerCities.length === 0) {
         return localState;

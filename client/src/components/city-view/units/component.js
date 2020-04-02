@@ -7,7 +7,6 @@ import {
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
-
 } from '../../../../../common/src/state';
 import { ImageComponent } from '../../image';
 import { CityItemsListComponent } from '../items-list';
@@ -17,8 +16,11 @@ import { ChangeInfoComponent } from '../../change-info';
 import classNames from 'classnames';
 import type { Props } from './props';
 import {
-    ARMOR_HEAVY, ARMOR_LIGHT,
-    ARMOR_MEDIUM, ARMOR_NONE, RESOURCE_FOOD,
+    ARMOR_HEAVY,
+    ARMOR_LIGHT,
+    ARMOR_MEDIUM,
+    ARMOR_NONE,
+    RESOURCE_FOOD,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
 import type { CommonStateDamage } from '../../../../../common/src/state/modules/rules/reducer/types';
 
@@ -32,25 +34,28 @@ const armorDescriptions = {
 };
 
 const formatDamageString = ({ damage }: { damage: CommonStateDamage }) => {
-    return `${numberToQuantityString({ value: damage[ARMOR_NONE] })}/${numberToQuantityString({ value: damage[ARMOR_LIGHT] })}/${numberToQuantityString({ value: damage[ARMOR_MEDIUM] })}/${numberToQuantityString({ value: damage[ARMOR_HEAVY] })}`;
+    return `${numberToQuantityString({
+        value: damage[ARMOR_NONE],
+    })}/${numberToQuantityString({
+        value: damage[ARMOR_LIGHT],
+    })}/${numberToQuantityString({
+        value: damage[ARMOR_MEDIUM],
+    })}/${numberToQuantityString({ value: damage[ARMOR_HEAVY] })}`;
 };
 
-export const Component = (
-    {
-        activeUnit,
-        city,
-        isVisible,
-        rules,
-        selectCityViewUnitsTab,
-        unitStats,
-    }: Props,
-) => {
-
+export const Component = ({
+    activeUnit,
+    city,
+    isVisible,
+    rules,
+    selectCityViewUnitsTab,
+    unitStats,
+}: Props) => {
     if (!isVisible || rules == null) {
         return null;
     }
 
-    const unitComponents = unitsOrder.map(unitType => {
+    const unitComponents = unitsOrder.map((unitType) => {
         const unitQuantity = city.units[unitType];
         const unitVisual = unitVisuals[unitType];
 
@@ -72,24 +77,16 @@ export const Component = (
             },
         );
 
-        const nameClassName = classNames(
-            'text-xs text-center text-gray-100',
-            {
-                'invisible': isSelected,
-            },
-        );
+        const nameClassName = classNames('text-xs text-center text-gray-100', {
+            invisible: isSelected,
+        });
 
         return (
-            <div
-                key={unitType}
-                className={parentClassName}
-                onClick={onClick}
-            >
-                <p className="text-sm text-center font-medium text-gray-100">{numberToQuantityString({ value: unitQuantity })}</p>
-                <ImageComponent
-                    image={unitVisual.image}
-                    ratio="100%"
-                />
+            <div key={unitType} className={parentClassName} onClick={onClick}>
+                <p className="text-sm text-center font-medium text-gray-100">
+                    {numberToQuantityString({ value: unitQuantity })}
+                </p>
+                <ImageComponent image={unitVisual.image} ratio="100%" />
                 <p className={nameClassName}>{unitVisual.name}</p>
             </div>
         );
@@ -110,7 +107,9 @@ export const Component = (
                             ratio="100%"
                         />
                     </td>
-                    <td>{formatDamageString({ damage: activeUnitStat.damage })}</td>
+                    <td>
+                        {formatDamageString({ damage: activeUnitStat.damage })}
+                    </td>
                 </tr>
                 <tr>
                     <td className="w-8 p-1">
@@ -130,7 +129,9 @@ export const Component = (
                             ratio="100%"
                         />
                     </td>
-                    <td>{`${numberToQuantityString({ value: activeUnitStat.speed })}/h`}</td>
+                    <td>{`${numberToQuantityString({
+                        value: activeUnitStat.speed,
+                    })}/h`}</td>
                 </tr>
                 <tr>
                     <td className="w-8 p-1">
@@ -140,7 +141,9 @@ export const Component = (
                             ratio="100%"
                         />
                     </td>
-                    <td>{`${numberToQuantityString({ value: activeUnitStat.foodDemand })}/h`}</td>
+                    <td>{`${numberToQuantityString({
+                        value: activeUnitStat.foodDemand,
+                    })}/h`}</td>
                 </tr>
             </tbody>
         </table>
@@ -148,7 +151,9 @@ export const Component = (
 
     const activeUnitQuantity = city.units[activeUnit];
 
-    const buildingTiersSum = calculateBuildingTierSum({ buildings: city.buildings });
+    const buildingTiersSum = calculateBuildingTierSum({
+        buildings: city.buildings,
+    });
 
     const foodChangeRate = convertChangeInfoToChangeRate({
         changeInfo: calculateResourceChangeInfo({
@@ -168,13 +173,12 @@ export const Component = (
 
     const changeComponent = (
         <div className="m-1">
-            <ChangeInfoComponent changeInfo={changeInfo}/>
+            <ChangeInfoComponent changeInfo={changeInfo} />
         </div>
     );
 
     const infoComponent = (
-        <div
-            className="parchment-bg flex flex-col w-full h-full border-solid border-l border-r border-b rounded-b border-gray-900">
+        <div className="parchment-bg flex flex-col w-full h-full border-solid border-l border-r border-b rounded-b border-gray-900">
             <p className="m-1 text-2xl text-center">{activeUnitVisual.name}</p>
             <div className="flex flex-row justify-around">
                 {statsComponent}

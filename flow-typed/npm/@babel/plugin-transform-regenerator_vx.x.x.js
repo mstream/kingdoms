@@ -14,7 +14,7 @@
  */
 
 declare module '@babel/plugin-transform-regenerator' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,13 +23,13 @@ declare module '@babel/plugin-transform-regenerator' {
  * needed.
  */
 declare module '@babel/plugin-transform-regenerator/lib' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module '@babel/plugin-transform-regenerator/lib/index' {
-  declare module.exports: $Exports<'@babel/plugin-transform-regenerator/lib'>;
+    declare module.exports: $Exports<'@babel/plugin-transform-regenerator/lib'>;
 }
 declare module '@babel/plugin-transform-regenerator/lib/index.js' {
-  declare module.exports: $Exports<'@babel/plugin-transform-regenerator/lib'>;
+    declare module.exports: $Exports<'@babel/plugin-transform-regenerator/lib'>;
 }

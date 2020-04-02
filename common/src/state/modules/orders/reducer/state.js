@@ -1,6 +1,5 @@
 // @flow
 
-
 import type {
     CommonStateOrders,
     CommonStateRegimentTemplate,

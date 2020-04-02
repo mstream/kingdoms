@@ -34,7 +34,11 @@ const requestExecutionError = {
     body: `Request processing error.`,
 };
 
-const extractActionFromBody = ({ bodyString }: { bodyString: ?string }): ?CommonPlayerAction => {
+const extractActionFromBody = ({
+    bodyString,
+}: {
+    bodyString: ?string,
+}): ?CommonPlayerAction => {
     if (bodyString == null) {
         console.error(`invalid api gateway body received`);
         return null;
@@ -42,7 +46,12 @@ const extractActionFromBody = ({ bodyString }: { bodyString: ?string }): ?Common
     console.info(`received body string: ${bodyString}`);
     const body = parseJson({ json: bodyString });
 
-    if (typeof body !== `object` || body == null || body.data == null || typeof body.data !== `object`) {
+    if (
+        typeof body !== `object` ||
+        body == null ||
+        body.data == null ||
+        typeof body.data !== `object`
+    ) {
         console.error(`invalid api gateway body received`);
         return null;
     }
@@ -85,16 +94,23 @@ export const handler: ProxyHandler = async (event, context) => {
         const { playerId } = action.payload;
 
         if (playerId !== username) {
-            console.warn(`username '${username}' does not match the playerId '${playerId}'`);
+            console.warn(
+                `username '${username}' does not match the playerId '${playerId}'`,
+            );
             return requestAuthorizationError;
         }
 
-        const sendResponseBackToClient = async ({ response }: { response: ServerResponse }) => await sendResponse({
-            apiGateway,
-            connectionId,
-            redis,
+        const sendResponseBackToClient = async ({
             response,
-        });
+        }: {
+            response: ServerResponse,
+        }) =>
+            await sendResponse({
+                apiGateway,
+                connectionId,
+                redis,
+                response,
+            });
 
         // TODO action authorization
 

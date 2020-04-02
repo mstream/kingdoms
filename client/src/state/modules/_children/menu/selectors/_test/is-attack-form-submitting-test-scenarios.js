@@ -3,7 +3,7 @@
 import { emptyClientState } from '../../../../../state';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<boolean>>
+type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<boolean>>;
 
 export const isAttackFormSubmittingSelectorTestScenarios: Scenarios = [
     {

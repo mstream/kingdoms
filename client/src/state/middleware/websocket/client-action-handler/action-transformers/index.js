@@ -1,6 +1,5 @@
 // @flow
 
-
 import type { ClientAction, ClientActionKey } from '../../../../types';
 import type { CommonAction } from '../../../../../../../common/src/state/types';
 import type {
@@ -29,39 +28,34 @@ import type {
 } from '../../../../../../../common/src/state/modules/cities/actions/types';
 import { createScheduledAttackOrder } from '../../../../../../../common/src/state/modules/orders/actions';
 
-type ActionTransformer<+A: ClientAction, +B: CommonAction> =
-    ($ReadOnly<{ clientAction: A, username: string }>) => CommonAction;
+type ActionTransformer<+A: ClientAction, +B: CommonAction> = (
+    $ReadOnly<{ clientAction: A, username: string }>,
+) => CommonAction;
 
-const transformRequestBuildingUpgrade: ActionTransformer<ClientRequestBuildingUpgradeAction, CommonUpgradeBuildingAction> = (
-    {
-        clientAction,
-        username,
-    },
-) => {
+const transformRequestBuildingUpgrade: ActionTransformer<
+    ClientRequestBuildingUpgradeAction,
+    CommonUpgradeBuildingAction,
+> = ({ clientAction, username }) => {
     return upgradeBuilding({
         ...clientAction.payload,
         playerId: username,
     });
 };
 
-const transformRequestCityNameChange: ActionTransformer<ClientRequestCityNameChangeAction, CommonChangeCityNameAction> = (
-    {
-        clientAction,
-        username,
-    },
-) => {
+const transformRequestCityNameChange: ActionTransformer<
+    ClientRequestCityNameChangeAction,
+    CommonChangeCityNameAction,
+> = ({ clientAction, username }) => {
     return changeCityName({
         ...clientAction.payload,
         playerId: username,
     });
 };
 
-const transformRequestCityCreation: ActionTransformer<ClientRequestCityCreationAction, CommonCreateCityAction> = (
-    {
-        clientAction,
-        username,
-    },
-) => {
+const transformRequestCityCreation: ActionTransformer<
+    ClientRequestCityCreationAction,
+    CommonCreateCityAction,
+> = ({ clientAction, username }) => {
     return createCity({
         ...clientAction.payload,
         cityId: generateId(),
@@ -69,12 +63,10 @@ const transformRequestCityCreation: ActionTransformer<ClientRequestCityCreationA
     });
 };
 
-const transformRequestOrderCreation: ActionTransformer<ClientRequestOrderCreationAction, CommonCreateScheduledAttackOrderAction> = (
-    {
-        clientAction,
-        username,
-    },
-) => {
+const transformRequestOrderCreation: ActionTransformer<
+    ClientRequestOrderCreationAction,
+    CommonCreateScheduledAttackOrderAction,
+> = ({ clientAction, username }) => {
     return createScheduledAttackOrder({
         ...clientAction.payload,
         orderId: generateId(),
@@ -82,7 +74,9 @@ const transformRequestOrderCreation: ActionTransformer<ClientRequestOrderCreatio
     });
 };
 
-export const actionTransformers: { [ClientActionKey]: ActionTransformer<ClientAction, CommonAction> } = {
+export const actionTransformers: {
+    [ClientActionKey]: ActionTransformer<ClientAction, CommonAction>,
+} = {
     [REQUEST_BUILDING_UPGRADE]: transformRequestBuildingUpgrade,
     [REQUEST_CITY_NAME_CHANGE]: transformRequestCityNameChange,
     [REQUEST_CITY_CREATION]: transformRequestCityCreation,

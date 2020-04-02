@@ -17,4 +17,3 @@ describe('createStateKey', () => {
         expect(actual).toEqual(expected);
     });
 });
-

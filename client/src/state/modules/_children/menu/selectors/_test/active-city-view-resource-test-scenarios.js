@@ -2,12 +2,12 @@
 
 import { emptyClientState } from '../../../../../state';
 import type { CommonStateResourceKey } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import {
-    RESOURCE_WOOD,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import { RESOURCE_WOOD } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<CommonStateResourceKey>>
+type Scenarios = $ReadOnlyArray<
+    ClientStateSelectorTestScenario<CommonStateResourceKey>,
+>;
 
 export const activeCityViewResourceSelectorTestScenarios: Scenarios = [
     {

@@ -29,7 +29,7 @@ describe('CityViewTabsComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <CityViewTabsComponent/>
+                <CityViewTabsComponent />
             </Provider>,
         );
 

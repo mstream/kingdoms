@@ -10,8 +10,10 @@ module.exports = {
         prod: 'env TARGET=client NODE_ENV=prod webpack',
     },
     deployOnly: {
-        dev: 'aws s3 sync --delete --acl public-read client/dist/dev/ s3://www.dev.kingdoms.maciej-laciak.com/',
-        prod: 'aws s3 sync --delete --acl public-read client/dist/prod/ s3://www.prod.kingdoms.maciej-laciak.com/',
+        dev:
+            'aws s3 sync --delete --acl public-read client/dist/dev/ s3://www.dev.kingdoms.maciej-laciak.com/',
+        prod:
+            'aws s3 sync --delete --acl public-read client/dist/prod/ s3://www.prod.kingdoms.maciej-laciak.com/',
     },
     startOnly: {
         dev: 'env TARGET=client NODE_ENV=dev webpack-dev-server --open',
@@ -56,14 +58,10 @@ module.exports = {
     },
     start: {
         dev: {
-            script: npsUtils.series.nps(
-                'client.startOnly.dev',
-            ),
+            script: npsUtils.series.nps('client.startOnly.dev'),
         },
         prod: {
-            script: npsUtils.series.nps(
-                'client.startOnly.prod',
-            ),
+            script: npsUtils.series.nps('client.startOnly.prod'),
         },
     },
 };

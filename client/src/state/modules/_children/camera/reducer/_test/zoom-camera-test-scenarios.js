@@ -5,8 +5,9 @@ import type { ClientZoomCameraAction } from '../../actions/types';
 import { emptyClientState } from '../../../../../state';
 import { clientActions } from '../../../../actions';
 
-
-export const zoomCameraTestScenarios: $ReadOnlyArray<ClientStateCameraReducerTestScenario<ClientZoomCameraAction>> = [
+export const zoomCameraTestScenarios: $ReadOnlyArray<
+    ClientStateCameraReducerTestScenario<ClientZoomCameraAction>,
+> = [
     {
         name: 'zooms camera in',
         action: clientActions.camera.zoomCameraIn(),

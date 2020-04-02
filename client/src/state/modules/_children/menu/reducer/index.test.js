@@ -54,7 +54,6 @@ import { clientActions } from '../../../actions';
 import { requestOrderCreationTestScenarios } from './_test/request-order-creation-test-scenarios';
 import { selectCityViewOrdersTabTestScenarios } from './_test/select-city-view-orders-tab-test-scenarios';
 
-
 const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDummyAction> = {
     name: 'initializes its state',
     action: clientActions.dummy.dummy(),
@@ -115,7 +114,6 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario<ClientDumm
         };
     },
 };
-
 
 describe('menuReducer', () => {
     runReducerTestScenarios({

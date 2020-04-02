@@ -50,7 +50,6 @@ body {
     }
 }
 
-
 @keyframes cursor-wait {
     0% {
         cursor: url('../images/cursors/cursor-wait-00.png') 15 15, wait;

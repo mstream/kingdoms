@@ -5,12 +5,7 @@ import type { Props } from './props';
 
 export const testId = 'city-overview';
 
-export const Component = (
-    {
-        city,
-        isVisible,
-    }: Props) => {
-
+export const Component = ({ city, isVisible }: Props) => {
     if (!isVisible) {
         return null;
     }

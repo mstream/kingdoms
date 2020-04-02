@@ -3,7 +3,6 @@
 // $FlowFixMe
 import globals from '../globals';
 
-
 const env = process.env.NODE_ENV;
 
 if (env == null) {

@@ -1,6 +1,5 @@
 // @flow
 
-
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import type { ClientAction, ClientState } from '../../../../state/types';
@@ -13,7 +12,7 @@ type OwnProps = $ReadOnly<{|
     regimentTemplate: CommonStateRegimentTemplate,
 |}>;
 
-type StateProps = $ReadOnly<{||}>
+type StateProps = $ReadOnly<{||}>;
 
 type DispatchProps = $ReadOnly<{||}>;
 
@@ -29,12 +28,14 @@ const mapStateToProps = (state: ClientState): StateProps => {
 
 const actionCreators: DispatchProps = Object.freeze({});
 
-export const connectProps = connect<Props,
+export const connectProps = connect<
+    Props,
     OwnProps,
     StateProps,
     DispatchProps,
     ClientState,
-    Dispatch<ClientAction>>(
+    Dispatch<ClientAction>,
+>(
     mapStateToProps,
     // $FlowFixMe
     actionCreators,

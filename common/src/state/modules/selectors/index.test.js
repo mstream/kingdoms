@@ -1,6 +1,5 @@
 // @flow
 
-
 import { runCommonStateSelectorsTestScenarios } from '../utils';
 import { commonStateCitiesSelectors } from '../cities/selectors';
 import { nextCitySpotSelectorTestScenarios } from './_test/next-city-spot-test-scenarios';

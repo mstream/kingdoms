@@ -14,7 +14,7 @@
  */
 
 declare module 'aws-sam-webpack-plugin' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,13 +23,13 @@ declare module 'aws-sam-webpack-plugin' {
  * needed.
  */
 declare module 'aws-sam-webpack-plugin/dist' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'aws-sam-webpack-plugin/dist/index' {
-  declare module.exports: $Exports<'aws-sam-webpack-plugin/dist'>;
+    declare module.exports: $Exports<'aws-sam-webpack-plugin/dist'>;
 }
 declare module 'aws-sam-webpack-plugin/dist/index.js' {
-  declare module.exports: $Exports<'aws-sam-webpack-plugin/dist'>;
+    declare module.exports: $Exports<'aws-sam-webpack-plugin/dist'>;
 }

@@ -19,13 +19,18 @@ module.exports = {
         checkTypesOnly: {
             script: 'flow check',
         },
+        formatCodeOnly: {
+            script: 'prettier --write .',
+        },
         testOnly: {
             remote: {
                 dev: {
-                    script: 'env NODE_ENV=dev testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
+                    script:
+                        'env NODE_ENV=dev testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
                 },
                 prod: {
-                    script: 'env NODE_ENV=prod testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
+                    script:
+                        'env NODE_ENV=prod testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
                 },
             },
         },

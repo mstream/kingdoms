@@ -6,15 +6,13 @@ import { createCognitoClient } from '../../clients/cognito';
 import { config } from '../../config';
 import type { UserProfileResult } from '../../jwt/types';
 
-const createAllowPolicy = (
-    {
-        methodArn,
-        username,
-    }: {
-        methodArn: string,
-        username: string
-    },
-): CustomAuthorizerResult => {
+const createAllowPolicy = ({
+    methodArn,
+    username,
+}: {
+    methodArn: string,
+    username: string,
+}): CustomAuthorizerResult => {
     return {
         principalId: username,
         policyDocument: {
@@ -52,7 +50,11 @@ export const handler: CustomAuthorizerHandler = async (event, context) => {
     });
 
     if (userProfileResult.errors.length > 0) {
-        console.info(`authentication failed: ${JSON.stringify(userProfileResult.errors)}`);
+        console.info(
+            `authentication failed: ${JSON.stringify(
+                userProfileResult.errors,
+            )}`,
+        );
         throw unauthorizedError;
     }
 

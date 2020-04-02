@@ -9,7 +9,6 @@ import type { ClientState } from '../../../../types';
 
 describe('createClientStateCommonStateSelector', () => {
     it('returns null when common state is not loaded', () => {
-
         const state: ClientState = {
             ...emptyClientState,
             commonState: null,
@@ -62,5 +61,4 @@ describe('createClientStateCommonStateSelector', () => {
 
         expect(actual).toEqual(expected);
     });
-
 });

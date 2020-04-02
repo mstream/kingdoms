@@ -7,15 +7,16 @@ import { validateTime } from '../../../../validators';
 import type { CommonExecuteTimeStepAction } from '../actions';
 import { calculateTimeDeltaInSeconds } from '../../../../time';
 
-type Reducer = CommonStateActionReducer<CommonStateTime, CommonExecuteTimeStepAction>;
+type Reducer = CommonStateActionReducer<
+    CommonStateTime,
+    CommonExecuteTimeStepAction,
+>;
 
-export const executeTimeStepTimeReducer: Reducer = (
-    {
-        action,
-        globalState,
-        localState,
-    },
-) => {
+export const executeTimeStepTimeReducer: Reducer = ({
+    action,
+    globalState,
+    localState,
+}) => {
     const { time } = action.payload;
 
     const timeValidationErrors = validateTime({ time });
@@ -30,11 +31,13 @@ export const executeTimeStepTimeReducer: Reducer = (
     });
 
     if (timeDelta < 0) {
-        return failure({ errors: [`the time from the action is not past the time from the state`] });
+        return failure({
+            errors: [
+                `the time from the action is not past the time from the state`,
+            ],
+        });
     }
 
     const newState = action.payload.time;
     return success({ state: newState });
 };
-
-

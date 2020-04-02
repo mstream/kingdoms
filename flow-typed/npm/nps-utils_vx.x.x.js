@@ -14,7 +14,7 @@
  */
 
 declare module 'nps-utils' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,13 +23,13 @@ declare module 'nps-utils' {
  * needed.
  */
 declare module 'nps-utils/dist' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'nps-utils/dist/index' {
-  declare module.exports: $Exports<'nps-utils/dist'>;
+    declare module.exports: $Exports<'nps-utils/dist'>;
 }
 declare module 'nps-utils/dist/index.js' {
-  declare module.exports: $Exports<'nps-utils/dist'>;
+    declare module.exports: $Exports<'nps-utils/dist'>;
 }

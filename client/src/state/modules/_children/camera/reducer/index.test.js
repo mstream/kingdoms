@@ -14,7 +14,6 @@ import { MOVE_CAMERA, ZOOM_CAMERA } from '../actions/types';
 import { UPDATE_STATE } from '../../common-state/actions/types';
 import { clientActions } from '../../../actions';
 
-
 const stateInitializationScenario: ClientStateCameraReducerTestScenario<ClientDummyAction> = {
     name: 'initializes its state',
     action: clientActions.dummy.dummy(),
@@ -54,7 +53,6 @@ const stateInitializationScenario: ClientStateCameraReducerTestScenario<ClientDu
         };
     },
 };
-
 
 describe('cameraReducer', () => {
     runReducerTestScenarios({

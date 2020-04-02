@@ -31,4 +31,3 @@ describe('numberToQuantityString', () => {
         expect(actual).toEqual(expected);
     });
 });
-

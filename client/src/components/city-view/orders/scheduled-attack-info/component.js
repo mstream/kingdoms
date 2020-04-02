@@ -6,15 +6,10 @@ import { unitsOrder, unitVisuals } from '../../../../assets/images/units';
 import { numberToQuantityString } from '../../../../../../common/src/util';
 import { ImageComponent } from '../../../image';
 
-
 export const testId = 'city-orders-scheduled-attack-info';
 
-export const Component = (
-    {
-        regimentTemplate,
-    }: Props,
-) => {
-    const unitItemComponents = unitsOrder.map(unitType => {
+export const Component = ({ regimentTemplate }: Props) => {
+    const unitItemComponents = unitsOrder.map((unitType) => {
         const quantityRange = regimentTemplate[unitType];
 
         if (quantityRange == null || quantityRange.to === 0) {
@@ -33,10 +28,7 @@ export const Component = (
                     <p className="text-sm text-center font-medium">
                         {rangeStr}
                     </p>
-                    <ImageComponent
-                        image={unitVisual.image}
-                        ratio="100%"
-                    />
+                    <ImageComponent image={unitVisual.image} ratio="100%" />
                     <p className="text-xs text-center">{unitVisual.name}</p>
                 </div>
             </div>

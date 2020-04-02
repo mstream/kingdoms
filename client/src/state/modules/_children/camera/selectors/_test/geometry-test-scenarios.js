@@ -1,6 +1,5 @@
 // @flow
 
-
 import { emptyClientState } from '../../../../../state';
 import type { Geometry } from '../../../../../../../../common/src/geometry';
 import type { ClientStateSelectorTestScenario } from '../../../../../types';

@@ -14,7 +14,7 @@
  */
 
 declare module 'mini-css-extract-plugin' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 /**
@@ -23,41 +23,45 @@ declare module 'mini-css-extract-plugin' {
  * needed.
  */
 declare module 'mini-css-extract-plugin/dist/cjs' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'mini-css-extract-plugin/dist/CssDependency' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'mini-css-extract-plugin/dist/hmr/hotModuleReplacement' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'mini-css-extract-plugin/dist' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 declare module 'mini-css-extract-plugin/dist/loader' {
-  declare module.exports: any;
+    declare module.exports: any;
 }
 
 // Filename aliases
 declare module 'mini-css-extract-plugin/dist/cjs.js' {
-  declare module.exports: $Exports<'mini-css-extract-plugin/dist/cjs'>;
+    declare module.exports: $Exports<'mini-css-extract-plugin/dist/cjs'>;
 }
 declare module 'mini-css-extract-plugin/dist/CssDependency.js' {
-  declare module.exports: $Exports<'mini-css-extract-plugin/dist/CssDependency'>;
+    declare module.exports: $Exports<
+        'mini-css-extract-plugin/dist/CssDependency',
+    >;
 }
 declare module 'mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js' {
-  declare module.exports: $Exports<'mini-css-extract-plugin/dist/hmr/hotModuleReplacement'>;
+    declare module.exports: $Exports<
+        'mini-css-extract-plugin/dist/hmr/hotModuleReplacement',
+    >;
 }
 declare module 'mini-css-extract-plugin/dist/index' {
-  declare module.exports: $Exports<'mini-css-extract-plugin/dist'>;
+    declare module.exports: $Exports<'mini-css-extract-plugin/dist'>;
 }
 declare module 'mini-css-extract-plugin/dist/index.js' {
-  declare module.exports: $Exports<'mini-css-extract-plugin/dist'>;
+    declare module.exports: $Exports<'mini-css-extract-plugin/dist'>;
 }
 declare module 'mini-css-extract-plugin/dist/loader.js' {
-  declare module.exports: $Exports<'mini-css-extract-plugin/dist/loader'>;
+    declare module.exports: $Exports<'mini-css-extract-plugin/dist/loader'>;
 }

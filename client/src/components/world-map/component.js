@@ -14,16 +14,14 @@ import { TerrainTileComponent } from './terrain-tile';
 import { CityTileComponent } from './city-tile';
 import type { ClientStateTile } from '../../state/modules/_children/tiles/reducer/types';
 
-
-const cullObjects = <T: $ReadOnly<{ geometry: Geometry }>>(
-    {
-        objects,
-        cameraGeometry,
-    }: {
-        objects: $ReadOnlyArray<T>,
-        cameraGeometry: Geometry,
-    }): $ReadOnlyArray<T> => {
-    return objects.filter(object => {
+const cullObjects = <T: $ReadOnly<{ geometry: Geometry }>>({
+    objects,
+    cameraGeometry,
+}: {
+    objects: $ReadOnlyArray<T>,
+    cameraGeometry: Geometry,
+}): $ReadOnlyArray<T> => {
+    return objects.filter((object) => {
         return checkIfIntersect({
             geometry1: object.geometry,
             geometry2: cameraGeometry,
@@ -31,19 +29,18 @@ const cullObjects = <T: $ReadOnly<{ geometry: Geometry }>>(
     });
 };
 
-const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry }>>(
-    {
-        objects,
-        cameraWindowGeometry,
-        cameraLocationToWindowCenterLocationVector,
-        desiredCameraSizeToWorldCameraSizeRatioVector,
-    }: {
-        objects: $ReadOnlyArray<T>,
-        cameraWindowGeometry: Geometry,
-        cameraLocationToWindowCenterLocationVector: Vector,
-        desiredCameraSizeToWorldCameraSizeRatioVector: Vector,
-    }): $ReadOnlyArray<T> => {
-    return objects.map(object => {
+const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry }>>({
+    objects,
+    cameraWindowGeometry,
+    cameraLocationToWindowCenterLocationVector,
+    desiredCameraSizeToWorldCameraSizeRatioVector,
+}: {
+    objects: $ReadOnlyArray<T>,
+    cameraWindowGeometry: Geometry,
+    cameraLocationToWindowCenterLocationVector: Vector,
+    desiredCameraSizeToWorldCameraSizeRatioVector: Vector,
+}): $ReadOnlyArray<T> => {
+    return objects.map((object) => {
         const windowGeometry = {
             location: addVectors({
                 vector1: object.geometry.location,
@@ -64,11 +61,11 @@ const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry }>>(
             x:
                 cameraWindowGeometry.location.x +
                 distanceFromWindowCameraCenter.x *
-                desiredCameraSizeToWorldCameraSizeRatioVector.x,
+                    desiredCameraSizeToWorldCameraSizeRatioVector.x,
             y:
                 cameraWindowGeometry.location.y +
                 distanceFromWindowCameraCenter.y *
-                desiredCameraSizeToWorldCameraSizeRatioVector.y,
+                    desiredCameraSizeToWorldCameraSizeRatioVector.y,
         };
         return {
             ...object,
@@ -85,27 +82,25 @@ const transformObjectGeometries = <T: $ReadOnly<{ geometry: Geometry }>>(
 
 export const testId = 'world-map';
 
-export const Component = (
-    {
-        cameraGeometry,
-        cities,
-        isVisible,
-        tiles,
-        moveCameraUp,
-        moveCameraDown,
-        moveCameraLeft,
-        moveCameraRight,
-        windowSize,
-        zoomCameraIn,
-        zoomCameraOut,
-    }: Props) => {
-
+export const Component = ({
+    cameraGeometry,
+    cities,
+    isVisible,
+    tiles,
+    moveCameraUp,
+    moveCameraDown,
+    moveCameraLeft,
+    moveCameraRight,
+    windowSize,
+    zoomCameraIn,
+    zoomCameraOut,
+}: Props) => {
     if (!isVisible) {
         return null;
     }
 
     useEffect(() => {
-        window.addEventListener('keydown', event => {
+        window.addEventListener('keydown', (event) => {
             switch (event.key) {
                 case 'ArrowUp': {
                     moveCameraUp();
@@ -183,9 +178,11 @@ export const Component = (
         [],
     );
 
-    const visibleCityTiles: $ReadOnlyArray<ClientStateTile> = visibleCityIds.map((cityId) => {
-        return tiles.city[cityId];
-    });
+    const visibleCityTiles: $ReadOnlyArray<ClientStateTile> = visibleCityIds.map(
+        (cityId) => {
+            return tiles.city[cityId];
+        },
+    );
 
     const cameraWindowGeometry = {
         location: addVectors({
@@ -212,7 +209,7 @@ export const Component = (
         cameraLocationToWindowCenterLocationVector,
     });
 
-    const terrainTileComponents = transformedVisibleTiles.map(tile => {
+    const terrainTileComponents = transformedVisibleTiles.map((tile) => {
         return (
             <TerrainTileComponent
                 key={`${tile.index.x}-${tile.index.y}`}
@@ -222,12 +219,14 @@ export const Component = (
     });
 
     const cityTileComponents = visibleCityIds.map((cityId, index) => {
-        return <CityTileComponent
-            key={cityId}
-            city={cities[cityId]}
-            cityId={cityId}
-            cityTile={transformedVisibleCityTiles[index]}
-        />;
+        return (
+            <CityTileComponent
+                key={cityId}
+                city={cities[cityId]}
+                cityId={cityId}
+                cityTile={transformedVisibleCityTiles[index]}
+            />
+        );
     });
 
     return (

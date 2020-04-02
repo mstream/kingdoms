@@ -20,25 +20,25 @@ describe('AttackViewCityListComponent', () => {
             commonState: {
                 ...emptyCommonState,
                 cities: {
-                    'city1': {
+                    city1: {
                         ...emptyCityState,
                         location: { x: 0, y: 0 },
                         name: 'Cityone',
                         ownerId: 'player2',
                     },
-                    'city2': {
+                    city2: {
                         ...emptyCityState,
                         location: { x: 0, y: -4 },
                         name: 'Citytwo',
                         ownerId: 'player3',
                     },
-                    'city3': {
+                    city3: {
                         ...emptyCityState,
                         location: { x: 2, y: 0 },
                         name: 'Citythree',
                         ownerId: 'player1',
                     },
-                    'city4': {
+                    city4: {
                         ...emptyCityState,
                         location: { x: 0, y: 3 },
                         name: 'Cityfour',
@@ -62,10 +62,9 @@ describe('AttackViewCityListComponent', () => {
 
         const { queryByText } = render(
             <Provider store={store}>
-                <AttackViewCityListComponent/>
+                <AttackViewCityListComponent />
             </Provider>,
         );
-
 
         await expect(queryByText('Citythree')).toBeInTheDocument();
         await expect(queryByText('Cityfour')).toBeInTheDocument();

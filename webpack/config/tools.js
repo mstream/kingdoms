@@ -1,9 +1,12 @@
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const utils = require('../utils');
 
-
-const createToolsConfig = ({ env, globalVariablesCreator, mode, projectPath }) => {
-
+const createToolsConfig = ({
+    env,
+    globalVariablesCreator,
+    mode,
+    projectPath,
+}) => {
     const circularDependencyPlugin = new CircularDependencyPlugin({
         allowAsyncCycles: false,
         cwd: process.cwd(),
@@ -11,14 +14,15 @@ const createToolsConfig = ({ env, globalVariablesCreator, mode, projectPath }) =
         failOnError: true,
     });
 
-    const definePlugin = utils.createDefinitionPlugin({ globalVariablesCreator });
+    const definePlugin = utils.createDefinitionPlugin({
+        globalVariablesCreator,
+    });
 
     return {
         entry: './tools/src/index.js',
 
         output: {
             path: `${projectPath}/tools/dist`,
-
         },
 
         resolve: {
@@ -44,12 +48,8 @@ const createToolsConfig = ({ env, globalVariablesCreator, mode, projectPath }) =
             ],
         },
 
-        plugins: [
-            circularDependencyPlugin,
-            definePlugin,
-        ],
+        plugins: [circularDependencyPlugin, definePlugin],
     };
 };
-
 
 module.exports = createToolsConfig;

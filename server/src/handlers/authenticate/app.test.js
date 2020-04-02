@@ -1,21 +1,17 @@
 // @flow
 
-jest.mock(
-    '../../config',
-    () => {
-        return {
-            config: {},
-        };
-    },
-);
+jest.mock('../../config', () => {
+    return {
+        config: {},
+    };
+});
 
-jest.mock(
-    '../../clients/cognito',
-    () => {
-        return {
-            createCognitoClient: () => {
-                return {
-                    getJwks: () => Promise.resolve([
+jest.mock('../../clients/cognito', () => {
+    return {
+        createCognitoClient: () => {
+            return {
+                getJwks: () =>
+                    Promise.resolve([
                         {
                             alg: '',
                             e: '',
@@ -33,25 +29,22 @@ jest.mock(
                             use: '',
                         },
                     ]),
-                };
-            },
-        };
-    },
-);
+            };
+        },
+    };
+});
 
-jest.mock(
-    '../../jwt',
-    () => {
-        return {
-            buildUserProfile: () => Promise.resolve({
+jest.mock('../../jwt', () => {
+    return {
+        buildUserProfile: () =>
+            Promise.resolve({
                 errors: [],
                 userProfile: {
                     name: 'user1',
-                }
+                },
             }),
-        };
-    },
-);
+    };
+});
 
 import { emptyContext, emptyCustomAuthorizerEvent } from '../util';
 import type { Context, CustomAuthorizerEvent } from '../types';
@@ -88,7 +81,6 @@ describe('authenticateHandler', () => {
         };
 
         const actual = await handler(event, context, callback);
-
 
         expect(actual).toEqual(expected);
     });

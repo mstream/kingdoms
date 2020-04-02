@@ -10,7 +10,6 @@ import { CREATE_SCHEDULED_ATTACK_ORDER } from '../../orders/actions/types';
 import { createOrderPlayersReducer } from './create-order';
 import { createCommonStateReducer } from '../../utils';
 
-
 export const playersReducer = createCommonStateReducer<CommonStatePlayers>({
     actionReducers: {
         [CREATE_CITY]: createCityPlayersReducer,
@@ -19,4 +18,3 @@ export const playersReducer = createCommonStateReducer<CommonStatePlayers>({
     },
     initialState: initialCommonState.players,
 });
-

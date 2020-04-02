@@ -17,9 +17,12 @@ export const createToken = ({ type }: { type: TokenType }): string => {
             return jwt.sign({}, 'secret');
         }
         case TOKEN_INVALID_PRIVATE_KEY: {
-            return jwt.sign({
-                'cognito:username': 'username',
-            }, 'secret');
+            return jwt.sign(
+                {
+                    'cognito:username': 'username',
+                },
+                'secret',
+            );
         }
         default: {
             throw Error(`unsupported token type '${type}'`);

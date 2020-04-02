@@ -3,13 +3,16 @@
 import type { CommonStateUnitKey } from '../../rules/reducer/types';
 import type { Range } from '../../../../range';
 
-export const ORDER_SCHEDULED_ATTACK: 'ORDER_SCHEDULED_ATTACK' = 'ORDER_SCHEDULED_ATTACK';
+export const ORDER_SCHEDULED_ATTACK: 'ORDER_SCHEDULED_ATTACK' =
+    'ORDER_SCHEDULED_ATTACK';
 
-export type OrderKey = typeof ORDER_SCHEDULED_ATTACK
+export type OrderKey = typeof ORDER_SCHEDULED_ATTACK;
 
 type ScheduledOrder = $ReadOnly<{ minimumDelay: number }>;
 
-export type CommonStateRegimentTemplate = $ReadOnly<{ [CommonStateUnitKey]: Range }>;
+export type CommonStateRegimentTemplate = $ReadOnly<{
+    [CommonStateUnitKey]: Range,
+}>;
 
 export type CommonStateScheduledAttackOrder = $ReadOnly<{
     ...ScheduledOrder,
@@ -18,9 +21,11 @@ export type CommonStateScheduledAttackOrder = $ReadOnly<{
     targetCityId: string,
 }>;
 
-export type CommonStateOrder = CommonStateScheduledAttackOrder
+export type CommonStateOrder = CommonStateScheduledAttackOrder;
 export type CommonStateOrderCreationTimes = $ReadOnly<{ [string]: string }>;
-export type CommonStateScheduledAttackOrders = $ReadOnly<{ [string]: CommonStateScheduledAttackOrder }>;
+export type CommonStateScheduledAttackOrders = $ReadOnly<{
+    [string]: CommonStateScheduledAttackOrder,
+}>;
 
 export type CommonStateOrderItems = $ReadOnly<{
     scheduledAttack: CommonStateScheduledAttackOrders,

@@ -10,6 +10,25 @@ import {
     config,
 } from '../../config';
 
+const createCity = async ( {
+    name,
+    t,
+}: {
+    name: string,
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.typeText(
+        selectors.newCityNameInput,
+        name,
+    );
+
+    await t.click(
+        selectors.newCityCreateButton,
+    );
+
+};
+
 const open = async ( {
     t,
     token,
@@ -53,6 +72,7 @@ const signOut = async ( {
 };
 
 export const actions = {
+    createCity,
     open,
     signOut,
 };

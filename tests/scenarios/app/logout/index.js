@@ -3,34 +3,33 @@
 import type {
     TestController,
 } from 'testcafe';
-import {
-    Selector,
-} from 'testcafe';
-import type {
-    CommonState,
-} from '../../common/src/state/modules/types';
-import {
-    emptyCommonState,
-} from '../../common/src/state/modules/state';
-import {
-    appModel,
-} from '../models/app';
-import {
-    authModel,
-} from '../models/auth';
+
 import {
     generateId, generatePassword,
-} from '../../common/src/utils';
+} from '../../../../common/src/utils';
 import {
     tools,
-} from '../tools';
+} from '../../../tools';
+import {
+    emptyCommonState,
+} from '../../../../common/src/state/modules/state';
+import type {
+    CommonState,
+} from '../../../../common/src/state/modules/types';
+import {
+    appModel,
+} from '../../../models/app';
+import {
+    authModel,
+} from '../../../models/auth';
+
 
 fixture(
     `app`,
 );
 
 test(
-    `presents a city creation window if user is new to the world`,
+    `redirects to login page after a logout`,
     async ( t: TestController, ) => {
 
         const password = generatePassword();
@@ -74,15 +73,18 @@ test(
             },
         );
 
-        await t.expect(
-            Selector(
-                `*`,
-            )
-                .withExactText(
-                    `Start game`,
-                ).exists,
-        )
-            .ok();
+        await appModel.actions.signOut(
+            {
+                t,
+            },
+        );
+
+        await authModel.expectations.gotRedirectedFromAppToAuth(
+            {
+                action: `login`,
+                t,
+            },
+        );
 
     },
 );

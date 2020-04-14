@@ -64,6 +64,26 @@ export const generatePassword = (): string => {
 
 };
 
+export const generateCityName = (): string => {
+
+    const upperCasePart = randomString(
+        {
+            characters: `ABCDEFGHIJKLMNOPQRSTUVWXYZ`,
+            length    : 1,
+        },
+    );
+
+    const lowerCasePart = randomString(
+        {
+            characters: `abcdefghijklmnopqrstuvwxyz`,
+            length    : 5,
+        },
+    );
+
+    return `${ upperCasePart }${ lowerCasePart }`;
+
+};
+
 
 export const numberToQuantityString = (
     {

@@ -101,7 +101,8 @@ export const Component = (
                         </div>
                         <div className="w-2/3">
                             <input
-                                id="new-city-name"
+                                id="new-city-name-input"
+                                data-testid="new-city-name-input"
                                 className={classNames(
                                     `appearance-none`,
                                     `border-none`,
@@ -127,6 +128,7 @@ export const Component = (
                         </div>
                     </div>
                     <button
+                        data-testid="new-city-create-button"
                         className={buttonClassName}
                         onClick={onClick}
                     >

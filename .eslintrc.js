@@ -343,7 +343,7 @@ const coreRules = {
     'no-unneeded-ternary': [
         'error',
     ],
-    'no-unused-vars': [
+    'autofix/no-unused-vars': [
         'error',
     ],
     // 'no-use-before-define': [

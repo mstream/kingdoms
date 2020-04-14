@@ -1,31 +1,50 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
+import type {
+    Props,
+} from './props';
 import classNames from 'classnames';
-import { minutesToDurationString } from '../../../../../common/src/time';
+import {
+    minutesToDurationString,
+} from '../../../../../common/src/time';
 
-export const testId = 'attack-view-scheduler-form';
+export const testId = `attack-view-scheduler-form`;
 
-export const Component = ({
-    isVisible,
-    minimumDelay,
-    updateAttackViewMinimumDelay,
-}: Props) => {
-    if (!isVisible) {
+export const Component = (
+    {
+        isVisible,
+        minimumDelay,
+        updateAttackViewMinimumDelay,
+    }: Props,
+) => {
+
+    if ( !isVisible ) {
+
         return null;
+
     }
 
-    const onChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-        updateAttackViewMinimumDelay({
-            minimumDelay: parseInt(event.target.value),
-        });
+    const onChange = (
+        event: SyntheticInputEvent< HTMLInputElement >,
+    ) => {
+
+        updateAttackViewMinimumDelay(
+            {
+                minimumDelay: parseInt(
+                    event.target.value,
+                ),
+            },
+        );
+
     };
 
-    const durationClassName = classNames({
-        visible: minimumDelay > 0,
-        invisible: minimumDelay === 0,
-    });
+    const durationClassName = classNames(
+        {
+            invisible: minimumDelay === 0,
+            visible  : minimumDelay > 0,
+        },
+    );
 
     return (
         <div
@@ -36,8 +55,8 @@ export const Component = ({
             <div className="shadow-inner bg-gray-900-alpha-50">
                 <div>
                     {minimumDelay === 0
-                        ? 'As soon as possible'
-                        : 'Not earlier than in'}
+                        ? `As soon as possible`
+                        : `Not earlier than in`}
                 </div>
                 <div>
                     <input
@@ -50,12 +69,15 @@ export const Component = ({
                         onChange={onChange}
                     />
                     <div className={durationClassName}>
-                        {minutesToDurationString({
-                            durationInMinutes: minimumDelay,
-                        })}
+                        {minutesToDurationString(
+                            {
+                                durationInMinutes: minimumDelay,
+                            },
+                        )}
                     </div>
                 </div>
             </div>
         </div>
     );
+
 };

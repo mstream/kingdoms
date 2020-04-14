@@ -1,13 +1,22 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
+import type {
+    Props,
+} from './props';
 
-export const testId = 'city-overview';
+export const testId = `city-overview`;
 
-export const Component = ({ city, isVisible }: Props) => {
-    if (!isVisible) {
+export const Component = (
+    {
+        isVisible,
+    }: Props,
+) => {
+
+    if ( !isVisible ) {
+
         return null;
+
     }
 
     return (
@@ -28,4 +37,5 @@ export const Component = ({ city, isVisible }: Props) => {
             </div>
         </div>
     );
+
 };

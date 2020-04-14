@@ -1,23 +1,25 @@
 // @flow
 
-import type { CommonStateCity } from '../reducer/types';
+import type {
+    CommonStateCity,
+} from '../reducer/types';
 
-export type CityDistances = $ReadOnly<{
+export type CityDistances = $ReadOnly< {
     [string]: number,
-    ...,
-}>;
+    ...
+} >;
 
-export type CitiesDistances = $ReadOnly<{
+export type CitiesDistances = $ReadOnly< {
     [string]: CityDistances,
-    ...,
-}>;
+    ...
+} >;
 
-export type CityIdsByOwner = $ReadOnly<{
-    [string]: $ReadOnlyArray<string>,
-    ...,
-}>;
+export type CityIdsByOwner = $ReadOnly< {
+    [string]: $ReadOnlyArray< string >,
+    ...
+} >;
 
-export type CitiesByOwner = $ReadOnly<{
-    [string]: $ReadOnlyArray<CommonStateCity>,
-    ...,
-}>;
+export type CitiesByOwner = $ReadOnly< {
+    [string]: $ReadOnlyArray< CommonStateCity >,
+    ...
+} >;

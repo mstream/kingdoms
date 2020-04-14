@@ -1,35 +1,59 @@
 // @flow
 
-import { emptyCommonState } from '../../../../../../../../common/src/state/modules/state';
-import { emptyCityState } from '../../../../../../../../common/src/state/modules/cities/reducer/state';
-import type { ClientStateMenuReducerTestScenario } from './types';
-import type { ClientOpenAttackViewAction } from '../../actions/types';
-import { emptyClientState } from '../../../../../state';
-import { clientActions } from '../../../../actions';
+import {
+    emptyCommonState,
+} from '../../../../../../../../common/src/state/modules/state';
+import {
+    emptyCityState,
+} from '../../../../../../../../common/src/state/modules/cities/reducer/state';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
+import type {
+    ClientOpenAttackViewAction,
+} from '../../actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    clientActions,
+} from '../../../../actions';
 
-export const openAttackViewTestScenarios: $ReadOnlyArray<
-    ClientStateMenuReducerTestScenario<ClientOpenAttackViewAction>,
-> = [
+export const openAttackViewTestScenarios: $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientOpenAttackViewAction >, > = [
     {
-        name: 'opens attack view',
-        action: clientActions.menu.openAttackView({
-            cityId: 'city2',
-        }),
+        action: clientActions.menu.openAttackView(
+            {
+                cityId: `city2`,
+            },
+        ),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+                attackView: {
+                    ...previousLocalState.attackView,
+                    attackedCityId: `city2`,
+                },
+            };
+
+        },
+        name               : `opens attack view`,
         previousGlobalState: {
             ...emptyClientState,
-            player: {
-                name: 'player1',
-            },
             commonState: {
                 ...emptyCommonState,
                 cities: {
                     city1: {
                         ...emptyCityState,
-                        ownerId: 'player1',
+                        ownerId: `player1`,
                     },
                     city2: {
                         ...emptyCityState,
-                        ownerId: 'player2',
+                        ownerId: `player2`,
                     },
                 },
             },
@@ -40,15 +64,9 @@ export const openAttackViewTestScenarios: $ReadOnlyArray<
                     attackedCityId: null,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-                attackView: {
-                    ...previousLocalState.attackView,
-                    attackedCityId: 'city2',
-                },
-            };
+            player: {
+                name: `player1`,
+            },
         },
     },
 ];

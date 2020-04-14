@@ -1,80 +1,165 @@
 // @flow
 
 import {
-    validateCityName,
-    validateCommonStateType,
-    validateTime,
-    validateUnitType,
+    validateCityName, validateTime,
 } from './index';
-import { UNIT_PEASANT } from '../state/modules/rules/reducer/types';
-import { emptyCommonState } from '../state/modules/state';
 
-describe('validateCityName', () => {
-    it('proper name', () => {
-        const name = 'Abc';
-        const expected = [];
+describe(
+    `validateCityName`,
+    () => {
 
-        const actual = validateCityName({
-            name,
-        });
+        it(
+            `proper name`,
+            () => {
 
-        expect(actual).toEqual(expected);
-    });
+                const name = `Abc`;
+                const expected = [];
 
-    it('name too short', () => {
-        const name = 'Ab';
-        const expected = ['the city name is too short'];
+                const actual = validateCityName(
+                    {
+                        name,
+                    },
+                );
 
-        const actual = validateCityName({
-            name,
-        });
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
 
-        expect(actual).toEqual(expected);
-    });
+            },
+        );
 
-    it('name too long', () => {
-        const name = 'AbcdeAbcdeAbcdeAbcdeAbcde';
-        const expected = ['the city name is too long'];
+        it(
+            `name too short`,
+            () => {
 
-        const actual = validateCityName({
-            name,
-        });
+                const name = `Ab`;
+                const expected = [
+                    `the city name is too short`,
+                ];
 
-        expect(actual).toEqual(expected);
-    });
+                const actual = validateCityName(
+                    {
+                        name,
+                    },
+                );
 
-    it('not uppercase', () => {
-        const name = 'abc';
-        const expected = ['the city name does not follow the convention'];
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
 
-        const actual = validateCityName({
-            name,
-        });
+            },
+        );
 
-        expect(actual).toEqual(expected);
-    });
-});
+        it(
+            `name too long`,
+            () => {
 
-describe('validateTime', () => {
-    it('valid format', () => {
-        const time = '2000-01-01:00:00.000Z';
-        const expected = [];
+                const name = `AbcdeAbcdeAbcdeAbcdeAbcde`;
+                const expected = [
+                    `the city name is too long`,
+                ];
 
-        const actual = validateTime({
-            time,
-        });
+                const actual = validateCityName(
+                    {
+                        name,
+                    },
+                );
 
-        expect(actual).toEqual(expected);
-    });
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
 
-    it('invalid format', () => {
-        const time = 'INVALID_TIME_FORMAT';
-        const expected = ['time does not have a valid format'];
+            },
+        );
 
-        const actual = validateTime({
-            time,
-        });
+        it(
+            `not uppercase`,
+            () => {
 
-        expect(actual).toEqual(expected);
-    });
-});
+                const name = `abc`;
+                const expected = [
+                    `the city name does not follow the convention`,
+                ];
+
+                const actual = validateCityName(
+                    {
+                        name,
+                    },
+                );
+
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
+
+            },
+        );
+
+    },
+);
+
+describe(
+    `validateTime`,
+    () => {
+
+        it(
+            `valid format`,
+            () => {
+
+                const time = `2000-01-01:00:00.000Z`;
+                const expected = [];
+
+                const actual = validateTime(
+                    {
+                        time,
+                    },
+                );
+
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
+
+            },
+        );
+
+        it(
+            `invalid format`,
+            () => {
+
+                const time = `INVALID_TIME_FORMAT`;
+                const expected = [
+                    `time does not have a valid format`,
+                ];
+
+                const actual = validateTime(
+                    {
+                        time,
+                    },
+                );
+
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
+
+            },
+        );
+
+    },
+);

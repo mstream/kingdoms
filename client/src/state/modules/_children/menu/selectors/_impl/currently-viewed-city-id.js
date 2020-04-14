@@ -1,11 +1,13 @@
 // @flow
 
-import { createSelector } from 'reselect';
-import type { ClientStateMenu } from '../../reducer/types';
-import type { ClientState, ClientStateSelector } from '../../../../../types';
+import type {
+    ClientStateSelector,
+} from '../../../../../types';
 
-export const currentlyViewedCityIdSelector: ClientStateSelector<?string> = (
+export const currentlyViewedCityIdSelector: ClientStateSelector< ?string > = (
     state,
 ) => {
+
     return state.menu.cityView.currentCityId;
+
 };

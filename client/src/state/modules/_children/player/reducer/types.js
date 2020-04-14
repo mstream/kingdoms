@@ -1,5 +1,5 @@
 // @flow
 
-export type ClientStatePlayer = $ReadOnly<{
+export type ClientStatePlayer = $ReadOnly< {
     name: ?string,
-}>;
+} >;

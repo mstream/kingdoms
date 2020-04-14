@@ -1,0 +1,28 @@
+{
+    "assertionTimeout": 8000,
+    "browsers": [
+        "chrome:headless",
+    ],
+    "color": true,
+    "concurrency": 4,
+    "pageLoadTimeout": 8000,
+    "quarantineMode": true,
+    "reporter": [
+        {
+            "name": "spec"
+        },
+        {
+            "name": "html",
+            "output": "tests/report/report.html"
+        }
+    ],
+    "screenshots": {
+        "path": "tests/report/screenshots/",
+        "takeOnFails": true
+    },
+    "selectorTimeout": 24000,
+    "speed": 1,
+    "src": [
+        "tests/scenarios/"
+    ]
+}

@@ -1,19 +1,24 @@
 // @flow
 
-import type { ClientStateMenu } from '../types';
-import type { ClientRequestCityCreationAction } from '../../../common-state/actions/types';
-import type { ClientStateActionReducer } from '../../../../../types';
-
-type Reducer = ClientStateActionReducer<
+import type {
     ClientStateMenu,
+} from '../types';
+import type {
     ClientRequestCityCreationAction,
->;
+} from '../../../common-state/actions/types';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
 
-export const requestCityCreationMenuReducer: Reducer = ({
-    localState,
-    action,
-    globalState,
-}) => {
+type Reducer = ClientStateActionReducer< ClientStateMenu,
+    ClientRequestCityCreationAction, >;
+
+export const requestCityCreationMenuReducer: Reducer = (
+    {
+        localState,
+    },
+) => {
+
     return {
         ...localState,
         newCity: {
@@ -21,4 +26,5 @@ export const requestCityCreationMenuReducer: Reducer = ({
             isCityBeingCreated: true,
         },
     };
+
 };

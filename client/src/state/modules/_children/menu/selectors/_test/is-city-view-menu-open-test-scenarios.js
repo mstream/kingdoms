@@ -1,14 +1,19 @@
 // @flow
 
-import { emptyClientState } from '../../../../../state';
-import type { ClientStateSelectorTestScenario } from '../../../../../types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientStateSelectorTestScenario,
+} from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<boolean>>;
+type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< boolean > >;
 
 export const isCityViewMenuOpenSelectorTestScenarios: Scenarios = [
     {
-        name: 'false if viewed city id is null',
-        state: {
+        expectedValue: false,
+        name         : `false if viewed city id is null`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
@@ -18,20 +23,19 @@ export const isCityViewMenuOpenSelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: false,
     },
     {
-        name: 'true if viewed city id is not null',
-        state: {
+        expectedValue: true,
+        name         : `true if viewed city id is not null`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: 'city1',
+                    currentCityId: `city1`,
                 },
             },
         },
-        expectedValue: true,
     },
 ];

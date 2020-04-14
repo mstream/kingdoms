@@ -1,41 +1,60 @@
 // @flow
 
-import type { ClientStateMenu } from '../types';
-import type { ClientUpdateStateAction } from '../../../common-state/actions/types';
-import { commonStateCitiesSelectors } from '../../../../../../../../common/src/state/modules/cities/selectors';
-import type { ClientStateActionReducer } from '../../../../../types';
-import { clientStateSelectors } from '../../../../selectors';
-
-type Reducer = ClientStateActionReducer<
+import type {
     ClientStateMenu,
+} from '../types';
+import type {
     ClientUpdateStateAction,
->;
+} from '../../../common-state/actions/types';
+import {
+    commonStateCitiesSelectors,
+} from '../../../../../../../../common/src/state/modules/cities/selectors';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
+import {
+    clientStateSelectors,
+} from '../../../../selectors';
 
-export const updateStateMenuReducer: Reducer = ({
-    localState,
-    action,
-    globalState,
-}) => {
-    const playerName = clientStateSelectors.player.name(globalState);
+type Reducer = ClientStateActionReducer< ClientStateMenu,
+    ClientUpdateStateAction, >;
 
-    if (playerName == null) {
+export const updateStateMenuReducer: Reducer = (
+    {
+        localState,
+        action,
+        globalState,
+    },
+) => {
+
+    const playerName = clientStateSelectors.player.name(
+        globalState,
+    );
+
+    if ( playerName == null ) {
+
         return localState;
+
     }
 
     const isNewCityBeingCreated = clientStateSelectors.menu.isNewCityBeingCreated(
         globalState,
     );
 
-    if (isNewCityBeingCreated) {
+    if ( isNewCityBeingCreated ) {
+
         return localState;
+
     }
 
     const playerCities = commonStateCitiesSelectors.cityIdsByOwner(
         action.payload.commonState,
-    )[playerName];
+    )[ playerName ];
 
-    if (playerCities == null || playerCities.length === 0) {
+    if ( playerCities == null || playerCities.length === 0 ) {
+
         return localState;
+
     }
 
     return {
@@ -45,4 +64,5 @@ export const updateStateMenuReducer: Reducer = ({
             isCityBeingCreated: false,
         },
     };
+
 };

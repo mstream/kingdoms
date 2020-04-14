@@ -1,36 +1,52 @@
 // @flow
 
-import type { ClientStateMenuReducerTestScenario } from './types';
-import type { ClientSelectAttackViewAttackingCityAction } from '../../actions/types';
-import { emptyClientState } from '../../../../../state';
-import { menuActions } from '../../actions';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
+import type {
+    ClientSelectAttackViewAttackingCityAction,
+} from '../../actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    menuActions,
+} from '../../actions';
 
-export const selectAttackViewAttackingCityTestScenarios: $ReadOnlyArray<
-    ClientStateMenuReducerTestScenario<ClientSelectAttackViewAttackingCityAction>,
-> = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientSelectAttackViewAttackingCityAction >, >;
+
+export const selectAttackViewAttackingCityTestScenarios: Scenarios = [
     {
-        name: 'select attack view attacking city',
-        action: menuActions.selectAttackViewAttackingCity({
-            cityId: 'city2',
-        }),
+        action: menuActions.selectAttackViewAttackingCity(
+            {
+                cityId: `city2`,
+            },
+        ),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+                attackView: {
+                    ...previousLocalState.attackView,
+                    attackingCityId: `city2`,
+                },
+            };
+
+        },
+        name               : `select attack view attacking city`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackingCityId: 'city1',
+                    attackingCityId: `city1`,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-                attackView: {
-                    ...previousLocalState.attackView,
-                    attackingCityId: 'city2',
-                },
-            };
         },
     },
 ];

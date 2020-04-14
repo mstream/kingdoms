@@ -1,42 +1,93 @@
 // @flow
 
-import { rootReducer } from './root';
-import { initialCommonState } from '../index';
-import type { CommonState, CommonStateReducerResult } from './types';
-import { emptyCommonState } from './state';
-import { success } from './utils';
-import { dummy, resetState } from '../actions';
+import {
+    rootReducer,
+} from './root';
+import {
+    initialCommonState,
+} from '../index';
+import type {
+    CommonState, CommonStateReducerResult,
+} from './types';
+import {
+    emptyCommonState,
+} from './state';
+import {
+    success,
+} from './utils';
+import {
+    dummy, resetState,
+} from '../actions';
 
-describe('rootReducer', () => {
-    it('returns the default state on reset state action', () => {
-        const action = resetState();
+describe(
+    `rootReducer`,
+    () => {
 
-        const previousState: CommonState = {
-            ...emptyCommonState,
-        };
+        it(
+            `returns the default state on reset state action`,
+            () => {
 
-        const expected: CommonStateReducerResult<CommonState> = success({
-            state: initialCommonState,
-        });
+                const action = resetState();
 
-        const actual = rootReducer({ action, state: previousState });
+                const previousState: CommonState = {
+                    ...emptyCommonState,
+                };
 
-        expect(actual).toEqual(expected);
-    });
+                const expected: CommonStateReducerResult< CommonState > = success(
+                    {
+                        state: initialCommonState,
+                    },
+                );
 
-    it('returns the current state on unsupported action', () => {
-        const action = dummy();
+                const actual = rootReducer(
+                    {
+                        action,
+                        state: previousState,
+                    },
+                );
 
-        const previousState: CommonState = {
-            ...emptyCommonState,
-        };
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
 
-        const expected: CommonStateReducerResult<CommonState> = success({
-            state: previousState,
-        });
+            },
+        );
 
-        const actual = rootReducer({ action, state: previousState });
+        it(
+            `returns the current state on unsupported action`,
+            () => {
 
-        expect(actual).toEqual(expected);
-    });
-});
+                const action = dummy();
+
+                const previousState: CommonState = {
+                    ...emptyCommonState,
+                };
+
+                const expected: CommonStateReducerResult< CommonState > = success(
+                    {
+                        state: previousState,
+                    },
+                );
+
+                const actual = rootReducer(
+                    {
+                        action,
+                        state: previousState,
+                    },
+                );
+
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
+
+            },
+        );
+
+    },
+);

@@ -1,9 +1,8 @@
 // @flow
 
-export type Config = {
+export type Config = $ReadOnly< {
     clientId: string,
-    password: string,
     region: string,
+    resetStateFunctionName: string,
     userPoolId: string,
-    usernames: $ReadOnlyArray<string>,
-};
+} >;

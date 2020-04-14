@@ -1,20 +1,29 @@
 // @flow
 
-import type { CommonStateActionReducer } from '../../../types';
-import { failure, success } from '../../../utils';
-import type { CommonCreateScheduledAttackOrderAction } from '../../actions/types';
-import type { CommonStateOrders } from '../types';
-
-type Reducer = CommonStateActionReducer<
-    CommonStateOrders,
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
+import {
+    failure, success,
+} from '../../../utils';
+import type {
     CommonCreateScheduledAttackOrderAction,
->;
+} from '../../actions/types';
+import type {
+    CommonStateOrders,
+} from '../types';
 
-export const createScheduledAttackOrderOrdersReducer: Reducer = ({
-    action,
-    globalState,
-    localState,
-}) => {
+type Reducer = CommonStateActionReducer< CommonStateOrders,
+    CommonCreateScheduledAttackOrderAction, >;
+
+export const createScheduledAttackOrderOrdersReducer: Reducer = (
+    {
+        action,
+        globalState,
+        localState,
+    },
+) => {
+
     const {
         minimumDelay,
         orderId,
@@ -24,22 +33,28 @@ export const createScheduledAttackOrderOrdersReducer: Reducer = ({
         targetCityId,
     } = action.payload;
 
-    if (localState.items.scheduledAttack[orderId] != null) {
-        return failure({
-            errors: ['order with the same id already exists'],
-        });
+    if ( localState.items.scheduledAttack[ orderId ] != null ) {
+
+        return failure(
+            {
+                errors: [
+                    `order with the same id already exists`,
+                ],
+            },
+        );
+
     }
 
     const newCreationTimes = {
         ...localState.creationTimes,
-        [orderId]: globalState.time,
+        [ orderId ]: globalState.time,
     };
 
     const newItemsState = {
         ...localState.items,
         scheduledAttack: {
             ...localState.items.scheduledAttack,
-            [orderId]: {
+            [ orderId ]: {
                 minimumDelay,
                 originCityId,
                 regimentTemplate,
@@ -50,15 +65,20 @@ export const createScheduledAttackOrderOrdersReducer: Reducer = ({
 
     const newOwnershipsState = {
         ...localState.ownerships,
-        [orderId]: playerId,
+        [ orderId ]: playerId,
     };
 
     const newState = {
         ...localState,
         creationTimes: newCreationTimes,
-        items: newItemsState,
-        ownerships: newOwnershipsState,
+        items        : newItemsState,
+        ownerships   : newOwnershipsState,
     };
 
-    return success({ state: newState });
+    return success(
+        {
+            state: newState,
+        },
+    );
+
 };

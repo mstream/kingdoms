@@ -5,37 +5,29 @@ import pasture from './pasture.png';
 import warehouse from './warehouse.png';
 import type {
     CommonStateBuildingKey,
-    CommonStateUnitKey,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
     BUILDING_WAREHOUSE,
-    UNIT_ARCHER,
-    UNIT_CATAPULT,
-    UNIT_KNIGHT,
-    UNIT_NOBLE,
-    UNIT_PEASANT,
-    UNIT_PIKEMAN,
-    UNIT_SWORDSMAN,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
 
 export const buildingVisuals = {
-    [BUILDING_LUMBER_MILL]: {
-        name: 'Lumber Mill',
+    [ BUILDING_LUMBER_MILL ]: {
         image: lumberMill,
+        name : `Lumber Mill`,
     },
-    [BUILDING_PASTURE]: {
-        name: 'Pasture',
+    [ BUILDING_PASTURE ]: {
         image: pasture,
+        name : `Pasture`,
     },
-    [BUILDING_WAREHOUSE]: {
-        name: 'Warehouse',
+    [ BUILDING_WAREHOUSE ]: {
         image: warehouse,
+        name : `Warehouse`,
     },
 };
 
-export const buildingsOrder: $ReadOnlyArray<CommonStateBuildingKey> = [
+export const buildingsOrder: $ReadOnlyArray< CommonStateBuildingKey > = [
     BUILDING_WAREHOUSE,
     BUILDING_PASTURE,
     BUILDING_LUMBER_MILL,

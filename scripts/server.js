@@ -1,118 +1,119 @@
 // $Flow
 
-const npsUtils = require(`nps-utils`);
+const npsUtils = require(
+    `nps-utils`,
+);
+
+const deleteStack = (
+    {
+        stackName,
+    },
+) => {
+
+    return `aws cloudformation delete-stack `
+        + `--stack-name ${ stackName }`;
+
+};
+
+const validateTemplate = (
+    {
+        templateName,
+    },
+) => {
+
+    return `cd server && `
+        + `sam validate `
+        + `-t ${ templateName }`;
+
+};
+
+const deployNetwork = (
+    {
+        stackName, templateName,
+    },
+) => {
+
+    return `cd server && `
+        + `sam deploy `
+        + `--no-fail-on-empty-changeset `
+        + `-t ${ templateName } `
+        + `--stack-name ${ stackName } `
+        + `--s3-prefix ${ stackName }`;
+
+};
+
+const deployPersistence = (
+    {
+        networkStackName, stackName, templateName,
+    },
+) => {
+
+    return `cd server && `
+        + `sam deploy `
+        + `--no-fail-on-empty-changeset `
+        + `-t ${ templateName } `
+        + `--stack-name ${ stackName } `
+        + `--s3-prefix ${ stackName } `
+        + `--parameter-overrides `
+        + `NetworkStackName=${ networkStackName }`;
+
+};
+
+const deployService = (
+    {
+        environment,
+        loggingLevel,
+        networkStackName,
+        persistenceStackName,
+        stackName,
+        webContentTtl,
+    },
+) => {
+
+    return `cd server && `
+        + `sam deploy `
+        + `--no-fail-on-empty-changeset `
+        + `--stack-name ${ stackName }-${ environment } `
+        + `--s3-prefix ${ stackName } `
+        + `--parameter-overrides `
+        + `NetworkStackName=${ networkStackName } `
+        + `PersistenceStackName=${ persistenceStackName } `
+        + `Environment=${ environment } `
+        + `LoggingLevel=${ loggingLevel } `
+        + `WebContentTtl=${ webContentTtl }`;
+
+};
+
+const destroyService = (
+    {
+        bucketName, environment, stackName,
+    },
+) => {
+
+    return `(aws s3 rm --recursive s3://${ bucketName } || true) && `
+        + `aws cloudformation delete-stack --stack-name ${ stackName }-${ environment }`;
+
+};
+
+const saveOutputs = (
+    {
+        environment, outputFileName, stackName,
+    },
+) => {
+
+    return `(`
+        + `echo 'module.exports = ' && `
+        + `aws cloudformation describe-stacks `
+        + `--stack-name ${ stackName } | `
+        + `jq '.Stacks | `
+        + `.[] | `
+        + `.Outputs | `
+        + `reduce .[] as $i ({}; .[$i.OutputKey] = $i.OutputValue)'`
+        + `) > server/dist/${ environment }/${ outputFileName }.js`;
+
+};
 
 module.exports = {
-    testOnly: `jest --config server/jest.config.js server`,
-    cleanOnly: `rimraf server/.aws-sam`,
-    buildOnly: {
-        dev: `env TARGET=server NODE_ENV=dev webpack`,
-        prod: `env TARGET=server NODE_ENV=prod webpack`,
-    },
-    validateTemplateOnly: {
-        network: {
-            script: `sam validate -t server/network-template.yaml`,
-        },
-        persistence: {
-            script: `sam validate -t server/persistence-template.yaml`,
-        },
-        service: {
-            script: `sam validate -t server/template.yaml`,
-        },
-    },
-    saveOutputsOnly: {
-        network: {
-            dev: {
-                script: `(echo 'module.exports = ' && aws cloudformation describe-stacks --stack-name kingdoms-network | jq '.Stacks | .[] | .Outputs | reduce .[] as $i ({}; .[$i.OutputKey] = $i.OutputValue)') > server/dist/dev/network.js`,
-            },
-            prod: {
-                script: `(echo 'module.exports = ' && aws cloudformation describe-stacks --stack-name kingdoms-network | jq '.Stacks | .[] | .Outputs | reduce .[] as $i ({}; .[$i.OutputKey] = $i.OutputValue)') > server/dist/prod/network.js`,
-            },
-        },
-        persistence: {
-            dev: {
-                script: `(echo 'module.exports = ' && aws cloudformation describe-stacks --stack-name kingdoms-persistence | jq '.Stacks | .[] | .Outputs | reduce .[] as $i ({}; .[$i.OutputKey] = $i.OutputValue)') > server/dist/dev/persistence.js`,
-            },
-            prod: {
-                script: `(echo 'module.exports = ' && aws cloudformation describe-stacks --stack-name kingdoms-persistence | jq '.Stacks | .[] | .Outputs | reduce .[] as $i ({}; .[$i.OutputKey] = $i.OutputValue)') > server/dist/prod/persistence.js`,
-            },
-        },
-        service: {
-            dev: {
-                script: `(echo 'module.exports = ' && aws cloudformation describe-stacks --stack-name kingdoms-service-dev | jq '.Stacks | .[] | .Outputs | reduce .[] as $i ({}; .[$i.OutputKey] = $i.OutputValue)') > server/dist/dev/service.js`,
-            },
-            prod: {
-                script: `(echo 'module.exports = ' && aws cloudformation describe-stacks --stack-name kingdoms-service-prod | jq '.Stacks | .[] | .Outputs | reduce .[] as $i ({}; .[$i.OutputKey] = $i.OutputValue)') > server/dist/prod/service.js`,
-            },
-        },
-    },
-    deployOnly: {
-        network: {
-            dev: {
-                script: `sam deploy --no-fail-on-empty-changeset -t server/network-template.yaml --stack-name kingdoms-network --s3-prefix kingdoms-network`,
-            },
-            prod: {
-                script: `sam deploy --no-fail-on-empty-changeset -t server/network-template.yaml --stack-name kingdoms-network --s3-prefix kingdoms-network`,
-            },
-        },
-        persistence: {
-            dev: {
-                script: `sam deploy --no-fail-on-empty-changeset -t server/persistence-template.yaml --stack-name kingdoms-persistence --s3-prefix kingdoms-persistence --parameter-overrides NetworkStackName=kingdoms-network`,
-            },
-            prod: {
-                script: `sam deploy --no-fail-on-empty-changeset -t server/persistence-template.yaml --stack-name kingdoms-persistence --s3-prefix kingdoms-persistence --parameter-overrides NetworkStackName=kingdoms-network`,
-            },
-        },
-        service: {
-            dev: {
-                script: `cd server && sam deploy --no-fail-on-empty-changeset --stack-name kingdoms-service-dev --s3-prefix kingdoms-service-dev --parameter-overrides NetworkStackName=kingdoms-network PersistenceStackName=kingdoms-persistence Environment=dev WebContentTtl=60`,
-            },
-            prod: {
-                script: `cd server && sam deploy --no-fail-on-empty-changeset --stack-name kingdoms-service-prod --s3-prefix kingdoms-service-prod --parameter-overrides NetworkStackName=kingdoms-network PersistenceStackName=kingdoms-persistence Environment=prod WebContentTtl=600`,
-            },
-        },
-    },
-    destroyOnly: {
-        network: {
-            dev: {
-                script: `aws cloudformation delete-stack --stack-name kingdoms-network`,
-            },
-            prod: {
-                script: `aws cloudformation delete-stack --stack-name kingdoms-network`,
-            },
-        },
-        persistence: {
-            dev: {
-                script: `aws cloudformation delete-stack --stack-name kingdoms-persistence`,
-            },
-            prod: {
-                script: `aws cloudformation delete-stack --stack-name kingdoms-persistence`,
-            },
-        },
-        service: {
-            dev: {
-                script: `aws s3 rm --recursive s3://www.dev.kingdoms.maciej-laciak.com/ && aws cloudformation delete-stack --stack-name kingdoms-service-dev`,
-            },
-            prod: {
-                script: `aws s3 rm --recursive s3://www.prod.kingdoms.maciej-laciak.com/ && aws cloudformation delete-stack --stack-name kingdoms-service-prod`,
-            },
-        },
-    },
-    createOutputsDirectoryOnly: {
-        dev: {
-            script: `mkdir -p server/dist/dev`,
-        },
-        prod: {
-            script: `mkdir -p server/dist/prod`,
-        },
-    },
-    test: {
-        script: npsUtils.series.nps(
-            'checkDepsOnly',
-            'checkTypesOnly',
-            `server.testOnly`,
-        ),
-    },
     build: {
         dev: {
             script: npsUtils.series.nps(
@@ -129,22 +130,17 @@ module.exports = {
             ),
         },
     },
-    saveOutputs: {
+    buildOnly: {
+        dev : `env TARGET=server NODE_ENV=dev webpack`,
+        prod: `env TARGET=server NODE_ENV=prod webpack`,
+    },
+    cleanOnly                 : `rimraf server/.aws-sam`,
+    createOutputsDirectoryOnly: {
         dev: {
-            script: npsUtils.series.nps(
-                `server.createOutputsDirectoryOnly.dev`,
-                `server.saveOutputsOnly.network.dev`,
-                `server.saveOutputsOnly.persistence.dev`,
-                `server.saveOutputsOnly.service.dev`,
-            ),
+            script: `mkdir -p server/dist/dev`,
         },
         prod: {
-            script: npsUtils.series.nps(
-                `server.createOutputsDirectoryOnly.prod`,
-                `server.saveOutputsOnly.network.prod`,
-                `server.saveOutputsOnly.persistence.prod`,
-                `server.saveOutputsOnly.service.prod`,
-            ),
+            script: `mkdir -p server/dist/prod`,
         },
     },
     deploy: {
@@ -173,6 +169,72 @@ module.exports = {
             ),
         },
     },
+    deployOnly: {
+        network: {
+            dev: {
+                script: deployNetwork(
+                    {
+                        stackName   : `kingdoms-network`,
+                        templateName: `network-template.yaml`,
+                    },
+                ),
+            },
+            prod: {
+                script: deployNetwork(
+                    {
+                        stackName   : `kingdoms-network`,
+                        templateName: `network-template.yaml`,
+                    },
+                ),
+            },
+        },
+        persistence: {
+            dev: {
+                script: deployPersistence(
+                    {
+                        networkStackName: `kingdoms-network`,
+                        stackName       : `kingdoms-persistence`,
+                        templateName    : `persistence-template.yaml`,
+                    },
+                ),
+            },
+            prod: {
+                script: deployPersistence(
+                    {
+                        networkStackName: `kingdoms-network`,
+                        stackName       : `kingdoms-persistence`,
+                        templateName    : `persistence-template.yaml`,
+                    },
+                ),
+            },
+        },
+        service: {
+            dev: {
+                script: deployService(
+                    {
+                        environment         : `dev`,
+                        loggingLevel        : `debug`,
+                        networkStackName    : `kingdoms-network`,
+                        persistenceStackName: `kingdoms-persistence`,
+                        stackName           : `kingdoms-service`,
+                        webContentTtl       : 60,
+                    },
+                ),
+            },
+            prod: {
+                script: deployService(
+                    {
+                        environment         : `prod`,
+                        loggingLevel        : `warn`,
+                        networkStackName    : `kingdoms-network`,
+                        persistenceStackName: `kingdoms-persistence`,
+                        stackName           : `kingdoms-service`,
+                        webContentTtl       : 600,
+                    },
+                ),
+            },
+        },
+    },
     destroy: {
         dev: {
             script: npsUtils.series.nps(
@@ -186,6 +248,171 @@ module.exports = {
                 `server.destroyOnly.service.prod`,
                 `server.destroyOnly.persistence.prod`,
                 `server.destroyOnly.network.prod`,
+            ),
+        },
+    },
+    destroyOnly: {
+        network: {
+            dev: {
+                script: deleteStack(
+                    {
+                        stackName: `kingdoms-network`,
+                    },
+                ),
+            },
+            prod: {
+                script: deleteStack(
+                    {
+                        stackName: `kingdoms-network`,
+                    },
+                ),
+            },
+        },
+        persistence: {
+            dev: {
+                script: deleteStack(
+                    {
+                        stackName: `kingdoms-persistence`,
+                    },
+                ),
+            },
+            prod: {
+                script: deleteStack(
+                    {
+                        stackName: `kingdoms-persistence`,
+                    },
+                ),
+            },
+        },
+        service: {
+            dev: {
+                script: destroyService(
+                    {
+                        bucketName : `www.dev.kingdoms.maciej-laciak.com`,
+                        environment: `dev`,
+                        stackName  : `kingdoms-service`,
+                    },
+                ),
+            },
+            prod: {
+                script: destroyService(
+                    {
+                        bucketName : `www.prod.kingdoms.maciej-laciak.com`,
+                        environment: `prod`,
+                        stackName  : `kingdoms-service`,
+                    },
+                ),
+            },
+        },
+    },
+    saveOutputs: {
+        dev: {
+            script: npsUtils.series.nps(
+                `server.createOutputsDirectoryOnly.dev`,
+                `server.saveOutputsOnly.network.dev`,
+                `server.saveOutputsOnly.persistence.dev`,
+                `server.saveOutputsOnly.service.dev`,
+            ),
+        },
+        prod: {
+            script: npsUtils.series.nps(
+                `server.createOutputsDirectoryOnly.prod`,
+                `server.saveOutputsOnly.network.prod`,
+                `server.saveOutputsOnly.persistence.prod`,
+                `server.saveOutputsOnly.service.prod`,
+            ),
+        },
+    },
+    saveOutputsOnly: {
+        network: {
+            dev: {
+                script: saveOutputs(
+                    {
+                        environment : `dev`,
+                        stackName   : `kingdoms-network`,
+                        templateName: `network`,
+                    },
+                ),
+            },
+            prod: {
+                script: saveOutputs(
+                    {
+                        environment : `prod`,
+                        stackName   : `kingdoms-network`,
+                        templateName: `network`,
+                    },
+                ),
+            },
+        },
+        persistence: {
+            dev: {
+                script: saveOutputs(
+                    {
+                        environment   : `dev`,
+                        outputFileName: `persistence`,
+                        stackName     : `kingdoms-persistence`,
+                    },
+                ),
+            },
+            prod: {
+                script: saveOutputs(
+                    {
+                        environment   : `prod`,
+                        outputFileName: `persistence`,
+                        stackName     : `kingdoms-persistence`,
+                    },
+                ),
+            },
+        },
+        service: {
+            dev: {
+                script: saveOutputs(
+                    {
+                        environment   : `dev`,
+                        outputFileName: `service`,
+                        stackName     : `kingdoms-service-dev`,
+                    },
+                ),
+            },
+            prod: {
+                script: saveOutputs(
+                    {
+                        environment   : `prod`,
+                        outputFileName: `service`,
+                        stackName     : `kingdoms-service-prod`,
+                    },
+                ),
+            },
+        },
+    },
+    test: {
+        script: npsUtils.series.nps(
+            `checkCode`,
+            `checkTypesOnly`,
+            `server.testOnly`,
+        ),
+    },
+    testOnly            : `jest --config server/jest.config.js server`,
+    validateTemplateOnly: {
+        network: {
+            script: validateTemplate(
+                {
+                    templateName: `network-template.yaml`,
+                },
+            ),
+        },
+        persistence: {
+            script: validateTemplate(
+                {
+                    templateName: `persistence-template.yaml`,
+                },
+            ),
+        },
+        service: {
+            script: validateTemplate(
+                {
+                    templateName: `template.yaml`,
+                },
             ),
         },
     },

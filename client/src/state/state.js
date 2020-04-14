@@ -24,22 +24,24 @@ import {
     emptyTilesState,
     initialTilesState,
 } from './modules/_children/tiles/reducer/state';
-import type { ClientState } from './types';
+import type {
+    ClientState,
+} from './types';
 
 export const initialClientState = {
-    camera: initialCameraState,
-    errors: initialErrorsState,
-    menu: initialMenuState,
-    player: initialPlayerState,
+    camera     : initialCameraState,
     commonState: initialCommonStateState,
-    tiles: initialTilesState,
+    errors     : initialErrorsState,
+    menu       : initialMenuState,
+    player     : initialPlayerState,
+    tiles      : initialTilesState,
 };
 
 export const emptyClientState: ClientState = {
-    camera: emptyCameraState,
-    errors: emptyErrorsState,
-    menu: emptyMenuState,
-    player: emptyPlayerState,
+    camera     : emptyCameraState,
     commonState: emptyCommonStateState,
-    tiles: emptyTilesState,
+    errors     : emptyErrorsState,
+    menu       : emptyMenuState,
+    player     : emptyPlayerState,
+    tiles      : emptyTilesState,
 };

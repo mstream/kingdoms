@@ -1,14 +1,19 @@
 // @flow
 
-import { emptyClientState } from '../../../../../state';
-import type { ClientStateSelectorTestScenario } from '../../../../../types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientStateSelectorTestScenario,
+} from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<boolean>>;
+type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< boolean > >;
 
 export const isAttackFormSubmittingSelectorTestScenarios: Scenarios = [
     {
-        name: 'returns if attack view is submitting',
-        state: {
+        expectedValue: true,
+        name         : `returns if attack view is submitting`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
@@ -18,6 +23,5 @@ export const isAttackFormSubmittingSelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: true,
     },
 ];

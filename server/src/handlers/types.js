@@ -1,12 +1,10 @@
 // @flow
 
-export type Handler<TEvent = mixed, TResult = mixed> = (
-    event: TEvent,
-    context: Context,
-    callback: Callback<TResult>,
-) => void | Promise<TResult>;
+import type {
+    Json,
+} from '../../../common/src/json';
 
-export type Context = $ReadOnly<{
+export type Context = $ReadOnly< {
     callbackWaitsForEmptyEventLoop: boolean,
     functionName: string,
     functionVersion: string,
@@ -20,48 +18,54 @@ export type Context = $ReadOnly<{
 
     getRemainingTimeInMillis(): number,
 
-    done(error?: Error, result?: mixed): void,
+    done( error?: Error, result?: mixed ): void,
 
-    fail(error: Error | string): void,
+    fail( error: Error | string ): void,
 
-    succeed(messageOrObject: mixed): void,
+    succeed( messageOrObject: mixed ): void,
 
-    succeed(message: string, object: mixed): void,
-}>;
+    succeed( message: string, object: mixed ): void,
+} >;
 
-export type CognitoIdentity = $ReadOnly<{
+export type Handler<TEvent = mixed, TResult = mixed> = (
+    event: TEvent,
+    context: Context,
+    callback: Callback< TResult >,
+) => void | Promise< TResult >;
+
+export type CognitoIdentity = $ReadOnly< {
     cognitoIdentityId: string,
     cognitoIdentityPoolId: string,
-}>;
+} >;
 
-export type ClientContext = $ReadOnly<{
+export type ClientContext = $ReadOnly< {
     client: ClientContextClient,
     Custom?: mixed,
     env: ClientContextEnv,
-}>;
+} >;
 
-export type ClientContextClient = $ReadOnly<{
+export type ClientContextClient = $ReadOnly< {
     installationId: string,
     appTitle: string,
     appVersionName: string,
     appVersionCode: string,
     appPackageName: string,
-}>;
+} >;
 
-export type ClientContextEnv = $ReadOnly<{
+export type ClientContextEnv = $ReadOnly< {
     platformVersion: string,
     platform: string,
     make: string,
     model: string,
     locale: string,
-}>;
+} >;
 
 export type Callback<TResult = mixed> = (
     error?: Error | string | null,
     result?: TResult,
 ) => void;
 
-export type APIGatewayEventRequestContext = $ReadOnly<{
+export type APIGatewayEventRequestContext = $ReadOnly< {
     accountId: string,
     apiId: string,
     authorizer?: ?AuthResponseContext,
@@ -84,9 +88,9 @@ export type APIGatewayEventRequestContext = $ReadOnly<{
     resourceId: string,
     resourcePath: string,
     routeKey?: string,
-}>;
+} >;
 
-export type APIGatewayEventIdentity = $ReadOnly<{
+export type APIGatewayEventIdentity = $ReadOnly< {
     accessKey: ?string,
     accountId: ?string,
     apiKey: ?string,
@@ -101,61 +105,57 @@ export type APIGatewayEventIdentity = $ReadOnly<{
     user: ?string,
     userAgent: ?string,
     userArn: ?string,
-}>;
+} >;
 
-export type AuthResponseContext = $ReadOnly<{
+export type AuthResponseContext = $ReadOnly< {
     [string]: mixed,
-    ...,
-}>;
+    ...
+} >;
 
-export type APIGatewayProxyHandler = Handler<
-    APIGatewayProxyEvent,
-    APIGatewayProxyResult,
->;
-export type APIGatewayProxyCallback = Callback<APIGatewayProxyResult>;
+export type APIGatewayProxyHandler = Handler< APIGatewayProxyEvent,
+    APIGatewayProxyResult, >;
+export type APIGatewayProxyCallback = Callback< APIGatewayProxyResult >;
 
 export type ProxyHandler = APIGatewayProxyHandler;
 export type ProxyCallback = APIGatewayProxyCallback;
 export type APIGatewayEvent = APIGatewayProxyEvent;
 export type ProxyResult = APIGatewayProxyResult;
 
-export type APIGatewayProxyEvent = $ReadOnly<{
-    body: ?string,
-    headers: $ReadOnly<{ [string]: string }>,
-    multiValueHeaders: $ReadOnly<{ [string]: string[] }>,
+export type APIGatewayProxyEvent = $ReadOnly< {
+    body: ?string | ?Json,
+    headers: $ReadOnly< { [string]: string } >,
+    multiValueHeaders: $ReadOnly< { [string]: string[] } >,
     httpMethod: string,
     isBase64Encoded: boolean,
     path: string,
-    pathParameters: ?$ReadOnly<{ [string]: string }>,
-    queryStringParameters: ?$ReadOnly<{ [string]: string }>,
-    multiValueQueryStringParameters: ?$ReadOnly<{ [string]: string[] }>,
-    stageVariables: ?$ReadOnly<{ [string]: string }>,
+    pathParameters: ?$ReadOnly< { [string]: string } >,
+    queryStringParameters: ?$ReadOnly< { [string]: string } >,
+    multiValueQueryStringParameters: ?$ReadOnly< { [string]: string[] } >,
+    stageVariables: ?$ReadOnly< { [string]: string } >,
     requestContext: APIGatewayEventRequestContext,
     resource: string,
-}>;
+} >;
 
-export type APIGatewayProxyResult = $ReadOnly<{
+export type APIGatewayProxyResult = $ReadOnly< {
     statusCode: number,
     headers?: {
         [header: string]: boolean | number | string,
-        ...,
+        ...
     },
     multiValueHeaders?: {
-        [header: string]: Array<boolean | number | string>,
-        ...,
+        [header: string]: Array< boolean | number | string >,
+        ...
     },
     body: string,
     isBase64Encoded?: boolean,
-}>;
+} >;
 
-export type CustomAuthorizerHandler = Handler<
-    CustomAuthorizerEvent,
-    CustomAuthorizerResult,
->;
+export type CustomAuthorizerHandler = Handler< CustomAuthorizerEvent,
+    CustomAuthorizerResult, >;
 
-export type CustomAuthorizerCallback = Callback<CustomAuthorizerResult>;
+export type CustomAuthorizerCallback = Callback< CustomAuthorizerResult >;
 
-export type CustomAuthorizerEvent = $ReadOnly<{
+export type CustomAuthorizerEvent = $ReadOnly< {
     type: string,
     methodArn: string,
     authorizationToken?: string,
@@ -171,74 +171,74 @@ export type CustomAuthorizerEvent = $ReadOnly<{
     requestContext?: APIGatewayEventRequestContext,
     domainName?: string,
     apiId?: string,
-}>;
+} >;
 
-export type CustomAuthorizerResult = $ReadOnly<{
+export type CustomAuthorizerResult = $ReadOnly< {
     principalId: string,
     policyDocument: PolicyDocument,
     context?: AuthResponseContext,
     usageIdentifierKey?: string,
-}>;
+} >;
 
-export type PolicyDocument = $ReadOnly<{
+export type PolicyDocument = $ReadOnly< {
     Version: string,
     Id?: string,
     Statement: Statement[],
-}>;
+} >;
 
-export type ConditionBlock = $ReadOnly<{
+export type ConditionBlock = $ReadOnly< {
     [condition: string]: Condition | Condition[],
-}>;
+} >;
 
-export type Condition = $ReadOnly<{
+export type Condition = $ReadOnly< {
     [key: string]: string | string[],
-    ...,
-}>;
+    ...
+} >;
 
 export type Statement = BaseStatement &
     StatementAction &
-    (StatementResource | StatementPrincipal);
+    ( StatementResource | StatementPrincipal );
 
-export type BaseStatement = $ReadOnly<{
+export type BaseStatement = $ReadOnly< {
     Effect: string,
     Sid?: string,
     Condition?: ConditionBlock,
-}>;
+} >;
 
 export type PrincipalValue =
-    | $ReadOnly<{ [key: string]: string | string[] }>
+    | $ReadOnly< { [key: string]: string | string[] } >
     | string
     | string[];
 
-export type MaybeStatementPrincipal = $ReadOnly<{
+export type MaybeStatementPrincipal = $ReadOnly< {
     Principal?: PrincipalValue,
     NotPrincipal?: PrincipalValue,
-}>;
+} >;
 
-export type MaybeStatementResource = $ReadOnly<{
+export type MaybeStatementResource = $ReadOnly< {
     Resource?: string | string[],
     NotResource?: string | string[],
-}>;
+} >;
 
 export type StatementAction =
-    | $ReadOnly<{ Action: string | string[] }>
-    | $ReadOnly<{ NotAction: string | string[] }>;
+    | $ReadOnly< { Action: string | string[] } >
+    | $ReadOnly< { NotAction: string | string[] } >;
 
 export type StatementResource = MaybeStatementPrincipal &
     (
-        | $ReadOnly<{ Resource: string | string[] }>
-        | $ReadOnly<{ NotResource: string | string[] }>
-    );
+        | $ReadOnly< { Resource: string | string[] } >
+        | $ReadOnly< { NotResource: string | string[] } >
+        );
 
 export type StatementPrincipal = MaybeStatementResource &
     (
-        | $ReadOnly<{ Principal: PrincipalValue }>
-        | $ReadOnly<{ NotPrincipal: PrincipalValue }>
-    );
+        | $ReadOnly< { Principal: PrincipalValue } >
+        | $ReadOnly< { NotPrincipal: PrincipalValue } >
+        );
 
-export type ScheduledHandler = Handler<ScheduledEvent, void>;
+export type ScheduledHandler = Handler< ScheduledEvent, void >;
 
-export type ScheduledEvent = $ReadOnly<{
+export type ScheduledEvent = $ReadOnly< {
     account: string,
     region: string,
     detail: mixed,
@@ -249,4 +249,8 @@ export type ScheduledEvent = $ReadOnly<{
     time: string,
     id: string,
     resources: string[],
-}>;
+} >;
+
+export type EventValidator<T> =
+    ( $ReadOnly< {| event: APIGatewayProxyEvent |} > ) =>
+        $ReadOnly< {| result?: T, errors: $ReadOnlyArray< string > |} >

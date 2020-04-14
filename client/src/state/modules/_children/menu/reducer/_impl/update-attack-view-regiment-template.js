@@ -1,19 +1,25 @@
 // @flow
 
-import type { ClientStateMenu } from '../types';
-import type { ClientUpdateAttackViewRegimentTemplateAction } from '../../actions/types';
-import type { ClientStateActionReducer } from '../../../../../types';
-
-type Reducer = ClientStateActionReducer<
+import type {
     ClientStateMenu,
+} from '../types';
+import type {
     ClientUpdateAttackViewRegimentTemplateAction,
->;
+} from '../../actions/types';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
 
-export const updateAttackViewRegimentTemplateReducer: Reducer = ({
-    localState,
-    action,
-    globalState,
-}) => {
+type Reducer = ClientStateActionReducer< ClientStateMenu,
+    ClientUpdateAttackViewRegimentTemplateAction, >;
+
+export const updateAttackViewRegimentTemplateReducer: Reducer = (
+    {
+        localState,
+        action,
+    },
+) => {
+
     return {
         ...localState,
         attackView: {
@@ -21,4 +27,5 @@ export const updateAttackViewRegimentTemplateReducer: Reducer = ({
             regimentTemplate: action.payload.regimentTemplate,
         },
     };
+
 };

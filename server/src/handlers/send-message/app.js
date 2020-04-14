@@ -1,168 +1,339 @@
 // @flow
 
-import { createRedisClient } from '../../clients/redis';
-import { createApiGatewayClient } from '../../clients/api-gateway';
-import { executeAction, sendResponse } from '../../util';
-import { parseJson } from '../../../../common/src/util';
-import type { ProxyHandler } from '../types';
-import { database } from '../../connectors/database';
-import type { ServerResponse } from '../../../../common/src/types';
-import { CommonPlayerActionType } from '../../../../common/src/types';
-import { validateCommonStateType } from '../../../../common/src/validators';
-import { config } from '../../config';
-import type { CommonPlayerAction } from '../../../../common/src/state/types';
-import { GET_CURRENT_STATE } from '../../../../common/src/state/actions/types';
+import {
+    createRedisClient,
+} from '../../clients/redis';
+import {
+    createApiGatewayClient,
+} from '../../clients/api-gateway';
+import {
+    ERROR_STATE_NOT_INITIALIZED,
+    executeAction,
+    sendResponse,
+} from '../../util';
+import type {
+    ProxyHandler,
+} from '../types';
+import {
+    database,
+} from '../../connectors/database';
+import type {
+    ServerResponse,
+} from '../../../../common/src/types';
+import {
+    GET_CURRENT_STATE,
+} from '../../../../common/src/state/actions/types';
 import {
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
 } from '../../../../common/src/state/modules/cities/actions/types';
-import { CREATE_SCHEDULED_ATTACK_ORDER } from '../../../../common/src/state/modules/orders/actions/types';
+import {
+    CREATE_SCHEDULED_ATTACK_ORDER,
+} from '../../../../common/src/state/modules/orders/actions/types';
+import {
+    createConfig,
+} from '../../config';
+import verror from 'verror';
+import {
+    generateRequestAcceptedResponse,
+    generateRequestExecutionErrorResponse,
+    generateRequestRejectionResponse,
+} from '../util';
+import {
+    createLogger,
+} from '../../../../common/src/logging';
+import {
+    validateEvent,
+} from './validation';
 
-const apiGateway = createApiGatewayClient();
-const redis = createRedisClient({ config });
+const config = createConfig();
+const logger = createLogger(
+    {
+        config,
+    },
+);
 
-const requestAccepted = { statusCode: 200, body: `Request accepted.` };
+const apiGateway = createApiGatewayClient(
+    {
+        config,
+    },
+);
 
-const requestAuthorizationError = {
-    statusCode: 400,
-    body: `Request not accepted.`,
-};
+const redis = createRedisClient(
+    {
+        config,
+    },
+);
 
-const requestExecutionError = {
-    statusCode: 500,
-    body: `Request processing error.`,
-};
 
-const extractActionFromBody = ({
-    bodyString,
-}: {
-    bodyString: ?string,
-}): ?CommonPlayerAction => {
-    if (bodyString == null) {
-        console.error(`invalid api gateway body received`);
-        return null;
-    }
-    console.info(`received body string: ${bodyString}`);
-    const body = parseJson({ json: bodyString });
+export const handler: ProxyHandler = async ( event, ) => {
 
-    if (
-        typeof body !== `object` ||
-        body == null ||
-        body.data == null ||
-        typeof body.data !== `object`
-    ) {
-        console.error(`invalid api gateway body received`);
-        return null;
-    }
-
-    try {
-        return CommonPlayerActionType.assert(body.data);
-    } catch (error) {
-        console.info(error.message);
-        return null;
-    }
-};
-
-export const handler: ProxyHandler = async (event, context) => {
-    const { authorizer, connectionId } = event.requestContext;
-
-    if (authorizer == null) {
-        console.error(`authorizer is missing`);
-        return requestExecutionError;
-    }
-
-    if (connectionId == null) {
-        console.error(`connectionId is missing`);
-        return requestExecutionError;
-    }
-
-    const username = authorizer.principalId;
-
-    if (username == null || typeof username !== `string`) {
-        console.error(`username is missing`);
-        return requestExecutionError;
-    }
+    logger.debug(
+        `received event: %o`,
+        event,
+    );
 
     try {
-        const action = extractActionFromBody({ bodyString: event.body });
 
-        if (action == null) {
-            return requestExecutionError;
-        }
+        const eventValidationResult = validateEvent(
+            {
+                event,
+            },
+        );
 
-        const { playerId } = action.payload;
+        if ( eventValidationResult.errors.length > 0 ) {
 
-        if (playerId !== username) {
-            console.warn(
-                `username '${username}' does not match the playerId '${playerId}'`,
+            const errorReason = `event validation error: ${ JSON.stringify(
+                eventValidationResult.errors,
+            ) }`;
+
+            logger.warn(
+                errorReason,
             );
-            return requestAuthorizationError;
+
+            return generateRequestRejectionResponse(
+                {
+                    reason: errorReason,
+                },
+            );
+
         }
 
-        const sendResponseBackToClient = async ({
+        const eventValidationResultEvent = eventValidationResult.result;
+
+        if ( eventValidationResultEvent == null ) {
+
+            throw Error(
+                `missing event validation result`,
+            );
+
+        }
+
+        const {
+            connectionId, serverRequest, username,
+        } = eventValidationResultEvent;
+
+        const {
+            action, worldId,
+        } = serverRequest;
+
+        const {
+            playerId,
+        } = action.payload;
+
+        if ( playerId !== username ) {
+
+            const errorReason = `username '${ username }' does not match the playerId '${ playerId }'`;
+
+            logger.warn(
+                errorReason,
+            );
+
+            return generateRequestRejectionResponse(
+                {
+                    reason: errorReason,
+                },
+            );
+
+        }
+
+        const sendResponseBackToClient = async ( {
             response,
         }: {
             response: ServerResponse,
-        }) =>
-            await sendResponse({
-                apiGateway,
-                connectionId,
-                redis,
-                response,
-            });
+        }, ) => {
 
-        // TODO action authorization
-
-        switch (action.type) {
-            case GET_CURRENT_STATE: {
-                const state = await database.getState({
-                    environment: config.environment,
+            return await sendResponse(
+                {
+                    apiGateway,
+                    connectionId,
                     redis,
-                    validateState: validateCommonStateType,
-                    worldId: 'default',
-                });
-                await sendResponseBackToClient({
+                    response,
+                },
+            );
+
+        };
+
+        const {
+            environment,
+        } = config;
+
+        switch ( action.type ) {
+
+        case GET_CURRENT_STATE: {
+
+            const getWorldStatePromise = database.stateByWorld.get(
+                {
+                    key: {
+                        environment,
+                        worldId,
+                    },
+                    logger,
+                    redis,
+                },
+            );
+
+            const addPlayerConnectionPromise = database.connectionByPlayer.set(
+                {
+                    key: {
+                        environment,
+                        playerId,
+                    },
+                    logger,
+                    redis,
+                    value: connectionId,
+                },
+            );
+
+            const addPlayerWorldPromise = database.worldByPlayer.set(
+                {
+                    key: {
+                        environment,
+                        playerId,
+                    },
+                    logger,
+                    redis,
+                    value: worldId,
+                },
+            );
+
+            const addPlayerToWorldPromise = database.playersByWorld.add(
+                {
+                    key: {
+                        environment,
+                        worldId,
+                    },
+                    logger,
+                    redis,
+                    value: playerId,
+                },
+            );
+
+            const [
+                state,
+            ] = await Promise.all(
+                [
+                    getWorldStatePromise,
+                    addPlayerConnectionPromise,
+                    addPlayerToWorldPromise,
+                    addPlayerWorldPromise,
+                ],
+            );
+
+            if ( state == null ) {
+
+                throw new verror.VError(
+                    {
+                        name: `STATE_NOT_INITIALIZED`,
+                    },
+                );
+
+            }
+
+            await sendResponseBackToClient(
+                {
                     response: {
-                        errors: [],
-                        request: action,
+                        errors : [],
+                        request: {
+                            action,
+                            worldId,
+                        },
                         state,
                     },
-                });
-                return requestAccepted;
-            }
-            case UPGRADE_BUILDING:
-            case CHANGE_CITY_NAME:
-            case CREATE_CITY:
-            case CREATE_SCHEDULED_ATTACK_ORDER: {
-                const response = await executeAction({
+                },
+            );
+
+            return generateRequestAcceptedResponse();
+
+        }
+        case UPGRADE_BUILDING:
+        case CHANGE_CITY_NAME:
+        case CREATE_CITY:
+        case CREATE_SCHEDULED_ATTACK_ORDER: {
+
+            const response = await executeAction(
+                {
                     action,
                     environment: config.environment,
+                    logger,
                     redis,
-                });
-                await sendResponseBackToClient({ response });
-                return requestAccepted;
-            }
-            default: {
-                console.error(`unsupported request type: ${action.type}`);
-                const state = await database.getState({
-                    environment: config.environment,
-                    redis,
-                    validateState: validateCommonStateType,
-                    worldId: 'default',
-                });
-                await sendResponseBackToClient({
-                    response: {
-                        errors: [`unsupported action`],
-                        request: action,
-                        state: state,
-                    },
-                });
-                return requestAuthorizationError;
-            }
+                    worldId,
+                },
+            );
+
+            await sendResponseBackToClient(
+                {
+                    response,
+                },
+            );
+
+            return generateRequestAcceptedResponse();
+
         }
-    } catch (error) {
-        console.info(error.stack);
-        return requestExecutionError;
+        default: {
+
+            const state = await database.stateByWorld.get(
+                {
+                    key: {
+                        environment: config.environment,
+                        worldId,
+                    },
+                    logger,
+                    redis,
+                },
+            );
+
+            if ( state == null ) {
+
+                throw new verror.VError(
+                    {
+                        name: ERROR_STATE_NOT_INITIALIZED,
+                    },
+                );
+
+            }
+
+            await sendResponseBackToClient(
+                {
+                    response: {
+                        errors: [
+                            `unsupported action`,
+                        ],
+                        request: serverRequest,
+                        state,
+                    },
+                },
+            );
+
+            const errorReason = `unsupported request type: ${ action.type }`;
+
+            logger.warn(
+                errorReason,
+            );
+
+            return generateRequestRejectionResponse(
+                {
+                    reason: errorReason,
+                },
+            );
+
+        }
+
+        }
+
+    } catch ( error ) {
+
+        logger.error(
+            error.stack,
+        );
+
+        return generateRequestExecutionErrorResponse(
+            {
+                reason: `unexpected error`,
+            },
+        );
+
     }
+
 };

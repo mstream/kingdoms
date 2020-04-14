@@ -1,17 +1,25 @@
 // @flow
 
-import { addConnection } from './add-connection';
-import { casState } from './cas-state';
-import { getConnections } from './get-connections';
-import { getState } from './get-state';
-import { setState } from './set-state';
-import { removeConnection } from './remove-connection';
+import {
+    playersByWorldOperations,
+} from './_impl/players-by-world';
+import {
+    worldsOperations,
+} from './_impl/worlds';
+import {
+    statesByWorldOperations,
+} from './_impl/state-by-world';
+import {
+    connectionByPlayerOperations,
+} from './_impl/connection-by-player';
+import {
+    worldByPlayerOperations,
+} from './_impl/world-by-player';
 
 export const database = {
-    addConnection,
-    casState,
-    getConnections,
-    getState,
-    removeConnection,
-    setState,
+    connectionByPlayer: connectionByPlayerOperations,
+    playersByWorld    : playersByWorldOperations,
+    stateByWorld      : statesByWorldOperations,
+    worldByPlayer     : worldByPlayerOperations,
+    worlds            : worldsOperations,
 };

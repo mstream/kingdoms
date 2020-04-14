@@ -1,6 +1,8 @@
 // @flow
 
-import type { ClientActionCreator } from '../../../../types';
+import type {
+    ClientActionCreator,
+} from '../../../../types';
 import type {
     ClientRequestBuildingUpgradeAction,
     ClientRequestCityCreationAction,
@@ -16,47 +18,59 @@ import {
     UPDATE_STATE,
 } from './types';
 
-const requestBuildingUpgrade: ClientActionCreator<ClientRequestBuildingUpgradeAction> = (
+const requestBuildingUpgrade: ClientActionCreator< ClientRequestBuildingUpgradeAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: REQUEST_BUILDING_UPGRADE,
-        payload,
     };
+
 };
 
-const requestCityCreation: ClientActionCreator<ClientRequestCityCreationAction> = (
+const requestCityCreation: ClientActionCreator< ClientRequestCityCreationAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: REQUEST_CITY_CREATION,
-        payload,
     };
+
 };
 
-const requestCityNameChange: ClientActionCreator<ClientRequestCityNameChangeAction> = (
+const requestCityNameChange: ClientActionCreator< ClientRequestCityNameChangeAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: REQUEST_CITY_NAME_CHANGE,
-        payload,
     };
+
 };
 
-const updateState: ClientActionCreator<ClientUpdateStateAction> = (payload) => {
-    return {
-        type: UPDATE_STATE,
-        payload,
-    };
-};
-
-const requestOrderCreation: ClientActionCreator<ClientRequestOrderCreationAction> = (
+const updateState: ClientActionCreator< ClientUpdateStateAction > = (
     payload,
 ) => {
+
     return {
-        type: REQUEST_ORDER_CREATION,
         payload,
+        type: UPDATE_STATE,
     };
+
+};
+
+const requestOrderCreation: ClientActionCreator< ClientRequestOrderCreationAction > = (
+    payload,
+) => {
+
+    return {
+        payload,
+        type: REQUEST_ORDER_CREATION,
+    };
+
 };
 
 export const commonStateActions = {

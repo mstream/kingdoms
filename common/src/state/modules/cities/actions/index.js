@@ -12,51 +12,67 @@ import {
     CREATE_CITY,
     UPGRADE_BUILDING,
 } from './types';
-import type { CommonExecuteTimeStepAction } from '../../time/actions';
-import { EXECUTE_TIME_STEP } from '../../time/actions';
-import type { CommonActionCreator } from '../../../types';
+import type {
+    CommonExecuteTimeStepAction,
+} from '../../time/actions';
+import {
+    EXECUTE_TIME_STEP,
+} from '../../time/actions';
+import type {
+    CommonActionCreator,
+} from '../../../types';
 
-export const abandonCity: CommonActionCreator<CommonAbandonCityAction> = (
+export const abandonCity: CommonActionCreator< CommonAbandonCityAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: ABANDON_CITY,
-        payload,
     };
+
 };
 
-export const changeCityName: CommonActionCreator<CommonChangeCityNameAction> = (
+export const changeCityName: CommonActionCreator< CommonChangeCityNameAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: CHANGE_CITY_NAME,
-        payload,
     };
+
 };
 
-export const createCity: CommonActionCreator<CommonCreateCityAction> = (
+export const createCity: CommonActionCreator< CommonCreateCityAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: CREATE_CITY,
-        payload,
     };
+
 };
 
-export const executeTimeStep: CommonActionCreator<CommonExecuteTimeStepAction> = (
+export const executeTimeStep: CommonActionCreator< CommonExecuteTimeStepAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: EXECUTE_TIME_STEP,
-        payload,
     };
+
 };
 
-export const upgradeBuilding: CommonActionCreator<CommonUpgradeBuildingAction> = (
+export const upgradeBuilding: CommonActionCreator< CommonUpgradeBuildingAction > = (
     payload,
 ) => {
+
     return {
-        type: UPGRADE_BUILDING,
         payload,
+        type: UPGRADE_BUILDING,
     };
+
 };

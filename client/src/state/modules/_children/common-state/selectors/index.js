@@ -1,25 +1,45 @@
 // @flow
 
-import { isLoadedSelector } from './_impl/is-loaded';
-import { cityIdsByOwnerSelector } from './_impl/city-ids-by-owner';
-import { commonStateSelector } from './_impl/common-state';
-import { citiesSelector } from './_impl/cities';
-import { citiesDistancesSelector } from './_impl/cities-distances';
-import { ordersSelector } from './_impl/orders';
-import { rulesSelector } from './_impl/rules';
-import { worldSelector } from './_impl/world';
-import { unitStatsSelector } from './_impl/unit-stats';
-import { timeSelector } from './_impl/time';
+import {
+    isLoadedSelector,
+} from './_impl/is-loaded';
+import {
+    cityIdsByOwnerSelector,
+} from './_impl/city-ids-by-owner';
+import {
+    commonStateSelector,
+} from './_impl/common-state';
+import {
+    citiesSelector,
+} from './_impl/cities';
+import {
+    citiesDistancesSelector,
+} from './_impl/cities-distances';
+import {
+    ordersSelector,
+} from './_impl/orders';
+import {
+    rulesSelector,
+} from './_impl/rules';
+import {
+    worldSelector,
+} from './_impl/world';
+import {
+    unitStatsSelector,
+} from './_impl/unit-stats';
+import {
+    timeSelector,
+} from './_impl/time';
 
 export const clientStateCommonStateSelectors = {
-    cities: citiesSelector,
+    cities         : citiesSelector,
     citiesDistances: citiesDistancesSelector,
-    cityIdsByOwner: cityIdsByOwnerSelector,
-    commonState: commonStateSelector,
-    isLoaded: isLoadedSelector,
-    orders: ordersSelector,
-    rules: rulesSelector,
-    time: timeSelector,
-    unitStats: unitStatsSelector,
-    world: worldSelector,
+    cityIdsByOwner : cityIdsByOwnerSelector,
+    commonState    : commonStateSelector,
+    isLoaded       : isLoadedSelector,
+    orders         : ordersSelector,
+    rules          : rulesSelector,
+    time           : timeSelector,
+    unitStats      : unitStatsSelector,
+    world          : worldSelector,
 };

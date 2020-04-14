@@ -1,9 +1,21 @@
 // @flow
 
-import type { ClientStore } from '../../../../types';
+import type {
+    Logger,
+} from '../../../../../../../common/src/logging/types';
 
-export const createOnCloseHandler = ({ store }: { store: ClientStore }) => {
+export const createOnCloseHandler = (
+    {
+        logger,
+    }: {logger: Logger},
+) => {
+
     return (): void => {
-        console.log(`ws connection closed`);
+
+        logger.info(
+            `Websocket connection closed`,
+        );
+
     };
+
 };

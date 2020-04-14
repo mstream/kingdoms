@@ -9,5 +9,6 @@ exact_by_default=false
 experimental.const_params=true
 include_warnings=true
 module.name_mapper.extension='bmp' -> '<PROJECT_ROOT>/flow-stubs/empty.js'
+traces=0
 [lints]
 all = error

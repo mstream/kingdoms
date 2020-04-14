@@ -1,33 +1,63 @@
 // @flow
 
-import type { ClientAction } from '../../../types';
-import type { Socket } from '../types';
-import type { CommonAction } from '../../../../../../common/src/state/types';
-import { actionTransformers } from './action-transformers';
-import { sendMessage } from '../utils';
+import type {
+    ClientAction,
+} from '../../../types';
+import type {
+    Socket,
+} from '../types';
+import type {
+    CommonPlayerAction,
+} from '../../../../../../common/src/state/types';
+import {
+    actionTransformers,
+} from './action-transformers';
+import {
+    sendMessage,
+} from '../utils';
+import type {
+    ServerRequest,
+} from '../../../../../../common/src/types';
 
-export const clientActionHandler = ({
-    action,
-    socket,
-    username,
-}: {
+export const clientActionHandler = (
+    {
+        action,
+        socket,
+        username,
+        worldId,
+    }: {
     action: ClientAction,
     socket: Socket,
     username: string,
-}) => {
-    const actionTransformer = actionTransformers[action.type];
+    worldId: string,
+},
+) => {
 
-    if (actionTransformer == null) {
+    const actionTransformer = actionTransformers[ action.type ];
+
+    if ( actionTransformer == null ) {
+
         return;
+
     }
 
-    const commonAction: CommonAction = actionTransformer({
-        clientAction: action,
-        username,
-    });
+    const commonPlayerAction: CommonPlayerAction = actionTransformer(
+        {
+            clientAction: action,
+            username,
+        },
+    );
 
-    sendMessage({
-        action: commonAction,
-        socket,
-    });
+    const request: ServerRequest = {
+        action: commonPlayerAction,
+        worldId,
+    };
+
+    sendMessage(
+        {
+            request,
+            socket,
+        },
+    );
+
 };

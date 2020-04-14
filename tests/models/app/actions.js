@@ -1,26 +1,55 @@
 // @flow
 
-import { TestController } from 'testcafe';
-import { selectors } from './selectors';
-import { config } from '../../config';
+import {
+    TestController,
+} from 'testcafe';
+import {
+    selectors,
+} from './selectors';
+import {
+    config,
+} from '../../config';
 
-const open = async ({
+const open = async ( {
     t,
     token,
+    worldId,
 }: {
     t: TestController,
     token?: string,
-}): Promise<void> => {
-    const url =
-        token == null ? config.appUrl : `${config.appUrl}/#id_token=${token}`;
+    worldId: string,
+}, ): Promise< void > => {
 
-    console.info(`navigating to the app page using url: ${url}`);
+    const worldIdHashParam = `state=${ worldId }`;
 
-    await t.navigateTo(url);
+    const tokenHashParam = token == null
+        ? ``
+        : `&id_token=${ token }`;
+
+    const hashParams = `#${ worldIdHashParam }${ tokenHashParam }`;
+    const url = `${ config.appUrl }/${ hashParams }`;
+
+    console.info(
+        `navigating to the app page using url: ${ url }`,
+    );
+
+    await t.navigateTo(
+        url,
+    );
+
 };
 
-const signOut = async ({ t }: { t: TestController }): Promise<void> => {
-    await t.hover(selectors.userMenuButton).click(selectors.signOutButton);
+const signOut = async ( {
+    t,
+}: { t: TestController }, ): Promise< void > => {
+
+    await t.hover(
+        selectors.userMenuButton,
+    )
+        .click(
+            selectors.signOutButton,
+        );
+
 };
 
 export const actions = {

@@ -1,3 +1,6 @@
 // @flow
 
-export const emptyPlayersState = Object.freeze({});
+export const emptyPlayersState = Object.freeze(
+    {
+    },
+);

@@ -1,65 +1,144 @@
 // @flow
 
-import { createRedisClient } from '../../clients/redis';
-import type { ProxyHandler } from '../types';
 import {
-    initialCommonState,
-    testCommonState,
-} from '../../../../common/src/state';
-import { database } from '../../connectors/database';
-import { config } from '../../config';
+    createRedisClient,
+} from '../../clients/redis';
+import type {
+    ProxyHandler,
+} from '../types';
+import {
+    database,
+} from '../../connectors/database';
+import {
+    createConfig,
+} from '../../config';
+import {
+    generateRequestAcceptedResponse,
+    generateRequestExecutionErrorResponse,
+    generateRequestRejectionResponse,
+} from '../util';
+import {
+    createLogger,
+} from '../../../../common/src/logging';
+import {
+    validateEvent,
+} from './validation';
 
-const states = {
-    initial: initialCommonState,
-    test: testCommonState,
-};
+const config = createConfig();
+const logger = createLogger(
+    {
+        config,
+    },
+);
 
-const redis = createRedisClient({ config });
+const redis = createRedisClient(
+    {
+        config,
+    },
+);
 
-const requestAccepted = {
-    body: `State reset.`,
-    statusCode: 200,
-};
+export const handler: ProxyHandler = async ( event, ) => {
 
-const requestExecutionError = {
-    body: `State reset error.`,
-    statusCode: 500,
-};
+    logger.debug(
+        `received event: %o`,
+        event,
+    );
 
-export const handler: ProxyHandler = async (event, context) => {
-    const stateType = event.body;
+    const bodyValidationResult = validateEvent(
+        {
+            event,
+        },
+    );
 
-    if (stateType == null) {
-        return {
-            statusCode: 500,
-            body: `State type missing. Supported values: ${JSON.stringify(
-                Object.keys(states),
-            )}`,
-        };
+    if ( bodyValidationResult.errors.length > 0 ) {
+
+        const errorReason = `body validation error: ${ JSON.stringify(
+            bodyValidationResult.errors,
+        ) }`;
+
+        logger.warn(
+            errorReason,
+        );
+
+        return generateRequestRejectionResponse(
+            {
+                reason: errorReason,
+            },
+        );
+
     }
 
-    const state = states[stateType];
+    const bodyValidationResultBody = bodyValidationResult.result;
 
-    if (state == null) {
-        return {
-            statusCode: 500,
-            body: `Unsupported test type. Supported values: ${JSON.stringify(
-                Object.keys(states),
-            )}`,
-        };
+    if ( bodyValidationResultBody == null ) {
+
+        throw Error(
+            `missing body validation result`,
+        );
+
     }
+
+    const {
+        environment,
+    } = config;
+
+    const {
+        state,
+        worldId,
+    } = bodyValidationResultBody;
 
     try {
-        console.info(`forcing state reset`);
-        await database.setState({
-            environment: config.environment,
-            redis,
-            state,
-            worldId: 'default',
-        });
-        return requestAccepted;
-    } catch (error) {
-        console.error(error.stack);
-        return requestExecutionError;
+
+        logger.info(
+            `resetting state for world '%s' in '%s' environment`,
+            worldId,
+            environment,
+        );
+
+        const addWorldPromise = database.worlds.add(
+            {
+                key: {
+                    environment,
+                },
+                logger,
+                redis,
+                value: worldId,
+            },
+        );
+
+        const setStatePromise = database.stateByWorld.set(
+            {
+                key: {
+                    environment,
+                    worldId,
+                },
+                logger,
+                redis,
+                value: state,
+            },
+        );
+
+        await Promise.all(
+            [
+                addWorldPromise,
+                setStatePromise,
+            ],
+        );
+
+        return generateRequestAcceptedResponse();
+
+    } catch ( error ) {
+
+        logger.error(
+            error.stack,
+        );
+
+        return generateRequestExecutionErrorResponse(
+            {
+                reason: `unexpected error`,
+            },
+        );
+
     }
+
 };

@@ -1,3 +1,3 @@
 // @flow
 
-export type ClientStateErrors = $ReadOnlyArray<string>;
+export type ClientStateErrors = $ReadOnlyArray< string >;

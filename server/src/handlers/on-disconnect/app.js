@@ -1,39 +1,45 @@
 // @flow
 
-import { createRedisClient } from '../../clients/redis';
-import type { ProxyHandler } from '../types';
-import { database } from '../../connectors/database';
-import { config } from '../../config';
+import type {
+    ProxyHandler,
+} from '../types';
 
 const requestExecutionError = {
-    body: `Connection error.`,
+    body      : `Disconnection error.`,
     statusCode: 500,
 };
 
 const requestAccepted = {
-    body: `Connected.`,
+    body      : `Disconnected.`,
     statusCode: 200,
 };
 
-const redis = createRedisClient({ config });
+export const handler: ProxyHandler = async ( event, ) => {
 
-export const handler: ProxyHandler = async (event, context) => {
     try {
-        const connectionId = event.requestContext.connectionId;
 
-        if (connectionId == null) {
-            throw Error(`connectionId is missing`);
+        const {
+            connectionId,
+        } = event.requestContext;
+
+        if ( connectionId == null ) {
+
+            throw Error(
+                `connectionId is missing`,
+            );
+
         }
 
-        await database.removeConnection({
-            connectionId,
-            environment: config.environment,
-            redis,
-        });
-    } catch (error) {
-        console.error(error.stack);
+    } catch ( error ) {
+
+        console.error(
+            error.stack,
+        );
+
         return requestExecutionError;
+
     }
 
     return requestAccepted;
+
 };

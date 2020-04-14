@@ -1,6 +1,8 @@
 // @flow
 
-import type { ClientStatePlayer } from './types';
+import type {
+    ClientStatePlayer,
+} from './types';
 
 export const emptyPlayerState: ClientStatePlayer = {
     name: null,

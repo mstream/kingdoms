@@ -1,54 +1,27 @@
 // @flow
 
-import type { ClientStateCameraReducerTestScenario } from './types';
-import type { ClientMoveCameraAction } from '../../actions/types';
-import { emptyClientState } from '../../../../../state';
-import { clientActions } from '../../../../actions';
+import type {
+    ClientStateCameraReducerTestScenario,
+} from './types';
+import type {
+    ClientMoveCameraAction,
+} from '../../actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    clientActions,
+} from '../../../../actions';
 
-export const moveCameraTestScenarios: $ReadOnlyArray<
-    ClientStateCameraReducerTestScenario<ClientMoveCameraAction>,
-> = [
+export const moveCameraTestScenarios: $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientMoveCameraAction >, > = [
     {
-        name: 'moves camera up',
-        action: clientActions.camera.moveCameraUp(),
-        previousGlobalState: {
-            ...emptyClientState,
-            camera: {
-                ...emptyClientState.camera,
-                geometry: {
-                    ...emptyClientState.camera.geometry,
-                    location: {
-                        ...emptyClientState.camera.geometry.location,
-                        x: 50,
-                        y: 50,
-                    },
-                    size: {
-                        ...emptyClientState.camera.geometry.size,
-                        x: 100,
-                        y: 100,
-                    },
-                },
-                locationLimit: {
-                    ...emptyClientState.camera.locationLimit,
-                    min: {
-                        ...emptyClientState.camera.locationLimit.min,
-                        x: 0,
-                        y: 0,
-                    },
-                    max: {
-                        ...emptyClientState.camera.locationLimit.min,
-                        x: 100,
-                        y: 100,
-                    },
-                },
-                movementSpeed: {
-                    ...emptyClientState.camera.movementSpeed,
-                    x: 0.1,
-                    y: 0.1,
-                },
+        action                   : clientActions.camera.moveCameraUp(),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
+        ) => {
+
             return {
                 ...previousLocalState,
                 geometry: {
@@ -59,11 +32,9 @@ export const moveCameraTestScenarios: $ReadOnlyArray<
                     },
                 },
             };
+
         },
-    },
-    {
-        name: 'does not move camera up when city view is open',
-        action: clientActions.camera.moveCameraUp(),
+        name               : `moves camera up`,
         previousGlobalState: {
             ...emptyClientState,
             camera: {
@@ -83,15 +54,67 @@ export const moveCameraTestScenarios: $ReadOnlyArray<
                 },
                 locationLimit: {
                     ...emptyClientState.camera.locationLimit,
+                    max: {
+                        ...emptyClientState.camera.locationLimit.min,
+                        x: 100,
+                        y: 100,
+                    },
                     min: {
                         ...emptyClientState.camera.locationLimit.min,
                         x: 0,
                         y: 0,
                     },
+                },
+                movementSpeed: {
+                    ...emptyClientState.camera.movementSpeed,
+                    x: 0.1,
+                    y: 0.1,
+                },
+            },
+        },
+    },
+    {
+        action                   : clientActions.camera.moveCameraUp(),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+            };
+
+        },
+        name               : `does not move camera up when city view is open`,
+        previousGlobalState: {
+            ...emptyClientState,
+            camera: {
+                ...emptyClientState.camera,
+                geometry: {
+                    ...emptyClientState.camera.geometry,
+                    location: {
+                        ...emptyClientState.camera.geometry.location,
+                        x: 50,
+                        y: 50,
+                    },
+                    size: {
+                        ...emptyClientState.camera.geometry.size,
+                        x: 100,
+                        y: 100,
+                    },
+                },
+                locationLimit: {
+                    ...emptyClientState.camera.locationLimit,
                     max: {
                         ...emptyClientState.camera.locationLimit.min,
                         x: 100,
                         y: 100,
+                    },
+                    min: {
+                        ...emptyClientState.camera.locationLimit.min,
+                        x: 0,
+                        y: 0,
                     },
                 },
                 movementSpeed: {
@@ -104,19 +127,25 @@ export const moveCameraTestScenarios: $ReadOnlyArray<
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: 'city1',
+                    currentCityId: `city1`,
                 },
             },
         },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
+    },
+    {
+        action                   : clientActions.camera.moveCameraUp(),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
             return {
                 ...previousLocalState,
             };
+
         },
-    },
-    {
-        name: 'does not move camera up when attack view is open',
-        action: clientActions.camera.moveCameraUp(),
+        name               : `does not move camera up when attack view is open`,
         previousGlobalState: {
             ...emptyClientState,
             camera: {
@@ -136,15 +165,15 @@ export const moveCameraTestScenarios: $ReadOnlyArray<
                 },
                 locationLimit: {
                     ...emptyClientState.camera.locationLimit,
-                    min: {
-                        ...emptyClientState.camera.locationLimit.min,
-                        x: 0,
-                        y: 0,
-                    },
                     max: {
                         ...emptyClientState.camera.locationLimit.min,
                         x: 100,
                         y: 100,
+                    },
+                    min: {
+                        ...emptyClientState.camera.locationLimit.min,
+                        x: 0,
+                        y: 0,
                     },
                 },
                 movementSpeed: {
@@ -157,14 +186,9 @@ export const moveCameraTestScenarios: $ReadOnlyArray<
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackedCityId: 'city1',
+                    attackedCityId: `city1`,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-            };
         },
     },
 ];

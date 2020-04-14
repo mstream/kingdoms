@@ -1,24 +1,69 @@
 // @flow
 
-import type { ClientStore } from '../../../../types';
-import { clientActions } from '../../../../modules/actions';
-import { redirectToLoginPage } from '../../../../../util';
+import type {
+    ClientStore,
+} from '../../../../types';
+import {
+    clientActions,
+} from '../../../../modules/actions';
+import type {
+    Config,
+} from '../../../../../config/types';
+import type {
+    Logger,
+} from '../../../../../../../common/src/logging/types';
+import {
+    redirectToLoginPage,
+} from '../../../../../location';
 
-export const createOnErrorHandler = ({
-    location,
-    store,
-}: {
-    location: Location,
-    store: ClientStore,
-}) => {
-    return (error: Error): void => {
+export const createOnErrorHandler = (
+    {
+        config,
+        location,
+        logger,
+        store,
+    }: {
+        config: Config,
+        location: Location,
+        logger: Logger,
+        store: ClientStore,
+    },
+) => {
+
+    return (
+        error: Error,
+    ): void => {
+
         const errorMessage = error.message;
-        console.error(`websocket communication error: ${errorMessage}`);
 
-        store.dispatch(clientActions.errors.reportErrors([errorMessage]));
+        logger.error(
+            `Websocket communication error: %s`,
+            errorMessage,
+        );
 
-        setTimeout(() => {
-            redirectToLoginPage({ location });
-        }, 1000);
+        store.dispatch(
+            clientActions.errors.reportErrors(
+                [
+                    errorMessage,
+                ],
+            ),
+        );
+
+        setTimeout(
+            () => {
+
+                redirectToLoginPage(
+                    {
+                        config,
+                        location,
+                        logger,
+                    },
+                );
+
+            },
+            1000,
+        );
+
     };
+
 };

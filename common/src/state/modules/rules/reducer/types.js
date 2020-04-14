@@ -1,28 +1,35 @@
 // @flow
+
+/*
+ *
+ */
+
 // @flow-runtime
 
-import { reify, Type } from 'flow-runtime';
+import {
+    Type, reify,
+} from 'flow-runtime';
 
-export const ARMOR_NONE: 'ARMOR_NONE' = 'ARMOR_NONE';
-export const ARMOR_LIGHT: 'ARMOR_LIGHT' = 'ARMOR_LIGHT';
-export const ARMOR_MEDIUM: 'ARMOR_MEDIUM' = 'ARMOR_MEDIUM';
-export const ARMOR_HEAVY: 'ARMOR_HEAVY' = 'ARMOR_HEAVY';
+export const ARMOR_NONE: 'ARMOR_NONE' = `ARMOR_NONE`;
+export const ARMOR_LIGHT: 'ARMOR_LIGHT' = `ARMOR_LIGHT`;
+export const ARMOR_MEDIUM: 'ARMOR_MEDIUM' = `ARMOR_MEDIUM`;
+export const ARMOR_HEAVY: 'ARMOR_HEAVY' = `ARMOR_HEAVY`;
 
-export const BUILDING_LUMBER_MILL: 'BUILDING_LUMBER_MILL' =
-    'BUILDING_LUMBER_MILL';
-export const BUILDING_PASTURE: 'BUILDING_PASTURE' = 'BUILDING_PASTURE';
-export const BUILDING_WAREHOUSE: 'BUILDING_WAREHOUSE' = 'BUILDING_WAREHOUSE';
+export const BUILDING_LUMBER_MILL: 'BUILDING_LUMBER_MILL'
+    = `BUILDING_LUMBER_MILL`;
+export const BUILDING_PASTURE: 'BUILDING_PASTURE' = `BUILDING_PASTURE`;
+export const BUILDING_WAREHOUSE: 'BUILDING_WAREHOUSE' = `BUILDING_WAREHOUSE`;
 
-export const RESOURCE_FOOD: 'RESOURCE_FOOD' = 'RESOURCE_FOOD';
-export const RESOURCE_WOOD: 'RESOURCE_WOOD' = 'RESOURCE_WOOD';
+export const RESOURCE_FOOD: 'RESOURCE_FOOD' = `RESOURCE_FOOD`;
+export const RESOURCE_WOOD: 'RESOURCE_WOOD' = `RESOURCE_WOOD`;
 
-export const UNIT_ARCHER: 'UNIT_ARCHER' = 'UNIT_ARCHER';
-export const UNIT_CATAPULT: 'UNIT_CATAPULT' = 'UNIT_CATAPULT';
-export const UNIT_KNIGHT: 'UNIT_KNIGHT' = 'UNIT_KNIGHT';
-export const UNIT_NOBLE: 'UNIT_NOBLE' = 'UNIT_NOBLE';
-export const UNIT_PEASANT: 'UNIT_PEASANT' = 'UNIT_PEASANT';
-export const UNIT_PIKEMAN: 'UNIT_PIKEMAN' = 'UNIT_PIKEMAN';
-export const UNIT_SWORDSMAN: 'UNIT_SWORDSMAN' = 'UNIT_SWORDSMAN';
+export const UNIT_ARCHER: 'UNIT_ARCHER' = `UNIT_ARCHER`;
+export const UNIT_CATAPULT: 'UNIT_CATAPULT' = `UNIT_CATAPULT`;
+export const UNIT_KNIGHT: 'UNIT_KNIGHT' = `UNIT_KNIGHT`;
+export const UNIT_NOBLE: 'UNIT_NOBLE' = `UNIT_NOBLE`;
+export const UNIT_PEASANT: 'UNIT_PEASANT' = `UNIT_PEASANT`;
+export const UNIT_PIKEMAN: 'UNIT_PIKEMAN' = `UNIT_PIKEMAN`;
+export const UNIT_SWORDSMAN: 'UNIT_SWORDSMAN' = `UNIT_SWORDSMAN`;
 
 export type CommonStateArmorKey =
     | typeof ARMOR_NONE
@@ -48,33 +55,33 @@ export type CommonStateUnitKey =
     | typeof UNIT_PIKEMAN
     | typeof UNIT_SWORDSMAN;
 
-export type CommonStateResources = $ReadOnly<{
+export type CommonStateResources = $ReadOnly< {
     [CommonStateResourceKey]: number,
-}>;
+} >;
 
-export type CommonStateBuildingUpgradeCost = $ReadOnly<{
+export type CommonStateBuildingUpgradeCost = $ReadOnly< {
     [CommonStateResourceKey]: number,
-}>;
+} >;
 
-export type CommonStateDamage = $ReadOnly<{ [CommonStateArmorKey]: number }>;
+export type CommonStateDamage = $ReadOnly< { [CommonStateArmorKey]: number } >;
 
-export type CommonStateBuildingUpgradeCosts = $ReadOnly<{
+export type CommonStateBuildingUpgradeCosts = $ReadOnly< {
     [CommonStateBuildingKey]: CommonStateBuildingUpgradeCost,
-}>;
+} >;
 
-export type CommonStateUnitStat = $ReadOnly<{
+export type CommonStateUnitStat = $ReadOnly< {
     armor: CommonStateArmorKey,
     damage: CommonStateDamage,
     foodDemand: number,
     range: number,
     speed: number,
-}>;
+} >;
 
-export type CommonStateUnitStats = $ReadOnly<{
+export type CommonStateUnitStats = $ReadOnly< {
     [CommonStateUnitKey]: CommonStateUnitStat,
-}>;
+} >;
 
-export type CommonStateRules = $ReadOnly<{
+export type CommonStateRules = $ReadOnly< {
     baseCityCapacity: number,
     basePeasantsMigrationRate: number,
     buildingUpgradeCoefficient: number,
@@ -88,16 +95,16 @@ export type CommonStateRules = $ReadOnly<{
     unitFoodDemand: number,
     unitStarvingCoefficient: number,
     unitStats: CommonStateUnitStats,
-}>;
+} >;
 
-export type CommonStateBuilding = $ReadOnly<{
+export type CommonStateBuilding = $ReadOnly< {
     tier: number,
-}>;
+} >;
 
-export type CommonStateBuildings = $ReadOnly<{
+export type CommonStateBuildings = $ReadOnly< {
     [CommonStateBuildingKey]: CommonStateBuilding,
-}>;
+} >;
 
-export type CommonStateUnits = $ReadOnly<{ [CommonStateUnitKey]: number }>;
+export type CommonStateUnits = $ReadOnly< { [CommonStateUnitKey]: number } >;
 
-export const CommonStateUnitKeyType = (reify: Type<CommonStateUnitKey>);
+export const CommonStateUnitKeyType = ( reify: Type< CommonStateUnitKey > );

@@ -1,21 +1,25 @@
 // @flow
 
-import { zeroVector } from '../../../../../../../common/src/vector';
-import type { ClientStateCamera } from './types';
+import {
+    zeroVector,
+} from '../../../../../../../common/src/vector';
+import type {
+    ClientStateCamera,
+} from './types';
 
 export const emptyCameraState: ClientStateCamera = {
-    locationLimit: {
-        min: zeroVector,
-        max: zeroVector,
-    },
     geometry: {
         location: zeroVector,
-        size: zeroVector,
+        size    : zeroVector,
+    },
+    locationLimit: {
+        max: zeroVector,
+        min: zeroVector,
     },
     movementSpeed: zeroVector,
-    sizeLimit: {
-        min: zeroVector,
+    sizeLimit    : {
         max: zeroVector,
+        min: zeroVector,
     },
     zoomingSpeed: zeroVector,
 };
@@ -32,16 +36,22 @@ export const initialCameraState: ClientStateCamera = {
         },
     },
     locationLimit: {
-        min: zeroVector,
         max: zeroVector,
+        min: zeroVector,
     },
     movementSpeed: {
         x: 0.1,
         y: 0.1,
     },
     sizeLimit: {
-        min: { x: 640, y: 400 },
-        max: { x: 3200, y: 2000 },
+        max: {
+            x: 3200,
+            y: 2000,
+        },
+        min: {
+            x: 640,
+            y: 400,
+        },
     },
     zoomingSpeed: {
         x: 100,

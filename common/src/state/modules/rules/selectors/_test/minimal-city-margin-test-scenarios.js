@@ -1,14 +1,24 @@
 // @flow
 
-import type { CommonStateSelectorTestScenario } from '../../../types';
-import { emptyCommonState } from '../../../state';
-import type { Vector } from '../../../../../vector';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../../types';
+import {
+    emptyCommonState,
+} from '../../../state';
+import type {
+    Vector,
+} from '../../../../../vector';
 
-type Scenarios = $ReadOnlyArray<CommonStateSelectorTestScenario<Vector>>;
+type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< Vector > >;
 
 export const minimalCityMarginSelectorTestScenarios: Scenarios = [
     {
-        name: 'returns the minimal city margin',
+        expectedValue: {
+            x: 3,
+            y: 3,
+        },
+        name : `returns the minimal city margin`,
         state: {
             ...emptyCommonState,
             rules: {
@@ -18,10 +28,6 @@ export const minimalCityMarginSelectorTestScenarios: Scenarios = [
                     y: 3,
                 },
             },
-        },
-        expectedValue: {
-            x: 3,
-            y: 3,
         },
     },
 ];

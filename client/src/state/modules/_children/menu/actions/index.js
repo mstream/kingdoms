@@ -1,6 +1,8 @@
 // @flow
 
-import type { ClientActionCreator } from '../../../../types';
+import type {
+    ClientActionCreator,
+} from '../../../../types';
 import type {
     ClientCloseAttackViewAction,
     ClientCloseCityViewAction,
@@ -30,108 +32,132 @@ import {
     UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from './types';
 
-const closeAttackView: ClientActionCreator<ClientCloseAttackViewAction> = () => {
+const closeAttackView: ClientActionCreator< ClientCloseAttackViewAction > = () => {
+
     return {
-        type: CLOSE_ATTACK_VIEW,
         payload: undefined,
+        type   : CLOSE_ATTACK_VIEW,
     };
+
 };
 
-const closeCityView: ClientActionCreator<ClientCloseCityViewAction> = () => {
+const closeCityView: ClientActionCreator< ClientCloseCityViewAction > = () => {
+
     return {
-        type: CLOSE_CITY_VIEW,
         payload: undefined,
+        type   : CLOSE_CITY_VIEW,
     };
+
 };
 
-const openAttackView: ClientActionCreator<ClientOpenAttackViewAction> = (
+const openAttackView: ClientActionCreator< ClientOpenAttackViewAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: OPEN_ATTACK_VIEW,
-        payload,
     };
+
 };
 
-const openCityView: ClientActionCreator<ClientOpenCityViewAction> = (
+const openCityView: ClientActionCreator< ClientOpenCityViewAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: OPEN_CITY_VIEW,
-        payload,
     };
+
 };
 
-const selectCityViewTab: ClientActionCreator<ClientSelectCityViewTabAction> = (
+const selectCityViewTab: ClientActionCreator< ClientSelectCityViewTabAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: SELECT_CITY_VIEW_TAB,
-        payload,
     };
+
 };
 
-const selectCityViewBuildingsTab: ClientActionCreator<ClientSelectCityViewBuildingsTabAction> = (
+const selectCityViewBuildingsTab: ClientActionCreator< ClientSelectCityViewBuildingsTabAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: SELECT_CITY_VIEW_BUILDINGS_TAB,
-        payload,
     };
+
 };
 
-const selectCityViewOrdersTab: ClientActionCreator<ClientSelectCityViewOrdersTabAction> = (
+const selectCityViewOrdersTab: ClientActionCreator< ClientSelectCityViewOrdersTabAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: SELECT_CITY_VIEW_ORDERS_TAB,
-        payload,
     };
+
 };
 
-const selectCityViewResourcesTab: ClientActionCreator<ClientSelectCityViewResourceTabAction> = (
+const selectCityViewResourcesTab: ClientActionCreator< ClientSelectCityViewResourceTabAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: SELECT_CITY_VIEW_RESOURCES_TAB,
-        payload,
     };
+
 };
 
-const selectCityViewUnitsTab: ClientActionCreator<ClientSelectCityViewUnitsTabAction> = (
+const selectCityViewUnitsTab: ClientActionCreator< ClientSelectCityViewUnitsTabAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: SELECT_CITY_VIEW_UNITS_TAB,
-        payload,
     };
+
 };
 
-const selectAttackViewAttackingCity: ClientActionCreator<ClientSelectAttackViewAttackingCityAction> = (
+const selectAttackViewAttackingCity: ClientActionCreator< ClientSelectAttackViewAttackingCityAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: SELECT_ATTACK_VIEW_ATTACKING_CITY,
-        payload,
     };
+
 };
 
-const updateAttackViewRegimentTemplate: ClientActionCreator<ClientUpdateAttackViewRegimentTemplateAction> = (
+const updateAttackViewRegimentTemplate: ClientActionCreator< ClientUpdateAttackViewRegimentTemplateAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
-        payload,
     };
+
 };
 
-const updateAttackViewMinimumDelay: ClientActionCreator<ClientUpdateAttackViewMinimumDelayAction> = (
+const updateAttackViewMinimumDelay: ClientActionCreator< ClientUpdateAttackViewMinimumDelayAction > = (
     payload,
 ) => {
+
     return {
-        type: UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
         payload,
+        type: UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
     };
+
 };
 
 export const menuActions = {

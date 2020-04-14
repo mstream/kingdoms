@@ -1,30 +1,62 @@
 // @flow
 
-import type { ClientActionCreator } from '../../types';
-import type { ClientDummyAction } from './types';
-import { DUMMY } from './types';
-import { menuActions } from '../_children/menu/actions';
-import { cameraActions } from '../_children/camera/actions';
-import { commonStateActions } from '../_children/common-state/actions';
-import { playerActions } from '../_children/player/actions';
-import { errorsActions } from '../_children/errors/actions';
+import type {
+    ClientActionCreator,
+} from '../../types';
+import type {
+    ClientDummyAction, ClientSignOutAction,
+} from './types';
+import {
+    DUMMY, SIGN_OUT,
+} from './types';
+import {
+    menuActions,
+} from '../_children/menu/actions';
+import {
+    cameraActions,
+} from '../_children/camera/actions';
+import {
+    commonStateActions,
+} from '../_children/common-state/actions';
+import {
+    playerActions,
+} from '../_children/player/actions';
+import {
+    errorsActions,
+} from '../_children/errors/actions';
 
-const dummy: ClientActionCreator<ClientDummyAction> = (payload) => {
+const dummy: ClientActionCreator< ClientDummyAction > = (
+    payload,
+) => {
+
     return {
-        type: DUMMY,
         payload,
+        type: DUMMY,
     };
+
 };
 
-const dummyActions = {
+const signOut: ClientActionCreator< ClientSignOutAction > = (
+    payload,
+) => {
+
+    return {
+        payload,
+        type: SIGN_OUT,
+    };
+
+};
+
+const globalActions = {
     dummy,
+    signOut,
 };
 
 export const clientActions = {
-    camera: cameraActions,
+    camera     : cameraActions,
     commonState: commonStateActions,
-    dummy: dummyActions,
-    errors: errorsActions,
-    menu: menuActions,
-    player: playerActions,
+    errors     : errorsActions,
+    global     : globalActions,
+    menu       : menuActions,
+    player     : playerActions,
 };

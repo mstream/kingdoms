@@ -1,9 +1,18 @@
 // @flow
 
-import type { ClientDummyAction } from './modules/actions/types';
-import { DUMMY } from './modules/actions/types';
-import type { ClientReportErrorsAction } from './modules/_children/errors/actions/types';
-import { REPORT_ERRORS } from './modules/_children/errors/actions/types';
+import type {
+    ClientDummyAction,
+    ClientSignOutAction,
+} from './modules/actions/types';
+import {
+    DUMMY, SIGN_OUT,
+} from './modules/actions/types';
+import type {
+    ClientReportErrorsAction,
+} from './modules/_children/errors/actions/types';
+import {
+    REPORT_ERRORS,
+} from './modules/_children/errors/actions/types';
 import type {
     ClientMoveCameraAction,
     ClientZoomCameraAction,
@@ -54,15 +63,33 @@ import {
     UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
     UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from './modules/_children/menu/actions/types';
-import type { ClientLoadPlayerAction } from './modules/_children/player/actions/types';
-import { LOAD_PLAYER } from './modules/_children/player/actions/types';
-import type { Dispatch, Store } from 'redux';
-import type { ClientStateCamera } from './modules/_children/camera/reducer/types';
-import type { ClientStateErrors } from './modules/_children/errors/reducer/types';
-import type { ClientStateMenu } from './modules/_children/menu/reducer/types';
-import type { ClientStatePlayer } from './modules/_children/player/reducer/types';
-import type { ClientStateCommonState } from './modules/_children/common-state/reducer/types';
-import type { ClientStateTiles } from './modules/_children/tiles/reducer/types';
+import type {
+    ClientLoadPlayerAction,
+} from './modules/_children/player/actions/types';
+import {
+    LOAD_PLAYER,
+} from './modules/_children/player/actions/types';
+import type {
+    Dispatch, Store,
+} from 'redux';
+import type {
+    ClientStateCamera,
+} from './modules/_children/camera/reducer/types';
+import type {
+    ClientStateErrors,
+} from './modules/_children/errors/reducer/types';
+import type {
+    ClientStateMenu,
+} from './modules/_children/menu/reducer/types';
+import type {
+    ClientStatePlayer,
+} from './modules/_children/player/reducer/types';
+import type {
+    ClientStateCommonState,
+} from './modules/_children/common-state/reducer/types';
+import type {
+    ClientStateTiles,
+} from './modules/_children/tiles/reducer/types';
 
 export type ClientActionKey =
     | typeof CLOSE_ATTACK_VIEW
@@ -83,6 +110,7 @@ export type ClientActionKey =
     | typeof SELECT_CITY_VIEW_RESOURCES_TAB
     | typeof SELECT_CITY_VIEW_UNITS_TAB
     | typeof SELECT_CITY_VIEW_TAB
+    | typeof SIGN_OUT
     | typeof UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE
     | typeof UPDATE_ATTACK_VIEW_MINIMUM_DELAY
     | typeof UPDATE_STATE
@@ -107,66 +135,64 @@ export type ClientAction =
     | ClientSelectCityViewResourceTabAction
     | ClientSelectCityViewUnitsTabAction
     | ClientSelectCityViewTabAction
+    | ClientSignOutAction
     | ClientUpdateAttackViewRegimentTemplateAction
     | ClientUpdateAttackViewMinimumDelayAction
     | ClientUpdateStateAction
     | ClientZoomCameraAction;
 
 export type ClientActionCreator<A: ClientAction> = (
-    $PropertyType<A, 'payload'>,
+    $PropertyType< A, 'payload' >,
 ) => A;
 
-export type ClientState = $ReadOnly<{
+export type ClientState = $ReadOnly< {
     camera: ClientStateCamera,
     errors: ClientStateErrors,
     menu: ClientStateMenu,
     player: ClientStatePlayer,
     commonState: ClientStateCommonState,
     tiles: ClientStateTiles,
-}>;
+} >;
 
-export type ClientStateReducer<S> = (S, ClientAction, ClientState) => S;
+export type ClientStateReducer<S> = ( S, ClientAction, ClientState ) => S;
 
 export type ClientStateActionReducer<S, +A: ClientAction> = (
-    $ReadOnly<{ action: A, globalState: ClientState, localState: S }>,
+    $ReadOnly< { action: A, globalState: ClientState, localState: S } >,
 ) => S;
 
-export type ClientStateReducerTestScenario<S, +A: ClientAction> = $ReadOnly<{
+export type ClientStateReducerTestScenario<S, +A: ClientAction> = $ReadOnly< {
     name: string,
     action: A,
     previousGlobalState: ClientState,
-    expectedLocalStateCreator: ({ previousLocalState: S }) => S,
-}>;
+    expectedLocalStateCreator: ( { previousLocalState: S } ) => S,
+} >;
 
-export type ClientStateSelector<T> = (state: ClientState) => T;
+export type ClientStateSelector<T> = ( state: ClientState ) => T;
 
-export type ClientStateSelectorTestScenario<T> = $ReadOnly<{
+export type ClientStateSelectorTestScenario<T> = $ReadOnly< {
     name: string,
     state: ClientState,
     expectedValue: T,
-}>;
+} >;
 
-export type ClientStateSelectors = $ReadOnly<{
-    [string]: ClientStateSelector<mixed>,
-}>;
+export type ClientStateSelectors = $ReadOnly< {
+    [string]: ClientStateSelector< mixed >,
+} >;
 
-// $FlowFixMe
-export type ClientStore = Store<
-    ClientState,
+export type ClientStore = Store< ClientState,
     ClientAction,
-    Dispatch<ClientAction>,
->;
 
-export type ActionReducers<S> = $ReadOnly<{
-    [ClientActionKey]: ClientStateActionReducer<S, ClientAction>,
-}>;
+    // $FlowFixMe
+    Dispatch< ClientAction >, >;
+
+export type ActionReducers<S> = $ReadOnly< {
+    [ClientActionKey]: ClientStateActionReducer< S, ClientAction >,
+} >;
 
 export type ReducerScenarios<S> = {
-    [ClientActionKey]: $ReadOnlyArray<
-        ClientStateReducerTestScenario<S, ClientAction>,
-    >,
+    [ClientActionKey]: $ReadOnlyArray< ClientStateReducerTestScenario< S, ClientAction >, >,
 };
 
-export type SelectorScenarios = $ReadOnly<{
-    [string]: $ReadOnlyArray<ClientStateSelectorTestScenario<mixed>>,
-}>;
+export type SelectorScenarios = $ReadOnly< {
+    [string]: $ReadOnlyArray< ClientStateSelectorTestScenario< mixed > >,
+} >;

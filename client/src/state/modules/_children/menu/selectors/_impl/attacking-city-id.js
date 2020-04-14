@@ -1,9 +1,13 @@
 // @flow
 
-import type { ClientStateSelector } from '../../../../../types';
+import type {
+    ClientStateSelector,
+} from '../../../../../types';
 
-export const attackingCityIdSelector: ClientStateSelector<?string> = (
+export const attackingCityIdSelector: ClientStateSelector< ?string > = (
     state,
 ) => {
+
     return state.menu.attackView.attackingCityId;
+
 };

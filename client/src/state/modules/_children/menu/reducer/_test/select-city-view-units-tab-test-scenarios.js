@@ -4,19 +4,44 @@ import {
     UNIT_CATAPULT,
     UNIT_SWORDSMAN,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientStateMenuReducerTestScenario } from './types';
-import type { ClientSelectCityViewUnitsTabAction } from '../../actions/types';
-import { emptyClientState } from '../../../../../state';
-import { clientActions } from '../../../../actions';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
+import type {
+    ClientSelectCityViewUnitsTabAction,
+} from '../../actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    clientActions,
+} from '../../../../actions';
 
-export const selectCityViewUnitsTabTestScenarios: $ReadOnlyArray<
-    ClientStateMenuReducerTestScenario<ClientSelectCityViewUnitsTabAction>,
-> = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientSelectCityViewUnitsTabAction >, >;
+
+export const selectCityViewUnitsTabTestScenarios: Scenarios = [
     {
-        name: 'select city view unit',
-        action: clientActions.menu.selectCityViewUnitsTab({
-            unitType: UNIT_SWORDSMAN,
-        }),
+        action: clientActions.menu.selectCityViewUnitsTab(
+            {
+                unitType: UNIT_SWORDSMAN,
+            },
+        ),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+                cityView: {
+                    ...previousLocalState.cityView,
+                    unit: UNIT_SWORDSMAN,
+                },
+            };
+
+        },
+        name               : `select city view unit`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
@@ -26,15 +51,6 @@ export const selectCityViewUnitsTabTestScenarios: $ReadOnlyArray<
                     unit: UNIT_CATAPULT,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-                cityView: {
-                    ...previousLocalState.cityView,
-                    unit: UNIT_SWORDSMAN,
-                },
-            };
         },
     },
 ];

@@ -1,18 +1,24 @@
 // @flow
 
-import type { ClientStateCommonState } from '../types';
-import type { ClientUpdateStateAction } from '../../actions/types';
-import type { ClientStateActionReducer } from '../../../../../types';
-
-type Reducer = ClientStateActionReducer<
+import type {
     ClientStateCommonState,
+} from '../types';
+import type {
     ClientUpdateStateAction,
->;
+} from '../../actions/types';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
 
-export const updateStateCommonStateReducer: Reducer = ({
-    action,
-    globalState,
-    localState,
-}) => {
+type Reducer = ClientStateActionReducer< ClientStateCommonState,
+    ClientUpdateStateAction, >;
+
+export const updateStateCommonStateReducer: Reducer = (
+    {
+        action,
+    },
+) => {
+
     return action.payload.commonState;
+
 };

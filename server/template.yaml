@@ -15,6 +15,9 @@ Parameters:
             - 'dev'
             - 'prod'
 
+    LoggingLevel:
+        Type: 'String'
+
     StageName:
         Type: 'String'
         Default: 'Stage'
@@ -51,6 +54,7 @@ Resources:
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
@@ -76,6 +80,7 @@ Resources:
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
@@ -101,6 +106,7 @@ Resources:
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
@@ -126,6 +132,7 @@ Resources:
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
@@ -163,6 +170,7 @@ Resources:
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
@@ -195,6 +203,7 @@ Resources:
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
                     REDIS_HOST:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
@@ -410,6 +419,14 @@ Outputs:
     AuthWebsiteUrl:
         Description: 'The auth website URL'
         Value: !Sub 'https://${UserPoolDomain}.auth.${AWS::Region}.amazoncognito.com'
+
+    Region:
+        Description: 'AWS region'
+        Value: !Sub '${AWS::Region}'
+
+    ResetStateFunctionId:
+        Description: 'Reset state function ID'
+        Value: !Sub '${ResetStateFunction}'
 
     UserPoolId:
         Description: 'User pool ID'

@@ -1,16 +1,24 @@
 // @flow
 
-import type { ClientActionCreator } from '../../../../types';
-import type { ClientReportErrorsAction } from './types';
-import { REPORT_ERRORS } from './types';
+import type {
+    ClientActionCreator,
+} from '../../../../types';
+import type {
+    ClientReportErrorsAction,
+} from './types';
+import {
+    REPORT_ERRORS,
+} from './types';
 
-const reportErrors: ClientActionCreator<ClientReportErrorsAction> = (
+const reportErrors: ClientActionCreator< ClientReportErrorsAction > = (
     payload,
 ) => {
+
     return {
-        type: REPORT_ERRORS,
         payload,
+        type: REPORT_ERRORS,
     };
+
 };
 
 export const errorsActions = {

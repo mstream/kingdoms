@@ -1,78 +1,101 @@
 // $Flow
 
-const clientScripts = require('./scripts/client');
-const commonScripts = require('./scripts/common');
-const serverScripts = require('./scripts/server');
-const toolsScripts = require('./scripts/tools');
+const clientScripts = require(
+    `./scripts/client`,
+);
 
-const npsUtils = require('nps-utils');
+const commonScripts = require(
+    `./scripts/common`,
+);
+
+const serverScripts = require(
+    `./scripts/server`,
+);
+
+const toolsScripts = require(
+    `./scripts/tools`,
+);
+
+const npsUtils = require(
+    `nps-utils`,
+);
 
 module.exports = {
     scripts: {
-        common: commonScripts,
-        tools: toolsScripts,
-        client: clientScripts,
-        server: serverScripts,
+        checkCode: {
+            script: npsUtils.series.nps(
+                `checkDepsOnly`,
+                `lintOnly`,
+                `checkTypesOnly`,
+            ),
+        },
         checkDepsOnly: {
-            script: 'node detect-circular-dependencies.js',
+            script: `node detect-circular-dependencies.js`,
         },
         checkTypesOnly: {
-            script: 'flow check',
+            script: `flow check`,
         },
-        formatCodeOnly: {
-            script: 'prettier --write .',
+        cleanOnly: {
+            script: `rimraf report`,
+        },
+        client: clientScripts,
+        common: commonScripts,
+        deploy: {
+            dev: {
+                script: npsUtils.series.nps(
+                    `server.deploy.dev`,
+                    `client.deploy.dev`,
+                ),
+            },
+            prod: {
+                script: npsUtils.series.nps(
+                    `server.deploy.prod`,
+                    `client.deploy.prod`,
+                ),
+            },
+        },
+        lintOnly: {
+            script: `eslint --fix .`,
+        },
+        server: serverScripts,
+        test  : {
+            local: {
+                script: npsUtils.series.nps(
+                    `common.test`,
+                    `tools.test`,
+                    `server.test`,
+                    `client.test`,
+                ),
+            },
+            remote: {
+                dev: {
+                    script: npsUtils.series.nps(
+                        `cleanOnly`,
+                        `deploy.dev`,
+                        `testOnly.remote.dev`,
+                    ),
+                },
+                prod: {
+                    script: npsUtils.series.nps(
+                        `cleanOnly`,
+                        `deploy.prod`,
+                        `testOnly.remote.prod`,
+                    ),
+                },
+            },
         },
         testOnly: {
             remote: {
                 dev: {
                     script:
-                        'env NODE_ENV=dev testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
+                        `env NODE_ENV=dev testcafe`,
                 },
                 prod: {
                     script:
-                        'env NODE_ENV=prod testcafe --assertion-timeout 5000 chrome tests/scenarios/*.js',
+                        `env NODE_ENV=prod testcafe`,
                 },
             },
         },
-        test: {
-            local: {
-                script: npsUtils.series.nps(
-                    'common.test',
-                    'tools.test',
-                    'server.test',
-                    'client.test',
-                ),
-            },
-            remote: {
-                dev: {
-                    script: npsUtils.series.nps(
-                        'deploy.dev',
-                        'testOnly.remote.dev',
-                    ),
-                },
-                prod: {
-                    script: npsUtils.series.nps(
-                        'deploy.prod',
-                        'testOnly.remote.prod',
-                    ),
-                },
-            },
-        },
-        deploy: {
-            dev: {
-                script: npsUtils.series.nps(
-                    'server.deploy.dev',
-                    'tools.deploy.dev',
-                    'client.deploy.dev',
-                ),
-            },
-            prod: {
-                script: npsUtils.series.nps(
-                    'server.deploy.prod',
-                    'tools.deploy.prod',
-                    'client.deploy.prod',
-                ),
-            },
-        },
+        tools: toolsScripts,
     },
 };

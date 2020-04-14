@@ -1,42 +1,65 @@
 // @flow
 
-import { clipToBoundary } from '../../../../../../../../common/src/boundary';
+import {
+    clipToBoundary,
+} from '../../../../../../../../common/src/boundary';
 import {
     addVectors,
     multipleVectors,
 } from '../../../../../../../../common/src/vector';
-import type { ClientStateCamera } from '../types';
-import type { ClientMoveCameraAction } from '../../actions/types';
-import type { ClientStateActionReducer } from '../../../../../types';
-import { clientStateSelectors } from '../../../../selectors';
-
-type Reducer = ClientStateActionReducer<
+import type {
     ClientStateCamera,
+} from '../types';
+import type {
     ClientMoveCameraAction,
->;
+} from '../../actions/types';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
+import {
+    clientStateSelectors,
+} from '../../../../selectors';
 
-export const moveCameraCameraReducer: Reducer = ({
-    action,
-    localState,
-    globalState,
-}) => {
-    if (clientStateSelectors.menu.isAnyMenuOpen(globalState)) {
+type Reducer = ClientStateActionReducer< ClientStateCamera,
+    ClientMoveCameraAction, >;
+
+export const moveCameraCameraReducer: Reducer = (
+    {
+        action,
+        localState,
+        globalState,
+    },
+) => {
+
+    if ( clientStateSelectors.menu.isAnyMenuOpen(
+        globalState,
+    ) ) {
+
         return localState;
+
     }
 
-    const newCameraLocation = clipToBoundary({
-        vector: addVectors({
-            vector1: localState.geometry.location,
-            vector2: multipleVectors({
-                vector1: localState.geometry.size,
-                vector2: multipleVectors({
-                    vector1: localState.movementSpeed,
-                    vector2: action.payload.vector,
-                }),
-            }),
-        }),
-        boundary: localState.locationLimit,
-    });
+    const newCameraLocation = clipToBoundary(
+        {
+            boundary: localState.locationLimit,
+            vector  : addVectors(
+                {
+                    vector1: localState.geometry.location,
+                    vector2: multipleVectors(
+                        {
+                            vector1: localState.geometry.size,
+                            vector2: multipleVectors(
+                                {
+                                    vector1: localState.movementSpeed,
+                                    vector2: action.payload.vector,
+                                },
+                            ),
+                        },
+                    ),
+                },
+            ),
+        },
+    );
 
     return {
         ...localState,
@@ -45,4 +68,5 @@ export const moveCameraCameraReducer: Reducer = ({
             location: newCameraLocation,
         },
     };
+
 };

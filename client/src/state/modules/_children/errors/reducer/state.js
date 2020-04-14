@@ -1,6 +1,8 @@
 // @flow
 
-import type { ClientStateErrors } from './types';
+import type {
+    ClientStateErrors,
+} from './types';
 
 export const emptyErrorsState: ClientStateErrors = [];
 

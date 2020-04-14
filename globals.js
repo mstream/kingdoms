@@ -1,25 +1,99 @@
-const createDevVariables = () => {
-    const devVariables = require('./server/dist/dev/service.js');
+const createVariables = (
+    {
+        exportedVariables,
+        loggingLevel,
+    },
+) => {
+
+    const getVariable = (
+        {
+            name,
+        },
+    ) => {
+
+        const variable = exportedVariables[ name ];
+
+        if ( variable == null ) {
+
+            throw Error(
+                `missing required exportes variable '${ name }'`,
+            );
+
+        }
+
+        return variable;
+
+    };
 
     return {
-        APP_URL: devVariables['WebsiteUrl'],
-        CLIENT_ID: devVariables['UserPoolClientId'],
-        COGNITO_URL: devVariables['AuthWebsiteUrl'],
-        USER_POOL_ID: devVariables['UserPoolId'],
-        WEB_SOCKET_URL: devVariables['WebSocketUrl'],
+        APP_URL: getVariable(
+            {
+                name: `WebsiteUrl`,
+            },
+        ),
+        CLIENT_ID: getVariable(
+            {
+                name: `UserPoolClientId`,
+            },
+        ),
+        COGNITO_URL: getVariable(
+            {
+                name: `AuthWebsiteUrl`,
+            },
+        ),
+        LOGGING_LEVEL: loggingLevel,
+        REGION       : getVariable(
+            {
+                name: `Region`,
+            },
+        ),
+        RESET_STATE_FUNCTION_ID: getVariable(
+            {
+                name: `ResetStateFunctionId`,
+            },
+        ),
+        USER_POOL_ID: getVariable(
+            {
+                name: `UserPoolId`,
+            },
+        ),
+        WEB_SOCKET_URL: getVariable(
+            {
+                name: `WebSocketUrl`,
+            },
+        ),
     };
+
+};
+
+const createDevVariables = () => {
+
+    const exportedVariables = require(
+        `./server/dist/dev/service.js`,
+    );
+
+    return createVariables(
+        {
+            exportedVariables,
+            loggingLevel: `debug`,
+        },
+    );
+
 };
 
 const createProdVariables = () => {
-    const prodVariables = require('./server/dist/prod/service.js');
 
-    return {
-        APP_URL: prodVariables['WebsiteUrl'],
-        CLIENT_ID: prodVariables['UserPoolClientId'],
-        COGNITO_URL: prodVariables['AuthWebsiteUrl'],
-        USER_POOL_ID: prodVariables['UserPoolId'],
-        WEB_SOCKET_URL: prodVariables['WebSocketUrl'],
-    };
+    const exportedVariables = require(
+        `./server/dist/prod/service.js`,
+    );
+
+    return createVariables(
+        {
+            exportedVariables,
+            loggingLevel: `warn`,
+        },
+    );
+
 };
 
 module.exports = {

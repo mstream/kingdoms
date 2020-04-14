@@ -1,18 +1,25 @@
 // @flow
 
-import { emptyClientState } from '../../../../../state';
-import { TAB_ORDERS } from '../../reducer/types';
-import type { ClientStateCityViewTab } from '../../reducer/types';
-import type { ClientStateSelectorTestScenario } from '../../../../../types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientStateCityViewTab,
+} from '../../reducer/types';
+import {
+    TAB_ORDERS,
+} from '../../reducer/types';
+import type {
+    ClientStateSelectorTestScenario,
+} from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<
-    ClientStateSelectorTestScenario<ClientStateCityViewTab>,
->;
+type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ClientStateCityViewTab >, >;
 
 export const activeCityViewTabSelectorTestScenarios: Scenarios = [
     {
-        name: 'returns the active tab',
-        state: {
+        expectedValue: TAB_ORDERS,
+        name         : `returns the active tab`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
@@ -22,6 +29,5 @@ export const activeCityViewTabSelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: TAB_ORDERS,
     },
 ];

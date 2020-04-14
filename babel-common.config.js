@@ -1,23 +1,26 @@
 module.exports = {
-    babelrcRoots: ['.', 'common'],
+    babelrcRoots: [
+        `.`,
+        `common`,
+    ],
     plugins: [
         [
-            'flow-runtime',
+            `flow-runtime`,
             {
                 optInOnly: true,
             },
         ],
-        '@babel/plugin-transform-block-scoping',
+        `@babel/plugin-transform-block-scoping`,
     ],
     presets: [
         [
-            '@babel/preset-env',
+            `@babel/preset-env`,
             {
                 targets: {
-                    node: '10.16',
+                    node: `10.16`,
                 },
             },
         ],
-        '@babel/preset-flow',
+        `@babel/preset-flow`,
     ],
 };

@@ -1,18 +1,41 @@
 // @flow
 
-import type { ClientStateMenuReducerTestScenario } from './types';
-import type { ClientRequestCityCreationAction } from '../../../common-state/actions/types';
-import { emptyClientState } from '../../../../../state';
-import { clientActions } from '../../../../actions';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
+import type {
+    ClientRequestCityCreationAction,
+} from '../../../common-state/actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    clientActions,
+} from '../../../../actions';
 
-export const requestCityCreationTestScenarios: $ReadOnlyArray<
-    ClientStateMenuReducerTestScenario<ClientRequestCityCreationAction>,
-> = [
+export const requestCityCreationTestScenarios: $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientRequestCityCreationAction >, > = [
     {
-        name: 'requests city creation',
-        action: clientActions.commonState.requestCityCreation({
-            name: 'Cityone',
-        }),
+        action: clientActions.commonState.requestCityCreation(
+            {
+                name: `Cityone`,
+            },
+        ),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+                newCity: {
+                    ...previousLocalState.newCity,
+                    isCityBeingCreated: true,
+                },
+            };
+
+        },
+        name               : `requests city creation`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
@@ -22,15 +45,6 @@ export const requestCityCreationTestScenarios: $ReadOnlyArray<
                     isCityBeingCreated: false,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-                newCity: {
-                    ...previousLocalState.newCity,
-                    isCityBeingCreated: true,
-                },
-            };
         },
     },
 ];

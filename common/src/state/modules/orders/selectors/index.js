@@ -1,8 +1,8 @@
 // @flow
 
-import { ordersSelector } from './_impl/orders';
-import type { CommonStateRegimentTemplate } from '../reducer/types';
-import type { CommonStateUnitKey } from '../../rules/reducer/types';
+import {
+    ordersSelector,
+} from './_impl/orders';
 
 export const commonStateOrdersSelectors = {
     orders: ordersSelector,

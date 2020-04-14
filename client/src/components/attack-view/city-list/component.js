@@ -1,12 +1,18 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
+import type {
+    Props,
+} from './props';
 import classNames from 'classnames';
-import { numberToQuantityString } from '../../../../../common/src/util';
-import type { CommonStateCity } from '../../../../../common/src/state/modules/cities/reducer/types';
+import {
+    numberToQuantityString,
+} from '../../../../../common/src/utils';
+import type {
+    CommonStateCity,
+} from '../../../../../common/src/state/modules/cities/reducer/types';
 
-export const testId = 'attack-view-city-list';
+export const testId = `attack-view-city-list`;
 
 type CityWithDistance = {
     city: CommonStateCity,
@@ -14,59 +20,91 @@ type CityWithDistance = {
     distance: number,
 };
 
-export const Component = ({
-    attackingCityId,
-    cities,
-    cityIdsOwnedByPlayer,
-    distancesToAttackedCity,
-    selectAttackViewAttackingCity,
-}: Props) => {
-    const playerCitiesWithDistance: $ReadOnlyArray<CityWithDistance> = cityIdsOwnedByPlayer
-        .reduce((playerCitiesWithDistance, cityId: string) => {
-            return [
-                ...playerCitiesWithDistance,
-                {
-                    city: cities[cityId],
-                    cityId,
-                    distance: distancesToAttackedCity[cityId],
-                },
-            ];
-        }, [])
+export const Component = (
+    {
+        attackingCityId,
+        cities,
+        cityIdsOwnedByPlayer,
+        distancesToAttackedCity,
+        selectAttackViewAttackingCity,
+    }: Props,
+) => {
+
+    const playerCitiesWithDistance: $ReadOnlyArray< CityWithDistance > = cityIdsOwnedByPlayer
+        .reduce(
+            (
+                playerCitiesWithDistance, cityId: string,
+            ) => {
+
+                return [
+                    ...playerCitiesWithDistance,
+                    {
+                        city    : cities[ cityId ],
+                        cityId,
+                        distance: distancesToAttackedCity[ cityId ],
+                    },
+                ];
+
+            },
+            [],
+        )
         .sort(
             (
                 cityWithDistance1: CityWithDistance,
                 cityWithDistance2: CityWithDistance,
             ) => {
+
                 return cityWithDistance1.distance - cityWithDistance2.distance;
+
             },
         );
 
     const cityRows = playerCitiesWithDistance.map(
-        (cityWithDistance: CityWithDistance) => {
-            const { city, cityId, distance } = cityWithDistance;
+        (
+            cityWithDistance: CityWithDistance,
+        ) => {
+
+            const {
+                city, cityId, distance,
+            } = cityWithDistance;
             const isSelected = cityId === attackingCityId;
 
             const className = classNames(
-                'flex flex-col m-1 leading-tight cursor-pointer',
+                `flex flex-col m-1 leading-tight cursor-pointer`,
                 {
                     'bg-green-500': isSelected,
                 },
             );
 
-            const onClick = (event) => {
-                selectAttackViewAttackingCity({ cityId });
+            const onClick = () => {
+
+                selectAttackViewAttackingCity(
+                    {
+                        cityId,
+                    },
+                );
+
             };
+
+            const quantityString = numberToQuantityString(
+                {
+                    value: distance,
+                },
+            );
+
+            const unitSuffix = distance > 1
+                ? `s`
+                : ``;
 
             return (
                 <div key={cityId} className={className} onClick={onClick}>
                     <div className="text-sm font-medium">{city.name}</div>
                     <div className="text-xs">
-                        {`${numberToQuantityString({
-                            value: distance,
-                        })} square${distance > 1 ? 's' : ''} away`}
+                        {`${ quantityString } square${ unitSuffix } away`}
                     </div>
                 </div>
             );
+
         },
     );
 
@@ -79,4 +117,5 @@ export const Component = ({
             <div className="shadow-inner bg-gray-900-alpha-50">{cityRows}</div>
         </div>
     );
+
 };

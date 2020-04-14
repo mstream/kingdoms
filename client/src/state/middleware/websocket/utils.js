@@ -1,26 +1,44 @@
 // @flow
 
-import { stringifyJson } from '../../../../../common/src/util';
-import type { CommonAction } from '../../../../../common/src/state/types';
-import type { Socket } from './types';
+import type {
+    Socket,
+} from './types';
+import {
+    stringifyJson,
+} from '../../../../../common/src/json';
+import type {
+    ServerRequest,
+} from '../../../../../common/src/types';
 
-export const sendMessage = ({
-    action,
-    socket,
-}: {
-    action: CommonAction,
+export const sendMessage = (
+    {
+        request,
+        socket,
+    }: {
+    request: ServerRequest,
     socket: Socket,
-}): void => {
-    const serializedMessage = stringifyJson({
-        value: {
-            message: 'sendmessage',
-            data: action,
-        },
-    });
+},
+): void => {
 
-    if (serializedMessage == null) {
-        throw Error('cannot send the message');
+    const serializedMessage = stringifyJson(
+        {
+            json: {
+                data   : request,
+                message: `sendmessage`,
+            },
+        },
+    );
+
+    if ( serializedMessage == null ) {
+
+        throw Error(
+            `cannot send the message`,
+        );
+
     }
 
-    socket.send(serializedMessage);
+    socket.send(
+        serializedMessage,
+    );
+
 };

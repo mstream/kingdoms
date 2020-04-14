@@ -1,19 +1,28 @@
 // @flow
 
-import { emptyCommonState } from '../../../../../../common/src/state/modules/state';
-import { emptyCityState } from '../../../../../../common/src/state/modules/cities/reducer/state';
-import { emptyClientState } from '../../../state';
-import type { CityDistances } from '../../../../../../common/src/state/modules/cities/selectors/types';
-import type { ClientStateSelectorTestScenario } from '../../../types';
+import {
+    emptyCommonState,
+} from '../../../../../../common/src/state/modules/state';
+import {
+    emptyCityState,
+} from '../../../../../../common/src/state/modules/cities/reducer/state';
+import {
+    emptyClientState,
+} from '../../../state';
+import type {
+    CityDistances,
+} from '../../../../../../common/src/state/modules/cities/selectors/types';
+import type {
+    ClientStateSelectorTestScenario,
+} from '../../../types';
 
-type Scenarios = $ReadOnlyArray<
-    ClientStateSelectorTestScenario<?CityDistances>,
->;
+type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ?CityDistances >, >;
 
 export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
     {
-        name: 'returns null if no city is selected to attack',
-        state: {
+        expectedValue: null,
+        name         : `returns null if no city is selected to attack`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
@@ -22,20 +31,17 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: null,
     },
     {
+        expectedValue: {
+            city1: 0,
+            city2: 2,
+            city3: 1,
+        },
         name:
-            'returns distances between attacked city and cities owned by player',
+            `returns distances between attacked city and cities owned by player`,
         state: {
             ...emptyClientState,
-            menu: {
-                ...emptyClientState.menu,
-                attackView: {
-                    ...emptyClientState.menu.attackView,
-                    attackedCityId: 'city1',
-                },
-            },
             commonState: {
                 ...emptyCommonState,
                 cities: {
@@ -45,7 +51,7 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
                             x: 0,
                             y: 0,
                         },
-                        ownerId: 'player2',
+                        ownerId: `player2`,
                     },
                     city2: {
                         ...emptyCityState,
@@ -53,7 +59,7 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
                             x: 2,
                             y: 0,
                         },
-                        ownerId: 'player1',
+                        ownerId: `player1`,
                     },
                     city3: {
                         ...emptyCityState,
@@ -61,15 +67,17 @@ export const distancesToAttackedCitySelectorTestScenarios: Scenarios = [
                             x: 0,
                             y: 1,
                         },
-                        ownerId: 'player1',
+                        ownerId: `player1`,
                     },
                 },
             },
-        },
-        expectedValue: {
-            city1: 0,
-            city2: 2,
-            city3: 1,
+            menu: {
+                ...emptyClientState.menu,
+                attackView: {
+                    ...emptyClientState.menu.attackView,
+                    attackedCityId: `city1`,
+                },
+            },
         },
     },
 ];

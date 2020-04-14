@@ -1,9 +1,13 @@
 // @flow
 
-import type { ClientStateSelector } from '../../../../../types';
+import type {
+    ClientStateSelector,
+} from '../../../../../types';
 
-export const isCityViewMenuOpenSelector: ClientStateSelector<boolean> = (
+export const isCityViewMenuOpenSelector: ClientStateSelector< boolean > = (
     state,
 ) => {
+
     return state.menu.cityView.currentCityId != null;
+
 };

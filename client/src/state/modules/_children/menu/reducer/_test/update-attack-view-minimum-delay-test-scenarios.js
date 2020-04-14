@@ -1,18 +1,43 @@
 // @flow
 
-import type { ClientStateMenuReducerTestScenario } from './types';
-import type { ClientUpdateAttackViewMinimumDelayAction } from '../../actions/types';
-import { emptyClientState } from '../../../../../state';
-import { clientActions } from '../../../../actions';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
+import type {
+    ClientUpdateAttackViewMinimumDelayAction,
+} from '../../actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    clientActions,
+} from '../../../../actions';
 
-export const updateAttackViewMinimumDelayTestScenarios: $ReadOnlyArray<
-    ClientStateMenuReducerTestScenario<ClientUpdateAttackViewMinimumDelayAction>,
-> = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientUpdateAttackViewMinimumDelayAction >, >;
+
+export const updateAttackViewMinimumDelayTestScenarios: Scenarios = [
     {
-        name: 'updates the minimum delay',
-        action: clientActions.menu.updateAttackViewMinimumDelay({
-            minimumDelay: 60,
-        }),
+        action: clientActions.menu.updateAttackViewMinimumDelay(
+            {
+                minimumDelay: 60,
+            },
+        ),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+                attackView: {
+                    ...previousLocalState.attackView,
+                    minimumDelay: 60,
+                },
+            };
+
+        },
+        name               : `updates the minimum delay`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
@@ -22,15 +47,6 @@ export const updateAttackViewMinimumDelayTestScenarios: $ReadOnlyArray<
                     minimumDelay: 30,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-                attackView: {
-                    ...previousLocalState.attackView,
-                    minimumDelay: 60,
-                },
-            };
         },
     },
 ];

@@ -1,19 +1,26 @@
 // @flow
 
-import type { ClientStateMenu } from '../types';
-import type { ClientSelectCityViewUnitsTabAction } from '../../actions/types';
-import type { ClientStateActionReducer } from '../../../../../types';
-
-type Reducer = ClientStateActionReducer<
+import type {
     ClientStateMenu,
+} from '../types';
+import type {
     ClientSelectCityViewUnitsTabAction,
->;
+} from '../../actions/types';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
 
-export const selectCityViewUnitTabMenuReducer: Reducer = ({
-    localState,
-    action,
-    globalState,
-}) => {
+type Reducer = ClientStateActionReducer< ClientStateMenu,
+    ClientSelectCityViewUnitsTabAction, >;
+
+export const selectCityViewUnitTabMenuReducer: Reducer = (
+    {
+        localState,
+        action,
+
+    },
+) => {
+
     return {
         ...localState,
         cityView: {
@@ -21,4 +28,5 @@ export const selectCityViewUnitTabMenuReducer: Reducer = ({
             unit: action.payload.unitType,
         },
     };
+
 };

@@ -1,16 +1,31 @@
 // @flow
+
+/*
+ *
+ */
+
 // @flow-runtime
 
-import { reify, Type } from 'flow-runtime';
-import type { CommonState } from './state/modules/types';
-import type { CommonAction, CommonPlayerAction } from './state/types';
+import {
+    Type, reify,
+} from 'flow-runtime';
+import type {
+    CommonState,
+} from './state/modules/types';
+import type {
+    CommonPlayerAction,
+} from './state/types';
 
 export type ServerResponse = {
-    request: CommonAction,
-    errors: $ReadOnlyArray<string>,
+    request: ServerRequest,
+    errors: $ReadOnlyArray< string >,
     state: CommonState,
 };
 
-export const CommonPlayerActionType = (reify: Type<CommonPlayerAction>);
+export type ServerRequest = {
+    action: CommonPlayerAction,
+    worldId: string,
+};
 
-export const ServerResponseType = (reify: Type<ServerResponse>);
+export const ServerRequestType = ( reify: Type< ServerRequest > );
+export const ServerResponseType = ( reify: Type< ServerResponse > );

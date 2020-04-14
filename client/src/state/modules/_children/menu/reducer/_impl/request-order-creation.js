@@ -1,19 +1,24 @@
 // @flow
 
-import type { ClientStateMenu } from '../types';
-import type { ClientRequestOrderCreationAction } from '../../../common-state/actions/types';
-import type { ClientStateActionReducer } from '../../../../../types';
-
-type Reducer = ClientStateActionReducer<
+import type {
     ClientStateMenu,
+} from '../types';
+import type {
     ClientRequestOrderCreationAction,
->;
+} from '../../../common-state/actions/types';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
 
-export const requestOrderCreationMenuReducer: Reducer = ({
-    localState,
-    action,
-    globalState,
-}) => {
+type Reducer = ClientStateActionReducer< ClientStateMenu,
+    ClientRequestOrderCreationAction, >;
+
+export const requestOrderCreationMenuReducer: Reducer = (
+    {
+        localState,
+    },
+) => {
+
     return {
         ...localState,
         attackView: {
@@ -21,4 +26,5 @@ export const requestOrderCreationMenuReducer: Reducer = ({
             isSubmitting: true,
         },
     };
+
 };

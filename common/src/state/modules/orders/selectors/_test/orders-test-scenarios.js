@@ -1,17 +1,36 @@
 // @flow
 
-import { emptyCommonState } from '../../../state';
-import { emptyScheduledAttackOrderState } from '../../reducer/state';
-import type { CommonStateOrders } from '../../reducer/types';
-import type { CommonStateSelectorTestScenario } from '../../../types';
+import {
+    emptyCommonState,
+} from '../../../state';
+import {
+    emptyScheduledAttackOrderState,
+} from '../../reducer/state';
+import type {
+    CommonStateOrders,
+} from '../../reducer/types';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../../types';
 
-type Scenarios = $ReadOnlyArray<
-    CommonStateSelectorTestScenario<CommonStateOrders>,
->;
+type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< CommonStateOrders >, >;
 
 export const ordersSelectorTestScenarios: Scenarios = [
     {
-        name: 'returns orders',
+        expectedValue: {
+            ...emptyCommonState.orders,
+            items: {
+                scheduledAttack: {
+                    order1: {
+                        ...emptyScheduledAttackOrderState,
+                    },
+                    order2: {
+                        ...emptyScheduledAttackOrderState,
+                    },
+                },
+            },
+        },
+        name : `returns orders`,
         state: {
             ...emptyCommonState,
             orders: {
@@ -24,19 +43,6 @@ export const ordersSelectorTestScenarios: Scenarios = [
                         order2: {
                             ...emptyScheduledAttackOrderState,
                         },
-                    },
-                },
-            },
-        },
-        expectedValue: {
-            ...emptyCommonState.orders,
-            items: {
-                scheduledAttack: {
-                    order1: {
-                        ...emptyScheduledAttackOrderState,
-                    },
-                    order2: {
-                        ...emptyScheduledAttackOrderState,
                     },
                 },
             },

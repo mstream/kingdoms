@@ -1,14 +1,19 @@
 // @flow
 
-import { emptyClientState } from '../../../../../state';
-import type { ClientStateSelectorTestScenario } from '../../../../../types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientStateSelectorTestScenario,
+} from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<boolean>>;
+type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< boolean > >;
 
 export const isNewCityBeingCreatedSelectorTestScenarios: Scenarios = [
     {
-        name: 'returns if city is being created',
-        state: {
+        expectedValue: true,
+        name         : `returns if city is being created`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
@@ -18,6 +23,5 @@ export const isNewCityBeingCreatedSelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: true,
     },
 ];

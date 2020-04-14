@@ -1,51 +1,70 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
-import { AttackViewRegimentTemplateFormComponent } from './regiment-template-form';
-import { AttackViewCityListComponent } from './city-list';
-import { AttackViewSchedulerFormComponent } from './scheduler-form';
+import type {
+    Props,
+} from './props';
+import {
+    AttackViewRegimentTemplateFormComponent,
+} from './regiment-template-form';
+import {
+    AttackViewCityListComponent,
+} from './city-list';
+import {
+    AttackViewSchedulerFormComponent,
+} from './scheduler-form';
 import classNames from 'classnames';
 
-export const testId = 'attack-view';
+export const testId = `attack-view`;
 
-export const Component = ({
-    attackedCity,
-    attackedCityId,
-    attackingCityId,
-    closeAttackView,
-    isFormSubmitting,
-    isFormValid,
-    minimumDelay,
-    regimentTemplate,
-    requestOrderCreation,
-}: Props) => {
-    if (attackedCity == null) {
+export const Component = (
+    {
+        attackedCity,
+        attackedCityId,
+        attackingCityId,
+        closeAttackView,
+        isFormSubmitting,
+        isFormValid,
+        minimumDelay,
+        regimentTemplate,
+        requestOrderCreation,
+    }: Props,
+) => {
+
+    if ( attackedCity == null ) {
+
         return null;
+
     }
 
     const onBackgroundClick = () => {
+
         closeAttackView();
+
     };
 
     const onScheduleActionClick = () => {
-        requestOrderCreation({
-            minimumDelay,
-            originCityId: attackingCityId,
-            regimentTemplate,
-            targetCityId: attackedCityId,
-        });
+
+        requestOrderCreation(
+            {
+                minimumDelay,
+                originCityId: attackingCityId,
+                regimentTemplate,
+                targetCityId: attackedCityId,
+            },
+        );
+
     };
 
     const buttonClassName = classNames(
-        'p-1 text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600',
+        `p-1 text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600`,
         {
-            'cursor-wait': isFormSubmitting,
             'cursor-not-allowed': !isFormValid && !isFormSubmitting,
-            'cursor-pointer': isFormValid && !isFormSubmitting,
-            'filter-grayscale': !isFormValid && !isFormSubmitting,
+            'cursor-pointer'    : isFormValid && !isFormSubmitting,
+            'cursor-wait'       : isFormSubmitting,
+            'filter-grayscale'  : !isFormValid && !isFormSubmitting,
             'hover:bg-green-400': isFormValid && !isFormSubmitting,
-            'spinner': isFormSubmitting,
+            'spinner'           : isFormSubmitting,
         },
     );
 
@@ -56,10 +75,36 @@ export const Component = ({
         >
             <div
                 onClick={onBackgroundClick}
-                className="modal-overlay absolute w-full h-full bg-gray-900 opacity-75 top-0 left-0 cursor-pointer"
+                className={classNames(
+                    `absolute`,
+                    `bg-gray-900`,
+                    `cursor-pointer`,
+                    `h-full`,
+                    `left-0`,
+                    `modal-overlay`,
+                    `opacity-75`,
+                    `top-0`,
+                    `w-full`,
+                )}
             />
-            <div className="bricks-bg absolute w-9/12 min-h-3/4 rounded-sm shadow-lg flex flex-col items-center justify-between overflow-hidden bg-gray-800">
-                <div className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
+            <div
+                className={classNames(
+                    `absolute`,
+                    `bg-gray-800`,
+                    `bricks-bg`,
+                    `flex`,
+                    `flex-col`,
+                    `items-center`,
+                    `justify-between`,
+                    `min-h-3/4`,
+                    `overflow-hidden`,
+                    `rounded-sm`,
+                    `shadow-lg`,
+                    `w-9/12`,
+                )}
+            >
+                <div
+                    className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
                     <div className="font-bold text-2xl text-center">
                         {attackedCity.name}
                     </div>
@@ -68,18 +113,19 @@ export const Component = ({
                     <div className="flex flex-col justify-around w-full">
                         <div className="flex flex-row justify-around">
                             <div className="w-1/3 m-1">
-                                <AttackViewCityListComponent />
+                                <AttackViewCityListComponent/>
                             </div>
                             <div className="w-1/3 m-1">
-                                <AttackViewSchedulerFormComponent />
+                                <AttackViewSchedulerFormComponent/>
                             </div>
                         </div>
                         <div className="w-full m-1">
-                            <AttackViewRegimentTemplateFormComponent />
+                            <AttackViewRegimentTemplateFormComponent/>
                         </div>
                     </div>
                 </div>
-                <div className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
+                <div
+                    className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
                     <button
                         className={buttonClassName}
                         onClick={onScheduleActionClick}
@@ -90,4 +136,5 @@ export const Component = ({
             </div>
         </div>
     );
+
 };

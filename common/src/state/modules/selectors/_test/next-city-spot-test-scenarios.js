@@ -1,24 +1,38 @@
 // @flow
 
-import type { Vector } from '../../../../vector';
-import { emptyCityState } from '../../cities/reducer/state';
-import { zeroVector } from '../../../../vector';
-import type { CommonStateSelectorTestScenario } from '../../types';
-import { emptyCommonState } from '../../state';
+import type {
+    Vector,
+} from '../../../../vector';
+import {
+    zeroVector,
+} from '../../../../vector';
+import {
+    emptyCityState,
+} from '../../cities/reducer/state';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../types';
+import {
+    emptyCommonState,
+} from '../../state';
 
-type Scenarios = $ReadOnlyArray<CommonStateSelectorTestScenario<?Vector>>;
+type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< ?Vector > >;
 
 export const nextCitySpotSelectorTestScenarios: Scenarios = [
     {
-        name: 'chooses the center of an empty map',
-        state: {
+        expectedValue: zeroVector,
+        name         : `chooses the center of an empty map`,
+        state        : {
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
             },
             rules: {
                 ...emptyCommonState.rules,
-                minimalCityMargin: { x: 1, y: 1 },
+                minimalCityMargin: {
+                    x: 1,
+                    y: 1,
+                },
             },
             world: {
                 ...emptyCommonState.world,
@@ -28,11 +42,11 @@ export const nextCitySpotSelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: zeroVector,
     },
     {
-        name: 'returns null when there are no valid spots left',
-        state: {
+        expectedValue: null,
+        name         : `returns null when there are no valid spots left`,
+        state        : {
             ...emptyCommonState,
             cities: {
                 ...emptyCommonState.cities,
@@ -42,40 +56,67 @@ export const nextCitySpotSelectorTestScenarios: Scenarios = [
                 },
                 city2: {
                     ...emptyCityState,
-                    location: { x: 0, y: -2 },
+                    location: {
+                        x: 0,
+                        y: -2,
+                    },
                 },
                 city3: {
                     ...emptyCityState,
-                    location: { x: 2, y: 0 },
+                    location: {
+                        x: 2,
+                        y: 0,
+                    },
                 },
                 city4: {
                     ...emptyCityState,
-                    location: { x: 0, y: 2 },
+                    location: {
+                        x: 0,
+                        y: 2,
+                    },
                 },
                 city5: {
                     ...emptyCityState,
-                    location: { x: -2, y: 0 },
+                    location: {
+                        x: -2,
+                        y: 0,
+                    },
                 },
                 city6: {
                     ...emptyCityState,
-                    location: { x: -2, y: -2 },
+                    location: {
+                        x: -2,
+                        y: -2,
+                    },
                 },
                 city7: {
                     ...emptyCityState,
-                    location: { x: 2, y: -2 },
+                    location: {
+                        x: 2,
+                        y: -2,
+                    },
                 },
                 city8: {
                     ...emptyCityState,
-                    location: { x: 2, y: 2 },
+                    location: {
+                        x: 2,
+                        y: 2,
+                    },
                 },
                 city9: {
                     ...emptyCityState,
-                    location: { x: -2, y: 2 },
+                    location: {
+                        x: -2,
+                        y: 2,
+                    },
                 },
             },
             rules: {
                 ...emptyCommonState.rules,
-                minimalCityMargin: { x: 1, y: 1 },
+                minimalCityMargin: {
+                    x: 1,
+                    y: 1,
+                },
             },
             world: {
                 ...emptyCommonState.world,
@@ -85,6 +126,5 @@ export const nextCitySpotSelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: null,
     },
 ];

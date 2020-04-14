@@ -1,6 +1,8 @@
 // @flow
 
-import type { ClientStateCommonState } from './types';
+import type {
+    ClientStateCommonState,
+} from './types';
 
 export const emptyCommonStateState: ClientStateCommonState = null;
 

@@ -1,3 +1,3 @@
 // @flow
 
-export const emptyTimeState = '';
+export const emptyTimeState = ``;

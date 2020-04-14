@@ -1,18 +1,25 @@
 // @flow
 
-import { emptyClientState } from '../../../../../state';
-import type { CommonStateResourceKey } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import { RESOURCE_WOOD } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientStateSelectorTestScenario } from '../../../../../types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    CommonStateResourceKey,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import {
+    RESOURCE_WOOD,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import type {
+    ClientStateSelectorTestScenario,
+} from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<
-    ClientStateSelectorTestScenario<CommonStateResourceKey>,
->;
+type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateResourceKey >, >;
 
 export const activeCityViewResourceSelectorTestScenarios: Scenarios = [
     {
-        name: 'returns the active resource',
-        state: {
+        expectedValue: RESOURCE_WOOD,
+        name         : `returns the active resource`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
@@ -22,6 +29,5 @@ export const activeCityViewResourceSelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: RESOURCE_WOOD,
     },
 ];

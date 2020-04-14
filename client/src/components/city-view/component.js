@@ -1,24 +1,50 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
-import { CityHeaderComponent } from './header';
-import { CityViewTabsComponent } from './view-tabs';
-import { CityUnitsComponent } from './units';
-import { CityResourcesComponent } from './resources';
-import { CityBuildingsComponent } from './buildings';
-import { CityOverviewComponent } from './overview';
-import { CityOrdersComponent } from './orders';
+import type {
+    Props,
+} from './props';
+import {
+    CityHeaderComponent,
+} from './header';
+import {
+    CityViewTabsComponent,
+} from './view-tabs';
+import {
+    CityUnitsComponent,
+} from './units';
+import {
+    CityResourcesComponent,
+} from './resources';
+import {
+    CityBuildingsComponent,
+} from './buildings';
+import {
+    CityOverviewComponent,
+} from './overview';
+import {
+    CityOrdersComponent,
+} from './orders';
+import classNames from 'classnames';
 
-export const testId = 'city-view';
+export const testId = `city-view`;
 
-export const Component = ({ city, cityId, closeCityView }: Props) => {
-    if (cityId == null || city == null) {
+export const Component = (
+    {
+        city, cityId, closeCityView,
+    }: Props,
+) => {
+
+    if ( cityId == null || city == null ) {
+
         return null;
+
     }
 
     const onBackgroundClick = () => {
+
         closeCityView();
+
     };
 
     return (
@@ -30,19 +56,37 @@ export const Component = ({ city, cityId, closeCityView }: Props) => {
                 onClick={onBackgroundClick}
                 className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"
             />
-            <div className="bricks-bg absolute w-9/12 min-h-3/4 rounded-sm shadow-lg flex flex-col items-center justify-start overflow-hidden text-2xl bg-gray-800">
-                <CityHeaderComponent />
-                <CityViewTabsComponent />
-                <div className="flex flex-col justify-around w-full h-full m-auto">
+            <div
+                className={classNames(
+                    `bricks-bg`,
+                    `absolute`,
+                    `w-9/12`,
+                    `min-h-3/4`,
+                    `rounded-sm`,
+                    `shadow-lg`,
+                    `flex`,
+                    `flex-col`,
+                    `items-center`,
+                    `justify-start`,
+                    `overflow-hidden`,
+                    `text-2xl`,
+                    `bg-gray-800`,
+                )}
+            >
+                <CityHeaderComponent/>
+                <CityViewTabsComponent/>
+                <div
+                    className="flex flex-col justify-around w-full h-full m-auto">
                     <div className="flex flex-row justify-around w-full h-full">
-                        <CityBuildingsComponent />
-                        <CityOrdersComponent />
-                        <CityOverviewComponent />
-                        <CityResourcesComponent />
-                        <CityUnitsComponent />
+                        <CityBuildingsComponent/>
+                        <CityOrdersComponent/>
+                        <CityOverviewComponent/>
+                        <CityResourcesComponent/>
+                        <CityUnitsComponent/>
                     </div>
                 </div>
             </div>
         </div>
     );
+
 };

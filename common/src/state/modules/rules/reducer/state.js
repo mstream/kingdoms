@@ -2,15 +2,15 @@
 
 import type {
     CommonStateBuilding,
-    CommonStateBuildings,
     CommonStateBuildingUpgradeCost,
     CommonStateBuildingUpgradeCosts,
+    CommonStateBuildings,
     CommonStateDamage,
     CommonStateResources,
     CommonStateRules,
-    CommonStateUnits,
     CommonStateUnitStat,
     CommonStateUnitStats,
+    CommonStateUnits,
 } from './types';
 import {
     ARMOR_HEAVY,
@@ -32,60 +32,60 @@ import {
 } from './types';
 
 export const emptyResourcesState: CommonStateResources = {
-    [RESOURCE_FOOD]: 0,
-    [RESOURCE_WOOD]: 0,
+    [ RESOURCE_FOOD ]: 0,
+    [ RESOURCE_WOOD ]: 0,
 };
 
 export const emptyBuildingUpgradeCostState: CommonStateBuildingUpgradeCost = {
-    [RESOURCE_FOOD]: 0,
-    [RESOURCE_WOOD]: 0,
+    [ RESOURCE_FOOD ]: 0,
+    [ RESOURCE_WOOD ]: 0,
 };
 
 export const emptyDamageState: CommonStateDamage = {
-    [ARMOR_NONE]: 0,
-    [ARMOR_LIGHT]: 0,
-    [ARMOR_MEDIUM]: 0,
-    [ARMOR_HEAVY]: 0,
+    [ ARMOR_HEAVY ] : 0,
+    [ ARMOR_LIGHT ] : 0,
+    [ ARMOR_MEDIUM ]: 0,
+    [ ARMOR_NONE ]  : 0,
 };
 
 export const emptyBuildingUpgradeCostsState: CommonStateBuildingUpgradeCosts = {
-    [BUILDING_LUMBER_MILL]: emptyBuildingUpgradeCostState,
-    [BUILDING_PASTURE]: emptyBuildingUpgradeCostState,
-    [BUILDING_WAREHOUSE]: emptyBuildingUpgradeCostState,
+    [ BUILDING_LUMBER_MILL ]: emptyBuildingUpgradeCostState,
+    [ BUILDING_PASTURE ]    : emptyBuildingUpgradeCostState,
+    [ BUILDING_WAREHOUSE ]  : emptyBuildingUpgradeCostState,
 };
 
 export const emptyUnitStatState: CommonStateUnitStat = {
-    armor: ARMOR_NONE,
-    damage: emptyDamageState,
+    armor     : ARMOR_NONE,
+    damage    : emptyDamageState,
     foodDemand: 0,
-    range: 0,
-    speed: 0,
+    range     : 0,
+    speed     : 0,
 };
 
 export const emptyUnitStatsState: CommonStateUnitStats = {
-    [UNIT_ARCHER]: emptyUnitStatState,
-    [UNIT_CATAPULT]: emptyUnitStatState,
-    [UNIT_KNIGHT]: emptyUnitStatState,
-    [UNIT_NOBLE]: emptyUnitStatState,
-    [UNIT_PEASANT]: emptyUnitStatState,
-    [UNIT_PIKEMAN]: emptyUnitStatState,
-    [UNIT_SWORDSMAN]: emptyUnitStatState,
+    [ UNIT_ARCHER ]   : emptyUnitStatState,
+    [ UNIT_CATAPULT ] : emptyUnitStatState,
+    [ UNIT_KNIGHT ]   : emptyUnitStatState,
+    [ UNIT_NOBLE ]    : emptyUnitStatState,
+    [ UNIT_PEASANT ]  : emptyUnitStatState,
+    [ UNIT_PIKEMAN ]  : emptyUnitStatState,
+    [ UNIT_SWORDSMAN ]: emptyUnitStatState,
 };
 
 export const emptyRulesState: CommonStateRules = {
-    baseCityCapacity: 0,
-    basePeasantsMigrationRate: 0,
+    baseCityCapacity          : 0,
+    basePeasantsMigrationRate : 0,
     buildingUpgradeCoefficient: 0,
-    buildingUpgradeCosts: emptyBuildingUpgradeCostsState,
-    minimalCityMargin: {
+    buildingUpgradeCosts      : emptyBuildingUpgradeCostsState,
+    minimalCityMargin         : {
         x: 0,
         y: 0,
     },
     populationGrowthChangeRateCoefficient: 0,
     resourceIncreaseChangeRateCoefficient: 0,
-    unitFoodDemand: 0,
-    unitStarvingCoefficient: 0,
-    unitStats: emptyUnitStatsState,
+    unitFoodDemand                       : 0,
+    unitStarvingCoefficient              : 0,
+    unitStats                            : emptyUnitStatsState,
 };
 
 export const emptyBuildingState: CommonStateBuilding = {
@@ -93,17 +93,17 @@ export const emptyBuildingState: CommonStateBuilding = {
 };
 
 export const emptyBuildingsState: CommonStateBuildings = {
-    [BUILDING_LUMBER_MILL]: emptyBuildingState,
-    [BUILDING_PASTURE]: emptyBuildingState,
-    [BUILDING_WAREHOUSE]: emptyBuildingState,
+    [ BUILDING_LUMBER_MILL ]: emptyBuildingState,
+    [ BUILDING_PASTURE ]    : emptyBuildingState,
+    [ BUILDING_WAREHOUSE ]  : emptyBuildingState,
 };
 
 export const emptyUnitsState: CommonStateUnits = {
-    [UNIT_ARCHER]: 0,
-    [UNIT_CATAPULT]: 0,
-    [UNIT_KNIGHT]: 0,
-    [UNIT_NOBLE]: 0,
-    [UNIT_PEASANT]: 0,
-    [UNIT_PIKEMAN]: 0,
-    [UNIT_SWORDSMAN]: 0,
+    [ UNIT_ARCHER ]   : 0,
+    [ UNIT_CATAPULT ] : 0,
+    [ UNIT_KNIGHT ]   : 0,
+    [ UNIT_NOBLE ]    : 0,
+    [ UNIT_PEASANT ]  : 0,
+    [ UNIT_PIKEMAN ]  : 0,
+    [ UNIT_SWORDSMAN ]: 0,
 };

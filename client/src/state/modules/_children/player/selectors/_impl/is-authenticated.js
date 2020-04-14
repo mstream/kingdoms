@@ -1,9 +1,13 @@
 // @flow
 
-import type { ClientStateSelector } from '../../../../../types';
+import type {
+    ClientStateSelector,
+} from '../../../../../types';
 
-export const isAuthenticatedSelector: ClientStateSelector<boolean> = (
+export const isAuthenticatedSelector: ClientStateSelector< boolean > = (
     state,
 ) => {
+
     return state.player.name != null;
+
 };

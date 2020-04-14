@@ -1,64 +1,117 @@
 // @flow
 
-import { createClientStateCommonStateSelector } from './utils';
-import type { CommonStateSelector } from '../../../../../../../common/src/state/modules/types';
-import { emptyClientState } from '../../../../state';
-import { emptyCommonState } from '../../../../../../../common/src/state/modules/state';
-import type { Vector } from '../../../../../../../common/src/vector';
-import type { ClientState } from '../../../../types';
+import {
+    createClientStateCommonStateSelector,
+} from './utils';
+import type {
+    CommonStateSelector,
+} from '../../../../../../../common/src/state/modules/types';
+import {
+    emptyClientState,
+} from '../../../../state';
+import {
+    emptyCommonState,
+} from '../../../../../../../common/src/state/modules/state';
+import type {
+    Vector,
+} from '../../../../../../../common/src/vector';
+import type {
+    ClientState,
+} from '../../../../types';
 
-describe('createClientStateCommonStateSelector', () => {
-    it('returns null when common state is not loaded', () => {
-        const state: ClientState = {
-            ...emptyClientState,
-            commonState: null,
-        };
+describe(
+    `createClientStateCommonStateSelector`,
+    () => {
 
-        const commonStateSelector: CommonStateSelector<Vector> = (state) => {
-            return state.rules.minimalCityMargin;
-        };
+        it(
+            `returns null when common state is not loaded`,
+            () => {
 
-        const selector = createClientStateCommonStateSelector({
-            commonStateSelector,
-        });
+                const state: ClientState = {
+                    ...emptyClientState,
+                    commonState: null,
+                };
 
-        const expected = null;
+                const commonStateSelector: CommonStateSelector< Vector > = (
+                    state,
+                ) => {
 
-        const actual = selector(state);
+                    return state.rules.minimalCityMargin;
 
-        expect(actual).toEqual(expected);
-    });
+                };
 
-    it('returns desired durationInMinutes using the provided common state selector', () => {
-        const state: ClientState = {
-            ...emptyClientState,
-            commonState: {
-                ...emptyCommonState,
-                rules: {
-                    ...emptyCommonState.rules,
-                    minimalCityMargin: {
-                        x: 3,
-                        y: 3,
+                const selector = createClientStateCommonStateSelector(
+                    {
+                        commonStateSelector,
                     },
-                },
+                );
+
+                const expected = null;
+
+                const actual = selector(
+                    state,
+                );
+
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
+
             },
-        };
+        );
 
-        const commonStateSelector: CommonStateSelector<Vector> = (state) => {
-            return state.rules.minimalCityMargin;
-        };
+        it(
+            `returns desired durationInMinutes using the provided common state selector`,
+            () => {
 
-        const selector = createClientStateCommonStateSelector({
-            commonStateSelector,
-        });
+                const state: ClientState = {
+                    ...emptyClientState,
+                    commonState: {
+                        ...emptyCommonState,
+                        rules: {
+                            ...emptyCommonState.rules,
+                            minimalCityMargin: {
+                                x: 3,
+                                y: 3,
+                            },
+                        },
+                    },
+                };
 
-        const expected = {
-            x: 3,
-            y: 3,
-        };
+                const commonStateSelector: CommonStateSelector< Vector > = (
+                    state,
+                ) => {
 
-        const actual = selector(state);
+                    return state.rules.minimalCityMargin;
 
-        expect(actual).toEqual(expected);
-    });
-});
+                };
+
+                const selector = createClientStateCommonStateSelector(
+                    {
+                        commonStateSelector,
+                    },
+                );
+
+                const expected = {
+                    x: 3,
+                    y: 3,
+                };
+
+                const actual = selector(
+                    state,
+                );
+
+                expect(
+                    actual,
+                )
+                    .toEqual(
+                        expected,
+                    );
+
+            },
+        );
+
+    },
+);

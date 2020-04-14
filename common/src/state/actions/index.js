@@ -5,28 +5,38 @@ import type {
     CommonGetCurrentStateAction,
     CommonResetStateAction,
 } from './types';
-import { DUMMY, GET_CURRENT_STATE, RESET_STATE } from './types';
-import type { CommonActionCreator } from '../types';
+import {
+    DUMMY, GET_CURRENT_STATE, RESET_STATE,
+} from './types';
+import type {
+    CommonActionCreator,
+} from '../types';
 
-export const dummy: CommonActionCreator<CommonDummyAction> = () => {
+export const dummy: CommonActionCreator< CommonDummyAction > = () => {
+
     return {
-        type: DUMMY,
         payload: undefined,
+        type   : DUMMY,
     };
+
 };
 
-export const getCurrentState: CommonActionCreator<CommonGetCurrentStateAction> = (
+export const getCurrentState: CommonActionCreator< CommonGetCurrentStateAction > = (
     payload,
 ) => {
+
     return {
+        payload,
         type: GET_CURRENT_STATE,
-        payload: payload,
     };
+
 };
 
-export const resetState: CommonActionCreator<CommonResetStateAction> = () => {
+export const resetState: CommonActionCreator< CommonResetStateAction > = () => {
+
     return {
-        type: RESET_STATE,
         payload: undefined,
+        type   : RESET_STATE,
     };
+
 };

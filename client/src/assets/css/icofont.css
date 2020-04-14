@@ -3,7 +3,7 @@
     font-weight: normal;
     font-style: 'Regular';
     src: url('../fonts/icofont.ttf') format('ttf'),
-        url('../fonts/icofont.woff2') format('woff2');
+    url('../fonts/icofont.woff2') format('woff2');
 }
 
 .icofont {

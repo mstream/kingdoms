@@ -1,14 +1,19 @@
 // @flow
 
-import { emptyClientState } from '../../../../../state';
-import type { ClientStateSelectorTestScenario } from '../../../../../types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientStateSelectorTestScenario,
+} from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray<ClientStateSelectorTestScenario<number>>;
+type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< number > >;
 
 export const minimumAttackDelaySelectorTestScenarios: Scenarios = [
     {
-        name: 'returns the minimum attack delay',
-        state: {
+        expectedValue: 60,
+        name         : `returns the minimum attack delay`,
+        state        : {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
@@ -18,6 +23,5 @@ export const minimumAttackDelaySelectorTestScenarios: Scenarios = [
                 },
             },
         },
-        expectedValue: 60,
     },
 ];

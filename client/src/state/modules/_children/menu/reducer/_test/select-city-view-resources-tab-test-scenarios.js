@@ -4,19 +4,44 @@ import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type { ClientStateMenuReducerTestScenario } from './types';
-import type { ClientSelectCityViewResourceTabAction } from '../../actions/types';
-import { emptyClientState } from '../../../../../state';
-import { clientActions } from '../../../../actions';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
+import type {
+    ClientSelectCityViewResourceTabAction,
+} from '../../actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    clientActions,
+} from '../../../../actions';
 
-export const selectCityViewResourcesTabTestScenarios: $ReadOnlyArray<
-    ClientStateMenuReducerTestScenario<ClientSelectCityViewResourceTabAction>,
-> = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientSelectCityViewResourceTabAction >, >;
+
+export const selectCityViewResourcesTabTestScenarios: Scenarios = [
     {
-        name: 'select city view resource',
-        action: clientActions.menu.selectCityViewResourcesTab({
-            resourceType: RESOURCE_FOOD,
-        }),
+        action: clientActions.menu.selectCityViewResourcesTab(
+            {
+                resourceType: RESOURCE_FOOD,
+            },
+        ),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+                cityView: {
+                    ...previousLocalState.cityView,
+                    resource: RESOURCE_FOOD,
+                },
+            };
+
+        },
+        name               : `select city view resource`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
@@ -26,15 +51,6 @@ export const selectCityViewResourcesTabTestScenarios: $ReadOnlyArray<
                     resource: RESOURCE_WOOD,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-                cityView: {
-                    ...previousLocalState.cityView,
-                    resource: RESOURCE_FOOD,
-                },
-            };
         },
     },
 ];

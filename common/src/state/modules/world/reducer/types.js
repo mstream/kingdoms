@@ -1,7 +1,9 @@
 // @flow
 
-import type { Vector } from '../../../../vector';
+import type {
+    Vector,
+} from '../../../../vector';
 
-export type CommonStateWorld = $ReadOnly<{
+export type CommonStateWorld = $ReadOnly< {
     size: Vector,
-}>;
+} >;

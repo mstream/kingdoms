@@ -1,14 +1,22 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
-import { redirectToLoginPage } from '../../util';
+import type {
+    Props,
+} from './props';
 
-export const testId = 'menu';
+export const testId = `menu`;
 
-export const Component = ({ playerName }: Props) => {
-    if (playerName == null) {
+export const Component = (
+    {
+        playerName, signOut,
+    }: Props,
+) => {
+
+    if ( playerName == null ) {
+
         return null;
+
     }
     return (
         <div
@@ -17,23 +25,27 @@ export const Component = ({ playerName }: Props) => {
         >
             <div className="group ml-1 cursor-pointer">
                 <div data-testid="user-menu-button" className="h-full p-2">
-                    <i className="icofont icofont-ui-user mr-1" />
+                    <i className="icofont icofont-ui-user mr-1"/>
                     {playerName}
-                    <i className="icofont icofont-caret-down" />
+                    <i className="icofont icofont-caret-down"/>
                 </div>
-                <div className="absolute invisible group-hover:visible text-gray-100">
+                <div
+                    className="absolute invisible group-hover:visible text-gray-100">
                     <div
                         data-testid="user-menu-sign-out-button"
                         className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
-                        onClick={(event: MouseEvent<HTMLDivElement>) => {
-                            redirectToLoginPage({ location: window.location });
+                        onClick={() => {
+
+                            signOut();
+
                         }}
                     >
-                        <i className="icofont icofont-ui-power" />
+                        <i className="icofont icofont-ui-power"/>
                         Sign Out
                     </div>
                 </div>
             </div>
         </div>
     );
+
 };

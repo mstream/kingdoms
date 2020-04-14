@@ -1,11 +1,18 @@
 // @flow
 
 import React from 'react';
-import type { Props } from './props';
+import type {
+    Props,
+} from './props';
 
-export const testId = 'city-items-list';
+export const testId = `city-items-list`;
 
-export const Component = ({ children }: Props) => {
+export const Component = (
+    {
+        children,
+    }: Props,
+) => {
+
     return (
         <div
             data-testid={testId}
@@ -14,4 +21,5 @@ export const Component = ({ children }: Props) => {
             {children}
         </div>
     );
+
 };

@@ -1,5 +1,9 @@
 // @flow
 
-import { zeroVector } from '../../../../vector';
+import {
+    zeroVector,
+} from '../../../../vector';
 
-export const emptyWorldState = { size: zeroVector };
+export const emptyWorldState = {
+    size: zeroVector,
+};

@@ -1,34 +1,22 @@
 // @flow
 
-import type { CommonStateSelectorTestScenario } from '../../../types';
-import { emptyCommonState } from '../../../state';
-import { emptyCityState } from '../../reducer/state';
-import type { CitiesDistances } from '../types';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../../types';
+import {
+    emptyCommonState,
+} from '../../../state';
+import {
+    emptyCityState,
+} from '../../reducer/state';
+import type {
+    CitiesDistances,
+} from '../types';
 
-type Scenarios = $ReadOnlyArray<
-    CommonStateSelectorTestScenario<CitiesDistances>,
->;
+type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< CitiesDistances >, >;
 
 export const citiesDistancesSelectorTestScenarios: Scenarios = [
     {
-        name: 'returns city ids grouped by owner id',
-        state: {
-            ...emptyCommonState,
-            cities: {
-                city1: {
-                    ...emptyCityState,
-                    location: { x: -2, y: 0 },
-                },
-                city2: {
-                    ...emptyCityState,
-                    location: { x: 0, y: 0 },
-                },
-                city3: {
-                    ...emptyCityState,
-                    location: { x: 1, y: 0 },
-                },
-            },
-        },
         expectedValue: {
             city1: {
                 city1: 0,
@@ -44,6 +32,33 @@ export const citiesDistancesSelectorTestScenarios: Scenarios = [
                 city1: 3,
                 city2: 1,
                 city3: 0,
+            },
+        },
+        name : `returns city ids grouped by owner id`,
+        state: {
+            ...emptyCommonState,
+            cities: {
+                city1: {
+                    ...emptyCityState,
+                    location: {
+                        x: -2,
+                        y: 0,
+                    },
+                },
+                city2: {
+                    ...emptyCityState,
+                    location: {
+                        x: 0,
+                        y: 0,
+                    },
+                },
+                city3: {
+                    ...emptyCityState,
+                    location: {
+                        x: 1,
+                        y: 0,
+                    },
+                },
             },
         },
     },

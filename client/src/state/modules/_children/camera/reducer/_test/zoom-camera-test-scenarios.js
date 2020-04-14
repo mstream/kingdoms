@@ -1,54 +1,27 @@
 // @flow
 
-import type { ClientStateCameraReducerTestScenario } from './types';
-import type { ClientZoomCameraAction } from '../../actions/types';
-import { emptyClientState } from '../../../../../state';
-import { clientActions } from '../../../../actions';
+import type {
+    ClientStateCameraReducerTestScenario,
+} from './types';
+import type {
+    ClientZoomCameraAction,
+} from '../../actions/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    clientActions,
+} from '../../../../actions';
 
-export const zoomCameraTestScenarios: $ReadOnlyArray<
-    ClientStateCameraReducerTestScenario<ClientZoomCameraAction>,
-> = [
+export const zoomCameraTestScenarios: $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientZoomCameraAction >, > = [
     {
-        name: 'zooms camera in',
-        action: clientActions.camera.zoomCameraIn(),
-        previousGlobalState: {
-            ...emptyClientState,
-            camera: {
-                ...emptyClientState.camera,
-                geometry: {
-                    ...emptyClientState.camera.geometry,
-                    location: {
-                        ...emptyClientState.camera.geometry.location,
-                        x: 50,
-                        y: 50,
-                    },
-                    size: {
-                        ...emptyClientState.camera.geometry.size,
-                        x: 100,
-                        y: 100,
-                    },
-                },
-                sizeLimit: {
-                    ...emptyClientState.camera.sizeLimit,
-                    min: {
-                        ...emptyClientState.camera.sizeLimit.min,
-                        x: 0,
-                        y: 0,
-                    },
-                    max: {
-                        ...emptyClientState.camera.sizeLimit.min,
-                        x: 200,
-                        y: 200,
-                    },
-                },
-                zoomingSpeed: {
-                    ...emptyClientState.camera.zoomingSpeed,
-                    x: 10,
-                    y: 10,
-                },
+        action                   : clientActions.camera.zoomCameraIn(),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
+        ) => {
+
             return {
                 ...previousLocalState,
                 geometry: {
@@ -60,11 +33,9 @@ export const zoomCameraTestScenarios: $ReadOnlyArray<
                     },
                 },
             };
+
         },
-    },
-    {
-        name: 'does not zoom camera in when city view is open',
-        action: clientActions.camera.zoomCameraIn(),
+        name               : `zooms camera in`,
         previousGlobalState: {
             ...emptyClientState,
             camera: {
@@ -84,15 +55,67 @@ export const zoomCameraTestScenarios: $ReadOnlyArray<
                 },
                 sizeLimit: {
                     ...emptyClientState.camera.sizeLimit,
+                    max: {
+                        ...emptyClientState.camera.sizeLimit.min,
+                        x: 200,
+                        y: 200,
+                    },
                     min: {
                         ...emptyClientState.camera.sizeLimit.min,
                         x: 0,
                         y: 0,
                     },
+                },
+                zoomingSpeed: {
+                    ...emptyClientState.camera.zoomingSpeed,
+                    x: 10,
+                    y: 10,
+                },
+            },
+        },
+    },
+    {
+        action                   : clientActions.camera.zoomCameraIn(),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
+            return {
+                ...previousLocalState,
+            };
+
+        },
+        name               : `does not zoom camera in when city view is open`,
+        previousGlobalState: {
+            ...emptyClientState,
+            camera: {
+                ...emptyClientState.camera,
+                geometry: {
+                    ...emptyClientState.camera.geometry,
+                    location: {
+                        ...emptyClientState.camera.geometry.location,
+                        x: 50,
+                        y: 50,
+                    },
+                    size: {
+                        ...emptyClientState.camera.geometry.size,
+                        x: 100,
+                        y: 100,
+                    },
+                },
+                sizeLimit: {
+                    ...emptyClientState.camera.sizeLimit,
                     max: {
                         ...emptyClientState.camera.sizeLimit.min,
                         x: 200,
                         y: 200,
+                    },
+                    min: {
+                        ...emptyClientState.camera.sizeLimit.min,
+                        x: 0,
+                        y: 0,
                     },
                 },
                 zoomingSpeed: {
@@ -105,19 +128,25 @@ export const zoomCameraTestScenarios: $ReadOnlyArray<
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    currentCityId: 'city1',
+                    currentCityId: `city1`,
                 },
             },
         },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
+    },
+    {
+        action                   : clientActions.camera.zoomCameraIn(),
+        expectedLocalStateCreator: (
+            {
+                previousLocalState,
+            },
+        ) => {
+
             return {
                 ...previousLocalState,
             };
+
         },
-    },
-    {
-        name: 'does not zoom camera in when attack view is open',
-        action: clientActions.camera.zoomCameraIn(),
+        name               : `does not zoom camera in when attack view is open`,
         previousGlobalState: {
             ...emptyClientState,
             camera: {
@@ -137,15 +166,15 @@ export const zoomCameraTestScenarios: $ReadOnlyArray<
                 },
                 sizeLimit: {
                     ...emptyClientState.camera.sizeLimit,
-                    min: {
-                        ...emptyClientState.camera.sizeLimit.min,
-                        x: 0,
-                        y: 0,
-                    },
                     max: {
                         ...emptyClientState.camera.sizeLimit.min,
                         x: 200,
                         y: 200,
+                    },
+                    min: {
+                        ...emptyClientState.camera.sizeLimit.min,
+                        x: 0,
+                        y: 0,
                     },
                 },
                 zoomingSpeed: {
@@ -158,14 +187,9 @@ export const zoomCameraTestScenarios: $ReadOnlyArray<
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackedCityId: 'city1',
+                    attackedCityId: `city1`,
                 },
             },
-        },
-        expectedLocalStateCreator: ({ previousLocalState }) => {
-            return {
-                ...previousLocalState,
-            };
         },
     },
 ];

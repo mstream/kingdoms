@@ -1,55 +1,135 @@
 // @flow
 
 import Socket from 'simple-websocket';
-import type { Middleware } from 'redux';
-import type { ClientAction, ClientState, ClientStore } from '../../types';
-import { createOnCloseHandler } from './socket-event-handlers/on-close';
-import { createOnDataHandler } from './socket-event-handlers/on-data';
-import { createOnConnectHandler } from './socket-event-handlers/on-connect';
-import { createOnErrorHandler } from './socket-event-handlers/on-error';
-import { clientActionHandler } from './client-action-handler';
-import type { IdTokenInfo } from '../../../types';
+import type {
+    Middleware,
+} from 'redux';
+import type {
+    ClientAction, ClientState, ClientStore,
+} from '../../types';
+import {
+    createOnCloseHandler,
+} from './socket-event-handlers/on-close';
+import {
+    createOnDataHandler,
+} from './socket-event-handlers/on-data';
+import {
+    createOnConnectHandler,
+} from './socket-event-handlers/on-connect';
+import {
+    createOnErrorHandler,
+} from './socket-event-handlers/on-error';
+import {
+    clientActionHandler,
+} from './client-action-handler';
+import type {
+    IdTokenInfo,
+} from '../../../types';
+import type {
+    Config,
+} from '../../../config/types';
+import {
+    Logger,
+} from 'aws-sdk/lib/config';
 
-export const websocketMiddleware = ({
-    location,
-    tokenInfo,
-    url,
-}: {
-    location: Location,
-    tokenInfo: IdTokenInfo,
-    url: string,
-}): Middleware<ClientState, ClientAction> => {
-    let socket = new Socket(`${url}?token=${tokenInfo.token}`);
+export const createWebsocketMiddleware = (
+    {
+        config,
+        location,
+        logger,
+        tokenInfo,
+        url,
+        worldId,
+    }: {
+        config: Config,
+        location: Location,
+        logger: Logger,
+        tokenInfo: IdTokenInfo,
+        url: string,
+        worldId: string,
+    },
+): Middleware< ClientState, ClientAction > => {
+
+    const socket = new Socket(
+        `${ url }?token=${ tokenInfo.token }`,
+    );
 
     // $FlowFixMe
-    const middleware: Middleware<ClientState, ClientAction> = (
+    const middleware: Middleware< ClientState, ClientAction > = (
         store: ClientStore,
     ) => {
+
         socket.on(
-            'connect',
-            createOnConnectHandler({
-                store,
-                socket,
-                username: tokenInfo.username,
-            }),
+            `connect`,
+            createOnConnectHandler(
+                {
+                    logger,
+                    socket,
+                    store,
+                    username: tokenInfo.username,
+                    worldId,
+                },
+            ),
         );
 
-        socket.on('close', createOnCloseHandler({ store }));
-        socket.on('data', createOnDataHandler({ store }));
-        socket.on('error', createOnErrorHandler({ location, store }));
+        socket.on(
+            `close`,
+            createOnCloseHandler(
+                {
+                    logger,
+                },
+            ),
+        );
 
-        return (next) => {
-            return (action) => {
-                clientActionHandler({
+        socket.on(
+            `data`,
+            createOnDataHandler(
+                {
+                    logger,
+                    store,
+                },
+            ),
+        );
+
+        socket.on(
+            `error`,
+            createOnErrorHandler(
+                {
+                    config,
+                    location,
+                    logger,
+                    store,
+                },
+            ),
+        );
+
+        return (
+            next,
+        ) => {
+
+            return (
+                action: ClientAction,
+            ) => {
+
+                clientActionHandler(
+                    {
+                        action,
+                        socket,
+                        username: tokenInfo.username,
+                        worldId,
+                    },
+                );
+
+                return next(
                     action,
-                    socket,
-                    username: tokenInfo.username,
-                });
+                );
 
-                return next(action);
             };
+
         };
+
     };
 
     return middleware;
+
 };

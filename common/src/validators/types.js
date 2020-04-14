@@ -1,3 +1,3 @@
 // @flow
 
-export type TypeValidator<T> = ({ toValidate: mixed }) => T;
+export type TypeValidator<T> = ( { toValidate: mixed } ) => T;

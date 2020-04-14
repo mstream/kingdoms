@@ -7,7 +7,9 @@ import {
 
 export const getLocation = ClientFunction(
     () => {
+
         return window.location.href;
+
     },
 );
 

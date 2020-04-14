@@ -37,7 +37,8 @@ export const execute = async ( {
             command,
         );
 
-        if (stdout.length > 0) {
+        if ( stdout.length > 0 ) {
+
             logger.debug(
                 `command '%s' execution stdout: %s`,
                 `${ command.substring(
@@ -46,9 +47,11 @@ export const execute = async ( {
                 ) }...`,
                 stdout,
             );
+
         }
 
-        if (stderr.length > 0) {
+        if ( stderr.length > 0 ) {
+
             logger.debug(
                 `command '%s' execution result stderr: %s`,
                 `${ command.substring(
@@ -57,7 +60,9 @@ export const execute = async ( {
                 ) }...`,
                 stderr,
             );
+
         }
+
     } catch ( error ) {
 
         throw new verror.VError(

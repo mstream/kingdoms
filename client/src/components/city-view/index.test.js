@@ -13,18 +13,6 @@ import {
     CityViewComponent,
 } from '.';
 import {
-    cityUnitsComponentTestId,
-} from './units';
-import {
-    cityResourcesComponentTestId,
-} from './resources';
-import {
-    cityBuildingsComponentTestId,
-} from './buildings';
-import {
-    cityOverviewComponentTestId,
-} from './overview';
-import {
     TAB_BUILDINGS,
     TAB_OVERVIEW,
     TAB_RESOURCES,
@@ -42,6 +30,9 @@ import {
 import type {
     ClientState,
 } from '../../state/types';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -89,7 +80,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        cityOverviewComponentTestId,
+                        testIds.COMPONENT_CITY_VIEW.OVERVIEW,
                     ),
                 )
                     .toBeInTheDocument();
@@ -135,7 +126,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        cityUnitsComponentTestId,
+                        testIds.COMPONENT_CITY_VIEW.UNITS,
                     ),
                 )
                     .toBeInTheDocument();
@@ -181,7 +172,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        cityBuildingsComponentTestId,
+                        testIds.COMPONENT_CITY_VIEW.BUILDINGS,
                     ),
                 )
                     .toBeInTheDocument();
@@ -227,7 +218,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        cityResourcesComponentTestId,
+                        testIds.COMPONENT_CITY_VIEW.RESOURCES,
                     ),
                 )
                     .toBeInTheDocument();

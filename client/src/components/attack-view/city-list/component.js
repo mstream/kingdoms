@@ -11,8 +11,9 @@ import {
 import type {
     CommonStateCity,
 } from '../../../../../common/src/state/modules/cities/reducer/types';
-
-export const testId = `attack-view-city-list`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 type CityWithDistance = {
     city: CommonStateCity,
@@ -110,7 +111,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_ATTACK_VIEW.CITY_LIST}
             className="flex flex-col justify-start text-xl"
         >
             <div className="mb-1">From city:</div>

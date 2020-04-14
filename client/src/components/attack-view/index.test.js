@@ -9,15 +9,7 @@ import {
     Provider,
 } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import {
-    AttackViewComponent, attackViewComponentTestId,
-} from '.';
-import {
-    attackViewCityListComponentTestId,
-} from './city-list';
-import {
-    attackViewRegimentTemplateFormComponentTestId,
-} from './regiment-template-form';
+
 import {
     emptyCommonState,
 } from '../../../../common/src/state/modules/state';
@@ -39,6 +31,12 @@ import type {
 import {
     clientActions,
 } from '../../state/modules/actions';
+import {
+    AttackViewComponent,
+} from './index';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -77,7 +75,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        attackViewComponentTestId,
+                        testIds.COMPONENT_ATTACK_VIEW.PARENT,
                     ),
                 ).not.toBeInTheDocument();
 
@@ -139,14 +137,14 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        attackViewCityListComponentTestId,
+                        testIds.COMPONENT_ATTACK_VIEW.CITY_LIST,
                     ),
                 )
                     .toBeInTheDocument();
 
                 await expect(
                     queryByTestId(
-                        attackViewRegimentTemplateFormComponentTestId,
+                        testIds.COMPONENT_ATTACK_VIEW.REGIMENT_TEMPLATE_FORM,
                     ),
                 ).not.toBeInTheDocument();
 
@@ -209,14 +207,14 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        attackViewCityListComponentTestId,
+                        testIds.COMPONENT_ATTACK_VIEW.CITY_LIST,
                     ),
                 )
                     .toBeInTheDocument();
 
                 await expect(
                     queryByTestId(
-                        attackViewRegimentTemplateFormComponentTestId,
+                        testIds.COMPONENT_ATTACK_VIEW.REGIMENT_TEMPLATE_FORM,
                     ),
                 )
                     .toBeInTheDocument();

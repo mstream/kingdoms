@@ -7,8 +7,9 @@ import type {
     Props,
 } from './props';
 import classNames from 'classnames';
-
-export const testId = `game-start`;
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 export const Component = (
     {
@@ -61,7 +62,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_GAME_START.PARENT}
             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t"
         >
             <div
@@ -102,7 +103,7 @@ export const Component = (
                         <div className="w-2/3">
                             <input
                                 id="new-city-name-input"
-                                data-testid="new-city-name-input"
+                                data-testid={testIds.COMPONENT_GAME_START.CITY_NAME_INPUT}
                                 className={classNames(
                                     `appearance-none`,
                                     `border-none`,
@@ -128,7 +129,7 @@ export const Component = (
                         </div>
                     </div>
                     <button
-                        data-testid="new-city-create-button"
+                        data-testid={testIds.COMPONENT_GAME_START.CITY_CREATE_BUTTON}
                         className={buttonClassName}
                         onClick={onClick}
                     >

@@ -10,7 +10,7 @@ import {
     Provider,
 } from 'react-redux';
 import {
-    GameStartComponent, gameStartComponentTestId,
+    GameStartComponent,
 } from './index';
 import {
     emptyCommonState,
@@ -24,6 +24,9 @@ import {
 import type {
     ClientState,
 } from '../../state/types';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -67,7 +70,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        gameStartComponentTestId,
+                        testIds.COMPONENT_GAME_START.PARENT,
                     ),
                 ).not.toBeInTheDocument();
 

@@ -15,6 +15,9 @@ import {
     TAB_RESOURCES,
     TAB_UNITS,
 } from '../../../state/modules/_children/menu/reducer/types';
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 const tabsOrder = [
     TAB_OVERVIEW,
@@ -46,8 +49,6 @@ const tabsVisuals = {
         name: `Units`,
     },
 };
-
-export const testId = `city-view-tabs`;
 
 export const Component = (
     {
@@ -87,7 +88,8 @@ export const Component = (
             };
 
             return (
-                <div key={tab} className={className} role="tab" onClick={onClick}>
+                <div key={tab} className={className} role="tab"
+                    onClick={onClick}>
                     <i className={iconClassName}/>
                     {name}
                 </div>
@@ -98,7 +100,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_CITY_VIEW.VIEW_TABS}
             className="wood-bg flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100"
             role="tablist"
         >

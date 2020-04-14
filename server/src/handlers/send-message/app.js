@@ -148,6 +148,7 @@ export const handler: ProxyHandler = async ( event, ) => {
                 {
                     apiGateway,
                     connectionId,
+                    logger,
                     redis,
                     response,
                 },

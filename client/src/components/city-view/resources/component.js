@@ -24,8 +24,9 @@ import {
 import {
     calculateResourceChangeInfo,
 } from '../../../../../common/src/state';
-
-export const testId = `city-resources`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -151,7 +152,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testId} role="tabpanel">
+        <div data-testid={testIds.COMPONENT_CITY_VIEW.RESOURCES} role="tabpanel">
             <CityItemsListComponent>
                 {resourceComponents}
             </CityItemsListComponent>

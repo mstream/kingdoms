@@ -4,8 +4,9 @@ import React from 'react';
 import type {
     Props,
 } from './props';
-
-export const testId = `image`;
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 export const Component = (
     {
@@ -24,7 +25,7 @@ export const Component = (
             : `${ localClassname } ${ className }`;
 
     return (
-        <div data-testid={testId} className="relative" style={style}>
+        <div data-testid={testIds.COMPONENT_IMAGE.PARENT} className="relative" style={style}>
             <img className={mergedClassname} src={image} alt="image"/>
             {children}
         </div>

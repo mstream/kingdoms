@@ -41,11 +41,13 @@ const optimisticLockingAttempts = 3;
 
 export const sendResponse = async ( {
     apiGateway,
+    logger,
     redis,
     connectionId,
     response,
 }: {
     apiGateway: ApiGateway,
+    logger: Logger,
     redis: Redis,
     connectionId: string,
     response: ServerResponse,
@@ -53,11 +55,7 @@ export const sendResponse = async ( {
 
     try {
 
-        console.group(
-            `sending response`,
-        );
-
-        console.info(
+        logger.info(
             `sending response back to the api gateway`,
         );
 
@@ -73,8 +71,9 @@ export const sendResponse = async ( {
 
         if ( error.statusCode === 410 ) {
 
-            console.info(
-                `Found stale connection, deleting ${ connectionId }`,
+            logger.info(
+                `Found stale connection, deleting: %s`,
+                connectionId,
             );
 
             try {
@@ -86,7 +85,7 @@ export const sendResponse = async ( {
 
             } catch ( error ) {
 
-                console.error(
+                logger.error(
                     error.stack,
                 );
 
@@ -94,16 +93,12 @@ export const sendResponse = async ( {
 
         } else {
 
-            console.error(
+            logger.error(
                 error.stack,
             );
 
         }
         throw error;
-
-    } finally {
-
-        console.groupEnd();
 
     }
 
@@ -125,19 +120,19 @@ export const executeAction = async ( {
 
     try {
 
-        console.group(
+        logger.debug(
             `executing action`,
         );
 
         for ( let i = 0; i < optimisticLockingAttempts; i += 1 ) {
 
-            console.group(
-                `optimistic locking attempt ${
-                    i + 1
-                }/${ optimisticLockingAttempts }`,
+            logger.info(
+                `optimistic locking attempt %d/%d`,
+                i + 1,
+                optimisticLockingAttempts,
             );
 
-            console.info(
+            logger.debug(
                 `watching state`,
             );
 
@@ -152,7 +147,7 @@ export const executeAction = async ( {
                 value: ?CommonState,
             |} > => {
 
-                console.info(
+                logger.debug(
                     `applying action to the state`,
                 );
 
@@ -220,7 +215,7 @@ export const executeAction = async ( {
 
             }
 
-            console.info(
+            logger.info(
                 `concurrent state modification detected - retrying`,
             );
 
@@ -238,11 +233,6 @@ export const executeAction = async ( {
             },
             `execution failed`,
         );
-
-    } finally {
-
-        console.groupEnd();
-        console.groupEnd();
 
     }
 

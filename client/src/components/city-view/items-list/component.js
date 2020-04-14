@@ -4,8 +4,9 @@ import React from 'react';
 import type {
     Props,
 } from './props';
-
-export const testId = `city-items-list`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -15,7 +16,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_CITY_VIEW.ITEMS_LIST}
             className="flex flex-row flex-wrap flex-none items-stretch content-center justify-center w-full shadow-inner"
         >
             {children}

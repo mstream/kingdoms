@@ -135,6 +135,7 @@ const updateWorldState = async ( {
                             {
                                 apiGateway,
                                 connectionId,
+                                logger,
                                 redis,
                                 response,
                             },

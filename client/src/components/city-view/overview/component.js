@@ -4,8 +4,9 @@ import React from 'react';
 import type {
     Props,
 } from './props';
-
-export const testId = `city-overview`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -21,7 +22,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_CITY_VIEW.OVERVIEW}
             className="flex flex-row p-1 text-lg text-gray-100"
             role="tabpanel"
         >

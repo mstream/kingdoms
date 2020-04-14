@@ -8,6 +8,9 @@ import classNames from 'classnames';
 import {
     minutesToDurationString,
 } from '../../../../../common/src/time';
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const testId = `attack-view-scheduler-form`;
 
@@ -48,7 +51,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_ATTACK_VIEW.SCHEDULER_FORM}
             className="flex flex-col justify-start text-xl"
         >
             <div className="mb-1">When:</div>

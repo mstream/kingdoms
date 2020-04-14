@@ -55,9 +55,6 @@ export const buildUserProfile = async ( {
 
             const errorMessage = `no key id in the token`;
 
-            console.info(
-                errorMessage,
-            );
 
             return buildErrorResult(
                 {
@@ -78,9 +75,6 @@ export const buildUserProfile = async ( {
 
             const errorMessage = `could not retrieve a public key for the token with key id ${ keyId }`;
 
-            console.info(
-                errorMessage,
-            );
 
             return buildErrorResult(
                 {

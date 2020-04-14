@@ -10,7 +10,7 @@ import {
     Provider,
 } from 'react-redux';
 import {
-    CityHeaderComponent, cityHeaderComponentTestId,
+    CityHeaderComponent,
 } from './index';
 import {
     emptyCommonState,
@@ -24,6 +24,9 @@ import {
 import type {
     ClientState,
 } from '../../../state/types';
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -62,7 +65,7 @@ describe(
 
                 expect(
                     queryByTestId(
-                        cityHeaderComponentTestId,
+                        testIds.COMPONENT_CITY_VIEW.PARENT,
                     ),
                 ).not.toBeInTheDocument();
 

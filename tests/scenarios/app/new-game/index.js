@@ -148,8 +148,11 @@ test(
         await t.expect(
             selectors
                 .cityTile
-                .textContent)
-            .contains(cityName);
+                .textContent,
+        )
+            .contains(
+                cityName,
+            );
 
     },
 );

@@ -97,11 +97,6 @@ export const handler: CustomAuthorizerHandler = async ( event, ) => {
 
     if ( userProfileResult.userProfile == null ) {
 
-        const errorMessage = `missing user profile`;
-
-        console.error(
-            errorMessage,
-        );
 
         throw Error(
             `missing user profile`,

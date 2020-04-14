@@ -4,8 +4,10 @@ import React from 'react';
 import type {
     Props,
 } from './props';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
-export const testId = `loader`;
 
 export const Component = (
     {
@@ -21,7 +23,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_LOADER.PARENT}
             className="absolute flex flex-row content-center justify-center h-screen w-screen"
         >
             <div

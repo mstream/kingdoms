@@ -39,8 +39,9 @@ import {
     ARMOR_NONE,
     RESOURCE_FOOD,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
-
-export const testId = `city-units`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 const armorDescriptions = {
     [ ARMOR_HEAVY ] : `heavy`,
@@ -280,7 +281,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testId} role="tabpanel">
+        <div data-testid={testIds.COMPONENT_CITY_VIEW.UNITS} role="tabpanel">
             <CityItemsListComponent>{unitComponents}</CityItemsListComponent>
             {infoComponent}
         </div>

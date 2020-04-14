@@ -115,8 +115,9 @@ export const createOnDataHandler = (
 
         if ( serverResponseHandler == null ) {
 
-            console.error(
-                `unsupported response type received from server: ${ actionType }`,
+            logger.error(
+                `unsupported response type received from server: %s`,
+                actionType,
             );
 
             return;

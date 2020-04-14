@@ -13,8 +13,9 @@ import {
 import {
     surfaceImages,
 } from '../../../assets/images/terrain';
-
-export const testId = `terrain-tile`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -31,7 +32,7 @@ export const Component = (
     };
 
     return (
-        <div data-testid={testId} className="absolute" style={style}>
+        <div data-testid={testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE} className="absolute" style={style}>
             <ImageComponent
                 image={surfaceImages[ tile.textureIndex ]}
                 ratio="100%"

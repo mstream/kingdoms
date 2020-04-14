@@ -14,8 +14,9 @@ import {
     AttackViewSchedulerFormComponent,
 } from './scheduler-form';
 import classNames from 'classnames';
-
-export const testId = `attack-view`;
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 export const Component = (
     {
@@ -70,7 +71,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_ATTACK_VIEW.PARENT}
             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t text-gray-100"
         >
             <div

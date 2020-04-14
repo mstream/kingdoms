@@ -29,6 +29,9 @@ import {
 import type {
     ClientStateTile,
 } from '../../state/modules/_children/tiles/reducer/types';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 const cullObjects = <T: $ReadOnly< { geometry: Geometry } >>( {
     objects,
@@ -127,8 +130,6 @@ const transformObjectGeometries = <T: $ReadOnly< { geometry: Geometry } >>( {
     );
 
 };
-
-export const testId = `world-map`;
 
 export const Component = (
     {
@@ -363,7 +364,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testId}>
+        <div data-testid={testIds.COMPONENT_WORLD_MAP.PARENT}>
             {terrainTileComponents}
             {cityTileComponents}
         </div>

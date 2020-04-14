@@ -4,8 +4,9 @@ import React from 'react';
 import type {
     Props,
 } from './props';
-
-export const testId = `menu`;
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 export const Component = (
     {
@@ -20,11 +21,13 @@ export const Component = (
     }
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_MENU.PARENT}
             className="wood2-bg relative flex flex-row items-end justify-start h-20 w-full z-10 shadow-lg bg-gray-500 text-gray-100"
         >
             <div className="group ml-1 cursor-pointer">
-                <div data-testid="user-menu-button" className="h-full p-2">
+                <div data-testid={testIds.COMPONENT_MENU.DROPDOWN_BUTTON}
+                    className="h-full p-2"
+                >
                     <i className="icofont icofont-ui-user mr-1"/>
                     {playerName}
                     <i className="icofont icofont-caret-down"/>
@@ -32,7 +35,7 @@ export const Component = (
                 <div
                     className="absolute invisible group-hover:visible text-gray-100">
                     <div
-                        data-testid="user-menu-sign-out-button"
+                        data-testid={testIds.COMPONENT_MENU.SIGN_OUT_BUTTON}
                         className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
                         onClick={() => {
 

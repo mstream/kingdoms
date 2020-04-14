@@ -7,9 +7,7 @@ import {
     Component,
 } from './component';
 
-export {
-    testId as cityOverviewComponentTestId,
-} from './component';
+
 export const CityOverviewComponent = connectProps(
     Component,
 );

@@ -13,8 +13,9 @@ import type {
 import {
     CityOrdersScheduledAttackInfoComponent,
 } from './scheduled-attack-info';
-
-export const testId = `city-orders`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -87,7 +88,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_CITY_VIEW.ORDERS}
             className="flex flex-row justify-around w-full h-full p-1 text-lg shadow-inner text-gray-100"
             role="tabpanel"
         >

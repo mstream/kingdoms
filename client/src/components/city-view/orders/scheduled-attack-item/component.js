@@ -10,8 +10,9 @@ import {
     translateTime,
 } from '../../../../../../common/src/time';
 import classNames from 'classnames';
-
-export const testId = `city-orders-scheduled-attack-item`;
+import {
+    testIds,
+} from '../../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -74,7 +75,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testId} className={itemClassName}>
+        <div data-testid={testIds.COMPONENT_CITY_VIEW.SCHEDULED_ATTACK_ITEM} className={itemClassName}>
             <div className="text-sm font-medium">{header}</div>
             <div className={subheaderClassName}>{subheader}</div>
         </div>

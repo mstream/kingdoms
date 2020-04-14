@@ -1,38 +1,38 @@
 const coreRules = {
-    'array-bracket-newline': [
+    'autofix/array-bracket-newline': [
         'error',
         {
             minItems: 1,
         },
     ],
-    'array-bracket-spacing': [
+    'autofix/array-bracket-spacing': [
         'error',
         'always',
     ],
-    'array-element-newline': [
+    'autofix/array-element-newline': [
         'error',
         'always',
     ],
-    'arrow-body-style': [
+    'autofix/arrow-body-style': [
         'error',
         'always',
     ],
-    'arrow-parens': [
+    'autofix/arrow-parens': [
         'error',
         'always',
     ],
-    'arrow-spacing': [
+    'autofix/arrow-spacing': [
         'error',
         {
             after: true,
             before: true,
         },
     ],
-    'block-spacing': [
+    'autofix/block-spacing': [
         'error',
         'always',
     ],
-    'brace-style': [
+    'autofix/brace-style': [
         'error',
         '1tbs',
     ],
@@ -45,26 +45,26 @@ const coreRules = {
             properties: 'always',
         },
     ],
-    'capitalized-comments': [
+    'autofix/capitalized-comments': [
         'error',
         'always',
     ],
-    'comma-dangle': [
+    'autofix/comma-dangle': [
         'error',
         'always',
     ],
-    'comma-spacing': [
+    'autofix/comma-spacing': [
         'error',
         {
             before: false,
             after: true,
         },
     ],
-    'comma-style': [
+    'autofix/comma-style': [
         'error',
         'last',
     ],
-    'computed-property-spacing': [
+    'autofix/computed-property-spacing': [
         'error',
         'always',
     ],
@@ -75,11 +75,11 @@ const coreRules = {
     'constructor-super': [
         'error',
     ],
-    'eol-last': [
+    'autofix/eol-last': [
         'error',
         'always',
     ],
-    'func-call-spacing': [
+    'autofix/func-call-spacing': [
         'error',
         'never',
     ],
@@ -90,17 +90,17 @@ const coreRules = {
             allowArrowFunctions: true,
         },
     ],
-    'function-call-argument-newline': [
+    'autofix/function-call-argument-newline': [
         'error',
         'always',
     ],
-    'function-paren-newline': [
+    'autofix/function-paren-newline': [
         'error',
         {
             minItems: 1,
         },
     ],
-    'generator-star-spacing': [
+    'autofix/generator-star-spacing': [
         'error',
         {
             after: true,
@@ -114,19 +114,19 @@ const coreRules = {
             max: 64,
         },
     ],
-    'implicit-arrow-linebreak': [
+    'autofix/implicit-arrow-linebreak': [
         'error',
         'beside',
     ],
-    'indent': [
+    'autofix/indent': [
         'error',
         4,
     ],
-    'jsx-quotes': [
+    'autofix/jsx-quotes': [
         'error',
         'prefer-double',
     ],
-    'key-spacing': [
+    'autofix/key-spacing': [
         'error',
         {
             afterColon: true,
@@ -135,7 +135,7 @@ const coreRules = {
             mode: 'minimum',
         },
     ],
-    'keyword-spacing': [
+    'autofix/keyword-spacing': [
         'error',
         {
             after: true,
@@ -150,7 +150,7 @@ const coreRules = {
         'error',
         'unix',
     ],
-    'lines-around-comment': [
+    'autofix/lines-around-comment': [
         'error',
         {
             afterBlockComment: false,
@@ -227,7 +227,7 @@ const coreRules = {
             max: 1,
         },
     ],
-    'multiline-comment-style': [
+    'autofix/multiline-comment-style': [
         'error',
         'starred-block',
     ],
@@ -235,11 +235,11 @@ const coreRules = {
         'error',
         'always',
     ],
-    'new-parens': [
+    'autofix/new-parens': [
         'error',
         'always',
     ],
-    'newline-per-chained-call': [
+    'autofix/newline-per-chained-call': [
         'error',
         {
             ignoreChainWithDepth: 1,
@@ -254,10 +254,16 @@ const coreRules = {
     'no-class-assign': [
         'error',
     ],
-    'no-confusing-arrow': [
+    'autofix/no-confusing-arrow': [
         'error',
     ],
+    // 'autofix/no-console': [
+    //     'error',
+    // ],
     'no-const-assign': [
+        'error',
+    ],
+    'autofix/no-debugger': [
         'error',
     ],
     'no-delete-var': [
@@ -281,7 +287,7 @@ const coreRules = {
     'no-multi-assign': [
         'error',
     ],
-    'no-multiple-empty-lines': [
+    'autofix/no-multiple-empty-lines': [
         'error',
         {
             max: 2,
@@ -298,10 +304,10 @@ const coreRules = {
     'no-new-object': [
         'error',
     ],
-    'no-new-symbol': [
+    'autofix/no-new-symbol': [
         'error',
     ],
-    'no-plusplus': [
+    'autofix/no-plusplus': [
         'error',
     ],
     // 'no-shadow': [
@@ -324,7 +330,7 @@ const coreRules = {
     'no-undef': [
         'error',
     ],
-    'no-undef-init': [
+    'autofix/no-undef-init': [
         'error',
     ],
     // 'no-undefined': [
@@ -340,7 +346,7 @@ const coreRules = {
             enforceInMethodNames: false,
         },
     ],
-    'no-unneeded-ternary': [
+    'autofix/no-unneeded-ternary': [
         'error',
     ],
     'autofix/no-unused-vars': [
@@ -349,55 +355,55 @@ const coreRules = {
     // 'no-use-before-define': [
     //     'error',
     // ],
-    'no-useless-computed-key': [
+    'autofix/no-useless-computed-key': [
         'error',
     ],
     'no-useless-constructor': [
         'error',
     ],
-    'no-useless-rename': [
+    'autofix/no-useless-rename': [
         'error',
     ],
-    'no-var': [
+    'autofix/no-var': [
         'error',
     ],
-    'no-whitespace-before-property': [
+    'autofix/no-whitespace-before-property': [
         'error',
     ],
-    'object-curly-newline': [
-        'error',
-        'always',
-    ],
-    'object-curly-spacing': [
+    'autofix/object-curly-newline': [
         'error',
         'always',
     ],
-    'object-property-newline': [
+    'autofix/object-curly-spacing': [
+        'error',
+        'always',
+    ],
+    'autofix/object-property-newline': [
         'error',
         {
             allowAllPropertiesOnSameLine: false,
         },
     ],
-    'object-shorthand': [
+    'autofix/object-shorthand': [
         'error',
     ],
-    'one-var': [
+    'autofix/one-var': [
         'error',
         'never',
     ],
-    'one-var-declaration-per-line': [
+    'autofix/one-var-declaration-per-line': [
         'error',
         'always',
     ],
-    'operator-linebreak': [
+    'autofix/operator-linebreak': [
         'error',
         'before',
     ],
-    'padded-blocks': [
+    'autofix/padded-blocks': [
         'error',
         'always',
     ],
-    'padding-line-between-statements': [
+    'autofix/padding-line-between-statements': [
         'error',
         {
             blankLine: 'never',
@@ -445,60 +451,60 @@ const coreRules = {
             prev: '*',
         },
     ],
-    'prefer-arrow-callback': [
+    'autofix/prefer-arrow-callback': [
         'error',
     ],
-    'prefer-const': [
+    'autofix/prefer-const': [
         'error',
     ],
-    'prefer-destructuring': [
+    'autofix/prefer-destructuring': [
         'error',
     ],
-    'prefer-exponentiation-operator': [
+    'autofix/prefer-exponentiation-operator': [
         'error',
     ],
     'prefer-numeric-literals': [
         'error',
     ],
-    'prefer-object-spread': [
+    'autofix/prefer-object-spread': [
         'error',
     ],
     'prefer-rest-params': [
         'error',
     ],
-    'prefer-spread': [
+    'autofix/prefer-spread': [
         'error',
     ],
-    'prefer-template': [
+    'autofix/prefer-template': [
         'error',
     ],
-    'quote-props': [
+    'autofix/quote-props': [
         'error',
         'consistent-as-needed',
     ],
-    'quotes': [
+    'autofix/quotes': [
         'error',
         'backtick',
     ],
     'require-yield': [
         'error',
     ],
-    'rest-spread-spacing': [
+    'autofix/rest-spread-spacing': [
         'error',
         'never',
     ],
-    'semi': [
+    'autofix/semi': [
         'error',
         'always',
     ],
-    'semi-spacing': [
+    'autofix/semi-spacing': [
         'error',
         {
             after: true,
             before: false,
         },
     ],
-    'semi-style': [
+    'autofix/semi-style': [
         'error',
         'last',
     ],
@@ -520,7 +526,7 @@ const coreRules = {
             natural: true,
         },
     ],
-    'space-before-blocks': [
+    'autofix/space-before-blocks': [
         'error',
         {
             classes: 'always',
@@ -528,29 +534,29 @@ const coreRules = {
             keywords: 'always',
         },
     ],
-    'space-before-function-paren': [
+    'autofix/space-before-function-paren': [
         'error',
         'always',
     ],
-    'space-in-parens': [
+    'autofix/space-in-parens': [
         'error',
         'always',
     ],
-    'space-infix-ops': [
+    'autofix/space-infix-ops': [
         'error',
     ],
-    'space-unary-ops': [
+    'autofix/space-unary-ops': [
         'error',
         {
             words: true,
             nonwords: false,
         },
     ],
-    'spaced-comment': [
+    'autofix/spaced-comment': [
         'error',
         'always',
     ],
-    'switch-colon-spacing': [
+    'autofix/switch-colon-spacing': [
         'error',
         {
             after: true,
@@ -560,19 +566,19 @@ const coreRules = {
     'symbol-description': [
         'error',
     ],
-    'template-curly-spacing': [
+    'autofix/template-curly-spacing': [
         'error',
         'always',
     ],
-    'template-tag-spacing': [
+    'autofix/template-tag-spacing': [
         'error',
         'never',
     ],
-    'unicode-bom': [
+    'autofix/unicode-bom': [
         'error',
         'never',
     ],
-    'yield-star-spacing': [
+    'autofix/yield-star-spacing': [
         'error',
         {
             after: true,

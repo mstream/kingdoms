@@ -10,7 +10,7 @@ import {
 } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {
-    ErrorsComponent, errorsComponentTestId,
+    ErrorsComponent,
 } from '.';
 import {
     emptyClientState,
@@ -18,6 +18,9 @@ import {
 import type {
     ClientState,
 } from '../../state/types';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -50,7 +53,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        errorsComponentTestId,
+                        testIds.COMPONENT_ERRORS.PARENT,
                     ),
                 ).not.toBeInTheDocument();
 

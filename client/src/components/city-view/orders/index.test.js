@@ -10,7 +10,7 @@ import {
 } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {
-    CityOrdersComponent, cityOrdersComponentTestId,
+    CityOrdersComponent,
 } from './index';
 import {
     TAB_ORDERS,
@@ -38,6 +38,9 @@ import {
 import {
     clientActions,
 } from '../../../state/modules/actions';
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -85,7 +88,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        cityOrdersComponentTestId,
+                        testIds.COMPONENT_CITY_VIEW.ORDERS,
                     ),
                 ).not.toBeInTheDocument();
 

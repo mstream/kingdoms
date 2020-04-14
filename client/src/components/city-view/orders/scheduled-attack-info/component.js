@@ -13,8 +13,9 @@ import {
 import {
     ImageComponent,
 } from '../../../image';
-
-export const testId = `city-orders-scheduled-attack-info`;
+import {
+    testIds,
+} from '../../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -66,7 +67,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testId} className="flex flex-row flex-wrap">
+        <div data-testid={testIds.COMPONENT_CITY_VIEW.SCHEDULED_ATTACK_INFO} className="flex flex-row flex-wrap">
             {unitItemComponents}
         </div>
     );

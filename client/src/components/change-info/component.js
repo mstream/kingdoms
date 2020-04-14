@@ -8,8 +8,10 @@ import classNames from 'classnames';
 import {
     numberToQuantityString,
 } from '../../../../common/src/utils';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
-export const testId = `change-info`;
 
 export const Component = (
     {
@@ -73,7 +75,7 @@ export const Component = (
         );
     return (
         <table
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_CHANGE_INFO.PARENT}
             className="table-fixed border-separate shadow-inner"
         >
             <tbody>{changeRowComponents}</tbody>

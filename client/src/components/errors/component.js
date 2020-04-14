@@ -5,9 +5,10 @@ import type {
     Props,
 } from './props';
 import classNames from 'classnames';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
-
-export const testId = `errors`;
 
 export const Component = (
     {
@@ -33,7 +34,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_ERRORS.PARENT}
             className="modal absolute top-0 left-0 w-screen h-screen flex items-center justify-center text-gray-100"
         >
             <div

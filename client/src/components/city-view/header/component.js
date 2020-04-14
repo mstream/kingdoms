@@ -10,8 +10,9 @@ import {
     getRefValue,
 } from '../../../utils';
 import classNames from 'classnames';
-
-export const testId = `city-header`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -252,7 +253,7 @@ export const Component = (
     };
 
     return (
-        <div data-testid={testId} className={className}>
+        <div data-testid={testIds.COMPONENT_CITY_VIEW.HEADER} className={className}>
             {previousCityId != null
             && navigateToPreviousCityButton(
                 {

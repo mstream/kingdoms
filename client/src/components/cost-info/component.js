@@ -14,8 +14,9 @@ import {
 import {
     subtractQuantities,
 } from '../../../../common/src/quantity';
-
-export const testId = `cost-info`;
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 export const Component = (
     {
@@ -73,7 +74,7 @@ export const Component = (
         );
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_COST_INFO.PARENT}
             className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs"
         >
             {requiredResourceComponents}

@@ -14,8 +14,10 @@ import cityImage from '../../../assets/images/cities/city.png';
 import {
     CityStatusBarComponent,
 } from './status-bar';
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
-export const testId = `city-tile`;
 
 export const Component = (
     {
@@ -54,7 +56,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testId}
+            data-testid={testIds.COMPONENT_WORLD_MAP.CITY_TILE}
             className="absolute cursor-pointer"
             style={style}
             onClick={onClick}

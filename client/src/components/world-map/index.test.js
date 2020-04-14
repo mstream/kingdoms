@@ -13,12 +13,6 @@ import {
     WorldMapComponent,
 } from './index';
 import {
-    terrainTileComponentTestId,
-} from './terrain-tile';
-import {
-    cityTileComponentTestId,
-} from './city-tile';
-import {
     emptyCommonState,
 } from '../../../../common/src/state/modules/state';
 import {
@@ -34,6 +28,9 @@ import {
 import type {
     ClientState,
 } from '../../state/types';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -71,7 +68,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        cityTileComponentTestId,
+                        testIds.COMPONENT_WORLD_MAP.CITY_TILE,
                     ),
                 )
                     .toHaveLength(
@@ -80,7 +77,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        terrainTileComponentTestId,
+                        testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE,
                     ),
                 )
                     .toHaveLength(
@@ -153,7 +150,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        cityTileComponentTestId,
+                        testIds.COMPONENT_WORLD_MAP.CITY_TILE,
                     ).length,
                 )
                     .toBeGreaterThan(
@@ -162,7 +159,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        terrainTileComponentTestId,
+                        testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE,
                     ).length,
                 )
                     .toBeGreaterThan(

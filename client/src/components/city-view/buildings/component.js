@@ -19,8 +19,9 @@ import {
     numberToQuantityString,
 } from '../../../../../common/src/utils';
 import * as romanDecimalConverter from 'roman-decimal';
-
-export const testId = `city-buildings`;
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 export const Component = (
     {
@@ -152,7 +153,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testId} role="tabpanel">
+        <div data-testid={testIds.COMPONENT_CITY_VIEW.BUILDINGS} role="tabpanel">
             <CityItemsListComponent>
                 {buildingComponents}
             </CityItemsListComponent>

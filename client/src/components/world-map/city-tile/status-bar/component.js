@@ -8,8 +8,10 @@ import type {
 import {
     calculateBuildingTierSum,
 } from '../../../../../../common/src/state';
+import {
+    testIds,
+} from '../../../../../../common/src/ui';
 
-export const testId = `city-status-bar`;
 
 export const Component = (
     {
@@ -43,7 +45,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testId} className={className}>
+        <div data-testid={testIds.COMPONENT_WORLD_MAP.STATUS_BAR} className={className}>
             <div
                 className="flex items-center p-1 text-md font-bold border-r border-gray-900">
                 {tiersSum}

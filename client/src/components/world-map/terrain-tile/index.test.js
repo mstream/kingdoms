@@ -10,7 +10,7 @@ import {
 } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import {
-    TerrainTileComponent, terrainTileComponentTestId,
+    TerrainTileComponent,
 } from './index';
 import type {
     ClientStateTile,
@@ -24,6 +24,9 @@ import {
 import type {
     ClientState,
 } from '../../../state/types';
+import {
+    testIds,
+} from '../../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -59,7 +62,7 @@ describe(
 
                 expect(
                     queryByTestId(
-                        terrainTileComponentTestId,
+                        testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE,
                     ),
                 )
                     .toBeInTheDocument();

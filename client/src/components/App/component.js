@@ -27,6 +27,8 @@ import {
 import {
     testIds,
 } from '../../../../common/src/ui';
+import classNames from 'classnames';
+
 
 export const Component = () => {
 
@@ -79,7 +81,16 @@ export const Component = () => {
     return (
         <div data-testid={testIds.COMPONENT_APP.PARENT}>
             <div
-                className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic cursor-default select-none">
+                className={classNames(
+                    `grid`,
+                    `grid-rows-12`,
+                    `grid-flow-col`,
+                    `h-screen`,
+                    `w-screen`,
+                    `font-gothic`,
+                    `cursor-default`,
+                    `select-none`,
+                )}>
                 <div className="row-span-1">
                     <MenuComponent/>
                 </div>

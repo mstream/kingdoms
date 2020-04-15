@@ -13,12 +13,6 @@ import {
     AppComponent,
 } from '.';
 import {
-    loaderComponentTestId,
-} from '../loader';
-import {
-    gameStartComponentTestId,
-} from '../game-start';
-import {
     emptyCommonState,
 } from '../../../../common/src/state/modules/state';
 import {
@@ -33,6 +27,9 @@ import {
 import type {
     ClientState,
 } from '../../state/types';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 const mockStore = configureStore(
     [],
@@ -65,7 +62,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        loaderComponentTestId,
+                        testIds.COMPONENT_LOADER.PARENT,
                     ),
                 )
                     .toBeInTheDocument();
@@ -117,13 +114,13 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        loaderComponentTestId,
+                        testIds.COMPONENT_LOADER.PARENT,
                     ),
                 ).not.toBeInTheDocument();
 
                 await expect(
                     queryByTestId(
-                        gameStartComponentTestId,
+                        testIds.COMPONENT_GAME_START.PARENT,
                     ),
                 )
                     .toBeInTheDocument();

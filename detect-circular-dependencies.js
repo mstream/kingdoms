@@ -40,5 +40,12 @@ dpdm.parseDependencyTree(
                 `no dependencies issues`,
             );
 
+            return null;
+
+        },
+    )
+    .catch(
+        () => {
+
         },
     );

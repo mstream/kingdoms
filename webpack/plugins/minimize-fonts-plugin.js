@@ -224,9 +224,12 @@ const minimize = (
                     },
                 );
 
-                done();
+                return null;
 
             },
+        )
+        .then(
+            done,
         )
         .catch(
             done,

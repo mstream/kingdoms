@@ -276,7 +276,7 @@ const coreRules = {
         'error',
     ],
     'no-label-var': [
-        'error'
+        'error',
     ],
     'no-mixed-operators': [
         'error',
@@ -588,6 +588,13 @@ const coreRules = {
 
 };
 
+const filenamesRules = {
+    'filenames/match-regex': [
+        'error',
+        /^[a-z-]+([0-9]+)?(\.[a-z]+)?$/,
+    ],
+};
+
 const flowtypeRules = {
     'flowtype/generic-spacing': [
         'error',
@@ -608,7 +615,9 @@ module.exports = {
         'plugin:import/warnings',
         'plugin:jest/recommended',
         'plugin:jest/style',
+        'plugin:promise/recommended',
         'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
         'plugin:testcafe/recommended',
     ],
     globals: {
@@ -638,14 +647,18 @@ module.exports = {
     },
     plugins: [
         'autofix',
+        'filenames',
         'flowtype',
         'import',
         'jest',
+        'promise',
         'react',
+        'react-hooks',
         'testcafe',
     ],
     rules: {
         ...coreRules,
+        ...filenamesRules,
         ...flowtypeRules,
     },
 };

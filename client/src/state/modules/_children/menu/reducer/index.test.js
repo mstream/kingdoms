@@ -26,7 +26,7 @@ import {
 } from './_test/select-city-view-units-tab-test-scenarios';
 import {
     updateStateTestScenarios,
-} from './_test/update-state.test-scenarios';
+} from './_test/update-state-test-scenarios';
 import {
     TAB_OVERVIEW,
 } from './types';

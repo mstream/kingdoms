@@ -19,18 +19,18 @@ export const Component = (
     }: Props,
 ) => {
 
-    if ( !isGameStarting ) {
-
-        return null;
-
-    }
-
     const [
         nameDraft,
         setNameDraft,
     ] = useState(
         ``,
     );
+
+    if ( !isGameStarting ) {
+
+        return null;
+
+    }
 
     const buttonClassName = classNames(
         `p-1 text-lg rounded-lg focus:outline-none text-gray-100 bg-green-600`,

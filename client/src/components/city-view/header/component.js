@@ -25,12 +25,6 @@ export const Component = (
     }: Props,
 ) => {
 
-    if ( city == null || cityId == null ) {
-
-        return null;
-
-    }
-
     const nameInputRef = useRef(
         null,
     );
@@ -68,6 +62,12 @@ export const Component = (
             isNameBeingEdited,
         ],
     );
+
+    if ( city == null || cityId == null ) {
+
+        return null;
+
+    }
 
     const onCityNameInputChange = (
         event,

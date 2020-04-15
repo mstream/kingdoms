@@ -147,12 +147,6 @@ export const Component = (
     }: Props,
 ) => {
 
-    if ( !isVisible ) {
-
-        return null;
-
-    }
-
     useEffect(
         () => {
 
@@ -221,6 +215,12 @@ export const Component = (
             zoomCameraOut,
         ],
     );
+
+    if ( !isVisible ) {
+
+        return null;
+
+    }
 
     const windowCenterLocation = multipleVectors(
         {

@@ -24,8 +24,9 @@ import {
 import {
     ErrorsComponent,
 } from '../errors';
-
-export const testId = `app`;
+import {
+    testIds,
+} from '../../../../common/src/ui';
 
 export const Component = () => {
 
@@ -76,7 +77,7 @@ export const Component = () => {
     };
 
     return (
-        <div data-testid={testId}>
+        <div data-testid={testIds.COMPONENT_APP.PARENT}>
             <div
                 className="grid grid-rows-12 grid-flow-col h-screen w-screen font-gothic cursor-default select-none">
                 <div className="row-span-1">

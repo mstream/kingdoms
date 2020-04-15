@@ -2,7 +2,8 @@
 
 import {
     getWorldId,
-    redirectToLoginPage, redirectToLogoutPage,
+    redirectToLoginPage,
+    redirectToLogoutPage,
 } from './index';
 import type {
     Config,
@@ -93,7 +94,11 @@ describe(
                     .toEqual(
                         [
                             [
-                                `cognitoUrl/login?client_id=client1&response_type=token&scope=email+openid&redirect_uri=http://localhost`,
+                                `cognitoUrl/login`
+                                + `?client_id=client1`
+                                + `&response_type=token`
+                                + `&scope=email+openid`
+                                + `&redirect_uri=http://localhost`,
                             ],
                         ],
                     );
@@ -144,7 +149,11 @@ describe(
                     .toEqual(
                         [
                             [
-                                `cognitoUrl/logout?client_id=client1&response_type=token&scope=email+openid&redirect_uri=http://localhost`,
+                                `cognitoUrl/logout`
+                                + `?client_id=client1`
+                                + `&response_type=token`
+                                + `&scope=email+openid`
+                                + `&redirect_uri=http://localhost`,
                             ],
                         ],
                     );

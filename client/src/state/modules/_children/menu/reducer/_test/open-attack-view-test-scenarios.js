@@ -19,7 +19,9 @@ import {
     clientActions,
 } from '../../../../actions';
 
-export const openAttackViewTestScenarios: $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientOpenAttackViewAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientOpenAttackViewAction >, >;
+
+export const openAttackViewTestScenarios: Scenarios = [
     {
         action: clientActions.menu.openAttackView(
             {

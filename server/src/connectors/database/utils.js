@@ -38,10 +38,11 @@ export const runDatabaseOperationTestScenarios = <A, R>( {
     operationFunction,
     scenarios,
 }: $ReadOnly< {|
-                                                                jest: Jest,
-                                                                operationFunction: ( A ) => Promise< R >,
-                                                                scenarios: $ReadOnlyArray< DatabaseTestScenario< A, R > >
-                                                            |} >, ): void => {
+                                                            jest: Jest,
+                                                            operationFunction: ( A ) => Promise< R >,
+                                                            scenarios: $ReadOnlyArray< DatabaseTestScenario< A, R > >
+                                                        |} >,
+): void => {
 
     scenarios.forEach(
         (

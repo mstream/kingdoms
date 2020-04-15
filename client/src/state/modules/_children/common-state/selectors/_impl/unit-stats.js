@@ -13,8 +13,9 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const unitStatsSelector: ClientStateSelector< ?CommonStateUnitStats > = createClientStateCommonStateSelector(
-    {
-        commonStateSelector: commonStateRulesSelectors.unitStats,
-    },
-);
+export const unitStatsSelector: ClientStateSelector< ?CommonStateUnitStats >
+    = createClientStateCommonStateSelector(
+        {
+            commonStateSelector: commonStateRulesSelectors.unitStats,
+        },
+    );

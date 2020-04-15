@@ -35,7 +35,18 @@ export const Component = (
     return (
         <div
             data-testid={testIds.COMPONENT_ERRORS.PARENT}
-            className="modal absolute top-0 left-0 w-screen h-screen flex items-center justify-center text-gray-100"
+            className={classNames(
+                `modal`,
+                `absolute`,
+                `top-0`,
+                `left-0`,
+                `w-screen`,
+                `h-screen`,
+                `flex`,
+                `items-center`,
+                `justify-center`,
+                `text-gray-100`,
+            )}
         >
             <div
                 className="modal-overlay absolute w-full h-full bg-gray-900 opacity-75 top-0 left-0"/>

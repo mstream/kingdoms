@@ -7,6 +7,8 @@ import type {
 import {
     testIds,
 } from '../../../../../common/src/ui';
+import classNames from 'classnames';
+
 
 export const Component = (
     {
@@ -17,7 +19,17 @@ export const Component = (
     return (
         <div
             data-testid={testIds.COMPONENT_CITY_VIEW.ITEMS_LIST}
-            className="flex flex-row flex-wrap flex-none items-stretch content-center justify-center w-full shadow-inner"
+            className={classNames(
+                `flex`,
+                `flex-row`,
+                `flex-wrap`,
+                `flex-none`,
+                `items-stretch`,
+                `content-center`,
+                `justify-center`,
+                `w-full`,
+                `shadow-inner`,
+            )}
         >
             {children}
         </div>

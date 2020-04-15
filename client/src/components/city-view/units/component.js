@@ -20,7 +20,7 @@ import {
     armor, food, speed, sword,
 } from '../../../assets/images/icons';
 import {
-    unitVisuals, unitsOrder,
+    unitsOrder, unitVisuals,
 } from '../../../assets/images/units';
 import {
     ChangeInfoComponent,
@@ -149,7 +149,8 @@ export const Component = (
             );
 
             return (
-                <div key={unitType} className={parentClassName} onClick={onClick}>
+                <div key={unitType} className={parentClassName}
+                    onClick={onClick}>
                     <p className="text-sm text-center font-medium text-gray-100">
                         {numberToQuantityString(
                             {
@@ -268,7 +269,19 @@ export const Component = (
 
     const infoComponent = (
         <div
-            className="parchment-bg flex flex-col w-full h-full border-solid border-l border-r border-b rounded-b border-gray-900">
+            className={classNames(
+                `parchment-bg`,
+                `flex`,
+                `flex-col`,
+                `w-full`,
+                `h-full`,
+                `border-solid`,
+                `border-l`,
+                `border-r`,
+                `border-b`,
+                `rounded-b`,
+                `border-gray-900`,
+            )}>
             <p className="m-1 text-2xl text-center">{activeUnitVisual.name}</p>
             <div className="flex flex-row justify-around">
                 {statsComponent}

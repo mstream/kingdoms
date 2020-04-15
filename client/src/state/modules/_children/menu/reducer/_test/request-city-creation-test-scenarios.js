@@ -13,7 +13,9 @@ import {
     clientActions,
 } from '../../../../actions';
 
-export const requestCityCreationTestScenarios: $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientRequestCityCreationAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientRequestCityCreationAction >, >;
+
+export const requestCityCreationTestScenarios: Scenarios = [
     {
         action: clientActions.commonState.requestCityCreation(
             {

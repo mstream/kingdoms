@@ -36,7 +36,16 @@ export const Component = (
     const doesBelongToEnemy = !isAbandoned && !doesBelongToPlayer;
 
     const className = classNames(
-        `absolute left-1/2 transform -translate-x-1/2 flex flex-row items-stretch text-center rounded-lg text-gray-100`,
+        `absolute`,
+        `left-1/2`,
+        `transform`,
+        `-translate-x-1/2`,
+        `flex`,
+        `flex-row`,
+        `items-stretch`,
+        `text-center`,
+        `rounded-lg`,
+        `text-gray-100`,
         {
             'bg-gray-500-alpha-50' : isAbandoned,
             'bg-green-500-alpha-50': doesBelongToPlayer,

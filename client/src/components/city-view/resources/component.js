@@ -18,8 +18,8 @@ import {
 } from '../items-list';
 import classNames from 'classnames';
 import {
-    resourceVisuals,
     resourcesOrder,
+    resourceVisuals,
 } from '../../../assets/images/resources';
 import {
     calculateResourceChangeInfo,
@@ -138,7 +138,19 @@ export const Component = (
 
     const infoComponent = (
         <div
-            className="parchment-bg flex flex-col w-full h-full border-solid border-l border-r border-b rounded-b border-gray-900">
+            className={classNames(
+                `parchment-bg`,
+                `flex`,
+                `flex-col`,
+                `w-full`,
+                `h-full`,
+                `border-solid`,
+                `border-l`,
+                `border-r`,
+                `border-b`,
+                `rounded-b`,
+                `border-gray-900`,
+            )}>
             <p className="m-1 text-2xl text-center">
                 {activeResourceVisual.name}
             </p>
@@ -152,7 +164,8 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_CITY_VIEW.RESOURCES} role="tabpanel">
+        <div data-testid={testIds.COMPONENT_CITY_VIEW.RESOURCES}
+            role="tabpanel">
             <CityItemsListComponent>
                 {resourceComponents}
             </CityItemsListComponent>

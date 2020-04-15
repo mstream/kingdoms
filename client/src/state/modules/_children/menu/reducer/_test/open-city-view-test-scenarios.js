@@ -19,7 +19,9 @@ import {
     clientActions,
 } from '../../../../actions';
 
-export const openCityViewTestScenarios: $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientOpenCityViewAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientOpenCityViewAction >, >;
+
+export const openCityViewTestScenarios: Scenarios = [
     {
         action: clientActions.menu.openCityView(
             {

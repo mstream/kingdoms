@@ -26,7 +26,9 @@ import {
     clientActions,
 } from '../../../../actions';
 
-export const updateStateTestScenarios: $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientUpdateStateAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientUpdateStateAction >, >;
+
+export const updateStateTestScenarios: Scenarios = [
     {
         action: clientActions.commonState.updateState(
             {

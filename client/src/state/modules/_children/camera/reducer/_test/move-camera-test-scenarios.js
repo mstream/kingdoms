@@ -13,7 +13,9 @@ import {
     clientActions,
 } from '../../../../actions';
 
-export const moveCameraTestScenarios: $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientMoveCameraAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientMoveCameraAction >, >;
+
+export const moveCameraTestScenarios: Scenarios = [
     {
         action                   : clientActions.camera.moveCameraUp(),
         expectedLocalStateCreator: (

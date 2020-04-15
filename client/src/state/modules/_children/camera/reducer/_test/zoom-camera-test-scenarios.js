@@ -13,7 +13,9 @@ import {
     clientActions,
 } from '../../../../actions';
 
-export const zoomCameraTestScenarios: $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientZoomCameraAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientZoomCameraAction >, >;
+
+export const zoomCameraTestScenarios: Scenarios = [
     {
         action                   : clientActions.camera.zoomCameraIn(),
         expectedLocalStateCreator: (

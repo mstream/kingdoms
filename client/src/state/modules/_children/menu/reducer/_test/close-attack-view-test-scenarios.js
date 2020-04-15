@@ -19,7 +19,9 @@ import {
     menuActions,
 } from '../../actions';
 
-export const closeAttackViewTestScenarios: $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientCloseAttackViewAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientCloseAttackViewAction >, >;
+
+export const closeAttackViewTestScenarios: Scenarios = [
     {
         action                   : menuActions.closeAttackView(),
         expectedLocalStateCreator: (

@@ -13,7 +13,9 @@ import {
     clientActions,
 } from '../../../../actions';
 
-export const closeCityViewTestScenarios: $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientCloseCityViewAction >, > = [
+type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientCloseCityViewAction >, >;
+
+export const closeCityViewTestScenarios: Scenarios = [
     {
         action                   : clientActions.menu.closeCityView(),
         expectedLocalStateCreator: (

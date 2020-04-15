@@ -7,6 +7,8 @@ import type {
 import {
     testIds,
 } from '../../../../common/src/ui';
+import classNames from 'classnames';
+
 
 export const Component = (
     {
@@ -22,7 +24,20 @@ export const Component = (
     return (
         <div
             data-testid={testIds.COMPONENT_MENU.PARENT}
-            className="wood2-bg relative flex flex-row items-end justify-start h-20 w-full z-10 shadow-lg bg-gray-500 text-gray-100"
+            className={classNames(
+                `wood2-bg`,
+                `relative`,
+                `flex`,
+                `flex-row`,
+                `items-end`,
+                `justify-start`,
+                `h-20`,
+                `w-full`,
+                `z-10`,
+                `shadow-lg`,
+                `bg-gray-500`,
+                `text-gray-100`,
+            )}
         >
             <div className="group ml-1 cursor-pointer">
                 <div data-testid={testIds.COMPONENT_MENU.DROPDOWN_BUTTON}

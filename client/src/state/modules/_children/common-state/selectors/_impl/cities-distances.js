@@ -13,8 +13,10 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const citiesDistancesSelector: ClientStateSelector< ?CitiesDistances > = createClientStateCommonStateSelector(
-    {
-        commonStateSelector: commonStateCitiesSelectors.citiesDistances,
-    },
-);
+
+export const citiesDistancesSelector: ClientStateSelector< ?CitiesDistances >
+    = createClientStateCommonStateSelector(
+        {
+            commonStateSelector: commonStateCitiesSelectors.citiesDistances,
+        },
+    );

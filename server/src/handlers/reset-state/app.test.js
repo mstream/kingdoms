@@ -1,26 +1,26 @@
 // @flow
 
 import {
-    stringifyJson,
-} from '../../../../common/src/json';
+    emptyApiGatewayProxyEvent, emptyContext,
+} from '../util';
 import {
     emptyCommonState,
 } from '../../../../common/src/state/modules/state';
 import {
+    handler,
+} from './app';
+import {
     mockSadd, mockSet,
 } from '../../clients/redis';
 import {
+    stringifyJson,
+} from '../../../../common/src/json';
+import {
     stubConfig,
 } from '../../config';
-import {
-    emptyApiGatewayProxyEvent, emptyContext,
-} from '../util';
 import type {
     APIGatewayProxyEvent, Context,
 } from '../types';
-import {
-    handler,
-} from './app';
 
 jest.mock(
     `../../config`,

@@ -1,14 +1,14 @@
 // @flow
 
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
 import {
     failure, success,
 } from '../../../utils';
 import type {
     CommonCreateScheduledAttackOrderAction,
 } from '../../actions/types';
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
 import type {
     CommonStateOrders,
 } from '../types';

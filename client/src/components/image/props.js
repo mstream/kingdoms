@@ -1,20 +1,20 @@
 // @flow
 
-import type {
-    ActionCreatorsProps, StateToProps,
-} from '../types';
 import {
     connect,
 } from 'react-redux';
+import type {
+    ActionCreatorsProps, StateToProps,
+} from '../types';
+import type {
+    ClientAction, ClientState,
+} from '../../state/types';
 import type {
     Dispatch,
 } from 'redux';
 import type {
     Node,
 } from 'react';
-import type {
-    ClientAction, ClientState,
-} from '../../state/types';
 
 type OwnProps = {
     children?: Node,

@@ -4,28 +4,29 @@ import {
     UNIT_PIKEMAN,
 } from '../../../rules/reducer/types';
 import {
-    failure, success,
-} from '../../../utils';
+    createScheduledAttackOrder,
+} from '../../../orders/actions';
+import {
+    emptyCityState,
+} from '../state';
 import {
     emptyCommonState,
 } from '../../../state';
-import type {
-    CommonStateCitiesReducerTestScenarios,
-} from './types';
-import type {
-    CommonCreateScheduledAttackOrderAction,
-} from '../../../orders/actions/types';
-import {
-    createScheduledAttackOrder,
-} from '../../../orders/actions';
 import {
     emptyRegimentTemplateState,
 } from '../../../orders/reducer/state';
 import {
-    emptyCityState,
-} from '../state';
+    failure, success,
+} from '../../../utils';
+import type {
+    CommonCreateScheduledAttackOrderAction,
+} from '../../../orders/actions/types';
+import type {
+    CommonStateCitiesReducerTestScenarios,
+} from './types';
 
-type Scenarios = $ReadOnlyArray< CommonStateCitiesReducerTestScenarios< CommonCreateScheduledAttackOrderAction >, >;
+type Scenario = CommonStateCitiesReducerTestScenarios< CommonCreateScheduledAttackOrderAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const createOrderTestScenarios: Scenarios = [
     {

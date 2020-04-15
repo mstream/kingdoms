@@ -3,15 +3,15 @@
 import {
     emptyCityState,
 } from '../../reducer/state';
+import {
+    emptyCommonState,
+} from '../../../state';
 import type {
     CitiesByOwner,
 } from '../types';
 import type {
     CommonStateSelectorTestScenario,
 } from '../../../types';
-import {
-    emptyCommonState,
-} from '../../../state';
 
 type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< CitiesByOwner > >;
 

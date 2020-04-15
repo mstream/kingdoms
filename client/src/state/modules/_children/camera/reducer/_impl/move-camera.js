@@ -1,24 +1,24 @@
 // @flow
 
 import {
-    clipToBoundary,
-} from '../../../../../../../../common/src/boundary';
-import {
     addVectors,
     multipleVectors,
 } from '../../../../../../../../common/src/vector';
-import type {
-    ClientStateCamera,
-} from '../types';
+import {
+    clientStateSelectors,
+} from '../../../../selectors';
+import {
+    clipToBoundary,
+} from '../../../../../../../../common/src/boundary';
 import type {
     ClientMoveCameraAction,
 } from '../../actions/types';
 import type {
     ClientStateActionReducer,
 } from '../../../../../types';
-import {
-    clientStateSelectors,
-} from '../../../../selectors';
+import type {
+    ClientStateCamera,
+} from '../types';
 
 type Reducer = ClientStateActionReducer< ClientStateCamera,
     ClientMoveCameraAction, >;

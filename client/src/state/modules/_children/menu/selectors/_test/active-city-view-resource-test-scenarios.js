@@ -1,17 +1,17 @@
 // @flow
 
 import {
+    RESOURCE_WOOD,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    CommonStateResourceKey,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import {
-    RESOURCE_WOOD,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
     ClientStateSelectorTestScenario,
 } from '../../../../../types';
+import type {
+    CommonStateResourceKey,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateResourceKey >, >;
 

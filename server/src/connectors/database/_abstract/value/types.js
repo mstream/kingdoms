@@ -1,19 +1,19 @@
 // @flow
 
 import type {
-    KeyCreator,
-    ValueDeserializer,
-    ValueSerializer,
-} from '../../types';
-import type {
     DatabaseValueCas,
 } from './operations/cas/types';
+import type {
+    DatabaseValueGet,
+} from './operations/get/types';
 import type {
     DatabaseValueSet,
 } from './operations/set/types';
 import type {
-    DatabaseValueGet,
-} from './operations/get/types';
+    KeyCreator,
+    ValueDeserializer,
+    ValueSerializer,
+} from '../../types';
 
 export type DatabaseValueOperations<K, V> = $ReadOnly< {|
     cas: DatabaseValueCas< K, V >,

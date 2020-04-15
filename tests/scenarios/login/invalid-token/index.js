@@ -1,25 +1,25 @@
 // @flow
 
-import type {
-    TestController,
-} from 'testcafe';
-import {
-    generateId,
-} from '../../../../common/src/utils';
-import {
-    appModel,
-} from '../../../models/app';
 import {
     TOKEN_INVALID_PRIVATE_KEY,
     TOKEN_UNPARSABLE,
     TOKEN_WITHOUT_USERNAME,
 } from '../../../jwt/types';
 import {
-    createToken,
-} from '../../../jwt';
+    appModel,
+} from '../../../models/app';
 import {
     authModel,
 } from '../../../models/auth';
+import {
+    createToken,
+} from '../../../jwt';
+import {
+    generateId,
+} from '../../../../common/src/utils';
+import type {
+    TestController,
+} from 'testcafe';
 
 
 fixture(

@@ -1,14 +1,14 @@
 // @flow
 
+import {
+    expectCalls,
+} from '../../../../common/src/test-utils';
 import type {
     DatabaseTestScenario,
     SideEffect,
     ValueDeserializer,
     ValueSerializer,
 } from './types';
-import {
-    expectCalls,
-} from '../../../../common/src/test-utils';
 import type {
     Jest,
 } from '../../../../common/src/test-utils/types';
@@ -33,15 +33,16 @@ export const stringValueDeserializer: ValueDeserializer< string > = (
 
 };
 
-export const runDatabaseOperationTestScenarios = <A, R>( {
-    jest,
-    operationFunction,
-    scenarios,
-}: $ReadOnly< {|
-                                                            jest: Jest,
-                                                            operationFunction: ( A ) => Promise< R >,
-                                                            scenarios: $ReadOnlyArray< DatabaseTestScenario< A, R > >
-                                                        |} >,
+export const runDatabaseOperationTestScenarios = <A, R>(
+    {
+        jest,
+        operationFunction,
+        scenarios,
+    }: $ReadOnly< {|
+        jest: Jest,
+        operationFunction: ( A ) => Promise< R >,
+        scenarios: $ReadOnlyArray< DatabaseTestScenario< A, R > >
+    |} >,
 ): void => {
 
     scenarios.forEach(

@@ -1,11 +1,11 @@
 // @flow
 
 import {
-    createTools,
-} from '../tools/src';
-import {
     config,
 } from './config';
+import {
+    createTools,
+} from '../tools/src';
 import {
     logger,
 } from './logging';

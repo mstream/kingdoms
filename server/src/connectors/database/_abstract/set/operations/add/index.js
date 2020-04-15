@@ -1,9 +1,9 @@
 // @flow
 
-import verror from 'verror';
 import {
     ERROR_DATABASE_SET_ADD,
 } from './types';
+import verror from 'verror';
 import type {
     DatabaseSetAdd,
 } from './types';

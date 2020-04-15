@@ -6,30 +6,30 @@
 
 // @flow-runtime
 
-import type {
-    CommonStateRules,
-} from './rules/reducer/types';
 import {
     Type, reify,
 } from 'flow-runtime';
 import type {
+    CommonAction,
+} from '../types';
+import type {
     CommonStateCities,
 } from './cities/reducer/types';
+import type {
+    CommonStateOrders,
+} from './orders/reducer/types';
+import type {
+    CommonStatePlayers,
+} from './players/reducer/types';
+import type {
+    CommonStateRules,
+} from './rules/reducer/types';
 import type {
     CommonStateTime,
 } from './time/reducer/types';
 import type {
     CommonStateWorld,
 } from './world/reducer/types';
-import type {
-    CommonStateOrders,
-} from './orders/reducer/types';
-import type {
-    CommonAction,
-} from '../types';
-import type {
-    CommonStatePlayers,
-} from './players/reducer/types';
 
 export type CommonState = $ReadOnly< {
     cities: CommonStateCities,

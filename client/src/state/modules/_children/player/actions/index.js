@@ -1,13 +1,13 @@
 // @flow
 
+import {
+    LOAD_PLAYER,
+} from './types';
 import type {
     ClientActionCreator,
 } from '../../../../types';
 import type {
     ClientLoadPlayerAction,
-} from './types';
-import {
-    LOAD_PLAYER,
 } from './types';
 
 const loadPlayer: ClientActionCreator< ClientLoadPlayerAction > = (

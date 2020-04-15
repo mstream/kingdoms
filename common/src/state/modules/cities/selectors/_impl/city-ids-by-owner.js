@@ -1,20 +1,20 @@
 // @flow
 
-import type {
-    CommonState, CommonStateSelector,
-} from '../../../types';
+import {
+    citiesSelector,
+} from './cities';
 import {
     createSelector,
 } from 'reselect';
 import type {
-    CommonStateCities,
-} from '../../reducer/types';
-import {
-    citiesSelector,
-} from './cities';
-import type {
     CityIdsByOwner,
 } from '../types';
+import type {
+    CommonState, CommonStateSelector,
+} from '../../../types';
+import type {
+    CommonStateCities,
+} from '../../reducer/types';
 
 export const cityIdsByOwnerSelector: CommonStateSelector< CityIdsByOwner > = createSelector<CommonState,
     void,

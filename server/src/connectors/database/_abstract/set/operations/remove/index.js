@@ -1,12 +1,12 @@
 // @flow
 
-import type {
-    DatabaseSetRemove,
-} from './types';
 import {
     ERROR_DATABASE_SET_REMOVE,
 } from './types';
 import verros from 'verror';
+import type {
+    DatabaseSetRemove,
+} from './types';
 
 export const remove: DatabaseSetRemove< string, string > = async ( {
     key,

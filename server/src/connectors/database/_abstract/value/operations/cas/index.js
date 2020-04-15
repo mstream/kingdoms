@@ -1,12 +1,12 @@
 // @flow
 
+import {
+    get,
+} from '../get';
 import verror from 'verror';
 import type {
     DatabaseValueCas,
 } from './types';
-import {
-    get,
-} from '../get';
 
 export const ERROR_DATABASE_VALUE_CAS: 'ERROR_DATABASE_VALUE_CAS'
     = `ERROR_DATABASE_VALUE_CAS`;
@@ -126,6 +126,7 @@ export const cas: DatabaseValueCas< string, string > = async ( {
                 );
 
             }
+
             throw error;
 
         }

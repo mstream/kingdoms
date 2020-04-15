@@ -4,13 +4,13 @@ import type {
     BaseAction,
 } from '../../../../../../../common/src/types/actions';
 import type {
+    ClientStateCityViewTab,
+} from '../reducer/types';
+import type {
     CommonStateBuildingKey,
     CommonStateResourceKey,
     CommonStateUnitKey,
 } from '../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
-    ClientStateCityViewTab,
-} from '../reducer/types';
 import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../../common/src/state/modules/orders/reducer/types';

@@ -1,17 +1,5 @@
 // @flow
 
-import type {
-    CommonStateBuilding,
-    CommonStateBuildingUpgradeCost,
-    CommonStateBuildingUpgradeCosts,
-    CommonStateBuildings,
-    CommonStateDamage,
-    CommonStateResources,
-    CommonStateRules,
-    CommonStateUnitStat,
-    CommonStateUnitStats,
-    CommonStateUnits,
-} from './types';
 import {
     ARMOR_HEAVY,
     ARMOR_LIGHT,
@@ -29,6 +17,18 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
+} from './types';
+import type {
+    CommonStateBuilding,
+    CommonStateBuildingUpgradeCost,
+    CommonStateBuildingUpgradeCosts,
+    CommonStateBuildings,
+    CommonStateDamage,
+    CommonStateResources,
+    CommonStateRules,
+    CommonStateUnitStat,
+    CommonStateUnitStats,
+    CommonStateUnits,
 } from './types';
 
 export const emptyResourcesState: CommonStateResources = {

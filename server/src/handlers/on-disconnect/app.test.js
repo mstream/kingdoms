@@ -3,12 +3,12 @@
 import {
     emptyApiGatewayProxyEvent, emptyContext,
 } from '../util';
-import type {
-    APIGatewayProxyEvent, Context,
-} from '../types';
 import {
     handler,
 } from './app';
+import type {
+    APIGatewayProxyEvent, Context,
+} from '../types';
 
 jest.mock(
     `../../config`,

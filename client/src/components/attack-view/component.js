@@ -1,22 +1,22 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    AttackViewRegimentTemplateFormComponent,
-} from './regiment-template-form';
 import {
     AttackViewCityListComponent,
 } from './city-list';
 import {
+    AttackViewRegimentTemplateFormComponent,
+} from './regiment-template-form';
+import {
     AttackViewSchedulerFormComponent,
 } from './scheduler-form';
-import classNames from 'classnames';
 import {
     testIds,
 } from '../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {
@@ -72,7 +72,18 @@ export const Component = (
     return (
         <div
             data-testid={testIds.COMPONENT_ATTACK_VIEW.PARENT}
-            className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t text-gray-100"
+            className={classNames(
+                `modal`,
+                `top-0`,
+                `left-0`,
+                `w-full`,
+                `h-full`,
+                `flex`,
+                `items-center`,
+                `justify-center`,
+                `rounded-t`,
+                `text-gray-100`,
+            )}
         >
             <div
                 onClick={onBackgroundClick}
@@ -105,7 +116,16 @@ export const Component = (
                 )}
             >
                 <div
-                    className="wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800 justify-center">
+                    className={classNames(
+                        `wood-bg`,
+                        `flex`,
+                        `flex-row`,
+                        `items-stretch`,
+                        `flex-none`,
+                        `w-full`,
+                        `bg-orange-800`,
+                        `justify-center`,
+                    )}>
                     <div className="font-bold text-2xl text-center">
                         {attackedCity.name}
                     </div>

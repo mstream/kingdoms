@@ -1,17 +1,14 @@
 // @flow
 
-import React, {
-    useEffect, useState,
-} from 'react';
 import {
-    MenuComponent,
-} from '../menu';
-import {
-    WorldMapComponent,
-} from '../world-map';
+    AttackViewComponent,
+} from '../attack-view';
 import {
     CityViewComponent,
 } from '../city-view';
+import {
+    ErrorsComponent,
+} from '../errors';
 import {
     GameStartComponent,
 } from '../game-start';
@@ -19,14 +16,17 @@ import {
     LoaderComponent,
 } from '../loader';
 import {
-    AttackViewComponent,
-} from '../attack-view';
+    MenuComponent,
+} from '../menu';
 import {
-    ErrorsComponent,
-} from '../errors';
+    WorldMapComponent,
+} from '../world-map';
 import {
     testIds,
 } from '../../../../common/src/ui';
+import React, {
+    useEffect, useState,
+} from 'react';
 import classNames from 'classnames';
 
 

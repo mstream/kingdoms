@@ -1,23 +1,23 @@
 // @flow
 
 import {
-    emptyCommonState,
-} from '../../../../../../../../common/src/state/modules/state';
+    clientActions,
+} from '../../../../actions';
 import {
     emptyCityState,
 } from '../../../../../../../../common/src/state/modules/cities/reducer/state';
-import type {
-    ClientStateMenuReducerTestScenario,
-} from './types';
-import type {
-    ClientOpenCityViewAction,
-} from '../../actions/types';
 import {
     emptyClientState,
 } from '../../../../../state';
 import {
-    clientActions,
-} from '../../../../actions';
+    emptyCommonState,
+} from '../../../../../../../../common/src/state/modules/state';
+import type {
+    ClientOpenCityViewAction,
+} from '../../actions/types';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientOpenCityViewAction >, >;
 

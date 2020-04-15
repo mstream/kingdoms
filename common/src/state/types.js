@@ -1,37 +1,37 @@
 // @flow
 
-import type {
-    CommonAbandonCityAction,
-    CommonChangeCityNameAction,
-    CommonCreateCityAction,
-    CommonUpgradeBuildingAction,
-} from './modules/cities/actions/types';
 import {
     ABANDON_CITY,
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
 } from './modules/cities/actions/types';
-import type {
-    CommonCreateScheduledAttackOrderAction,
-} from './modules/orders/actions/types';
 import {
     CREATE_SCHEDULED_ATTACK_ORDER,
 } from './modules/orders/actions/types';
-import type {
-    CommonExecuteTimeStepAction,
-} from './modules/time/actions';
+import {
+    DUMMY, GET_CURRENT_STATE, RESET_STATE,
+} from './actions/types';
 import {
     EXECUTE_TIME_STEP,
 } from './modules/time/actions';
+import type {
+    CommonAbandonCityAction,
+    CommonChangeCityNameAction,
+    CommonCreateCityAction,
+    CommonUpgradeBuildingAction,
+} from './modules/cities/actions/types';
+import type {
+    CommonCreateScheduledAttackOrderAction,
+} from './modules/orders/actions/types';
 import type {
     CommonDummyAction,
     CommonGetCurrentStateAction,
     CommonResetStateAction,
 } from './actions/types';
-import {
-    DUMMY, GET_CURRENT_STATE, RESET_STATE,
-} from './actions/types';
+import type {
+    CommonExecuteTimeStepAction,
+} from './modules/time/actions';
 
 export type CommonActionKey =
     | typeof ABANDON_CITY

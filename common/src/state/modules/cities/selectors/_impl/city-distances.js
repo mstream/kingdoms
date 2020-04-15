@@ -1,8 +1,14 @@
 // @flow
 
 import {
+    citiesSelector,
+} from './cities';
+import {
     createSelector,
 } from 'reselect';
+import {
+    getDistanceBetweenVectors,
+} from '../../../../../vector';
 import type {
     CitiesDistances, CityDistances,
 } from '../types';
@@ -12,12 +18,6 @@ import type {
 import type {
     CommonStateCities,
 } from '../../reducer/types';
-import {
-    getDistanceBetweenVectors,
-} from '../../../../../vector';
-import {
-    citiesSelector,
-} from './cities';
 
 export const citiesDistancesSelector: CommonStateSelector< CitiesDistances > = createSelector<CommonState,
     void,

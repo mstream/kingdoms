@@ -1,14 +1,14 @@
 // @flow
 
 import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
+import type {
     ClientStateMenu,
 } from '../types';
 import type {
     ClientUpdateAttackViewMinimumDelayAction,
 } from '../../actions/types';
-import type {
-    ClientStateActionReducer,
-} from '../../../../../types';
 
 type Reducer = ClientStateActionReducer< ClientStateMenu,
     ClientUpdateAttackViewMinimumDelayAction, >;

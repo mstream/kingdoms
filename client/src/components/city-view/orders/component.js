@@ -1,21 +1,21 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    CityOrdersScheduledAttackItemComponent,
-} from './scheduled-attack-item';
-import type {
-    ScheduledAttackOrderInfo,
-} from '../../../state/modules/selectors/types';
 import {
     CityOrdersScheduledAttackInfoComponent,
 } from './scheduled-attack-info';
 import {
+    CityOrdersScheduledAttackItemComponent,
+} from './scheduled-attack-item';
+import {
     testIds,
 } from '../../../../../common/src/ui';
+import React from 'react';
+import type {
+    Props,
+} from './props';
+import type {
+    ScheduledAttackOrderInfo,
+} from '../../../state/modules/selectors/types';
 
 export const Component = (
     {

@@ -1,11 +1,11 @@
 // @flow
 
 import {
-    invokeFunction,
-} from './index';
-import {
     emptyLogger,
 } from '../../../../common/src/logging';
+import {
+    invokeFunction,
+} from './index';
 
 describe(
     `invokeFunction`,

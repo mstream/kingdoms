@@ -1,3 +1,4 @@
 // @flow
 
-export type Exec = ( string ) => Promise< $ReadOnly< {| stderr: string, stdout: string |} > >
+export type Exec = ( string ) =>
+    Promise< $ReadOnly< {| stderr: string, stdout: string |} > >

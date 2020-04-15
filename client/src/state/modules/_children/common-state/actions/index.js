@@ -1,5 +1,12 @@
 // @flow
 
+import {
+    REQUEST_BUILDING_UPGRADE,
+    REQUEST_CITY_CREATION,
+    REQUEST_CITY_NAME_CHANGE,
+    REQUEST_ORDER_CREATION,
+    UPDATE_STATE,
+} from './types';
 import type {
     ClientActionCreator,
 } from '../../../../types';
@@ -9,13 +16,6 @@ import type {
     ClientRequestCityNameChangeAction,
     ClientRequestOrderCreationAction,
     ClientUpdateStateAction,
-} from './types';
-import {
-    REQUEST_BUILDING_UPGRADE,
-    REQUEST_CITY_CREATION,
-    REQUEST_CITY_NAME_CHANGE,
-    REQUEST_ORDER_CREATION,
-    UPDATE_STATE,
 } from './types';
 
 const requestBuildingUpgrade: ClientActionCreator< ClientRequestBuildingUpgradeAction > = (

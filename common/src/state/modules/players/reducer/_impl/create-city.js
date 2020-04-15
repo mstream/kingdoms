@@ -1,20 +1,20 @@
 // @flow
 
-import type {
-    CommonStatePlayers,
-} from '../types';
 import {
     PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING,
 } from '../types';
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
 import {
     failure, success,
 } from '../../../utils';
 import type {
     CommonCreateCityAction,
 } from '../../../cities/actions/types';
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
+import type {
+    CommonStatePlayers,
+} from '../types';
 
 type Reducer = CommonStateActionReducer< CommonStatePlayers,
     CommonCreateCityAction, >;

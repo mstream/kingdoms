@@ -1,9 +1,9 @@
 // @flow
 
+import jwkToPem from 'jwk-to-pem';
 import type {
     Cognito, Jwk, Jwks,
 } from '../../clients/cognito/types';
-import jwkToPem from 'jwk-to-pem';
 
 export const getPublicKey = async ( {
     cognito,

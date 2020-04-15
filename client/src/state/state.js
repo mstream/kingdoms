@@ -5,6 +5,10 @@ import {
     initialCameraState,
 } from './modules/_children/camera/reducer/state';
 import {
+    emptyCommonStateState,
+    initialCommonStateState,
+} from './modules/_children/common-state/reducer/state';
+import {
     emptyErrorsState,
     initialErrorsState,
 } from './modules/_children/errors/reducer/state';
@@ -16,10 +20,6 @@ import {
     emptyPlayerState,
     initialPlayerState,
 } from './modules/_children/player/reducer/state';
-import {
-    emptyCommonStateState,
-    initialCommonStateState,
-} from './modules/_children/common-state/reducer/state';
 import {
     emptyTilesState,
     initialTilesState,

@@ -4,11 +4,11 @@ import {
     TestController,
 } from 'testcafe';
 import {
-    getLocation,
-} from '../../utils';
-import {
     config,
 } from '../../config';
+import {
+    getLocation,
+} from '../../utils';
 
 const isAtAppPage = async (
     {

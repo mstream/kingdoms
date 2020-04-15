@@ -1,21 +1,21 @@
 // @flow
 
 import {
-    createSelector,
-} from 'reselect';
-import type {
-    CommonStateOrders,
-    CommonStateScheduledAttackOrder,
-} from '../../../../../../common/src/state/modules/orders/reducer/types';
+    clientStateCommonStateSelectors,
+} from '../../_children/common-state/selectors';
 import {
     clientStateMenuSelectors,
 } from '../../_children/menu/selectors';
 import {
-    clientStateCommonStateSelectors,
-} from '../../_children/common-state/selectors';
+    createSelector,
+} from 'reselect';
 import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
+import type {
+    CommonStateOrders,
+    CommonStateScheduledAttackOrder,
+} from '../../../../../../common/src/state/modules/orders/reducer/types';
 import type {
     ScheduledAttackOrderInfo,
     ScheduledAttackOrderInfosById,

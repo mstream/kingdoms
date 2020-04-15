@@ -1,13 +1,5 @@
 // @flow
 
-import type {
-    DatabaseSetOperations,
-} from './types';
-import type {
-    KeyCreator,
-    ValueDeserializer,
-    ValueSerializer,
-} from '../../types';
 import {
     add,
 } from './operations/add';
@@ -24,8 +16,16 @@ import type {
     DatabaseSetGetAll,
 } from './operations/get-all/types';
 import type {
+    DatabaseSetOperations,
+} from './types';
+import type {
     DatabaseSetRemove,
 } from './operations/remove/types';
+import type {
+    KeyCreator,
+    ValueDeserializer,
+    ValueSerializer,
+} from '../../types';
 
 export const createDatabaseSetOperations = <K, V>( {
     keyCreator,

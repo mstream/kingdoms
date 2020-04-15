@@ -1,19 +1,19 @@
 // @flow
 
 import type {
-    Jest,
-} from '../../../../common/src/test-utils/types';
-import type {
     ClientAction,
     ClientActionKey,
     ClientStateReducer,
     ClientStateReducerTestScenario,
     ClientStateSelector,
-    ClientStateSelectors,
     ClientStateSelectorTestScenario,
+    ClientStateSelectors,
     ReducerScenarios,
     SelectorScenarios,
 } from '../types';
+import type {
+    Jest,
+} from '../../../../common/src/test-utils/types';
 
 const runReducerTestScenario = <S>( {
     jest,

@@ -4,11 +4,11 @@ import type {
     BaseAction,
 } from '../../../../../../../common/src/types/actions';
 import type {
-    CommonStateBuildingKey,
-} from '../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
     CommonState,
 } from '../../../../../../../common/src/state/modules/types';
+import type {
+    CommonStateBuildingKey,
+} from '../../../../../../../common/src/state/modules/rules/reducer/types';
 import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../../common/src/state/modules/orders/reducer/types';

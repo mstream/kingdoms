@@ -1,13 +1,13 @@
 // @flow
 
+import {
+    MOVE_CAMERA, ZOOM_CAMERA,
+} from './types';
 import type {
     ClientActionCreator,
 } from '../../../../types';
 import type {
     ClientMoveCameraAction, ClientZoomCameraAction,
-} from './types';
-import {
-    MOVE_CAMERA, ZOOM_CAMERA,
 } from './types';
 
 const moveCamera: ClientActionCreator< ClientMoveCameraAction > = (

@@ -1,26 +1,26 @@
 // @flow
 
-import type {
-    CommonState,
-} from '../state/modules/types';
 import {
     CommonStateType,
+} from '../state/modules/types';
+import {
+    CommonStateUnitKeyType,
+} from '../state/modules/rules/reducer/types';
+import {
+    ServerResponseType,
+} from '../types';
+import type {
+    CommonState,
 } from '../state/modules/types';
 import type {
     CommonStateUnitKey,
 } from '../state/modules/rules/reducer/types';
-import {
-    CommonStateUnitKeyType,
-} from '../state/modules/rules/reducer/types';
-import type {
-    TypeValidator,
-} from './types';
 import type {
     ServerResponse,
 } from '../types';
-import {
-    ServerResponseType,
-} from '../types';
+import type {
+    TypeValidator,
+} from './types';
 
 export const validateCommonStateType: TypeValidator< CommonState > = (
     {
@@ -111,6 +111,7 @@ export const validateCityName = (
         ];
 
     }
+
     return [];
 
 };

@@ -1,16 +1,16 @@
 // @flow
 
-import type {
-    CommonDummyAction,
-    CommonGetCurrentStateAction,
-    CommonResetStateAction,
-} from './types';
 import {
     DUMMY, GET_CURRENT_STATE, RESET_STATE,
 } from './types';
 import type {
     CommonActionCreator,
 } from '../types';
+import type {
+    CommonDummyAction,
+    CommonGetCurrentStateAction,
+    CommonResetStateAction,
+} from './types';
 
 export const dummy: CommonActionCreator< CommonDummyAction > = () => {
 

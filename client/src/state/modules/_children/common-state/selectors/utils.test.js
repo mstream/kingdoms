@@ -3,9 +3,6 @@
 import {
     createClientStateCommonStateSelector,
 } from './utils';
-import type {
-    CommonStateSelector,
-} from '../../../../../../../common/src/state/modules/types';
 import {
     emptyClientState,
 } from '../../../../state';
@@ -13,11 +10,14 @@ import {
     emptyCommonState,
 } from '../../../../../../../common/src/state/modules/state';
 import type {
-    Vector,
-} from '../../../../../../../common/src/vector';
-import type {
     ClientState,
 } from '../../../../types';
+import type {
+    CommonStateSelector,
+} from '../../../../../../../common/src/state/modules/types';
+import type {
+    Vector,
+} from '../../../../../../../common/src/vector';
 
 describe(
     `createClientStateCommonStateSelector`,

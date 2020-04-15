@@ -1,8 +1,5 @@
 // @flow
 
-import type {
-    ClientStateMenu,
-} from '../types';
 import {
     TAB_OVERVIEW,
 } from '../types';
@@ -15,6 +12,9 @@ import type {
 import type {
     ClientStateActionReducer,
 } from '../../../../../types';
+import type {
+    ClientStateMenu,
+} from '../types';
 
 type Reducer = ClientStateActionReducer< ClientStateMenu,
     ClientCloseCityViewAction, >;

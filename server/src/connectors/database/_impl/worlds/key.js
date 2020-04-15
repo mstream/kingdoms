@@ -1,11 +1,11 @@
 // @flow
 
 import type {
-    KeyCreator,
-} from '../../types';
-import type {
     DatabaseWorldsKey,
 } from './types';
+import type {
+    KeyCreator,
+} from '../../types';
 
 export const createWorldsKey: KeyCreator< DatabaseWorldsKey > = (
     {

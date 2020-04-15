@@ -1,21 +1,21 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    unitVisuals, unitsOrder,
-} from '../../../../assets/images/units';
-import {
-    numberToQuantityString,
-} from '../../../../../../common/src/utils';
 import {
     ImageComponent,
 } from '../../../image';
 import {
+    numberToQuantityString,
+} from '../../../../../../common/src/utils';
+import {
     testIds,
 } from '../../../../../../common/src/ui';
+import {
+    unitVisuals, unitsOrder,
+} from '../../../../assets/images/units';
+import React from 'react';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {
@@ -52,7 +52,8 @@ export const Component = (
             const rangeStr = `${ fromStr } - ${ toStr }`;
 
             return (
-                <div key={unitType} className="flex flex-row flex-1 p-1 my-1 mx-2">
+                <div key={unitType}
+                    className="flex flex-row flex-1 p-1 my-1 mx-2">
                     <div className="m-1">
                         <p className="text-sm text-center font-medium">
                             {rangeStr}
@@ -67,7 +68,10 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_CITY_VIEW.SCHEDULED_ATTACK_INFO} className="flex flex-row flex-wrap">
+        <div
+            data-testid={testIds.COMPONENT_CITY_VIEW.SCHEDULED_ATTACK_INFO}
+            className="flex flex-row flex-wrap"
+        >
             {unitItemComponents}
         </div>
     );

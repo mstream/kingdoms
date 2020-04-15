@@ -1,7 +1,5 @@
 // @flow
 
-import React from 'react';
-import ReactDOM from 'react-dom';
 import './assets/css/style.css';
 import {
     AppComponent,
@@ -12,21 +10,23 @@ import {
 import {
     createClientStore,
 } from './state/store';
-import type {
-    Config,
-} from './config/types';
 import {
     createConfig,
 } from './config';
-import type {
-    Logger,
-} from '../../common/src/logging/types';
 import {
     createLogger,
 } from '../../common/src/logging';
 import {
     getIdTokenInfo, getWorldId,
 } from './location';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import type {
+    Config,
+} from './config/types';
+import type {
+    Logger,
+} from '../../common/src/logging/types';
 
 const config: Config = createConfig();
 

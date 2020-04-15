@@ -1,16 +1,16 @@
 // @flow
 
-import React from 'react';
-import classNames from 'classnames';
-import type {
-    Props,
-} from './props';
 import {
     calculateBuildingTierSum,
 } from '../../../../../../common/src/state';
 import {
     testIds,
 } from '../../../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 
 export const Component = (

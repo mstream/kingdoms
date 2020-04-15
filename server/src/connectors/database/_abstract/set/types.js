@@ -1,19 +1,19 @@
 // @flow
 
 import type {
-    KeyCreator,
-    ValueDeserializer,
-    ValueSerializer,
-} from '../../types';
-import type {
-    DatabaseSetRemove,
-} from './operations/remove/types';
+    DatabaseSetAdd,
+} from './operations/add/types';
 import type {
     DatabaseSetGetAll,
 } from './operations/get-all/types';
 import type {
-    DatabaseSetAdd,
-} from './operations/add/types';
+    DatabaseSetRemove,
+} from './operations/remove/types';
+import type {
+    KeyCreator,
+    ValueDeserializer,
+    ValueSerializer,
+} from '../../types';
 
 export type DatabaseSetOperations<K, V> = $ReadOnly< {
     add: DatabaseSetAdd< K, V >,

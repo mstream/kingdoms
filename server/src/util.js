@@ -1,36 +1,36 @@
 // @flow
 
+import {
+    database,
+} from './connectors/database';
+import {
+    rootReducer,
+} from '../../common/src/state/modules/root';
+import {
+    sendServerResponse,
+} from './connectors/api';
 import verror from 'verror';
 import type {
     ApiGateway,
 } from './clients/api-gateway/types';
 import type {
-    Redis,
-} from './clients/redis/types';
-import {
-    database,
-} from './connectors/database';
-import {
-    sendServerResponse,
-} from './connectors/api';
-import {
-    rootReducer,
-} from '../../common/src/state/modules/root';
-import type {
-    ServerRequest, ServerResponse,
-} from '../../common/src/types';
+    CommonAction,
+} from '../../common/src/state/types';
 import type {
     CommonState,
 } from '../../common/src/state/modules/types';
-import type {
-    CommonAction,
-} from '../../common/src/state/types';
 import type {
     DatabaseValueCasResult,
 } from './connectors/database/_abstract/value/operations/cas/types';
 import type {
     Logger,
 } from '../../common/src/logging/types';
+import type {
+    Redis,
+} from './clients/redis/types';
+import type {
+    ServerRequest, ServerResponse,
+} from '../../common/src/types';
 
 export const ERROR_ACTION_EXECUTION: 'ERROR_ACTION_EXECUTION'
     = `ERROR_ACTION_EXECUTION`;
@@ -98,6 +98,7 @@ export const sendResponse = async ( {
             );
 
         }
+
         throw error;
 
     }
@@ -220,6 +221,7 @@ export const executeAction = async ( {
             );
 
         }
+
         throw Error(
             `optimistic locking failed after ${ optimisticLockingAttempts } attempts`,
         );

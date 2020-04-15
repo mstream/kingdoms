@@ -1,14 +1,14 @@
 // @flow
 
 import type {
-    ClientStateErrors,
-} from '../types';
-import type {
     ClientReportErrorsAction,
 } from '../../actions/types';
 import type {
     ClientStateActionReducer,
 } from '../../../../../types';
+import type {
+    ClientStateErrors,
+} from '../types';
 
 type Reducer = ClientStateActionReducer< ClientStateErrors,
     ClientReportErrorsAction, >;

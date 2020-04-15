@@ -1,11 +1,11 @@
 // @flow
 
 import type {
-    CommonStateSelector,
-} from '../../../../../../../common/src/state/modules/types';
-import type {
     ClientState, ClientStateSelector,
 } from '../../../../types';
+import type {
+    CommonStateSelector,
+} from '../../../../../../../common/src/state/modules/types';
 
 export const createClientStateCommonStateSelector = <T>( {
     commonStateSelector,
@@ -22,6 +22,7 @@ export const createClientStateCommonStateSelector = <T>( {
             return null;
 
         }
+
         return commonStateSelector(
             state.commonState,
         );

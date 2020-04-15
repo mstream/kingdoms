@@ -1,17 +1,17 @@
 // @flow
 
 import {
+    PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING,
+} from '../types';
+import {
     createCity,
 } from '../../../cities/actions';
-import {
-    failure, success,
-} from '../../../utils';
 import {
     emptyCommonState,
 } from '../../../state';
 import {
-    PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING,
-} from '../types';
+    failure, success,
+} from '../../../utils';
 import type {
     CommonCreateCityAction,
 } from '../../../cities/actions/types';

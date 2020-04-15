@@ -1,8 +1,23 @@
 // @flow
 
-import type {
-    CommonStatePlayersReducerTestScenario,
-} from './_test/types';
+import {
+    CREATE_CITY,
+} from '../../cities/actions/types';
+import {
+    CREATE_SCHEDULED_ATTACK_ORDER,
+} from '../../orders/actions/types';
+import {
+    DUMMY,
+} from '../../../../../../client/src/state/modules/actions/types';
+import {
+    RESET_STATE,
+} from '../../../actions/types';
+import {
+    createCityTestScenarios,
+} from './_test/create-city-test-scenarios';
+import {
+    createOrderTestScenarios,
+} from './_test/create-order-test-scenarios';
 import {
     dummy,
 } from '../../../actions';
@@ -13,38 +28,23 @@ import {
     initialCommonState,
 } from '../../../index';
 import {
-    success,
-} from '../../utils';
-import type {
-    CommonDummyAction,
-} from '../../../actions/types';
-import {
-    RESET_STATE,
-} from '../../../actions/types';
-import {
     playersReducer,
 } from './index';
 import {
     resetStateTestScenarios,
 } from './_test/reset-state-test-scenarios';
 import {
-    CREATE_CITY,
-} from '../../cities/actions/types';
-import {
-    CREATE_SCHEDULED_ATTACK_ORDER,
-} from '../../orders/actions/types';
-import {
-    createCityTestScenarios,
-} from './_test/create-city-test-scenarios';
-import {
-    createOrderTestScenarios,
-} from './_test/create-order-test-scenarios';
-import {
-    DUMMY,
-} from '../../../../../../client/src/state/modules/actions/types';
-import {
     runReducerTestScenarios,
 } from '../../test-utils';
+import {
+    success,
+} from '../../utils';
+import type {
+    CommonDummyAction,
+} from '../../../actions/types';
+import type {
+    CommonStatePlayersReducerTestScenario,
+} from './_test/types';
 
 const stateInitializationScenario: CommonStatePlayersReducerTestScenario< CommonDummyAction > = {
     action                        : dummy(),

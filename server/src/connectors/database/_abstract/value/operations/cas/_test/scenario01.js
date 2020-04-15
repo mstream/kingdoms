@@ -4,12 +4,12 @@ import {
     dummyMultiRedis,
     dummyRedis,
 } from '../../../../../../../clients/redis/utils';
-import type {
-    DatabaseValueCasTestScenario,
-} from '../types';
 import {
     emptyLogger,
 } from '../../../../../../../../../common/src/logging';
+import type {
+    DatabaseValueCasTestScenario,
+} from '../types';
 
 export const scenario01: DatabaseValueCasTestScenario = {
     create: () => {
@@ -172,5 +172,5 @@ export const scenario01: DatabaseValueCasTestScenario = {
         };
 
     },
-    name: `sets the value if value has not changed before the beginning of the value transformation operation`,
+    name: `sets the value if value has not changed during the transformation operation`,
 };

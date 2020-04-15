@@ -1,30 +1,6 @@
 // @flow
 
 import {
-    createRedisClient,
-} from '../../clients/redis';
-import {
-    createApiGatewayClient,
-} from '../../clients/api-gateway';
-import {
-    ERROR_STATE_NOT_INITIALIZED,
-    executeAction,
-    sendResponse,
-} from '../../util';
-import type {
-    ProxyHandler,
-} from '../types';
-import {
-    database,
-} from '../../connectors/database';
-import type {
-    ServerRequest,
-    ServerResponse,
-} from '../../../../common/src/types';
-import {
-    GET_CURRENT_STATE,
-} from '../../../../common/src/state/actions/types';
-import {
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
@@ -33,26 +9,47 @@ import {
     CREATE_SCHEDULED_ATTACK_ORDER,
 } from '../../../../common/src/state/modules/orders/actions/types';
 import {
+    GET_CURRENT_STATE,
+} from '../../../../common/src/state/actions/types';
+import {
+    createApiGatewayClient,
+} from '../../clients/api-gateway';
+import {
     createConfig,
 } from '../../config';
-import verror from 'verror';
+import {
+    createLogger,
+} from '../../../../common/src/logging';
+import {
+    createRedisClient,
+} from '../../clients/redis';
+import {
+    executeAction, sendResponse,
+} from '../../util';
 import {
     generateRequestAcceptedResponse,
     generateRequestExecutionErrorResponse,
     generateRequestRejectionResponse,
 } from '../util';
 import {
-    createLogger,
-} from '../../../../common/src/logging';
+    handleGetCurrentStateAction,
+} from './action-handlers/get-current-state';
+import {
+    handleUnsupportedAction,
+} from './action-handlers/unsuported';
 import {
     validateEvent,
 } from './validation';
+
 import type {
-    Redis,
-} from '../../clients/redis/types';
-import type {
-    CommonPlayerAction,
+    CommonActionKey,
 } from '../../../../common/src/state/types';
+import type {
+    ProxyHandler,
+} from '../types';
+import type {
+    ServerResponse,
+} from '../../../../common/src/types';
 
 const config = createConfig();
 const logger = createLogger(
@@ -73,68 +70,13 @@ const redis = createRedisClient(
     },
 );
 
-const handleUnsupportedAction = async (
-    {
-        action,
-        redis,
-        serverRequest,
-        sendResponseBackToClient,
-        worldId,
-    }: {
-        action: CommonPlayerAction,
-        redis: Redis,
-        serverRequest: ServerRequest,
-        sendResponseBackToClient: ( { response: ServerResponse } ) => Promise< void >,
-        worldId: string
-    },
-) => {
+const supportedActions: $ReadOnlyArray< CommonActionKey > = [
+    UPGRADE_BUILDING,
+    CHANGE_CITY_NAME,
+    CREATE_CITY,
+    CREATE_SCHEDULED_ATTACK_ORDER,
+];
 
-    const state = await database.stateByWorld.get(
-        {
-            key: {
-                environment: config.environment,
-                worldId,
-            },
-            logger,
-            redis,
-        },
-    );
-
-    if ( state == null ) {
-
-        throw new verror.VError(
-            {
-                name: ERROR_STATE_NOT_INITIALIZED,
-            },
-        );
-
-    }
-
-    await sendResponseBackToClient(
-        {
-            response: {
-                errors: [
-                    `unsupported action`,
-                ],
-                request: serverRequest,
-                state,
-            },
-        },
-    );
-
-    const errorReason = `unsupported request type: ${ action.type }`;
-
-    logger.warn(
-        errorReason,
-    );
-
-    return generateRequestRejectionResponse(
-        {
-            reason: errorReason,
-        },
-    );
-
-};
 
 export const handler: ProxyHandler = async ( event, ) => {
 
@@ -230,123 +172,15 @@ export const handler: ProxyHandler = async ( event, ) => {
             environment,
         } = config;
 
-        switch ( action.type ) {
-
-        case GET_CURRENT_STATE: {
-
-            const getWorldStatePromise = database.stateByWorld.get(
-                {
-                    key: {
-                        environment,
-                        worldId,
-                    },
-                    logger,
-                    redis,
-                },
-            );
-
-            const addPlayerConnectionPromise = database.connectionByPlayer.set(
-                {
-                    key: {
-                        environment,
-                        playerId,
-                    },
-                    logger,
-                    redis,
-                    value: connectionId,
-                },
-            );
-
-            const addPlayerWorldPromise = database.worldByPlayer.set(
-                {
-                    key: {
-                        environment,
-                        playerId,
-                    },
-                    logger,
-                    redis,
-                    value: worldId,
-                },
-            );
-
-            const addPlayerToWorldPromise = database.playersByWorld.add(
-                {
-                    key: {
-                        environment,
-                        worldId,
-                    },
-                    logger,
-                    redis,
-                    value: playerId,
-                },
-            );
-
-            const [
-                state,
-            ] = await Promise.all(
-                [
-                    getWorldStatePromise,
-                    addPlayerConnectionPromise,
-                    addPlayerToWorldPromise,
-                    addPlayerWorldPromise,
-                ],
-            );
-
-            if ( state == null ) {
-
-                throw new verror.VError(
-                    {
-                        name: `STATE_NOT_INITIALIZED`,
-                    },
-                );
-
-            }
-
-            await sendResponseBackToClient(
-                {
-                    response: {
-                        errors : [],
-                        request: {
-                            action,
-                            worldId,
-                        },
-                        state,
-                    },
-                },
-            );
-
-            return generateRequestAcceptedResponse();
-
-        }
-        case UPGRADE_BUILDING:
-        case CHANGE_CITY_NAME:
-        case CREATE_CITY:
-        case CREATE_SCHEDULED_ATTACK_ORDER: {
-
-            const response = await executeAction(
-                {
-                    action,
-                    environment: config.environment,
-                    logger,
-                    redis,
-                    worldId,
-                },
-            );
-
-            await sendResponseBackToClient(
-                {
-                    response,
-                },
-            );
-
-            return generateRequestAcceptedResponse();
-
-        }
-        default: {
+        if ( !supportedActions.includes(
+            action.type,
+        ) ) {
 
             return await handleUnsupportedAction(
                 {
                     action,
+                    environment,
+                    logger,
                     redis,
                     sendResponseBackToClient,
                     serverRequest,
@@ -356,7 +190,40 @@ export const handler: ProxyHandler = async ( event, ) => {
 
         }
 
+        if ( action.type === GET_CURRENT_STATE ) {
+
+            return await handleGetCurrentStateAction(
+                {
+                    action,
+                    connectionId,
+                    environment,
+                    logger,
+                    playerId,
+                    redis,
+                    sendResponseBackToClient,
+                    worldId,
+                },
+            );
+
         }
+
+        const response = await executeAction(
+            {
+                action,
+                environment: config.environment,
+                logger,
+                redis,
+                worldId,
+            },
+        );
+
+        await sendResponseBackToClient(
+            {
+                response,
+            },
+        );
+
+        return generateRequestAcceptedResponse();
 
     } catch ( error ) {
 

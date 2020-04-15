@@ -1,18 +1,18 @@
 // @flow
 
-import React, {
-    useEffect, useRef, useState,
-} from 'react';
-import type {
-    Props,
-} from './props';
 import {
     getRefValue,
 } from '../../../utils';
-import classNames from 'classnames';
 import {
     testIds,
 } from '../../../../../common/src/ui';
+import React, {
+    useEffect, useRef, useState,
+} from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {
@@ -121,6 +121,7 @@ export const Component = (
             break;
 
         }
+
         case `Escape`: {
 
             setNameBeingEdited(

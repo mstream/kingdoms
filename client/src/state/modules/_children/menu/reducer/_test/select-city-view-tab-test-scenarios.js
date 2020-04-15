@@ -3,18 +3,18 @@
 import {
     TAB_BUILDINGS, TAB_UNITS,
 } from '../types';
-import type {
-    ClientStateMenuReducerTestScenario,
-} from './types';
-import type {
-    ClientSelectCityViewTabAction,
-} from '../../actions/types';
-import {
-    emptyClientState,
-} from '../../../../../state';
 import {
     clientActions,
 } from '../../../../actions';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientSelectCityViewTabAction,
+} from '../../actions/types';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientSelectCityViewTabAction >, >;
 

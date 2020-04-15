@@ -1,11 +1,11 @@
 // @flow
 
 import type {
-    CommonStateSelector,
-} from '../../../types';
-import type {
     CommonStateOrders,
 } from '../../reducer/types';
+import type {
+    CommonStateSelector,
+} from '../../../types';
 
 export const ordersSelector: CommonStateSelector< CommonStateOrders > = (
     state,

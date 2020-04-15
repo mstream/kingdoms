@@ -1,17 +1,17 @@
 // @flow
 
-import type {
-    EventValidator,
-} from '../types';
-import type {
-    CommonState,
-} from '../../../../common/src/state/modules/types';
-import {
-    validateCommonStateType,
-} from '../../../../common/src/validators';
 import {
     parseJson,
 } from '../../../../common/src/json';
+import {
+    validateCommonStateType,
+} from '../../../../common/src/validators';
+import type {
+    CommonState,
+} from '../../../../common/src/state/modules/types';
+import type {
+    EventValidator,
+} from '../types';
 
 
 export const validateEvent: EventValidator< $ReadOnly< {

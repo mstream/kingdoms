@@ -3,15 +3,15 @@
 import {
     createSelector,
 } from 'reselect';
-import type {
-    ClientStateErrors,
-} from '../../reducer/types';
 import {
     errorsSelector,
 } from './errors';
 import type {
     ClientState, ClientStateSelector,
 } from '../../../../../types';
+import type {
+    ClientStateErrors,
+} from '../../reducer/types';
 
 export const anyErrorsSelector: ClientStateSelector< boolean > = createSelector<ClientState,
     void,

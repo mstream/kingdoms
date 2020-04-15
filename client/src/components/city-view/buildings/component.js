@@ -1,27 +1,27 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    ImageComponent,
-} from '../../image';
+import * as romanDecimalConverter from 'roman-decimal';
 import {
     CityItemsListComponent,
 } from '../items-list';
 import {
+    ImageComponent,
+} from '../../image';
+import {
     buildingVisuals,
     buildingsOrder,
 } from '../../../assets/images/buildings';
-import classNames from 'classnames';
 import {
     numberToQuantityString,
 } from '../../../../../common/src/utils';
-import * as romanDecimalConverter from 'roman-decimal';
 import {
     testIds,
 } from '../../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {

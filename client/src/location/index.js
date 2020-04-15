@@ -1,13 +1,13 @@
 // @flow
 
-import queryString from 'query-string';
-import type {
-    IdTokenInfo,
-} from '../types';
 import jwt from 'jsonwebtoken';
+import queryString from 'query-string';
 import type {
     Config,
 } from '../config/types';
+import type {
+    IdTokenInfo,
+} from '../types';
 import type {
     Logger,
 } from '../../../common/src/logging/types';

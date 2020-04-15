@@ -1,28 +1,28 @@
 // @flow
 
 import {
+    createConfig,
+} from '../../config';
+import {
+    createLogger,
+} from '../../../../common/src/logging';
+import {
     createRedisClient,
 } from '../../clients/redis';
-import type {
-    ProxyHandler,
-} from '../types';
 import {
     database,
 } from '../../connectors/database';
-import {
-    createConfig,
-} from '../../config';
 import {
     generateRequestAcceptedResponse,
     generateRequestExecutionErrorResponse,
     generateRequestRejectionResponse,
 } from '../util';
 import {
-    createLogger,
-} from '../../../../common/src/logging';
-import {
     validateEvent,
 } from './validation';
+import type {
+    ProxyHandler,
+} from '../types';
 
 const config = createConfig();
 const logger = createLogger(

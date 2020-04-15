@@ -1,11 +1,11 @@
 // @flow
 
-import type {
-    CommonStateSelectorTestScenario,
-} from '../../../types';
 import {
     emptyCommonState,
 } from '../../../state';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../../types';
 import type {
     CommonStateUnitStats,
 } from '../../reducer/types';

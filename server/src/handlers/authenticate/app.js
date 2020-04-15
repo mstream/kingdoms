@@ -1,9 +1,5 @@
 // @flow
 
-import type {
-    CustomAuthorizerHandler,
-    CustomAuthorizerResult,
-} from '../types';
 import {
     buildUserProfile,
 } from '../../jwt';
@@ -13,6 +9,10 @@ import {
 import {
     createConfig,
 } from '../../config';
+import type {
+    CustomAuthorizerHandler,
+    CustomAuthorizerResult,
+} from '../types';
 import type {
     UserProfileResult,
 } from '../../jwt/types';

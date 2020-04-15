@@ -1,37 +1,37 @@
 // @flow
 
+import {
+    CityTileComponent,
+} from './city-tile';
+import {
+    TerrainTileComponent,
+} from './terrain-tile';
+import {
+    addVectors,
+    multipleVectors,
+    subtractVectors,
+} from '../../../../common/src/vector';
+import {
+    checkIfIntersect,
+} from '../../../../common/src/geometry';
+import {
+    testIds,
+} from '../../../../common/src/ui';
 import React, {
     useEffect,
 } from 'react';
+import type {
+    ClientStateTile,
+} from '../../state/modules/_children/tiles/reducer/types';
+import type {
+    Geometry,
+} from '../../../../common/src/geometry';
 import type {
     Props,
 } from './props';
 import type {
     Vector,
 } from '../../../../common/src/vector';
-import {
-    addVectors,
-    multipleVectors,
-    subtractVectors,
-} from '../../../../common/src/vector';
-import type {
-    Geometry,
-} from '../../../../common/src/geometry';
-import {
-    checkIfIntersect,
-} from '../../../../common/src/geometry';
-import {
-    TerrainTileComponent,
-} from './terrain-tile';
-import {
-    CityTileComponent,
-} from './city-tile';
-import type {
-    ClientStateTile,
-} from '../../state/modules/_children/tiles/reducer/types';
-import {
-    testIds,
-} from '../../../../common/src/ui';
 
 const cullObjects = <T: $ReadOnly< { geometry: Geometry } >>( {
     objects,
@@ -164,36 +164,42 @@ export const Component = (
                         break;
 
                     }
+
                     case `ArrowDown`: {
 
                         moveCameraDown();
                         break;
 
                     }
+
                     case `ArrowLeft`: {
 
                         moveCameraLeft();
                         break;
 
                     }
+
                     case `ArrowRight`: {
 
                         moveCameraRight();
                         break;
 
                     }
+
                     case `[`: {
 
                         zoomCameraOut();
                         break;
 
                     }
+
                     case `]`: {
 
                         zoomCameraIn();
                         break;
 
                     }
+
                     default: {
 
                         break;

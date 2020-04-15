@@ -1,5 +1,19 @@
 // @flow
 
+import {
+    CLOSE_ATTACK_VIEW,
+    CLOSE_CITY_VIEW,
+    OPEN_ATTACK_VIEW,
+    OPEN_CITY_VIEW,
+    SELECT_ATTACK_VIEW_ATTACKING_CITY,
+    SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_ORDERS_TAB,
+    SELECT_CITY_VIEW_RESOURCES_TAB,
+    SELECT_CITY_VIEW_TAB,
+    SELECT_CITY_VIEW_UNITS_TAB,
+    UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
+    UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
+} from './types';
 import type {
     ClientActionCreator,
 } from '../../../../types';
@@ -16,20 +30,6 @@ import type {
     ClientSelectCityViewUnitsTabAction,
     ClientUpdateAttackViewMinimumDelayAction,
     ClientUpdateAttackViewRegimentTemplateAction,
-} from './types';
-import {
-    CLOSE_ATTACK_VIEW,
-    CLOSE_CITY_VIEW,
-    OPEN_ATTACK_VIEW,
-    OPEN_CITY_VIEW,
-    SELECT_ATTACK_VIEW_ATTACKING_CITY,
-    SELECT_CITY_VIEW_BUILDINGS_TAB,
-    SELECT_CITY_VIEW_ORDERS_TAB,
-    SELECT_CITY_VIEW_RESOURCES_TAB,
-    SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNITS_TAB,
-    UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
-    UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from './types';
 
 const closeAttackView: ClientActionCreator< ClientCloseAttackViewAction > = () => {

@@ -1,29 +1,29 @@
 // @flow
 
 import '@testing-library/jest-dom/extend-expect';
-import React from 'react';
-import configureStore from 'redux-mock-store';
 import {
-    render,
-} from '@testing-library/react';
+    CityOrdersScheduledAttackInfoComponent,
+} from './index';
 import {
     Provider,
 } from 'react-redux';
 import {
+    UNIT_PIKEMAN,
+} from '../../../../../../common/src/state/modules/rules/reducer/types';
+import {
     emptyClientState,
 } from '../../../../state/state';
-import type {
-    ClientState,
-} from '../../../../state/types';
 import {
     emptyRegimentTemplateState,
 } from '../../../../../../common/src/state/modules/orders/reducer/state';
 import {
-    UNIT_PIKEMAN,
-} from '../../../../../../common/src/state/modules/rules/reducer/types';
-import {
-    CityOrdersScheduledAttackInfoComponent,
-} from './index';
+    render,
+} from '@testing-library/react';
+import React from 'react';
+import configureStore from 'redux-mock-store';
+import type {
+    ClientState,
+} from '../../../../state/types';
 import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../common/src/state/modules/orders/reducer/types';

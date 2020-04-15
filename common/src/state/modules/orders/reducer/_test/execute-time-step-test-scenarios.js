@@ -1,11 +1,11 @@
 // @flow
 
 import type {
-    CommonStateOrdersReducerTestScenarios,
-} from './types';
-import type {
     CommonExecuteTimeStepAction,
 } from '../../../time/actions';
+import type {
+    CommonStateOrdersReducerTestScenarios,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< CommonStateOrdersReducerTestScenarios< CommonExecuteTimeStepAction >, >;
 

@@ -1,32 +1,8 @@
 // @flow
 
 import {
-    cameraReducer,
-} from './index';
-import {
-    zoomCameraTestScenarios,
-} from './_test/zoom-camera-test-scenarios';
-import {
-    updateStateTestScenarios,
-} from './_test/update-state-test-scenarios';
-import {
-    moveCameraTestScenarios,
-} from './_test/move-camera-test-scenarios';
-import {
-    zeroVector,
-} from '../../../../../../../common/src/vector';
-import type {
-    ClientDummyAction,
-} from '../../../actions/types';
-import {
     DUMMY,
 } from '../../../actions/types';
-import type {
-    ClientStateCameraReducerTestScenario,
-} from './_test/types';
-import {
-    emptyClientState,
-} from '../../../../state';
 import {
     MOVE_CAMERA, ZOOM_CAMERA,
 } from '../actions/types';
@@ -34,11 +10,35 @@ import {
     UPDATE_STATE,
 } from '../../common-state/actions/types';
 import {
+    cameraReducer,
+} from './index';
+import {
     clientActions,
 } from '../../../actions';
 import {
+    emptyClientState,
+} from '../../../../state';
+import {
+    moveCameraTestScenarios,
+} from './_test/move-camera-test-scenarios';
+import {
     runReducerTestScenarios,
 } from '../../../../test-utils';
+import {
+    updateStateTestScenarios,
+} from './_test/update-state-test-scenarios';
+import {
+    zeroVector,
+} from '../../../../../../../common/src/vector';
+import {
+    zoomCameraTestScenarios,
+} from './_test/zoom-camera-test-scenarios';
+import type {
+    ClientDummyAction,
+} from '../../../actions/types';
+import type {
+    ClientStateCameraReducerTestScenario,
+} from './_test/types';
 
 const stateInitializationScenario: ClientStateCameraReducerTestScenario< ClientDummyAction > = {
     action                   : clientActions.global.dummy(),

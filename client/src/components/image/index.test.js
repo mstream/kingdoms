@@ -1,20 +1,20 @@
 // @flow
 
 import '@testing-library/jest-dom/extend-expect';
-import React from 'react';
-import configureStore from 'redux-mock-store';
-import {
-    render,
-} from '@testing-library/react';
-import {
-    Provider,
-} from 'react-redux';
 import {
     ImageComponent,
 } from './index';
 import {
+    Provider,
+} from 'react-redux';
+import {
     emptyClientState,
 } from '../../state/state';
+import {
+    render,
+} from '@testing-library/react';
+import React from 'react';
+import configureStore from 'redux-mock-store';
 
 const mockStore = configureStore(
     [],

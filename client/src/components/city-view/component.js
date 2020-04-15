@@ -1,34 +1,34 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    CityHeaderComponent,
-} from './header';
-import {
-    CityViewTabsComponent,
-} from './view-tabs';
-import {
-    CityUnitsComponent,
-} from './units';
-import {
-    CityResourcesComponent,
-} from './resources';
 import {
     CityBuildingsComponent,
 } from './buildings';
 import {
-    CityOverviewComponent,
-} from './overview';
+    CityHeaderComponent,
+} from './header';
 import {
     CityOrdersComponent,
 } from './orders';
-import classNames from 'classnames';
+import {
+    CityOverviewComponent,
+} from './overview';
+import {
+    CityResourcesComponent,
+} from './resources';
+import {
+    CityUnitsComponent,
+} from './units';
+import {
+    CityViewTabsComponent,
+} from './view-tabs';
 import {
     testIds,
 } from '../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {
@@ -51,11 +51,35 @@ export const Component = (
     return (
         <div
             data-testid={testIds.COMPONENT_CITY_VIEW.PARENT}
-            className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t"
+            className={
+                classNames(
+                    `modal`,
+                    `top-0`,
+                    `left-0`,
+                    `w-full`,
+                    `h-full`,
+                    `flex`,
+                    `items-center`,
+                    `justify-center`,
+                    `rounded-t`,
+                )
+            }
         >
             <div
                 onClick={onBackgroundClick}
-                className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"
+                className={
+                    classNames(
+                        `modal-overlay`,
+                        `absolute`,
+                        `w-full`,
+                        `h-full`,
+                        `bg-black`,
+                        `opacity-75`,
+                        `top-0`,
+                        `left-0`,
+                        `cursor-pointer`,
+                    )
+                }
             />
             <div
                 className={classNames(

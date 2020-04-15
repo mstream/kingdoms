@@ -4,20 +4,20 @@ import {
     UNIT_PIKEMAN,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 import {
-    emptyRegimentTemplateState,
-} from '../../../../../../../../common/src/state/modules/orders/reducer/state';
-import type {
-    ClientStateMenuReducerTestScenario,
-} from './types';
-import type {
-    ClientCloseAttackViewAction,
-} from '../../actions/types';
-import {
     emptyClientState,
 } from '../../../../../state';
 import {
+    emptyRegimentTemplateState,
+} from '../../../../../../../../common/src/state/modules/orders/reducer/state';
+import {
     menuActions,
 } from '../../actions';
+import type {
+    ClientCloseAttackViewAction,
+} from '../../actions/types';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientCloseAttackViewAction >, >;
 

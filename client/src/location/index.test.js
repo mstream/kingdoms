@@ -1,6 +1,12 @@
 // @flow
 
 import {
+    emptyConfig,
+} from '../config';
+import {
+    emptyLogger,
+} from '../../../common/src/logging';
+import {
     getWorldId,
     redirectToLoginPage,
     redirectToLogoutPage,
@@ -8,12 +14,6 @@ import {
 import type {
     Config,
 } from '../config/types';
-import {
-    emptyConfig,
-} from '../config';
-import {
-    emptyLogger,
-} from '../../../common/src/logging';
 
 describe(
     `getWorldId`,

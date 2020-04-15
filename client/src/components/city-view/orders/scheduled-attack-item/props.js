@@ -1,23 +1,23 @@
 // @flow
 
 import {
+    clientStateSelectors,
+} from '../../../../state/modules/selectors';
+import {
     connect,
 } from 'react-redux';
+import type {
+    ClientAction, ClientState,
+} from '../../../../state/types';
+import type {
+    CommonStateCities,
+} from '../../../../../../common/src/state/modules/cities/reducer/types';
 import type {
     Dispatch,
 } from 'redux';
 import type {
-    ClientAction, ClientState,
-} from '../../../../state/types';
-import {
-    clientStateSelectors,
-} from '../../../../state/modules/selectors';
-import type {
     ScheduledAttackOrderInfo,
 } from '../../../../state/modules/selectors/types';
-import type {
-    CommonStateCities,
-} from '../../../../../../common/src/state/modules/cities/reducer/types';
 
 type OwnProps = $ReadOnly< {|
     isActive: boolean,

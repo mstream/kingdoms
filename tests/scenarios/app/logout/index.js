@@ -5,23 +5,23 @@ import type {
 } from 'testcafe';
 
 import {
-    generateId, generatePassword,
-} from '../../../../common/src/utils';
-import {
-    tools,
-} from '../../../tools';
-import {
-    emptyCommonState,
-} from '../../../../common/src/state/modules/state';
-import type {
-    CommonState,
-} from '../../../../common/src/state/modules/types';
-import {
     appModel,
 } from '../../../models/app';
 import {
     authModel,
 } from '../../../models/auth';
+import {
+    emptyCommonState,
+} from '../../../../common/src/state/modules/state';
+import {
+    generateId, generatePassword,
+} from '../../../../common/src/utils';
+import {
+    tools,
+} from '../../../tools';
+import type {
+    CommonState,
+} from '../../../../common/src/state/modules/types';
 
 
 fixture(

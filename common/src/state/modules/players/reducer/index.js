@@ -1,32 +1,32 @@
 // @flow
 
-import type {
-    CommonStatePlayers,
-} from './types';
-import {
-    createCityPlayersReducer,
-} from './_impl/create-city';
-import {
-    initialCommonState,
-} from '../../../index';
-import {
-    RESET_STATE,
-} from '../../../actions/types';
 import {
     CREATE_CITY,
 } from '../../cities/actions/types';
 import {
-    resetStatePlayersReducer,
-} from './_impl/reset-state';
-import {
     CREATE_SCHEDULED_ATTACK_ORDER,
 } from '../../orders/actions/types';
+import {
+    RESET_STATE,
+} from '../../../actions/types';
+import {
+    createCityPlayersReducer,
+} from './_impl/create-city';
+import {
+    createCommonStateReducer,
+} from '../../utils';
 import {
     createOrderPlayersReducer,
 } from './_impl/create-order';
 import {
-    createCommonStateReducer,
-} from '../../utils';
+    initialCommonState,
+} from '../../../index';
+import {
+    resetStatePlayersReducer,
+} from './_impl/reset-state';
+import type {
+    CommonStatePlayers,
+} from './types';
 
 export const playersReducer = createCommonStateReducer<CommonStatePlayers>(
     {

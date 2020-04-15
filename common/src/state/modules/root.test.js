@@ -1,23 +1,23 @@
 // @flow
 
 import {
-    rootReducer,
-} from './root';
-import {
-    initialCommonState,
-} from '../index';
-import type {
-    CommonState, CommonStateReducerResult,
-} from './types';
+    dummy, resetState,
+} from '../actions';
 import {
     emptyCommonState,
 } from './state';
 import {
+    initialCommonState,
+} from '../index';
+import {
+    rootReducer,
+} from './root';
+import {
     success,
 } from './utils';
-import {
-    dummy, resetState,
-} from '../actions';
+import type {
+    CommonState, CommonStateReducerResult,
+} from './types';
 
 describe(
     `rootReducer`,

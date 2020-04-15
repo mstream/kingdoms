@@ -1,20 +1,20 @@
 // @flow
 
 import {
+    emptyContext, emptyCustomAuthorizerEvent,
+} from '../util';
+import {
+    handler,
+} from './app';
+import {
     mockBuildUserProfile,
 } from '../../jwt';
 import {
     mockGetJwks,
 } from '../../clients/cognito';
-import {
-    emptyContext, emptyCustomAuthorizerEvent,
-} from '../util';
 import type {
     Context, CustomAuthorizerEvent,
 } from '../types';
-import {
-    handler,
-} from './app';
 
 jest.mock(
     `../../jwt`,

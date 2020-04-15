@@ -1,17 +1,8 @@
 // @flow
 
-import type {
-    ClientActionCreator,
-} from '../../types';
-import type {
-    ClientDummyAction, ClientSignOutAction,
-} from './types';
 import {
     DUMMY, SIGN_OUT,
 } from './types';
-import {
-    menuActions,
-} from '../_children/menu/actions';
 import {
     cameraActions,
 } from '../_children/camera/actions';
@@ -19,11 +10,20 @@ import {
     commonStateActions,
 } from '../_children/common-state/actions';
 import {
-    playerActions,
-} from '../_children/player/actions';
-import {
     errorsActions,
 } from '../_children/errors/actions';
+import {
+    menuActions,
+} from '../_children/menu/actions';
+import {
+    playerActions,
+} from '../_children/player/actions';
+import type {
+    ClientActionCreator,
+} from '../../types';
+import type {
+    ClientDummyAction, ClientSignOutAction,
+} from './types';
 
 const dummy: ClientActionCreator< ClientDummyAction > = (
     payload,

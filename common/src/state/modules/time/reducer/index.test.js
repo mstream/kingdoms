@@ -1,26 +1,14 @@
 // @flow
 
 import {
-    success,
-} from '../../utils';
-import type {
-    CommonDummyAction,
-} from '../../../actions/types';
-import {
-    RESET_STATE,
-} from '../../../actions/types';
+    DUMMY,
+} from '../../../../../../client/src/state/modules/actions/types';
 import {
     EXECUTE_TIME_STEP,
 } from '../actions';
 import {
-    resetStateTestScenarios,
-} from './_test/reset-state-test-scenarios';
-import {
-    executeTimeStepTestScenarios,
-} from './_test/execute-time-step-test-scenarios';
-import type {
-    CommonStateTimeReducerTestScenarios,
-} from './_test/types';
+    RESET_STATE,
+} from '../../../actions/types';
 import {
     dummy,
 } from '../../../actions';
@@ -28,17 +16,29 @@ import {
     emptyCommonState,
 } from '../../state';
 import {
+    executeTimeStepTestScenarios,
+} from './_test/execute-time-step-test-scenarios';
+import {
     initialCommonState,
 } from '../../../index';
 import {
-    timeReducer,
-} from './index';
-import {
-    DUMMY,
-} from '../../../../../../client/src/state/modules/actions/types';
+    resetStateTestScenarios,
+} from './_test/reset-state-test-scenarios';
 import {
     runReducerTestScenarios,
 } from '../../test-utils';
+import {
+    success,
+} from '../../utils';
+import {
+    timeReducer,
+} from './index';
+import type {
+    CommonDummyAction,
+} from '../../../actions/types';
+import type {
+    CommonStateTimeReducerTestScenarios,
+} from './_test/types';
 
 const stateInitializationScenario: CommonStateTimeReducerTestScenarios< CommonDummyAction > = {
     action                        : dummy(),

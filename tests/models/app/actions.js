@@ -4,11 +4,11 @@ import {
     TestController,
 } from 'testcafe';
 import {
-    selectors,
-} from './selectors';
-import {
     config,
 } from '../../config';
+import {
+    selectors,
+} from './selectors';
 
 const createCity = async ( {
     name,

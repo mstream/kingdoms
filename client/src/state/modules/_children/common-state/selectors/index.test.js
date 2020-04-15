@@ -4,11 +4,11 @@ import {
     clientStateCommonStateSelectors,
 } from './index';
 import {
-    isLoadedSelectorTestScenarios,
-} from './_test/is-loaded-test-scenarios';
-import {
     commonStateSelectorTestScenarios,
 } from './_test/common-state-test-scenarios';
+import {
+    isLoadedSelectorTestScenarios,
+} from './_test/is-loaded-test-scenarios';
 import {
     runClientStateSelectorsTestScenarios,
 } from '../../../../test-utils';

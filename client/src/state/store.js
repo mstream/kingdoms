@@ -1,32 +1,32 @@
 // @flow
 
-import type {
-    Dispatch,
-} from 'redux';
 import {
     applyMiddleware, createStore,
 } from 'redux';
 import {
-    rootReducer,
-} from './modules/reducer';
+    composeWithDevTools,
+} from 'redux-devtools-extension';
+import {
+    createLocationMiddleware,
+} from './middleware/location';
 import {
     createWebsocketMiddleware,
 } from './middleware/websocket';
 import {
-    composeWithDevTools,
-} from 'redux-devtools-extension';
+    rootReducer,
+} from './modules/reducer';
 import type {
     ClientAction, ClientState, ClientStore,
 } from './types';
 import type {
-    IdTokenInfo,
-} from '../types';
-import type {
     Config,
 } from '../config/types';
-import {
-    createLocationMiddleware,
-} from './middleware/location';
+import type {
+    Dispatch,
+} from 'redux';
+import type {
+    IdTokenInfo,
+} from '../types';
 import type {
     Logger,
 } from '../../../common/src/logging/types';

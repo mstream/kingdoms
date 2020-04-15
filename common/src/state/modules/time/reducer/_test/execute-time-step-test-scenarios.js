@@ -1,14 +1,14 @@
 // @flow
 
 import {
+    emptyCommonState,
+} from '../../../state';
+import {
     executeTimeStep,
 } from '../../../cities/actions';
 import {
     failure, success,
 } from '../../../utils';
-import {
-    emptyCommonState,
-} from '../../../state';
 import type {
     CommonExecuteTimeStepAction,
 } from '../../actions';

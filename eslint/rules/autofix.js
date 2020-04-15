@@ -235,6 +235,16 @@ module.exports = {
         {
             blankLine: `always`,
             next     : `*`,
+            prev     : `multiline-block-like`,
+        },
+        {
+            blankLine: `always`,
+            next     : `multiline-block-like`,
+            prev     : `*`,
+        },
+        {
+            blankLine: `always`,
+            next     : `*`,
             prev     : `multiline-expression`,
         },
         {
@@ -337,18 +347,6 @@ module.exports = {
         `error`,
         `always`,
     ],
-
-    /*
-     * 'autofix/sort-imports': [
-     *     'error',
-     *     {
-     *         ignoreCase: false,
-     *         ignoreDeclarationSort: false,
-     *         ignoreMemberSort: false,
-     *         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-     *     },
-     * ],
-     */
     'autofix/space-infix-ops': [
         `error`,
     ],
@@ -387,6 +385,19 @@ module.exports = {
         {
             after : true,
             before: false,
+        },
+    ],
+    'sort-imports-es6-autofix/sort-imports-es6': [
+        `error`,
+        {
+            ignoreCase           : false,
+            ignoreMemberSort     : false,
+            memberSyntaxSortOrder: [
+                `none`,
+                `all`,
+                `multiple`,
+                `single`,
+            ],
         },
     ],
 };

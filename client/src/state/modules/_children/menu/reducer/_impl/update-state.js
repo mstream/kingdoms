@@ -1,20 +1,20 @@
 // @flow
 
-import type {
-    ClientStateMenu,
-} from '../types';
-import type {
-    ClientUpdateStateAction,
-} from '../../../common-state/actions/types';
+import {
+    clientStateSelectors,
+} from '../../../../selectors';
 import {
     commonStateCitiesSelectors,
 } from '../../../../../../../../common/src/state/modules/cities/selectors';
 import type {
     ClientStateActionReducer,
 } from '../../../../../types';
-import {
-    clientStateSelectors,
-} from '../../../../selectors';
+import type {
+    ClientStateMenu,
+} from '../types';
+import type {
+    ClientUpdateStateAction,
+} from '../../../common-state/actions/types';
 
 type Reducer = ClientStateActionReducer< ClientStateMenu,
     ClientUpdateStateAction, >;

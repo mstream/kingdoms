@@ -1,19 +1,19 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import classNames from 'classnames';
 import {
     numberToQuantityString,
 } from '../../../../../common/src/utils';
-import type {
-    CommonStateCity,
-} from '../../../../../common/src/state/modules/cities/reducer/types';
 import {
     testIds,
 } from '../../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    CommonStateCity,
+} from '../../../../../common/src/state/modules/cities/reducer/types';
+import type {
+    Props,
+} from './props';
 
 type CityWithDistance = {
     city: CommonStateCity,

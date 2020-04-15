@@ -1,20 +1,20 @@
 // @flow
 
 import {
+    failure, success,
+} from '../../../utils';
+import {
     validateCityName,
 } from '../../../../../validators';
 import type {
-    CommonStateCities,
-} from '../types';
+    CommonChangeCityNameAction,
+} from '../../actions/types';
 import type {
     CommonStateActionReducer,
 } from '../../../types';
-import {
-    failure, success,
-} from '../../../utils';
 import type {
-    CommonChangeCityNameAction,
-} from '../../actions/types';
+    CommonStateCities,
+} from '../types';
 
 type Reducer = CommonStateActionReducer< CommonStateCities,
     CommonChangeCityNameAction, >;

@@ -1,33 +1,32 @@
 // @flow
 
-import type {
-    ClientDummyAction,
-    ClientSignOutAction,
-} from './modules/actions/types';
+import {
+    CLOSE_ATTACK_VIEW,
+    CLOSE_CITY_VIEW,
+    OPEN_ATTACK_VIEW,
+    OPEN_CITY_VIEW,
+    SELECT_ATTACK_VIEW_ATTACKING_CITY,
+    SELECT_CITY_VIEW_BUILDINGS_TAB,
+    SELECT_CITY_VIEW_ORDERS_TAB,
+    SELECT_CITY_VIEW_RESOURCES_TAB,
+    SELECT_CITY_VIEW_TAB,
+    SELECT_CITY_VIEW_UNITS_TAB,
+    UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
+    UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
+} from './modules/_children/menu/actions/types';
 import {
     DUMMY, SIGN_OUT,
 } from './modules/actions/types';
-import type {
-    ClientReportErrorsAction,
-} from './modules/_children/errors/actions/types';
 import {
-    REPORT_ERRORS,
-} from './modules/_children/errors/actions/types';
-import type {
-    ClientMoveCameraAction,
-    ClientZoomCameraAction,
-} from './modules/_children/camera/actions/types';
+    LOAD_PLAYER,
+} from './modules/_children/player/actions/types';
 import {
     MOVE_CAMERA,
     ZOOM_CAMERA,
 } from './modules/_children/camera/actions/types';
-import type {
-    ClientRequestBuildingUpgradeAction,
-    ClientRequestCityCreationAction,
-    ClientRequestCityNameChangeAction,
-    ClientRequestOrderCreationAction,
-    ClientUpdateStateAction,
-} from './modules/_children/common-state/actions/types';
+import {
+    REPORT_ERRORS,
+} from './modules/_children/errors/actions/types';
 import {
     REQUEST_BUILDING_UPGRADE,
     REQUEST_CITY_CREATION,
@@ -49,32 +48,33 @@ import type {
     ClientUpdateAttackViewMinimumDelayAction,
     ClientUpdateAttackViewRegimentTemplateAction,
 } from './modules/_children/menu/actions/types';
-import {
-    CLOSE_ATTACK_VIEW,
-    CLOSE_CITY_VIEW,
-    OPEN_ATTACK_VIEW,
-    OPEN_CITY_VIEW,
-    SELECT_ATTACK_VIEW_ATTACKING_CITY,
-    SELECT_CITY_VIEW_BUILDINGS_TAB,
-    SELECT_CITY_VIEW_ORDERS_TAB,
-    SELECT_CITY_VIEW_RESOURCES_TAB,
-    SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNITS_TAB,
-    UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
-    UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
-} from './modules/_children/menu/actions/types';
+import type {
+    ClientDummyAction,
+    ClientSignOutAction,
+} from './modules/actions/types';
 import type {
     ClientLoadPlayerAction,
 } from './modules/_children/player/actions/types';
-import {
-    LOAD_PLAYER,
-} from './modules/_children/player/actions/types';
 import type {
-    Dispatch, Store,
-} from 'redux';
+    ClientMoveCameraAction,
+    ClientZoomCameraAction,
+} from './modules/_children/camera/actions/types';
+import type {
+    ClientReportErrorsAction,
+} from './modules/_children/errors/actions/types';
+import type {
+    ClientRequestBuildingUpgradeAction,
+    ClientRequestCityCreationAction,
+    ClientRequestCityNameChangeAction,
+    ClientRequestOrderCreationAction,
+    ClientUpdateStateAction,
+} from './modules/_children/common-state/actions/types';
 import type {
     ClientStateCamera,
 } from './modules/_children/camera/reducer/types';
+import type {
+    ClientStateCommonState,
+} from './modules/_children/common-state/reducer/types';
 import type {
     ClientStateErrors,
 } from './modules/_children/errors/reducer/types';
@@ -85,11 +85,11 @@ import type {
     ClientStatePlayer,
 } from './modules/_children/player/reducer/types';
 import type {
-    ClientStateCommonState,
-} from './modules/_children/common-state/reducer/types';
-import type {
     ClientStateTiles,
 } from './modules/_children/tiles/reducer/types';
+import type {
+    Dispatch, Store,
+} from 'redux';
 
 export type ClientActionKey =
     | typeof CLOSE_ATTACK_VIEW

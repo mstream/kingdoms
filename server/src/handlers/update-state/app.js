@@ -1,42 +1,42 @@
 // @flow
 
 import {
-    executeAction, sendResponse,
-} from '../../util';
-import {
     createApiGatewayClient,
 } from '../../clients/api-gateway';
 import {
-    createRedisClient,
-} from '../../clients/redis';
-import {
-    executeTimeStep,
-} from '../../../../common/src/state/modules/cities/actions';
-import type {
-    ScheduledHandler,
-} from '../types';
-import {
-    database,
-} from '../../connectors/database';
-import {
     createConfig,
 } from '../../config';
-import verror from 'verror';
-import type {
-    Redis,
-} from '../../clients/redis/types';
 import {
     createDateProvider,
 } from '../../clients/date-provider';
 import {
-    getCurrentTime,
-} from '../../connectors/time';
-import {
     createLogger,
 } from '../../../../common/src/logging';
+import {
+    createRedisClient,
+} from '../../clients/redis';
+import {
+    database,
+} from '../../connectors/database';
+import {
+    executeAction, sendResponse,
+} from '../../util';
+import {
+    executeTimeStep,
+} from '../../../../common/src/state/modules/cities/actions';
+import {
+    getCurrentTime,
+} from '../../connectors/time';
+import verror from 'verror';
 import type {
     Logger,
 } from '../../../../common/src/logging/types';
+import type {
+    Redis,
+} from '../../clients/redis/types';
+import type {
+    ScheduledHandler,
+} from '../types';
 
 const config = createConfig();
 const logger = createLogger(

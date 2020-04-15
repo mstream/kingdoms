@@ -1,28 +1,29 @@
 // @flow
 
 import {
-    failure, success,
-} from '../../../utils';
-import {
-    emptyCommonState,
-} from '../../../state';
-import {
     PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING,
 } from '../types';
-import type {
-    CommonStatePlayersReducerTestScenario,
-} from './types';
-import type {
-    CommonCreateScheduledAttackOrderAction,
-} from '../../../orders/actions/types';
 import {
     createScheduledAttackOrder,
 } from '../../../orders/actions';
 import {
+    emptyCommonState,
+} from '../../../state';
+import {
     emptyRegimentTemplateState,
 } from '../../../orders/reducer/state';
+import {
+    failure, success,
+} from '../../../utils';
+import type {
+    CommonCreateScheduledAttackOrderAction,
+} from '../../../orders/actions/types';
+import type {
+    CommonStatePlayersReducerTestScenario,
+} from './types';
 
-type Scenarios = $ReadOnlyArray< CommonStatePlayersReducerTestScenario< CommonCreateScheduledAttackOrderAction >, >;
+type Scenario = CommonStatePlayersReducerTestScenario< CommonCreateScheduledAttackOrderAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const createOrderTestScenarios: Scenarios = [
     {

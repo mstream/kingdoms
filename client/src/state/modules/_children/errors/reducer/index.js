@@ -1,12 +1,6 @@
 // @flow
 
 import {
-    reportErrorsErrorsReducer,
-} from './_impl/report-errors';
-import type {
-    ClientStateErrors,
-} from './types';
-import {
     REPORT_ERRORS,
 } from '../actions/types';
 import {
@@ -15,6 +9,12 @@ import {
 import {
     initialClientState,
 } from '../../../../state';
+import {
+    reportErrorsErrorsReducer,
+} from './_impl/report-errors';
+import type {
+    ClientStateErrors,
+} from './types';
 
 export const errorsReducer = createClientStateReducer<ClientStateErrors>(
     {

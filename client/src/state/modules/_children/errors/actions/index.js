@@ -1,13 +1,13 @@
 // @flow
 
+import {
+    REPORT_ERRORS,
+} from './types';
 import type {
     ClientActionCreator,
 } from '../../../../types';
 import type {
     ClientReportErrorsAction,
-} from './types';
-import {
-    REPORT_ERRORS,
 } from './types';
 
 const reportErrors: ClientActionCreator< ClientReportErrorsAction > = (

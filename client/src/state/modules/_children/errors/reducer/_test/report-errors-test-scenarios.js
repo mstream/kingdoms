@@ -1,17 +1,17 @@
 // @flow
 
-import type {
-    ClientStateErrorsReducerTestScenario,
-} from './types';
-import type {
-    ClientReportErrorsAction,
-} from '../../actions/types';
-import {
-    emptyClientState,
-} from '../../../../../state';
 import {
     clientActions,
 } from '../../../../actions';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientReportErrorsAction,
+} from '../../actions/types';
+import type {
+    ClientStateErrorsReducerTestScenario,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< ClientStateErrorsReducerTestScenario< ClientReportErrorsAction >, >;
 

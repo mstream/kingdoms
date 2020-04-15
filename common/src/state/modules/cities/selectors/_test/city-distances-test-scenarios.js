@@ -1,17 +1,17 @@
 // @flow
 
-import type {
-    CommonStateSelectorTestScenario,
-} from '../../../types';
-import {
-    emptyCommonState,
-} from '../../../state';
 import {
     emptyCityState,
 } from '../../reducer/state';
+import {
+    emptyCommonState,
+} from '../../../state';
 import type {
     CitiesDistances,
 } from '../types';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../../types';
 
 type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< CitiesDistances >, >;
 

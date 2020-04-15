@@ -1,8 +1,5 @@
 // @flow
 
-import type {
-    CommonStateCities,
-} from '../../../../../../../../common/src/state/modules/cities/reducer/types';
 import {
     commonStateCitiesSelectors,
 } from '../../../../../../../../common/src/state/modules/cities/selectors';
@@ -12,6 +9,9 @@ import {
 import type {
     ClientStateSelector,
 } from '../../../../../types';
+import type {
+    CommonStateCities,
+} from '../../../../../../../../common/src/state/modules/cities/reducer/types';
 
 export const citiesSelector: ClientStateSelector< ?CommonStateCities > = createClientStateCommonStateSelector(
     {

@@ -1,17 +1,17 @@
 // @flow
 
 import {
+    BUILDING_WAREHOUSE,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    CommonStateBuildingKey,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import {
-    BUILDING_WAREHOUSE,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
     ClientStateSelectorTestScenario,
 } from '../../../../../types';
+import type {
+    CommonStateBuildingKey,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateBuildingKey >, >;
 

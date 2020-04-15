@@ -1,8 +1,23 @@
 // @flow
 
 import {
+    dummyMultiRedis,
+} from '../../clients/redis/utils';
+import {
     emptyCommonState,
 } from '../../../../common/src/state/modules/state';
+import {
+    emptyContext, emptyScheduledEvent,
+} from '../util';
+import {
+    executeTimeStep,
+} from '../../../../common/src/state/modules/cities/actions';
+import {
+    expectCalls,
+} from '../../../../common/src/test-utils';
+import {
+    handler,
+} from './app';
 import {
     mockGet,
     mockMulti,
@@ -11,38 +26,23 @@ import {
     mockWatch,
 } from '../../clients/redis';
 import {
-    emptyContext, emptyScheduledEvent,
-} from '../util';
-import type {
-    Context, ScheduledEvent,
-} from '../types';
-import {
-    handler,
-} from './app';
-import {
-    stubConfig,
-} from '../../config';
-import {
-    dummyMultiRedis,
-} from '../../clients/redis/utils';
+    mockGetCurrent,
+} from '../../clients/date-provider';
 import {
     mockPostToConnection,
 } from '../../clients/api-gateway';
 import {
-    mockGetCurrent,
-} from '../../clients/date-provider';
-import type {
-    CommonState,
-} from '../../../../common/src/state/modules/types';
-import {
-    executeTimeStep,
-} from '../../../../common/src/state/modules/cities/actions';
-import {
     stringifyJson,
 } from '../../../../common/src/json';
 import {
-    expectCalls,
-} from '../../../../common/src/test-utils';
+    stubConfig,
+} from '../../config';
+import type {
+    CommonState,
+} from '../../../../common/src/state/modules/types';
+import type {
+    Context, ScheduledEvent,
+} from '../types';
 
 jest.mock(
     `../../config`,
@@ -194,6 +194,7 @@ describe(
                             }
 
                         }
+
                         return Promise.reject(
                             `mockGet: ${ key }`,
                         );
@@ -250,6 +251,7 @@ describe(
                             }
 
                         }
+
                         return Promise.reject(
                             `mockSmembers: ${ key }`,
                         );

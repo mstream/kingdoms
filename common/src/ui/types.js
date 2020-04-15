@@ -2,6 +2,27 @@
 
 
 import {
+    COMPONENT_APP,
+} from './app';
+import {
+    COMPONENT_ATTACK_VIEW,
+} from './attack-view';
+import {
+    COMPONENT_CHANGE_INFO,
+} from './change-info';
+import {
+    COMPONENT_CITY_VIEW,
+} from './city-view';
+import {
+    COMPONENT_COST_INFO,
+} from './const-info';
+import {
+    COMPONENT_ERRORS,
+} from './errors';
+import {
+    COMPONENT_GAME_START,
+} from './game-start';
+import {
     COMPONENT_IMAGE,
 } from './image';
 import {
@@ -13,27 +34,6 @@ import {
 import {
     COMPONENT_WORLD_MAP,
 } from './world-map';
-import {
-    COMPONENT_GAME_START,
-} from './game-start';
-import {
-    COMPONENT_ERRORS,
-} from './errors';
-import {
-    COMPONENT_COST_INFO,
-} from './const-info';
-import {
-    COMPONENT_CITY_VIEW,
-} from './city-view';
-import {
-    COMPONENT_CHANGE_INFO,
-} from './change-info';
-import {
-    COMPONENT_ATTACK_VIEW,
-} from './attack-view';
-import {
-    COMPONENT_APP,
-} from './app';
 
 export type ComponentKey =
     | typeof COMPONENT_APP

@@ -1,17 +1,5 @@
 // @flow
 
-import type {
-    ClientStateCamera,
-} from './types';
-import {
-    moveCameraCameraReducer,
-} from './_impl/move-camera';
-import {
-    zoomCameraCameraReducer,
-} from './_impl/zoom-camera';
-import {
-    updateStateCameraReducer,
-} from './_impl/update-state';
 import {
     MOVE_CAMERA, ZOOM_CAMERA,
 } from '../actions/types';
@@ -24,6 +12,18 @@ import {
 import {
     initialClientState,
 } from '../../../../state';
+import {
+    moveCameraCameraReducer,
+} from './_impl/move-camera';
+import {
+    updateStateCameraReducer,
+} from './_impl/update-state';
+import {
+    zoomCameraCameraReducer,
+} from './_impl/zoom-camera';
+import type {
+    ClientStateCamera,
+} from './types';
 
 export const cameraReducer = createClientStateReducer<ClientStateCamera>(
     {

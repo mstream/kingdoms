@@ -1,9 +1,6 @@
 // @flow
 
 
-import type {
-    ServerRequest,
-} from '../../../../common/src/types';
 import {
     ServerRequestType,
 } from '../../../../common/src/types';
@@ -13,6 +10,9 @@ import {
 import type {
     EventValidator,
 } from '../types';
+import type {
+    ServerRequest,
+} from '../../../../common/src/types';
 
 export const validateEvent: EventValidator< $ReadOnly< {|
     connectionId: string,

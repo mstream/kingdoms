@@ -1,18 +1,18 @@
 // @flow
 
 import {
-    dummyRedis,
-} from '../../../../../../../clients/redis/utils';
-import type {
-    DatabaseSetRemoveTestScenario,
-} from '../types';
-import {
     ERROR_DATABASE_SET_REMOVE,
 } from '../types';
-import verror from 'verror';
+import {
+    dummyRedis,
+} from '../../../../../../../clients/redis/utils';
 import {
     emptyLogger,
 } from '../../../../../../../../../common/src/logging';
+import verror from 'verror';
+import type {
+    DatabaseSetRemoveTestScenario,
+} from '../types';
 
 export const scenario02: DatabaseSetRemoveTestScenario = {
     create: () => {

@@ -1,20 +1,20 @@
 // @flow
 
 import {
-    emptyCommonState,
-} from '../../../../../../common/src/state/modules/state';
+    TAB_ORDERS,
+} from '../../_children/menu/reducer/types';
 import {
     emptyCityState,
 } from '../../../../../../common/src/state/modules/cities/reducer/state';
 import {
-    TAB_ORDERS,
-} from '../../_children/menu/reducer/types';
+    emptyClientState,
+} from '../../../state';
+import {
+    emptyCommonState,
+} from '../../../../../../common/src/state/modules/state';
 import {
     emptyScheduledAttackOrderState,
 } from '../../../../../../common/src/state/modules/orders/reducer/state';
-import {
-    emptyClientState,
-} from '../../../state';
 import type {
     ClientStateSelectorTestScenario,
 } from '../../../types';

@@ -14,11 +14,6 @@ import {
     set,
 } from './operations/set';
 import type {
-    KeyCreator,
-    ValueDeserializer,
-    ValueSerializer,
-} from '../../types';
-import type {
     DatabaseValueCas,
     DatabaseValueCasResult,
     ValueTransformationResult,
@@ -30,6 +25,11 @@ import type {
 import type {
     DatabaseValueSet,
 } from './operations/set/types';
+import type {
+    KeyCreator,
+    ValueDeserializer,
+    ValueSerializer,
+} from '../../types';
 
 export const createDatabaseValueOperations = <K, V>( {
     keyCreator,

@@ -3,12 +3,12 @@
 import {
     dummyRedis,
 } from '../../../../../../../clients/redis/utils';
-import type {
-    DatabaseValueSetTestScenario,
-} from '../types';
 import {
     emptyLogger,
 } from '../../../../../../../../../common/src/logging';
+import type {
+    DatabaseValueSetTestScenario,
+} from '../types';
 
 export const scenario01: DatabaseValueSetTestScenario = {
     create: () => {

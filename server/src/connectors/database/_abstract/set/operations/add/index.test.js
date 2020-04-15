@@ -6,15 +6,15 @@ import {
 import {
     runDatabaseOperationTestScenarios,
 } from '../../../../utils';
-import type {
-    DatabaseSetAddArgs, DatabaseSetAddResult,
-} from './types';
 import {
     scenario01,
 } from './_test/scenario01';
 import {
     scenario02,
 } from './_test/scenario02';
+import type {
+    DatabaseSetAddArgs, DatabaseSetAddResult,
+} from './types';
 
 describe(
     `add`,

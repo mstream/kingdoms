@@ -4,25 +4,26 @@ import {
     UNIT_ARCHER,
     UNIT_PIKEMAN,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import {
+    clientActions,
+} from '../../../../actions';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import {
+    emptyRegimentTemplateState,
+} from '../../../../../../../../common/src/state/modules/orders/reducer/state';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 import type {
     ClientUpdateAttackViewRegimentTemplateAction,
 } from '../../actions/types';
-import {
-    emptyRegimentTemplateState,
-} from '../../../../../../../../common/src/state/modules/orders/reducer/state';
-import {
-    emptyClientState,
-} from '../../../../../state';
-import {
-    clientActions,
-} from '../../../../actions';
 
-type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientUpdateAttackViewRegimentTemplateAction >, >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientUpdateAttackViewRegimentTemplateAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const updateAttackViewRegimentTemplateTestScenarios: Scenarios  = [
+export const updateAttackViewRegimentTemplateTestScenarios: Scenarios = [
     {
         action: clientActions.menu.updateAttackViewRegimentTemplate(
             {

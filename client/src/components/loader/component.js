@@ -1,12 +1,12 @@
 // @flow
 
+import {
+    testIds,
+} from '../../../../common/src/ui';
 import React from 'react';
 import type {
     Props,
 } from './props';
-import {
-    testIds,
-} from '../../../../common/src/ui';
 
 
 export const Component = (

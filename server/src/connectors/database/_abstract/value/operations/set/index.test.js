@@ -3,18 +3,18 @@
 import {
     runDatabaseOperationTestScenarios,
 } from '../../../../utils';
-import type {
-    DatabaseValueSetArgs, DatabaseValueSetResult,
-} from './types';
-import {
-    set,
-} from '.';
 import {
     scenario01,
 } from './_test/scenario01';
 import {
     scenario02,
 } from './_test/scenario02';
+import {
+    set,
+} from '.';
+import type {
+    DatabaseValueSetArgs, DatabaseValueSetResult,
+} from './types';
 
 describe(
     `set`,

@@ -4,14 +4,14 @@ import {
     changeCityName,
 } from '../../actions';
 import {
-    failure, success,
-} from '../../../utils';
+    emptyCityState,
+} from '../state';
 import {
     emptyCommonState,
 } from '../../../state';
 import {
-    emptyCityState,
-} from '../state';
+    failure, success,
+} from '../../../utils';
 import type {
     CommonChangeCityNameAction,
 } from '../../actions/types';

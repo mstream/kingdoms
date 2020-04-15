@@ -52,6 +52,7 @@ module.exports = {
         `promise`,
         `react`,
         `react-hooks`,
+        `sort-imports-es6-autofix`,
         `testcafe`,
     ],
     rules: require(

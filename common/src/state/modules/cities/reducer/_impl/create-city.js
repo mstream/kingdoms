@@ -1,12 +1,6 @@
 // @flow
 
 import {
-    validateCityName,
-} from '../../../../../validators';
-import type {
-    CommonStateCities, CommonStateCity,
-} from '../types';
-import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
     BUILDING_WAREHOUSE,
@@ -20,18 +14,24 @@ import {
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
 } from '../../../rules/reducer/types';
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
-import {
-    failure, success,
-} from '../../../utils';
-import type {
-    CommonCreateCityAction,
-} from '../../actions/types';
 import {
     commonStateSelectors,
 } from '../../../selectors';
+import {
+    failure, success,
+} from '../../../utils';
+import {
+    validateCityName,
+} from '../../../../../validators';
+import type {
+    CommonCreateCityAction,
+} from '../../actions/types';
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
+import type {
+    CommonStateCities, CommonStateCity,
+} from '../types';
 
 type Reducer = CommonStateActionReducer< CommonStateCities,
     CommonCreateCityAction, >;

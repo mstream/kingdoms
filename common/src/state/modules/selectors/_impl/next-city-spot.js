@@ -1,16 +1,25 @@
 // @flow
 
-import type {
-    CommonState,
-} from '../../types';
-import type {
-    Vector,
-} from '../../../../vector';
 import {
     addVectors,
     getDistanceBetweenVectors,
     zeroVector,
 } from '../../../../vector';
+import {
+    citiesSelector,
+} from '../../cities/selectors/_impl/cities';
+import {
+    commonStateRulesSelectors,
+} from '../../rules/selectors';
+import {
+    commonStateWorldSelectors,
+} from '../../world/selectors';
+import {
+    createSelector,
+} from 'reselect';
+import type {
+    CommonState,
+} from '../../types';
 import type {
     CommonStateCities,
 } from '../../cities/reducer/types';
@@ -20,18 +29,9 @@ import type {
 import type {
     CommonStateWorld,
 } from '../../world/reducer/types';
-import {
-    citiesSelector,
-} from '../../cities/selectors/_impl/cities';
-import {
-    createSelector,
-} from 'reselect';
-import {
-    commonStateRulesSelectors,
-} from '../../rules/selectors';
-import {
-    commonStateWorldSelectors,
-} from '../../world/selectors';
+import type {
+    Vector,
+} from '../../../../vector';
 
 export const nextCitySpotSelector = createSelector<CommonState,
     void,
@@ -143,6 +143,7 @@ export const nextCitySpotSelector = createSelector<CommonState,
                     }
 
                 }
+
                 return true;
 
             };

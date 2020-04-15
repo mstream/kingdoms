@@ -4,6 +4,17 @@ const npsUtils = require(
     `nps-utils`,
 );
 
+const deploy = (
+    {
+        environment,
+    },
+) => {
+
+    return `aws s3 sync --delete --acl public-read client/dist/dev/`
+        + `s3://www.${ environment }.kingdoms.maciej-laciak.com/`;
+
+};
+
 module.exports = {
     build: {
         dev: {
@@ -41,10 +52,16 @@ module.exports = {
         },
     },
     deployOnly: {
-        dev:
-            `aws s3 sync --delete --acl public-read client/dist/dev/ s3://www.dev.kingdoms.maciej-laciak.com/`,
-        prod:
-            `aws s3 sync --delete --acl public-read client/dist/prod/ s3://www.prod.kingdoms.maciej-laciak.com/`,
+        dev: deploy(
+            {
+                environment: `dev`,
+            },
+        ),
+        prod: deploy(
+            {
+                environment: `prod`,
+            },
+        ),
     },
     start: {
         dev: {

@@ -1,32 +1,32 @@
 // @flow
 
 import '@testing-library/jest-dom/extend-expect';
-import React from 'react';
-import configureStore from 'redux-mock-store';
-import {
-    fireEvent, render,
-} from '@testing-library/react';
-import {
-    Provider,
-} from 'react-redux';
 import {
     CityTileComponent,
 } from './index';
 import {
+    Provider,
+} from 'react-redux';
+import {
+    clientActions,
+} from '../../../state/modules/actions';
+import {
     emptyCityState,
 } from '../../../../../common/src/state/modules/cities/reducer/state';
+import {
+    emptyClientState,
+} from '../../../state/state';
 import {
     emptyClientStateCityTile,
 } from '../../../state/modules/_children/tiles/reducer/state';
 import {
-    emptyClientState,
-} from '../../../state/state';
+    fireEvent, render,
+} from '@testing-library/react';
+import React from 'react';
+import configureStore from 'redux-mock-store';
 import type {
     ClientState,
 } from '../../../state/types';
-import {
-    clientActions,
-} from '../../../state/modules/actions';
 
 const mockStore = configureStore(
     [],

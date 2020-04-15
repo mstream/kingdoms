@@ -1,15 +1,15 @@
 // @flow
 
-import React, {
-    useState,
-} from 'react';
-import type {
-    Props,
-} from './props';
-import classNames from 'classnames';
 import {
     testIds,
 } from '../../../../common/src/ui';
+import React, {
+    useState,
+} from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {
@@ -66,7 +66,17 @@ export const Component = (
             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t"
         >
             <div
-                className="modal-overlay absolute w-full h-full bg-black opacity-75 top-0 left-0 cursor-pointer"/>
+                className={classNames(
+                    `modal-overlay`,
+                    `absolute`,
+                    `w-full`,
+                    `h-full`,
+                    `bg-black`,
+                    `opacity-75`,
+                    `top-0`,
+                    `left-0`,
+                    `cursor-pointer`,
+                )}/>
             <div
                 className={classNames(
                     `bricks-bg`,
@@ -83,7 +93,16 @@ export const Component = (
                 )}
             >
                 <div
-                    className="wood-bg flex flex-row items-stretch flex-none justify-between w-full bg-orange-800">
+                    className={classNames(
+                        `wood-bg`,
+                        `flex`,
+                        `flex-row`,
+                        `items-stretch`,
+                        `flex-none`,
+                        `justify-between`,
+                        `w-full`,
+                        `bg-orange-800`,
+                    )}>
                     <div className="flex flex-row items-center justify-center">
                         <p className="font-bold text-2xl text-center text-gray-100">
                             Start game

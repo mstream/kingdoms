@@ -1,19 +1,19 @@
 // @flow
-import type {
-    ActionCreatorsProps, StateToProps,
-} from '../../../types';
 import {
     connect,
 } from 'react-redux';
 import type {
-    Dispatch,
-} from 'redux';
+    ActionCreatorsProps, StateToProps,
+} from '../../../types';
+import type {
+    ClientAction, ClientState,
+} from '../../../../state/types';
 import type {
     CommonStateCity,
 } from '../../../../../../common/src/state/modules/cities/reducer/types';
 import type {
-    ClientAction, ClientState,
-} from '../../../../state/types';
+    Dispatch,
+} from 'redux';
 
 type OwnProps = {
     city: CommonStateCity,

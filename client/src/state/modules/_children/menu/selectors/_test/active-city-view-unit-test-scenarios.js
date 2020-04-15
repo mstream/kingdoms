@@ -1,17 +1,17 @@
 // @flow
 
 import {
+    UNIT_ARCHER,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    CommonStateUnitKey,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import {
-    UNIT_ARCHER,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
     ClientStateSelectorTestScenario,
 } from '../../../../../types';
+import type {
+    CommonStateUnitKey,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateUnitKey >, >;
 

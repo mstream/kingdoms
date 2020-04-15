@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    createSelector,
-} from 'reselect';
-import {
     clientStateCommonStateSelectors,
 } from '../../_children/common-state/selectors';
 import {
     clientStatePlayerSelectors,
 } from '../../_children/player/selectors';
+import {
+    createSelector,
+} from 'reselect';
 import type {
     CityIdsByOwner,
 } from '../../../../../../common/src/state/modules/cities/selectors/types';

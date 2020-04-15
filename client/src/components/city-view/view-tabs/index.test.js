@@ -1,23 +1,23 @@
 // @flow
 
 import '@testing-library/jest-dom/extend-expect';
-import React from 'react';
-import {
-    render,
-} from '@testing-library/react';
-import {
-    Provider,
-} from 'react-redux';
-import configureStore from 'redux-mock-store';
 import {
     CityViewTabsComponent,
 } from './index';
+import {
+    Provider,
+} from 'react-redux';
 import {
     TAB_OVERVIEW,
 } from '../../../state/modules/_children/menu/reducer/types';
 import {
     emptyClientState,
 } from '../../../state/state';
+import {
+    render,
+} from '@testing-library/react';
+import React from 'react';
+import configureStore from 'redux-mock-store';
 import type {
     ClientState,
 } from '../../../state/types';

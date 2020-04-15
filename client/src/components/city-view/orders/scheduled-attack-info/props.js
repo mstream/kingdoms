@@ -4,14 +4,14 @@ import {
     connect,
 } from 'react-redux';
 import type {
-    Dispatch,
-} from 'redux';
-import type {
     ClientAction, ClientState,
 } from '../../../../state/types';
 import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../common/src/state/modules/orders/reducer/types';
+import type {
+    Dispatch,
+} from 'redux';
 
 type OwnProps = $ReadOnly< {|
     regimentTemplate: CommonStateRegimentTemplate,

@@ -2,20 +2,20 @@
 
 
 import {
+    get,
+} from '.';
+import {
     runDatabaseOperationTestScenarios,
 } from '../../../../utils';
-import type {
-    DatabaseValueGetArgs, DatabaseValueGetResult,
-} from './types';
 import {
     scenario01,
 } from './_test/scenario01';
 import {
     scenario02,
 } from './_test/scenario02';
-import {
-    get,
-} from '.';
+import type {
+    DatabaseValueGetArgs, DatabaseValueGetResult,
+} from './types';
 
 describe(
     `get`,

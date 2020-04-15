@@ -1,19 +1,19 @@
 // @flow
 
-import type {
-    Cognito,
-} from '../clients/cognito/types';
-import type {
-    BuildUserProfileResult,
-    MockBuildUserProfile,
-    UserProfileResult,
-} from './types';
 import {
     getKeyId, verifyToken,
 } from './utils';
 import {
     getPublicKey,
 } from '../connectors/auth';
+import type {
+    BuildUserProfileResult,
+    MockBuildUserProfile,
+    UserProfileResult,
+} from './types';
+import type {
+    Cognito,
+} from '../clients/cognito/types';
 
 // $FlowFixMe
 export const mockBuildUserProfile: MockBuildUserProfile = null;

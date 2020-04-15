@@ -46,10 +46,16 @@ const createConfig: () => Config = () => {
 
         if ( variable == null ) {
 
+            const serializedGlobalVariables = JSON.stringify(
+                globalVariables,
+            );
+
+            const errorMessage
+                = `variable '${ name }' is missing in global variables for '${ env }' environment:`
+                + ` ${ serializedGlobalVariables }`;
+
             throw Error(
-                `variable '${ name }' is missing in global variables for '${ env }' environment: ${ JSON.stringify(
-                    globalVariables,
-                ) }`,
+                errorMessage,
             );
 
         }

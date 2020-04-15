@@ -10,11 +10,11 @@ import {
     Type, reify,
 } from 'flow-runtime';
 import type {
-    CommonState,
-} from './state/modules/types';
-import type {
     CommonPlayerAction,
 } from './state/types';
+import type {
+    CommonState,
+} from './state/modules/types';
 
 export type ServerResponse = {
     request: ServerRequest,

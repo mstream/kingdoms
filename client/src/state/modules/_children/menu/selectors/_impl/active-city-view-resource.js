@@ -1,11 +1,11 @@
 // @flow
 
 import type {
-    CommonStateResourceKey,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
     ClientStateSelector,
 } from '../../../../../types';
+import type {
+    CommonStateResourceKey,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 
 export const activeCityViewResourceSelector: ClientStateSelector< CommonStateResourceKey > = (
     state,

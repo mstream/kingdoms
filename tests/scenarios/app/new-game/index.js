@@ -1,17 +1,8 @@
 // @flow
 
-import type {
-    TestController,
-} from 'testcafe';
 import {
     Selector,
 } from 'testcafe';
-import type {
-    CommonState,
-} from '../../../../common/src/state/modules/types';
-import {
-    emptyCommonState,
-} from '../../../../common/src/state/modules/state';
 import {
     appModel,
 } from '../../../models/app';
@@ -19,16 +10,25 @@ import {
     authModel,
 } from '../../../models/auth';
 import {
+    emptyCommonState,
+} from '../../../../common/src/state/modules/state';
+import {
     generateCityName,
     generateId,
     generatePassword,
 } from '../../../../common/src/utils';
 import {
-    tools,
-} from '../../../tools';
-import {
     selectors,
 } from '../../../models/app/selectors';
+import {
+    tools,
+} from '../../../tools';
+import type {
+    CommonState,
+} from '../../../../common/src/state/modules/types';
+import type {
+    TestController,
+} from 'testcafe';
 
 fixture(
     `app`,

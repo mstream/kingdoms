@@ -4,6 +4,12 @@ import {
     citiesReducer,
 } from './cities/reducer';
 import {
+    emptyCommonState,
+} from './state';
+import {
+    ordersReducer,
+} from './orders/reducer';
+import {
     rulesReducer,
 } from './rules/reducer';
 import {
@@ -13,8 +19,19 @@ import {
     worldReducer,
 } from './world/reducer';
 import type {
+    CommonAction,
+} from '../types';
+import type {
+    CommonState,
+    CommonStateReducer,
+    CommonStateReducerResult,
+} from './types';
+import type {
     CommonStateCities,
 } from './cities/reducer/types';
+import type {
+    CommonStateOrders,
+} from './orders/reducer/types';
 import type {
     CommonStateRules,
 } from './rules/reducer/types';
@@ -24,23 +41,6 @@ import type {
 import type {
     CommonStateWorld,
 } from './world/reducer/types';
-import type {
-    CommonState,
-    CommonStateReducer,
-    CommonStateReducerResult,
-} from './types';
-import {
-    emptyCommonState,
-} from './state';
-import {
-    ordersReducer,
-} from './orders/reducer';
-import type {
-    CommonStateOrders,
-} from './orders/reducer/types';
-import type {
-    CommonAction,
-} from '../types';
 
 type StateToReducersMapping = {
     cities: CommonStateReducer< CommonStateCities >,
@@ -121,6 +121,7 @@ const combineCommonStateReducers = (
             );
 
     };
+
     return combinedReducer;
 
 };

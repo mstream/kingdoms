@@ -1,13 +1,13 @@
 // @flow
 
 import {
-    zeroVector,
-} from '../../../../vector';
-import {
     emptyBuildingsState,
     emptyResourcesState,
     emptyUnitsState,
 } from '../../rules/reducer/state';
+import {
+    zeroVector,
+} from '../../../../vector';
 import type {
     CommonStateCities, CommonStateCity,
 } from './types';

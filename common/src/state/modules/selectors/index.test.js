@@ -1,11 +1,11 @@
 // @flow
 
 import {
-    nextCitySpotSelectorTestScenarios,
-} from './_test/next-city-spot-test-scenarios';
-import {
     commonStateSelectors,
 } from './index';
+import {
+    nextCitySpotSelectorTestScenarios,
+} from './_test/next-city-spot-test-scenarios';
 import {
     runCommonStateSelectorsTestScenarios,
 } from '../test-utils';

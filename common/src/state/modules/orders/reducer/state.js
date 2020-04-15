@@ -1,10 +1,5 @@
 // @flow
 
-import type {
-    CommonStateOrders,
-    CommonStateRegimentTemplate,
-    CommonStateScheduledAttackOrder,
-} from './types';
 import {
     UNIT_ARCHER,
     UNIT_CATAPULT,
@@ -17,6 +12,11 @@ import {
 import {
     emptyRange,
 } from '../../../../range';
+import type {
+    CommonStateOrders,
+    CommonStateRegimentTemplate,
+    CommonStateScheduledAttackOrder,
+} from './types';
 
 export const emptyRegimentTemplateState: CommonStateRegimentTemplate = {
     [ UNIT_ARCHER ]   : emptyRange,

@@ -4,11 +4,11 @@ import {
     clientStatePlayerSelectors,
 } from './index';
 import {
-    nameSelectorTestScenarios,
-} from './_test/name-test-scenarios';
-import {
     isAuthenticatedSelectorTestScenarios,
 } from './_test/is-authenticated-test-scenarios';
+import {
+    nameSelectorTestScenarios,
+} from './_test/name-test-scenarios';
 import {
     runClientStateSelectorsTestScenarios,
 } from '../../../../test-utils';

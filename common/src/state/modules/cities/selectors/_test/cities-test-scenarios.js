@@ -1,11 +1,11 @@
 // @flow
 
 import {
-    emptyCommonState,
-} from '../../../state';
-import {
     emptyCityState,
 } from '../../reducer/state';
+import {
+    emptyCommonState,
+} from '../../../state';
 import type {
     CommonStateCities,
 } from '../../reducer/types';

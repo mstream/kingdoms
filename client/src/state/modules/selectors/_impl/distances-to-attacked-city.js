@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    createSelector,
-} from 'reselect';
+    clientStateCommonStateSelectors,
+} from '../../_children/common-state/selectors';
 import {
     clientStateMenuSelectors,
 } from '../../_children/menu/selectors';
 import {
-    clientStateCommonStateSelectors,
-} from '../../_children/common-state/selectors';
+    createSelector,
+} from 'reselect';
 import type {
     CitiesDistances,
     CityDistances,

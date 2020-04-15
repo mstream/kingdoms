@@ -1,26 +1,26 @@
 // @flow
 
 import {
-    getCurrentState,
-} from '../../../../../../../common/src/state/actions';
-import type {
-    ClientStore,
-} from '../../../../types';
-import type {
-    Socket,
-} from '../../types';
-import {
     clientActions,
 } from '../../../../modules/actions';
+import {
+    getCurrentState,
+} from '../../../../../../../common/src/state/actions';
 import {
     sendMessage,
 } from '../../utils';
 import type {
-    ServerRequest,
-} from '../../../../../../../common/src/types';
+    ClientStore,
+} from '../../../../types';
 import type {
     Logger,
 } from '../../../../../../../common/src/logging/types';
+import type {
+    ServerRequest,
+} from '../../../../../../../common/src/types';
+import type {
+    Socket,
+} from '../../types';
 
 export const createOnConnectHandler = (
     {

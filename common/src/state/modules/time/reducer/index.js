@@ -1,15 +1,6 @@
 // @flow
 
 import {
-    resetStateTimeReducer,
-} from './_impl/reset-state';
-import {
-    executeTimeStepTimeReducer,
-} from './_impl/execute-time-step';
-import {
-    initialCommonState,
-} from '../../../index';
-import {
     EXECUTE_TIME_STEP,
 } from '../actions';
 import {
@@ -18,6 +9,15 @@ import {
 import {
     createCommonStateReducer,
 } from '../../utils';
+import {
+    executeTimeStepTimeReducer,
+} from './_impl/execute-time-step';
+import {
+    initialCommonState,
+} from '../../../index';
+import {
+    resetStateTimeReducer,
+} from './_impl/reset-state';
 import type {
     CommonStateTime,
 } from './types';

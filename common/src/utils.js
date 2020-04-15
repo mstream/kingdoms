@@ -1,21 +1,21 @@
 // @flow
 
 import {
+    parseJson,
+} from './json';
+import {
     v4,
 } from 'uuid';
+import {
+    validateServerResponseType,
+} from './validators';
+import randomString from 'crypto-random-string';
 import type {
     CommonState,
 } from './state/modules/types';
 import type {
     ServerResponse,
 } from './types';
-import {
-    validateServerResponseType,
-} from './validators';
-import {
-    parseJson,
-} from './json';
-import randomString from 'crypto-random-string';
 
 const suffixes: $ReadOnlyArray< string > = [
     `k`,
@@ -103,6 +103,7 @@ export const numberToQuantityString = (
                 return quantity;
 
             }
+
             return {
                 suffix,
                 value: quantity.value / 1000,

@@ -1,20 +1,20 @@
 // @flow
 
-import type {
-    Vector,
-} from '../../../../vector';
-import {
-    zeroVector,
-} from '../../../../vector';
 import {
     emptyCityState,
 } from '../../cities/reducer/state';
-import type {
-    CommonStateSelectorTestScenario,
-} from '../../types';
 import {
     emptyCommonState,
 } from '../../state';
+import {
+    zeroVector,
+} from '../../../../vector';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../types';
+import type {
+    Vector,
+} from '../../../../vector';
 
 type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< ?Vector > >;
 

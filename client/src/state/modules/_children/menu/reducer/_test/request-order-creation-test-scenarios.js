@@ -1,23 +1,23 @@
 // @flow
 
-import type {
-    ClientStateMenuReducerTestScenario,
-} from './types';
-import type {
-    ClientRequestOrderCreationAction,
-} from '../../../common-state/actions/types';
 import {
-    emptyClientState,
-} from '../../../../../state';
+    UNIT_PIKEMAN,
+} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
 import {
     clientActions,
 } from '../../../../actions';
 import {
+    emptyClientState,
+} from '../../../../../state';
+import {
     emptyRegimentTemplateState,
 } from '../../../../../../../../common/src/state/modules/orders/reducer/state';
-import {
-    UNIT_PIKEMAN,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import type {
+    ClientRequestOrderCreationAction,
+} from '../../../common-state/actions/types';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientRequestOrderCreationAction >, >;
 

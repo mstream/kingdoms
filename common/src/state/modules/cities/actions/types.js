@@ -1,11 +1,11 @@
 // @flow
 
 import type {
-    CommonStateBuildingKey,
-} from '../../rules/reducer/types';
-import type {
     BasePlayerAction,
 } from '../../../../types/actions';
+import type {
+    CommonStateBuildingKey,
+} from '../../rules/reducer/types';
 
 export const ABANDON_CITY: 'ABANDON_CITY' = `ABANDON_CITY`;
 export const CHANGE_CITY_NAME: 'CHANGE_CITY_NAME' = `CHANGE_CITY_NAME`;

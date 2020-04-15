@@ -21,6 +21,7 @@ export const minutesToDurationString = (
         return `0`;
 
     }
+
     const hours = Math.floor(
         durationInMinutes / 60,
     );

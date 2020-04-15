@@ -1,13 +1,13 @@
 // @flow
 
-import jwt from 'jsonwebtoken';
-import type {
-    TokenType,
-} from './types';
 import {
     TOKEN_INVALID_PRIVATE_KEY,
     TOKEN_UNPARSABLE,
     TOKEN_WITHOUT_USERNAME,
+} from './types';
+import jwt from 'jsonwebtoken';
+import type {
+    TokenType,
 } from './types';
 
 export const createToken = (
@@ -23,6 +23,7 @@ export const createToken = (
         return `UNPARSABLE_TOKEN`;
 
     }
+
     case TOKEN_WITHOUT_USERNAME: {
 
         return jwt.sign(
@@ -32,6 +33,7 @@ export const createToken = (
         );
 
     }
+
     case TOKEN_INVALID_PRIVATE_KEY: {
 
         return jwt.sign(
@@ -42,6 +44,7 @@ export const createToken = (
         );
 
     }
+
     default: {
 
         throw Error(

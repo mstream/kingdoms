@@ -4,11 +4,11 @@ import type {
     DatabaseTestScenario,
 } from '../../../../types';
 import type {
-    Redis,
-} from '../../../../../../clients/redis/types';
-import type {
     Logger,
 } from '../../../../../../../../common/src/logging/types';
+import type {
+    Redis,
+} from '../../../../../../clients/redis/types';
 
 export type DatabaseValueSetResult = void
 

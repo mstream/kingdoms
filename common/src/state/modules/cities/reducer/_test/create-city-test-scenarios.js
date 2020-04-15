@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    createCity,
-} from '../../actions';
-import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
     BUILDING_WAREHOUSE,
@@ -18,14 +15,17 @@ import {
     UNIT_SWORDSMAN,
 } from '../../../rules/reducer/types';
 import {
-    failure, success,
-} from '../../../utils';
+    createCity,
+} from '../../actions';
+import {
+    emptyCityState,
+} from '../state';
 import {
     emptyCommonState,
 } from '../../../state';
 import {
-    emptyCityState,
-} from '../state';
+    failure, success,
+} from '../../../utils';
 import type {
     CommonCreateCityAction,
 } from '../../actions/types';

@@ -1,8 +1,8 @@
 // @flow
 
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
+import {
+    calculateTimeDeltaInSeconds,
+} from '../../../../../time';
 import {
     failure, success,
 } from '../../../utils';
@@ -10,11 +10,11 @@ import type {
     CommonExecuteTimeStepAction,
 } from '../../../time/actions';
 import type {
+    CommonStateActionReducer,
+} from '../../../types';
+import type {
     CommonStateOrders,
 } from '../types';
-import {
-    calculateTimeDeltaInSeconds,
-} from '../../../../../time';
 
 type Reducer = CommonStateActionReducer< CommonStateOrders,
     CommonExecuteTimeStepAction, >;

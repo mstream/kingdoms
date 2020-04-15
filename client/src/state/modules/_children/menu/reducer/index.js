@@ -1,44 +1,6 @@
 // @flow
 
 import {
-    updateStateMenuReducer,
-} from './_impl/update-state';
-import {
-    closeCityViewMenuReducer,
-} from './_impl/close-city-view';
-import {
-    openCityViewMenuReducer,
-} from './_impl/open-city-view';
-import {
-    requestCityCreationMenuReducer,
-} from './_impl/request-city-creation';
-import {
-    selectCityViewUnitTabMenuReducer,
-} from './_impl/select-city-view-unit-tab';
-import {
-    closeAttackViewMenuReducer,
-} from './_impl/close-attack-view';
-import {
-    openAttackViewMenuReducer,
-} from './_impl/open-attack-view';
-import type {
-    ClientStateMenu,
-} from './types';
-import {
-    selectAttackViewAttackingCityReducer,
-} from './_impl/select-attack-view-attacking-city';
-import {
-    selectCityViewResourcesTabMenuReducer,
-} from './_impl/select-city-view-resources-tab';
-import {
-    selectCityViewBuildingsTabMenuReducer,
-} from './_impl/select-city-view-buildings-tab';
-import {
-    REQUEST_CITY_CREATION,
-    REQUEST_ORDER_CREATION,
-    UPDATE_STATE,
-} from '../../common-state/actions/types';
-import {
     CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
     OPEN_ATTACK_VIEW,
@@ -53,11 +15,16 @@ import {
     UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
 } from '../actions/types';
 import {
-    updateAttackViewRegimentTemplateReducer,
-} from './_impl/update-attack-view-regiment-template';
+    REQUEST_CITY_CREATION,
+    REQUEST_ORDER_CREATION,
+    UPDATE_STATE,
+} from '../../common-state/actions/types';
 import {
-    updateAttackViewMinimumDelayReducer,
-} from './_impl/update-attack-view-minimum-delay-template';
+    closeAttackViewMenuReducer,
+} from './_impl/close-attack-view';
+import {
+    closeCityViewMenuReducer,
+} from './_impl/close-city-view';
 import {
     createClientStateReducer,
 } from '../../../../utils';
@@ -65,14 +32,47 @@ import {
     initialClientState,
 } from '../../../../state';
 import {
-    selectCityViewTabMenuReducer,
-} from './_impl/select-city-view-tab';
+    openAttackViewMenuReducer,
+} from './_impl/open-attack-view';
+import {
+    openCityViewMenuReducer,
+} from './_impl/open-city-view';
+import {
+    requestCityCreationMenuReducer,
+} from './_impl/request-city-creation';
 import {
     requestOrderCreationMenuReducer,
 } from './_impl/request-order-creation';
 import {
+    selectAttackViewAttackingCityReducer,
+} from './_impl/select-attack-view-attacking-city';
+import {
+    selectCityViewBuildingsTabMenuReducer,
+} from './_impl/select-city-view-buildings-tab';
+import {
     selectCityViewOrdersTabMenuReducer,
 } from './_impl/select-city-view-orders-tab';
+import {
+    selectCityViewResourcesTabMenuReducer,
+} from './_impl/select-city-view-resources-tab';
+import {
+    selectCityViewTabMenuReducer,
+} from './_impl/select-city-view-tab';
+import {
+    selectCityViewUnitTabMenuReducer,
+} from './_impl/select-city-view-unit-tab';
+import {
+    updateAttackViewMinimumDelayReducer,
+} from './_impl/update-attack-view-minimum-delay-template';
+import {
+    updateAttackViewRegimentTemplateReducer,
+} from './_impl/update-attack-view-regiment-template';
+import {
+    updateStateMenuReducer,
+} from './_impl/update-state';
+import type {
+    ClientStateMenu,
+} from './types';
 
 export const menuReducer = createClientStateReducer<ClientStateMenu>(
     {

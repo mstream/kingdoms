@@ -4,20 +4,21 @@ import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
-    ClientStateMenuReducerTestScenario,
-} from './types';
-import type {
-    ClientSelectCityViewBuildingsTabAction,
-} from '../../actions/types';
-import {
-    emptyClientState,
-} from '../../../../../state';
 import {
     clientActions,
 } from '../../../../actions';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientSelectCityViewBuildingsTabAction,
+} from '../../actions/types';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
 
-type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientSelectCityViewBuildingsTabAction >, >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewBuildingsTabAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const selectCityViewBuildingsTabTestScenarios: Scenarios = [
     {

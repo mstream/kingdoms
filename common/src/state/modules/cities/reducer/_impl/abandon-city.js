@@ -1,17 +1,17 @@
 // @flow
 
-import type {
-    CommonStateCities,
-} from '../types';
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
 import {
     failure, success,
 } from '../../../utils';
 import type {
     CommonAbandonCityAction,
 } from '../../actions/types';
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
+import type {
+    CommonStateCities,
+} from '../types';
 
 type Reducer = CommonStateActionReducer< CommonStateCities,
     CommonAbandonCityAction, >;

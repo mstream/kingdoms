@@ -1,28 +1,28 @@
 // @flow
 
 import {
-    upgradeBuilding,
-} from '../../actions';
-import {
     BUILDING_PASTURE,
     RESOURCE_FOOD,
     RESOURCE_WOOD,
 } from '../../../rules/reducer/types';
 import {
-    failure, success,
-} from '../../../utils';
+    emptyCityState,
+} from '../state';
 import {
     emptyCommonState,
 } from '../../../state';
 import {
-    emptyCityState,
-} from '../state';
-import type {
-    CommonUpgradeBuildingAction,
-} from '../../actions/types';
+    failure, success,
+} from '../../../utils';
+import {
+    upgradeBuilding,
+} from '../../actions';
 import type {
     CommonStateCitiesReducerTestScenarios,
 } from './types';
+import type {
+    CommonUpgradeBuildingAction,
+} from '../../actions/types';
 
 type Scenarios = $ReadOnlyArray< CommonStateCitiesReducerTestScenarios< CommonUpgradeBuildingAction >, >
 

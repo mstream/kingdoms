@@ -18,7 +18,7 @@ module.exports = {
     'id-length': [
         `error`,
         {
-            max: 64,
+            max: 60,
             min: 1,
         },
     ],
@@ -43,14 +43,14 @@ module.exports = {
     'max-len': [
         `error`,
         {
-            code    : 120,
+            code    : 115,
             tabWidth: 4,
         },
     ],
     'max-lines': [
         `error`,
         {
-            max           : 800,
+            max           : 500,
             skipBlankLines: true,
             skipComments  : true,
         },
@@ -79,7 +79,7 @@ module.exports = {
     'max-statements': [
         `error`,
         {
-            max: 35,
+            max: 30,
         },
     ],
     'max-statements-per-line': [

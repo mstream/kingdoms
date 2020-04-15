@@ -1,33 +1,33 @@
 // @flow
 
 import '@testing-library/jest-dom/extend-expect';
-import React from 'react';
-import {
-    render,
-} from '@testing-library/react';
-import {
-    Provider,
-} from 'react-redux';
-import configureStore from 'redux-mock-store';
 import {
     CostInfoComponent,
 } from '.';
-import type {
-    CommonStateResources,
-} from '../../../../common/src/state/modules/rules/reducer/types';
+import {
+    Provider,
+} from 'react-redux';
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
 } from '../../../../common/src/state/modules/rules/reducer/types';
 import {
+    emptyClientState,
+} from '../../state/state';
+import {
     emptyResourcesState,
 } from '../../../../common/src/state/modules/rules/reducer/state';
 import {
-    emptyClientState,
-} from '../../state/state';
+    render,
+} from '@testing-library/react';
+import React from 'react';
+import configureStore from 'redux-mock-store';
 import type {
     ClientState,
 } from '../../state/types';
+import type {
+    CommonStateResources,
+} from '../../../../common/src/state/modules/rules/reducer/types';
 
 const mockStore = configureStore(
     [],

@@ -1,20 +1,20 @@
 // @flow
 
 import {
-    executeTimeStep,
-} from '../../actions';
-import {
     UNIT_PEASANT,
 } from '../../../rules/reducer/types';
 import {
-    failure, success,
-} from '../../../utils';
+    emptyCityState,
+} from '../state';
 import {
     emptyCommonState,
 } from '../../../state';
 import {
-    emptyCityState,
-} from '../state';
+    executeTimeStep,
+} from '../../actions';
+import {
+    failure, success,
+} from '../../../utils';
 import type {
     CommonExecuteTimeStepAction,
 } from '../../../time/actions';

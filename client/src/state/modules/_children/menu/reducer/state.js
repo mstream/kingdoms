@@ -5,15 +5,15 @@ import {
     RESOURCE_FOOD,
     UNIT_PEASANT,
 } from '../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
-    ClientStateMenu,
-} from './types';
 import {
     TAB_OVERVIEW,
 } from './types';
 import {
     emptyRegimentTemplateState,
 } from '../../../../../../../common/src/state/modules/orders/reducer/state';
+import type {
+    ClientStateMenu,
+} from './types';
 
 export const emptyMenuState: ClientStateMenu = {
     attackView: {

@@ -1,10 +1,10 @@
 // @flow
 
-import type {
-    Jwks,
-} from './types';
 import {
     JwksType,
+} from './types';
+import type {
+    Jwks,
 } from './types';
 
 export const validateJwksType = (

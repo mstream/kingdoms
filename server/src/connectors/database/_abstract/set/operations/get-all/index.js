@@ -1,12 +1,12 @@
 // @flow
 
-import type {
-    DatabaseSetGetAll,
-} from './types';
 import {
     ERROR_DATABASE_SET_GET_ALL,
 } from './types';
 import verros from 'verror';
+import type {
+    DatabaseSetGetAll,
+} from './types';
 
 export const getAll: DatabaseSetGetAll< string, string > = async ( {
     key,

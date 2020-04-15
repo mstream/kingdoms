@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    emptyCommonState,
-} from '../../../../../../common/src/state/modules/state';
-import {
     emptyCityState,
 } from '../../../../../../common/src/state/modules/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state';
+import {
+    emptyCommonState,
+} from '../../../../../../common/src/state/modules/state';
 import type {
     ClientStateSelectorTestScenario,
 } from '../../../types';

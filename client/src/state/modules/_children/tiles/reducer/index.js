@@ -1,11 +1,5 @@
 // @flow
 
-import type {
-    ClientStateTiles,
-} from './types';
-import {
-    updateStateTilesReducer,
-} from './_impl/update-state';
 import {
     UPDATE_STATE,
 } from '../../common-state/actions/types';
@@ -15,6 +9,12 @@ import {
 import {
     initialClientState,
 } from '../../../../state';
+import {
+    updateStateTilesReducer,
+} from './_impl/update-state';
+import type {
+    ClientStateTiles,
+} from './types';
 
 export const tilesReducer = createClientStateReducer<ClientStateTiles>(
     {

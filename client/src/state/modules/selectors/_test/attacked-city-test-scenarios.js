@@ -1,20 +1,20 @@
 // @flow
 
 import {
-    emptyCommonState,
-} from '../../../../../../common/src/state/modules/state';
-import {
     emptyCityState,
 } from '../../../../../../common/src/state/modules/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state';
-import type {
-    CommonStateCity,
-} from '../../../../../../common/src/state/modules/cities/reducer/types';
+import {
+    emptyCommonState,
+} from '../../../../../../common/src/state/modules/state';
 import type {
     ClientStateSelectorTestScenario,
 } from '../../../types';
+import type {
+    CommonStateCity,
+} from '../../../../../../common/src/state/modules/cities/reducer/types';
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ?CommonStateCity >, >;
 

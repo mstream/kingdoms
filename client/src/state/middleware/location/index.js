@@ -1,23 +1,23 @@
 // @flow
 
-import type {
-    Middleware,
-} from 'redux';
+import {
+    SIGN_OUT,
+} from '../../modules/actions/types';
+import {
+    redirectToLogoutPage,
+} from '../../../location';
 import type {
     ClientAction, ClientState,
 } from '../../types';
 import type {
     Config,
 } from '../../../config/types';
-import {
-    SIGN_OUT,
-} from '../../modules/actions/types';
 import type {
     Logger,
 } from '../../../../../common/src/logging/types';
-import {
-    redirectToLogoutPage,
-} from '../../../location';
+import type {
+    Middleware,
+} from 'redux';
 
 export const createLocationMiddleware = (
     {

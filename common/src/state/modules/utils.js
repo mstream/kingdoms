@@ -1,14 +1,14 @@
 // @flow
 
 import type {
+    CommonAction, CommonActionKey,
+} from '../types';
+import type {
     CommonState,
     CommonStateActionReducer,
     CommonStateReducer,
     CommonStateReducerResult,
 } from './types';
-import type {
-    CommonAction, CommonActionKey,
-} from '../types';
 
 export const success = <S>( {
     state,

@@ -91,13 +91,16 @@ const destroyService = (
 ) => {
 
     return `(aws s3 rm --recursive s3://${ bucketName } || true) && `
-        + `aws cloudformation delete-stack --stack-name ${ stackName }-${ environment }`;
+        + `aws cloudformation delete-stack`
+        + ` --stack-name ${ stackName }-${ environment }`;
 
 };
 
 const saveOutputs = (
     {
-        environment, outputFileName, stackName,
+        environment,
+        outputFileName,
+        stackName,
     },
 ) => {
 

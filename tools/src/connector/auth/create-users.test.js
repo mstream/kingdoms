@@ -1,11 +1,11 @@
 // @flow
 
 import {
-    emptyConfig,
-} from '../../config';
-import {
     createUsers,
 } from './create-users';
+import {
+    emptyConfig,
+} from '../../config';
 import {
     emptyLogger,
 } from '../../../../common/src/logging';
@@ -129,6 +129,7 @@ describe(
                             );
 
                         }
+
                         return Promise.resolve(
                             {
                                 stderr: ``,
@@ -230,6 +231,7 @@ describe(
                             );
 
                         }
+
                         return Promise.resolve(
                             {
                                 stderr: ``,
@@ -330,6 +332,7 @@ describe(
                             );
 
                         }
+
                         return Promise.resolve(
                             {
                                 stderr: ``,

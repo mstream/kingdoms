@@ -1,18 +1,18 @@
 // @flow
 
 import {
-    dummyRedis,
-} from '../../../../../../../clients/redis/utils';
-import type {
-    DatabaseSetAddTestScenario,
-} from '../types';
-import {
     ERROR_DATABASE_SET_ADD,
 } from '../types';
-import verror from 'verror';
+import {
+    dummyRedis,
+} from '../../../../../../../clients/redis/utils';
 import {
     emptyLogger,
 } from '../../../../../../../../../common/src/logging';
+import verror from 'verror';
+import type {
+    DatabaseSetAddTestScenario,
+} from '../types';
 
 export const scenario02: DatabaseSetAddTestScenario = {
     create: () => {

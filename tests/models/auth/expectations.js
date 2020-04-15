@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    getLocation,
-} from '../../utils';
+    TestController,
+} from 'testcafe';
 import {
     config,
 } from '../../config';
 import {
-    TestController,
-} from 'testcafe';
+    getLocation,
+} from '../../utils';
 
 const isAtAuthPage = async (
     {

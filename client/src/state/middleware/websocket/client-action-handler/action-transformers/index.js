@@ -1,17 +1,5 @@
 // @flow
 
-import type {
-    ClientAction, ClientActionKey,
-} from '../../../../types';
-import type {
-    CommonPlayerAction,
-} from '../../../../../../../common/src/state/types';
-import type {
-    ClientRequestBuildingUpgradeAction,
-    ClientRequestCityCreationAction,
-    ClientRequestCityNameChangeAction,
-    ClientRequestOrderCreationAction,
-} from '../../../../modules/_children/common-state/actions/types';
 import {
     REQUEST_BUILDING_UPGRADE,
     REQUEST_CITY_CREATION,
@@ -24,19 +12,31 @@ import {
     upgradeBuilding,
 } from '../../../../../../../common/src/state/modules/cities/actions';
 import {
+    createScheduledAttackOrder,
+} from '../../../../../../../common/src/state/modules/orders/actions';
+import {
     generateId,
 } from '../../../../../../../common/src/utils';
 import type {
-    CommonCreateScheduledAttackOrderAction,
-} from '../../../../../../../common/src/state/modules/orders/actions/types';
+    ClientAction, ClientActionKey,
+} from '../../../../types';
+import type {
+    ClientRequestBuildingUpgradeAction,
+    ClientRequestCityCreationAction,
+    ClientRequestCityNameChangeAction,
+    ClientRequestOrderCreationAction,
+} from '../../../../modules/_children/common-state/actions/types';
 import type {
     CommonChangeCityNameAction,
     CommonCreateCityAction,
     CommonUpgradeBuildingAction,
 } from '../../../../../../../common/src/state/modules/cities/actions/types';
-import {
-    createScheduledAttackOrder,
-} from '../../../../../../../common/src/state/modules/orders/actions';
+import type {
+    CommonCreateScheduledAttackOrderAction,
+} from '../../../../../../../common/src/state/modules/orders/actions/types';
+import type {
+    CommonPlayerAction,
+} from '../../../../../../../common/src/state/types';
 
 type ActionTransformer<+A: ClientAction, +B: CommonPlayerAction> = (
     $ReadOnly< { clientAction: A, username: string } >,

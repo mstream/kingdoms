@@ -3,9 +3,6 @@
 import {
     cas,
 } from './index';
-import type {
-    DatabaseValueCasArgs, DatabaseValueCasResult,
-} from './types';
 import {
     runDatabaseOperationTestScenarios,
 } from '../../../../utils';
@@ -27,12 +24,18 @@ import {
 import {
     scenario06,
 } from './_test/scenario06';
+import type {
+    DatabaseValueCasArgs, DatabaseValueCasResult,
+} from './types';
+
+type Args = DatabaseValueCasArgs< string, string >;
+type Result = DatabaseValueCasResult< string >;
 
 describe(
     `cas`,
     () => {
 
-        runDatabaseOperationTestScenarios<DatabaseValueCasArgs< string, string >, DatabaseValueCasResult< string >>(
+        runDatabaseOperationTestScenarios<Args, Result>(
             {
                 jest: {
                     describe,

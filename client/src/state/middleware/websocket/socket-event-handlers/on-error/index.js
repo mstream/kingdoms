@@ -1,20 +1,20 @@
 // @flow
 
-import type {
-    ClientStore,
-} from '../../../../types';
 import {
     clientActions,
 } from '../../../../modules/actions';
+import {
+    redirectToLoginPage,
+} from '../../../../../location';
+import type {
+    ClientStore,
+} from '../../../../types';
 import type {
     Config,
 } from '../../../../../config/types';
 import type {
     Logger,
 } from '../../../../../../../common/src/logging/types';
-import {
-    redirectToLoginPage,
-} from '../../../../../location';
 
 export const createOnErrorHandler = (
     {

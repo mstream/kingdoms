@@ -1,44 +1,26 @@
 // @flow
 
 import {
-    cityIdsOwnedByPlayerSelector,
-} from './_impl/city-ids-owned-by-player';
-import {
-    currentlyViewedCitySelector,
-} from './_impl/currently-viewed-city';
-import {
-    isGameStartingSelector,
-} from './_impl/is-game-starting';
+    attackedCitySelector,
+} from './_impl/attacked-city';
 import {
     attackingCitySelector,
 } from './_impl/attacking-city';
 import {
-    scheduledAttackOrdersForViewedCitySelector,
-} from './_impl/scheduled-attack-orders-for-viewed-city';
-import {
-    playerOwnsAnyCitySelector,
-} from './_impl/player-owns-any-city';
-import {
-    nextCityIdSelector,
-} from './_impl/next-city-id';
-import {
-    previousCityIdSelector,
-} from './_impl/previous-city-id';
-import {
-    attackedCitySelector,
-} from './_impl/attacked-city';
-import {
-    clientStateDistancesToAttackedCitySelector,
-} from './_impl/distances-to-attacked-city';
+    cityIdsOwnedByPlayerSelector,
+} from './_impl/city-ids-owned-by-player';
 import {
     clientStateCameraSelectors,
 } from '../_children/camera/selectors';
 import {
-    clientStateErrorsSelectors,
-} from '../_children/errors/selectors';
-import {
     clientStateCommonStateSelectors,
 } from '../_children/common-state/selectors';
+import {
+    clientStateDistancesToAttackedCitySelector,
+} from './_impl/distances-to-attacked-city';
+import {
+    clientStateErrorsSelectors,
+} from '../_children/errors/selectors';
 import {
     clientStateMenuSelectors,
 } from '../_children/menu/selectors';
@@ -48,6 +30,24 @@ import {
 import {
     clientStateTilesSelectors,
 } from '../_children/tiles/selectors';
+import {
+    currentlyViewedCitySelector,
+} from './_impl/currently-viewed-city';
+import {
+    isGameStartingSelector,
+} from './_impl/is-game-starting';
+import {
+    nextCityIdSelector,
+} from './_impl/next-city-id';
+import {
+    playerOwnsAnyCitySelector,
+} from './_impl/player-owns-any-city';
+import {
+    previousCityIdSelector,
+} from './_impl/previous-city-id';
+import {
+    scheduledAttackOrdersForViewedCitySelector,
+} from './_impl/scheduled-attack-orders-for-viewed-city';
 
 export const clientStateSelectors = {
     attackedCity                      : attackedCitySelector,

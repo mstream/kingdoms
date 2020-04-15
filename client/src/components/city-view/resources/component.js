@@ -1,32 +1,32 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    numberToQuantityString,
-} from '../../../../../common/src/utils';
 import {
     ChangeInfoComponent,
 } from '../../change-info';
 import {
-    ImageComponent,
-} from '../../image';
-import {
     CityItemsListComponent,
 } from '../items-list';
-import classNames from 'classnames';
 import {
-    resourcesOrder,
-    resourceVisuals,
-} from '../../../assets/images/resources';
+    ImageComponent,
+} from '../../image';
 import {
     calculateResourceChangeInfo,
 } from '../../../../../common/src/state';
 import {
+    numberToQuantityString,
+} from '../../../../../common/src/utils';
+import {
+    resourceVisuals,
+    resourcesOrder,
+} from '../../../assets/images/resources';
+import {
     testIds,
 } from '../../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {

@@ -3,22 +3,22 @@
 import {
     auth,
 } from './connector/auth';
-import type {
-    User,
-} from './connector/auth/types';
-import type {
-    CommonState,
-} from '../../common/src/state/modules/types';
 import {
     world,
 } from './connector/world';
+import exec from 'await-exec';
+import type {
+    CommonState,
+} from '../../common/src/state/modules/types';
 import type {
     Config,
 } from './config/types';
-import exec from 'await-exec';
 import type {
     Logger,
 } from '../../common/src/logging/types';
+import type {
+    User,
+} from './connector/auth/types';
 
 export const createTools = (
     {

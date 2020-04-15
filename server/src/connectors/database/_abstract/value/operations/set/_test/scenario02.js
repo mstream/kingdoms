@@ -1,18 +1,18 @@
 // @flow
 
 import {
+    ERROR_DATABASE_VALUE_SET,
+} from '../index';
+import {
     dummyRedis,
 } from '../../../../../../../clients/redis/utils';
 import {
-    ERROR_DATABASE_VALUE_SET,
-} from '../index';
+    emptyLogger,
+} from '../../../../../../../../../common/src/logging';
 import verror from 'verror';
 import type {
     DatabaseValueSetTestScenario,
 } from '../types';
-import {
-    emptyLogger,
-} from '../../../../../../../../../common/src/logging';
 
 export const scenario02: DatabaseValueSetTestScenario = {
     create: () => {

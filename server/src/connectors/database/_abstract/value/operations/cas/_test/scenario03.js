@@ -4,12 +4,12 @@ import {
     dummyMultiRedis,
     dummyRedis,
 } from '../../../../../../../clients/redis/utils';
-import type {
-    DatabaseValueCasTestScenario,
-} from '../types';
 import {
     emptyLogger,
 } from '../../../../../../../../../common/src/logging';
+import type {
+    DatabaseValueCasTestScenario,
+} from '../types';
 
 export const scenario03: DatabaseValueCasTestScenario = {
     create: () => {

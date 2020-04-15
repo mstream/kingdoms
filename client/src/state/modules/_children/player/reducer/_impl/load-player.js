@@ -1,14 +1,14 @@
 // @flow
 
 import type {
-    ClientStatePlayer,
-} from '../types';
-import type {
     ClientLoadPlayerAction,
 } from '../../actions/types';
 import type {
     ClientStateActionReducer,
 } from '../../../../../types';
+import type {
+    ClientStatePlayer,
+} from '../types';
 
 type Reducer = ClientStateActionReducer< ClientStatePlayer,
     ClientLoadPlayerAction, >;

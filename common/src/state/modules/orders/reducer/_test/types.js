@@ -1,14 +1,14 @@
 // @flow
 
 import type {
-    CommonStateReducerTestScenario,
-} from '../../../types';
+    CommonAction,
+} from '../../../../types';
 import type {
     CommonStateOrders,
 } from '../types';
 import type {
-    CommonAction,
-} from '../../../../types';
+    CommonStateReducerTestScenario,
+} from '../../../types';
 
 export type CommonStateOrdersReducerTestScenarios<+A: CommonAction,
     > = CommonStateReducerTestScenario< CommonStateOrders, A >;

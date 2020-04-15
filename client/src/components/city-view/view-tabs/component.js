@@ -1,13 +1,5 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import classNames from 'classnames';
-import type {
-    ClientStateCityViewTab,
-} from '../../../state/modules/_children/menu/reducer/types';
 import {
     TAB_BUILDINGS,
     TAB_ORDERS,
@@ -18,6 +10,14 @@ import {
 import {
     testIds,
 } from '../../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    ClientStateCityViewTab,
+} from '../../../state/modules/_children/menu/reducer/types';
+import type {
+    Props,
+} from './props';
 
 const tabsOrder = [
     TAB_OVERVIEW,

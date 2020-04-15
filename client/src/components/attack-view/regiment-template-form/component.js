@@ -1,30 +1,30 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    unitVisuals, unitsOrder,
-} from '../../../assets/images/units';
-import {
-    numberToQuantityString,
-} from '../../../../../common/src/utils';
 import {
     ImageComponent,
 } from '../../image';
-import type {
-    CommonStateUnitKey,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
 import {
     UNIT_PEASANT,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
 import {
-    validateUnitType,
-} from '../../../../../common/src/validators';
+    numberToQuantityString,
+} from '../../../../../common/src/utils';
 import {
     testIds,
 } from '../../../../../common/src/ui';
+import {
+    unitVisuals, unitsOrder,
+} from '../../../assets/images/units';
+import {
+    validateUnitType,
+} from '../../../../../common/src/validators';
+import React from 'react';
+import type {
+    CommonStateUnitKey,
+} from '../../../../../common/src/state/modules/rules/reducer/types';
+import type {
+    Props,
+} from './props';
 
 type BoundaryType = 'from' | 'to';
 
@@ -162,6 +162,7 @@ export const Component = (
                     };
 
                 }
+
                 throw Error(
                     `unsupported boundary type: ${ boundaryType }`,
                 );

@@ -4,11 +4,11 @@ import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    ClientStateTiles,
-} from '../../reducer/types';
-import type {
     ClientStateSelectorTestScenario,
 } from '../../../../../types';
+import type {
+    ClientStateTiles,
+} from '../../reducer/types';
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ClientStateTiles >, >;
 

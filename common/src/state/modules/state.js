@@ -1,17 +1,5 @@
 // @flow
 
-import type {
-    CommonState,
-} from './types';
-import {
-    emptyTimeState,
-} from './time/reducer/state';
-import {
-    emptyWorldState,
-} from './world/reducer/state';
-import {
-    emptyRulesState,
-} from './rules/reducer/state';
 import {
     emptyCitiesState,
 } from './cities/reducer/state';
@@ -21,6 +9,18 @@ import {
 import {
     emptyPlayersState,
 } from './players/reducer/state';
+import {
+    emptyRulesState,
+} from './rules/reducer/state';
+import {
+    emptyTimeState,
+} from './time/reducer/state';
+import {
+    emptyWorldState,
+} from './world/reducer/state';
+import type {
+    CommonState,
+} from './types';
 
 export const emptyCommonState: CommonState = {
     cities : emptyCitiesState,

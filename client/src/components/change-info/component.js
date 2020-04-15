@@ -1,16 +1,16 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import classNames from 'classnames';
 import {
     numberToQuantityString,
 } from '../../../../common/src/utils';
 import {
     testIds,
 } from '../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 
 export const Component = (

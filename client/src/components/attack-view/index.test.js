@@ -1,42 +1,42 @@
 // @flow
 
 import '@testing-library/jest-dom/extend-expect';
-import React from 'react';
-import {
-    fireEvent, render,
-} from '@testing-library/react';
 import {
     Provider,
 } from 'react-redux';
+import {
+    fireEvent, render,
+} from '@testing-library/react';
+import React from 'react';
 import configureStore from 'redux-mock-store';
 
-import {
-    emptyCommonState,
-} from '../../../../common/src/state/modules/state';
-import {
-    emptyCityState,
-} from '../../../../common/src/state/modules/cities/reducer/state';
-import {
-    UNIT_PIKEMAN,
-} from '../../../../common/src/state/modules/rules/reducer/types';
-import {
-    emptyRegimentTemplateState,
-} from '../../../../common/src/state/modules/orders/reducer/state';
-import {
-    emptyClientState,
-} from '../../state/state';
-import type {
-    ClientState,
-} from '../../state/types';
-import {
-    clientActions,
-} from '../../state/modules/actions';
 import {
     AttackViewComponent,
 } from './index';
 import {
+    UNIT_PIKEMAN,
+} from '../../../../common/src/state/modules/rules/reducer/types';
+import {
+    clientActions,
+} from '../../state/modules/actions';
+import {
+    emptyCityState,
+} from '../../../../common/src/state/modules/cities/reducer/state';
+import {
+    emptyClientState,
+} from '../../state/state';
+import {
+    emptyCommonState,
+} from '../../../../common/src/state/modules/state';
+import {
+    emptyRegimentTemplateState,
+} from '../../../../common/src/state/modules/orders/reducer/state';
+import {
     testIds,
 } from '../../../../common/src/ui';
+import type {
+    ClientState,
+} from '../../state/types';
 
 const mockStore = configureStore(
     [],

@@ -1,18 +1,18 @@
 // @flow
 
 import type {
-    Jest,
-} from '../../../test-utils/types';
+    CommonAction, CommonActionKey,
+} from '../../types';
 import type {
     CommonStateReducer,
     CommonStateReducerTestScenario,
     CommonStateSelector,
-    CommonStateSelectors,
     CommonStateSelectorTestScenario,
+    CommonStateSelectors,
 } from '../types';
 import type {
-    CommonAction, CommonActionKey,
-} from '../../types';
+    Jest,
+} from '../../../test-utils/types';
 
 export type CommonStateReducerTestScenarios<S> = {
     [CommonActionKey]: $ReadOnlyArray< CommonStateReducerTestScenario< S, CommonAction >, >,

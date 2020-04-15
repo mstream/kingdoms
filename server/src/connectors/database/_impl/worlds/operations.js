@@ -6,12 +6,12 @@ import {
 import {
     createWorldsKey,
 } from './key';
-import type {
-    DatabaseWorldsKey,
-} from './types';
 import {
     stringValueDeserializer, stringValueSerializer,
 } from '../../utils';
+import type {
+    DatabaseWorldsKey,
+} from './types';
 
 export const operations = createDatabaseSetOperations<DatabaseWorldsKey,
     string,

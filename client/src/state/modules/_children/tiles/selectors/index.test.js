@@ -4,11 +4,11 @@ import {
     clientStateTilesSelectors,
 } from './index';
 import {
-    tilesSelectorTestScenarios,
-} from './_test/tiles-test-scenarios';
-import {
     runClientStateSelectorsTestScenarios,
 } from '../../../../test-utils';
+import {
+    tilesSelectorTestScenarios,
+} from './_test/tiles-test-scenarios';
 
 describe(
     `clientStateTilesSelectors`,

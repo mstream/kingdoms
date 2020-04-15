@@ -4,18 +4,18 @@ import {
     UNIT_CATAPULT,
     UNIT_SWORDSMAN,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
-    ClientStateMenuReducerTestScenario,
-} from './types';
-import type {
-    ClientSelectCityViewUnitsTabAction,
-} from '../../actions/types';
-import {
-    emptyClientState,
-} from '../../../../../state';
 import {
     clientActions,
 } from '../../../../actions';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientSelectCityViewUnitsTabAction,
+} from '../../actions/types';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientSelectCityViewUnitsTabAction >, >;
 

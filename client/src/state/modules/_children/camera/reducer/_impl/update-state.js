@@ -6,23 +6,23 @@ import {
     negateVector,
 } from '../../../../../../../../common/src/vector';
 import {
+    clientStateSelectors,
+} from '../../../../selectors';
+import {
+    commonStateCitiesSelectors,
+} from '../../../../../../../../common/src/state/modules/cities/selectors';
+import {
     tileVectorToPixelVector,
 } from '../../../../../../utils';
+import type {
+    ClientStateActionReducer,
+} from '../../../../../types';
 import type {
     ClientStateCamera,
 } from '../types';
 import type {
     ClientUpdateStateAction,
 } from '../../../common-state/actions/types';
-import {
-    commonStateCitiesSelectors,
-} from '../../../../../../../../common/src/state/modules/cities/selectors';
-import {
-    clientStateSelectors,
-} from '../../../../selectors';
-import type {
-    ClientStateActionReducer,
-} from '../../../../../types';
 
 type Reducer = ClientStateActionReducer< ClientStateCamera,
     ClientUpdateStateAction, >;

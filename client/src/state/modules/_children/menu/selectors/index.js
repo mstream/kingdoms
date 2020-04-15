@@ -1,11 +1,20 @@
 // @flow
 
 import {
-    isNewCityBeingCreatedSelector,
-} from './_impl/is-new-city-being-created';
+    activeCityViewBuildingSelector,
+} from './_impl/active-city-view-building';
 import {
-    regimentTemplateSelector,
-} from './_impl/regiment-template';
+    activeCityViewOrderIdSelector,
+} from './_impl/active-city-view-order-id';
+import {
+    activeCityViewResourceSelector,
+} from './_impl/active-city-view-resource';
+import {
+    activeCityViewTabSelector,
+} from './_impl/active-city-view-tab';
+import {
+    activeCityViewUnitSelector,
+} from './_impl/active-city-view-unit';
 import {
     attackedCityIdSelector,
 } from './_impl/attacked-city-id';
@@ -16,8 +25,14 @@ import {
     currentlyViewedCityIdSelector,
 } from './_impl/currently-viewed-city-id';
 import {
-    minimumAttackDelaySelector,
-} from './_impl/minimum-attack-delay';
+    isAnyMenuOpenSelector,
+} from './_impl/is-any-menu-open';
+import {
+    isAttackFormSubmittingSelector,
+} from './_impl/is-attack-form-submitting';
+import {
+    isAttackFormValidSelector,
+} from './_impl/is-attack-form-valid';
 import {
     isAttackViewMenuOpenSelector,
 } from './_impl/is-attack-view-menu-open';
@@ -25,29 +40,14 @@ import {
     isCityViewMenuOpenSelector,
 } from './_impl/is-city-view-menu-open';
 import {
-    isAnyMenuOpenSelector,
-} from './_impl/is-any-menu-open';
+    isNewCityBeingCreatedSelector,
+} from './_impl/is-new-city-being-created';
 import {
-    activeCityViewTabSelector,
-} from './_impl/active-city-view-tab';
+    minimumAttackDelaySelector,
+} from './_impl/minimum-attack-delay';
 import {
-    activeCityViewBuildingSelector,
-} from './_impl/active-city-view-building';
-import {
-    activeCityViewResourceSelector,
-} from './_impl/active-city-view-resource';
-import {
-    activeCityViewUnitSelector,
-} from './_impl/active-city-view-unit';
-import {
-    isAttackFormValidSelector,
-} from './_impl/is-attack-form-valid';
-import {
-    isAttackFormSubmittingSelector,
-} from './_impl/is-attack-form-submitting';
-import {
-    activeCityViewOrderIdSelector,
-} from './_impl/active-city-view-order-id';
+    regimentTemplateSelector,
+} from './_impl/regiment-template';
 
 export const clientStateMenuSelectors = {
     activeCityViewBuilding: activeCityViewBuildingSelector,

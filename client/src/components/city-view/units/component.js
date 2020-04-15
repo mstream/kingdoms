@@ -1,37 +1,5 @@
 // @flow
 
-import React from 'react';
-import {
-    numberToQuantityString,
-} from '../../../../../common/src/utils';
-import {
-    calculateBuildingTierSum,
-    calculatePeasantChangeInfo,
-    calculateResourceChangeInfo,
-    convertChangeInfoToChangeRate,
-} from '../../../../../common/src/state';
-import {
-    ImageComponent,
-} from '../../image';
-import {
-    CityItemsListComponent,
-} from '../items-list';
-import {
-    armor, food, speed, sword,
-} from '../../../assets/images/icons';
-import {
-    unitsOrder, unitVisuals,
-} from '../../../assets/images/units';
-import {
-    ChangeInfoComponent,
-} from '../../change-info';
-import classNames from 'classnames';
-import type {
-    Props,
-} from './props';
-import type {
-    CommonStateDamage,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
 import {
     ARMOR_HEAVY,
     ARMOR_LIGHT,
@@ -40,8 +8,40 @@ import {
     RESOURCE_FOOD,
 } from '../../../../../common/src/state/modules/rules/reducer/types';
 import {
+    ChangeInfoComponent,
+} from '../../change-info';
+import {
+    CityItemsListComponent,
+} from '../items-list';
+import {
+    ImageComponent,
+} from '../../image';
+import {
+    armor, food, speed, sword,
+} from '../../../assets/images/icons';
+import {
+    calculateBuildingTierSum,
+    calculatePeasantChangeInfo,
+    calculateResourceChangeInfo,
+    convertChangeInfoToChangeRate,
+} from '../../../../../common/src/state';
+import {
+    numberToQuantityString,
+} from '../../../../../common/src/utils';
+import {
     testIds,
 } from '../../../../../common/src/ui';
+import {
+    unitVisuals, unitsOrder,
+} from '../../../assets/images/units';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    CommonStateDamage,
+} from '../../../../../common/src/state/modules/rules/reducer/types';
+import type {
+    Props,
+} from './props';
 
 const armorDescriptions = {
     [ ARMOR_HEAVY ] : `heavy`,

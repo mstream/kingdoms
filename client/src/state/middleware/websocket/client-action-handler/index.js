@@ -1,14 +1,5 @@
 // @flow
 
-import type {
-    ClientAction,
-} from '../../../types';
-import type {
-    Socket,
-} from '../types';
-import type {
-    CommonPlayerAction,
-} from '../../../../../../common/src/state/types';
 import {
     actionTransformers,
 } from './action-transformers';
@@ -16,8 +7,17 @@ import {
     sendMessage,
 } from '../utils';
 import type {
+    ClientAction,
+} from '../../../types';
+import type {
+    CommonPlayerAction,
+} from '../../../../../../common/src/state/types';
+import type {
     ServerRequest,
 } from '../../../../../../common/src/types';
+import type {
+    Socket,
+} from '../types';
 
 export const clientActionHandler = (
     {

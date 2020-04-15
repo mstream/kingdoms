@@ -1,15 +1,15 @@
 // @flow
 
-import type {
-    Quantities,
-} from './quantity';
-import type {
-    CommonStateResourceKey,
-} from './state/modules/rules/reducer/types';
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
 } from './state/modules/rules/reducer/types';
+import type {
+    CommonStateResourceKey,
+} from './state/modules/rules/reducer/types';
+import type {
+    Quantities,
+} from './quantity';
 
 export const convertQuantitiesToResources = (
     {

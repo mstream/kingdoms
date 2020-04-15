@@ -3,18 +3,18 @@
 import {
     initialCommonState,
 } from '../../../../index';
-import type {
-    CommonStateOrders,
-} from '../types';
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
 import {
     success,
 } from '../../../utils';
 import type {
     CommonResetStateAction,
 } from '../../../../actions/types';
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
+import type {
+    CommonStateOrders,
+} from '../types';
 
 type Reducer = CommonStateActionReducer< CommonStateOrders,
     CommonResetStateAction, >;

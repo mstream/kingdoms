@@ -1,23 +1,23 @@
 // @flow
 
 import {
-    createSelector,
-} from 'reselect';
-import type {
-    CommonStateRegimentTemplate,
-} from '../../../../../../../../common/src/state/modules/orders/reducer/types';
+    attackingCityIdSelector,
+} from './attacking-city-id';
 import {
     calculateStateMinimumRegimentSize,
 } from '../../../../../../../../common/src/state/modules/orders/utils';
 import {
-    attackingCityIdSelector,
-} from './attacking-city-id';
+    createSelector,
+} from 'reselect';
 import {
     regimentTemplateSelector,
 } from './regiment-template';
 import type {
     ClientState, ClientStateSelector,
 } from '../../../../../types';
+import type {
+    CommonStateRegimentTemplate,
+} from '../../../../../../../../common/src/state/modules/orders/reducer/types';
 
 export const isAttackFormValidSelector: ClientStateSelector< boolean >
     = createSelector<ClientState,

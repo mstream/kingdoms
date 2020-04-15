@@ -1,29 +1,30 @@
 // @flow
 
-import type {
-    CommonStateOrdersReducerTestScenarios,
-} from './types';
-import type {
-    CommonCreateScheduledAttackOrderAction,
-} from '../../actions/types';
 import {
-    emptyCommonState,
-} from '../../../state';
+    UNIT_PIKEMAN,
+} from '../../../rules/reducer/types';
 import {
     createScheduledAttackOrder,
 } from '../../actions';
+import {
+    emptyCommonState,
+} from '../../../state';
 import {
     emptyRegimentTemplateState,
     emptyScheduledAttackOrderState,
 } from '../state';
 import {
-    UNIT_PIKEMAN,
-} from '../../../rules/reducer/types';
-import {
     failure, success,
 } from '../../../utils';
+import type {
+    CommonCreateScheduledAttackOrderAction,
+} from '../../actions/types';
+import type {
+    CommonStateOrdersReducerTestScenarios,
+} from './types';
 
-type Scenarios = $ReadOnlyArray< CommonStateOrdersReducerTestScenarios< CommonCreateScheduledAttackOrderAction >, >;
+type Scenario = CommonStateOrdersReducerTestScenarios< CommonCreateScheduledAttackOrderAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const createScheduledAttackOrderTestScenarios: Scenarios = [
     {

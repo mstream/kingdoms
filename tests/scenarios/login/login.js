@@ -1,14 +1,8 @@
 // @flow
 
-import type {
-    TestController,
-} from 'testcafe';
 import {
     Selector,
 } from 'testcafe';
-import {
-    getLocation,
-} from '../../utils';
 import {
     appModel,
 } from '../../models/app';
@@ -19,8 +13,14 @@ import {
     generateId, generatePassword,
 } from '../../../common/src/utils';
 import {
+    getLocation,
+} from '../../utils';
+import {
     tools,
 } from '../../tools';
+import type {
+    TestController,
+} from 'testcafe';
 
 
 fixture(

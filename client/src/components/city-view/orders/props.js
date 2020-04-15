@@ -1,26 +1,26 @@
 // @flow
 
 import {
-    connect,
-} from 'react-redux';
-import type {
-    Dispatch,
-} from 'redux';
-import {
     TAB_ORDERS,
 } from '../../../state/modules/_children/menu/reducer/types';
-import type {
-    ClientAction, ClientState,
-} from '../../../state/types';
-import {
-    clientStateSelectors,
-} from '../../../state/modules/selectors';
-import type {
-    ScheduledAttackOrderInfosById,
-} from '../../../state/modules/selectors/types';
 import {
     clientActions,
 } from '../../../state/modules/actions';
+import {
+    clientStateSelectors,
+} from '../../../state/modules/selectors';
+import {
+    connect,
+} from 'react-redux';
+import type {
+    ClientAction, ClientState,
+} from '../../../state/types';
+import type {
+    Dispatch,
+} from 'redux';
+import type {
+    ScheduledAttackOrderInfosById,
+} from '../../../state/modules/selectors/types';
 
 type OwnProps = $ReadOnly< {||} >;
 

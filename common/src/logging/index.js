@@ -1,10 +1,10 @@
 // @flow
 
 import pino from 'pino';
+import verror from 'verror';
 import type {
     Logger,
 } from './types';
-import verror from 'verror';
 
 export const createLogger = (
     {

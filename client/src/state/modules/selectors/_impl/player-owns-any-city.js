@@ -1,11 +1,11 @@
 // @flow
 
 import {
-    createSelector,
-} from 'reselect';
-import {
     cityIdsOwnedByPlayerSelector,
 } from './city-ids-owned-by-player';
+import {
+    createSelector,
+} from 'reselect';
 import type {
     ClientState, ClientStateSelector,
 } from '../../../types';

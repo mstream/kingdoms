@@ -3,19 +3,19 @@
 import {
     confirmSignUp, signUp,
 } from '../../client/cognito';
+import verror from 'verror';
 import type {
     Config,
 } from '../../config/types';
 import type {
-    User,
-} from './types';
-import verror from 'verror';
+    Exec,
+} from '../../../../common/src/execute/types';
 import type {
     Logger,
 } from '../../../../common/src/logging/types';
 import type {
-    Exec,
-} from '../../../../common/src/execute/types';
+    User,
+} from './types';
 
 type SuccessfulResult = $ReadOnly< {
     error: null,

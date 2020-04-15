@@ -1,9 +1,9 @@
 // @flow
 
-import axios from 'axios';
 import {
     validateJwksType,
 } from './validation';
+import axios from 'axios';
 import type {
     Cognito, GetJwks, GetJwksArgs, GetJwksResult,
 } from './types';
@@ -22,7 +22,10 @@ export const createCognitoClient = (
     },
 ): Cognito => {
 
-    const userPoolUrl = `https://cognito-idp.${ config.cognito.region }.amazonaws.com/${ config.cognito.userPoolId }`;
+    const userPoolUrl
+        = `https://cognito-idp.${ config.cognito.region }`
+        + `.amazonaws.com`
+        + `/${ config.cognito.userPoolId }`;
 
     const getJwks: GetJwks = async () => {
 

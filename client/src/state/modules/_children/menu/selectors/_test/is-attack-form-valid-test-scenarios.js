@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    emptyClientState,
-} from '../../../../../state';
-import {
     UNIT_ARCHER,
     UNIT_CATAPULT,
     UNIT_KNIGHT,
@@ -12,6 +9,9 @@ import {
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+import {
+    emptyClientState,
+} from '../../../../../state';
 import {
     emptyRange,
 } from '../../../../../../../../common/src/range';

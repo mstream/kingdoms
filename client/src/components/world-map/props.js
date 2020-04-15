@@ -1,26 +1,26 @@
 // @flow
 
-import type {
-    ActionCreatorsProps, StateToProps,
-} from '../types';
-import {
-    connect,
-} from 'react-redux';
-import type {
-    Dispatch,
-} from 'redux';
-import type {
-    Vector,
-} from '../../../../common/src/vector';
-import type {
-    ClientAction, ClientState,
-} from '../../state/types';
 import {
     clientActions,
 } from '../../state/modules/actions';
 import {
     clientStateSelectors,
 } from '../../state/modules/selectors';
+import {
+    connect,
+} from 'react-redux';
+import type {
+    ActionCreatorsProps, StateToProps,
+} from '../types';
+import type {
+    ClientAction, ClientState,
+} from '../../state/types';
+import type {
+    Dispatch,
+} from 'redux';
+import type {
+    Vector,
+} from '../../../../common/src/vector';
 
 type OwnProps = {
     windowSize: Vector,

@@ -1,24 +1,24 @@
 // @flow
 
-import type {
-    ClientStateTiles,
-} from '../types';
+import {
+    surfaceImages,
+} from '../../../../../../assets/images/terrain';
 import {
     tileVectorToPixelVector,
 } from '../../../../../../utils';
 import tumult from 'tumult';
 import type {
-    Vector,
-} from '../../../../../../../../common/src/vector';
-import {
-    surfaceImages,
-} from '../../../../../../assets/images/terrain';
+    ClientStateActionReducer,
+} from '../../../../../types';
+import type {
+    ClientStateTiles,
+} from '../types';
 import type {
     ClientUpdateStateAction,
 } from '../../../common-state/actions/types';
 import type {
-    ClientStateActionReducer,
-} from '../../../../../types';
+    Vector,
+} from '../../../../../../../../common/src/vector';
 
 type Reducer = ClientStateActionReducer< ClientStateTiles,
     ClientUpdateStateAction, >;

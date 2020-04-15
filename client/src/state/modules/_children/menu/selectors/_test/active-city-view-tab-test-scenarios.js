@@ -1,13 +1,13 @@
 // @flow
 
 import {
+    TAB_ORDERS,
+} from '../../reducer/types';
+import {
     emptyClientState,
 } from '../../../../../state';
 import type {
     ClientStateCityViewTab,
-} from '../../reducer/types';
-import {
-    TAB_ORDERS,
 } from '../../reducer/types';
 import type {
     ClientStateSelectorTestScenario,

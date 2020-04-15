@@ -4,20 +4,21 @@ import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
 } from '../../../../../../../../common/src/state/modules/rules/reducer/types';
-import type {
-    ClientStateMenuReducerTestScenario,
-} from './types';
-import type {
-    ClientSelectCityViewResourceTabAction,
-} from '../../actions/types';
-import {
-    emptyClientState,
-} from '../../../../../state';
 import {
     clientActions,
 } from '../../../../actions';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientSelectCityViewResourceTabAction,
+} from '../../actions/types';
+import type {
+    ClientStateMenuReducerTestScenario,
+} from './types';
 
-type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientSelectCityViewResourceTabAction >, >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewResourceTabAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const selectCityViewResourcesTabTestScenarios: Scenarios = [
     {

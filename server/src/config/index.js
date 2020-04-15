@@ -1,11 +1,11 @@
 // @flow
 
-import type {
-    Config,
-} from './types';
 import {
     emptyConfig,
 } from './utils';
+import type {
+    Config,
+} from './types';
 
 export const stubConfig = {
     ...emptyConfig,

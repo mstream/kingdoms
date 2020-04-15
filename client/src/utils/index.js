@@ -1,17 +1,17 @@
 // @flow
 
-import type {
-    Geometry,
-} from '../../../common/src/geometry';
-import type {
-    Vector,
-} from '../../../common/src/vector';
 import {
     multipleVectors,
 } from '../../../common/src/vector';
 import type {
+    Geometry,
+} from '../../../common/src/geometry';
+import type {
     GeometryStyle,
 } from './types';
+import type {
+    Vector,
+} from '../../../common/src/vector';
 
 const tileSize = {
     x: 64,
@@ -46,6 +46,7 @@ export const getRefValue = <T>( {
         );
 
     }
+
     return ref.current;
 
 };

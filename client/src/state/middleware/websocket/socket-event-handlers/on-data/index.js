@@ -1,11 +1,5 @@
 // @flow
 
-import type {
-    ServerResponse,
-} from '../../../../../../../common/src/types';
-import {
-    parseServerResponse,
-} from '../../../../../../../common/src/utils';
 import {
     ABANDON_CITY,
     CHANGE_CITY_NAME,
@@ -16,22 +10,28 @@ import {
     CREATE_SCHEDULED_ATTACK_ORDER,
 } from '../../../../../../../common/src/state/modules/orders/actions/types';
 import {
-    EXECUTE_TIME_STEP,
-} from '../../../../../../../common/src/state/modules/time/actions';
-import {
     DUMMY,
     GET_CURRENT_STATE,
     RESET_STATE,
 } from '../../../../../../../common/src/state/actions/types';
-import type {
-    ClientStore,
-} from '../../../../types';
+import {
+    EXECUTE_TIME_STEP,
+} from '../../../../../../../common/src/state/modules/time/actions';
 import {
     clientActions,
 } from '../../../../modules/actions';
+import {
+    parseServerResponse,
+} from '../../../../../../../common/src/utils';
+import type {
+    ClientStore,
+} from '../../../../types';
 import type {
     Logger,
 } from '../../../../../../../common/src/logging/types';
+import type {
+    ServerResponse,
+} from '../../../../../../../common/src/types';
 
 type ServerResponseHandler = ( {
                                   serverResponse: ServerResponse,

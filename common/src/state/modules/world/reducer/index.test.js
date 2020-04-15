@@ -1,35 +1,35 @@
 // @flow
 
 import {
+    DUMMY, RESET_STATE,
+} from '../../../actions/types';
+import {
+    dummy,
+} from '../../../actions';
+import {
+    emptyCommonState,
+} from '../../state';
+import {
     initialCommonState,
 } from '../../../index';
 import {
     resetStateTestScenarios,
 } from './_test/reset-state-test-scenarios';
 import {
-    worldReducer,
-} from './index';
+    runReducerTestScenarios,
+} from '../../test-utils';
 import {
     success,
 } from '../../utils';
 import {
-    emptyCommonState,
-} from '../../state';
+    worldReducer,
+} from './index';
 import type {
     CommonDummyAction,
-} from '../../../actions/types';
-import {
-    DUMMY, RESET_STATE,
 } from '../../../actions/types';
 import type {
     CommonStateWorldReducerTestScenarios,
 } from './_test/types';
-import {
-    dummy,
-} from '../../../actions';
-import {
-    runReducerTestScenarios,
-} from '../../test-utils';
 
 const stateInitializationScenario: CommonStateWorldReducerTestScenarios< CommonDummyAction > = {
     action                        : dummy(),

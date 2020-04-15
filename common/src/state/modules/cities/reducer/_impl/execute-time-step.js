@@ -1,35 +1,35 @@
 // @flow
 
 import {
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+    UNIT_PEASANT,
+} from '../../../rules/reducer/types';
+import {
     calculateBuildingTierSum,
     calculatePeasantChangeInfo,
     calculateResourceChangeInfo,
     convertChangeInfoToChangeRate,
     convertChangeRateToDelta,
 } from '../../../../index';
-import type {
-    CommonStateCities,
-} from '../types';
-import type {
-    CommonStateUnits,
-} from '../../../rules/reducer/types';
 import {
-    RESOURCE_FOOD,
-    RESOURCE_WOOD,
-    UNIT_PEASANT,
-} from '../../../rules/reducer/types';
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
+    calculateTimeDeltaInSeconds,
+} from '../../../../../time';
 import {
     failure, success,
 } from '../../../utils';
 import type {
     CommonExecuteTimeStepAction,
 } from '../../../time/actions';
-import {
-    calculateTimeDeltaInSeconds,
-} from '../../../../../time';
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
+import type {
+    CommonStateCities,
+} from '../types';
+import type {
+    CommonStateUnits,
+} from '../../../rules/reducer/types';
 
 type Reducer = CommonStateActionReducer< CommonStateCities,
     CommonExecuteTimeStepAction, >;

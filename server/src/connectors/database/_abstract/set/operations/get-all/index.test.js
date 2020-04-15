@@ -6,15 +6,15 @@ import {
 import {
     runDatabaseOperationTestScenarios,
 } from '../../../../utils';
-import type {
-    DatabaseSetGetAllArgs, DatabaseSetGetAllResult,
-} from './types';
 import {
     scenario01,
 } from './_test/scenario01';
 import {
     scenario02,
 } from './_test/scenario02';
+import type {
+    DatabaseSetGetAllArgs, DatabaseSetGetAllResult,
+} from './types';
 
 describe(
     `getAll`,

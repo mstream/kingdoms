@@ -1,18 +1,18 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
 import {
     calculateTimeDeltaInSeconds,
     minutesToDurationString,
     translateTime,
 } from '../../../../../../common/src/time';
-import classNames from 'classnames';
 import {
     testIds,
 } from '../../../../../../common/src/ui';
+import React from 'react';
+import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 export const Component = (
     {

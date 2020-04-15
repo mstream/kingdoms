@@ -7,7 +7,7 @@
 // @flow-runtime
 
 import {
-    reify, Type,
+    Type, reify,
 } from 'flow-runtime';
 
 export type Jwk = $ReadOnly< {

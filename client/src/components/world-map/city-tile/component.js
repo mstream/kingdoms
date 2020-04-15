@@ -1,22 +1,22 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
-import {
-    createGeometryStyle,
-} from '../../../utils';
-import {
-    ImageComponent,
-} from '../../image';
-import cityImage from '../../../assets/images/cities/city.png';
 import {
     CityStatusBarComponent,
 } from './status-bar';
 import {
+    ImageComponent,
+} from '../../image';
+import {
+    createGeometryStyle,
+} from '../../../utils';
+import {
     testIds,
 } from '../../../../../common/src/ui';
+import React from 'react';
+import cityImage from '../../../assets/images/cities/city.png';
+import type {
+    Props,
+} from './props';
 
 
 export const Component = (

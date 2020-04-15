@@ -1,13 +1,13 @@
 // @flow
 
-import React from 'react';
-import type {
-    Props,
-} from './props';
 import {
     testIds,
 } from '../../../../common/src/ui';
+import React from 'react';
 import classNames from 'classnames';
+import type {
+    Props,
+} from './props';
 
 
 export const Component = (
@@ -21,6 +21,7 @@ export const Component = (
         return null;
 
     }
+
     return (
         <div
             data-testid={testIds.COMPONENT_MENU.PARENT}

@@ -1,14 +1,14 @@
 // @flow
 
-import type {
-    Socket,
-} from './types';
 import {
     stringifyJson,
 } from '../../../../../common/src/json';
 import type {
     ServerRequest,
 } from '../../../../../common/src/types';
+import type {
+    Socket,
+} from './types';
 
 export const sendMessage = (
     {

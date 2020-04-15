@@ -1,14 +1,20 @@
 // @flow
 
 import {
+    calculateBuildingsUpgradeCost,
+} from '../../../../index';
+import {
     convertQuantitiesToResources,
 } from '../../../../../resource';
 import {
+    failure, success,
+} from '../../../utils';
+import {
     subtractQuantities,
 } from '../../../../../quantity';
-import {
-    calculateBuildingsUpgradeCost,
-} from '../../../../index';
+import type {
+    CommonStateActionReducer,
+} from '../../../types';
 import type {
     CommonStateCities, CommonStateCity,
 } from '../types';
@@ -16,12 +22,6 @@ import type {
     CommonStateResourceKey,
     CommonStateResources,
 } from '../../../rules/reducer/types';
-import type {
-    CommonStateActionReducer,
-} from '../../../types';
-import {
-    failure, success,
-} from '../../../utils';
 import type {
     CommonUpgradeBuildingAction,
 } from '../../actions/types';

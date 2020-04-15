@@ -1,21 +1,5 @@
 // @flow
 
-import type {
-    Quantities,
-} from '../quantity';
-import {
-    multipleQuantitiesByScalar,
-} from '../quantity';
-import {
-    convertQuantitiesToResources,
-} from '../resource';
-import type {
-    CommonStateBuildingKey,
-    CommonStateBuildings,
-    CommonStateResourceKey,
-    CommonStateResources,
-    CommonStateRules,
-} from './modules/rules/reducer/types';
 import {
     ARMOR_HEAVY,
     ARMOR_LIGHT,
@@ -34,15 +18,12 @@ import {
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
 } from './modules/rules/reducer/types';
-import type {
-    CommonState,
-} from './modules/types';
-import type {
-    CommonStateCity,
-} from './modules/cities/reducer/types';
+
+import {
+    convertQuantitiesToResources,
+} from '../resource';
 import {
     emptyCitiesState,
-    emptyCityState,
 } from './modules/cities/reducer/state';
 import {
     emptyOrdersState,
@@ -51,8 +32,24 @@ import {
     emptyPlayersState,
 } from './modules/players/reducer/state';
 import {
-    PLAYER_STATUS_PLAYING,
-} from './modules/players/reducer/types';
+    multipleQuantitiesByScalar,
+} from '../quantity';
+import type {
+    CommonState,
+} from './modules/types';
+import type {
+    CommonStateBuildingKey,
+    CommonStateBuildings,
+    CommonStateResourceKey,
+    CommonStateResources,
+    CommonStateRules,
+} from './modules/rules/reducer/types';
+import type {
+    CommonStateCity,
+} from './modules/cities/reducer/types';
+import type {
+    Quantities,
+} from '../quantity';
 
 export const initialCommonState: CommonState = {
     cities: {
@@ -304,6 +301,7 @@ export const calculateResourceChangeInfo = (
         );
 
     }
+
     case RESOURCE_WOOD: {
 
         return calculateWoodChangeInfo(
@@ -315,6 +313,7 @@ export const calculateResourceChangeInfo = (
         );
 
     }
+
     default: {
 
         throw Error(
@@ -424,186 +423,4 @@ export const convertChangeRateToDelta = (
 
     return ( changeRate / 3600 ) * timeDelta;
 
-};
-
-export const testCommonState: CommonState = {
-    cities: {
-        city1: {
-            ...emptyCityState,
-            location: {
-                x: 0,
-                y: 0,
-            },
-            name    : `Trzebinia`,
-            ownerId: `test1`,
-            units   : {
-                ...emptyCityState.units,
-                [ UNIT_PEASANT ]: 1000,
-                [ UNIT_PIKEMAN ]: 100,
-            },
-        },
-        city2: {
-            ...emptyCityState,
-            location: {
-                x: 3,
-                y: 0,
-            },
-            name    : `Krakow`,
-            ownerId: `test1`,
-        },
-        city3: {
-            ...emptyCityState,
-            location: {
-                x: 0,
-                y: -3,
-            },
-            name    : `Warszawa`,
-            ownerId: `test2`,
-        },
-        city4: {
-            ...emptyCityState,
-            location: {
-                x: 0,
-                y: 3,
-            },
-            name    : `Poznan`,
-            ownerId: `test3`,
-        },
-    },
-    orders: {
-        creationTimes: {
-        },
-        items: {
-            scheduledAttack: {
-            },
-        },
-        ownerships: {
-        },
-    },
-    players: {
-        test1: PLAYER_STATUS_PLAYING,
-        test2: PLAYER_STATUS_PLAYING,
-        test3: PLAYER_STATUS_PLAYING,
-    },
-    rules: {
-        baseCityCapacity          : 1000,
-        basePeasantsMigrationRate : 100,
-        buildingUpgradeCoefficient: 0.5,
-        buildingUpgradeCosts      : {
-            [ BUILDING_LUMBER_MILL ]: {
-                [ RESOURCE_FOOD ]: 0,
-                [ RESOURCE_WOOD ]: 100,
-            },
-            [ BUILDING_PASTURE ]: {
-                [ RESOURCE_FOOD ]: 0,
-                [ RESOURCE_WOOD ]: 50,
-            },
-            [ BUILDING_WAREHOUSE ]: {
-                [ RESOURCE_FOOD ]: 0,
-                [ RESOURCE_WOOD ]: 200,
-            },
-        },
-        minimalCityMargin: {
-            x: 3,
-            y: 3,
-        },
-        populationGrowthChangeRateCoefficient: 1,
-        resourceIncreaseChangeRateCoefficient: 10000,
-        unitFoodDemand                       : 1,
-        unitStarvingCoefficient              : 0.2,
-        unitStats                            : {
-            [ UNIT_ARCHER ]: {
-                armor : ARMOR_LIGHT,
-                damage: {
-                    [ ARMOR_HEAVY ] : 0,
-                    [ ARMOR_LIGHT ] : 5,
-                    [ ARMOR_MEDIUM ]: 1,
-                    [ ARMOR_NONE ]  : 10,
-                },
-                foodDemand: 1,
-                range     : 0,
-                speed     : 10,
-            },
-            [ UNIT_CATAPULT ]: {
-                armor : ARMOR_HEAVY,
-                damage: {
-                    [ ARMOR_HEAVY ] : 100,
-                    [ ARMOR_LIGHT ] : 100,
-                    [ ARMOR_MEDIUM ]: 100,
-                    [ ARMOR_NONE ]  : 100,
-                },
-                foodDemand: 2,
-                range     : 0,
-                speed     : 1,
-            },
-            [ UNIT_KNIGHT ]: {
-                armor : ARMOR_MEDIUM,
-                damage: {
-                    [ ARMOR_HEAVY ] : 2,
-                    [ ARMOR_LIGHT ] : 10,
-                    [ ARMOR_MEDIUM ]: 5,
-                    [ ARMOR_NONE ]  : 20,
-                },
-                foodDemand: 3,
-                range     : 0,
-                speed     : 50,
-            },
-            [ UNIT_NOBLE ]: {
-                armor : ARMOR_NONE,
-                damage: {
-                    [ ARMOR_HEAVY ] : 0,
-                    [ ARMOR_LIGHT ] : 0,
-                    [ ARMOR_MEDIUM ]: 0,
-                    [ ARMOR_NONE ]  : 0,
-                },
-                foodDemand: 100,
-                range     : 0,
-                speed     : 1,
-            },
-            [ UNIT_PEASANT ]: {
-                armor : ARMOR_NONE,
-                damage: {
-                    [ ARMOR_HEAVY ] : 0,
-                    [ ARMOR_LIGHT ] : 2,
-                    [ ARMOR_MEDIUM ]: 1,
-                    [ ARMOR_NONE ]  : 4,
-                },
-                foodDemand: 1,
-                range     : 0,
-                speed     : 10,
-            },
-            [ UNIT_PIKEMAN ]: {
-                armor : ARMOR_LIGHT,
-                damage: {
-                    [ ARMOR_HEAVY ] : 1,
-                    [ ARMOR_LIGHT ] : 4,
-                    [ ARMOR_MEDIUM ]: 2,
-                    [ ARMOR_NONE ]  : 8,
-                },
-                foodDemand: 1,
-                range     : 0,
-                speed     : 10,
-            },
-            [ UNIT_SWORDSMAN ]: {
-                armor : ARMOR_HEAVY,
-                damage: {
-                    [ ARMOR_HEAVY ] : 2,
-                    [ ARMOR_LIGHT ] : 10,
-                    [ ARMOR_MEDIUM ]: 5,
-                    [ ARMOR_NONE ]  : 20,
-                },
-                foodDemand: 1,
-                range     : 0,
-                speed     : 2,
-            },
-        },
-    },
-    time: new Date()
-        .toISOString(),
-    world: {
-        size: {
-            x: 10,
-            y: 10,
-        },
-    },
 };

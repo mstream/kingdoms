@@ -1,11 +1,11 @@
 // @flow
 
 import type {
-    Geometry,
-} from '../../../../../../../../common/src/geometry';
-import type {
     ClientStateSelector,
 } from '../../../../../types';
+import type {
+    Geometry,
+} from '../../../../../../../../common/src/geometry';
 
 export const geometrySelector: ClientStateSelector< Geometry > = (
     state,

@@ -4,11 +4,11 @@ import {
     commonStateWorldSelectors,
 } from './index';
 import {
-    worldSelectorTestScenarios,
-} from './_test/world-test-scenarios';
-import {
     runCommonStateSelectorsTestScenarios,
 } from '../../test-utils';
+import {
+    worldSelectorTestScenarios,
+} from './_test/world-test-scenarios';
 
 describe(
     `commonStateWorldSelectors`,

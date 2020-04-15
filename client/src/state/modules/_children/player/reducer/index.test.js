@@ -1,32 +1,32 @@
 // @flow
 
 import {
-    playerReducer,
-} from './index';
-import {
-    loadPlayerTestScenarios,
-} from './_test/load-player-test-scenarios';
-import {
-    clientActions,
-} from '../../../actions';
-import type {
-    ClientDummyAction,
-} from '../../../actions/types';
-import {
     DUMMY,
 } from '../../../actions/types';
-import type {
-    ClientStatePlayerReducerTestScenario,
-} from './_test/types';
-import {
-    emptyClientState,
-} from '../../../../state';
 import {
     LOAD_PLAYER,
 } from '../actions/types';
 import {
+    clientActions,
+} from '../../../actions';
+import {
+    emptyClientState,
+} from '../../../../state';
+import {
+    loadPlayerTestScenarios,
+} from './_test/load-player-test-scenarios';
+import {
+    playerReducer,
+} from './index';
+import {
     runReducerTestScenarios,
 } from '../../../../test-utils';
+import type {
+    ClientDummyAction,
+} from '../../../actions/types';
+import type {
+    ClientStatePlayerReducerTestScenario,
+} from './_test/types';
 
 const stateInitializationScenario: ClientStatePlayerReducerTestScenario< ClientDummyAction > = {
     action                   : clientActions.global.dummy(),

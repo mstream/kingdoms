@@ -10,11 +10,11 @@ import {
     emptyConfig,
 } from '../../config';
 import {
-    stringifyJson,
-} from '../../../../common/src/json';
-import {
     emptyLogger,
 } from '../../../../common/src/logging';
+import {
+    stringifyJson,
+} from '../../../../common/src/json';
 
 describe(
     `createWorld`,

@@ -1,23 +1,23 @@
 // @flow
 
 import {
+    emptyCommonState,
+} from '../../../state';
+import {
     initialCommonState,
 } from '../../../../index';
 import {
+    resetState,
+} from '../../../../actions';
+import {
     success,
 } from '../../../utils';
-import {
-    emptyCommonState,
-} from '../../../state';
 import type {
     CommonResetStateAction,
 } from '../../../../actions/types';
 import type {
     CommonStatePlayersReducerTestScenario,
 } from './types';
-import {
-    resetState,
-} from '../../../../actions';
 
 type Scenarios = $ReadOnlyArray< CommonStatePlayersReducerTestScenario< CommonResetStateAction >, >;
 

@@ -1,15 +1,15 @@
 // @flow
 
-import type {
-    Logger,
-} from '../../../../common/src/logging/types';
-import verror from 'verror';
 import {
     execute,
 } from '../../../../common/src/execute';
+import verror from 'verror';
 import type {
     Exec,
 } from '../../../../common/src/execute/types';
+import type {
+    Logger,
+} from '../../../../common/src/logging/types';
 
 export const ERROR_AWS_LAMBDA_INVOKE: 'ERROR_AWS_LAMBDA_INVOKE'
     = `ERROR_AWS_LAMBDA_INVOKE`;

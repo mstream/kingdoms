@@ -1,18 +1,18 @@
 // @flow
 
 import {
-    dummyRedis,
-} from '../../../../../../../clients/redis/utils';
-import type {
-    DatabaseValueGetTestScenario,
-} from '../types';
-import {
     ERROR_DATABASE_VALUE_GET,
 } from '../index';
-import verror from 'verror';
+import {
+    dummyRedis,
+} from '../../../../../../../clients/redis/utils';
 import {
     emptyLogger,
 } from '../../../../../../../../../common/src/logging';
+import verror from 'verror';
+import type {
+    DatabaseValueGetTestScenario,
+} from '../types';
 
 export const scenario02: DatabaseValueGetTestScenario = {
     create: () => {

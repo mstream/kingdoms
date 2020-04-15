@@ -1,14 +1,14 @@
 // @flow
 
-import type {
-    CommonStateSelectorTestScenario,
-} from '../../../types';
 import {
     emptyCommonState,
 } from '../../../state';
 import type {
     CommonStateRules,
 } from '../../reducer/types';
+import type {
+    CommonStateSelectorTestScenario,
+} from '../../../types';
 
 type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< CommonStateRules >, >;
 

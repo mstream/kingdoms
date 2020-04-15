@@ -1,20 +1,20 @@
 // @flow
 
 import {
-    initialCommonState,
-} from '../../../index';
-import type {
-    CommonStateRules,
-} from './types';
-import {
-    resetStateRulesReducer,
-} from './_impl/reset-state';
-import {
     RESET_STATE,
 } from '../../../actions/types';
 import {
     createCommonStateReducer,
 } from '../../utils';
+import {
+    initialCommonState,
+} from '../../../index';
+import {
+    resetStateRulesReducer,
+} from './_impl/reset-state';
+import type {
+    CommonStateRules,
+} from './types';
 
 export const rulesReducer = createCommonStateReducer<CommonStateRules>(
     {

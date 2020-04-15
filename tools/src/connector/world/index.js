@@ -1,11 +1,5 @@
 // @flow
 
-import type {
-    Config,
-} from '../../config/types';
-import type {
-    CommonState,
-} from '../../../../common/src/state/modules/types';
 import {
     invokeFunction,
 } from '../../client/lambda';
@@ -13,11 +7,17 @@ import {
     stringifyJson,
 } from '../../../../common/src/json';
 import type {
-    Logger,
-} from '../../../../common/src/logging/types';
+    CommonState,
+} from '../../../../common/src/state/modules/types';
+import type {
+    Config,
+} from '../../config/types';
 import type {
     Exec,
 } from '../../../../common/src/execute/types';
+import type {
+    Logger,
+} from '../../../../common/src/logging/types';
 
 
 export const createWorld = async ( {

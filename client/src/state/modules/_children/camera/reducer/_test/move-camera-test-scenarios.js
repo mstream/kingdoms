@@ -1,17 +1,17 @@
 // @flow
 
-import type {
-    ClientStateCameraReducerTestScenario,
-} from './types';
-import type {
-    ClientMoveCameraAction,
-} from '../../actions/types';
-import {
-    emptyClientState,
-} from '../../../../../state';
 import {
     clientActions,
 } from '../../../../actions';
+import {
+    emptyClientState,
+} from '../../../../../state';
+import type {
+    ClientMoveCameraAction,
+} from '../../actions/types';
+import type {
+    ClientStateCameraReducerTestScenario,
+} from './types';
 
 type Scenarios = $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientMoveCameraAction >, >;
 

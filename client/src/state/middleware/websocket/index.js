@@ -1,36 +1,36 @@
 // @flow
 
-import Socket from 'simple-websocket';
-import type {
-    Middleware,
-} from 'redux';
-import type {
-    ClientAction, ClientState, ClientStore,
-} from '../../types';
+import {
+    Logger,
+} from 'aws-sdk/lib/config';
+import {
+    clientActionHandler,
+} from './client-action-handler';
 import {
     createOnCloseHandler,
 } from './socket-event-handlers/on-close';
 import {
-    createOnDataHandler,
-} from './socket-event-handlers/on-data';
-import {
     createOnConnectHandler,
 } from './socket-event-handlers/on-connect';
 import {
+    createOnDataHandler,
+} from './socket-event-handlers/on-data';
+import {
     createOnErrorHandler,
 } from './socket-event-handlers/on-error';
-import {
-    clientActionHandler,
-} from './client-action-handler';
+import Socket from 'simple-websocket';
+import type {
+    ClientAction, ClientState, ClientStore,
+} from '../../types';
+import type {
+    Config,
+} from '../../../config/types';
 import type {
     IdTokenInfo,
 } from '../../../types';
 import type {
-    Config,
-} from '../../../config/types';
-import {
-    Logger,
-} from 'aws-sdk/lib/config';
+    Middleware,
+} from 'redux';
 
 export const createWebsocketMiddleware = (
     {

@@ -59,7 +59,7 @@ module.exports = {
         `error`,
         {
             IIFEs         : true,
-            max           : 500,
+            max           : 400,
             skipBlankLines: true,
             skipComments  : true,
         },
@@ -67,7 +67,7 @@ module.exports = {
     'max-nested-callbacks': [
         `error`,
         {
-            max: 4,
+            max: 3,
         },
     ],
     'max-params': [

@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../utils';
-import {
     clientStateErrorsSelectors,
 } from './index';
 import {
@@ -12,6 +9,9 @@ import {
 import {
     anyErrorsSelectorTestScenarios,
 } from './_test/any-errors-test-scenarios';
+import {
+    runClientStateSelectorsTestScenarios,
+} from '../../../../test-utils';
 
 describe(
     `clientStateErrorsSelectors`,

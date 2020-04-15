@@ -4,9 +4,6 @@ import {
     clientStateSelectors,
 } from './index';
 import {
-    runClientStateSelectorsTestScenarios,
-} from '../../utils';
-import {
     cityIdsOwnedByPlayersSelectorTestScenarios,
 } from './_test/city-ids-owned-by-player-test-scenarios';
 import {
@@ -36,6 +33,9 @@ import {
 import {
     distancesToAttackedCitySelectorTestScenarios,
 } from './_test/distances-to-attacked-city-test-scenarios';
+import {
+    runClientStateSelectorsTestScenarios,
+} from '../../test-utils';
 
 describe(
     `clientStateSelectors`,

@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    runCommonStateSelectorsTestScenarios,
-} from '../utils';
-import {
     nextCitySpotSelectorTestScenarios,
 } from './_test/next-city-spot-test-scenarios';
 import {
     commonStateSelectors,
 } from './index';
+import {
+    runCommonStateSelectorsTestScenarios,
+} from '../test-utils';
 
 describe(
     `commonStateCitiesSelectors`,

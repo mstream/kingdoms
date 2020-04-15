@@ -1,7 +1,7 @@
 // @flow
 
 import {
-    runTestScenarios, success,
+    success,
 } from '../../utils';
 import type {
     CommonDummyAction,
@@ -30,6 +30,9 @@ import {
 import {
     DUMMY,
 } from '../../../../../../client/src/state/modules/actions/types';
+import {
+    runReducerTestScenarios,
+} from '../../test-utils';
 
 const stateInitializationScenario: CommonStateRulesReducerTestScenarios< CommonDummyAction > = {
     action                        : dummy(),
@@ -55,7 +58,7 @@ describe(
     `rulesReducer`,
     () => {
 
-        runTestScenarios(
+        runReducerTestScenarios(
             {
                 jest: {
                     describe,

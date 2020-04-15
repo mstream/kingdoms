@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../utils';
-import {
     clientStateTilesSelectors,
 } from './index';
 import {
     tilesSelectorTestScenarios,
 } from './_test/tiles-test-scenarios';
+import {
+    runClientStateSelectorsTestScenarios,
+} from '../../../../test-utils';
 
 describe(
     `clientStateTilesSelectors`,

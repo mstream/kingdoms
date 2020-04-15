@@ -17,7 +17,7 @@ import {
 } from './_test/city-distances-test-scenarios';
 import {
     runCommonStateSelectorsTestScenarios,
-} from '../../utils';
+} from '../../test-utils';
 
 describe(
     `commonStateCitiesSelectors`,

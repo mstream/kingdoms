@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../utils';
-import {
     attackingCityIdSelectorTestScenarios,
 } from './_test/attacking-city-id-test-scenarios';
 import {
@@ -54,6 +51,9 @@ import {
 import {
     activeCityViewOrderIdSelectorTestScenarios,
 } from './_test/active-city-view-order-id-test-scenarios';
+import {
+    runClientStateSelectorsTestScenarios,
+} from '../../../../test-utils';
 
 describe(
     `clientStateMenuSelectors`,

@@ -28,9 +28,6 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    runReducerTestScenarios,
-} from '../../../../utils';
-import {
     MOVE_CAMERA, ZOOM_CAMERA,
 } from '../actions/types';
 import {
@@ -39,6 +36,9 @@ import {
 import {
     clientActions,
 } from '../../../actions';
+import {
+    runReducerTestScenarios,
+} from '../../../../test-utils';
 
 const stateInitializationScenario: ClientStateCameraReducerTestScenario< ClientDummyAction > = {
     action                   : clientActions.global.dummy(),

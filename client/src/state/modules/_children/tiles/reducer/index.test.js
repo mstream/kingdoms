@@ -16,11 +16,11 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    runReducerTestScenarios,
-} from '../../../../utils';
-import {
     clientActions,
 } from '../../../actions';
+import {
+    runReducerTestScenarios,
+} from '../../../../test-utils';
 
 const stateInitializationScenario: ClientStateTilesReducerTestScenario< ClientDummyAction > = {
     action                   : clientActions.global.dummy(),

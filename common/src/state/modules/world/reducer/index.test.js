@@ -10,7 +10,7 @@ import {
     worldReducer,
 } from './index';
 import {
-    runTestScenarios, success,
+    success,
 } from '../../utils';
 import {
     emptyCommonState,
@@ -27,6 +27,9 @@ import type {
 import {
     dummy,
 } from '../../../actions';
+import {
+    runReducerTestScenarios,
+} from '../../test-utils';
 
 const stateInitializationScenario: CommonStateWorldReducerTestScenarios< CommonDummyAction > = {
     action                        : dummy(),
@@ -52,7 +55,7 @@ describe(
     `worldReducer`,
     () => {
 
-        runTestScenarios(
+        runReducerTestScenarios(
             {
                 jest: {
                     describe,

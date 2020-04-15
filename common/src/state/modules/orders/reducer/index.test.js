@@ -4,7 +4,7 @@ import {
     initialCommonState,
 } from '../../../index';
 import {
-    runTestScenarios, success,
+    success,
 } from '../../utils';
 import {
     emptyCommonState,
@@ -42,6 +42,9 @@ import {
 import {
     DUMMY,
 } from '../../../../../../client/src/state/modules/actions/types';
+import {
+    runReducerTestScenarios,
+} from '../../test-utils';
 
 const stateInitializationScenario: CommonStateOrdersReducerTestScenarios< CommonDummyAction > = {
     action                        : dummy(),
@@ -67,7 +70,7 @@ describe(
     `ordersReducer`,
     () => {
 
-        runTestScenarios(
+        runReducerTestScenarios(
             {
                 jest: {
                     describe,

@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    runCommonStateSelectorsTestScenarios,
-} from '../../utils';
-import {
     commonStateRulesSelectors,
 } from './index';
 import {
@@ -15,6 +12,9 @@ import {
 import {
     rulesSelectorTestScenarios,
 } from './_test/rules-test-scenarios';
+import {
+    runCommonStateSelectorsTestScenarios,
+} from '../../test-utils';
 
 describe(
     `commonStateRulesSelectors`,

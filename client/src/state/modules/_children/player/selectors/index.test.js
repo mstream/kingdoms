@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../utils';
-import {
     clientStatePlayerSelectors,
 } from './index';
 import {
@@ -12,6 +9,9 @@ import {
 import {
     isAuthenticatedSelectorTestScenarios,
 } from './_test/is-authenticated-test-scenarios';
+import {
+    runClientStateSelectorsTestScenarios,
+} from '../../../../test-utils';
 
 describe(
     `clientStatePlayerSelectors`,

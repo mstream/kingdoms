@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    runCommonStateSelectorsTestScenarios,
-} from '../../utils';
-import {
     commonStateWorldSelectors,
 } from './index';
 import {
     worldSelectorTestScenarios,
 } from './_test/world-test-scenarios';
+import {
+    runCommonStateSelectorsTestScenarios,
+} from '../../test-utils';
 
 describe(
     `commonStateWorldSelectors`,

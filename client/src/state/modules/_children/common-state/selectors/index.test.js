@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../utils';
-import {
     clientStateCommonStateSelectors,
 } from './index';
 import {
@@ -12,6 +9,9 @@ import {
 import {
     commonStateSelectorTestScenarios,
 } from './_test/common-state-test-scenarios';
+import {
+    runClientStateSelectorsTestScenarios,
+} from '../../../../test-utils';
 
 describe(
     `clientStateCommonStateSelectors`,

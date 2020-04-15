@@ -69,9 +69,6 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    runReducerTestScenarios,
-} from '../../../../utils';
-import {
     REQUEST_CITY_CREATION,
     REQUEST_ORDER_CREATION,
     UPDATE_STATE,
@@ -99,6 +96,9 @@ import {
 import {
     selectCityViewOrdersTabTestScenarios,
 } from './_test/select-city-view-orders-tab-test-scenarios';
+import {
+    runReducerTestScenarios,
+} from '../../../../test-utils';
 
 const stateInitializationScenario: ClientStateMenuReducerTestScenario< ClientDummyAction > = {
     action                   : clientActions.global.dummy(),

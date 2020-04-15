@@ -22,11 +22,11 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    runReducerTestScenarios,
-} from '../../../../utils';
-import {
     LOAD_PLAYER,
 } from '../actions/types';
+import {
+    runReducerTestScenarios,
+} from '../../../../test-utils';
 
 const stateInitializationScenario: ClientStatePlayerReducerTestScenario< ClientDummyAction > = {
     action                   : clientActions.global.dummy(),

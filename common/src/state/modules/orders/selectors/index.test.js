@@ -1,14 +1,14 @@
 // @flow
 
 import {
-    runCommonStateSelectorsTestScenarios,
-} from '../../utils';
-import {
     commonStateOrdersSelectors,
 } from './index';
 import {
     ordersSelectorTestScenarios,
 } from './_test/orders-test-scenarios';
+import {
+    runCommonStateSelectorsTestScenarios,
+} from '../../test-utils';
 
 describe(
     `commonStateOrdersSelectors`,

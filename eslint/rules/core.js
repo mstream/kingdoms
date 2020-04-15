@@ -50,7 +50,7 @@ module.exports = {
     'max-lines': [
         `error`,
         {
-            max           : 1000,
+            max           : 800,
             skipBlankLines: true,
             skipComments  : true,
         },
@@ -79,7 +79,7 @@ module.exports = {
     'max-statements': [
         `error`,
         {
-            max: 50,
+            max: 35,
         },
     ],
     'max-statements-per-line': [

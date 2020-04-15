@@ -18,6 +18,7 @@ import {
     database,
 } from '../../connectors/database';
 import type {
+    ServerRequest,
     ServerResponse,
 } from '../../../../common/src/types';
 import {
@@ -46,6 +47,12 @@ import {
 import {
     validateEvent,
 } from './validation';
+import type {
+    Redis,
+} from '../../clients/redis/types';
+import type {
+    CommonPlayerAction,
+} from '../../../../common/src/state/types';
 
 const config = createConfig();
 const logger = createLogger(
@@ -66,6 +73,68 @@ const redis = createRedisClient(
     },
 );
 
+const handleUnsupportedAction = async (
+    {
+        action,
+        redis,
+        serverRequest,
+        sendResponseBackToClient,
+        worldId,
+    }: {
+        action: CommonPlayerAction,
+        redis: Redis,
+        serverRequest: ServerRequest,
+        sendResponseBackToClient: ( { response: ServerResponse } ) => Promise< void >,
+        worldId: string
+    },
+) => {
+
+    const state = await database.stateByWorld.get(
+        {
+            key: {
+                environment: config.environment,
+                worldId,
+            },
+            logger,
+            redis,
+        },
+    );
+
+    if ( state == null ) {
+
+        throw new verror.VError(
+            {
+                name: ERROR_STATE_NOT_INITIALIZED,
+            },
+        );
+
+    }
+
+    await sendResponseBackToClient(
+        {
+            response: {
+                errors: [
+                    `unsupported action`,
+                ],
+                request: serverRequest,
+                state,
+            },
+        },
+    );
+
+    const errorReason = `unsupported request type: ${ action.type }`;
+
+    logger.warn(
+        errorReason,
+    );
+
+    return generateRequestRejectionResponse(
+        {
+            reason: errorReason,
+        },
+    );
+
+};
 
 export const handler: ProxyHandler = async ( event, ) => {
 
@@ -124,7 +193,8 @@ export const handler: ProxyHandler = async ( event, ) => {
 
         if ( playerId !== username ) {
 
-            const errorReason = `username '${ username }' does not match the playerId '${ playerId }'`;
+            const errorReason = `username '${ username }'`
+                + ` does not match the playerId '${ playerId }'`;
 
             logger.warn(
                 errorReason,
@@ -274,48 +344,13 @@ export const handler: ProxyHandler = async ( event, ) => {
         }
         default: {
 
-            const state = await database.stateByWorld.get(
+            return await handleUnsupportedAction(
                 {
-                    key: {
-                        environment: config.environment,
-                        worldId,
-                    },
-                    logger,
+                    action,
                     redis,
-                },
-            );
-
-            if ( state == null ) {
-
-                throw new verror.VError(
-                    {
-                        name: ERROR_STATE_NOT_INITIALIZED,
-                    },
-                );
-
-            }
-
-            await sendResponseBackToClient(
-                {
-                    response: {
-                        errors: [
-                            `unsupported action`,
-                        ],
-                        request: serverRequest,
-                        state,
-                    },
-                },
-            );
-
-            const errorReason = `unsupported request type: ${ action.type }`;
-
-            logger.warn(
-                errorReason,
-            );
-
-            return generateRequestRejectionResponse(
-                {
-                    reason: errorReason,
+                    sendResponseBackToClient,
+                    serverRequest,
+                    worldId,
                 },
             );
 

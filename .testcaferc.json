@@ -2,9 +2,13 @@
     "assertionTimeout": 8000,
     "browsers": [
         "chrome:headless",
+        "firefox:headless",
     ],
     "color": true,
     "concurrency": 4,
+    "filter": {
+        "testMeta": {}
+    },
     "pageLoadTimeout": 8000,
     "quarantineMode": true,
     "reporter": [
@@ -23,6 +27,6 @@
     "selectorTimeout": 24000,
     "speed": 1,
     "src": [
-        "tests/scenarios/"
+        "tests/scenarios/index.spec.js"
     ]
 }

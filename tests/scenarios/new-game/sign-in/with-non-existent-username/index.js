@@ -14,7 +14,7 @@ import type {
     ScenarioExecution,
 } from '../../../types';
 
-const name = `with invalid credentials`;
+const name = `with non-existent username`;
 const tags = [
     `positive`,
 ];

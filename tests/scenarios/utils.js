@@ -1,6 +1,10 @@
 // @flow
 
 
+import {
+    getDuplicates,
+} from '../../common/src/utils';
+import verror from 'verror';
 import type {
     Scenario, ScenarioExecution,
 } from './types';
@@ -10,9 +14,9 @@ export const combineScenarios = (
         parent,
         children,
     }: {
-    parent: Scenario,
-    children: $ReadOnlyArray< Scenario >,
-},
+        parent: Scenario,
+        children: $ReadOnlyArray< Scenario >,
+    },
 ): $ReadOnlyArray< Scenario > => {
 
     if ( children.length === 0 ) {
@@ -20,6 +24,33 @@ export const combineScenarios = (
         return [
             parent,
         ];
+
+    }
+
+    const scenarioNames = children.map(
+        (
+            scenario: Scenario,
+        ) => {
+
+            return scenario.name;
+
+        },
+    );
+
+    const duplicatedScenarioNames = getDuplicates(
+        {
+            items: scenarioNames,
+        },
+    );
+
+    if ( duplicatedScenarioNames.length > 0 ) {
+
+        throw new verror.VError(
+            {
+                name: `INVALID_CONFIGURATION`,
+            },
+            `duplicated scenario names`,
+        );
 
     }
 

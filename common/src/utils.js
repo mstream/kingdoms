@@ -163,3 +163,48 @@ export const parseServerResponse = (
     );
 
 };
+
+export const getDuplicates = (
+    {
+        items,
+    }: { items: $ReadOnlyArray< string > },
+): $ReadOnlyArray< string > => {
+
+    const itemFrequencies = items.reduce(
+        (
+            itemFrequencies, item: string,
+        ) => {
+
+            if ( itemFrequencies[ item ] == null ) {
+
+                return {
+                    ...itemFrequencies,
+                    [ item ]: 1,
+                };
+
+            }
+
+            return {
+                ...itemFrequencies,
+                [ item ]: itemFrequencies[ item ] + 1,
+            };
+
+        },
+        {
+        },
+    );
+
+    return Object.keys(
+        itemFrequencies,
+    )
+        .filter(
+            (
+                item: string,
+            ) => {
+
+                return itemFrequencies[ item ] > 1;
+
+            },
+        );
+
+};

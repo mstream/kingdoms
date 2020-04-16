@@ -152,7 +152,7 @@ const updateWorldState = async ( {
 
     } catch ( error ) {
 
-        throw verror.VError(
+        throw new verror.VError(
             {
                 cause: error,
                 name : ERROR_STATE_UPDATE,

@@ -71,10 +71,11 @@ const redis = createRedisClient(
 );
 
 const supportedActions: $ReadOnlyArray< CommonActionKey > = [
-    UPGRADE_BUILDING,
     CHANGE_CITY_NAME,
     CREATE_CITY,
     CREATE_SCHEDULED_ATTACK_ORDER,
+    GET_CURRENT_STATE,
+    UPGRADE_BUILDING,
 ];
 
 

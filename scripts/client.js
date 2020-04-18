@@ -11,7 +11,7 @@ const deploy = (
 ) => {
 
     return `aws s3 sync --delete --acl public-read client/dist/dev/`
-        + `s3://www.${ environment }.kingdoms.maciej-laciak.com/`;
+        + ` s3://www.${ environment }.kingdoms.maciej-laciak.com/`;
 
 };
 

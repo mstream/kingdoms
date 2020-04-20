@@ -23,6 +23,11 @@ const createCityViewTestId = (
 };
 
 export const testIds = {
+    BACKGROUND: createCityViewTestId(
+        {
+            id: `background`,
+        },
+    ),
     BUILDINGS: createCityViewTestId(
         {
             id: `buildings`,

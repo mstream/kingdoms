@@ -9,14 +9,12 @@ import {
 } from './new-game';
 
 import type {
-    Scenario,
+    Scenario, ScenarioContext,
 } from './types';
 
 type TestFixture = $ReadOnly< {|
     name: string,
-
-    // $FlowFixMe
-    scenarios: $ReadOnlyArray< Scenario< void, any > >,
+    scenarios: $ReadOnlyArray< Scenario< {||}, ScenarioContext > >,
 |} >
 
 const testFixtures: $ReadOnlyArray< TestFixture > = [
@@ -38,8 +36,7 @@ testFixtures.forEach(
 
         testFixture.scenarios.forEach(
             (
-                // $FlowFixMe
-                scenario: Scenario< void, any >,
+                scenario: Scenario< {||}, ScenarioContext >,
             ) => {
 
                 const tagsMetadata = scenario.tags.reduce(
@@ -61,7 +58,10 @@ testFixtures.forEach(
 
                     await scenario.execution(
                         {
-                            context: undefined,
+                            context: Object.freeze(
+                                {
+                                },
+                            ),
                             t,
                         },
                     );

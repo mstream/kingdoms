@@ -34,7 +34,7 @@ import type {
 const name = `new game`;
 const tags = [];
 
-const execution: ScenarioExecution< void, NewGameScenarioContext > = async ( {
+const execution: ScenarioExecution< {||}, NewGameScenarioContext > = async ( {
     t,
 }, ) => {
 
@@ -61,7 +61,7 @@ const execution: ScenarioExecution< void, NewGameScenarioContext > = async ( {
 };
 
 
-export const scenarios: $ReadOnlyArray< Scenario< void, NewGameScenarioContext > >
+export const scenarios: $ReadOnlyArray< Scenario< {||}, NewGameScenarioContext > >
     = combineScenarios(
         {
             children: [

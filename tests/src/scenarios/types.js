@@ -5,7 +5,10 @@ import {
 } from 'testcafe';
 
 
-export type ScenarioExecution<IC, OC> = (
+// $FlowFixMe
+export type ScenarioContext = Object;
+
+export type ScenarioExecution<IC: ScenarioContext, OC: ScenarioContext> = (
     {
         context: IC,
         t: TestController,
@@ -13,7 +16,7 @@ export type ScenarioExecution<IC, OC> = (
 ) => Promise< OC >
 
 
-export type Scenario<IC, OC> = {
+export type Scenario<IC: ScenarioContext, OC: ScenarioContext> = {
     execution: ScenarioExecution< IC, OC >,
     name: string,
     tags: $ReadOnlyArray< string >,

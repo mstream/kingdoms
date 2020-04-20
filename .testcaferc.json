@@ -7,14 +7,13 @@
     "color": true,
     "concurrency": 4,
     "filter": {
-        "testMeta": {
-        }
+        "testMeta": {}
     },
     "pageLoadTimeout": 8000,
     "quarantineMode": true,
     "reporter": [
         {
-            "name": "spec"
+            "name": "custom"
         },
         {
             "name": "html",

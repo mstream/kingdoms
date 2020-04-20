@@ -2,26 +2,23 @@
 
 import {
     appModel,
-} from '../../../../../../models/app';
+} from '../../../../../../../models/app';
 
-import {
-    scenarios as closeCityViewScenarios,
-} from './close-city-view';
 import {
     combineScenarios,
-} from '../../../../../utils';
+} from '../../../../../../utils';
 import {
     selectors,
-} from '../../../../../../models/app/selectors';
+} from '../../../../../../../models/app/selectors';
 import type {
     CreateCityScenarioContext,
-} from '../types';
+} from '../../types';
 import type {
     Scenario, ScenarioExecution,
-} from '../../../../../types';
+} from '../../../../../../types';
 
 
-const name = `open city view`;
+const name = `close city view`;
 
 const tags = [
     `positive`,
@@ -32,13 +29,9 @@ const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenari
     t,
 }, ) => {
 
-    const {
-        cityName,
-    } = context;
-
-    await appModel.actions.openCityView(
+    await appModel.actions.closeCityView(
         {
-            name: cityName,
+            name: `non-existent`,
             t,
         },
     );
@@ -46,11 +39,9 @@ const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenari
     await t.expect(
         selectors
             .cityView
-            .textContent,
+            .exists,
     )
-        .contains(
-            cityName,
-        );
+        .notOk();
 
     return {
         ...context,
@@ -62,10 +53,8 @@ const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenari
 export const scenarios: $ReadOnlyArray< Scenario< CreateCityScenarioContext, CreateCityScenarioContext > >
     = combineScenarios(
         {
-            children: [
-                ...closeCityViewScenarios,
-            ],
-            parent: {
+            children: [],
+            parent  : {
                 execution,
                 name,
                 tags,

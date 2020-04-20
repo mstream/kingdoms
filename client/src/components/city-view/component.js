@@ -66,7 +66,7 @@ export const Component = (
             }
         >
             <div
-                onClick={onBackgroundClick}
+                data-testid={testIds.COMPONENT_CITY_VIEW.BACKGROUND}
                 className={
                     classNames(
                         `modal-overlay`,
@@ -80,6 +80,7 @@ export const Component = (
                         `cursor-pointer`,
                     )
                 }
+                onClick={onBackgroundClick}
             />
             <div
                 className={classNames(

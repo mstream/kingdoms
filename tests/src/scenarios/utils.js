@@ -7,28 +7,86 @@ import {
 import verror from 'verror';
 
 
+import {
+    getLocation, validateTestCafeError,
+} from '../utils';
 import type {
-    Scenario, ScenarioExecution,
+    Scenario, ScenarioContext, ScenarioExecution,
 } from './types';
+import type {
+    TestCafeError,
+} from '../types';
 
-export const combineScenarios = <IC, OC>(
+export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
     {
         parent,
         children,
     }: {
         parent: Scenario< IC, OC >,
 
-        // $FlowFixMe
-        children: $ReadOnlyArray< Scenario< OC, any > >,
+        children: $ReadOnlyArray< Scenario< OC, ScenarioContext > >,
     },
+): $ReadOnlyArray< Scenario< IC, ScenarioContext > > => {
 
-    // $FlowFixMe
-): $ReadOnlyArray< Scenario< IC, any > > => {
+    const parentExecution: ScenarioExecution< IC, OC > = async ( {
+        context, t,
+    }, ) => {
+
+        const startLocation = await getLocation();
+
+        try {
+
+            return await parent.execution(
+                {
+                    context,
+                    t,
+                },
+            );
+
+        } catch ( error ) {
+
+            const testCafeError: ?TestCafeError = validateTestCafeError(
+                {
+                    error,
+                },
+            );
+
+            if ( testCafeError == null ) {
+
+                throw new verror.VError(
+                    {
+                        cause: error,
+                        info: {
+                            context,
+                            tags: parent.tags,
+                        },
+                        name: `SCENARIO_EXECUTION`,
+                    },
+                    JSON.stringify(error),
+                    // `scenario failure`,
+                );
+
+            }
+
+            throw {
+                ...testCafeError,
+                context: {
+                    ...context,
+                    startLocation,
+                },
+            };
+
+        }
+
+    };
 
     if ( children.length === 0 ) {
 
         return [
-            parent,
+            {
+                ...parent,
+                execution: parentExecution,
+            },
         ];
 
     }
@@ -69,7 +127,7 @@ export const combineScenarios = <IC, OC>(
                 context, t,
             }, ) => {
 
-                const outputContext: OC = await parent.execution(
+                const outputContext: OC = await parentExecution(
                     {
                         context,
                         t,
@@ -87,7 +145,7 @@ export const combineScenarios = <IC, OC>(
 
             const combinedScenario = {
                 execution,
-                name: `${ parent.name } -> ${ scenario.name }`,
+                name: `${ parent.name }|${ scenario.name }`,
                 tags: [
                     ...parent.tags,
                     ...scenario.tags,
@@ -104,4 +162,3 @@ export const combineScenarios = <IC, OC>(
     );
 
 };
-

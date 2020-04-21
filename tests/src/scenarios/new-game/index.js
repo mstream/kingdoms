@@ -35,7 +35,7 @@ const name = `new game`;
 const tags = [];
 
 const execution: ScenarioExecution< {||}, NewGameScenarioContext > = async ( {
-    t,
+    logger, t,
 }, ) => {
 
     const worldId = generateId();
@@ -49,6 +49,7 @@ const execution: ScenarioExecution< {||}, NewGameScenarioContext > = async ( {
 
     await appModel.actions.open(
         {
+            logger,
             t,
             worldId,
         },

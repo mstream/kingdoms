@@ -3,6 +3,7 @@
 import { TestController } from 'testcafe';
 import { config } from '../../config';
 import { selectors } from './selectors';
+import type { Logger } from '../../../../common/src/logging/types';
 
 const createCity = async ({
                               name,
@@ -23,11 +24,39 @@ const createCity = async ({
 
 };
 
+const changeCityName = async ({
+                                  name,
+                                  t,
+                              }: {
+    name: string,
+    t: TestController,
+}): Promise<void> => {
+
+    await t.click(
+        selectors.cityViewName,
+    );
+
+    await t.pressKey('ctrl+a');
+    await t.pressKey('delete');
+
+    await t.typeText(
+        selectors.cityViewName,
+        name,
+    );
+
+    await t.pressKey(
+        `enter`,
+    );
+
+};
+
 const open = async ({
+                        logger,
                         t,
                         token,
                         worldId,
                     }: {
+    logger: Logger,
     t: TestController,
     token?: string,
     worldId: string,
@@ -42,7 +71,7 @@ const open = async ({
     const hashParams = `#${worldIdHashParam}${tokenHashParam}`;
     const url = `${config.appUrl}/${hashParams}`;
 
-    console.info(
+    logger.info(
         `navigating to the app page using url: ${url}`,
     );
 
@@ -58,10 +87,14 @@ const closeCityView = async ({
     t: TestController,
 }): Promise<void> => {
 
-    await t.click(selectors.cityViewBackground, {
-        offsetX: -1,
-        offsetY: -1,
-    });
+    await t.click(
+        selectors.cityViewBackground,
+        {
+            offsetX: -1,
+            offsetY: -1,
+        },
+    );
+
 };
 
 const openCityView = async ({
@@ -97,6 +130,7 @@ const signOut = async ({
 };
 
 export const actions = {
+    changeCityName,
     closeCityView,
     createCity,
     open,

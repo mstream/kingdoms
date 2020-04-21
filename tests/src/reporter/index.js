@@ -15,19 +15,19 @@ const selectDecorator = (
     const isUnstable = !isError && testRunInfo.unstable;
     const isSuccess = !isError && !isUnstable;
 
-    if (isError) {
+    if ( isError ) {
 
         return decorators.decorateErrorOutput;
 
     }
 
-    if (isSuccess) {
+    if ( isSuccess ) {
 
         return decorators.decorateSuccessOutput;
 
     }
 
-    if (isUnstable) {
+    if ( isUnstable ) {
 
         return decorators.decorateUnstableOutput;
 
@@ -42,13 +42,13 @@ const selectDecorator = (
 module.exports = () => {
 
     return {
-        async reportFixtureStart() {
+        async reportFixtureStart () {
         },
-        async reportTaskDone() {
+        async reportTaskDone () {
         },
-        async reportTaskStart() {
+        async reportTaskStart () {
         },
-        async reportTestDone(
+        async reportTestDone (
             name, testRunInfo, meta,
         ) {
 
@@ -66,12 +66,16 @@ module.exports = () => {
                     ) => {
 
                         return {
-                            context: err.context == null ? {} : err.context,
+                            context: err.context == null
+                                ? {
+                                }
+                                : err.context,
                             formattedError: this.formatError(
                                 err,
                             ),
                         };
-                    }
+
+                    },
                 );
 
                 const output = reportTestDone.createReport(
@@ -85,6 +89,7 @@ module.exports = () => {
                 const decoratedContent = decorator(
                     {
                         output,
+                        width: this.viewportWidth,
                     },
                 );
 
@@ -102,7 +107,7 @@ module.exports = () => {
                     },
                 );
 
-            } catch (error) {
+            } catch ( error ) {
 
                 console.error(
                     error.stack,
@@ -111,7 +116,7 @@ module.exports = () => {
             }
 
         },
-        async reportTestStart() {
+        async reportTestStart () {
         },
     };
 

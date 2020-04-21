@@ -29,7 +29,7 @@ const tags = [
 ];
 
 const execution: ScenarioExecution< NewGameScenarioContext, NewGameScenarioContext > = async ( {
-    context, t,
+    context, logger, t,
 }, ) => {
 
     const {
@@ -38,6 +38,7 @@ const execution: ScenarioExecution< NewGameScenarioContext, NewGameScenarioConte
 
     await appModel.actions.open(
         {
+            logger,
             t,
             token: createToken(
                 {

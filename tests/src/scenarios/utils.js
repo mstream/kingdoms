@@ -23,13 +23,12 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
         children,
     }: {
         parent: Scenario< IC, OC >,
-
         children: $ReadOnlyArray< Scenario< OC, ScenarioContext > >,
     },
 ): $ReadOnlyArray< Scenario< IC, ScenarioContext > > => {
 
     const parentExecution: ScenarioExecution< IC, OC > = async ( {
-        context, t,
+        context, logger, t,
     }, ) => {
 
         const startLocation = await getLocation();
@@ -39,6 +38,7 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
             return await parent.execution(
                 {
                     context,
+                    logger,
                     t,
                 },
             );
@@ -56,13 +56,16 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
                 throw new verror.VError(
                     {
                         cause: error,
-                        info: {
+                        info : {
                             context,
                             tags: parent.tags,
                         },
                         name: `SCENARIO_EXECUTION`,
                     },
-                    JSON.stringify(error),
+                    JSON.stringify(
+                        error,
+                    ),
+
                     // `scenario failure`,
                 );
 
@@ -124,12 +127,13 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
         ) => {
 
             const execution: ScenarioExecution< IC, OC > = async ( {
-                context, t,
+                context, logger, t,
             }, ) => {
 
                 const outputContext: OC = await parentExecution(
                     {
                         context,
+                        logger,
                         t,
                     },
                 );
@@ -137,6 +141,7 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
                 return await scenario.execution(
                     {
                         context: outputContext,
+                        logger,
                         t,
                     },
                 );

@@ -138,6 +138,7 @@ export const Component = (
 
     const cityNameInput = isNameBeingEdited ? (
         <input
+            data-testid={testIds.COMPONENT_CITY_VIEW.NAME}
             ref={nameInputRef}
             type="text"
             defaultValue={nameDraft}
@@ -148,6 +149,7 @@ export const Component = (
         />
     ) : (
         <p
+            data-testid={testIds.COMPONENT_CITY_VIEW.NAME}
             className="font-bold text-2xl text-center cursor-text hover:border text-gray-100"
             onClick={onCityNameInputClick}
         >

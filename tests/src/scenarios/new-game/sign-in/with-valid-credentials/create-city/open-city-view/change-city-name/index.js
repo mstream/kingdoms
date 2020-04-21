@@ -8,6 +8,9 @@ import {
     combineScenarios,
 } from '../../../../../../utils';
 import {
+    generateCityName,
+} from '../../../../../../../../../common/src/utils';
+import {
     selectors,
 } from '../../../../../../../models/app/selectors';
 import type {
@@ -18,7 +21,7 @@ import type {
 } from '../../../../../../types';
 
 
-const name = `close city view`;
+const name = `change city name`;
 
 const tags = [
     `city-view`,
@@ -30,22 +33,27 @@ const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenari
     t,
 }, ) => {
 
-    await appModel.actions.closeCityView(
+    const newCityName = generateCityName();
+
+
+    await appModel.actions.changeCityName(
         {
-            name: `non-existent`,
+            name: newCityName,
             t,
         },
     );
 
     await t.expect(
         selectors
-            .cityView
-            .exists,
+            .cityViewName.textContent,
     )
-        .notOk();
+        .contains(
+            newCityName,
+        );
 
     return {
         ...context,
+        cityName: newCityName,
     };
 
 };

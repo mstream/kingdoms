@@ -2,12 +2,71 @@ const chalk = require(
     `chalk`,
 );
 
-const decorateOutput = (
+const repeatCharacter = (
     {
-        color, footer, header, output,
+        character, times,
     },
 ) => {
 
+    return [
+        ...Array(
+            times,
+        )
+            .keys(),
+    ].map(
+        () => {
+
+            return character;
+
+        },
+    )
+        .join(
+            ``,
+        );
+
+};
+
+const decorateOutput = (
+    {
+        color, title, output, width,
+    },
+) => {
+
+    const footerPartCenter = repeatCharacter(
+        {
+            character: `━`,
+            times    : Math.max(
+                0,
+                width - 2,
+            ),
+        },
+    );
+
+    const footer = `┗${ footerPartCenter }┛`;
+
+    const headerPartCenter = repeatCharacter(
+        {
+            character: `━`,
+            times    : Math.max(
+                0,
+                width - title.length - 5,
+            ),
+        },
+    );
+
+    const header = `┏━ ${ title } ${ headerPartCenter }┓`;
+
+    const separatorPartCenter = repeatCharacter(
+        {
+            character: `─`,
+            times    : Math.max(
+                0,
+                width - 2,
+            ),
+        },
+    );
+
+    const separator = `┠${ separatorPartCenter }┨`;
     const colorize = chalk[ color ];
 
     const content = output.map(
@@ -18,7 +77,7 @@ const decorateOutput = (
             if ( line == null ) {
 
                 return colorize(
-                    `┠─`,
+                    separator,
                 );
 
             }
@@ -26,10 +85,33 @@ const decorateOutput = (
             const verticalBar = colorize(
                 `┃`,
             );
-            return `${ verticalBar } ${ line }`;
+
+            const spacePadding = repeatCharacter(
+                {
+                    character: ` `,
+                    times    : Math.max(
+                        0,
+                        width - line.replace(
+
+                            // eslint-disable-next-line
+                        /\u001b\[.*?m/g,
+                            ``,
+                        ).length - 3,
+                    ),
+                },
+            );
+
+            const prefix = `${ verticalBar } `;
+
+            const suffix = spacePadding.length > 0
+                ? verticalBar
+                : ``;
+
+            return `${ prefix }${ line }${ spacePadding }${ suffix }`;
 
         },
     );
+
 
     return [
         colorize(
@@ -45,16 +127,16 @@ const decorateOutput = (
 
 const decorateErrorOutput = (
     {
-        output,
+        output, width,
     },
 ) => {
 
     return decorateOutput(
         {
-            color : `red`,
-            footer: `┗━━━━━━━━━━━━━━━`,
-            header: `┏━ ERROR ━━━━━━━`,
+            color: `red`,
             output,
+            title: `ERROR`,
+            width,
         },
     );
 
@@ -62,16 +144,16 @@ const decorateErrorOutput = (
 
 const decorateSuccessOutput = (
     {
-        output,
+        output, width,
     },
 ) => {
 
     return decorateOutput(
         {
-            color : `green`,
-            footer: `┗━━━━━━━━━━━━━━━`,
-            header: `┏━ SUCCESS ━━━━━`,
+            color: `green`,
             output,
+            title: `SUCCESS`,
+            width,
         },
     );
 
@@ -79,16 +161,16 @@ const decorateSuccessOutput = (
 
 const decorateUnstableOutput = (
     {
-        output,
+        output, width,
     },
 ) => {
 
     return decorateOutput(
         {
-            color : `yellow`,
-            footer: `┗━━━━━━━━━━━━━━━`,
-            header: `┏━ UNSTABLE ━━━━`,
+            color: `yellow`,
             output,
+            title: `UNSTABLE`,
+            width,
         },
     );
 

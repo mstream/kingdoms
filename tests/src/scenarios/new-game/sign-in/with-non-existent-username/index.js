@@ -20,11 +20,11 @@ import type {
 
 const name = `with non-existent username`;
 const tags = [
-    `positive`,
+    `negative`,
 ];
 
 const execution: ScenarioExecution< SignInScenarioContext, SignInScenarioContext > = async ( {
-    context, t,
+    context, logger, t,
 }, ) => {
 
     const {
@@ -33,6 +33,7 @@ const execution: ScenarioExecution< SignInScenarioContext, SignInScenarioContext
 
     await authModel.actions.signIn(
         {
+            logger,
             password,
             t,
             username: `non-existent`,

@@ -80,11 +80,15 @@ const createConfig: () => Config = () => {
                 name: `COGNITO_URL`,
             },
         ),
-        loggingLevel: getGlobalVariable(
-            {
-                name: `LOGGING_LEVEL`,
-            },
-        ),
+        loggingLevel: `warn`,
+
+        /*
+         * LoggingLevel: getGlobalVariable(
+         *     {
+         *         name: `LOGGING_LEVEL`,
+         *     },
+         * ),
+         */
         region: getGlobalVariable(
             {
                 name: `REGION`,

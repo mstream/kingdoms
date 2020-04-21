@@ -3,7 +3,9 @@
 import {
     appModel,
 } from '../../../../../../models/app';
-
+import {
+    scenarios as changeCityNameScenarios,
+} from './change-city-name';
 import {
     scenarios as closeCityViewScenarios,
 } from './close-city-view';
@@ -24,6 +26,7 @@ import type {
 const name = `open city view`;
 
 const tags = [
+    `city-view`,
     `positive`,
 ];
 
@@ -63,6 +66,7 @@ export const scenarios: $ReadOnlyArray< Scenario< CreateCityScenarioContext, Cre
     = combineScenarios(
         {
             children: [
+                ...changeCityNameScenarios,
                 ...closeCityViewScenarios,
             ],
             parent: {

@@ -43,6 +43,11 @@ export const testIds = {
             id: `items-list`,
         },
     ),
+    NAME: createCityViewTestId(
+        {
+            id: `name`,
+        },
+    ),
     ORDERS: createCityViewTestId(
         {
             id: `orders`,

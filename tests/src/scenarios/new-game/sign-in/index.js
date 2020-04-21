@@ -38,7 +38,7 @@ const tags = [
 ];
 
 const execution: ScenarioExecution< NewGameScenarioContext, SignInScenarioContext > = async ( {
-    context, t,
+    context, logger, t,
 }, ) => {
 
     const {
@@ -61,6 +61,7 @@ const execution: ScenarioExecution< NewGameScenarioContext, SignInScenarioContex
 
     await appModel.actions.open(
         {
+            logger,
             t,
             worldId,
         },

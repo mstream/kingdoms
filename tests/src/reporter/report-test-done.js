@@ -13,7 +13,7 @@ const createExecutionPathSegment = (
                 pathSegment,
             ) => {
 
-                return `  ┣ ${pathSegment}`;
+                return `  ┣ ${ pathSegment }`;
 
             },
         );
@@ -43,7 +43,7 @@ const createTagsSegment = (
                 tag,
             ) => {
 
-                return `  • ${tag}`;
+                return `  • ${ tag }`;
 
             },
         );
@@ -70,13 +70,19 @@ const createErrorSegment = (
                 line,
             ) => {
 
-                return `  ${line}`;
+                return `  ${ line }`;
 
             },
         );
 
-    if (errorInfo.context == null) {
-        console.error('!!!' + JSON.stringify(errorInfo));
+    if ( errorInfo.context == null ) {
+
+        console.error(
+            `!!!${  JSON.stringify(
+                errorInfo,
+            ) }`,
+        );
+
     }
 
     const contextLines = Object
@@ -88,14 +94,14 @@ const createErrorSegment = (
                 key,
             ) => {
 
-                const value = errorInfo.context[key];
-                return `  ${key}: ${value}`;
+                const value = errorInfo.context[ key ];
+                return `  ${ key }: ${ value }`;
 
             },
         );
 
     return [
-        `Error ${index + 1}`,
+        `Error ${ index + 1 }`,
         ...errorLines,
         `Context`,
         ...contextLines,
@@ -127,7 +133,7 @@ const createReport = (
         ...tagsSegment,
     ];
 
-    if (errorInfos.length === 0) {
+    if ( errorInfos.length === 0 ) {
 
         return testInfoSegment;
 

@@ -8,6 +8,9 @@ import {
     scenarios as newGameScenarios,
 } from './new-game';
 
+import {
+    logger,
+} from '../logging';
 import type {
     Scenario, ScenarioContext,
 } from './types';
@@ -34,50 +37,55 @@ testFixtures.forEach(
             testFixture.name,
         );
 
-        testFixture.scenarios.forEach(
-            (
-                scenario: Scenario< {||}, ScenarioContext >,
-            ) => {
+        [
+            ...testFixture.scenarios,
+        ]
+            .sort()
+            .forEach(
+                (
+                    scenario: Scenario< {||}, ScenarioContext >,
+                ) => {
 
-                const tagsMetadata = scenario.tags.reduce(
-                    (
-                        tagsMetadata, tag,
-                    ) => {
+                    const tagsMetadata = scenario.tags.reduce(
+                        (
+                            tagsMetadata, tag,
+                        ) => {
 
-                        return {
-                            ...tagsMetadata,
-                            [ tag ]: true,
-                        };
+                            return {
+                                ...tagsMetadata,
+                                [ tag ]: true,
+                            };
 
-                    },
-                    {
-                    },
-                );
-
-                const execution = async ( t: TestController, ) => {
-
-                    await scenario.execution(
+                        },
                         {
-                            context: Object.freeze(
-                                {
-                                },
-                            ),
-                            t,
                         },
                     );
 
-                };
+                    const execution = async ( t: TestController, ) => {
 
-                // $FlowFixMe
-                test.meta(
-                    tagsMetadata,
-                )(
-                    scenario.name,
-                    execution,
-                );
+                        await scenario.execution(
+                            {
+                                context: Object.freeze(
+                                    {
+                                    },
+                                ),
+                                logger,
+                                t,
+                            },
+                        );
 
-            },
-        );
+                    };
+
+                    // $FlowFixMe
+                    test.meta(
+                        tagsMetadata,
+                    )(
+                        scenario.name,
+                        execution,
+                    );
+
+                },
+            );
 
     },
 );

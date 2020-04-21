@@ -18,6 +18,9 @@ export const selectors = {
     cityViewBackground: Selector(
         `*[data-testid="${ testIds.COMPONENT_CITY_VIEW.BACKGROUND }"]`,
     ),
+    cityViewName: Selector(
+        `*[data-testid="${ testIds.COMPONENT_CITY_VIEW.NAME }"]`,
+    ),
     newCityCreateButton: Selector(
         `*[data-testid="${ testIds.COMPONENT_GAME_START.CITY_CREATE_BUTTON }"]`,
     ),

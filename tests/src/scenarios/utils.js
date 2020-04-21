@@ -11,7 +11,9 @@ import {
     getLocation, validateTestCafeError,
 } from '../utils';
 import type {
-    Scenario, ScenarioContext, ScenarioExecution,
+    ScenarioContext,
+    ScenarioExecution,
+    TestScenario,
 } from './types';
 import type {
     TestCafeError,
@@ -22,10 +24,10 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
         parent,
         children,
     }: {
-        parent: Scenario< IC, OC >,
-        children: $ReadOnlyArray< Scenario< OC, ScenarioContext > >,
+        parent: TestScenario< IC, OC >,
+        children: $ReadOnlyArray< TestScenario< OC, ScenarioContext > >,
     },
-): $ReadOnlyArray< Scenario< IC, ScenarioContext > > => {
+): $ReadOnlyArray< TestScenario< IC, ScenarioContext > > => {
 
     const parentExecution: ScenarioExecution< IC, OC > = async ( {
         context, logger, t,
@@ -62,11 +64,7 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
                         },
                         name: `SCENARIO_EXECUTION`,
                     },
-                    JSON.stringify(
-                        error,
-                    ),
-
-                    // `scenario failure`,
+                    `scenario failure`,
                 );
 
             }
@@ -94,36 +92,38 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
 
     }
 
-    const scenarioNames = children.map(
+    const serializedScenarioPaths: $ReadOnlyArray< string > = children.map(
         (
-            scenario: Scenario< OC, OC >,
+            scenario: TestScenario< OC, OC >,
         ) => {
 
-            return scenario.name;
+            return JSON.stringify(
+                scenario.path,
+            );
 
         },
     );
 
-    const duplicatedScenarioNames = getDuplicates(
+    const duplicatedScenarioPaths = getDuplicates(
         {
-            items: scenarioNames,
+            items: serializedScenarioPaths,
         },
     );
 
-    if ( duplicatedScenarioNames.length > 0 ) {
+    if ( duplicatedScenarioPaths.length > 0 ) {
 
         throw new verror.VError(
             {
                 name: `INVALID_CONFIGURATION`,
             },
-            `duplicated scenario names`,
+            `duplicated scenario paths`,
         );
 
     }
 
     return children.reduce(
         (
-            combinedScenarios, scenario,
+            combinedScenarios, child,
         ) => {
 
             const execution: ScenarioExecution< IC, OC > = async ( {
@@ -138,7 +138,7 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
                     },
                 );
 
-                return await scenario.execution(
+                return await child.execution(
                     {
                         context: outputContext,
                         logger,
@@ -150,10 +150,13 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
 
             const combinedScenario = {
                 execution,
-                name: `${ parent.name }|${ scenario.name }`,
+                path: [
+                    ...parent.path,
+                    ...child.path,
+                ],
                 tags: [
                     ...parent.tags,
-                    ...scenario.tags,
+                    ...child.tags,
                 ],
             };
 

@@ -5,7 +5,7 @@ const dpdm = require(
 dpdm.parseDependencyTree(
     [
         `./client/src/index.js`,
-        `./tests/src/scenarios/index.spec.js`,
+        `./tests/src/index.spec.js`,
         `./tools/src/index.js`,
         `./server/src/index.js`,
     ],

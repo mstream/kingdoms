@@ -1,13 +1,14 @@
+const verror = require(
+    `verror`,
+);
+
 const createExecutionPathSegment = (
     {
-        name,
+        path,
     },
 ) => {
 
-    const timeline = name
-        .split(
-            `|`,
-        )
+    const timeline = path
         .map(
             (
                 pathSegment,
@@ -29,13 +30,13 @@ const createExecutionPathSegment = (
 
 const createTagsSegment = (
     {
-        meta,
+        tags,
     },
 ) => {
 
-    const tags = Object
+    const tagLines = Object
         .keys(
-            meta,
+            tags,
         )
         .sort()
         .map(
@@ -50,7 +51,7 @@ const createTagsSegment = (
 
     return [
         `Tags`,
-        ...tags,
+        ...tagLines,
     ];
 
 };
@@ -77,10 +78,11 @@ const createErrorSegment = (
 
     if ( errorInfo.context == null ) {
 
-        console.error(
-            `!!!${  JSON.stringify(
-                errorInfo,
-            ) }`,
+        throw new verror.VError(
+            {
+                name: `UI_TEST`,
+            },
+            `missing error context`,
         );
 
     }
@@ -95,7 +97,9 @@ const createErrorSegment = (
             ) => {
 
                 const value = errorInfo.context[ key ];
-                return `  ${ key }: ${ value }`;
+                return `  ${ key }
+    : ${ value }
+        `;
 
             },
         );
@@ -116,18 +120,25 @@ const createReport = (
     },
 ) => {
 
+    const nameSegment = [
+        name,
+    ];
+
     const executionPathSegment = createExecutionPathSegment(
         {
-            name,
+            path: meta.path,
         },
     );
+
     const tagsSegment = createTagsSegment(
         {
-            meta,
+            tags: meta.tags,
         },
     );
 
     const testInfoSegment = [
+        ...nameSegment,
+        null,
         ...executionPathSegment,
         null,
         ...tagsSegment,

@@ -1,5 +1,3 @@
-// $Flow
-
 const npsUtils = require(
     `nps-utils`,
 );

@@ -12,6 +12,11 @@ const serverScripts = require(
     `./scripts/server`,
 );
 
+
+const testsScripts = require(
+    `./scripts/tests`,
+);
+
 const toolsScripts = require(
     `./scripts/tools`,
 );
@@ -96,6 +101,7 @@ module.exports = {
                 },
             },
         },
+        tests: testsScripts,
         tools: toolsScripts,
     },
 };

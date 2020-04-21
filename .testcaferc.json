@@ -27,6 +27,6 @@
     "selectorTimeout": 24000,
     "speed": 1,
     "src": [
-        "tests/src/scenarios/index.spec.js"
+        "tests/src/index.spec.js"
     ]
 }

@@ -1,9 +1,19 @@
+const verror = require(
+    `verror`,
+);
+
 const decorators = require(
     `./decorators`,
 );
+const reportTaskDone = require(
+    `./report-task-done`,
+);
+
 const reportTestDone = require(
     `./report-test-done`,
 );
+
+const testMode = process.env.TEST_MODE;
 
 const selectDecorator = (
     {
@@ -45,14 +55,73 @@ module.exports = () => {
         async reportFixtureStart () {
         },
         async reportTaskDone () {
+
+            if ( testMode === `retest` ) {
+
+                return;
+
+            }
+
+            const dir = `tests/dist/${ process.env.NODE_ENV }`;
+
+            reportTaskDone.saveFailedTestsMeta(
+                {
+                    dir,
+                    failedTests: this.failedTests,
+                },
+            );
+
         },
         async reportTaskStart () {
+
+            if ( testMode === `test` ) {
+
+                this.write(
+                    `TESTING...`,
+                );
+
+                this.newline();
+                return;
+
+            }
+
+            if ( testMode === `retest` ) {
+
+                this.write(
+                    `RE-TESTING...`,
+                );
+
+                this.newline();
+                return;
+
+            }
+
+            throw new verror.VError(
+                {
+                    name: `UI_TEST`,
+                },
+                `invalid test mode: ${ testMode }`,
+            );
+
         },
         async reportTestDone (
             name, testRunInfo, meta,
         ) {
 
             try {
+
+                if ( testRunInfo.errs.length > 0 ) {
+
+                    this.failedTests = this.failedTests == null
+                        ? [
+                            name,
+                        ]
+                        : [
+                            ...this.failedTests,
+                            name,
+                        ];
+
+                }
 
                 const decorator = selectDecorator(
                     {

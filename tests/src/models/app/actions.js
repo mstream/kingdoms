@@ -1,17 +1,25 @@
 // @flow
 
-import { TestController } from 'testcafe';
-import { config } from '../../config';
-import { selectors } from './selectors';
-import type { Logger } from '../../../../common/src/logging/types';
+import {
+    TestController,
+} from 'testcafe';
+import {
+    config,
+} from '../../config';
+import {
+    selectors,
+} from './selectors';
+import type {
+    Logger,
+} from '../../../../common/src/logging/types';
 
-const createCity = async ({
-                              name,
-                              t,
-                          }: {
+const createCity = async ( {
+    name,
+    t,
+}: {
     name: string,
     t: TestController,
-}): Promise<void> => {
+}, ): Promise< void > => {
 
     await t.typeText(
         selectors.newCityNameInput,
@@ -24,20 +32,25 @@ const createCity = async ({
 
 };
 
-const changeCityName = async ({
-                                  name,
-                                  t,
-                              }: {
+const changeCityName = async ( {
+    name,
+    t,
+}: {
     name: string,
     t: TestController,
-}): Promise<void> => {
+}, ): Promise< void > => {
 
     await t.click(
         selectors.cityViewName,
     );
 
-    await t.pressKey('ctrl+a');
-    await t.pressKey('delete');
+    await t.pressKey(
+        `ctrl+a`,
+    );
+
+    await t.pressKey(
+        `delete`,
+    );
 
     await t.typeText(
         selectors.cityViewName,
@@ -50,29 +63,29 @@ const changeCityName = async ({
 
 };
 
-const open = async ({
-                        logger,
-                        t,
-                        token,
-                        worldId,
-                    }: {
+const open = async ( {
+    logger,
+    t,
+    token,
+    worldId,
+}: {
     logger: Logger,
     t: TestController,
     token?: string,
     worldId: string,
-}): Promise<void> => {
+}, ): Promise< void > => {
 
-    const worldIdHashParam = `state=${worldId}`;
+    const worldIdHashParam = `state=${ worldId }`;
 
     const tokenHashParam = token == null
         ? ``
-        : `&id_token=${token}`;
+        : `&id_token=${ token }`;
 
-    const hashParams = `#${worldIdHashParam}${tokenHashParam}`;
-    const url = `${config.appUrl}/${hashParams}`;
+    const hashParams = `#${ worldIdHashParam }${ tokenHashParam }`;
+    const url = `${ config.appUrl }/${ hashParams }`;
 
     logger.info(
-        `navigating to the app page using url: ${url}`,
+        `navigating to the app page using url: ${ url }`,
     );
 
     await t.navigateTo(
@@ -81,11 +94,11 @@ const open = async ({
 
 };
 
-const closeCityView = async ({
-                                 t,
-                             }: {
+const closeCityView = async ( {
+    t,
+}: {
     t: TestController,
-}): Promise<void> => {
+}, ): Promise< void > => {
 
     await t.click(
         selectors.cityViewBackground,
@@ -97,13 +110,13 @@ const closeCityView = async ({
 
 };
 
-const openCityView = async ({
-                                name,
-                                t,
-                            }: {
+const openCityView = async ( {
+    name,
+    t,
+}: {
     name: string,
     t: TestController,
-}): Promise<void> => {
+}, ): Promise< void > => {
 
     await t.click(
         selectors.cityTile.find(
@@ -116,9 +129,9 @@ const openCityView = async ({
 
 };
 
-const signOut = async ({
-                           t,
-                       }: { t: TestController }): Promise<void> => {
+const signOut = async ( {
+    t,
+}: { t: TestController }, ): Promise< void > => {
 
     await t.hover(
         selectors.userMenuButton,

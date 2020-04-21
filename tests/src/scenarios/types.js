@@ -20,9 +20,9 @@ export type ScenarioExecution<IC: ScenarioContext, OC: ScenarioContext> = (
 ) => Promise< OC >
 
 
-export type Scenario<IC: ScenarioContext, OC: ScenarioContext> = {
+export type TestScenario<IC: ScenarioContext, OC: ScenarioContext> = {
     execution: ScenarioExecution< IC, OC >,
-    name: string,
+    path: $ReadOnlyArray< string >,
     tags: $ReadOnlyArray< string >,
 };
 

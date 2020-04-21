@@ -1,68 +1,25 @@
 // @flow
 
-
-import {
-    scenarios as reSignInScenarios,
-} from './re-sign-in';
-import {
-    scenarios as signInScenarios,
-} from './sign-in';
-
-
-import {
-    appModel,
-} from '../../models/app';
 import {
     combineScenarios,
 } from '../utils';
 import {
-    emptyCommonState,
-} from '../../../../common/src/state/modules/state';
+    execution,
+} from './execution';
 import {
-    generateId,
-} from '../../../../common/src/utils';
+    scenarios as reSignInScenarios,
+} from './_children/re-sign-in';
 import {
-    tools,
-} from '../../tools';
+    scenarios as signInScenarios,
+} from './_children/sign-in';
 import type {
     NewGameScenarioContext,
 } from './types';
 import type {
-    Scenario, ScenarioExecution,
+    TestScenario,
 } from '../types';
 
-const name = `new game`;
-const tags = [];
-
-const execution: ScenarioExecution< {||}, NewGameScenarioContext > = async ( {
-    logger, t,
-}, ) => {
-
-    const worldId = generateId();
-
-    await tools.createWorld(
-        {
-            id   : worldId,
-            state: emptyCommonState,
-        },
-    );
-
-    await appModel.actions.open(
-        {
-            logger,
-            t,
-            worldId,
-        },
-    );
-
-    return {
-        worldId,
-    };
-
-};
-
-
-export const scenarios: $ReadOnlyArray< Scenario< {||}, NewGameScenarioContext > >
+export const scenarios: $ReadOnlyArray< TestScenario< {||}, NewGameScenarioContext > >
     = combineScenarios(
         {
             children: [
@@ -71,9 +28,12 @@ export const scenarios: $ReadOnlyArray< Scenario< {||}, NewGameScenarioContext >
             ],
             parent: {
                 execution,
-                name,
-                tags,
+                path: [
+                    `new game`,
+                ],
+                tags: [
+                    `new-game`,
+                ],
             },
         },
     );
-

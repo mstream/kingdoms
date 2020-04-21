@@ -64,6 +64,7 @@
         "chalk": "4.0.0",
         "classnames": "2.2.6",
         "combine-reducers-global-state": "1.0.1",
+        "crypto-js": "4.0.0",
         "crypto-random-string": "3.2.0",
         "flow-runtime": "0.17.0",
         "ioredis": "4.16.2",

@@ -142,6 +142,23 @@ const decorateErrorOutput = (
 
 };
 
+const decorateInfoOutput = (
+    {
+        output, title, width,
+    },
+) => {
+
+    return decorateOutput(
+        {
+            color: `white`,
+            output,
+            title,
+            width,
+        },
+    );
+
+};
+
 const decorateSuccessOutput = (
     {
         output, width,
@@ -178,6 +195,7 @@ const decorateUnstableOutput = (
 
 module.exports = {
     decorateErrorOutput,
+    decorateInfoOutput,
     decorateSuccessOutput,
     decorateUnstableOutput,
 };

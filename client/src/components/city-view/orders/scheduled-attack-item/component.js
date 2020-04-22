@@ -75,7 +75,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_CITY_VIEW.SCHEDULED_ATTACK_ITEM} className={itemClassName}>
+        <div data-testid={testIds.cityView.scheduledAttackItem} className={itemClassName}>
             <div className="text-sm font-medium">{header}</div>
             <div className={subheaderClassName}>{subheader}</div>
         </div>

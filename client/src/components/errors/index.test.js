@@ -53,7 +53,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_ERRORS.PARENT,
+                        testIds.errors.parent,
                     ),
                 ).not.toBeInTheDocument();
 

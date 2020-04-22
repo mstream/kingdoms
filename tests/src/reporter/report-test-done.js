@@ -97,9 +97,7 @@ const createErrorSegment = (
             ) => {
 
                 const value = errorInfo.context[ key ];
-                return `  ${ key }
-    : ${ value }
-        `;
+                return `  ${ key }: ${ value }`;
 
             },
         );

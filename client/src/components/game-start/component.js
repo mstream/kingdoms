@@ -62,7 +62,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_GAME_START.PARENT}
+            data-testid={testIds.gameStart.parent}
             className="modal top-0 left-0 w-full h-full flex items-center justify-center rounded-t"
         >
             <div
@@ -122,7 +122,7 @@ export const Component = (
                         <div className="w-2/3">
                             <input
                                 id="new-city-name-input"
-                                data-testid={testIds.COMPONENT_GAME_START.CITY_NAME_INPUT}
+                                data-testid={testIds.gameStart.cityNameInput}
                                 className={classNames(
                                     `appearance-none`,
                                     `border-none`,
@@ -148,7 +148,7 @@ export const Component = (
                         </div>
                     </div>
                     <button
-                        data-testid={testIds.COMPONENT_GAME_START.CITY_CREATE_BUTTON}
+                        data-testid={testIds.gameStart.createCityButton}
                         className={buttonClassName}
                         onClick={onClick}
                     >

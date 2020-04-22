@@ -153,7 +153,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_CITY_VIEW.BUILDINGS} role="tabpanel">
+        <div data-testid={testIds.cityView.buildingsPanel} role="tabpanel">
             <CityItemsListComponent>
                 {buildingComponents}
             </CityItemsListComponent>

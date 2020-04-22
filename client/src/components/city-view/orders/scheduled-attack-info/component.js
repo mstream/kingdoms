@@ -69,7 +69,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_CITY_VIEW.SCHEDULED_ATTACK_INFO}
+            data-testid={testIds.cityView.scheduledAttackInfo}
             className="flex flex-row flex-wrap"
         >
             {unitItemComponents}

@@ -25,7 +25,7 @@ export const Component = (
             : `${ localClassname } ${ className }`;
 
     return (
-        <div data-testid={testIds.COMPONENT_IMAGE.PARENT} className="relative" style={style}>
+        <div data-testid={testIds.image.parent} className="relative" style={style}>
             <img className={mergedClassname} src={image} alt="image"/>
             {children}
         </div>

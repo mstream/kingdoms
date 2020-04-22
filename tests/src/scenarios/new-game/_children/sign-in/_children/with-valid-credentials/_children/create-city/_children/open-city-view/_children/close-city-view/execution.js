@@ -7,7 +7,7 @@ import {
 
 import {
     selectors,
-} from '../../../../../../../../../../../../models/app/selectors';
+} from '../../../../../../../../../../../../models/selectors';
 import type {
     CreateCityScenarioContext,
 } from '../../../../types';
@@ -31,6 +31,7 @@ export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCity
     await t.expect(
         selectors
             .cityView
+            .parent
             .exists,
     )
         .notOk();

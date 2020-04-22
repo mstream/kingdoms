@@ -370,7 +370,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_WORLD_MAP.PARENT}>
+        <div data-testid={testIds.worldMap.parent}>
             {terrainTileComponents}
             {cityTileComponents}
         </div>

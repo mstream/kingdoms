@@ -138,7 +138,7 @@ export const Component = (
 
     const cityNameInput = isNameBeingEdited ? (
         <input
-            data-testid={testIds.COMPONENT_CITY_VIEW.NAME}
+            data-testid={testIds.cityView.name}
             ref={nameInputRef}
             type="text"
             defaultValue={nameDraft}
@@ -149,7 +149,7 @@ export const Component = (
         />
     ) : (
         <p
-            data-testid={testIds.COMPONENT_CITY_VIEW.NAME}
+            data-testid={testIds.cityView.name}
             className="font-bold text-2xl text-center cursor-text hover:border text-gray-100"
             onClick={onCityNameInputClick}
         >
@@ -256,7 +256,7 @@ export const Component = (
     };
 
     return (
-        <div data-testid={testIds.COMPONENT_CITY_VIEW.HEADER} className={className}>
+        <div data-testid={testIds.cityView.header} className={className}>
             {previousCityId != null
             && navigateToPreviousCityButton(
                 {

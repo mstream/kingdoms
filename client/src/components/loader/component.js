@@ -23,7 +23,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_LOADER.PARENT}
+            data-testid={testIds.loader.parent}
             className="absolute flex flex-row content-center justify-center h-screen w-screen"
         >
             <div

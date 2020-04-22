@@ -75,7 +75,7 @@ export const Component = (
         );
     return (
         <table
-            data-testid={testIds.COMPONENT_CHANGE_INFO.PARENT}
+            data-testid={testIds.changeInfo.parent}
             className="table-fixed border-separate shadow-inner"
         >
             <tbody>{changeRowComponents}</tbody>

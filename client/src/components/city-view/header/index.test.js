@@ -65,7 +65,7 @@ describe(
 
                 expect(
                     queryByTestId(
-                        testIds.COMPONENT_CITY_VIEW.PARENT,
+                        testIds.cityView.parent,
                     ),
                 ).not.toBeInTheDocument();
 

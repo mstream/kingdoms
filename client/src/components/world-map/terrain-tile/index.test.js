@@ -62,7 +62,7 @@ describe(
 
                 expect(
                     queryByTestId(
-                        testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE,
+                        testIds.worldMap.terrainTile,
                     ),
                 )
                     .toBeInTheDocument();

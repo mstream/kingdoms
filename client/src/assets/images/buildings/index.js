@@ -15,7 +15,7 @@ import type {
 export const buildingVisuals = {
     [ BUILDING_LUMBER_MILL ]: {
         image: lumberMill,
-        name : `Lumber Mill`,
+        name : `Lumber mill`,
     },
     [ BUILDING_PASTURE ]: {
         image: pasture,

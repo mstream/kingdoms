@@ -50,7 +50,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_CITY_VIEW.PARENT}
+            data-testid={testIds.cityView.parent}
             className={
                 classNames(
                     `modal`,
@@ -66,7 +66,7 @@ export const Component = (
             }
         >
             <div
-                data-testid={testIds.COMPONENT_CITY_VIEW.BACKGROUND}
+                data-testid={testIds.cityView.background}
                 className={
                     classNames(
                         `modal-overlay`,

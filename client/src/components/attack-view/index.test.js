@@ -75,7 +75,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_ATTACK_VIEW.PARENT,
+                        testIds.attackView.parent,
                     ),
                 ).not.toBeInTheDocument();
 
@@ -137,14 +137,14 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_ATTACK_VIEW.CITY_LIST,
+                        testIds.attackView.cityList,
                     ),
                 )
                     .toBeInTheDocument();
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_ATTACK_VIEW.REGIMENT_TEMPLATE_FORM,
+                        testIds.attackView.regimentTemplateForm,
                     ),
                 ).not.toBeInTheDocument();
 
@@ -207,14 +207,14 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_ATTACK_VIEW.CITY_LIST,
+                        testIds.attackView.cityList,
                     ),
                 )
                     .toBeInTheDocument();
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_ATTACK_VIEW.REGIMENT_TEMPLATE_FORM,
+                        testIds.attackView.regimentTemplateForm,
                     ),
                 )
                     .toBeInTheDocument();

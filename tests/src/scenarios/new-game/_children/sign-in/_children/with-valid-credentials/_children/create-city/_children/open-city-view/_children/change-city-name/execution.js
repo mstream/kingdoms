@@ -10,7 +10,7 @@ import {
 } from '../../../../../../../../../../../../../../common/src/utils';
 import {
     selectors,
-} from '../../../../../../../../../../../../models/app/selectors';
+} from '../../../../../../../../../../../../models/selectors';
 import type {
     CreateCityScenarioContext,
 } from '../../../../types';
@@ -37,7 +37,9 @@ export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCity
 
     await t.expect(
         selectors
-            .cityViewName.textContent,
+            .cityView
+            .name
+            .textContent,
     )
         .contains(
             newCityName,

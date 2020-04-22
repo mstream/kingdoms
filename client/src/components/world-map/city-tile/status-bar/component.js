@@ -54,7 +54,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_WORLD_MAP.STATUS_BAR} className={className}>
+        <div data-testid={testIds.worldMap.statusBar} className={className}>
             <div
                 className="flex items-center p-1 text-md font-bold border-r border-gray-900">
                 {tiersSum}

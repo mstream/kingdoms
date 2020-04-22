@@ -265,7 +265,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_ATTACK_VIEW.REGIMENT_TEMPLATE_FORM} className="flex flex-col">
+        <div data-testid={testIds.attackView.regimentTemplateForm} className="flex flex-col">
             <div className="flex flex-row justify-center text-xl">Regiment</div>
             <div className="flex flex-row flex-wrap justify-start shadow-inner">
                 {unitRows}

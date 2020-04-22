@@ -70,7 +70,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_GAME_START.PARENT,
+                        testIds.gameStart.parent,
                     ),
                 ).not.toBeInTheDocument();
 

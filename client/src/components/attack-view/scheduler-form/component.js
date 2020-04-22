@@ -51,7 +51,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_ATTACK_VIEW.SCHEDULER_FORM}
+            data-testid={testIds.attackView.schedulerForm}
             className="flex flex-col justify-start text-xl"
         >
             <div className="mb-1">When:</div>

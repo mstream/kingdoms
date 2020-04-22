@@ -12,6 +12,21 @@ import {
 import {
     execution,
 } from './execution';
+import {
+    scenarios as navigateToBuildingsTabScenarios,
+} from './_children/navigate-to-buildings-tab';
+import {
+    scenarios as navigateToOrdersTabScenarios,
+} from './_children/navigate-to-orders-tab';
+import {
+    scenarios as navigateToOverviewTabScenarios,
+} from './_children/navigate-to-overview-tab';
+import {
+    scenarios as navigateToResourcesTabScenarios,
+} from './_children/navigate-to-resources-tab';
+import {
+    scenarios as navigateToUnitsTabScenarios,
+} from './_children/navigate-to-units-tab';
 import type {
     CreateCityScenarioContext,
 } from '../../types';
@@ -25,6 +40,11 @@ export const scenarios: $ReadOnlyArray< TestScenario< CreateCityScenarioContext,
             children: [
                 ...changeCityNameScenarios,
                 ...closeCityViewScenarios,
+                ...navigateToBuildingsTabScenarios,
+                ...navigateToOrdersTabScenarios,
+                ...navigateToOverviewTabScenarios,
+                ...navigateToResourcesTabScenarios,
+                ...navigateToUnitsTabScenarios,
             ],
             parent: {
                 execution,

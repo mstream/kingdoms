@@ -71,7 +71,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_ATTACK_VIEW.PARENT}
+            data-testid={testIds.attackView.parent}
             className={classNames(
                 `modal`,
                 `top-0`,

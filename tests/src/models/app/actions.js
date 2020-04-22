@@ -8,7 +8,7 @@ import {
 } from '../../config';
 import {
     selectors,
-} from './selectors';
+} from '../selectors';
 import type {
     Logger,
 } from '../../../../common/src/logging/types';
@@ -22,12 +22,16 @@ const createCity = async ( {
 }, ): Promise< void > => {
 
     await t.typeText(
-        selectors.newCityNameInput,
+        selectors
+            .gameStart
+            .cityNameInput,
         name,
     );
 
     await t.click(
-        selectors.newCityCreateButton,
+        selectors
+            .gameStart
+            .createCityButton,
     );
 
 };
@@ -41,7 +45,9 @@ const changeCityName = async ( {
 }, ): Promise< void > => {
 
     await t.click(
-        selectors.cityViewName,
+        selectors
+            .cityView
+            .name,
     );
 
     await t.pressKey(
@@ -53,7 +59,9 @@ const changeCityName = async ( {
     );
 
     await t.typeText(
-        selectors.cityViewName,
+        selectors
+            .cityView
+            .name,
         name,
     );
 
@@ -101,7 +109,9 @@ const closeCityView = async ( {
 }, ): Promise< void > => {
 
     await t.click(
-        selectors.cityViewBackground,
+        selectors
+            .cityView
+            .background,
         {
             offsetX: -1,
             offsetY: -1,
@@ -119,12 +129,85 @@ const openCityView = async ( {
 }, ): Promise< void > => {
 
     await t.click(
-        selectors.cityTile.find(
-            `*`,
-        )
+        selectors
+            .worldMap
+            .cityTile
+            .find(
+                `*`,
+            )
             .withExactText(
                 name,
             ),
+    );
+
+};
+
+const openBuildingsTab = async ( {
+    t,
+}: {
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.click(
+        selectors
+            .cityView
+            .buildingsTab,
+    );
+
+};
+
+const openOrdersTab = async ( {
+    t,
+}: {
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.click(
+        selectors
+            .cityView
+            .ordersTab,
+    );
+
+};
+
+const openOverviewTab = async ( {
+    t,
+}: {
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.click(
+        selectors
+            .cityView
+            .overviewTab,
+    );
+
+};
+
+const openResourcesTab = async ( {
+    t,
+}: {
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.click(
+        selectors
+            .cityView
+            .resourcesTab,
+    );
+
+};
+
+const openUnitsTab = async ( {
+    t,
+}: {
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.click(
+        selectors
+            .cityView
+            .unitsTab,
     );
 
 };
@@ -134,10 +217,14 @@ const signOut = async ( {
 }: { t: TestController }, ): Promise< void > => {
 
     await t.hover(
-        selectors.userMenuButton,
+        selectors
+            .menu
+            .userMenuDropdownButton,
     )
         .click(
-            selectors.signOutButton,
+            selectors
+                .menu
+                .signOutButton,
         );
 
 };
@@ -147,6 +234,11 @@ export const actions = {
     closeCityView,
     createCity,
     open,
+    openBuildingsTab,
     openCityView,
+    openOrdersTab,
+    openOverviewTab,
+    openResourcesTab,
+    openUnitsTab,
     signOut,
 };

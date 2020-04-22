@@ -79,7 +79,7 @@ export const Component = () => {
     };
 
     return (
-        <div data-testid={testIds.COMPONENT_APP.PARENT}>
+        <div data-testid={testIds.app.parent}>
             <div
                 className={classNames(
                     `grid`,

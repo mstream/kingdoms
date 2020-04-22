@@ -5,7 +5,7 @@ import {
 } from 'testcafe';
 import {
     selectors,
-} from './selectors';
+} from '../selectors';
 import type {
     Logger,
 } from '../../../../common/src/logging/types';
@@ -27,17 +27,23 @@ const signIn = async ( {
     );
 
     await t.typeText(
-        selectors.usernameInput,
+        selectors
+            .auth
+            .usernameInput,
         username,
     );
 
     await t.typeText(
-        selectors.passwordInput,
+        selectors
+            .auth
+            .passwordInput,
         password,
     );
 
     await t.click(
-        selectors.signInButton,
+        selectors
+            .auth
+            .signInButton,
     );
 
 };

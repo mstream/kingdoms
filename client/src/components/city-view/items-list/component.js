@@ -18,7 +18,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_CITY_VIEW.ITEMS_LIST}
+            data-testid={testIds.cityView.itemsList}
             className={classNames(
                 `flex`,
                 `flex-row`,

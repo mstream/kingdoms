@@ -1,10 +1,15 @@
-const verror = require(
-    `verror`,
+const config = require(
+    `./config`,
 );
 
 const decorators = require(
     `./decorators`,
 );
+
+const reportTaskStart = require(
+    `./report-task-start`,
+);
+
 const reportTaskDone = require(
     `./report-task-done`,
 );
@@ -13,7 +18,6 @@ const reportTestDone = require(
     `./report-test-done`,
 );
 
-const testMode = process.env.TEST_MODE;
 
 const selectDecorator = (
     {
@@ -54,9 +58,39 @@ module.exports = () => {
     return {
         async reportFixtureStart () {
         },
-        async reportTaskDone () {
+        async reportTaskDone (
+            _, __, ___, result,
+        ) {
 
-            if ( testMode === `retest` ) {
+            const output = reportTaskDone.createReport(
+                {
+                    result,
+                },
+            );
+
+            const decoratedOutput = decorators.decorateInfoOutput(
+                {
+                    output,
+                    title: `TEST FINISHED`,
+                    width: this.viewportWidth,
+                },
+            );
+
+            decoratedOutput.forEach(
+                (
+                    line,
+                ) => {
+
+                    this.write(
+                        line,
+                    );
+
+                    this.newline();
+
+                },
+            );
+
+            if ( config.testMode === `retest` ) {
 
                 return;
 
@@ -72,35 +106,37 @@ module.exports = () => {
             );
 
         },
-        async reportTaskStart () {
+        async reportTaskStart (
+            _, userAgents,
+        ) {
 
-            if ( testMode === `test` ) {
-
-                this.write(
-                    `TESTING...`,
-                );
-
-                this.newline();
-                return;
-
-            }
-
-            if ( testMode === `retest` ) {
-
-                this.write(
-                    `RE-TESTING...`,
-                );
-
-                this.newline();
-                return;
-
-            }
-
-            throw new verror.VError(
+            const output = reportTaskStart.createReport(
                 {
-                    name: `UI_TEST`,
+                    testMode: config.testMode,
+                    userAgents,
                 },
-                `invalid test mode: ${ testMode }`,
+            );
+
+            const decoratedOutput = decorators.decorateInfoOutput(
+                {
+                    output,
+                    title: `TEST STARTED`,
+                    width: this.viewportWidth,
+                },
+            );
+
+            decoratedOutput.forEach(
+                (
+                    line,
+                ) => {
+
+                    this.write(
+                        line,
+                    );
+
+                    this.newline();
+
+                },
             );
 
         },
@@ -155,14 +191,14 @@ module.exports = () => {
                     },
                 );
 
-                const decoratedContent = decorator(
+                const decoratedOutput = decorator(
                     {
                         output,
                         width: this.viewportWidth,
                     },
                 );
 
-                decoratedContent.forEach(
+                decoratedOutput.forEach(
                     (
                         line,
                     ) => {

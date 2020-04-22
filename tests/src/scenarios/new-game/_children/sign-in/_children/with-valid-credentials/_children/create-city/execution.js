@@ -8,7 +8,7 @@ import {
 } from '../../../../../../../../../../common/src/utils';
 import {
     selectors,
-} from '../../../../../../../../models/app/selectors';
+} from '../../../../../../../../models/selectors';
 import type {
     CreateCityScenarioContext,
 } from './types';
@@ -37,6 +37,7 @@ export const execution: ScenarioExecution< SignInScenarioContext, CreateCityScen
 
     await t.expect(
         selectors
+            .worldMap
             .cityTile
             .textContent,
     )

@@ -74,7 +74,7 @@ export const Component = (
         );
     return (
         <div
-            data-testid={testIds.COMPONENT_COST_INFO.PARENT}
+            data-testid={testIds.costInfo.parent}
             className="flex flex-col m-1 rounded-sm bg-gray-100 shadow-2xs"
         >
             {requiredResourceComponents}

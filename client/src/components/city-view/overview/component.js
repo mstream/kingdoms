@@ -22,19 +22,29 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_CITY_VIEW.OVERVIEW}
+            data-testid={testIds.cityView.overviewPanel}
             className="flex flex-row p-1 text-lg text-gray-100"
             role="tabpanel"
         >
             <div className="flex flex-col p-1 mx-2">
-                <p>group1info1</p>
-                <p>group1info2</p>
-                <p>group1info3</p>
+                <p className="text-md">Buildings</p>
+                <p>info</p>
+                <p>info</p>
             </div>
             <div className="flex flex-col p-1 mx-2">
-                <p>group2info1</p>
-                <p>group2info2</p>
-                <p>group2info3</p>
+                <p className="text-md">Orders</p>
+                <p>info</p>
+                <p>info</p>
+            </div>
+            <div className="flex flex-col p-1 mx-2">
+                <p className="text-md">Resources</p>
+                <p>info</p>
+                <p>info</p>
+            </div>
+            <div className="flex flex-col p-1 mx-2">
+                <p className="text-md">Units</p>
+                <p>info</p>
+                <p>info</p>
             </div>
         </div>
     );

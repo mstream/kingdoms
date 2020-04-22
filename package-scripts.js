@@ -77,27 +77,15 @@ module.exports = {
                     script: npsUtils.series.nps(
                         `cleanOnly`,
                         `deploy.dev`,
-                        `testOnly.remote.dev`,
+                        `tests.test.dev`,
                     ),
                 },
                 prod: {
                     script: npsUtils.series.nps(
                         `cleanOnly`,
                         `deploy.prod`,
-                        `testOnly.remote.prod`,
+                        `tests.test.prod`,
                     ),
-                },
-            },
-        },
-        testOnly: {
-            remote: {
-                dev: {
-                    script:
-                        `env NODE_ENV=dev testcafe`,
-                },
-                prod: {
-                    script:
-                        `env NODE_ENV=prod testcafe`,
                 },
             },
         },

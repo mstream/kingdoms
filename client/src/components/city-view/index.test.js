@@ -80,7 +80,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_CITY_VIEW.OVERVIEW,
+                        testIds.cityView.overviewPanel,
                     ),
                 )
                     .toBeInTheDocument();
@@ -126,7 +126,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_CITY_VIEW.UNITS,
+                        testIds.cityView.unitsPanel,
                     ),
                 )
                     .toBeInTheDocument();
@@ -172,7 +172,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_CITY_VIEW.BUILDINGS,
+                        testIds.cityView.buildingsPanel,
                     ),
                 )
                     .toBeInTheDocument();
@@ -218,7 +218,7 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_CITY_VIEW.RESOURCES,
+                        testIds.cityView.resourcesPanel,
                     ),
                 )
                     .toBeInTheDocument();

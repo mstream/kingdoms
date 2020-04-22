@@ -2,6 +2,46 @@ const fs = require(
     `fs`,
 );
 
+const createResultsSegment = (
+    {
+        result,
+    },
+) => {
+
+    const {
+        failedCount, passedCount, skippedCount,
+    } = result;
+
+    const resultLines = [
+        `  passed: ${ passedCount }`,
+        `  skipped: ${ skippedCount }`,
+        `  failed: ${ failedCount }`,
+    ];
+
+    return [
+        `Results`,
+        ...resultLines,
+    ];
+
+};
+
+const createReport = (
+    {
+        result,
+    },
+) => {
+
+
+    return [
+        ...createResultsSegment(
+            {
+                result,
+            },
+        ),
+    ];
+
+};
+
 const saveFailedTestsMeta = (
     {
         dir,
@@ -45,5 +85,6 @@ const saveFailedTestsMeta = (
 };
 
 module.exports = {
+    createReport,
     saveFailedTestsMeta,
 };

@@ -111,7 +111,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_ATTACK_VIEW.CITY_LIST}
+            data-testid={testIds.attackView.cityList}
             className="flex flex-col justify-start text-xl"
         >
             <div className="mb-1">From city:</div>

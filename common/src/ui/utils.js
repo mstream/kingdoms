@@ -2,16 +2,35 @@
 
 
 import type {
-    ComponentKey,
+    ElementIds,
 } from './types';
 
-export const createTestId = (
+export const generateIds = <K: string>(
     {
-        componentKey, id,
-    }: { componentKey: ComponentKey, id: string },
-) => {
+        ids,
+        prefix,
+    }: $ReadOnly< {|
+        ids: ElementIds< K >,
+        prefix: string
+    |} >,
+): ElementIds< K > => {
 
-    return `${ componentKey }/${ id }`;
+    return Object
+        .keys(
+            ids,
+        )
+        .reduce(
+            (
+                generatedIds, key: string,
+            ) => {
+
+                return {
+                    ...generatedIds,
+                    [ key ]: `${ prefix }/${ key }`,
+                };
+
+            },
+            ids,
+        );
 
 };
-

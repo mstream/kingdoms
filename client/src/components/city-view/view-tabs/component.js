@@ -27,26 +27,31 @@ const tabsOrder = [
     TAB_ORDERS,
 ];
 
-const tabsVisuals = {
+const tabModels = {
     [ TAB_BUILDINGS ]: {
-        icon: `icofont-home`,
-        name: `Buildings`,
+        icon  : `icofont-home`,
+        name  : `Buildings`,
+        testId: testIds.cityView.buildingsTab,
     },
     [ TAB_ORDERS ]: {
-        icon: `icofont-direction-sign`,
-        name: `Orders`,
+        icon  : `icofont-direction-sign`,
+        name  : `Orders`,
+        testId: testIds.cityView.ordersTab,
     },
     [ TAB_OVERVIEW ]: {
-        icon: `icofont-info-square`,
-        name: `Overview`,
+        icon  : `icofont-info-square`,
+        name  : `Overview`,
+        testId: testIds.cityView.overviewTab,
     },
     [ TAB_RESOURCES ]: {
-        icon: `icofont-corn`,
-        name: `Resources`,
+        icon  : `icofont-corn`,
+        name  : `Resources`,
+        testId: testIds.cityView.resourcesTab,
     },
     [ TAB_UNITS ]: {
-        icon: `icofont-people`,
-        name: `Units`,
+        icon  : `icofont-people`,
+        name  : `Units`,
+        testId: testIds.cityView.unitsTab,
     },
 };
 
@@ -72,8 +77,8 @@ export const Component = (
             );
 
             const {
-                icon, name,
-            } = tabsVisuals[ tab ];
+                icon, name, testId,
+            } = tabModels[ tab ];
 
             const iconClassName = `icofont ${ icon }`;
 
@@ -88,8 +93,12 @@ export const Component = (
             };
 
             return (
-                <div key={tab} className={className} role="tab"
-                    onClick={onClick}>
+                <div data-testid={testId}
+                    key={tab}
+                    className={className}
+                    role="tab"
+                    onClick={onClick}
+                >
                     <i className={iconClassName}/>
                     {name}
                 </div>
@@ -100,7 +109,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_CITY_VIEW.VIEW_TABS}
+            data-testid={testIds.cityView.viewTabs}
             className="wood-bg flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100"
             role="tablist"
         >

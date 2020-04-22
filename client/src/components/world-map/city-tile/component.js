@@ -56,7 +56,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_WORLD_MAP.CITY_TILE}
+            data-testid={testIds.worldMap.cityTile}
             className="absolute cursor-pointer"
             style={style}
             onClick={onClick}

@@ -68,7 +68,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        testIds.COMPONENT_WORLD_MAP.CITY_TILE,
+                        testIds.worldMap.cityTile,
                     ),
                 )
                     .toHaveLength(
@@ -77,7 +77,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE,
+                        testIds.worldMap.terrainTile,
                     ),
                 )
                     .toHaveLength(
@@ -150,7 +150,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        testIds.COMPONENT_WORLD_MAP.CITY_TILE,
+                        testIds.worldMap.cityTile,
                     ).length,
                 )
                     .toBeGreaterThan(
@@ -159,7 +159,7 @@ describe(
 
                 await expect(
                     queryAllByTestId(
-                        testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE,
+                        testIds.worldMap.terrainTile,
                     ).length,
                 )
                     .toBeGreaterThan(

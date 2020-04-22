@@ -32,7 +32,7 @@ export const Component = (
     };
 
     return (
-        <div data-testid={testIds.COMPONENT_WORLD_MAP.TERRAIN_TILE} className="absolute" style={style}>
+        <div data-testid={testIds.worldMap.terrainTile} className="absolute" style={style}>
             <ImageComponent
                 image={surfaceImages[ tile.textureIndex ]}
                 ratio="100%"

@@ -294,7 +294,7 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.COMPONENT_CITY_VIEW.UNITS} role="tabpanel">
+        <div data-testid={testIds.cityView.unitsPanel} role="tabpanel">
             <CityItemsListComponent>{unitComponents}</CityItemsListComponent>
             {infoComponent}
         </div>

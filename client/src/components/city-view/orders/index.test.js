@@ -88,9 +88,60 @@ describe(
 
                 await expect(
                     queryByTestId(
-                        testIds.COMPONENT_CITY_VIEW.ORDERS,
+                        testIds.cityView.ordersPanel,
                     ),
                 ).not.toBeInTheDocument();
+
+            },
+        );
+
+        test(
+            `displays a placeholder if there are no orders`,
+            async () => {
+
+                const state: ClientState = {
+                    ...emptyClientState,
+                    commonState: {
+                        ...emptyCommonState,
+                        cities: {
+                            city1: {
+                                ...emptyCityState,
+                                name: `Cityone`,
+                            },
+                        },
+                        orders: {
+                            ...emptyCommonState.orders,
+                        },
+                        time: `2000-01-01T00:00:00Z`,
+                    },
+                    menu: {
+                        ...emptyClientState.menu,
+                        cityView: {
+                            ...emptyClientState.menu.cityView,
+                            currentCityId: `city1`,
+                            tab          : TAB_ORDERS,
+                        },
+                    },
+                };
+
+                const store = mockStore(
+                    state,
+                );
+
+                const {
+                    queryByText,
+                } = render(
+                    <Provider store={store}>
+                        <CityOrdersComponent/>
+                    </Provider>,
+                );
+
+                await expect(
+                    queryByText(
+                        `No orders`,
+                    ),
+                )
+                    .toBeInTheDocument();
 
             },
         );

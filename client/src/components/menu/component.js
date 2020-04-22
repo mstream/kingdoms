@@ -24,7 +24,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_MENU.PARENT}
+            data-testid={testIds.menu.parent}
             className={classNames(
                 `wood2-bg`,
                 `relative`,
@@ -41,7 +41,7 @@ export const Component = (
             )}
         >
             <div className="group ml-1 cursor-pointer">
-                <div data-testid={testIds.COMPONENT_MENU.DROPDOWN_BUTTON}
+                <div data-testid={testIds.menu.userMenuDropdownButton}
                     className="h-full p-2"
                 >
                     <i className="icofont icofont-ui-user mr-1"/>
@@ -51,7 +51,7 @@ export const Component = (
                 <div
                     className="absolute invisible group-hover:visible text-gray-100">
                     <div
-                        data-testid={testIds.COMPONENT_MENU.SIGN_OUT_BUTTON}
+                        data-testid={testIds.menu.signOutButton}
                         className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
                         onClick={() => {
 

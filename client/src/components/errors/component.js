@@ -34,7 +34,7 @@ export const Component = (
 
     return (
         <div
-            data-testid={testIds.COMPONENT_ERRORS.PARENT}
+            data-testid={testIds.errors.parent}
             className={classNames(
                 `modal`,
                 `absolute`,

@@ -22,7 +22,6 @@ describe(
                     it,
                 },
 
-                // $FlowFixMe
                 moduleSelectors: clientStateCameraSelectors,
                 scenarios      : {
                     // $FlowFixMe

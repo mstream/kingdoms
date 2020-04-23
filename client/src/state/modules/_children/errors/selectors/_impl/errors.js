@@ -7,7 +7,7 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const errorsSelector: ClientStateSelector< ClientStateErrors > = (
+export const errorsSelector: ClientStateSelector< ClientStateErrors, void > = (
     state,
 ) => {
 

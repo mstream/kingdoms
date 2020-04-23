@@ -6,7 +6,7 @@ import {
     ARMOR_MEDIUM,
     ARMOR_NONE,
     RESOURCE_FOOD,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     ChangeInfoComponent,
 } from '../../change-info';
@@ -38,7 +38,7 @@ import React from 'react';
 import classNames from 'classnames';
 import type {
     CommonStateDamage,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import type {
     Props,
 } from './props';

@@ -13,7 +13,7 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const nextCityIdSelector: ClientStateSelector< ?string > = createSelector<ClientState,
+export const nextCityIdSelector: ClientStateSelector< ?string, void > = createSelector<ClientState,
     void,
     ?string,
     ?$ReadOnlyArray< string >,

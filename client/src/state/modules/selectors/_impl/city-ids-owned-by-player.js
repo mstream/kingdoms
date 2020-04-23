@@ -11,12 +11,12 @@ import {
 } from 'reselect';
 import type {
     CityIdsByOwner,
-} from '../../../../../../common/src/state/modules/cities/selectors/types';
+} from '../../../../../../common/src/state/modules/_children/cities/selectors/types';
 import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const cityIdsOwnedByPlayerSelector: ClientStateSelector< ?$ReadOnlyArray< string > >
+export const cityIdsOwnedByPlayerSelector: ClientStateSelector< ?$ReadOnlyArray< string >, void >
     = createSelector<ClientState,
     void,
     ?$ReadOnlyArray< string >,

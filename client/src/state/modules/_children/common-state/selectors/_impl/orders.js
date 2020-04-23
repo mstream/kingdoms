@@ -2,7 +2,7 @@
 
 import {
     commonStateOrdersSelectors,
-} from '../../../../../../../../common/src/state/modules/orders/selectors';
+} from '../../../../../../../../common/src/state/modules/_children/orders/selectors';
 import {
     createClientStateCommonStateSelector,
 } from '../utils';
@@ -11,10 +11,11 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateOrders,
-} from '../../../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
-export const ordersSelector: ClientStateSelector< ?CommonStateOrders > = createClientStateCommonStateSelector(
-    {
-        commonStateSelector: commonStateOrdersSelectors.orders,
-    },
-);
+export const ordersSelector: ClientStateSelector< ?CommonStateOrders, void >
+    = createClientStateCommonStateSelector(
+        {
+            commonStateSelector: commonStateOrdersSelectors.orders,
+        },
+    );

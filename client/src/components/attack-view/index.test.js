@@ -15,13 +15,13 @@ import {
 } from './index';
 import {
     UNIT_PIKEMAN,
-} from '../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     clientActions,
 } from '../../state/modules/actions';
 import {
     emptyCityState,
-} from '../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../state/state';
@@ -30,7 +30,7 @@ import {
 } from '../../../../common/src/state/modules/state';
 import {
     emptyRegimentTemplateState,
-} from '../../../../common/src/state/modules/orders/reducer/state';
+} from '../../../../common/src/state/modules/_children/orders/reducer/state';
 import {
     testIds,
 } from '../../../../common/src/ui';

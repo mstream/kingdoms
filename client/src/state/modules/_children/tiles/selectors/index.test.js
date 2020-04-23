@@ -22,7 +22,6 @@ describe(
                     it,
                 },
 
-                // $FlowFixMe
                 moduleSelectors: clientStateTilesSelectors,
                 scenarios      : {
                     // $FlowFixMe

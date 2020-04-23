@@ -7,13 +7,13 @@ import {
 } from '../../../../vector';
 import {
     citiesSelector,
-} from '../../cities/selectors/_impl/cities';
+} from '../../_children/cities/selectors/_impl/cities';
 import {
     commonStateRulesSelectors,
-} from '../../rules/selectors';
+} from '../../_children/rules/selectors';
 import {
     commonStateWorldSelectors,
-} from '../../world/selectors';
+} from '../../_children/world/selectors';
 import {
     createSelector,
 } from 'reselect';
@@ -22,13 +22,13 @@ import type {
 } from '../../types';
 import type {
     CommonStateCities,
-} from '../../cities/reducer/types';
+} from '../../_children/cities/reducer/types';
 import type {
     CommonStateRules,
-} from '../../rules/reducer/types';
+} from '../../_children/rules/reducer/types';
 import type {
     CommonStateWorld,
-} from '../../world/reducer/types';
+} from '../../_children/world/reducer/types';
 import type {
     Vector,
 } from '../../../../vector';

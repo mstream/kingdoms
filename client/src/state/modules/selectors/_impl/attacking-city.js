@@ -15,9 +15,9 @@ import type {
 import type {
     CommonStateCities,
     CommonStateCity,
-} from '../../../../../../common/src/state/modules/cities/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/types';
 
-export const attackingCitySelector: ClientStateSelector< ?CommonStateCity > = createSelector<ClientState,
+export const attackingCitySelector: ClientStateSelector< ?CommonStateCity, void > = createSelector<ClientState,
     void,
     ?CommonStateCity,
     ?string,

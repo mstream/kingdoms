@@ -2,7 +2,7 @@
 
 import {
     commonStateTimeSelectors,
-} from '../../../../../../../../common/src/state/modules/time/selectors';
+} from '../../../../../../../../common/src/state/modules/_children/time/selectors';
 import {
     createClientStateCommonStateSelector,
 } from '../utils';
@@ -11,9 +11,9 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateTime,
-} from '../../../../../../../../common/src/state/modules/time/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/time/reducer/types';
 
-export const timeSelector: ClientStateSelector< ?CommonStateTime > = createClientStateCommonStateSelector(
+export const timeSelector: ClientStateSelector< ?CommonStateTime, void > = createClientStateCommonStateSelector(
     {
         commonStateSelector: commonStateTimeSelectors.time,
     },

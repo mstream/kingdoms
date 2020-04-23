@@ -15,14 +15,14 @@ import type {
 import type {
     CommonStateOrders,
     CommonStateScheduledAttackOrder,
-} from '../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/orders/reducer/types';
 import type {
     ScheduledAttackOrderInfo,
     ScheduledAttackOrderInfosById,
 } from '../types';
 
 
-export const scheduledAttackOrdersForViewedCitySelector: ClientStateSelector< ScheduledAttackOrderInfosById >
+export const scheduledAttackOrdersForViewedCitySelector: ClientStateSelector< ScheduledAttackOrderInfosById, void >
     = createSelector<ClientState,
         void,
         ScheduledAttackOrderInfosById,

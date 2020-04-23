@@ -10,10 +10,10 @@ import type {
     CommonStateBuildingKey,
     CommonStateResourceKey,
     CommonStateUnitKey,
-} from '../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
 export const CLOSE_ATTACK_VIEW: 'CLOSE_ATTACK_VIEW' = `CLOSE_ATTACK_VIEW`;
 export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = `CLOSE_CITY_VIEW`;

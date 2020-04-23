@@ -2,7 +2,7 @@
 
 import type {
     CommonStateScheduledAttackOrder,
-} from '../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../common/src/state/modules/_children/orders/reducer/types';
 
 export type ScheduledAttackOrderInfo = {
     ...CommonStateScheduledAttackOrder,

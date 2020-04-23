@@ -17,20 +17,20 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
-} from './modules/rules/reducer/types';
+} from './modules/_children/rules/reducer/types';
 
 import {
     convertQuantitiesToResources,
 } from '../resource';
 import {
     emptyCitiesState,
-} from './modules/cities/reducer/state';
+} from './modules/_children/cities/reducer/state';
 import {
     emptyOrdersState,
-} from './modules/orders/reducer/state';
+} from './modules/_children/orders/reducer/state';
 import {
     emptyPlayersState,
-} from './modules/players/reducer/state';
+} from './modules/_children/players/reducer/state';
 import {
     multipleQuantitiesByScalar,
 } from '../quantity';
@@ -43,10 +43,10 @@ import type {
     CommonStateResourceKey,
     CommonStateResources,
     CommonStateRules,
-} from './modules/rules/reducer/types';
+} from './modules/_children/rules/reducer/types';
 import type {
     CommonStateCity,
-} from './modules/cities/reducer/types';
+} from './modules/_children/cities/reducer/types';
 import type {
     Quantities,
 } from '../quantity';
@@ -79,6 +79,7 @@ export const initialCommonState: CommonState = {
                 [ RESOURCE_WOOD ]: 200,
             },
         },
+        gameSpeed        : 1,
         minimalCityMargin: {
             x: 3,
             y: 3,

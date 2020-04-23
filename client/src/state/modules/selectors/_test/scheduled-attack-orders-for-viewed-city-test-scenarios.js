@@ -5,7 +5,7 @@ import {
 } from '../../_children/menu/reducer/types';
 import {
     emptyCityState,
-} from '../../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state';
@@ -14,7 +14,7 @@ import {
 } from '../../../../../../common/src/state/modules/state';
 import {
     emptyScheduledAttackOrderState,
-} from '../../../../../../common/src/state/modules/orders/reducer/state';
+} from '../../../../../../common/src/state/modules/_children/orders/reducer/state';
 import type {
     ClientStateSelectorTestScenario,
 } from '../../../types';

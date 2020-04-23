@@ -14,13 +14,13 @@ import {
 import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     clientActions,
 } from '../../../state/modules/actions';
 import {
     emptyCityState,
-} from '../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state/state';

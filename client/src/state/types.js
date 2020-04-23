@@ -167,7 +167,7 @@ export type ClientStateReducerTestScenario<S, +A: ClientAction> = $ReadOnly< {
     expectedLocalStateCreator: ( { previousLocalState: S } ) => S,
 } >;
 
-export type ClientStateSelector<T> = ( state: ClientState ) => T;
+export type ClientStateSelector<T, P> = ( state: ClientState, props: P ) => T;
 
 export type ClientStateSelectorTestScenario<T> = $ReadOnly< {
     name: string,
@@ -176,7 +176,9 @@ export type ClientStateSelectorTestScenario<T> = $ReadOnly< {
 } >;
 
 export type ClientStateSelectors = $ReadOnly< {
-    [string]: ClientStateSelector< mixed >,
+
+    // $FlowFixMe
+    [string]: ClientStateSelector< any, any >,
 } >;
 
 export type ClientStore = Store< ClientState,

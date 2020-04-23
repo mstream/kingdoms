@@ -5,9 +5,9 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateResourceKey,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 
-export const activeCityViewResourceSelector: ClientStateSelector< CommonStateResourceKey > = (
+export const activeCityViewResourceSelector: ClientStateSelector< CommonStateResourceKey, void > = (
     state,
 ) => {
 

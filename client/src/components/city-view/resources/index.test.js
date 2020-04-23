@@ -10,7 +10,7 @@ import {
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     TAB_RESOURCES,
     TAB_UNITS,
@@ -20,7 +20,7 @@ import {
 } from '../../../state/modules/actions';
 import {
     emptyCityState,
-} from '../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state/state';

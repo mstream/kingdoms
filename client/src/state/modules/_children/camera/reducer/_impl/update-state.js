@@ -10,7 +10,7 @@ import {
 } from '../../../../selectors';
 import {
     commonStateCitiesSelectors,
-} from '../../../../../../../../common/src/state/modules/cities/selectors';
+} from '../../../../../../../../common/src/state/modules/_children/cities/selectors';
 import {
     tileVectorToPixelVector,
 } from '../../../../../../utils';

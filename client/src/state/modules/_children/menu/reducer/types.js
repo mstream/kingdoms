@@ -4,10 +4,10 @@ import type {
     CommonStateBuildingKey,
     CommonStateResourceKey,
     CommonStateUnitKey,
-} from '../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
 export const TAB_BUILDINGS: 'TAB_BUILDINGS' = `TAB_BUILDINGS`;
 export const TAB_ORDERS: 'TAB_ORDERS' = `TAB_ORDERS`;

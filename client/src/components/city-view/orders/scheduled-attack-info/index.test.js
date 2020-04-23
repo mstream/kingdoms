@@ -9,13 +9,13 @@ import {
 } from 'react-redux';
 import {
     UNIT_PIKEMAN,
-} from '../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     emptyClientState,
 } from '../../../../state/state';
 import {
     emptyRegimentTemplateState,
-} from '../../../../../../common/src/state/modules/orders/reducer/state';
+} from '../../../../../../common/src/state/modules/_children/orders/reducer/state';
 import {
     render,
 } from '@testing-library/react';
@@ -26,7 +26,7 @@ import type {
 } from '../../../../state/types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
 const mockStore = configureStore(
     [],

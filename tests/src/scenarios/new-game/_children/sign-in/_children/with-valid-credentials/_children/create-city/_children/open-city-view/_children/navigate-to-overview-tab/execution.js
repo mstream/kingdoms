@@ -68,6 +68,36 @@ export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCity
             `Units`,
         );
 
+    await t.expect(
+        selectors
+            .cityView
+            .overviewPanel
+            .textContent,
+    )
+        .contains(
+            `Peasants: 0`,
+        );
+
+    await t.expect(
+        selectors
+            .cityView
+            .overviewPanel
+            .textContent,
+    )
+        .contains(
+            `Army: 0`,
+        );
+
+    await t.expect(
+        selectors
+            .cityView
+            .overviewPanel
+            .textContent,
+    )
+        .contains(
+            `Nobles: 0`,
+        );
+
     return {
         ...context,
     };

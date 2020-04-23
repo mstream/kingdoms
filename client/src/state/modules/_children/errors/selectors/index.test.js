@@ -25,7 +25,6 @@ describe(
                     it,
                 },
 
-                // $FlowFixMe
                 moduleSelectors: clientStateErrorsSelectors,
                 scenarios      : {
                     // $FlowFixMe

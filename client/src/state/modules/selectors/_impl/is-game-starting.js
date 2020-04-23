@@ -16,7 +16,7 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const isGameStartingSelector: ClientStateSelector< boolean > = createSelector<ClientState,
+export const isGameStartingSelector: ClientStateSelector< boolean, void > = createSelector<ClientState,
     void,
     boolean,
     boolean,

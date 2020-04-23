@@ -2,7 +2,7 @@
 
 import {
     emptyCityState,
-} from '../../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state';
@@ -14,7 +14,7 @@ import type {
 } from '../../../types';
 import type {
     CommonStateCity,
-} from '../../../../../../common/src/state/modules/cities/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/types';
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ?CommonStateCity >, >;
 

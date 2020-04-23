@@ -67,7 +67,6 @@ describe(
                     it,
                 },
 
-                // $FlowFixMe
                 moduleSelectors: clientStateMenuSelectors,
                 scenarios      : {
                     // $FlowFixMe

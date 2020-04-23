@@ -20,7 +20,7 @@ import type {
 } from '../../../state/modules/_children/tiles/reducer/types';
 import type {
     CommonStateCity,
-} from '../../../../../common/src/state/modules/cities/reducer/types';
+} from '../../../../../common/src/state/modules/_children/cities/reducer/types';
 import type {
     Dispatch,
 } from 'redux';

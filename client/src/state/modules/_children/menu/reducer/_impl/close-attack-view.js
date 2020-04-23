@@ -2,7 +2,7 @@
 
 import {
     emptyRegimentTemplateState,
-} from '../../../../../../../../common/src/state/modules/orders/reducer/state';
+} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/state';
 import type {
     ClientCloseAttackViewAction,
 } from '../../actions/types';

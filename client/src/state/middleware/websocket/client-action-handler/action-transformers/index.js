@@ -10,10 +10,10 @@ import {
     changeCityName,
     createCity,
     upgradeBuilding,
-} from '../../../../../../../common/src/state/modules/cities/actions';
+} from '../../../../../../../common/src/state/modules/_children/cities/actions';
 import {
     createScheduledAttackOrder,
-} from '../../../../../../../common/src/state/modules/orders/actions';
+} from '../../../../../../../common/src/state/modules/_children/orders/actions';
 import {
     generateId,
 } from '../../../../../../../common/src/utils';
@@ -30,10 +30,10 @@ import type {
     CommonChangeCityNameAction,
     CommonCreateCityAction,
     CommonUpgradeBuildingAction,
-} from '../../../../../../../common/src/state/modules/cities/actions/types';
+} from '../../../../../../../common/src/state/modules/_children/cities/actions/types';
 import type {
     CommonCreateScheduledAttackOrderAction,
-} from '../../../../../../../common/src/state/modules/orders/actions/types';
+} from '../../../../../../../common/src/state/modules/_children/orders/actions/types';
 import type {
     CommonPlayerAction,
 } from '../../../../../../../common/src/state/types';

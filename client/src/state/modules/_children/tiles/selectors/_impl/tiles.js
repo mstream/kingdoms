@@ -7,7 +7,7 @@ import type {
     ClientStateTiles,
 } from '../../reducer/types';
 
-export const tilesSelector: ClientStateSelector< ClientStateTiles > = (
+export const tilesSelector: ClientStateSelector< ClientStateTiles, void > = (
     state,
 ) => {
 

@@ -5,25 +5,25 @@ import {
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
-} from './modules/cities/actions/types';
+} from './modules/_children/cities/actions/types';
 import {
     CREATE_SCHEDULED_ATTACK_ORDER,
-} from './modules/orders/actions/types';
+} from './modules/_children/orders/actions/types';
 import {
     DUMMY, GET_CURRENT_STATE, RESET_STATE,
 } from './actions/types';
 import {
     EXECUTE_TIME_STEP,
-} from './modules/time/actions';
+} from './modules/_children/time/actions';
 import type {
     CommonAbandonCityAction,
     CommonChangeCityNameAction,
     CommonCreateCityAction,
     CommonUpgradeBuildingAction,
-} from './modules/cities/actions/types';
+} from './modules/_children/cities/actions/types';
 import type {
     CommonCreateScheduledAttackOrderAction,
-} from './modules/orders/actions/types';
+} from './modules/_children/orders/actions/types';
 import type {
     CommonDummyAction,
     CommonGetCurrentStateAction,
@@ -31,7 +31,7 @@ import type {
 } from './actions/types';
 import type {
     CommonExecuteTimeStepAction,
-} from './modules/time/actions';
+} from './modules/_children/time/actions';
 
 export type CommonActionKey =
     | typeof ABANDON_CITY

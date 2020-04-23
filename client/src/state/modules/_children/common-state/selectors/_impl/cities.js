@@ -2,7 +2,7 @@
 
 import {
     commonStateCitiesSelectors,
-} from '../../../../../../../../common/src/state/modules/cities/selectors';
+} from '../../../../../../../../common/src/state/modules/_children/cities/selectors';
 import {
     createClientStateCommonStateSelector,
 } from '../utils';
@@ -11,10 +11,12 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateCities,
-} from '../../../../../../../../common/src/state/modules/cities/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/cities/reducer/types';
 
-export const citiesSelector: ClientStateSelector< ?CommonStateCities > = createClientStateCommonStateSelector(
-    {
-        commonStateSelector: commonStateCitiesSelectors.cities,
-    },
-);
+
+export const citiesSelector: ClientStateSelector< ?CommonStateCities, void >
+    = createClientStateCommonStateSelector(
+        {
+            commonStateSelector: commonStateCitiesSelectors.cities,
+        },
+    );

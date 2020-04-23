@@ -11,7 +11,7 @@ import {
 } from '../test-utils';
 
 describe(
-    `commonStateCitiesSelectors`,
+    `commonStateSelectors`,
     () => {
 
         runCommonStateSelectorsTestScenarios(
@@ -21,9 +21,10 @@ describe(
                     expect,
                     it,
                 },
-                moduleSelectors: commonStateSelectors,
-                scenarios      : {
-                    // $FlowFixMe
+                moduleSelectors: {
+                    nextCitySpot: commonStateSelectors.nextCitySpot,
+                },
+                scenarios: {
                     nextCitySpot: nextCitySpotSelectorTestScenarios,
                 },
             },

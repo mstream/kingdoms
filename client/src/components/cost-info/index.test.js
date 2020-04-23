@@ -10,13 +10,13 @@ import {
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
-} from '../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     emptyClientState,
 } from '../../state/state';
 import {
     emptyResourcesState,
-} from '../../../../common/src/state/modules/rules/reducer/state';
+} from '../../../../common/src/state/modules/_children/rules/reducer/state';
 import {
     render,
 } from '@testing-library/react';
@@ -27,7 +27,7 @@ import type {
 } from '../../state/types';
 import type {
     CommonStateResources,
-} from '../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../common/src/state/modules/_children/rules/reducer/types';
 
 const mockStore = configureStore(
     [],

@@ -5,7 +5,7 @@ import {
 } from './attacking-city-id';
 import {
     calculateStateMinimumRegimentSize,
-} from '../../../../../../../../common/src/state/modules/orders/utils';
+} from '../../../../../../../../common/src/state/modules/_children/orders/utils';
 import {
     createSelector,
 } from 'reselect';
@@ -17,9 +17,9 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
-export const isAttackFormValidSelector: ClientStateSelector< boolean >
+export const isAttackFormValidSelector: ClientStateSelector< boolean, void >
     = createSelector<ClientState,
         void,
         boolean,

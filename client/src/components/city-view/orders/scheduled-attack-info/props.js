@@ -8,7 +8,7 @@ import type {
 } from '../../../../state/types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/orders/reducer/types';
 import type {
     Dispatch,
 } from 'redux';

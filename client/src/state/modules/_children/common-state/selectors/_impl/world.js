@@ -2,7 +2,7 @@
 
 import {
     commonStateWorldSelectors,
-} from '../../../../../../../../common/src/state/modules/world/selectors';
+} from '../../../../../../../../common/src/state/modules/_children/world/selectors';
 import {
     createClientStateCommonStateSelector,
 } from '../utils';
@@ -11,9 +11,9 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateWorld,
-} from '../../../../../../../../common/src/state/modules/world/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/world/reducer/types';
 
-export const worldSelector: ClientStateSelector< ?CommonStateWorld > = createClientStateCommonStateSelector(
+export const worldSelector: ClientStateSelector< ?CommonStateWorld, void > = createClientStateCommonStateSelector(
     {
         commonStateSelector: commonStateWorldSelectors.world,
     },

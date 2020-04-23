@@ -9,6 +9,7 @@ import {
 import {
     emptyCommonState,
 } from '../../../../../../../common/src/state/modules/state';
+
 import type {
     ClientState,
 } from '../../../../types';
@@ -32,7 +33,7 @@ describe(
                     commonState: null,
                 };
 
-                const commonStateSelector: CommonStateSelector< Vector > = (
+                const commonStateSelector: CommonStateSelector< Vector, void > = (
                     state,
                 ) => {
 
@@ -80,7 +81,7 @@ describe(
                     },
                 };
 
-                const commonStateSelector: CommonStateSelector< Vector > = (
+                const commonStateSelector: CommonStateSelector< Vector, void > = (
                     state,
                 ) => {
 

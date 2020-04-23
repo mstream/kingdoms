@@ -5,10 +5,10 @@ import {
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
-} from '../../../../../../../common/src/state/modules/cities/actions/types';
+} from '../../../../../../../common/src/state/modules/_children/cities/actions/types';
 import {
     CREATE_SCHEDULED_ATTACK_ORDER,
-} from '../../../../../../../common/src/state/modules/orders/actions/types';
+} from '../../../../../../../common/src/state/modules/_children/orders/actions/types';
 import {
     DUMMY,
     GET_CURRENT_STATE,
@@ -16,7 +16,7 @@ import {
 } from '../../../../../../../common/src/state/actions/types';
 import {
     EXECUTE_TIME_STEP,
-} from '../../../../../../../common/src/state/modules/time/actions';
+} from '../../../../../../../common/src/state/modules/_children/time/actions';
 import {
     clientActions,
 } from '../../../../modules/actions';

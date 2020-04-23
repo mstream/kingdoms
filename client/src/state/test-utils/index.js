@@ -115,8 +115,12 @@ const runClientStateSelectorTestScenario = (
         scenario,
     }: {
         jest: Jest,
-        selector: ClientStateSelector< mixed >,
-        scenario: ClientStateSelectorTestScenario< mixed >,
+
+        // $FlowFixMe
+        selector: ClientStateSelector< any, any >,
+
+        // $FlowFixMe
+        scenario: ClientStateSelectorTestScenario< any >,
     },
 ): void => {
 
@@ -177,7 +181,8 @@ export const runClientStateSelectorsTestScenarios = (
                                 scenario: ClientStateSelectorTestScenario< mixed >,
                             ) => {
 
-                                const selector: ClientStateSelector< mixed >
+                                // $FlowFixMe
+                                const selector: ClientStateSelector< any, any >
                                     = moduleSelectors[ selectorKey ];
 
                                 if ( selector == null ) {

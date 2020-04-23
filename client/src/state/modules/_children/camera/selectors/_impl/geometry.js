@@ -7,7 +7,7 @@ import type {
     Geometry,
 } from '../../../../../../../../common/src/geometry';
 
-export const geometrySelector: ClientStateSelector< Geometry > = (
+export const geometrySelector: ClientStateSelector< Geometry, void > = (
     state,
 ) => {
 

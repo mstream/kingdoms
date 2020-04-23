@@ -4,7 +4,7 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const isAttackFormSubmittingSelector: ClientStateSelector< boolean > = (
+export const isAttackFormSubmittingSelector: ClientStateSelector< boolean, void > = (
     state,
 ) => {
 

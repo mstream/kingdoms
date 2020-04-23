@@ -9,7 +9,7 @@ import {
 } from 'react-redux';
 import {
     emptyCityState,
-} from '../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state/state';
@@ -18,7 +18,7 @@ import {
 } from '../../../../../common/src/state/modules/state';
 import {
     emptyRegimentTemplateState,
-} from '../../../../../common/src/state/modules/orders/reducer/state';
+} from '../../../../../common/src/state/modules/_children/orders/reducer/state';
 import {
     render,
 } from '@testing-library/react';

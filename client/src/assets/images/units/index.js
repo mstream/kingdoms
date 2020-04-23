@@ -8,7 +8,7 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import archer from './archer.png';
 import catapult from './catapult.png';
 import knight from './knight.png';
@@ -18,7 +18,7 @@ import pikeman from './pikeman.png';
 import swordsman from './swordsman.png';
 import type {
     CommonStateUnitKey,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 
 export const unitVisuals = {
     [ UNIT_ARCHER ]: {

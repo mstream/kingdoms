@@ -2,7 +2,7 @@
 
 import {
     emptyCityState,
-} from '../../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state';
@@ -11,7 +11,7 @@ import {
 } from '../../../../../../common/src/state/modules/state';
 import type {
     CityDistances,
-} from '../../../../../../common/src/state/modules/cities/selectors/types';
+} from '../../../../../../common/src/state/modules/_children/cities/selectors/types';
 import type {
     ClientStateSelectorTestScenario,
 } from '../../../types';

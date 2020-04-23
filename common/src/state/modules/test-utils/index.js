@@ -14,12 +14,15 @@ import type {
     Jest,
 } from '../../../test-utils/types';
 
+
 export type CommonStateReducerTestScenarios<S> = {
     [CommonActionKey]: $ReadOnlyArray< CommonStateReducerTestScenario< S, CommonAction >, >,
 };
 
 type SelectorTestScenariosScenarios = $ReadOnly< {
-    [string]: $ReadOnlyArray< CommonStateSelectorTestScenario< mixed > >,
+
+    // $FlowFixMe
+    [string]: $ReadOnlyArray< CommonStateSelectorTestScenario< any > >,
 } >;
 
 const runReducerTestScenario = <S>( {
@@ -123,8 +126,12 @@ const runCommonStateSelectorTestScenario = (
         scenario,
     }: {
         jest: Jest,
-        selector: CommonStateSelector< mixed >,
-        scenario: CommonStateSelectorTestScenario< mixed >,
+
+        // $FlowFixMe
+        selector: CommonStateSelector< any, any >,
+
+        // $FlowFixMe
+        scenario: CommonStateSelectorTestScenario< any >,
     },
 ): void => {
 
@@ -136,9 +143,11 @@ const runCommonStateSelectorTestScenario = (
                 state,
             } = scenario;
 
-            const expected: mixed = scenario.expectedValue;
+            // $FlowFixMe
+            const expected: any = scenario.expectedValue;
 
-            const actual: mixed = selector(
+            // $FlowFixMe
+            const actual: any = selector(
                 state,
             );
 
@@ -182,10 +191,12 @@ export const runCommonStateSelectorsTestScenarios = (
 
                         scenariosForSelector.forEach(
                             (
-                                scenario: CommonStateSelectorTestScenario< mixed >,
+                                // $FlowFixMe
+                                scenario: CommonStateSelectorTestScenario< any >,
                             ) => {
 
-                                const selector: CommonStateSelector< mixed >
+                                // $FlowFixMe
+                                const selector: CommonStateSelector< any, any >
                                     = moduleSelectors[ selectorKey ];
 
                                 if ( selector == null ) {

@@ -11,7 +11,7 @@ import type {
 } from '../../state/types';
 import type {
     CommonStateResources,
-} from '../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../common/src/state/modules/_children/rules/reducer/types';
 import type {
     Dispatch,
 } from 'redux';

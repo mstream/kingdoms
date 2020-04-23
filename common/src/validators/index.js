@@ -5,7 +5,7 @@ import {
 } from '../state/modules/types';
 import {
     CommonStateUnitKeyType,
-} from '../state/modules/rules/reducer/types';
+} from '../state/modules/_children/rules/reducer/types';
 import {
     ServerResponseType,
 } from '../types';
@@ -14,7 +14,7 @@ import type {
 } from '../state/modules/types';
 import type {
     CommonStateUnitKey,
-} from '../state/modules/rules/reducer/types';
+} from '../state/modules/_children/rules/reducer/types';
 import type {
     ServerResponse,
 } from '../types';

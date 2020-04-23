@@ -4,7 +4,7 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const minimumAttackDelaySelector: ClientStateSelector< number > = (
+export const minimumAttackDelaySelector: ClientStateSelector< number, void > = (
     state,
 ) => {
 

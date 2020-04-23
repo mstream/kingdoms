@@ -3,10 +3,10 @@
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
-} from './state/modules/rules/reducer/types';
+} from './state/modules/_children/rules/reducer/types';
 import type {
     CommonStateResourceKey,
-} from './state/modules/rules/reducer/types';
+} from './state/modules/_children/rules/reducer/types';
 import type {
     Quantities,
 } from './quantity';

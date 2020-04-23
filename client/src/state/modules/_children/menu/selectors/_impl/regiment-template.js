@@ -5,9 +5,9 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
-export const regimentTemplateSelector: ClientStateSelector< CommonStateRegimentTemplate > = (
+export const regimentTemplateSelector: ClientStateSelector< CommonStateRegimentTemplate, void > = (
     state,
 ) => {
 

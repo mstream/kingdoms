@@ -3,7 +3,7 @@
 import {
     UNIT_CATAPULT,
     UNIT_SWORDSMAN,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     clientActions,
 } from '../../../../actions';

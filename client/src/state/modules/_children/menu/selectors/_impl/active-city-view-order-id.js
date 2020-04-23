@@ -4,7 +4,7 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const activeCityViewOrderIdSelector: ClientStateSelector< ?string > = (
+export const activeCityViewOrderIdSelector: ClientStateSelector< ?string, void > = (
     state,
 ) => {
 

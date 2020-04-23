@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
-} from '../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     CityStatusBarComponent,
 } from './index';
@@ -13,7 +13,7 @@ import {
 } from 'react-redux';
 import {
     emptyCityState,
-} from '../../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../../state/state';
@@ -27,7 +27,7 @@ import type {
 } from '../../../../state/types';
 import type {
     CommonStateCity,
-} from '../../../../../../common/src/state/modules/cities/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/types';
 
 const mockStore = configureStore(
     [],

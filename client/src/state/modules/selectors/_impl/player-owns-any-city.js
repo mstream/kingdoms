@@ -10,7 +10,7 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const playerOwnsAnyCitySelector: ClientStateSelector< boolean > = createSelector<ClientState,
+export const playerOwnsAnyCitySelector: ClientStateSelector< boolean, void > = createSelector<ClientState,
     void,
     boolean,
     ?$ReadOnlyArray< string >,

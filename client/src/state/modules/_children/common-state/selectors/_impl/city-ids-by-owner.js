@@ -2,18 +2,18 @@
 
 import {
     commonStateCitiesSelectors,
-} from '../../../../../../../../common/src/state/modules/cities/selectors';
+} from '../../../../../../../../common/src/state/modules/_children/cities/selectors';
 import {
     createClientStateCommonStateSelector,
 } from '../utils';
 import type {
     CityIdsByOwner,
-} from '../../../../../../../../common/src/state/modules/cities/selectors/types';
+} from '../../../../../../../../common/src/state/modules/_children/cities/selectors/types';
 import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const cityIdsByOwnerSelector: ClientStateSelector< ?CityIdsByOwner >
+export const cityIdsByOwnerSelector: ClientStateSelector< ?CityIdsByOwner, void >
     = createClientStateCommonStateSelector(
         {
             commonStateSelector: commonStateCitiesSelectors.cityIdsByOwner,

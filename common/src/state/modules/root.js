@@ -2,22 +2,22 @@
 
 import {
     citiesReducer,
-} from './cities/reducer';
+} from './_children/cities/reducer';
 import {
     emptyCommonState,
 } from './state';
 import {
     ordersReducer,
-} from './orders/reducer';
+} from './_children/orders/reducer';
 import {
     rulesReducer,
-} from './rules/reducer';
+} from './_children/rules/reducer';
 import {
     timeReducer,
-} from './time/reducer';
+} from './_children/time/reducer';
 import {
     worldReducer,
-} from './world/reducer';
+} from './_children/world/reducer';
 import type {
     CommonAction,
 } from '../types';
@@ -28,19 +28,19 @@ import type {
 } from './types';
 import type {
     CommonStateCities,
-} from './cities/reducer/types';
+} from './_children/cities/reducer/types';
 import type {
     CommonStateOrders,
-} from './orders/reducer/types';
+} from './_children/orders/reducer/types';
 import type {
     CommonStateRules,
-} from './rules/reducer/types';
+} from './_children/rules/reducer/types';
 import type {
     CommonStateTime,
-} from './time/reducer/types';
+} from './_children/time/reducer/types';
 import type {
     CommonStateWorld,
-} from './world/reducer/types';
+} from './_children/world/reducer/types';
 
 type StateToReducersMapping = {
     cities: CommonStateReducer< CommonStateCities >,

@@ -9,7 +9,7 @@ import {
 } from 'react-redux';
 import {
     emptyCityState,
-} from '../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../state/state';

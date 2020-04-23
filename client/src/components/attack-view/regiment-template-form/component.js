@@ -5,7 +5,7 @@ import {
 } from '../../image';
 import {
     UNIT_PEASANT,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     numberToQuantityString,
 } from '../../../../../common/src/utils';
@@ -21,7 +21,7 @@ import {
 import React from 'react';
 import type {
     CommonStateUnitKey,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import type {
     Props,
 } from './props';

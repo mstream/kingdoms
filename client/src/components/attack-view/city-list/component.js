@@ -10,7 +10,7 @@ import React from 'react';
 import classNames from 'classnames';
 import type {
     CommonStateCity,
-} from '../../../../../common/src/state/modules/cities/reducer/types';
+} from '../../../../../common/src/state/modules/_children/cities/reducer/types';
 import type {
     Props,
 } from './props';

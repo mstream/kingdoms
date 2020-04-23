@@ -11,7 +11,7 @@ import type {
 } from '../../../../state/types';
 import type {
     CommonStateCities,
-} from '../../../../../../common/src/state/modules/cities/reducer/types';
+} from '../../../../../../common/src/state/modules/_children/cities/reducer/types';
 import type {
     Dispatch,
 } from 'redux';

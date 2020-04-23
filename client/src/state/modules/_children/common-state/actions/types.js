@@ -8,10 +8,10 @@ import type {
 } from '../../../../../../../common/src/state/modules/types';
 import type {
     CommonStateBuildingKey,
-} from '../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../common/src/state/modules/orders/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
 export const REQUEST_BUILDING_UPGRADE: 'REQUEST_BUILDING_UPGRADE'
     = `REQUEST_BUILDING_UPGRADE`;

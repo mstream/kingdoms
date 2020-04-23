@@ -3,7 +3,7 @@
 import {
     BUILDING_LUMBER_MILL,
     BUILDING_PASTURE,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     clientActions,
 } from '../../../../actions';

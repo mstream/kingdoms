@@ -4,7 +4,7 @@ import '@testing-library/jest-dom/extend-expect';
 import {
     BUILDING_PASTURE,
     BUILDING_WAREHOUSE,
-} from '../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     CityBuildingsComponent,
 } from './index';
@@ -20,7 +20,7 @@ import {
 } from '../../../state/modules/actions';
 import {
     emptyCityState,
-} from '../../../../../common/src/state/modules/cities/reducer/state';
+} from '../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
 } from '../../../state/state';

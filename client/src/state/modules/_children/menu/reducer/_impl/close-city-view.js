@@ -5,7 +5,7 @@ import {
 } from '../types';
 import {
     UNIT_PEASANT,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import type {
     ClientCloseCityViewAction,
 } from '../../actions/types';

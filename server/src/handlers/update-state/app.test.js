@@ -11,7 +11,7 @@ import {
 } from '../util';
 import {
     executeTimeStep,
-} from '../../../../common/src/state/modules/cities/actions';
+} from '../../../../common/src/state/modules/_children/cities/actions';
 import {
     expectCalls,
 } from '../../../../common/src/test-utils';

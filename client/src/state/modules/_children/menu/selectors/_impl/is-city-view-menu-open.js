@@ -4,7 +4,7 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const isCityViewMenuOpenSelector: ClientStateSelector< boolean > = (
+export const isCityViewMenuOpenSelector: ClientStateSelector< boolean, void > = (
     state,
 ) => {
 

@@ -2,7 +2,7 @@
 
 import {
     BUILDING_WAREHOUSE,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     emptyClientState,
 } from '../../../../../state';
@@ -11,7 +11,7 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateBuildingKey,
-} from '../../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateBuildingKey >, >;
 

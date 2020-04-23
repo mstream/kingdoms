@@ -2,7 +2,7 @@
 
 import {
     emptyCityState,
-} from '../../cities/reducer/state';
+} from '../../_children/cities/reducer/state';
 import {
     emptyCommonState,
 } from '../../state';

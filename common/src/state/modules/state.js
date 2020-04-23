@@ -2,22 +2,22 @@
 
 import {
     emptyCitiesState,
-} from './cities/reducer/state';
+} from './_children/cities/reducer/state';
 import {
     emptyOrdersState,
-} from './orders/reducer/state';
+} from './_children/orders/reducer/state';
 import {
     emptyPlayersState,
-} from './players/reducer/state';
+} from './_children/players/reducer/state';
 import {
     emptyRulesState,
-} from './rules/reducer/state';
+} from './_children/rules/reducer/state';
 import {
     emptyTimeState,
-} from './time/reducer/state';
+} from './_children/time/reducer/state';
 import {
     emptyWorldState,
-} from './world/reducer/state';
+} from './_children/world/reducer/state';
 import type {
     CommonState,
 } from './types';

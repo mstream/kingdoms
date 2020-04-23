@@ -4,7 +4,7 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const isLoadedSelector: ClientStateSelector< boolean > = (
+export const isLoadedSelector: ClientStateSelector< boolean, void > = (
     state,
 ) => {
 

@@ -4,13 +4,13 @@ import {
     BUILDING_WAREHOUSE,
     RESOURCE_FOOD,
     UNIT_PEASANT,
-} from '../../../../../../../common/src/state/modules/rules/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     TAB_OVERVIEW,
 } from './types';
 import {
     emptyRegimentTemplateState,
-} from '../../../../../../../common/src/state/modules/orders/reducer/state';
+} from '../../../../../../../common/src/state/modules/_children/orders/reducer/state';
 import type {
     ClientStateMenu,
 } from './types';

@@ -4,7 +4,7 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const isNewCityBeingCreatedSelector: ClientStateSelector< boolean > = (
+export const isNewCityBeingCreatedSelector: ClientStateSelector< boolean, void > = (
     state,
 ) => {
 

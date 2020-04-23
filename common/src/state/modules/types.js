@@ -14,22 +14,23 @@ import type {
 } from '../types';
 import type {
     CommonStateCities,
-} from './cities/reducer/types';
+} from './_children/cities/reducer/types';
 import type {
     CommonStateOrders,
-} from './orders/reducer/types';
+} from './_children/orders/reducer/types';
 import type {
     CommonStatePlayers,
-} from './players/reducer/types';
+} from './_children/players/reducer/types';
 import type {
     CommonStateRules,
-} from './rules/reducer/types';
+} from './_children/rules/reducer/types';
 import type {
     CommonStateTime,
-} from './time/reducer/types';
+} from './_children/time/reducer/types';
 import type {
     CommonStateWorld,
-} from './world/reducer/types';
+} from './_children/world/reducer/types';
+
 
 export type CommonState = $ReadOnly< {
     cities: CommonStateCities,
@@ -64,7 +65,7 @@ export type CommonStateReducerTestScenario<S, +A: CommonAction> = $ReadOnly< {
                                      } ) => CommonStateReducerResult< S >,
 } >;
 
-export type CommonStateSelector<T> = ( state: CommonState ) => T;
+export type CommonStateSelector<T, P> = ( state: CommonState, props: P ) => T;
 
 export type CommonStateSelectorTestScenario<T> = $ReadOnly< {
     name: string,
@@ -73,7 +74,9 @@ export type CommonStateSelectorTestScenario<T> = $ReadOnly< {
 } >;
 
 export type CommonStateSelectors = $ReadOnly< {
-    [string]: CommonStateSelector< mixed >,
+
+    // $FlowFixMe
+    [string]: CommonStateSelector< any, any >,
 } >;
 
 export const CommonStateType = ( reify: Type< CommonState > );

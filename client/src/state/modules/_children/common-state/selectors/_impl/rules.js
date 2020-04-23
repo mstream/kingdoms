@@ -13,8 +13,9 @@ import type {
     CommonStateRules,
 } from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 
-export const rulesSelector: ClientStateSelector< ?CommonStateRules, void > = createClientStateCommonStateSelector(
-    {
-        commonStateSelector: commonStateRulesSelectors.rules,
-    },
-);
+export const rulesSelector: ClientStateSelector< ?CommonStateRules, void >
+    = createClientStateCommonStateSelector(
+        {
+            commonStateSelector: commonStateRulesSelectors.rules,
+        },
+    );

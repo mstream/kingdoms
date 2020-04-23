@@ -17,25 +17,26 @@ import type {
     CommonStateCity,
 } from '../../../../../../common/src/state/modules/_children/cities/reducer/types';
 
-export const attackingCitySelector: ClientStateSelector< ?CommonStateCity, void > = createSelector<ClientState,
-    void,
-    ?CommonStateCity,
-    ?string,
-    ?CommonStateCities,
-    >(
-        clientStateMenuSelectors.attackingCityId,
-        clientStateCommonStateSelectors.cities,
-        (
-            attackingCityId, cities,
-        ) => {
+export const attackingCitySelector: ClientStateSelector< ?CommonStateCity, void >
+    = createSelector<ClientState,
+        void,
+        ?CommonStateCity,
+        ?string,
+        ?CommonStateCities,
+        >(
+            clientStateMenuSelectors.attackingCityId,
+            clientStateCommonStateSelectors.cities,
+            (
+                attackingCityId, cities,
+            ) => {
 
-            if ( attackingCityId == null || cities == null ) {
+                if ( attackingCityId == null || cities == null ) {
 
-                return null;
+                    return null;
 
-            }
+                }
 
-            return cities[ attackingCityId ];
+                return cities[ attackingCityId ];
 
-        },
-    );
+            },
+        );

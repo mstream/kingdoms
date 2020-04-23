@@ -32,133 +32,145 @@ import type {
     ClientUpdateAttackViewRegimentTemplateAction,
 } from './types';
 
-const closeAttackView: ClientActionCreator< ClientCloseAttackViewAction > = () => {
+const closeAttackView: ClientActionCreator< ClientCloseAttackViewAction >
+    = () => {
 
-    return {
-        payload: undefined,
-        type   : CLOSE_ATTACK_VIEW,
+        return {
+            payload: undefined,
+            type   : CLOSE_ATTACK_VIEW,
+        };
+
     };
 
-};
+const closeCityView: ClientActionCreator< ClientCloseCityViewAction >
+    = () => {
 
-const closeCityView: ClientActionCreator< ClientCloseCityViewAction > = () => {
+        return {
+            payload: undefined,
+            type   : CLOSE_CITY_VIEW,
+        };
 
-    return {
-        payload: undefined,
-        type   : CLOSE_CITY_VIEW,
     };
 
-};
-
-const openAttackView: ClientActionCreator< ClientOpenAttackViewAction > = (
-    payload,
-) => {
-
-    return {
+const openAttackView: ClientActionCreator< ClientOpenAttackViewAction >
+    = (
         payload,
-        type: OPEN_ATTACK_VIEW,
+    ) => {
+
+        return {
+            payload,
+            type: OPEN_ATTACK_VIEW,
+        };
+
     };
 
-};
-
-const openCityView: ClientActionCreator< ClientOpenCityViewAction > = (
-    payload,
-) => {
-
-    return {
+const openCityView: ClientActionCreator< ClientOpenCityViewAction >
+    = (
         payload,
-        type: OPEN_CITY_VIEW,
+    ) => {
+
+        return {
+            payload,
+            type: OPEN_CITY_VIEW,
+        };
+
     };
 
-};
-
-const selectCityViewTab: ClientActionCreator< ClientSelectCityViewTabAction > = (
-    payload,
-) => {
-
-    return {
+const selectCityViewTab: ClientActionCreator< ClientSelectCityViewTabAction >
+    = (
         payload,
-        type: SELECT_CITY_VIEW_TAB,
+    ) => {
+
+        return {
+            payload,
+            type: SELECT_CITY_VIEW_TAB,
+        };
+
     };
 
-};
-
-const selectCityViewBuildingsTab: ClientActionCreator< ClientSelectCityViewBuildingsTabAction > = (
-    payload,
-) => {
-
-    return {
+const selectCityViewBuildingsTab: ClientActionCreator< ClientSelectCityViewBuildingsTabAction >
+    = (
         payload,
-        type: SELECT_CITY_VIEW_BUILDINGS_TAB,
+    ) => {
+
+        return {
+            payload,
+            type: SELECT_CITY_VIEW_BUILDINGS_TAB,
+        };
+
     };
 
-};
-
-const selectCityViewOrdersTab: ClientActionCreator< ClientSelectCityViewOrdersTabAction > = (
-    payload,
-) => {
-
-    return {
+const selectCityViewOrdersTab: ClientActionCreator< ClientSelectCityViewOrdersTabAction >
+    = (
         payload,
-        type: SELECT_CITY_VIEW_ORDERS_TAB,
+    ) => {
+
+        return {
+            payload,
+            type: SELECT_CITY_VIEW_ORDERS_TAB,
+        };
+
     };
 
-};
-
-const selectCityViewResourcesTab: ClientActionCreator< ClientSelectCityViewResourceTabAction > = (
-    payload,
-) => {
-
-    return {
+const selectCityViewResourcesTab: ClientActionCreator< ClientSelectCityViewResourceTabAction >
+    = (
         payload,
-        type: SELECT_CITY_VIEW_RESOURCES_TAB,
+    ) => {
+
+        return {
+            payload,
+            type: SELECT_CITY_VIEW_RESOURCES_TAB,
+        };
+
     };
 
-};
-
-const selectCityViewUnitsTab: ClientActionCreator< ClientSelectCityViewUnitsTabAction > = (
-    payload,
-) => {
-
-    return {
+const selectCityViewUnitsTab: ClientActionCreator< ClientSelectCityViewUnitsTabAction >
+    = (
         payload,
-        type: SELECT_CITY_VIEW_UNITS_TAB,
+    ) => {
+
+        return {
+            payload,
+            type: SELECT_CITY_VIEW_UNITS_TAB,
+        };
+
     };
 
-};
-
-const selectAttackViewAttackingCity: ClientActionCreator< ClientSelectAttackViewAttackingCityAction > = (
-    payload,
-) => {
-
-    return {
+const selectAttackViewAttackingCity: ClientActionCreator< ClientSelectAttackViewAttackingCityAction >
+    = (
         payload,
-        type: SELECT_ATTACK_VIEW_ATTACKING_CITY,
+    ) => {
+
+        return {
+            payload,
+            type: SELECT_ATTACK_VIEW_ATTACKING_CITY,
+        };
+
     };
 
-};
-
-const updateAttackViewRegimentTemplate: ClientActionCreator< ClientUpdateAttackViewRegimentTemplateAction > = (
-    payload,
-) => {
-
-    return {
+const updateAttackViewRegimentTemplate: ClientActionCreator< ClientUpdateAttackViewRegimentTemplateAction >
+    = (
         payload,
-        type: UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
+    ) => {
+
+        return {
+            payload,
+            type: UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
+        };
+
     };
 
-};
-
-const updateAttackViewMinimumDelay: ClientActionCreator< ClientUpdateAttackViewMinimumDelayAction > = (
-    payload,
-) => {
-
-    return {
+const updateAttackViewMinimumDelay: ClientActionCreator< ClientUpdateAttackViewMinimumDelayAction >
+    = (
         payload,
-        type: UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
-    };
+    ) => {
 
-};
+        return {
+            payload,
+            type: UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
+        };
+
+    };
 
 export const menuActions = {
     closeAttackView,

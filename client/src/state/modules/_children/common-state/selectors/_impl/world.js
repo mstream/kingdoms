@@ -13,8 +13,9 @@ import type {
     CommonStateWorld,
 } from '../../../../../../../../common/src/state/modules/_children/world/reducer/types';
 
-export const worldSelector: ClientStateSelector< ?CommonStateWorld, void > = createClientStateCommonStateSelector(
-    {
-        commonStateSelector: commonStateWorldSelectors.world,
-    },
-);
+export const worldSelector: ClientStateSelector< ?CommonStateWorld, void >
+    = createClientStateCommonStateSelector(
+        {
+            commonStateSelector: commonStateWorldSelectors.world,
+        },
+    );

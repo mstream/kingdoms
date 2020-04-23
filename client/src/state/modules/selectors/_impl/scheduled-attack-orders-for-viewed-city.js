@@ -22,7 +22,9 @@ import type {
 } from '../types';
 
 
-export const scheduledAttackOrdersForViewedCitySelector: ClientStateSelector< ScheduledAttackOrderInfosById, void >
+type Selector = ClientStateSelector< ScheduledAttackOrderInfosById, void >;
+
+export const scheduledAttackOrdersForViewedCitySelector: Selector
     = createSelector<ClientState,
         void,
         ScheduledAttackOrderInfosById,
@@ -52,7 +54,7 @@ export const scheduledAttackOrdersForViewedCitySelector: ClientStateSelector< Sc
                         ) => {
 
                             const order: ?CommonStateScheduledAttackOrder
-                        = orders.items.scheduledAttack[ orderId ];
+                            = orders.items.scheduledAttack[ orderId ];
 
                             if ( order == null ) {
 
@@ -63,7 +65,7 @@ export const scheduledAttackOrdersForViewedCitySelector: ClientStateSelector< Sc
                             }
 
                             const relevantForViewedCity: boolean
-                        = currentlyViewedCityId === order.originCityId;
+                            = currentlyViewedCityId === order.originCityId;
 
                             const orderInfo: ScheduledAttackOrderInfo = {
                                 ...order,

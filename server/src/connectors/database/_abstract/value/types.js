@@ -7,6 +7,9 @@ import type {
     DatabaseValueGet,
 } from './operations/get/types';
 import type {
+    DatabaseValueRemove,
+} from './operations/remove/types';
+import type {
     DatabaseValueSet,
 } from './operations/set/types';
 import type {
@@ -18,6 +21,7 @@ import type {
 export type DatabaseValueOperations<K, V> = $ReadOnly< {|
     cas: DatabaseValueCas< K, V >,
     get: DatabaseValueGet< K, V >,
+    remove: DatabaseValueRemove< K >,
     set: DatabaseValueSet< K, V >,
 |} >;
 

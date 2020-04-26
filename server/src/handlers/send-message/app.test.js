@@ -19,7 +19,7 @@ import {
     mockPostToConnection,
 } from '../../clients/api-gateway';
 import {
-    stringifyJson,
+    serializeJson,
 } from '../../../../common/src/json';
 import {
     stubConfig,
@@ -76,7 +76,7 @@ describe(
 
                 const event: APIGatewayProxyEvent = {
                     ...emptyApiGatewayProxyEvent,
-                    body: stringifyJson(
+                    body: serializeJson(
                         {
                             json: {
                                 data: serverRequest,
@@ -116,7 +116,7 @@ describe(
                     () => {
 
                         return Promise.resolve(
-                            stringifyJson(
+                            serializeJson(
                                 {
                                     json: state,
                                 },
@@ -205,7 +205,7 @@ describe(
                             [
                                 {
                                     ConnectionId: `connection1`,
-                                    Data        : stringifyJson(
+                                    Data        : serializeJson(
                                         {
                                             json: {
                                                 errors : [],

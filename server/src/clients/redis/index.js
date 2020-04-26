@@ -5,6 +5,7 @@ import type {
     Config,
 } from '../../config/types';
 import type {
+    MockRedisDel,
     MockRedisGet,
     MockRedisKeys, MockRedisMulti,
     MockRedisSadd,
@@ -14,6 +15,10 @@ import type {
     MockRedisWatch,
     Redis,
 } from './types';
+
+
+// $FlowFixMe
+export const mockDel: MockRedisDel = null;
 
 // $FlowFixMe
 export const mockGet: MockRedisGet = null;

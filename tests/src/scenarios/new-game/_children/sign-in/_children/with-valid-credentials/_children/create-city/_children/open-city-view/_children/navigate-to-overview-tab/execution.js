@@ -28,15 +28,11 @@ export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCity
         },
     );
 
-    await t.expect(
-        selectors
-            .cityView
-            .overviewPanel
-            .textContent,
-    )
-        .contains(
-            `Buildings`,
-        );
+    const panelTextContent = await selectors
+        .cityView
+        .overviewPanel
+        .textContent;
+
 
     await t.expect(
         selectors
@@ -44,58 +40,12 @@ export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCity
             .overviewPanel
             .textContent,
     )
-        .contains(
-            `Resources`,
-        );
-
-    await t.expect(
-        selectors
-            .cityView
-            .overviewPanel
-            .textContent,
-    )
-        .contains(
-            `Orders`,
-        );
-
-    await t.expect(
-        selectors
-            .cityView
-            .overviewPanel
-            .textContent,
-    )
-        .contains(
-            `Units`,
-        );
-
-    await t.expect(
-        selectors
-            .cityView
-            .overviewPanel
-            .textContent,
-    )
-        .contains(
-            `Peasants: 0`,
-        );
-
-    await t.expect(
-        selectors
-            .cityView
-            .overviewPanel
-            .textContent,
-    )
-        .contains(
-            `Army: 0`,
-        );
-
-    await t.expect(
-        selectors
-            .cityView
-            .overviewPanel
-            .textContent,
-    )
-        .contains(
-            `Nobles: 0`,
+        .notEql(
+            panelTextContent,
+            `check if panel text content changes`,
+            {
+                timeout: 90000,
+            },
         );
 
     return {

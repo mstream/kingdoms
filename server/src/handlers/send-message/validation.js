@@ -8,13 +8,13 @@ import {
     parseJson,
 } from '../../../../common/src/json';
 import type {
-    EventValidator,
+    ProxyEventValidator,
 } from '../types';
 import type {
     ServerRequest,
 } from '../../../../common/src/types';
 
-export const validateEvent: EventValidator< $ReadOnly< {|
+export const validateServerRequestEvent: ProxyEventValidator< $ReadOnly< {|
     connectionId: string,
     serverRequest: ServerRequest,
     username: string,

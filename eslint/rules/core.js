@@ -18,7 +18,7 @@ module.exports = {
     'id-length': [
         `error`,
         {
-            max: 60,
+            max: 54,
             min: 1,
         },
     ],
@@ -59,7 +59,7 @@ module.exports = {
         `error`,
         {
             IIFEs         : true,
-            max           : 400,
+            max           : 350,
             skipBlankLines: true,
             skipComments  : true,
         },

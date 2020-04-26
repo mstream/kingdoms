@@ -1,7 +1,7 @@
 // @flow
 
 import {
-    stringifyJson,
+    serializeJson,
 } from '../../../../common/src/json';
 import type {
     ApiGateway,
@@ -20,7 +20,7 @@ export const sendServerResponse = async ( {
     response: ServerResponse,
 }, ): Promise< void > => {
 
-    const serializedResponse = stringifyJson(
+    const serializedResponse = serializeJson(
         {
             json: response,
         },

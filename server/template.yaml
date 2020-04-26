@@ -18,6 +18,10 @@ Parameters:
     LoggingLevel:
         Type: 'String'
 
+    LogsRetentionInDays:
+        Type: 'Number'
+        Default: 1
+
     StageName:
         Type: 'String'
         Default: 'Stage'
@@ -34,9 +38,38 @@ Parameters:
         Default: 'arn:aws:lambda:eu-west-1:235338379175:layer:common:1'
 
 Resources:
+
+    AllowWebsocketConnectionManagementPolicy:
+        Type: 'AWS::IAM::ManagedPolicy'
+        Properties:
+            PolicyDocument:
+                Version: 2012-10-17
+                Statement:
+                    -   Effect: Allow
+                        Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
+                        Action:
+                            - 'execute-api:ManageConnections'
+
+    AllowWorldStateUpdateQueueSendMessagePolicy:
+        Type: 'AWS::IAM::ManagedPolicy'
+        Properties:
+            PolicyDocument:
+                Version: 2012-10-17
+                Statement:
+                    -   Effect: 'Allow'
+                        Resource: !Sub '${WorldStateUpdateQueue.Arn}'
+                        Action:
+                            - 'sqs:SendMessage'
+
+
+    WorldStateUpdateQueue:
+        Type: 'AWS::SQS::Queue'
+
     AuthenticateFunction:
         Type: 'AWS::Serverless::Function'
+        DependsOn: 'AuthenticateFunctionLogGroup'
         Properties:
+            FunctionName: 'AuthenticateFunction'
             CodeUri: 'src/handlers/authenticate/'
             Handler: 'app.handler'
             MemorySize: 256
@@ -45,9 +78,9 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
@@ -59,10 +92,62 @@ Resources:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+
+    AuthenticateFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/AuthenticateFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
+
+    BroadcastStateFunction:
+        Type: 'AWS::Serverless::Function'
+        DependsOn: 'BroadcastStateFunctionLogGroup'
+        Properties:
+            FunctionName: 'BroadcastStateFunction'
+            CodeUri: 'src/handlers/broadcast-state/'
+            Handler: 'app.handler'
+            MemorySize: 256
+            Runtime: 'nodejs12.x'
+            Layers:
+                - !Sub '${LayerArn}'
+            VpcConfig:
+                SecurityGroupIds:
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                SubnetIds:
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+            Events:
+                MySQSEvent:
+                    Type: SQS
+                    Properties:
+                        Queue: !Sub '${WorldStateUpdateQueue.Arn}'
+                        BatchSize: 1
+            Environment:
+                Variables:
+                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+            Policies:
+                - !Sub "${AllowWebsocketConnectionManagementPolicy}"
+
+    BroadcastStateFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/BroadcastStateFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     OnConnectFunction:
         Type: 'AWS::Serverless::Function'
+        DependsOn: 'OnConnectFunctionLogGroup'
         Properties:
+            FunctionName: 'OnConnectFunction'
             CodeUri: 'src/handlers/on-connect/'
             Handler: 'app.handler'
             MemorySize: 256
@@ -71,9 +156,9 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
@@ -85,10 +170,19 @@ Resources:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+
+    OnConnectFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/OnConnectFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     OnDisconnectFunction:
         Type: 'AWS::Serverless::Function'
+        DependsOn: 'OnDisconnectFunctionLogGroup'
         Properties:
+            FunctionName: 'OnDisconnectFunction'
             CodeUri: 'src/handlers/on-disconnect/'
             Handler: 'app.handler'
             MemorySize: 256
@@ -97,9 +191,9 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
@@ -111,10 +205,19 @@ Resources:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+
+    OnDisconnectFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/OnDisconnectFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     SendMessageFunction:
         Type: 'AWS::Serverless::Function'
+        DependsOn: 'SendMessageFunctionLogGroup'
         Properties:
+            FunctionName: 'SendMessageFunction'
             CodeUri: 'src/handlers/send-message/'
             Handler: 'app.handler'
             MemorySize: 1024
@@ -123,9 +226,9 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
@@ -137,17 +240,21 @@ Resources:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
             Policies:
-                - Statement:
-                      - Effect: 'Allow'
-                        Action:
-                            - 'execute-api:ManageConnections'
-                        Resource:
-                            - !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
+                - !Sub "${AllowWebsocketConnectionManagementPolicy}"
+
+    SendMessageFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/SendMessageFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     UpdateStateFunction:
         Type: 'AWS::Serverless::Function'
+        DependsOn: 'UpdateStateFunctionLogGroup'
         Properties:
+            FunctionName: 'UpdateStateFunction'
             CodeUri: 'src/handlers/update-state/'
             Handler: 'app.handler'
             MemorySize: 1024
@@ -156,9 +263,9 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Events:
                 StateUpdateScheduledEvent:
                     Type: 'Schedule'
@@ -175,18 +282,22 @@ Resources:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
             Policies:
-                - Statement:
-                      - Effect: 'Allow'
-                        Action:
-                            - 'execute-api:ManageConnections'
-                        Resource:
-                            - !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
+                - !Sub '${AllowWorldStateUpdateQueueSendMessagePolicy}'
 
-    ResetStateFunction:
-        Type: 'AWS::Serverless::Function'
+    UpdateStateFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
         Properties:
-            CodeUri: 'src/handlers/reset-state/'
+            LogGroupName: '/aws/lambda/UpdateStateFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
+
+    DestroyWorldFunction:
+        Type: 'AWS::Serverless::Function'
+        DependsOn: 'DestroyWorldFunctionLogGroup'
+        Properties:
+            FunctionName: 'DestroyWorldFunction'
+            CodeUri: 'src/handlers/destroy-world/'
             Handler: 'app.handler'
             MemorySize: 256
             Runtime: 'nodejs12.x'
@@ -194,9 +305,9 @@ Resources:
                 - !Sub '${LayerArn}'
             VpcConfig:
                 SecurityGroupIds:
-                    - Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
                 SubnetIds:
-                    - Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
@@ -208,6 +319,48 @@ Resources:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
                     REDIS_PORT:
                         Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+
+    DestroyWorldFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/DestroyWorldFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
+
+    ResetStateFunction:
+        Type: 'AWS::Serverless::Function'
+        DependsOn: 'ResetStateFunctionLogGroup'
+        Properties:
+            FunctionName: 'ResetStateFunction'
+            CodeUri: 'src/handlers/reset-state/'
+            Handler: 'app.handler'
+            MemorySize: 256
+            Runtime: 'nodejs12.x'
+            Layers:
+                - !Sub '${LayerArn}'
+            VpcConfig:
+                SecurityGroupIds:
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                SubnetIds:
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+            Environment:
+                Variables:
+                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+
+    ResetStateFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/ResetStateFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     WebSocket:
         Type: 'AWS::ApiGatewayV2::Api'
@@ -342,8 +495,8 @@ Resources:
                 ErrorDocument: 'error.html'
                 IndexDocument: 'index.html'
             Tags:
-                - Key: 'Name'
-                  Value: !Sub '${AWS::StackName}-website'
+                -   Key: 'Name'
+                    Value: !Sub '${AWS::StackName}-website'
 
     OriginAccessIdentity:
         Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
@@ -355,13 +508,13 @@ Resources:
         Type: AWS::CloudFront::Distribution
         Properties:
             DistributionConfig:
-                Enabled: 'true'
+                Enabled: true
                 PriceClass: 'PriceClass_100'
                 ViewerCertificate:
-                    CloudFrontDefaultCertificate: 'true'
+                    CloudFrontDefaultCertificate: true
                 DefaultRootObject: index.html
                 DefaultCacheBehavior:
-                    Compress: 'true'
+                    Compress: true
                     MinTTL: !Sub '${WebContentTtl}'
                     MaxTTL: !Sub '${WebContentTtl}'
                     DefaultTTL: !Sub '${WebContentTtl}'
@@ -370,10 +523,10 @@ Resources:
                     TargetOriginId: 's3-origin'
                     ViewerProtocolPolicy: 'redirect-to-https'
                 Origins:
-                    - Id: 's3-origin'
-                      DomainName: !Sub '${WebsiteBucket}.s3-${AWS::Region}.amazonaws.com'
-                      S3OriginConfig:
-                          OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${OriginAccessIdentity}'
+                    -   Id: 's3-origin'
+                        DomainName: !Sub '${WebsiteBucket}.s3-${AWS::Region}.amazonaws.com'
+                        S3OriginConfig:
+                            OriginAccessIdentity: !Sub 'origin-access-identity/cloudfront/${OriginAccessIdentity}'
 
     UserPool:
         Type: 'AWS::Cognito::UserPool'
@@ -385,7 +538,7 @@ Resources:
         Properties:
             ClientName: !Sub '${AWS::StackName}'
             UserPoolId: !Sub '${UserPool}'
-            AllowedOAuthFlowsUserPoolClient: 'true'
+            AllowedOAuthFlowsUserPoolClient: true
             SupportedIdentityProviders:
                 - 'COGNITO'
             AllowedOAuthFlows:
@@ -423,6 +576,10 @@ Outputs:
     Region:
         Description: 'AWS region'
         Value: !Sub '${AWS::Region}'
+
+    DestroyWorldFunctionId:
+        Description: 'Destroy world function ID'
+        Value: !Sub '${DestroyWorldFunction}'
 
     ResetStateFunctionId:
         Description: 'Reset state function ID'

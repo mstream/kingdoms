@@ -8,8 +8,9 @@ import type {
 } from '../../../common/src/logging/types';
 
 
-// $FlowFixMe
-export type ScenarioContext = Object;
+export type ScenarioContext = $ReadOnly< {
+    destroy: () => Promise< void >,
+} >;
 
 export type ScenarioExecution<IC: ScenarioContext, OC: ScenarioContext> = (
     {
@@ -17,7 +18,7 @@ export type ScenarioExecution<IC: ScenarioContext, OC: ScenarioContext> = (
         logger: Logger,
         t: TestController,
     },
-) => Promise< OC >
+) => Promise< IC & OC >
 
 
 export type TestScenario<IC: ScenarioContext, OC: ScenarioContext> = {

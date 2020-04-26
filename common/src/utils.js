@@ -208,3 +208,25 @@ export const getDuplicates = (
         );
 
 };
+
+export const getEnvironmentalVariable = (
+    {
+        name,
+    }: {
+        name: string,
+    },
+): string => {
+
+    const value: ?string = process.env[ name ];
+
+    if ( value == null ) {
+
+        throw Error(
+            `${ name } is required`,
+        );
+
+    }
+
+    return value;
+
+};

@@ -7,7 +7,7 @@ import {
     createKey,
 } from './key';
 import {
-    parseJson, stringifyJson,
+    parseJson, serializeJson,
 } from '../../../../../../common/src/json';
 import {
     validateCommonStateType,
@@ -47,7 +47,7 @@ const commonStateSerializer: ValueSerializer< CommonState > = (
     },
 ) => {
 
-    return stringifyJson(
+    return serializeJson(
         {
             json: value,
         },

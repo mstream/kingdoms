@@ -38,7 +38,7 @@ import {
     handleUnsupportedAction,
 } from './action-handlers/unsuported';
 import {
-    validateEvent,
+    validateServerRequestEvent,
 } from './validation';
 
 import type {
@@ -88,7 +88,7 @@ export const handler: ProxyHandler = async ( event, ) => {
 
     try {
 
-        const eventValidationResult = validateEvent(
+        const eventValidationResult = validateServerRequestEvent(
             {
                 event,
             },

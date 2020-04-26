@@ -14,4 +14,9 @@ export type Config = {
         host: string,
         port: number,
     },
+    sqs: {
+        queueUrls: {
+            worldStateUpdate: string,
+        }
+    }
 };

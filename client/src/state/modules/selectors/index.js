@@ -46,24 +46,24 @@ import {
     previousCityIdSelector,
 } from './_impl/previous-city-id';
 import {
-    scheduledAttackOrdersForViewedCitySelector,
-} from './_impl/scheduled-attack-orders-for-viewed-city';
+    viewedCityScheduledAttackOrdersSelector,
+} from './_impl/viewed-city-scheduled-attack-orders';
 
 export const clientStateSelectors = {
-    attackedCity                      : attackedCitySelector,
-    attackingCity                     : attackingCitySelector,
-    camera                            : clientStateCameraSelectors,
-    cityIdsOwnedByPlayer              : cityIdsOwnedByPlayerSelector,
-    commonState                       : clientStateCommonStateSelectors,
-    currentlyViewedCity               : currentlyViewedCitySelector,
-    distancesToAttackedCity           : clientStateDistancesToAttackedCitySelector,
-    errors                            : clientStateErrorsSelectors,
-    isGameStarting                    : isGameStartingSelector,
-    menu                              : clientStateMenuSelectors,
-    nextCityId                        : nextCityIdSelector,
-    player                            : clientStatePlayerSelectors,
-    playerOwnsAnyCity                 : playerOwnsAnyCitySelector,
-    previousCityId                    : previousCityIdSelector,
-    scheduledAttackOrdersForViewedCity: scheduledAttackOrdersForViewedCitySelector,
-    tiles                             : clientStateTilesSelectors,
+    attackedCity                   : attackedCitySelector,
+    attackingCity                  : attackingCitySelector,
+    camera                         : clientStateCameraSelectors,
+    cityIdsOwnedByPlayer           : cityIdsOwnedByPlayerSelector,
+    commonState                    : clientStateCommonStateSelectors,
+    currentlyViewedCity            : currentlyViewedCitySelector,
+    distancesToAttackedCity        : clientStateDistancesToAttackedCitySelector,
+    errors                         : clientStateErrorsSelectors,
+    isGameStarting                 : isGameStartingSelector,
+    menu                           : clientStateMenuSelectors,
+    nextCityId                     : nextCityIdSelector,
+    player                         : clientStatePlayerSelectors,
+    playerOwnsAnyCity              : playerOwnsAnyCitySelector,
+    previousCityId                 : previousCityIdSelector,
+    tiles                          : clientStateTilesSelectors,
+    viewedCityScheduledAttackOrders: viewedCityScheduledAttackOrdersSelector,
 };

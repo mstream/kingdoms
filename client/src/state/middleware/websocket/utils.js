@@ -1,7 +1,7 @@
 // @flow
 
 import {
-    stringifyJson,
+    serializeJson,
 } from '../../../../../common/src/json';
 import type {
     ServerRequest,
@@ -20,7 +20,7 @@ export const sendMessage = (
 },
 ): void => {
 
-    const serializedMessage = stringifyJson(
+    const serializedMessage = serializeJson(
         {
             json: {
                 data   : request,

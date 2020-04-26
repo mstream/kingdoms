@@ -1,23 +1,23 @@
 // @flow
 
 import {
-    createWorld,
-} from './index';
+    create,
+} from './create';
 import {
     emptyCommonState,
-} from '../../../../common/src/state/modules/state';
+} from '../../../../../common/src/state/modules/state';
 import {
     emptyConfig,
-} from '../../config';
+} from '../../../config';
 import {
     emptyLogger,
-} from '../../../../common/src/logging';
+} from '../../../../../common/src/logging';
 import {
-    stringifyJson,
-} from '../../../../common/src/json';
+    serializeJson,
+} from '../../../../../common/src/json';
 
 describe(
-    `createWorld`,
+    `create`,
     () => {
 
         it(
@@ -48,9 +48,11 @@ describe(
                     ...emptyLogger,
                 };
 
-                const state = emptyCommonState;
+                const state = {
+                    ...emptyCommonState,
+                };
 
-                await createWorld(
+                await create(
                     {
                         config,
                         exec,
@@ -60,7 +62,7 @@ describe(
                     },
                 );
 
-                const expectedPayload = stringifyJson(
+                const expectedPayload = serializeJson(
                     {
                         json: {
                             body: {

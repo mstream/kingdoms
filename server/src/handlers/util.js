@@ -7,6 +7,8 @@ import type {
     Context,
     CustomAuthorizerEvent,
     ScheduledEvent,
+    SqsEvent,
+    SqsEventRecord,
 } from './types';
 
 const emptyApiGatewayEventRequestContext: APIGatewayEventRequestContext = {
@@ -108,6 +110,23 @@ export const emptyScheduledEvent: ScheduledEvent = {
     'resources'  : [],
     'source'     : ``,
     'time'       : ``,
+};
+
+export const emptySqsEvent: SqsEvent = {
+    Records: [],
+};
+
+export const emptySqsRecord: SqsEventRecord = {
+    attributes: {
+    },
+    awsRegion        : ``,
+    body             : ``,
+    eventSource      : ``,
+    eventSourceArn   : ``,
+    md5OfBody        : ``,
+    messageAttributes: ``,
+    messageId        : ``,
+    receiptHandle    : ``,
 };
 
 export const emptyContext: Context = {

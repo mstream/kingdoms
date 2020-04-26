@@ -24,7 +24,10 @@ export const createTools = (
     {
         config,
         logger,
-    }: $ReadOnly< {| config: Config, logger: Logger|} >,
+    }: $ReadOnly< {|
+        config: Config,
+        logger: Logger
+    |} >,
 ) => {
 
     const createUsers = async ( {
@@ -44,6 +47,23 @@ export const createTools = (
 
     };
 
+    const deleteUsers = async ( {
+        usernames,
+    }: {
+        usernames: $ReadOnlyArray< string >,
+    }, ): Promise< void > => {
+
+        await auth.deleteUsers(
+            {
+                config,
+                exec,
+                logger,
+                usernames,
+            },
+        );
+
+    };
+
     const createWorld = async ( {
         id,
         state,
@@ -52,7 +72,7 @@ export const createTools = (
         state: CommonState,
     }, ): Promise< void > => {
 
-        await world.createWorld(
+        await world.create(
             {
                 config,
                 exec,
@@ -64,9 +84,28 @@ export const createTools = (
 
     };
 
+    const destroyWorld = async ( {
+        id,
+    }: {
+        id: string,
+    }, ): Promise< void > => {
+
+        await world.destroy(
+            {
+                config,
+                exec,
+                id,
+                logger,
+            },
+        );
+
+    };
+
     return {
         createUsers,
         createWorld,
+        deleteUsers,
+        destroyWorld,
     };
 
 };

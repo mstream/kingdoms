@@ -80,7 +80,14 @@ const createConfig: () => Config = () => {
                 name: `COGNITO_URL`,
             },
         ),
-        loggingLevel: `warn`,
+        destroyWorldFunctionName: getGlobalVariable(
+            {
+                name: `DESTROY_WORLD_FUNCTION_ID`,
+            },
+        ),
+
+
+        loggingLevel: `debug`,
 
         /*
          * LoggingLevel: getGlobalVariable(

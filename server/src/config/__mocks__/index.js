@@ -18,6 +18,11 @@ export const stubConfig: Config = {
         host: `redisHost1`,
         port: 1111,
     },
+    sqs: {
+        queueUrls: {
+            worldStateUpdate: `worldStateUpdateUrl1`,
+        },
+    },
 };
 
 export const createConfig: () => Config = () => {

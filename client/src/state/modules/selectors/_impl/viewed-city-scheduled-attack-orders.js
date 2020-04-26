@@ -24,7 +24,7 @@ import type {
 
 type Selector = ClientStateSelector< ScheduledAttackOrderInfosById, void >;
 
-export const scheduledAttackOrdersForViewedCitySelector: Selector
+export const viewedCityScheduledAttackOrdersSelector: Selector
     = createSelector<ClientState,
         void,
         ScheduledAttackOrderInfosById,

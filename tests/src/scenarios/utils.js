@@ -25,9 +25,13 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
         children,
     }: {
         parent: TestScenario< IC, OC >,
-        children: $ReadOnlyArray< TestScenario< OC, ScenarioContext > >,
+
+        // $FlowFixMe
+        children: $ReadOnlyArray< TestScenario< OC, any > >,
     },
-): $ReadOnlyArray< TestScenario< IC, ScenarioContext > > => {
+
+    // $FlowFixMe
+): $ReadOnlyArray< TestScenario< IC, any > > => {
 
     const parentExecution: ScenarioExecution< IC, OC > = async ( {
         context, logger, t,
@@ -46,6 +50,19 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
             );
 
         } catch ( error ) {
+
+            try {
+
+                await context.destroy();
+
+            } catch ( error ) {
+
+                logger.error(
+                    `error during context destroying: %s`,
+                    error.stack,
+                );
+
+            }
 
             const testCafeError: ?TestCafeError = validateTestCafeError(
                 {

@@ -11,6 +11,9 @@ import {
     get,
 } from './operations/get';
 import {
+    remove,
+} from './operations/remove';
+import {
     set,
 } from './operations/set';
 import type {
@@ -22,6 +25,9 @@ import type {
 import type {
     DatabaseValueGet,
 } from './operations/get/types';
+import type {
+    DatabaseValueRemove,
+} from './operations/remove/types';
 import type {
     DatabaseValueSet,
 } from './operations/set/types';
@@ -164,6 +170,28 @@ export const createDatabaseValueOperations = <K, V>( {
 
     };
 
+    const specializedRemove: DatabaseValueRemove< K > = async ( {
+        key,
+        logger,
+        redis,
+    }, ) => {
+
+        const serializedKey = keyCreator(
+            {
+                key,
+            },
+        );
+
+        await remove(
+            {
+                key: serializedKey,
+                logger,
+                redis,
+            },
+        );
+
+    };
+
     const specializedSet: DatabaseValueSet< K, V > = async ( {
         key,
         logger,
@@ -195,9 +223,10 @@ export const createDatabaseValueOperations = <K, V>( {
     };
 
     return {
-        cas: specializedCas,
-        get: specializedGet,
-        set: specializedSet,
+        cas   : specializedCas,
+        get   : specializedGet,
+        remove: specializedRemove,
+        set   : specializedSet,
     };
 
 };

@@ -18,4 +18,9 @@ export const emptyConfig: Config = {
         host: ``,
         port: 0,
     },
+    sqs: {
+        queueUrls: {
+            worldStateUpdate: ``,
+        },
+    },
 };

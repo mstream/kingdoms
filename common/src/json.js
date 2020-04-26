@@ -16,7 +16,7 @@ export const parseJson = (
 
 };
 
-export const stringifyJson = (
+export const serializeJson = (
     {
         json,
     }: { json: Json },

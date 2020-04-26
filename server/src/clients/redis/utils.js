@@ -45,6 +45,15 @@ export const dummyMultiRedis: MultiRedis = {
 };
 
 export const dummyRedis: Redis = {
+    del: () => {
+
+        return Promise.reject(
+            Error(
+                `unsupported`,
+            ),
+        );
+
+    },
     get: () => {
 
         return Promise.reject(

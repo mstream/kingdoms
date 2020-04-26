@@ -214,7 +214,7 @@ module.exports = {
                 script: deployService(
                     {
                         environment         : `dev`,
-                        loggingLevel        : `debug`,
+                        loggingLevel        : `warn`,
                         networkStackName    : `kingdoms-network`,
                         persistenceStackName: `kingdoms-persistence`,
                         stackName           : `kingdoms-service`,

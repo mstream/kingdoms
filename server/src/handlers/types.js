@@ -251,6 +251,27 @@ export type ScheduledEvent = $ReadOnly< {
     resources: string[],
 } >;
 
-export type EventValidator<T> =
-    ( $ReadOnly< {| event: APIGatewayProxyEvent |} > ) =>
+export type SqsEventRecord = $ReadOnly< {
+    attributes: {[string]: string},
+    awsRegion: string,
+    body: string,
+    eventSource: string,
+    eventSourceArn: string,
+    md5OfBody: string,
+    messageAttributes: string,
+    messageId: string,
+    receiptHandle: string,
+} >;
+
+export type SqsEvent = $ReadOnly< {
+    Records: $ReadOnlyArray< SqsEventRecord >
+} >
+
+export type SqsHandler = Handler< SqsEvent, void >;
+
+type EventValidator<E, T> =
+    ( $ReadOnly< {| event: E |} > ) =>
         $ReadOnly< {| result?: T, errors: $ReadOnlyArray< string > |} >
+
+export type ProxyEventValidator<T> = EventValidator< APIGatewayProxyEvent, T >
+export type SqsEventValidator<T> = EventValidator< SqsEvent, T >

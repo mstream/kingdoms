@@ -5,10 +5,10 @@ import {
 } from './create-users';
 import {
     emptyConfig,
-} from '../../config';
+} from '../../../config';
 import {
     emptyLogger,
-} from '../../../../common/src/logging';
+} from '../../../../../common/src/logging';
 
 describe(
     `createUsers`,

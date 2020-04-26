@@ -34,20 +34,20 @@ import {
     runClientStateSelectorsTestScenarios,
 } from '../../test-utils';
 import {
-    scheduledAttackOrdersForViewedCitySelectorTestScenarios,
-} from './_test/scheduled-attack-orders-for-viewed-city-test-scenarios';
+    viewedCityScheduledAttackOrdersSelectorTestScenarios,
+} from './_test/viewed-city-scheduled-attack-orders-test-scenarios';
 
 const scenarios = {
-    attackedCity                      : attackedCitySelectorTestScenarios,
-    attackingCity                     : attackingCitySelectorTestScenarios,
-    cityIdsOwnedByPlayer              : cityIdsOwnedByPlayersSelectorTestScenarios,
-    currentlyViewedCity               : currentlyViewedCitySelectorTestScenarios,
-    distancesToAttackedCity           : distancesToAttackedCitySelectorTestScenarios,
-    isGameStarting                    : isGameStartingSelectorTestScenarios,
-    nextCityId                        : nextCityIdTestScenarios,
-    playerOwnsAnyCity                 : playerOwnsAnyCitySelectorTestScenarios,
-    previousCityId                    : previousCityIdTestScenarios,
-    scheduledAttackOrdersForViewedCity: scheduledAttackOrdersForViewedCitySelectorTestScenarios,
+    attackedCity                   : attackedCitySelectorTestScenarios,
+    attackingCity                  : attackingCitySelectorTestScenarios,
+    cityIdsOwnedByPlayer           : cityIdsOwnedByPlayersSelectorTestScenarios,
+    currentlyViewedCity            : currentlyViewedCitySelectorTestScenarios,
+    distancesToAttackedCity        : distancesToAttackedCitySelectorTestScenarios,
+    isGameStarting                 : isGameStartingSelectorTestScenarios,
+    nextCityId                     : nextCityIdTestScenarios,
+    playerOwnsAnyCity              : playerOwnsAnyCitySelectorTestScenarios,
+    previousCityId                 : previousCityIdTestScenarios,
+    viewedCityScheduledAttackOrders: viewedCityScheduledAttackOrdersSelectorTestScenarios,
 };
 
 describe(

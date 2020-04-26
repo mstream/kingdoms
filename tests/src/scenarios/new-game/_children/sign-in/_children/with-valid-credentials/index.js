@@ -8,10 +8,6 @@ import {
     scenarios as createCityScenarios,
 } from './_children/create-city';
 import {
-    scenarios as signOutScenarios,
-} from './_children/sign-out';
-
-import {
     execution,
 } from './execution';
 import type {
@@ -26,7 +22,6 @@ export const scenarios: $ReadOnlyArray< TestScenario< SignInScenarioContext, Sig
         {
             children: [
                 ...createCityScenarios,
-                ...signOutScenarios,
             ],
             parent: {
                 execution,

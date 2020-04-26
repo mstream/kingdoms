@@ -16,7 +16,7 @@ const createVariables = (
         if ( variable == null ) {
 
             throw Error(
-                `missing required exportes variable '${ name }'`,
+                `missing required exported variable '${ name }'`,
             );
 
         }
@@ -39,6 +39,11 @@ const createVariables = (
         COGNITO_URL: getVariable(
             {
                 name: `AuthWebsiteUrl`,
+            },
+        ),
+        DESTROY_WORLD_FUNCTION_ID: getVariable(
+            {
+                name: `DestroyWorldFunctionId`,
             },
         ),
         LOGGING_LEVEL: loggingLevel,
@@ -75,7 +80,7 @@ const createDevVariables = () => {
     return createVariables(
         {
             exportedVariables,
-            loggingLevel: `debug`,
+            loggingLevel: `warn`,
         },
     );
 

@@ -47,7 +47,7 @@ const mapStateToProps = (
             isVisible: clientStateSelectors.menu.activeCityViewTab(
                 state,
             ) === TAB_OVERVIEW,
-            orderInfosById: clientStateSelectors.scheduledAttackOrdersForViewedCity(
+            orderInfosById: clientStateSelectors.viewedCityScheduledAttackOrders(
                 state,
             ),
         },

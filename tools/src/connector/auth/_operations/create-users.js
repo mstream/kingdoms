@@ -1,21 +1,21 @@
 // @flow
 
 import {
-    confirmSignUp, signUp,
-} from '../../client/cognito';
+    cognito,
+} from '../../../client/cognito';
 import verror from 'verror';
 import type {
     Config,
-} from '../../config/types';
+} from '../../../config/types';
 import type {
     Exec,
-} from '../../../../common/src/execute/types';
+} from '../../../../../common/src/execute/types';
 import type {
     Logger,
-} from '../../../../common/src/logging/types';
+} from '../../../../../common/src/logging/types';
 import type {
     User,
-} from './types';
+} from '../types';
 
 type SuccessfulResult = $ReadOnly< {
     error: null,
@@ -69,7 +69,7 @@ const signUpUsers = async ( {
                 username,
             );
 
-            return signUp(
+            return cognito.signUp(
                 {
                     clientId: config.clientId,
                     exec,
@@ -264,7 +264,7 @@ const confirmUsersSignUp = async ( {
                 username,
             );
 
-            return confirmSignUp(
+            return cognito.adminConfirmSignUp(
                 {
                     exec,
                     logger,
@@ -366,7 +366,7 @@ export const createUsers = async ( {
 }, ) => {
 
     logger.info(
-        `creating test users in '%s' user pool`,
+        `creating users in '%s' user pool`,
         config.userPoolId,
     );
 

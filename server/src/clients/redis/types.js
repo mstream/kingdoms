@@ -1,5 +1,10 @@
 // @flow
 
+export type RedisDelArgs = [string]
+export type RedisDelResult = Promise< number >
+export type RedisDel = ( ...RedisDelArgs ) => RedisDelResult;
+export type MockRedisDel = JestMockFn< RedisDelArgs, RedisDelResult >
+
 export type RedisGetArgs = [string]
 export type RedisGetResult = Promise< ?string >
 export type RedisGet = ( ...RedisGetArgs ) => RedisGetResult;
@@ -59,6 +64,7 @@ export type MultiRedis = {
 };
 
 export type Redis = {
+    del: RedisDel,
     get: RedisGet,
     keys: RedisKeys,
     multi: () => MultiRedis,

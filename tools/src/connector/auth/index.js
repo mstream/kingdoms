@@ -2,8 +2,12 @@
 
 import {
     createUsers,
-} from './create-users';
+} from './_operations/create-users';
+import {
+    deleteUsers,
+} from './_operations/delete-users';
 
 export const auth = {
     createUsers,
+    deleteUsers,
 };

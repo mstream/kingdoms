@@ -1,9 +1,6 @@
 // @flow
 
 import {
-    createApiGatewayClient,
-} from '../../clients/api-gateway';
-import {
     createConfig,
 } from '../../config';
 import {
@@ -13,13 +10,19 @@ import {
     createLogger,
 } from '../../../../common/src/logging';
 import {
+    createQueueConnector,
+} from '../../connectors/queue';
+import {
     createRedisClient,
 } from '../../clients/redis';
+import {
+    createSqsClient,
+} from '../../clients/sqs';
 import {
     database,
 } from '../../connectors/database';
 import {
-    executeAction, sendResponse,
+    executeAction,
 } from '../../util';
 import {
     executeTimeStep,
@@ -28,12 +31,6 @@ import {
     getCurrentTime,
 } from '../../connectors/time';
 import verror from 'verror';
-import type {
-    Logger,
-} from '../../../../common/src/logging/types';
-import type {
-    Redis,
-} from '../../clients/redis/types';
 import type {
     ScheduledHandler,
 } from '../types';
@@ -44,32 +41,28 @@ const logger = createLogger(
         config,
     },
 );
-const apiGateway = createApiGatewayClient(
+const dateProvider = createDateProvider();
+const queue = createQueueConnector(
     {
         config,
     },
 );
-const dateProvider = createDateProvider();
 const redis = createRedisClient(
     {
         config,
     },
 );
+const sqs = createSqsClient();
+
 
 export const ERROR_STATE_UPDATE: 'STATE_UPDATE' = `STATE_UPDATE`;
 
 const updateWorldState = async ( {
-    environment,
-    logger,
-    redis,
-    time,
-    worldId,
+    environment, time, worldId,
 }: {
     environment: string,
-    logger: Logger,
-    redis: Redis,
     time: string,
-    worldId: string,
+    worldId: string
 }, ): Promise< void > => {
 
     try {
@@ -88,75 +81,22 @@ const updateWorldState = async ( {
             },
         );
 
-        const playerIds = await database.playersByWorld.getAll(
+        await queue.sendWorldStateUpdate(
             {
-                key: {
-                    environment,
+                logger,
+                payload: {
+                    state: response.state,
+                    time,
                     worldId,
                 },
-                logger,
-                redis,
+                sqs,
             },
-        );
-
-        const connectionIdPromises = playerIds.map(
-            (
-                playerId: string,
-            ) => {
-
-                return database.connectionByPlayer.get(
-                    {
-                        key: {
-                            environment,
-                            playerId,
-                        },
-                        logger,
-                        redis,
-                    },
-                );
-
-            },
-        );
-
-        const connectionIds: $ReadOnlyArray< ?string > = await Promise.all(
-            connectionIdPromises,
-        );
-
-        const sendStatueUpdatePromises: $ReadOnlyArray< Promise< void >, > = connectionIds.reduce(
-            (
-                sendStatueUpdatePromises, connectionId: ?string,
-            ) => {
-
-                return connectionId == null
-                    ? sendStatueUpdatePromises
-                    : [
-                        ...sendStatueUpdatePromises,
-                        sendResponse(
-                            {
-                                apiGateway,
-                                connectionId,
-                                logger,
-                                redis,
-                                response,
-                            },
-                        ),
-                    ];
-
-            },
-            [],
-        );
-
-        await Promise.all(
-            sendStatueUpdatePromises,
         );
 
     } catch ( error ) {
 
-        throw new verror.VError(
-            {
-                cause: error,
-                name : ERROR_STATE_UPDATE,
-            },
+        console.error(
+            error.stack,
         );
 
     }
@@ -195,8 +135,6 @@ export const handler: ScheduledHandler = async () => {
                 return updateWorldState(
                     {
                         environment,
-                        logger,
-                        redis,
                         time,
                         worldId,
                     },

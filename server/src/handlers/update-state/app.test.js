@@ -10,9 +10,6 @@ import {
     emptyContext, emptyScheduledEvent,
 } from '../util';
 import {
-    executeTimeStep,
-} from '../../../../common/src/state/modules/_children/cities/actions';
-import {
     expectCalls,
 } from '../../../../common/src/test-utils';
 import {
@@ -29,10 +26,10 @@ import {
     mockGetCurrent,
 } from '../../clients/date-provider';
 import {
-    mockPostToConnection,
-} from '../../clients/api-gateway';
+    mockSendMessage,
+} from '../../clients/sqs';
 import {
-    stringifyJson,
+    serializeJson,
 } from '../../../../common/src/json';
 import {
     stubConfig,
@@ -43,13 +40,12 @@ import type {
 import type {
     Context, ScheduledEvent,
 } from '../types';
+import type {
+    WorldStateUpdatePayload,
+} from '../../connectors/queue/send-world-state-update/types';
 
 jest.mock(
     `../../config`,
-);
-
-jest.mock(
-    `../../clients/api-gateway`,
 );
 
 jest.mock(
@@ -58,6 +54,10 @@ jest.mock(
 
 jest.mock(
     `../../clients/redis`,
+);
+
+jest.mock(
+    `../../clients/sqs`,
 );
 
 describe(
@@ -115,83 +115,31 @@ describe(
                         key,
                     ) => {
 
-                        if ( key.startsWith(
-                            `state-by-world`,
+                        if ( key.includes(
+                            `world1`,
                         ) ) {
 
-                            if ( key.includes(
-                                `world1`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    stringifyJson(
-                                        {
-                                            json: state1,
-                                        },
-                                    ),
-                                );
-
-                            }
-
-                            if ( key.includes(
-                                `world2`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    stringifyJson(
-                                        {
-                                            json: state2,
-                                        },
-                                    ),
-                                );
-
-                            }
+                            return Promise.resolve(
+                                serializeJson(
+                                    {
+                                        json: state1,
+                                    },
+                                ),
+                            );
 
                         }
 
-                        if ( key.startsWith(
-                            `connection-by-player`,
+                        if ( key.includes(
+                            `world2`,
                         ) ) {
 
-                            if ( key.includes(
-                                `player1`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    `connection1`,
-                                );
-
-                            }
-
-                            if ( key.includes(
-                                `player2`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    `connection2`,
-                                );
-
-                            }
-
-                            if ( key.includes(
-                                `player3`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    `connection3`,
-                                );
-
-                            }
-
-                            if ( key.includes(
-                                `player4`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    `connection4`,
-                                );
-
-                            }
+                            return Promise.resolve(
+                                serializeJson(
+                                    {
+                                        json: state2,
+                                    },
+                                ),
+                            );
 
                         }
 
@@ -203,57 +151,13 @@ describe(
                 );
 
                 mockSmembers.mockImplementation(
-                    (
-                        key: string,
-                    ) => {
+                    () => {
 
-                        if ( key.startsWith(
-                            `worlds`,
-                        ) ) {
-
-                            return Promise.resolve(
-                                [
-                                    `world1`,
-                                    `world2`,
-                                ],
-                            );
-
-                        }
-
-                        if ( key.startsWith(
-                            `players-by-world`,
-                        ) ) {
-
-                            if ( key.includes(
+                        return Promise.resolve(
+                            [
                                 `world1`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    [
-                                        `player1`,
-                                        `player2`,
-                                    ],
-                                );
-
-                            }
-
-                            if ( key.includes(
                                 `world2`,
-                            ) ) {
-
-                                return Promise.resolve(
-                                    [
-                                        `player3`,
-                                        `player4`,
-                                    ],
-                                );
-
-                            }
-
-                        }
-
-                        return Promise.reject(
-                            `mockSmembers: ${ key }`,
+                            ],
                         );
 
                     },
@@ -293,7 +197,7 @@ describe(
                     },
                 );
 
-                mockPostToConnection.mockImplementation(
+                mockSendMessage.mockImplementation(
                     () => {
 
                         return {
@@ -327,6 +231,18 @@ describe(
                     time: `2000-01-01T01:00:00.000Z`,
                 };
 
+                const stateUpdateMessagePayload1: WorldStateUpdatePayload = {
+                    state  : updatedState1,
+                    time   : `2000-01-01T01:00:00.000Z`,
+                    worldId: `world1`,
+                };
+
+                const stateUpdateMessagePayload2: WorldStateUpdatePayload = {
+                    state  : updatedState2,
+                    time   : `2000-01-01T01:00:00.000Z`,
+                    worldId: `world2`,
+                };
+
                 await handler(
                     event,
                     context,
@@ -357,18 +273,6 @@ describe(
                             [
                                 `state-by-world:${ stubConfig.environment }:world2`,
                             ],
-                            [
-                                `connection-by-player:${ stubConfig.environment }:player1`,
-                            ],
-                            [
-                                `connection-by-player:${ stubConfig.environment }:player2`,
-                            ],
-                            [
-                                `connection-by-player:${ stubConfig.environment }:player3`,
-                            ],
-                            [
-                                `connection-by-player:${ stubConfig.environment }:player4`,
-                            ],
                         ],
                         expect,
                         mockFunction: mockGet,
@@ -391,7 +295,7 @@ describe(
                         calls: [
                             [
                                 `state-by-world:${ stubConfig.environment }:world1`,
-                                stringifyJson(
+                                serializeJson(
                                     {
                                         json: updatedState1,
                                     },
@@ -399,7 +303,7 @@ describe(
                             ],
                             [
                                 `state-by-world:${ stubConfig.environment }:world2`,
-                                stringifyJson(
+                                serializeJson(
                                     {
                                         json: updatedState2,
                                     },
@@ -428,12 +332,6 @@ describe(
                             [
                                 `worlds:${ stubConfig.environment }`,
                             ],
-                            [
-                                `players-by-world:${ stubConfig.environment }:world1`,
-                            ],
-                            [
-                                `players-by-world:${ stubConfig.environment }:world2`,
-                            ],
                         ],
                         expect,
                         mockFunction: mockSmembers,
@@ -445,91 +343,27 @@ describe(
                         calls: [
                             [
                                 {
-                                    ConnectionId: `connection1`,
-                                    Data        : stringifyJson(
+                                    MessageBody: serializeJson(
                                         {
-                                            json: {
-                                                errors : [],
-                                                request: {
-                                                    action: executeTimeStep(
-                                                        {
-                                                            time: `2000-01-01T01:00:00.000Z`,
-                                                        },
-                                                    ),
-                                                    worldId: `world1`,
-                                                },
-                                                state: updatedState1,
-                                            },
+                                            json: stateUpdateMessagePayload1,
                                         },
                                     ),
+                                    QueueUrl: stubConfig.sqs.queueUrls.worldStateUpdate,
                                 },
                             ],
                             [
                                 {
-                                    ConnectionId: `connection2`,
-                                    Data        : stringifyJson(
+                                    MessageBody: serializeJson(
                                         {
-                                            json: {
-                                                errors : [],
-                                                request: {
-                                                    action: executeTimeStep(
-                                                        {
-                                                            time: `2000-01-01T01:00:00.000Z`,
-                                                        },
-                                                    ),
-                                                    worldId: `world1`,
-                                                },
-                                                state: updatedState1,
-                                            },
+                                            json: stateUpdateMessagePayload2,
                                         },
                                     ),
-                                },
-                            ],
-                            [
-                                {
-                                    ConnectionId: `connection3`,
-                                    Data        : stringifyJson(
-                                        {
-                                            json: {
-                                                errors : [],
-                                                request: {
-                                                    action: executeTimeStep(
-                                                        {
-                                                            time: `2000-01-01T01:00:00.000Z`,
-                                                        },
-                                                    ),
-                                                    worldId: `world2`,
-                                                },
-                                                state: updatedState2,
-                                            },
-                                        },
-                                    ),
-                                },
-                            ],
-                            [
-                                {
-                                    ConnectionId: `connection4`,
-                                    Data        : stringifyJson(
-                                        {
-                                            json: {
-                                                errors : [],
-                                                request: {
-                                                    action: executeTimeStep(
-                                                        {
-                                                            time: `2000-01-01T01:00:00.000Z`,
-                                                        },
-                                                    ),
-                                                    worldId: `world2`,
-                                                },
-                                                state: updatedState2,
-                                            },
-                                        },
-                                    ),
+                                    QueueUrl: stubConfig.sqs.queueUrls.worldStateUpdate,
                                 },
                             ],
                         ],
                         expect,
-                        mockFunction: mockPostToConnection,
+                        mockFunction: mockSendMessage,
                     },
                 );
 
@@ -538,3 +372,4 @@ describe(
 
     },
 );
+

@@ -91,6 +91,15 @@ const createErrorSegment = (
         .keys(
             errorInfo.context,
         )
+        .filter(
+            (
+                key,
+            ) => {
+
+                return key !== `destroy`;
+
+            },
+        )
         .map(
             (
                 key,

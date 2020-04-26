@@ -13,7 +13,7 @@ import {
     mockSadd, mockSet,
 } from '../../clients/redis';
 import {
-    stringifyJson,
+    serializeJson,
 } from '../../../../common/src/json';
 import {
     stubConfig,
@@ -31,7 +31,7 @@ jest.mock(
 );
 
 describe(
-    `onResetStateHandler`,
+    `resetStateHandler`,
     () => {
 
         it(
@@ -55,7 +55,7 @@ describe(
 
                 const event: APIGatewayProxyEvent = {
                     ...emptyApiGatewayProxyEvent,
-                    body: stringifyJson(
+                    body: serializeJson(
                         {
                             json: {
                                 state,
@@ -122,7 +122,7 @@ describe(
                         [
                             [
                                 `state-by-world:${ stubConfig.environment }:world1`,
-                                stringifyJson(
+                                serializeJson(
                                     {
                                         json: state,
                                     },

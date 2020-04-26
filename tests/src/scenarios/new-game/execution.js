@@ -17,19 +17,29 @@ import type {
     NewGameScenarioContext,
 } from './types';
 import type {
-    ScenarioExecution,
+    ScenarioContext, ScenarioExecution,
 } from '../types';
 
-export const execution: ScenarioExecution< {||}, NewGameScenarioContext > = async ( {
-    logger, t,
-}, ) => {
+export const execution: ScenarioExecution< ScenarioContext, NewGameScenarioContext > = async (
+    {
+        context,
+        logger,
+        t,
+    },
+) => {
 
     const worldId = generateId();
 
     await tools.createWorld(
         {
             id   : worldId,
-            state: emptyCommonState,
+            state: {
+                ...emptyCommonState,
+                rules: {
+                    ...emptyCommonState.rules,
+                    gameSpeed: 1,
+                },
+            },
         },
     );
 
@@ -41,7 +51,21 @@ export const execution: ScenarioExecution< {||}, NewGameScenarioContext > = asyn
         },
     );
 
+    const newDestroyContext = async () => {
+
+        await tools.destroyWorld(
+            {
+                id: worldId,
+            },
+        );
+
+        await context.destroy();
+
+    };
+
     return {
+        ...context,
+        destroy: newDestroyContext,
         worldId,
     };
 

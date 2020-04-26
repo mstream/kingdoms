@@ -5,8 +5,9 @@ import type {
 } from './types';
 
 export const emptyConfig: Config = {
-    clientId              : ``,
-    region                : ``,
-    resetStateFunctionName: ``,
-    userPoolId            : ``,
+    clientId                : ``,
+    destroyWorldFunctionName: ``,
+    region                  : ``,
+    resetStateFunctionName  : ``,
+    userPoolId              : ``,
 };

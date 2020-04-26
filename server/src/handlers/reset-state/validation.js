@@ -10,11 +10,11 @@ import type {
     CommonState,
 } from '../../../../common/src/state/modules/types';
 import type {
-    EventValidator,
+    ProxyEventValidator,
 } from '../types';
 
 
-export const validateEvent: EventValidator< $ReadOnly< {
+export const validateEvent: ProxyEventValidator< $ReadOnly< {
     state: CommonState,
     worldId: string
 } > > = (

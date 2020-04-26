@@ -5,6 +5,10 @@ import {
 } from 'testcafe';
 
 import {
+    scenarios as frozenNewGameScenarios,
+} from './scenarios/frozen-new-game';
+
+import {
     scenarios as newGameScenarios,
 } from './scenarios/new-game';
 
@@ -19,7 +23,9 @@ import type {
 
 type TestFixture = $ReadOnly< {|
     name: string,
-    scenarios: $ReadOnlyArray< TestScenario< {||}, ScenarioContext > >,
+
+    // $FlowFixMe
+    scenarios: $ReadOnlyArray< TestScenario< ScenarioContext, any > >,
 |} >
 
 const generateTestName = (
@@ -42,6 +48,10 @@ const generateTestName = (
 
 const testFixtures: $ReadOnlyArray< TestFixture > = [
     {
+        name     : `frozen new game`,
+        scenarios: frozenNewGameScenarios,
+    },
+    {
         name     : `new game`,
         scenarios: newGameScenarios,
     },
@@ -63,7 +73,7 @@ testFixtures.forEach(
             .sort()
             .forEach(
                 (
-                    scenario: TestScenario< {||}, ScenarioContext >,
+                    scenario: TestScenario< ScenarioContext, ScenarioContext >,
                 ) => {
 
                     const tagsMetadata = scenario.tags.reduce(
@@ -83,16 +93,19 @@ testFixtures.forEach(
 
                     const execution = async ( t: TestController, ) => {
 
-                        await scenario.execution(
+                        const context = await scenario.execution(
                             {
                                 context: Object.freeze(
                                     {
+                                        destroy: async () => {},
                                     },
                                 ),
                                 logger,
                                 t,
                             },
                         );
+
+                        await context.destroy();
 
                     };
 

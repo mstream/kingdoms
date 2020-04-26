@@ -24,7 +24,7 @@ import type {
 
 type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ?ScheduledAttackOrderInfosById >, >;
 
-export const scheduledAttackOrdersForViewedCitySelectorTestScenarios: Scenarios = [
+export const viewedCityScheduledAttackOrdersSelectorTestScenarios: Scenarios = [
     {
         expectedValue: {
             order1: {

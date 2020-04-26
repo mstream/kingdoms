@@ -1,6 +1,7 @@
 // @flow
 
 import type {
+    MockRedisDel,
     MockRedisGet,
     MockRedisKeys,
     MockRedisMulti,
@@ -12,6 +13,18 @@ import type {
     MockRedisWatch,
     Redis,
 } from '../types';
+
+export const mockDel: MockRedisDel = jest.fn(
+    () => {
+
+        return Promise.reject(
+            Error(
+                `mockDel`,
+            ),
+        );
+
+    },
+);
 
 export const mockGet: MockRedisGet = jest.fn(
     () => {
@@ -122,6 +135,7 @@ export const mockWatch: MockRedisWatch = jest.fn(
 export const createRedisClient: () => Redis = () => {
 
     return {
+        del     : mockDel,
         get     : mockGet,
         keys    : mockKeys,
         multi   : mockMulti,

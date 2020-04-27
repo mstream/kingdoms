@@ -160,7 +160,13 @@ export const Component = (
     const isNavigationEnabled = previousCityId != null || nextCityId != null;
 
     const className = classNames(
-        `wood-bg flex flex-row items-stretch flex-none w-full bg-orange-800`,
+        `wood-bg`,
+        `flex`,
+        `flex-row`,
+        `items-stretch`,
+        `flex-none`,
+        `w-full`,
+        `bg-orange-800`,
         {
             'justify-between': isNavigationEnabled,
             'justify-center' : !isNavigationEnabled,
@@ -189,6 +195,7 @@ export const Component = (
 
         return (
             <button
+                data-testid={testIds.cityView.nextCityButton}
                 className={classNames(
                     `metal-bg`,
                     `text-gray-100`,
@@ -233,6 +240,7 @@ export const Component = (
 
         return (
             <button
+                data-testid={testIds.cityView.previousCityButton}
                 className={classNames(
                     `metal-bg`,
                     `text-gray-100`,

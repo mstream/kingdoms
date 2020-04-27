@@ -120,6 +120,34 @@ const closeCityView = async ( {
 
 };
 
+const navigateToNextCity = async ( {
+    t,
+}: {
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.click(
+        selectors
+            .cityView
+            .nextCityButton,
+    );
+
+};
+
+const navigateToPreviousCity = async ( {
+    t,
+}: {
+    t: TestController,
+}, ): Promise< void > => {
+
+    await t.click(
+        selectors
+            .cityView
+            .previousCityButton,
+    );
+
+};
+
 const openCityView = async ( {
     name,
     t,
@@ -233,6 +261,8 @@ export const actions = {
     changeCityName,
     closeCityView,
     createCity,
+    navigateToNextCity,
+    navigateToPreviousCity,
     open,
     openBuildingsTab,
     openCityView,

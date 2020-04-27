@@ -85,17 +85,11 @@ const createConfig: () => Config = () => {
                 name: `DESTROY_WORLD_FUNCTION_ID`,
             },
         ),
-
-
-        loggingLevel: `debug`,
-
-        /*
-         * LoggingLevel: getGlobalVariable(
-         *     {
-         *         name: `LOGGING_LEVEL`,
-         *     },
-         * ),
-         */
+        loggingLevel: getGlobalVariable(
+            {
+                name: `LOGGING_LEVEL`,
+            },
+        ),
         region: getGlobalVariable(
             {
                 name: `REGION`,

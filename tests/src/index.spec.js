@@ -5,28 +5,15 @@ import {
 } from 'testcafe';
 
 import {
-    scenarios as frozenNewGameScenarios,
-} from './scenarios/frozen-new-game';
-
-import {
-    scenarios as newGameScenarios,
-} from './scenarios/new-game';
-
-import {
     logger,
 } from './logging';
+import {
+    scenarios,
+} from './scenarios';
 import sha256 from 'crypto-js/sha256';
 import type {
     ScenarioContext, TestScenario,
 } from './scenarios/types';
-
-
-type TestFixture = $ReadOnly< {|
-    name: string,
-
-    // $FlowFixMe
-    scenarios: $ReadOnlyArray< TestScenario< ScenarioContext, any > >,
-|} >
 
 const generateTestName = (
     {
@@ -46,86 +33,87 @@ const generateTestName = (
 
 };
 
-const testFixtures: $ReadOnlyArray< TestFixture > = [
+
+const createTestMetadata = (
     {
-        name     : `frozen new game`,
-        scenarios: frozenNewGameScenarios,
+        tags,
+    }: {
+        tags: $ReadOnlyArray< string >
     },
-    {
-        name     : `new game`,
-        scenarios: newGameScenarios,
-    },
-];
+): $ReadOnly< { [string]: true } > => {
+
+    return tags.reduce(
+        (
+            tagsMetadata,
+            tag: string,
+        ) => {
+
+            return {
+                ...tagsMetadata,
+                [ tag ]: true,
+            };
+
+        },
+        {
+        },
+    );
+
+};
 
 
-testFixtures.forEach(
-    (
-        testFixture: TestFixture,
-    ) => {
+fixture(
+    `scenarios`,
+);
 
-        fixture(
-            testFixture.name,
-        );
 
-        [
-            ...testFixture.scenarios,
-        ]
-            .sort()
-            .forEach(
-                (
-                    scenario: TestScenario< ScenarioContext, ScenarioContext >,
-                ) => {
+[
+    ...scenarios,
+]
+    .sort()
+    .forEach(
+        (
+            scenario: TestScenario< ScenarioContext, ScenarioContext >,
+        ) => {
 
-                    const tagsMetadata = scenario.tags.reduce(
-                        (
-                            tagsMetadata, tag,
-                        ) => {
-
-                            return {
-                                ...tagsMetadata,
-                                [ tag ]: true,
-                            };
-
-                        },
-                        {
-                        },
-                    );
-
-                    const execution = async ( t: TestController, ) => {
-
-                        const context = await scenario.execution(
-                            {
-                                context: Object.freeze(
-                                    {
-                                        destroy: async () => {},
-                                    },
-                                ),
-                                logger,
-                                t,
-                            },
-                        );
-
-                        await context.destroy();
-
-                    };
-
-                    // $FlowFixMe
-                    test.meta(
-                        {
-                            path: scenario.path,
-                            tags: tagsMetadata,
-                        },
-                    )(
-                        generateTestName(
-                            {
-                                path: scenario.path,
-                            },
-                        ),
-                        execution,
-                    );
-
+            const tagsMetadata = createTestMetadata(
+                {
+                    tags: scenario.tags,
                 },
             );
 
-    },
-);
+            const execution = async ( t: TestController, ) => {
+
+                const context = await scenario.execution(
+                    {
+                        context: Object.freeze(
+                            {
+                                destroy: async () => {
+                                },
+                            },
+                        ),
+                        logger,
+                        t,
+                    },
+                );
+
+                await context.destroy();
+
+            };
+
+            // $FlowFixMe
+            test.meta(
+                {
+                    path: scenario.path,
+                    tags: tagsMetadata,
+                },
+            )(
+                generateTestName(
+                    {
+                        path: scenario.path,
+                    },
+                ),
+                execution,
+            );
+
+        },
+    );

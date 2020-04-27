@@ -29,7 +29,7 @@ import type {
     Redis,
 } from './clients/redis/types';
 import type {
-    ServerRequest, ServerResponse,
+    ServerResponse,
 } from '../../common/src/types';
 
 export const ERROR_ACTION_EXECUTION: 'ERROR_ACTION_EXECUTION'
@@ -105,6 +105,11 @@ export const sendResponse = async ( {
 
 };
 
+type ActionExecutionResult = $ReadOnly< {|
+    errors: $ReadOnlyArray< string >,
+    state: CommonState,
+|} >;
+
 export const executeAction = async ( {
     action,
     environment,
@@ -117,7 +122,7 @@ export const executeAction = async ( {
     logger: Logger,
     redis: Redis,
     worldId: string,
-}, ): Promise< ServerResponse > => {
+}, ): Promise< ActionExecutionResult > => {
 
     try {
 
@@ -168,17 +173,18 @@ export const executeAction = async ( {
 
             };
 
-            const casResult: DatabaseValueCasResult< CommonState > = await database.stateByWorld.cas(
-                {
-                    key: {
-                        environment,
-                        worldId,
+            const casResult: DatabaseValueCasResult< CommonState >
+                = await database.stateByWorld.cas(
+                    {
+                        key: {
+                            environment,
+                            worldId,
+                        },
+                        logger,
+                        redis,
+                        valueTransformer,
                     },
-                    logger,
-                    redis,
-                    valueTransformer,
-                },
-            );
+                );
 
             if ( casResult.previousValue == null ) {
 
@@ -190,17 +196,10 @@ export const executeAction = async ( {
 
             }
 
-            const request: ServerRequest = {
-                // $FlowFixMe
-                action,
-                worldId,
-            };
-
             if ( casResult.errors.length > 0 ) {
 
                 return {
                     errors: casResult.errors,
-                    request,
                     state : casResult.previousValue,
                 };
 
@@ -210,7 +209,6 @@ export const executeAction = async ( {
 
                 return {
                     errors: [],
-                    request,
                     state : casResult.savedValue,
                 };
 

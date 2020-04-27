@@ -21,7 +21,8 @@ export type DatabaseSetGetAllArgs<K> = $ReadOnly< {|
     redis: Redis,
 |} >;
 
-export type DatabaseSetGetAll<K, V> = ( DatabaseSetGetAllArgs< K > ) => Promise< $ReadOnlyArray< V >, >;
+export type DatabaseSetGetAll<K, V> = ( DatabaseSetGetAllArgs< K > ) =>
+    Promise< $ReadOnlyArray< V >, >;
 
 export type DatabaseSetGetAllTestScenario =
     DatabaseTestScenario< DatabaseSetGetAllArgs< string >, DatabaseSetGetAllResult< string > >;

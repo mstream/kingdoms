@@ -14,25 +14,27 @@ import type {
     SignInScenarioContext,
 } from '../../../../types';
 
+type Execution = ScenarioExecution< SignInScenarioContext, SignInScenarioContext >;
 
-export const execution: ScenarioExecution< SignInScenarioContext, SignInScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
+export const execution: Execution
+    = async ( {
+        context,
+        t,
+    }, ) => {
 
-    await appModel.actions.signOut(
-        {
-            t,
-        },
-    );
+        await appModel.actions.signOut(
+            {
+                t,
+            },
+        );
 
-    await authModel.expectations.gotRedirectedFromAppToAuth(
-        {
-            action: `login`,
-            t,
-        },
-    );
+        await authModel.expectations.gotRedirectedFromAppToAuth(
+            {
+                action: `login`,
+                t,
+            },
+        );
 
-    return context;
+        return context;
 
-};
+    };

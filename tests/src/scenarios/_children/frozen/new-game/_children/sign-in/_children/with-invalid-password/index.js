@@ -7,14 +7,19 @@ import {
 import {
     execution,
 } from './execution';
+
 import type {
     SignInScenarioContext,
 } from '../../types';
 import type {
+
     TestScenario,
 } from '../../../../../../../types';
 
-export const scenarios: $ReadOnlyArray< TestScenario< SignInScenarioContext, SignInScenarioContext > >
+type Scenario = TestScenario< SignInScenarioContext, SignInScenarioContext >;
+type Scenarios = $ReadOnlyArray< Scenario >
+
+export const scenarios: Scenarios
     = combineScenarios(
         {
             children: [],

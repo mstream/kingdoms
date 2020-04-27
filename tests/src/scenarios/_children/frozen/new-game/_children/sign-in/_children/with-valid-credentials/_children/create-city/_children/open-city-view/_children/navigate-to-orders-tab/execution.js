@@ -12,35 +12,38 @@ import type {
     CreateCityScenarioContext,
 } from '../../../../types';
 import type {
-
     ScenarioExecution,
 } from '../../../../../../../../../../../../../types';
 
+type Execution = ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext >;
 
-export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
-
-    await appModel.actions.openOrdersTab(
+export const execution: Execution
+    = async (
         {
+            context,
             t,
         },
-    );
+    ) => {
 
-    await t.expect(
-        selectors
-            .cityView
-            .ordersPanel
-            .textContent,
-    )
-        .contains(
-            `No orders`,
+        await appModel.actions.openOrdersTab(
+            {
+                t,
+            },
         );
 
-    return {
-        ...context,
-    };
+        await t.expect(
+            selectors
+                .cityView
+                .ordersPanel
+                .textContent,
+        )
+            .contains(
+                `No orders`,
+            );
 
-};
+        return {
+            ...context,
+        };
+
+    };
 

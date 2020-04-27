@@ -14,7 +14,9 @@ import type {
     WorldStateUpdatePayload,
 } from '../../connectors/queue/send-world-state-update/types';
 
-export const validateStateUpdateEvent: SqsEventValidator< $ReadOnlyArray< WorldStateUpdatePayload > > = (
+type Validator = SqsEventValidator< $ReadOnlyArray< WorldStateUpdatePayload > >;
+
+export const validateStateUpdateEvent: Validator = (
     {
         event,
     },

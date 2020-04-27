@@ -12,55 +12,58 @@ import type {
     CreateCityScenarioContext,
 } from '../../../../types';
 import type {
-
     ScenarioExecution,
 } from '../../../../../../../../../../../../../types';
 
+type Execution = ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext >;
 
-export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
-
-    await appModel.actions.openBuildingsTab(
+export const execution: Execution
+    = async (
         {
+            context,
             t,
         },
-    );
+    ) => {
 
-    await t.expect(
-        selectors
-            .cityView
-            .buildingsPanel
-            .textContent,
-    )
-        .contains(
-            `Lumber mill`,
+        await appModel.actions.openBuildingsTab(
+            {
+                t,
+            },
         );
 
-    await t.expect(
-        selectors
-            .cityView
-            .buildingsPanel
-            .textContent,
-    )
-        .contains(
-            `Pasture`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .buildingsPanel
+                .textContent,
+        )
+            .contains(
+                `Lumber mill`,
+            );
 
-    await t.expect(
-        selectors
-            .cityView
-            .buildingsPanel
-            .textContent,
-    )
-        .contains(
-            `Warehouse`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .buildingsPanel
+                .textContent,
+        )
+            .contains(
+                `Pasture`,
+            );
 
-    return {
-        ...context,
+        await t.expect(
+            selectors
+                .cityView
+                .buildingsPanel
+                .textContent,
+        )
+            .contains(
+                `Warehouse`,
+            );
+
+        return {
+            ...context,
+        };
+
     };
-
-};
 

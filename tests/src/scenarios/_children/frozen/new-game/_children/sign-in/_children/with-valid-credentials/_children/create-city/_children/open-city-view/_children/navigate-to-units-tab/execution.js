@@ -15,91 +15,95 @@ import type {
     ScenarioExecution,
 } from '../../../../../../../../../../../../../types';
 
+type Execution = ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext >;
 
-export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
-
-    await appModel.actions.openUnitsTab(
+export const execution: Execution
+    = async (
         {
+            context,
             t,
         },
-    );
+    ) => {
 
-    await t.expect(
-        selectors
-            .cityView
-            .unitsPanel
-            .textContent,
-    )
-        .contains(
-            `Archers`,
+        await appModel.actions.openUnitsTab(
+            {
+                t,
+            },
         );
 
-    await t.expect(
-        selectors
-            .cityView
-            .unitsPanel
-            .textContent,
-    )
-        .contains(
-            `Catapults`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .unitsPanel
+                .textContent,
+        )
+            .contains(
+                `Archers`,
+            );
 
-    await t.expect(
-        selectors
-            .cityView
-            .unitsPanel
-            .textContent,
-    )
-        .contains(
-            `Knights`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .unitsPanel
+                .textContent,
+        )
+            .contains(
+                `Catapults`,
+            );
 
-    await t.expect(
-        selectors
-            .cityView
-            .unitsPanel
-            .textContent,
-    )
-        .contains(
-            `Nobles`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .unitsPanel
+                .textContent,
+        )
+            .contains(
+                `Knights`,
+            );
 
-    await t.expect(
-        selectors
-            .cityView
-            .unitsPanel
-            .textContent,
-    )
-        .contains(
-            `Pikemen`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .unitsPanel
+                .textContent,
+        )
+            .contains(
+                `Nobles`,
+            );
 
-    await t.expect(
-        selectors
-            .cityView
-            .unitsPanel
-            .textContent,
-    )
-        .contains(
-            `Peasants`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .unitsPanel
+                .textContent,
+        )
+            .contains(
+                `Pikemen`,
+            );
 
-    await t.expect(
-        selectors
-            .cityView
-            .unitsPanel
-            .textContent,
-    )
-        .contains(
-            `Swordsmen`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .unitsPanel
+                .textContent,
+        )
+            .contains(
+                `Peasants`,
+            );
 
-    return {
-        ...context,
+        await t.expect(
+            selectors
+                .cityView
+                .unitsPanel
+                .textContent,
+        )
+            .contains(
+                `Swordsmen`,
+            );
+
+        return {
+            ...context,
+        };
+
     };
-
-};
 

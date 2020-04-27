@@ -110,7 +110,15 @@ export const Component = (
                     <ImageComponent image={buildingVisual.image} ratio="75%">
                         <div
                             className="absolute top-1/2 w-full bg-gray-100-alpha-50">
-                            <p className="text-xl object-center text-center font-medium text-gray-900">
+                            <p className={
+                                classNames(
+                                    `text-xl`,
+                                    `object-center`,
+                                    `text-center`,
+                                    `font-medium`,
+                                    `text-gray-900`,
+                                )
+                            }>
                                 {romanDecimalConverter.roman(
                                     buildingTier,
                                 )}

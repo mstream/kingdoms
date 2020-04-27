@@ -71,7 +71,8 @@ describe(
         );
 
         test(
-            `displays new game window when the server state is loaded and the player does not own any city`,
+            `displays new game window when the server state is loaded `
+            + `and the player does not own any city`,
             async () => {
 
                 const state: ClientState = {
@@ -129,7 +130,8 @@ describe(
         );
 
         test(
-            `does not display new game window when the server state is loaded and the player does own a city`,
+            `does not display new game window when the server state is loaded `
+            + `and the player does own a city`,
             async () => {
 
                 const state: ClientState = {

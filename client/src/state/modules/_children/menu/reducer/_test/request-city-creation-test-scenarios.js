@@ -13,7 +13,8 @@ import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientRequestCityCreationAction >, >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientRequestCityCreationAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const requestCityCreationTestScenarios: Scenarios = [
     {

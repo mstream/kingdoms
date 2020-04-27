@@ -3,9 +3,7 @@
 import {
     PLAYER_STATUS_DEFEATED, PLAYER_STATUS_PLAYING,
 } from '../types';
-import {
-    createScheduledAttackOrder,
-} from '../../../orders/actions';
+
 import {
     emptyCommonState,
 } from '../../../../state';
@@ -15,6 +13,9 @@ import {
 import {
     failure, success,
 } from '../../../../utils';
+import {
+    ordersActions,
+} from '../../../orders/actions';
 import type {
     CommonCreateScheduledAttackOrderAction,
 } from '../../../orders/actions/types';
@@ -27,7 +28,7 @@ type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const createOrderTestScenarios: Scenarios = [
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 0,
                 orderId         : `order1`,
@@ -63,7 +64,7 @@ export const createOrderTestScenarios: Scenarios = [
         },
     },
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 0,
                 orderId         : `order1`,
@@ -95,7 +96,7 @@ export const createOrderTestScenarios: Scenarios = [
         },
     },
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 0,
                 orderId         : `order1`,

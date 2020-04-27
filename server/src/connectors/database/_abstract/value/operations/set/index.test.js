@@ -16,11 +16,14 @@ import type {
     DatabaseValueSetArgs, DatabaseValueSetResult,
 } from './types';
 
+type Args = DatabaseValueSetArgs< string, string >;
+type Result = DatabaseValueSetResult;
+
 describe(
     `set`,
     () => {
 
-        runDatabaseOperationTestScenarios<DatabaseValueSetArgs< string, string >, DatabaseValueSetResult>(
+        runDatabaseOperationTestScenarios<Args, Result>(
             {
                 jest: {
                     describe,

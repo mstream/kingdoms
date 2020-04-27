@@ -8,4 +8,5 @@ export type SignInScenarioContext = $ReadOnly< {
     ...NewGameScenarioContext,
     password: string,
     username: string,
+    ...
 } >;

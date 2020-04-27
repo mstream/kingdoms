@@ -3,54 +3,57 @@
 
 import {
     Selector,
-} from "testcafe";
+} from 'testcafe';
 import {
     authModel,
 } from '../../../../../../../../models/auth';
 
 
 import type {
-
     ScenarioExecution,
 } from '../../../../../../../types';
 import type {
     SignInScenarioContext,
 } from '../../types';
 
-export const execution: ScenarioExecution< SignInScenarioContext, SignInScenarioContext > = async ( {
-    context, logger, t,
-}, ) => {
+type Execution = ScenarioExecution< SignInScenarioContext, SignInScenarioContext >;
 
-    const {
-        password,
-    } = context;
 
-    await authModel.actions.signIn(
-        {
-            logger,
+export const execution: Execution
+    = async ( {
+        context, logger, t,
+    }, ) => {
+
+        const {
             password,
-            t,
-            username: `non-existent`,
-        },
-    );
+        } = context;
 
-    await authModel.expectations.isAtAuthPage(
-        {
-            t,
-        },
-    );
+        await authModel.actions.signIn(
+            {
+                logger,
+                password,
+                t,
+                username: `non-existent`,
+            },
+        );
 
-    await t
-        .expect(
-            Selector(
-                `*`,
+        await authModel.expectations.isAtAuthPage(
+            {
+                t,
+            },
+        );
+
+        await t
+            .expect(
+                Selector(
+                    `*`,
+                )
+                    .withExactText(
+                        `The username or password you entered is invalid`,
+                    ).exists,
             )
-                .withExactText(
-                    `The username or password you entered is invalid`,
-                ).exists,
-        )
-        .ok();
+            .ok();
 
-    return context;
+        return context;
 
-};
+    };

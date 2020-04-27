@@ -1,85 +1,127 @@
 // @flow
 
 import type {
-    BaseAction,
-} from '../../../../../../../common/src/types/actions';
+    ClientCloseAttackViewAction,
+} from './_children/close-attack-view/types';
 import type {
-    ClientStateCityViewTab,
-} from '../reducer/types';
+    ClientCloseCityViewAction,
+} from './_children/close-city-view/types';
 import type {
-    CommonStateBuildingKey,
-    CommonStateResourceKey,
-    CommonStateUnitKey,
-} from '../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+    ClientOpenAttackViewAction,
+} from './_children/open-attack-view/types';
 import type {
-    CommonStateRegimentTemplate,
-} from '../../../../../../../common/src/state/modules/_children/orders/reducer/types';
+    ClientOpenCityViewAction,
+} from './_children/open-city-view/types';
+import type {
+    ClientSelectAttackViewAttackingCityAction,
+} from './_children/select-attack-view-attacking-city/types';
+import type {
+    ClientSelectCityViewBuildingsTabAction,
+} from './_children/select-city-view-buildings-tab/types';
+import type {
+    ClientSelectCityViewOrdersTabAction,
+} from './_children/select-city-view-orders-tab/types';
+import type {
+    ClientSelectCityViewResourcesTabAction,
+} from './_children/select-city-view-resources-tab/types';
+import type {
+    ClientSelectCityViewTabAction,
+} from './_children/select-city-view-tab/types';
+import type {
+    ClientSelectCityViewUnitsTabAction,
+} from './_children/select-city-view-units-tab/types';
+import type {
+    ClientUpdateAttackViewMinimumDelayAction,
+} from './_children/update-attack-view-minimum-delay/types';
+import type {
+    ClientUpdateAttackViewRegimentTemplateAction,
+} from './_children/update-attack-view-regiment-template/types';
 
-export const CLOSE_ATTACK_VIEW: 'CLOSE_ATTACK_VIEW' = `CLOSE_ATTACK_VIEW`;
-export const CLOSE_CITY_VIEW: 'CLOSE_CITY_VIEW' = `CLOSE_CITY_VIEW`;
-export const OPEN_ATTACK_VIEW: 'OPEN_ATTACK_VIEW' = `OPEN_ATTACK_VIEW`;
-export const OPEN_CITY_VIEW: 'OPEN_CITY_VIEW' = `OPEN_CITY_VIEW`;
-export const SELECT_ATTACK_VIEW_ATTACKING_CITY: 'SELECT_ATTACK_VIEW_ATTACKING_CITY'
-    = `SELECT_ATTACK_VIEW_ATTACKING_CITY`;
-export const SELECT_CITY_VIEW_TAB: 'SELECT_CITY_VIEW_TAB'
-    = `SELECT_CITY_VIEW_TAB`;
-export const SELECT_CITY_VIEW_BUILDINGS_TAB: 'SELECT_CITY_VIEW_BUILDINGS_TAB'
-    = `SELECT_CITY_VIEW_BUILDINGS_TAB`;
-export const SELECT_CITY_VIEW_ORDERS_TAB: 'SELECT_CITY_VIEW_ORDERS_TAB'
-    = `SELECT_CITY_VIEW_ORDERS_TAB`;
-export const SELECT_CITY_VIEW_RESOURCES_TAB: 'SELECT_CITY_VIEW_RESOURCES_TAB'
-    = `SELECT_CITY_VIEW_RESOURCES_TAB`;
-export const SELECT_CITY_VIEW_UNITS_TAB: 'SELECT_CITY_VIEW_UNITS_TAB'
-    = `SELECT_CITY_VIEW_UNITS_TAB`;
-export const UPDATE_ATTACK_VIEW_MINIMUM_DELAY: 'UPDATE_ATTACK_VIEW_MINIMUM_DELAY'
-    = `UPDATE_ATTACK_VIEW_MINIMUM_DELAY`;
-export const UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE: 'UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE'
-    = `UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE`;
+export type {
+    ClientCloseAttackViewAction,
+} from './_children/close-attack-view/types';
+export type {
+    ClientCloseCityViewAction,
+} from './_children/close-city-view/types';
+export type {
+    ClientOpenAttackViewAction,
+} from './_children/open-attack-view/types';
+export type {
+    ClientOpenCityViewAction,
+} from './_children/open-city-view/types';
+export type {
+    ClientSelectAttackViewAttackingCityAction,
+} from './_children/select-attack-view-attacking-city/types';
+export type {
+    ClientSelectCityViewBuildingsTabAction,
+} from './_children/select-city-view-buildings-tab/types';
+export type {
+    ClientSelectCityViewOrdersTabAction,
+} from './_children/select-city-view-orders-tab/types';
+export type {
+    ClientSelectCityViewResourcesTabAction,
+} from './_children/select-city-view-resources-tab/types';
+export type {
+    ClientSelectCityViewTabAction,
+} from './_children/select-city-view-tab/types';
+export type {
+    ClientSelectCityViewUnitsTabAction,
+} from './_children/select-city-view-units-tab/types';
+export type {
+    ClientUpdateAttackViewMinimumDelayAction,
+} from './_children/update-attack-view-minimum-delay/types';
+export type {
+    ClientUpdateAttackViewRegimentTemplateAction,
+} from './_children/update-attack-view-regiment-template/types';
 
-export type ClientCloseAttackViewAction =
-    BaseAction< typeof CLOSE_ATTACK_VIEW,
-    void, >;
+export {
+    CLOSE_ATTACK_VIEW,
+} from './_children/close-attack-view/types';
+export {
+    CLOSE_CITY_VIEW,
+} from './_children/close-city-view/types';
+export {
+    OPEN_ATTACK_VIEW,
+} from './_children/open-attack-view/types';
+export {
+    OPEN_CITY_VIEW,
+} from './_children/open-city-view/types';
+export {
+    SELECT_ATTACK_VIEW_ATTACKING_CITY,
+} from './_children/select-attack-view-attacking-city/types';
+export {
+    SELECT_CITY_VIEW_BUILDINGS_TAB,
+} from './_children/select-city-view-buildings-tab/types';
+export {
+    SELECT_CITY_VIEW_ORDERS_TAB,
+} from './_children/select-city-view-orders-tab/types';
+export {
+    SELECT_CITY_VIEW_RESOURCES_TAB,
+} from './_children/select-city-view-resources-tab/types';
+export {
+    SELECT_CITY_VIEW_TAB,
+} from './_children/select-city-view-tab/types';
+export {
+    SELECT_CITY_VIEW_UNITS_TAB,
+} from './_children/select-city-view-units-tab/types';
+export {
+    UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
+} from './_children/update-attack-view-minimum-delay/types';
+export {
+    UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
+} from './_children/update-attack-view-regiment-template/types';
 
-export type ClientCloseCityViewAction =
-    BaseAction< typeof CLOSE_CITY_VIEW,
-    void, >;
 
-export type ClientOpenAttackViewAction =
-    BaseAction< typeof OPEN_ATTACK_VIEW,
-    $ReadOnly< { cityId: string } >, >;
-
-export type ClientOpenCityViewAction =
-    BaseAction< typeof OPEN_CITY_VIEW,
-    $ReadOnly< { cityId: string } >, >;
-
-export type ClientSelectAttackViewAttackingCityAction =
-    BaseAction< typeof SELECT_ATTACK_VIEW_ATTACKING_CITY,
-    $ReadOnly< { cityId: string } >, >;
-
-export type ClientSelectCityViewTabAction =
-    BaseAction< typeof SELECT_CITY_VIEW_TAB,
-    $ReadOnly< { tab: ClientStateCityViewTab } >, >;
-
-export type ClientSelectCityViewBuildingsTabAction =
-    BaseAction< typeof SELECT_CITY_VIEW_BUILDINGS_TAB,
-    $ReadOnly< { buildingType: CommonStateBuildingKey } >, >;
-
-export type ClientSelectCityViewOrdersTabAction =
-    BaseAction< typeof SELECT_CITY_VIEW_ORDERS_TAB,
-    $ReadOnly< { orderId: string } >, >;
-
-export type ClientSelectCityViewResourceTabAction =
-    BaseAction< typeof SELECT_CITY_VIEW_RESOURCES_TAB,
-    $ReadOnly< { resourceType: CommonStateResourceKey } >, >;
-
-export type ClientSelectCityViewUnitsTabAction =
-    BaseAction< typeof SELECT_CITY_VIEW_UNITS_TAB,
-    $ReadOnly< { unitType: CommonStateUnitKey } >, >;
-
-export type ClientUpdateAttackViewMinimumDelayAction =
-    BaseAction< typeof UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
-    $ReadOnly< { minimumDelay: number } >, >;
-
-export type ClientUpdateAttackViewRegimentTemplateAction =
-    BaseAction< typeof UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
-        $ReadOnly< { regimentTemplate: CommonStateRegimentTemplate } >, >;
+export type MenuAction =
+    |  ClientCloseAttackViewAction
+    |  ClientCloseCityViewAction
+    |  ClientOpenAttackViewAction
+    |  ClientOpenCityViewAction
+    |  ClientSelectAttackViewAttackingCityAction
+    |  ClientSelectCityViewBuildingsTabAction
+    |  ClientSelectCityViewOrdersTabAction
+    |  ClientSelectCityViewResourcesTabAction
+    |  ClientSelectCityViewTabAction
+    |  ClientSelectCityViewUnitsTabAction
+    |  ClientUpdateAttackViewMinimumDelayAction
+    |  ClientUpdateAttackViewRegimentTemplateAction

@@ -16,57 +16,63 @@ import {
 import type {
     NewGameScenarioContext,
 } from './types';
+
 import type {
     ScenarioContext, ScenarioExecution,
 } from '../../../types';
 
-export const execution: ScenarioExecution< ScenarioContext, NewGameScenarioContext > = async (
-    {
-        context,
-        logger,
-        t,
-    },
-) => {
+type Execution = ScenarioExecution< ScenarioContext, NewGameScenarioContext >;
 
-    const worldId = generateId();
-
-    await tools.createWorld(
+export const execution: Execution
+    = async (
         {
-            id   : worldId,
-            state: {
-                ...emptyCommonState,
-                rules: {
-                    ...emptyCommonState.rules,
-                    gameSpeed: 0,
-                },
-            },
-        },
-    );
-
-    await appModel.actions.open(
-        {
+            context,
             logger,
             t,
-            worldId,
         },
-    );
+    ) => {
 
-    const newDestroyContext = async () => {
+        const worldId = generateId();
 
-        await tools.destroyWorld(
+        await tools.createWorld(
             {
-                id: worldId,
+                id   : worldId,
+                state: {
+                    ...emptyCommonState,
+                    rules: {
+                        ...emptyCommonState.rules,
+                        gameSpeed: 0,
+                    },
+                },
             },
         );
 
-        await context.destroy();
+        await appModel.actions.open(
+            {
+                logger,
+                t,
+                worldId,
+            },
+        );
+
+        const newDestroyContext = async () => {
+
+            await tools.destroyWorld(
+                {
+                    id: worldId,
+                },
+            );
+
+            await context.destroy();
+
+        };
+
+        return Object.freeze(
+            {
+                ...context,
+                destroy: newDestroyContext,
+                worldId,
+            },
+        );
 
     };
-
-    return {
-        ...context,
-        destroy: newDestroyContext,
-        worldId,
-    };
-
-};

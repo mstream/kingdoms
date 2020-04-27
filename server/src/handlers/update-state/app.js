@@ -67,7 +67,7 @@ const updateWorldState = async ( {
 
     try {
 
-        const response = await executeAction(
+        const actionExecutionResult = await executeAction(
             {
                 action: executeTimeStep(
                     {
@@ -85,7 +85,7 @@ const updateWorldState = async ( {
             {
                 logger,
                 payload: {
-                    state: response.state,
+                    state: actionExecutionResult.state,
                     time,
                     worldId,
                 },

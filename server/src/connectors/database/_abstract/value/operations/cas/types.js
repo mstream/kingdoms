@@ -44,4 +44,5 @@ export type DatabaseValueCas<K, V> = (
 ) => Promise< DatabaseValueCasResult< V > >;
 
 export type DatabaseValueCasTestScenario =
-    DatabaseTestScenario< DatabaseValueCasArgs< string, string >, DatabaseValueCasResult< string > >;
+    DatabaseTestScenario< DatabaseValueCasArgs< string, string >,
+        DatabaseValueCasResult< string > >;

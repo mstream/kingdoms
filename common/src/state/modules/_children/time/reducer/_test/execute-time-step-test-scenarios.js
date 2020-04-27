@@ -16,7 +16,8 @@ import type {
     CommonStateTimeReducerTestScenarios,
 } from './types';
 
-type Scenarios = $ReadOnlyArray< CommonStateTimeReducerTestScenarios< CommonExecuteTimeStepAction >, >;
+type Scenario = CommonStateTimeReducerTestScenarios< CommonExecuteTimeStepAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const executeTimeStepTestScenarios: Scenarios = [
     {

@@ -16,55 +16,58 @@ import type {
     CommonStateCities,
 } from '../../reducer/types';
 
-export const cityIdsByOwnerSelector: CommonStateSelector< CityIdsByOwner, void > = createSelector<CommonState,
-    void,
-    CityIdsByOwner,
-    CommonStateCities,
-    >(
-        citiesSelector,
-        (
-            cities,
-        ) => {
+type Selector = CommonStateSelector< CityIdsByOwner, void >;
 
-            return Object.keys(
+export const cityIdsByOwnerSelector: Selector
+    = createSelector<CommonState,
+        void,
+        CityIdsByOwner,
+        CommonStateCities,
+        >(
+            citiesSelector,
+            (
                 cities,
-            )
-                .reduce(
-                    (
-                        cityIdsByOwner, cityId,
-                    ) => {
+            ) => {
 
-                        const city = cities[ cityId ];
-                        const playerId = city.ownerId;
+                return Object.keys(
+                    cities,
+                )
+                    .reduce(
+                        (
+                            cityIdsByOwner, cityId,
+                        ) => {
 
-                        if ( playerId == null ) {
+                            const city = cities[ cityId ];
+                            const playerId = city.ownerId;
 
-                            return cityIdsByOwner;
+                            if ( playerId == null ) {
 
-                        }
+                                return cityIdsByOwner;
 
-                        const playerCityIds = cityIdsByOwner[ playerId ];
+                            }
 
-                        const newPlayerCityIds = [
-                            ...( playerCityIds == null
-                                ? []
-                                : [
-                                    ...playerCityIds,
-                                ] ),
-                            cityId,
-                        ];
+                            const playerCityIds = cityIdsByOwner[ playerId ];
 
-                        return {
-                            ...cityIdsByOwner,
-                            [ playerId ]: newPlayerCityIds,
-                        };
+                            const newPlayerCityIds = [
+                                ...( playerCityIds == null
+                                    ? []
+                                    : [
+                                        ...playerCityIds,
+                                    ] ),
+                                cityId,
+                            ];
 
-                    },
-                    Object.freeze(
-                        {
+                            return {
+                                ...cityIdsByOwner,
+                                [ playerId ]: newPlayerCityIds,
+                            };
+
                         },
-                    ),
-                );
+                        Object.freeze(
+                            {
+                            },
+                        ),
+                    );
 
-        },
-    );
+            },
+        );

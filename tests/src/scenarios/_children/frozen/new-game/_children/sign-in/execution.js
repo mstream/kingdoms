@@ -21,57 +21,62 @@ import type {
     SignInScenarioContext,
 } from './types';
 
+type Execution = ScenarioExecution< NewGameScenarioContext, SignInScenarioContext >;
 
-export const execution: ScenarioExecution< NewGameScenarioContext, SignInScenarioContext > = async ( {
-    context, logger, t,
-}, ) => {
 
-    const {
-        worldId,
-    } = context;
-
-    const password = generatePassword();
-    const username = generateId();
-
-    await tools.createUsers(
+export const execution: Execution
+    = async (
         {
-            users: [
-                {
-                    password,
-                    username,
-                },
-            ],
+            context, logger, t,
         },
-    );
+    ) => {
 
-    await appModel.actions.open(
-        {
-            logger,
-            t,
+        const {
             worldId,
-        },
-    );
+        } = context;
 
-    const newDestroyContext = async () => {
+        const password = generatePassword();
+        const username = generateId();
 
-        await tools.deleteUsers(
+        await tools.createUsers(
             {
-                usernames:  [
-                    username,
+                users: [
+                    {
+                        password,
+                        username,
+                    },
                 ],
             },
         );
 
-        await context.destroy();
+        await appModel.actions.open(
+            {
+                logger,
+                t,
+                worldId,
+            },
+        );
+
+        const newDestroyContext = async () => {
+
+            await tools.deleteUsers(
+                {
+                    usernames: [
+                        username,
+                    ],
+                },
+            );
+
+            await context.destroy();
+
+        };
+
+        return {
+            ...context,
+            destroy: newDestroyContext,
+            password,
+            username,
+        };
 
     };
-
-    return {
-        ...context,
-        destroy: newDestroyContext,
-        password,
-        username,
-    };
-
-};
 

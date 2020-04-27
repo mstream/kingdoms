@@ -18,7 +18,8 @@ export type DatabaseValueGetArgs<K> = $ReadOnly< {|
     redis: Redis,
 |} >;
 
-export type DatabaseValueGet<K, V> = ( DatabaseValueGetArgs< K > ) => Promise< DatabaseValueGetResult< V > >;
+export type DatabaseValueGet<K, V> = ( DatabaseValueGetArgs< K > ) =>
+    Promise< DatabaseValueGetResult< V > >;
 
 export type DatabaseValueGetTestScenario =
     DatabaseTestScenario< DatabaseValueGetArgs< string >, DatabaseValueGetResult< string > >;

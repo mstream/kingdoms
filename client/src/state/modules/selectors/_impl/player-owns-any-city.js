@@ -10,18 +10,17 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const playerOwnsAnyCitySelector: ClientStateSelector< boolean, void > = createSelector<ClientState,
-    void,
-    boolean,
-    ?$ReadOnlyArray< string >,
-    ?string,
-    >(
+type Selector = ClientStateSelector< boolean, void >;
+
+export const playerOwnsAnyCitySelector: Selector
+    = createSelector<ClientState, void, boolean, ?$ReadOnlyArray< string >, ?string, >(
         cityIdsOwnedByPlayerSelector,
         (
             cityIdsOwnedByPlayer,
         ) => {
 
-            return cityIdsOwnedByPlayer != null && cityIdsOwnedByPlayer.length > 0;
+            return cityIdsOwnedByPlayer != null
+                && cityIdsOwnedByPlayer.length > 0;
 
         },
     );

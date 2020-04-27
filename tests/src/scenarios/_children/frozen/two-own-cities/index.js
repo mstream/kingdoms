@@ -16,7 +16,10 @@ import type {
     TwoOwnCitiesScenarioContext,
 } from './types';
 
-export const scenarios: $ReadOnlyArray< TestScenario< ScenarioContext, TwoOwnCitiesScenarioContext > >
+type Scenario = TestScenario< ScenarioContext, TwoOwnCitiesScenarioContext >;
+type Scenarios = $ReadOnlyArray< Scenario >
+
+export const scenarios: Scenarios
     = combineScenarios(
         {
             children: [

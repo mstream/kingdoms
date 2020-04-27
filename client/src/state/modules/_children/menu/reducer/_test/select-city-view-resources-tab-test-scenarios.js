@@ -11,13 +11,13 @@ import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    ClientSelectCityViewResourceTabAction,
+    ClientSelectCityViewResourcesTabAction,
 } from '../../actions/types';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewResourceTabAction >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewResourcesTabAction >;
 type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const selectCityViewResourcesTabTestScenarios: Scenarios = [

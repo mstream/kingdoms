@@ -16,12 +16,14 @@ import type {
     DatabaseSetRemoveArgs, DatabaseSetRemoveResult,
 } from './types';
 
+type Args = DatabaseSetRemoveArgs< string, string >;
+type Result = DatabaseSetRemoveResult;
 
 describe(
     `remove`,
     () => {
 
-        runDatabaseOperationTestScenarios<DatabaseSetRemoveArgs< string, string >, DatabaseSetRemoveResult>(
+        runDatabaseOperationTestScenarios<Args, Result>(
             {
                 jest: {
                     describe,

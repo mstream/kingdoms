@@ -21,58 +21,60 @@ import type {
     SignInScenarioContext,
 } from '../../types';
 
+type Execution = ScenarioExecution< SignInScenarioContext, SignInScenarioContext >;
 
-export const execution: ScenarioExecution< SignInScenarioContext, SignInScenarioContext > = async ( {
-    context, logger, t,
-}, ) => {
+export const execution: Execution
+    = async ( {
+        context, logger, t,
+    }, ) => {
 
-    const {
-        password, username,
-    } = context;
+        const {
+            password, username,
+        } = context;
 
-    await authModel.actions.signIn(
-        {
-            logger,
-            password,
-            t,
-            username,
-        },
-    );
-
-    await appModel.expectations.isAtAppPage(
-        {
-            t,
-        },
-    );
-
-    await t.expect(
-        getLocation(),
-    )
-        .contains(
-            `token=`,
+        await authModel.actions.signIn(
+            {
+                logger,
+                password,
+                t,
+                username,
+            },
         );
 
-    await t.expect(
-        Selector(
-            `*`,
+        await appModel.expectations.isAtAppPage(
+            {
+                t,
+            },
+        );
+
+        await t.expect(
+            getLocation(),
         )
-            .withExactText(
-                username,
-            ).exists,
-    )
-        .ok();
+            .contains(
+                `token=`,
+            );
 
-    await t.expect(
-        Selector(
-            `*`,
+        await t.expect(
+            Selector(
+                `*`,
+            )
+                .withExactText(
+                    username,
+                ).exists,
         )
-            .withExactText(
-                `Start game`,
-            ).exists,
-    )
-        .ok();
+            .ok();
 
-    return context;
+        await t.expect(
+            Selector(
+                `*`,
+            )
+                .withExactText(
+                    `Start game`,
+                ).exists,
+        )
+            .ok();
 
-};
+        return context;
+
+    };
 

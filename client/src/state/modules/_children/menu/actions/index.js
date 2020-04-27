@@ -1,176 +1,43 @@
 // @flow
 
+
 import {
-    CLOSE_ATTACK_VIEW,
-    CLOSE_CITY_VIEW,
-    OPEN_ATTACK_VIEW,
-    OPEN_CITY_VIEW,
-    SELECT_ATTACK_VIEW_ATTACKING_CITY,
-    SELECT_CITY_VIEW_BUILDINGS_TAB,
-    SELECT_CITY_VIEW_ORDERS_TAB,
-    SELECT_CITY_VIEW_RESOURCES_TAB,
-    SELECT_CITY_VIEW_TAB,
-    SELECT_CITY_VIEW_UNITS_TAB,
-    UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
-    UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
-} from './types';
-import type {
-    ClientActionCreator,
-} from '../../../../types';
-import type {
-    ClientCloseAttackViewAction,
-    ClientCloseCityViewAction,
-    ClientOpenAttackViewAction,
-    ClientOpenCityViewAction,
-    ClientSelectAttackViewAttackingCityAction,
-    ClientSelectCityViewBuildingsTabAction,
-    ClientSelectCityViewOrdersTabAction,
-    ClientSelectCityViewResourceTabAction,
-    ClientSelectCityViewTabAction,
-    ClientSelectCityViewUnitsTabAction,
-    ClientUpdateAttackViewMinimumDelayAction,
-    ClientUpdateAttackViewRegimentTemplateAction,
-} from './types';
+    closeAttackView,
+} from './_children/close-attack-view';
+import {
+    closeCityView,
+} from './_children/close-city-view';
+import {
+    openAttackView,
+} from './_children/open-attack-view';
+import {
+    openCityView,
+} from './_children/open-city-view';
+import {
+    selectAttackViewAttackingCity,
+} from './_children/select-attack-view-attacking-city';
+import {
+    selectCityViewBuildingsTab,
+} from './_children/select-city-view-buildings-tab';
+import {
+    selectCityViewOrdersTab,
+} from './_children/select-city-view-orders-tab';
+import {
+    selectCityViewResourcesTab,
+} from './_children/select-city-view-resources-tab';
+import {
+    selectCityViewTab,
+} from './_children/select-city-view-tab';
+import {
+    selectCityViewUnitsTab,
+} from './_children/select-city-view-units-tab';
+import {
+    updateAttackViewMinimumDelay,
+} from './_children/update-attack-view-minimum-delay';
+import {
+    updateAttackViewRegimentTemplate,
+} from './_children/update-attack-view-regiment-template';
 
-const closeAttackView: ClientActionCreator< ClientCloseAttackViewAction >
-    = () => {
-
-        return {
-            payload: undefined,
-            type   : CLOSE_ATTACK_VIEW,
-        };
-
-    };
-
-const closeCityView: ClientActionCreator< ClientCloseCityViewAction >
-    = () => {
-
-        return {
-            payload: undefined,
-            type   : CLOSE_CITY_VIEW,
-        };
-
-    };
-
-const openAttackView: ClientActionCreator< ClientOpenAttackViewAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: OPEN_ATTACK_VIEW,
-        };
-
-    };
-
-const openCityView: ClientActionCreator< ClientOpenCityViewAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: OPEN_CITY_VIEW,
-        };
-
-    };
-
-const selectCityViewTab: ClientActionCreator< ClientSelectCityViewTabAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: SELECT_CITY_VIEW_TAB,
-        };
-
-    };
-
-const selectCityViewBuildingsTab: ClientActionCreator< ClientSelectCityViewBuildingsTabAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: SELECT_CITY_VIEW_BUILDINGS_TAB,
-        };
-
-    };
-
-const selectCityViewOrdersTab: ClientActionCreator< ClientSelectCityViewOrdersTabAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: SELECT_CITY_VIEW_ORDERS_TAB,
-        };
-
-    };
-
-const selectCityViewResourcesTab: ClientActionCreator< ClientSelectCityViewResourceTabAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: SELECT_CITY_VIEW_RESOURCES_TAB,
-        };
-
-    };
-
-const selectCityViewUnitsTab: ClientActionCreator< ClientSelectCityViewUnitsTabAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: SELECT_CITY_VIEW_UNITS_TAB,
-        };
-
-    };
-
-const selectAttackViewAttackingCity: ClientActionCreator< ClientSelectAttackViewAttackingCityAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: SELECT_ATTACK_VIEW_ATTACKING_CITY,
-        };
-
-    };
-
-const updateAttackViewRegimentTemplate: ClientActionCreator< ClientUpdateAttackViewRegimentTemplateAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE,
-        };
-
-    };
-
-const updateAttackViewMinimumDelay: ClientActionCreator< ClientUpdateAttackViewMinimumDelayAction >
-    = (
-        payload,
-    ) => {
-
-        return {
-            payload,
-            type: UPDATE_ATTACK_VIEW_MINIMUM_DELAY,
-        };
-
-    };
 
 export const menuActions = {
     closeAttackView,

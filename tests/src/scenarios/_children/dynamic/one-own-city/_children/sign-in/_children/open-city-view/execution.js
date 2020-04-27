@@ -15,37 +15,40 @@ import type {
     ScenarioExecution,
 } from '../../../../../../../types';
 
-export const execution: ScenarioExecution< OneOwnCityScenarioContext, OneOwnCityScenarioContext > = async (
-    {
-        context,
-        t,
-    },
-) => {
+type Execution = ScenarioExecution< OneOwnCityScenarioContext, OneOwnCityScenarioContext >;
 
-    const {
-        cityName,
-    } = context;
-
-    await appModel.actions.openCityView(
+export const execution: Execution
+    = async (
         {
-            name: cityName,
+            context,
             t,
         },
-    );
+    ) => {
 
-    await t.expect(
-        selectors
-            .cityView
-            .parent
-            .textContent,
-    )
-        .contains(
+        const {
             cityName,
+        } = context;
+
+        await appModel.actions.openCityView(
+            {
+                name: cityName,
+                t,
+            },
         );
 
-    return {
-        ...context,
-    };
+        await t.expect(
+            selectors
+                .cityView
+                .parent
+                .textContent,
+        )
+            .contains(
+                cityName,
+            );
 
-};
+        return {
+            ...context,
+        };
+
+    };
 

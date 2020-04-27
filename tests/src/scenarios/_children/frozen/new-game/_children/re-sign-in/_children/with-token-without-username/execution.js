@@ -20,34 +20,39 @@ import type {
     ScenarioExecution,
 } from '../../../../../../../types';
 
-export const execution: ScenarioExecution< NewGameScenarioContext, NewGameScenarioContext > = async ( {
-    context, logger, t,
-}, ) => {
+type Execution = ScenarioExecution< NewGameScenarioContext, NewGameScenarioContext >;
 
-    const {
-        worldId,
-    } = context;
-
-    await appModel.actions.open(
+export const execution: Execution
+    = async (
         {
-            logger,
-            t,
-            token: createToken(
-                {
-                    type: TOKEN_WITHOUT_USERNAME,
-                },
-            ),
+            context, logger, t,
+        },
+    ) => {
+
+        const {
             worldId,
-        },
-    );
+        } = context;
 
-    await authModel.expectations.gotRedirectedFromAppToAuth(
-        {
-            action: `login`,
-            t,
-        },
-    );
+        await appModel.actions.open(
+            {
+                logger,
+                t,
+                token: createToken(
+                    {
+                        type: TOKEN_WITHOUT_USERNAME,
+                    },
+                ),
+                worldId,
+            },
+        );
 
-    return context;
+        await authModel.expectations.gotRedirectedFromAppToAuth(
+            {
+                action: `login`,
+                t,
+            },
+        );
 
-};
+        return context;
+
+    };

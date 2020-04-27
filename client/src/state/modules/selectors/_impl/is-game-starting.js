@@ -16,21 +16,22 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const isGameStartingSelector: ClientStateSelector< boolean, void > = createSelector<ClientState,
-    void,
-    boolean,
-    boolean,
-    boolean,
-    boolean,
-    >(
-        clientStatePlayerSelectors.isAuthenticated,
-        clientStateCommonStateSelectors.isLoaded,
-        playerOwnsAnyCitySelector,
-        (
-            isAuthenticated, isLoaded, playerOwnsAnyCity,
-        ) => {
+export const isGameStartingSelector: ClientStateSelector< boolean, void >
+    = createSelector<ClientState,
+        void,
+        boolean,
+        boolean,
+        boolean,
+        boolean,
+        >(
+            clientStatePlayerSelectors.isAuthenticated,
+            clientStateCommonStateSelectors.isLoaded,
+            playerOwnsAnyCitySelector,
+            (
+                isAuthenticated, isLoaded, playerOwnsAnyCity,
+            ) => {
 
-            return isLoaded && isAuthenticated && !playerOwnsAnyCity;
+                return isLoaded && isAuthenticated && !playerOwnsAnyCity;
 
-        },
-    );
+            },
+        );

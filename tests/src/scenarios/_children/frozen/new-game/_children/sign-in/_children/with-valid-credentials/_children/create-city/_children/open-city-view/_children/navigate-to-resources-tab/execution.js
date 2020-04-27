@@ -12,45 +12,48 @@ import type {
     CreateCityScenarioContext,
 } from '../../../../types';
 import type {
-
     ScenarioExecution,
 } from '../../../../../../../../../../../../../types';
 
+type Execution = ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext >;
 
-export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
-
-    await appModel.actions.openResourcesTab(
+export const execution: Execution
+    = async (
         {
+            context,
             t,
         },
-    );
+    ) => {
 
-    await t.expect(
-        selectors
-            .cityView
-            .resourcesPanel
-            .textContent,
-    )
-        .contains(
-            `Food`,
+        await appModel.actions.openResourcesTab(
+            {
+                t,
+            },
         );
 
-    await t.expect(
-        selectors
-            .cityView
-            .resourcesPanel
-            .textContent,
-    )
-        .contains(
-            `Wood`,
-        );
+        await t.expect(
+            selectors
+                .cityView
+                .resourcesPanel
+                .textContent,
+        )
+            .contains(
+                `Food`,
+            );
 
-    return {
-        ...context,
+        await t.expect(
+            selectors
+                .cityView
+                .resourcesPanel
+                .textContent,
+        )
+            .contains(
+                `Wood`,
+            );
+
+        return {
+            ...context,
+        };
+
     };
-
-};
 

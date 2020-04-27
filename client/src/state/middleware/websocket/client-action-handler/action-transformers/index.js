@@ -12,11 +12,12 @@ import {
     upgradeBuilding,
 } from '../../../../../../../common/src/state/modules/_children/cities/actions';
 import {
-    createScheduledAttackOrder,
-} from '../../../../../../../common/src/state/modules/_children/orders/actions';
-import {
     generateId,
 } from '../../../../../../../common/src/utils';
+import {
+
+    ordersActions,
+} from '../../../../../../../common/src/state/modules/_children/orders/actions';
 import type {
     ClientAction, ClientActionKey,
 } from '../../../../types';
@@ -98,7 +99,7 @@ const transformRequestOrderCreation: ActionTransformer< ClientRequestOrderCreati
         },
     ) => {
 
-        return createScheduledAttackOrder(
+        return ordersActions.createScheduledAttackOrder(
             {
                 ...clientAction.payload,
                 orderId : generateId(),

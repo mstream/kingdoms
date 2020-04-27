@@ -17,7 +17,10 @@ import type {
     TestScenario,
 } from '../../../types';
 
-export const scenarios: $ReadOnlyArray< TestScenario< ScenarioContext, OneOwnCityScenarioContext > >
+type Scenario = TestScenario< ScenarioContext, OneOwnCityScenarioContext >;
+type Scenarios = $ReadOnlyArray< Scenario >
+
+export const scenarios: Scenarios
     = combineScenarios(
         {
             children: [

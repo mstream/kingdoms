@@ -19,7 +19,8 @@ import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenarios = $ReadOnlyArray< ClientStateMenuReducerTestScenario< ClientOpenAttackViewAction >, >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientOpenAttackViewAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const openAttackViewTestScenarios: Scenarios = [
     {

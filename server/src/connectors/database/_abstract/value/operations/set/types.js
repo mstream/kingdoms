@@ -19,7 +19,8 @@ export type DatabaseValueSetArgs<K, V> = $ReadOnly< {|
     value: V,
 |} >;
 
-export type DatabaseValueSet<K, V> = ( DatabaseValueSetArgs< K, V > ) => Promise< DatabaseValueSetResult >;
+export type DatabaseValueSet<K, V> = ( DatabaseValueSetArgs< K, V > ) =>
+    Promise< DatabaseValueSetResult >;
 
 export type DatabaseValueSetTestScenario =
     DatabaseTestScenario< DatabaseValueSetArgs< string, string >, DatabaseValueSetResult >;

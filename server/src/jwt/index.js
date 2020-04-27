@@ -22,8 +22,8 @@ const buildErrorResult = (
     {
         message,
     }: {
-    message: string,
-},
+        message: string,
+    },
 ): UserProfileResult => {
 
     return {
@@ -73,7 +73,8 @@ export const buildUserProfile = async ( {
 
         if ( publicKey == null ) {
 
-            const errorMessage = `could not retrieve a public key for the token with key id ${ keyId }`;
+            const errorMessage = `could not retrieve a public key `
+                + `for the token with key id ${ keyId }`;
 
 
             return buildErrorResult(

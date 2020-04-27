@@ -24,7 +24,8 @@ import type {
     CommonUpgradeBuildingAction,
 } from '../../actions/types';
 
-type Scenarios = $ReadOnlyArray< CommonStateCitiesReducerTestScenarios< CommonUpgradeBuildingAction >, >
+type Scenario = CommonStateCitiesReducerTestScenarios< CommonUpgradeBuildingAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const upgradeBuildingTestScenarios: Scenarios = [
     {

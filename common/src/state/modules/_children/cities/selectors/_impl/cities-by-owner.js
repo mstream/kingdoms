@@ -19,7 +19,9 @@ import type {
     CommonStateCities,
 } from '../../reducer/types';
 
-export const citiesByOwnerSelector: CommonStateSelector< CitiesByOwner, void > = createSelector<CommonState,
+type Selector = CommonStateSelector< CitiesByOwner, void >;
+
+export const citiesByOwnerSelector: Selector = createSelector<CommonState,
     void,
     CitiesByOwner,
     CommonStateCities,

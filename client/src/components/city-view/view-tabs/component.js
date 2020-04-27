@@ -110,7 +110,16 @@ export const Component = (
     return (
         <div
             data-testid={testIds.cityView.viewTabs}
-            className="wood-bg flex flex-row flex-wrap justify-center w-full bg-orange-700 text-gray-100"
+            className={classNames(
+                `wood-bg`,
+                `flex`,
+                `flex-row`,
+                `flex-wrap`,
+                `justify-center`,
+                `w-full`,
+                `bg-orange-700`,
+                `text-gray-100`,
+            )}
             role="tablist"
         >
             {tabComponents}

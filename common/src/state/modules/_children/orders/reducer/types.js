@@ -12,18 +12,18 @@ export const ORDER_SCHEDULED_ATTACK: 'ORDER_SCHEDULED_ATTACK'
 
 export type OrderKey = typeof ORDER_SCHEDULED_ATTACK;
 
-type ScheduledOrder = $ReadOnly< { minimumDelay: number } >;
+type ScheduledOrder = $ReadOnly< {| minimumDelay: number |} >;
 
 export type CommonStateRegimentTemplate = $ReadOnly< {
     [CommonStateUnitKey]: Range,
 } >;
 
-export type CommonStateScheduledAttackOrder = $ReadOnly< {
+export type CommonStateScheduledAttackOrder = $ReadOnly< {|
     ...ScheduledOrder,
     originCityId: string,
     regimentTemplate: CommonStateRegimentTemplate,
     targetCityId: string,
-} >;
+|} >;
 
 export type CommonStateOrder = CommonStateScheduledAttackOrder;
 export type CommonStateOrderCreationTimes = $ReadOnly< { [string]: string } >;

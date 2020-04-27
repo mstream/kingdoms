@@ -12,45 +12,48 @@ import type {
     OneOwnCityScenarioContext,
 } from '../../../../../../types';
 import type {
-
     ScenarioExecution,
 } from '../../../../../../../../../types';
 
+type Execution = ScenarioExecution< OneOwnCityScenarioContext, OneOwnCityScenarioContext >;
 
-export const execution: ScenarioExecution< OneOwnCityScenarioContext, OneOwnCityScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
-
-    await appModel.actions.openOverviewTab(
+export const execution: Execution
+    = async (
         {
+            context,
             t,
         },
-    );
+    ) => {
 
-    const panelTextContent = await selectors
-        .cityView
-        .overviewPanel
-        .textContent;
-
-
-    await t.expect(
-        selectors
-            .cityView
-            .overviewPanel
-            .textContent,
-    )
-        .notEql(
-            panelTextContent,
-            `check if panel text content changes`,
+        await appModel.actions.openOverviewTab(
             {
-                timeout: 90000,
+                t,
             },
         );
 
-    return {
-        ...context,
-    };
+        const panelTextContent = await selectors
+            .cityView
+            .overviewPanel
+            .textContent;
 
-};
+
+        await t.expect(
+            selectors
+                .cityView
+                .overviewPanel
+                .textContent,
+        )
+            .notEql(
+                panelTextContent,
+                `check if panel text content changes`,
+                {
+                    timeout: 90000,
+                },
+            );
+
+        return {
+            ...context,
+        };
+
+    };
 

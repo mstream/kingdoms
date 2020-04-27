@@ -17,33 +17,36 @@ import type {
     OneOwnCityScenarioContext,
 } from '../../types';
 
+type Execution = ScenarioExecution< OneOwnCityScenarioContext, OneOwnCityScenarioContext >;
 
-export const execution: ScenarioExecution< OneOwnCityScenarioContext, OneOwnCityScenarioContext > = async ( {
-    context, logger, t,
-}, ) => {
 
-    const {
-        password, username, worldId,
-    } = context;
+export const execution: Execution
+    = async ( {
+        context, logger, t,
+    }, ) => {
 
-    await appModel.actions.open(
-        {
-            logger,
-            t,
-            worldId,
-        },
-    );
+        const {
+            password, username, worldId,
+        } = context;
 
-    await authModel.actions.signIn(
-        {
-            logger,
-            password,
-            t,
-            username,
-        },
-    );
+        await appModel.actions.open(
+            {
+                logger,
+                t,
+                worldId,
+            },
+        );
 
-    return context;
+        await authModel.actions.signIn(
+            {
+                logger,
+                password,
+                t,
+                username,
+            },
+        );
 
-};
+        return context;
+
+    };
 

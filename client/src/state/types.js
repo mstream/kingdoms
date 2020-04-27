@@ -35,20 +35,6 @@ import {
     UPDATE_STATE,
 } from './modules/_children/common-state/actions/types';
 import type {
-    ClientCloseAttackViewAction,
-    ClientCloseCityViewAction,
-    ClientOpenAttackViewAction,
-    ClientOpenCityViewAction,
-    ClientSelectAttackViewAttackingCityAction,
-    ClientSelectCityViewBuildingsTabAction,
-    ClientSelectCityViewOrdersTabAction,
-    ClientSelectCityViewResourceTabAction,
-    ClientSelectCityViewTabAction,
-    ClientSelectCityViewUnitsTabAction,
-    ClientUpdateAttackViewMinimumDelayAction,
-    ClientUpdateAttackViewRegimentTemplateAction,
-} from './modules/_children/menu/actions/types';
-import type {
     ClientDummyAction,
     ClientSignOutAction,
 } from './modules/actions/types';
@@ -90,6 +76,9 @@ import type {
 import type {
     Dispatch, Store,
 } from 'redux';
+import type {
+    MenuAction,
+} from './modules/_children/menu/actions/types';
 
 export type ClientActionKey =
     | typeof CLOSE_ATTACK_VIEW
@@ -117,27 +106,16 @@ export type ClientActionKey =
     | typeof ZOOM_CAMERA;
 
 export type ClientAction =
-    | ClientCloseAttackViewAction
-    | ClientCloseCityViewAction
+    | MenuAction
     | ClientDummyAction
     | ClientLoadPlayerAction
     | ClientMoveCameraAction
-    | ClientOpenAttackViewAction
-    | ClientOpenCityViewAction
     | ClientReportErrorsAction
     | ClientRequestBuildingUpgradeAction
     | ClientRequestCityCreationAction
     | ClientRequestCityNameChangeAction
     | ClientRequestOrderCreationAction
-    | ClientSelectAttackViewAttackingCityAction
-    | ClientSelectCityViewBuildingsTabAction
-    | ClientSelectCityViewOrdersTabAction
-    | ClientSelectCityViewResourceTabAction
-    | ClientSelectCityViewUnitsTabAction
-    | ClientSelectCityViewTabAction
     | ClientSignOutAction
-    | ClientUpdateAttackViewRegimentTemplateAction
-    | ClientUpdateAttackViewMinimumDelayAction
     | ClientUpdateStateAction
     | ClientZoomCameraAction;
 

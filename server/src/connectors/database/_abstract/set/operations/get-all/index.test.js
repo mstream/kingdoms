@@ -16,11 +16,14 @@ import type {
     DatabaseSetGetAllArgs, DatabaseSetGetAllResult,
 } from './types';
 
+type Args = DatabaseSetGetAllArgs< string >;
+type Result = DatabaseSetGetAllResult< string >;
+
 describe(
     `getAll`,
     () => {
 
-        runDatabaseOperationTestScenarios<DatabaseSetGetAllArgs< string >, DatabaseSetGetAllResult< string >>(
+        runDatabaseOperationTestScenarios<Args, Result>(
             {
                 jest: {
                     describe,

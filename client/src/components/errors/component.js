@@ -49,7 +49,16 @@ export const Component = (
             )}
         >
             <div
-                className="modal-overlay absolute w-full h-full bg-gray-900 opacity-75 top-0 left-0"/>
+                className={classNames(
+                    `modal-overlay`,
+                    `absolute`,
+                    `w-full`,
+                    `h-full`,
+                    `bg-gray-900`,
+                    `opacity-75`,
+                    `top-0`,
+                    `left-0`,
+                )}/>
             <div
                 className={classNames(
                     `metal-black-bg`,

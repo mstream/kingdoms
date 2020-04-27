@@ -1,6 +1,5 @@
 // @flow
 
-
 import {
     get,
 } from '.';
@@ -17,11 +16,14 @@ import type {
     DatabaseValueGetArgs, DatabaseValueGetResult,
 } from './types';
 
+type Args = DatabaseValueGetArgs< string >;
+type Result = DatabaseValueGetResult< string >;
+
 describe(
     `get`,
     () => {
 
-        runDatabaseOperationTestScenarios<DatabaseValueGetArgs< string >, DatabaseValueGetResult< string >>(
+        runDatabaseOperationTestScenarios<Args, Result>(
             {
                 jest: {
                     describe,

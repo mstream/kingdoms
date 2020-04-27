@@ -8,7 +8,6 @@ import {
 import {
     selectors,
 } from '../../../../../../../../../../models/selectors';
-
 import type {
     ScenarioExecution,
 } from '../../../../../../../../../types';
@@ -17,7 +16,9 @@ import type {
 } from '../../../../../../types';
 
 
-export const execution: ScenarioExecution< TwoOwnCitiesScenarioContext, TwoOwnCitiesScenarioContext >
+type Execution = ScenarioExecution< TwoOwnCitiesScenarioContext, TwoOwnCitiesScenarioContext >;
+
+export const execution: Execution
     = async (
         {
             context,

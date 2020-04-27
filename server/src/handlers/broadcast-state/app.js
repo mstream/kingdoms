@@ -31,7 +31,8 @@ import {
     validateStateUpdateEvent,
 } from './validation';
 import type {
-    ServerRequest,
+    ExecuteTimeResponseRequest,
+
     ServerResponse,
 } from '../../../../common/src/types';
 import type {
@@ -115,8 +116,7 @@ const broadcastStateUpdate = async (
             worldId,
         );
 
-        const request: ServerRequest = {
-            // $FlowFixMe
+        const request: ExecuteTimeResponseRequest = {
             action: executeTimeStep(
                 {
                     time,

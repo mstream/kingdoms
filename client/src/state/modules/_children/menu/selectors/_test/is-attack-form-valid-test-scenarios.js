@@ -73,7 +73,8 @@ export const isAttackFormValidSelectorTestScenarios: Scenarios = [
     {
         expectedValue: true,
         name         :
-            `true if attacking city is selected and regiment template would resolve into at least one unit`,
+            `true if attacking city is selected and regiment template `
+            + `would resolve into at least one unit`,
         state: {
             ...emptyClientState,
             menu: {

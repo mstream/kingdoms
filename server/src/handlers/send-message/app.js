@@ -208,7 +208,7 @@ export const handler: ProxyHandler = async ( event, ) => {
 
         }
 
-        const response = await executeAction(
+        const actionExecutionResult = await executeAction(
             {
                 action,
                 environment: config.environment,
@@ -217,6 +217,11 @@ export const handler: ProxyHandler = async ( event, ) => {
                 worldId,
             },
         );
+
+        const response = {
+            ...actionExecutionResult,
+            request: serverRequest,
+        };
 
         await sendResponseBackToClient(
             {

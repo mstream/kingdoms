@@ -22,7 +22,8 @@ export type DatabaseSetAddArgs<K, V> = $ReadOnly< {|
     value: V,
 |} >;
 
-export type DatabaseSetAdd<K, V> = ( DatabaseSetAddArgs< K, V > ) => Promise< DatabaseSetAddResult >;
+export type DatabaseSetAdd<K, V> = ( DatabaseSetAddArgs< K, V > ) =>
+    Promise< DatabaseSetAddResult >;
 
 export type DatabaseSetAddTestScenario =
     DatabaseTestScenario< DatabaseSetAddArgs< string, string >, DatabaseSetAddResult >;

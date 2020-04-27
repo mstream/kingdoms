@@ -100,7 +100,9 @@ import type {
     ClientStateMenuReducerTestScenario,
 } from './_test/types';
 
-const stateInitializationScenario: ClientStateMenuReducerTestScenario< ClientDummyAction > = {
+type Scenario = ClientStateMenuReducerTestScenario< ClientDummyAction >;
+
+const stateInitializationScenario: Scenario = {
     action                   : clientActions.global.dummy(),
     expectedLocalStateCreator: () => {
 
@@ -164,6 +166,27 @@ const stateInitializationScenario: ClientStateMenuReducerTestScenario< ClientDum
     },
 };
 
+const scenarios = {
+    [ CLOSE_ATTACK_VIEW ]: closeAttackViewTestScenarios,
+    [ CLOSE_CITY_VIEW ]  : closeCityViewTestScenarios,
+    [ DUMMY ]            : [
+        stateInitializationScenario,
+    ],
+    [ OPEN_ATTACK_VIEW ]                    : openAttackViewTestScenarios,
+    [ OPEN_CITY_VIEW ]                      : openCityViewTestScenarios,
+    [ REQUEST_CITY_CREATION ]               : requestCityCreationTestScenarios,
+    [ REQUEST_ORDER_CREATION ]              : requestOrderCreationTestScenarios,
+    [ SELECT_ATTACK_VIEW_ATTACKING_CITY ]   : selectAttackViewAttackingCityTestScenarios,
+    [ SELECT_CITY_VIEW_BUILDINGS_TAB ]      : selectCityViewBuildingsTabTestScenarios,
+    [ SELECT_CITY_VIEW_ORDERS_TAB ]         : selectCityViewOrdersTabTestScenarios,
+    [ SELECT_CITY_VIEW_RESOURCES_TAB ]      : selectCityViewResourcesTabTestScenarios,
+    [ SELECT_CITY_VIEW_TAB ]                : selectCityViewTabTestScenarios,
+    [ SELECT_CITY_VIEW_UNITS_TAB ]          : selectCityViewUnitsTabTestScenarios,
+    [ UPDATE_ATTACK_VIEW_MINIMUM_DELAY ]    : updateAttackViewMinimumDelayTestScenarios,
+    [ UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE ]: updateAttackViewRegimentTemplateTestScenarios,
+    [ UPDATE_STATE ]                        : updateStateTestScenarios,
+};
+
 describe(
     `menuReducer`,
     () => {
@@ -177,26 +200,7 @@ describe(
                 },
                 reducer   : menuReducer,
                 reducerKey: `menu`,
-                scenarios : {
-                    [ CLOSE_ATTACK_VIEW ]: closeAttackViewTestScenarios,
-                    [ CLOSE_CITY_VIEW ]                     : closeCityViewTestScenarios,
-                    [ DUMMY ]            : [
-                        stateInitializationScenario,
-                    ],
-                    [ OPEN_ATTACK_VIEW ]                    : openAttackViewTestScenarios,
-                    [ OPEN_CITY_VIEW ]                      : openCityViewTestScenarios,
-                    [ REQUEST_CITY_CREATION ]               : requestCityCreationTestScenarios,
-                    [ REQUEST_ORDER_CREATION ]              : requestOrderCreationTestScenarios,
-                    [ SELECT_ATTACK_VIEW_ATTACKING_CITY ]   : selectAttackViewAttackingCityTestScenarios,
-                    [ SELECT_CITY_VIEW_BUILDINGS_TAB ]      : selectCityViewBuildingsTabTestScenarios,
-                    [ SELECT_CITY_VIEW_ORDERS_TAB ]         : selectCityViewOrdersTabTestScenarios,
-                    [ SELECT_CITY_VIEW_RESOURCES_TAB ]      : selectCityViewResourcesTabTestScenarios,
-                    [ SELECT_CITY_VIEW_TAB ]                : selectCityViewTabTestScenarios,
-                    [ SELECT_CITY_VIEW_UNITS_TAB ]          : selectCityViewUnitsTabTestScenarios,
-                    [ UPDATE_ATTACK_VIEW_MINIMUM_DELAY ]    : updateAttackViewMinimumDelayTestScenarios,
-                    [ UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE ]: updateAttackViewRegimentTemplateTestScenarios,
-                    [ UPDATE_STATE ]                        : updateStateTestScenarios,
-                },
+                scenarios,
             },
         );
 

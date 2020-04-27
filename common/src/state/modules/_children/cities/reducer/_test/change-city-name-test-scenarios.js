@@ -19,7 +19,8 @@ import type {
     CommonStateCitiesReducerTestScenarios,
 } from './types';
 
-type Scenarios = $ReadOnlyArray< CommonStateCitiesReducerTestScenarios< CommonChangeCityNameAction >, >
+type Scenario = CommonStateCitiesReducerTestScenarios< CommonChangeCityNameAction >;
+type Scenarios = $ReadOnlyArray< Scenario >
 
 export const changeCityNameTestScenarios: Scenarios = [
     {

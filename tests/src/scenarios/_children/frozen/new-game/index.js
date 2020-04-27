@@ -16,11 +16,14 @@ import type {
     NewGameScenarioContext,
 } from './types';
 import type {
-    ScenarioContext,
-    TestScenario,
+    ScenarioContext, TestScenario,
 } from '../../../types';
 
-export const scenarios: $ReadOnlyArray< TestScenario< ScenarioContext, NewGameScenarioContext > >
+
+type Scenario = TestScenario< ScenarioContext, NewGameScenarioContext >;
+type Scenarios = $ReadOnlyArray< Scenario >
+
+export const scenarios: Scenarios
     = combineScenarios(
         {
             children: [

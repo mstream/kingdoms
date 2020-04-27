@@ -16,42 +16,45 @@ import type {
     SignInScenarioContext,
 } from '../../types';
 
+type Execution = ScenarioExecution< SignInScenarioContext, SignInScenarioContext >;
 
-export const execution: ScenarioExecution< SignInScenarioContext, SignInScenarioContext > = async ( {
-    context, logger, t,
-}, ) => {
 
-    const {
-        password,
-    } = context;
+export const execution: Execution
+    = async ( {
+        context, logger, t,
+    }, ) => {
 
-    await authModel.actions.signIn(
-        {
-            logger,
+        const {
             password,
-            t,
-            username: `non-existent`,
-        },
-    );
+        } = context;
 
-    await authModel.expectations.isAtAuthPage(
-        {
-            t,
-        },
-    );
+        await authModel.actions.signIn(
+            {
+                logger,
+                password,
+                t,
+                username: `non-existent`,
+            },
+        );
 
-    await t
-        .expect(
-            Selector(
-                `*`,
+        await authModel.expectations.isAtAuthPage(
+            {
+                t,
+            },
+        );
+
+        await t
+            .expect(
+                Selector(
+                    `*`,
+                )
+                    .withExactText(
+                        `The username or password you entered is invalid`,
+                    ).exists,
             )
-                .withExactText(
-                    `The username or password you entered is invalid`,
-                ).exists,
-        )
-        .ok();
+            .ok();
 
-    return context;
+        return context;
 
-};
+    };
 

@@ -5,14 +5,17 @@ import type {
     ScenarioContext, ScenarioExecution,
 } from '../../types';
 
-export const execution: ScenarioExecution< ScenarioContext, ScenarioContext > = async (
-    {
-        context,
-    },
-) => {
+type Execution = ScenarioExecution< ScenarioContext, ScenarioContext >;
 
-    return {
-        ...context,
+export const execution: Execution
+    = async (
+        {
+            context,
+        },
+    ) => {
+
+        return {
+            ...context,
+        };
+
     };
-
-};

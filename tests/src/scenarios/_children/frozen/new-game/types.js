@@ -7,4 +7,5 @@ import type {
 export type NewGameScenarioContext = $ReadOnly< {
     ...ScenarioContext,
     worldId: string,
+    ...
 } >;

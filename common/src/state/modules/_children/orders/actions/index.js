@@ -1,22 +1,10 @@
 // @flow
 
+
 import {
-    CREATE_SCHEDULED_ATTACK_ORDER,
-} from './types';
-import type {
-    CommonActionCreator,
-} from '../../../../types';
-import type {
-    CommonCreateScheduledAttackOrderAction,
-} from './types';
+    createScheduledAttackOrder,
+} from './_children/creade-scheduled-attack-order';
 
-export const createScheduledAttackOrder: CommonActionCreator< CommonCreateScheduledAttackOrderAction > = (
-    payload,
-) => {
-
-    return {
-        payload,
-        type: CREATE_SCHEDULED_ATTACK_ORDER,
-    };
-
+export const ordersActions = {
+    createScheduledAttackOrder,
 };

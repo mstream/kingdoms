@@ -20,35 +20,37 @@ import type {
     SignInScenarioContext,
 } from '../../../../types';
 
+type Execution = ScenarioExecution< SignInScenarioContext, CreateCityScenarioContext >;
 
-export const execution: ScenarioExecution< SignInScenarioContext, CreateCityScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
+export const execution: Execution
+    = async ( {
+        context,
+        t,
+    }, ) => {
 
-    const cityName = generateCityName();
+        const cityName = generateCityName();
 
-    await appModel.actions.createCity(
-        {
-            name: cityName,
-            t,
-        },
-    );
-
-    await t.expect(
-        selectors
-            .worldMap
-            .cityTile
-            .textContent,
-    )
-        .contains(
-            cityName,
+        await appModel.actions.createCity(
+            {
+                name: cityName,
+                t,
+            },
         );
 
-    return {
-        ...context,
-        cityName,
-    };
+        await t.expect(
+            selectors
+                .worldMap
+                .cityTile
+                .textContent,
+        )
+            .contains(
+                cityName,
+            );
 
-};
+        return {
+            ...context,
+            cityName,
+        };
+
+    };
 

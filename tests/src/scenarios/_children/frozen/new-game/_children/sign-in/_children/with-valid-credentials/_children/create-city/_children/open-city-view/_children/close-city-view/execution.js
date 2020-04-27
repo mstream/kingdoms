@@ -15,29 +15,33 @@ import type {
     ScenarioExecution,
 } from '../../../../../../../../../../../../../types';
 
+type Execution = ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext >;
 
-export const execution: ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext > = async ( {
-    context,
-    t,
-}, ) => {
-
-    await appModel.actions.closeCityView(
+export const execution: Execution
+    = async (
         {
-            name: `non-existent`,
+            context,
             t,
         },
-    );
+    ) => {
 
-    await t.expect(
-        selectors
-            .cityView
-            .parent
-            .exists,
-    )
-        .notOk();
+        await appModel.actions.closeCityView(
+            {
+                name: `non-existent`,
+                t,
+            },
+        );
 
-    return {
-        ...context,
+        await t.expect(
+            selectors
+                .cityView
+                .parent
+                .exists,
+        )
+            .notOk();
+
+        return {
+            ...context,
+        };
+
     };
-
-};

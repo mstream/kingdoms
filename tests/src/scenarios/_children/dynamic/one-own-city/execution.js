@@ -25,80 +25,84 @@ import type {
     ScenarioContext, ScenarioExecution,
 } from '../../../types';
 
-export const execution: ScenarioExecution< ScenarioContext, OneOwnCityScenarioContext > = async (
-    {
-        context
+type Execution = ScenarioExecution< ScenarioContext, OneOwnCityScenarioContext >;
 
-        ,
-    },
-) => {
 
-    const cityName = generateCityName();
-    const password = generatePassword();
-    const username = generateId();
-    const worldId = generateId();
-
-    await tools.createUsers(
+export const execution: Execution
+    = async (
         {
-            users: [
-                {
-                    password,
-                    username,
-                },
-            ],
+            context
+
+            ,
         },
-    );
+    ) => {
 
-    await tools.createWorld(
-        {
-            id   : worldId,
-            state: {
-                ...emptyCommonState,
-                cities: {
-                    [ generateId() ]: {
-                        ...emptyCityState,
-                        name: cityName,
-                        ownerId: username,
-                    },
-                },
-                players: {
-                    [ username ]: PLAYER_STATUS_PLAYING,
-                },
-                rules: {
-                    ...emptyCommonState.rules,
-                    gameSpeed: 1,
-                },
-            },
-        },
-    );
+        const cityName = generateCityName();
+        const password = generatePassword();
+        const username = generateId();
+        const worldId = generateId();
 
-    const newDestroyContext = async () => {
-
-        await tools.deleteUsers(
+        await tools.createUsers(
             {
-                usernames: [
-                    username,
+                users: [
+                    {
+                        password,
+                        username,
+                    },
                 ],
             },
         );
 
-        await tools.destroyWorld(
+        await tools.createWorld(
             {
-                id: worldId,
+                id   : worldId,
+                state: {
+                    ...emptyCommonState,
+                    cities: {
+                        [ generateId() ]: {
+                            ...emptyCityState,
+                            name   : cityName,
+                            ownerId: username,
+                        },
+                    },
+                    players: {
+                        [ username ]: PLAYER_STATUS_PLAYING,
+                    },
+                    rules: {
+                        ...emptyCommonState.rules,
+                        gameSpeed: 1,
+                    },
+                },
             },
         );
 
-        await context.destroy();
+        const newDestroyContext = async () => {
+
+            await tools.deleteUsers(
+                {
+                    usernames: [
+                        username,
+                    ],
+                },
+            );
+
+            await tools.destroyWorld(
+                {
+                    id: worldId,
+                },
+            );
+
+            await context.destroy();
+
+        };
+
+        return {
+            ...context,
+            cityName,
+            destroy: newDestroyContext,
+            password,
+            username,
+            worldId,
+        };
 
     };
-
-    return {
-        ...context,
-        cityName,
-        destroy: newDestroyContext,
-        password,
-        username,
-        worldId,
-    };
-
-};

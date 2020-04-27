@@ -4,9 +4,6 @@ import {
     UNIT_PIKEMAN,
 } from '../../../rules/reducer/types';
 import {
-    createScheduledAttackOrder,
-} from '../../../orders/actions';
-import {
     emptyCityState,
 } from '../state';
 import {
@@ -18,9 +15,12 @@ import {
 import {
     failure, success,
 } from '../../../../utils';
+import {
+    ordersActions,
+} from '../../../orders/actions';
 import type {
     CommonCreateScheduledAttackOrderAction,
-} from '../../../orders/actions/types';
+} from '../../../orders/actions/_children/creade-scheduled-attack-order/types';
 import type {
     CommonStateCitiesReducerTestScenarios,
 } from './types';
@@ -30,7 +30,7 @@ type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const createOrderTestScenarios: Scenarios = [
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 10,
                 orderId         : `order1`,
@@ -78,7 +78,7 @@ export const createOrderTestScenarios: Scenarios = [
         },
     },
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 10,
                 orderId         : `order1`,
@@ -118,7 +118,7 @@ export const createOrderTestScenarios: Scenarios = [
         },
     },
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 10,
                 orderId         : `order1`,
@@ -162,7 +162,7 @@ export const createOrderTestScenarios: Scenarios = [
         },
     },
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 10,
                 orderId         : `order1`,

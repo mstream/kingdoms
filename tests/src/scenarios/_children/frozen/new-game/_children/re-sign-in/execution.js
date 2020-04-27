@@ -8,25 +8,29 @@ import type {
     NewGameScenarioContext,
 } from '../../types';
 import type {
+
     ScenarioExecution,
 } from '../../../../../types';
 
-export const execution: ScenarioExecution< NewGameScenarioContext, NewGameScenarioContext > = async ( {
-    context, logger, t,
-}, ) => {
+type Execution = ScenarioExecution< NewGameScenarioContext, NewGameScenarioContext >;
 
-    const {
-        worldId,
-    } = context;
+export const execution: Execution
+    = async ( {
+        context, logger, t,
+    }, ) => {
 
-    await appModel.actions.open(
-        {
-            logger,
-            t,
+        const {
             worldId,
-        },
-    );
+        } = context;
 
-    return context;
+        await appModel.actions.open(
+            {
+                logger,
+                t,
+                worldId,
+            },
+        );
 
-};
+        return context;
+
+    };

@@ -13,7 +13,10 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../../../types';
 
-export const isAnyMenuOpenSelector: ClientStateSelector< boolean, void > = createSelector<ClientState,
+type Selector = ClientStateSelector< boolean, void >;
+
+export const isAnyMenuOpenSelector: Selector
+    = createSelector<ClientState,
     void,
     boolean,
     boolean,

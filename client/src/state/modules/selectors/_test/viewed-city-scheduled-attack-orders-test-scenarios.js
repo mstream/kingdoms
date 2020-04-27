@@ -22,7 +22,8 @@ import type {
     ScheduledAttackOrderInfosById,
 } from '../types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ?ScheduledAttackOrderInfosById >, >;
+type Scenario = ClientStateSelectorTestScenario< ?ScheduledAttackOrderInfosById >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const viewedCityScheduledAttackOrdersSelectorTestScenarios: Scenarios = [
     {

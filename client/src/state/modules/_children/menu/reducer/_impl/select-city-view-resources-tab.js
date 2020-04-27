@@ -1,7 +1,7 @@
 // @flow
 
 import type {
-    ClientSelectCityViewResourceTabAction,
+    ClientSelectCityViewResourcesTabAction,
 } from '../../actions/types';
 import type {
     ClientStateActionReducer,
@@ -11,7 +11,7 @@ import type {
 } from '../types';
 
 type Reducer = ClientStateActionReducer< ClientStateMenu,
-    ClientSelectCityViewResourceTabAction, >;
+    ClientSelectCityViewResourcesTabAction, >;
 
 export const selectCityViewResourcesTabMenuReducer: Reducer = (
     {

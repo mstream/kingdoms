@@ -4,9 +4,6 @@ import {
     UNIT_PIKEMAN,
 } from '../../../rules/reducer/types';
 import {
-    createScheduledAttackOrder,
-} from '../../actions';
-import {
     emptyCommonState,
 } from '../../../../state';
 import {
@@ -16,6 +13,9 @@ import {
 import {
     failure, success,
 } from '../../../../utils';
+import {
+    ordersActions,
+} from '../../actions';
 import type {
     CommonCreateScheduledAttackOrderAction,
 } from '../../actions/types';
@@ -28,7 +28,7 @@ type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const createScheduledAttackOrderTestScenarios: Scenarios = [
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 10,
                 orderId         : `order1`,
@@ -88,7 +88,7 @@ export const createScheduledAttackOrderTestScenarios: Scenarios = [
         },
     },
     {
-        action: createScheduledAttackOrder(
+        action: ordersActions.createScheduledAttackOrder(
             {
                 minimumDelay    : 10,
                 orderId         : `order1`,

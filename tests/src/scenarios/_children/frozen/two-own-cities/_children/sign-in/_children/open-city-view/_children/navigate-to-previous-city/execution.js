@@ -16,7 +16,9 @@ import type {
 } from '../../../../../../types';
 
 
-export const execution: ScenarioExecution< TwoOwnCitiesScenarioContext, TwoOwnCitiesScenarioContext >
+type Execution = ScenarioExecution< TwoOwnCitiesScenarioContext, TwoOwnCitiesScenarioContext >;
+
+export const execution: Execution
     = async (
         {
             context,

@@ -19,7 +19,8 @@ import type {
     CommonStateWorldReducerTestScenarios,
 } from './types';
 
-type Scenarios = $ReadOnlyArray< CommonStateWorldReducerTestScenarios< CommonResetStateAction >, >;
+type Scenario = CommonStateWorldReducerTestScenarios< CommonResetStateAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const resetStateTestScenarios: Scenarios = [
     {

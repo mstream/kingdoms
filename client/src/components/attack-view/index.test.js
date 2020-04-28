@@ -152,7 +152,8 @@ describe(
         );
 
         test(
-            `displays both cities list and regiment template form when attacking city is selected`,
+            `displays both cities list and regiment template form `
+            + `when attacking city is selected`,
             async () => {
 
                 const state: ClientState = {

@@ -20,7 +20,9 @@ import type {
     ClientUpdateAttackViewRegimentTemplateAction,
 } from '../../actions/types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientUpdateAttackViewRegimentTemplateAction >;
+type Scenario =
+    ClientStateMenuReducerTestScenario< ClientUpdateAttackViewRegimentTemplateAction >;
+
 type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const updateAttackViewRegimentTemplateTestScenarios: Scenarios = [

@@ -23,7 +23,9 @@ import type {
     CommonStateOrdersReducerTestScenarios,
 } from './types';
 
-type Scenario = CommonStateOrdersReducerTestScenarios< CommonCreateScheduledAttackOrderAction >;
+type Scenario =
+    CommonStateOrdersReducerTestScenarios< CommonCreateScheduledAttackOrderAction >;
+
 type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const createScheduledAttackOrderTestScenarios: Scenarios = [

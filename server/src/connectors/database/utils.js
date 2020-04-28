@@ -87,7 +87,8 @@ export const runDatabaseOperationTestScenarios = <A, R>(
                     if ( noExpectations || contradictoryExpectations ) {
 
                         throw Error(
-                            `there should be exactly one of either result or error expectation`,
+                            `there should be exactly one `
+                            + `of either result or error expectation`,
                         );
 
                     }

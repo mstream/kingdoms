@@ -13,7 +13,8 @@ import type {
     ClientStatePlayerReducerTestScenario,
 } from './types';
 
-type Scenarios = $ReadOnlyArray< ClientStatePlayerReducerTestScenario< ClientLoadPlayerAction >, >;
+type Scenario = ClientStatePlayerReducerTestScenario< ClientLoadPlayerAction >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const loadPlayerTestScenarios: Scenarios = [
     {

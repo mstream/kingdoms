@@ -7,7 +7,9 @@ import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
-export const regimentTemplateSelector: ClientStateSelector< CommonStateRegimentTemplate, void > = (
+type Selector = ClientStateSelector< CommonStateRegimentTemplate, void >;
+
+export const regimentTemplateSelector: Selector = (
     state,
 ) => {
 

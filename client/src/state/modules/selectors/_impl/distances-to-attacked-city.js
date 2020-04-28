@@ -17,7 +17,9 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const clientStateDistancesToAttackedCitySelector: ClientStateSelector< ?CityDistances, void >
+type Selector = ClientStateSelector< ?CityDistances, void >;
+
+export const clientStateDistancesToAttackedCitySelector: Selector
     = createSelector<ClientState,
         void,
         ?CityDistances,

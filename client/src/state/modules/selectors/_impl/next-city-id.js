@@ -13,40 +13,43 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const nextCityIdSelector: ClientStateSelector< ?string, void > = createSelector<ClientState,
-    void,
-    ?string,
-    ?$ReadOnlyArray< string >,
-    ?string,
-    >(
-        cityIdsOwnedByPlayerSelector,
-        clientStateMenuSelectors.currentlyViewedCityId,
-        (
-            citiesOwnedByPlayer, currentlyViewedCityId,
-        ) => {
+type Selector = ClientStateSelector< ?string, void >;
 
-            if ( citiesOwnedByPlayer == null || currentlyViewedCityId == null ) {
+export const nextCityIdSelector: Selector
+    = createSelector<ClientState,
+        void,
+        ?string,
+        ?$ReadOnlyArray< string >,
+        ?string,
+        >(
+            cityIdsOwnedByPlayerSelector,
+            clientStateMenuSelectors.currentlyViewedCityId,
+            (
+                citiesOwnedByPlayer, currentlyViewedCityId,
+            ) => {
 
-                return null;
+                if ( citiesOwnedByPlayer == null || currentlyViewedCityId == null ) {
 
-            }
+                    return null;
 
-            if ( citiesOwnedByPlayer.length < 2 ) {
+                }
 
-                return null;
+                if ( citiesOwnedByPlayer.length < 2 ) {
 
-            }
+                    return null;
 
-            const sortedCityIds = [
-                ...citiesOwnedByPlayer,
-            ].sort();
+                }
 
-            const currentlyViewedCityIndex = sortedCityIds.indexOf(
-                currentlyViewedCityId,
-            );
-            return currentlyViewedCityIndex === citiesOwnedByPlayer.length - 1
-                ? sortedCityIds[ 0 ]
-                : sortedCityIds[ currentlyViewedCityIndex + 1 ];
+                const sortedCityIds = [
+                    ...citiesOwnedByPlayer,
+                ].sort();
 
-        },
-    );
+                const currentlyViewedCityIndex = sortedCityIds.indexOf(
+                    currentlyViewedCityId,
+                );
+                return currentlyViewedCityIndex === citiesOwnedByPlayer.length - 1
+                    ? sortedCityIds[ 0 ]
+                    : sortedCityIds[ currentlyViewedCityIndex + 1 ];
+
+            },
+        );

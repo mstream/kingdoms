@@ -13,7 +13,8 @@ import type {
     ClientStateSelectorTestScenario,
 } from '../../../types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ?$ReadOnlyArray< string > >, >;
+type Scenario = ClientStateSelectorTestScenario< ?$ReadOnlyArray< string > >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const cityIdsOwnedByPlayersSelectorTestScenarios: Scenarios = [
     {

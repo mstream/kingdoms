@@ -51,7 +51,8 @@ const createConfig: () => Config = () => {
             );
 
             const errorMessage
-                = `variable '${ name }' is missing in global variables for '${ env }' environment:`
+                = `variable '${ name }' is missing in global variables `
+                + `for '${ env }' environment:`
                 + ` ${ serializedGlobalVariables }`;
 
             throw Error(

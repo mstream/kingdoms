@@ -9,5 +9,5 @@ import type {
     CommonStateRules,
 } from '../types';
 
-export type CommonStateRulesReducerTestScenarios<+A: CommonAction,
+export type CommonStateRulesReducerTestScenario<+A: CommonAction,
     > = CommonStateReducerTestScenario< CommonStateRules, A >;

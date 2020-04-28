@@ -46,7 +46,10 @@ import type {
     CommonStatePlayersReducerTestScenario,
 } from './_test/types';
 
-const stateInitializationScenario: CommonStatePlayersReducerTestScenario< CommonDummyAction > = {
+type StateInitializationScenario =
+    CommonStatePlayersReducerTestScenario< CommonDummyAction >;
+
+const stateInitializationScenario: StateInitializationScenario = {
     action                        : dummy(),
     expectedReductionResultCreator: () => {
 

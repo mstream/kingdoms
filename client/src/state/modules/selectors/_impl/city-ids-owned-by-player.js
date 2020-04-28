@@ -16,30 +16,32 @@ import type {
     ClientState, ClientStateSelector,
 } from '../../../types';
 
-export const cityIdsOwnedByPlayerSelector: ClientStateSelector< ?$ReadOnlyArray< string >, void >
+type Selector = ClientStateSelector< ?$ReadOnlyArray< string >, void >;
+
+export const cityIdsOwnedByPlayerSelector: Selector
     = createSelector<ClientState,
-    void,
-    ?$ReadOnlyArray< string >,
-    ?CityIdsByOwner,
-    ?string,
-    >(
-        clientStateCommonStateSelectors.cityIdsByOwner,
-        clientStatePlayerSelectors.name,
-        (
-            cityIdsByOwner, playerName,
-        ) => {
+        void,
+        ?$ReadOnlyArray< string >,
+        ?CityIdsByOwner,
+        ?string,
+        >(
+            clientStateCommonStateSelectors.cityIdsByOwner,
+            clientStatePlayerSelectors.name,
+            (
+                cityIdsByOwner, playerName,
+            ) => {
 
-            if ( cityIdsByOwner == null || playerName == null ) {
+                if ( cityIdsByOwner == null || playerName == null ) {
 
-                return null;
+                    return null;
 
-            }
+                }
 
-            const playerCityIds = cityIdsByOwner[ playerName ];
+                const playerCityIds = cityIdsByOwner[ playerName ];
 
-            return playerCityIds == null
-                ? []
-                : playerCityIds;
+                return playerCityIds == null
+                    ? []
+                    : playerCityIds;
 
-        },
-    );
+            },
+        );

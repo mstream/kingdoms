@@ -13,17 +13,20 @@ import type {
     ClientStateErrors,
 } from '../../reducer/types';
 
-export const anyErrorsSelector: ClientStateSelector< boolean, void > = createSelector<ClientState,
-    void,
-    boolean,
-    ClientStateErrors,
-    >(
-        errorsSelector,
-        (
-            errors,
-        ) => {
+type Selector = ClientStateSelector< boolean, void >;
 
-            return errors.length > 0;
+export const anyErrorsSelector: Selector
+    = createSelector<ClientState,
+        void,
+        boolean,
+        ClientStateErrors,
+        >(
+            errorsSelector,
+            (
+                errors,
+            ) => {
 
-        },
-    );
+                return errors.length > 0;
+
+            },
+        );

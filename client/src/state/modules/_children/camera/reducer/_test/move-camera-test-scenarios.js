@@ -13,7 +13,8 @@ import type {
     ClientStateCameraReducerTestScenario,
 } from './types';
 
-type Scenarios = $ReadOnlyArray< ClientStateCameraReducerTestScenario< ClientMoveCameraAction >, >;
+type Scenario = ClientStateCameraReducerTestScenario< ClientMoveCameraAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const moveCameraTestScenarios: Scenarios = [
     {

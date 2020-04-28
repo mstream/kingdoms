@@ -19,7 +19,8 @@ import type {
     ClientUpdateStateAction,
 } from '../../../common-state/actions/types';
 
-type Scenarios = $ReadOnlyArray< ClientStateTilesReducerTestScenario< ClientUpdateStateAction >, >;
+type Scenario = ClientStateTilesReducerTestScenario< ClientUpdateStateAction >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const updateStateTestScenarios: Scenarios = [
     {

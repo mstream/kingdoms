@@ -22,9 +22,10 @@ import type {
     CommonStateCitiesReducerTestScenarios,
 } from './types';
 
-type State = $ReadOnlyArray< CommonStateCitiesReducerTestScenarios< CommonResetStateAction >, >;
+type Scenario = CommonStateCitiesReducerTestScenarios< CommonResetStateAction >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
-export const resetStateTestScenarios: State = [
+export const resetStateTestScenarios: Scenarios = [
     {
         action                        : resetState(),
         expectedReductionResultCreator: () => {

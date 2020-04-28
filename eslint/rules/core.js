@@ -43,7 +43,7 @@ module.exports = {
     'max-len': [
         `error`,
         {
-            code    : 100,
+            code    : 95,
             tabWidth: 4,
         },
     ],
@@ -122,24 +122,12 @@ module.exports = {
     'no-label-var': [
         `error`,
     ],
-
-    /*
-     * 'no-undefined': [
-     *     'error',
-     * ],
-     */
     'no-mixed-operators': [
         `error`,
     ],
     'no-mixed-spaces-and-tabs': [
         `error`,
     ],
-
-    /*
-     * 'no-use-before-define': [
-     *     'error',
-     * ],
-     */
     'no-multi-assign': [
         `error`,
     ],

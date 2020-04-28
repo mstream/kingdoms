@@ -28,7 +28,10 @@ import type {
     ClientStateErrorsReducerTestScenario,
 } from './_test/types';
 
-const stateInitializationScenario: ClientStateErrorsReducerTestScenario< ClientDummyAction > = {
+type StateInitializationScenario =
+    ClientStateErrorsReducerTestScenario< ClientDummyAction >
+
+const stateInitializationScenario: StateInitializationScenario = {
     action                   : clientActions.global.dummy(),
     expectedLocalStateCreator: () => {
 

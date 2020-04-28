@@ -31,10 +31,13 @@ import type {
     CommonDummyAction,
 } from '../../../../actions/types';
 import type {
-    CommonStateRulesReducerTestScenarios,
+    CommonStateRulesReducerTestScenario,
 } from './_test/types';
 
-const stateInitializationScenario: CommonStateRulesReducerTestScenarios< CommonDummyAction > = {
+type StateInitializationScenario =
+    CommonStateRulesReducerTestScenario< CommonDummyAction >;
+
+const stateInitializationScenario: StateInitializationScenario = {
     action                        : dummy(),
     expectedReductionResultCreator: () => {
 

@@ -16,7 +16,8 @@ import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateRegimentTemplate >, >;
+type Scenario = ClientStateSelectorTestScenario< CommonStateRegimentTemplate >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const regimentTemplateSelectorTestScenarios: Scenarios = [
     {

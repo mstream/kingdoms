@@ -13,20 +13,20 @@ import {
     emptyCommonState,
 } from '../../../../../../../../common/src/state/modules/state';
 import type {
-    ClientOpenCityViewAction,
+    ClientOpenAttackViewAction,
 } from '../../actions/types';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientOpenCityViewAction >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientOpenAttackViewAction >;
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const openCityViewTestScenarios: Scenarios = [
+export const openAttackViewScenarios: Scenarios = [
     {
-        action: clientActions.menu.openCityView(
+        action: clientActions.menu.openAttackView(
             {
-                cityId: `city1`,
+                cityId: `city2`,
             },
         ),
         expectedLocalStateCreator: (
@@ -37,15 +37,14 @@ export const openCityViewTestScenarios: Scenarios = [
 
             return {
                 ...previousLocalState,
-                cityView: {
-                    ...previousLocalState.cityView,
-                    currentCityId: `city1`,
-                    orderId      : null,
+                attackView: {
+                    ...previousLocalState.attackView,
+                    attackedCityId: `city2`,
                 },
             };
 
         },
-        name               : `opens city view`,
+        name               : `opens attack view`,
         previousGlobalState: {
             ...emptyClientState,
             commonState: {
@@ -55,14 +54,17 @@ export const openCityViewTestScenarios: Scenarios = [
                         ...emptyCityState,
                         ownerId: `player1`,
                     },
+                    city2: {
+                        ...emptyCityState,
+                        ownerId: `player2`,
+                    },
                 },
             },
             menu: {
                 ...emptyClientState.menu,
-                cityView: {
-                    ...emptyClientState.menu.cityView,
-                    currentCityId: `city2`,
-                    orderId      : `order1`,
+                attackView: {
+                    ...emptyClientState.menu.attackView,
+                    attackedCityId: null,
                 },
             },
             player: {

@@ -16,14 +16,14 @@ import {
     commonStateCitiesSelectors,
 } from './index';
 import {
-    runCommonStateSelectorsTestScenarios,
+    generateTests,
 } from '../../../test-utils';
 
 describe(
     `commonStateCitiesSelectors`,
     () => {
 
-        runCommonStateSelectorsTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

@@ -12,7 +12,9 @@ export type PostToConnectionResult = $ReadOnly< {|
 |} >;
 
 type PostToConnection = ( ...PostToConnectionArgs ) => PostToConnectionResult;
-export type MockPostToConnection = JestMockFn< PostToConnectionArgs, PostToConnectionResult >;
+
+export type MockPostToConnection =
+    JestMockFn< PostToConnectionArgs, PostToConnectionResult >;
 
 export type ApiGateway = {
     postToConnection: PostToConnection,

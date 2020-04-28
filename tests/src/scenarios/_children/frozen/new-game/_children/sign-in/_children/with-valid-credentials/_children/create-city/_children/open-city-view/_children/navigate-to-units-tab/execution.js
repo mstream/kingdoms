@@ -15,7 +15,8 @@ import type {
     ScenarioExecution,
 } from '../../../../../../../../../../../../../types';
 
-type Execution = ScenarioExecution< CreateCityScenarioContext, CreateCityScenarioContext >;
+type Execution = ScenarioExecution< CreateCityScenarioContext,
+    CreateCityScenarioContext >;
 
 export const execution: Execution
     = async (

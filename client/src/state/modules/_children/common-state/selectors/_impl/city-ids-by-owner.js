@@ -8,7 +8,7 @@ import {
 } from '../utils';
 import type {
     CityIdsByOwner,
-} from '../../../../../../../../common/src/state/modules/_children/cities/selectors/types';
+} from '../../../../../../../../common/src/state/modules/_children/cities/types';
 import type {
     ClientStateSelector,
 } from '../../../../../types';

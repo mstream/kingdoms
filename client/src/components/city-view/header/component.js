@@ -150,7 +150,16 @@ export const Component = (
     ) : (
         <p
             data-testid={testIds.cityView.name}
-            className="font-bold text-2xl text-center cursor-text hover:border text-gray-100"
+            className={
+                classNames(
+                    `font-bold`,
+                    `text-2xl`,
+                    `text-center`,
+                    `cursor-text`,
+                    `hover:border`,
+                    `text-gray-100`,
+                )
+            }
             onClick={onCityNameInputClick}
         >
             {city.name}

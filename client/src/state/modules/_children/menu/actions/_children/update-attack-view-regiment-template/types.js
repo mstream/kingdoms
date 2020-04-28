@@ -6,9 +6,11 @@ import type {
 } from '../../../../../../../../../common/src/types/actions';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
+} from '../../../../../../../../../common/src/state/modules/_children/orders/types';
 
-export const UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE: 'UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE'
+type ActionKey = 'UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE';
+
+export const UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE: ActionKey
     = `UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE`;
 
 export type ClientUpdateAttackViewRegimentTemplateAction =

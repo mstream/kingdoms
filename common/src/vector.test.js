@@ -16,7 +16,7 @@ describe(
     () => {
 
         it(
-            `returns true when both vectors have both coordinates equal`,
+            `returns true when both vectors have both cords equal`,
             () => {
 
                 const vector1 = {
@@ -47,7 +47,7 @@ describe(
         );
 
         it(
-            `returns false when x coordinates differ`,
+            `returns false when x cords differ`,
             () => {
 
                 const vector1 = {
@@ -78,7 +78,7 @@ describe(
         );
 
         it(
-            `returns false when y coordinates differ`,
+            `returns false when y cords differ`,
             () => {
 
                 const vector1 = {
@@ -116,7 +116,7 @@ describe(
     () => {
 
         it(
-            `returns a vector with both coordinates negated`,
+            `returns a vector with both cords negated`,
             () => {
 
                 const vector = {
@@ -153,7 +153,7 @@ describe(
     () => {
 
         it(
-            `returns a vector with coordinates being sum of corresponding coordinates`,
+            `returns a vector with cords being sum of corresponding cords`,
             () => {
 
                 const vector1 = {
@@ -196,7 +196,7 @@ describe(
     () => {
 
         it(
-            `returns a vector with coordinates being difference of corresponding coordinates`,
+            `returns a vector with cords being difference of corresponding cords`,
             () => {
 
                 const vector1 = {
@@ -239,7 +239,7 @@ describe(
     () => {
 
         it(
-            `returns a vector with coordinates being product of corresponding coordinates`,
+            `returns a vector with cords being product of corresponding cords`,
             () => {
 
                 const vector1 = {
@@ -282,7 +282,7 @@ describe(
     () => {
 
         it(
-            `returns a vector with coordinates being quotient of corresponding coordinates`,
+            `returns a vector with cords being quotient of corresponding cords`,
             () => {
 
                 const vector1 = {

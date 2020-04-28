@@ -1,30 +1,26 @@
 // @flow
 
 import {
-    UNIT_CATAPULT,
-    UNIT_SWORDSMAN,
-} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
-import {
     clientActions,
 } from '../../../../actions';
 import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    ClientSelectCityViewUnitsTabAction,
+    ClientSelectCityViewOrdersTabAction,
 } from '../../actions/types';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewUnitsTabAction >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewOrdersTabAction >;
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const selectCityViewUnitsTabTestScenarios: Scenarios = [
+export const selectCityViewOrdersTabScenarios: Scenarios = [
     {
-        action: clientActions.menu.selectCityViewUnitsTab(
+        action: clientActions.menu.selectCityViewOrdersTab(
             {
-                unitType: UNIT_SWORDSMAN,
+                orderId: `order1`,
             },
         ),
         expectedLocalStateCreator: (
@@ -37,19 +33,19 @@ export const selectCityViewUnitsTabTestScenarios: Scenarios = [
                 ...previousLocalState,
                 cityView: {
                     ...previousLocalState.cityView,
-                    unit: UNIT_SWORDSMAN,
+                    orderId: `order1`,
                 },
             };
 
         },
-        name               : `select city view unit`,
+        name               : `selects city view order`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    unit: UNIT_CATAPULT,
+                    orderId: `order2`,
                 },
             },
         },

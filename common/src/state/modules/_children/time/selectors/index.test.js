@@ -4,7 +4,7 @@ import {
     commonStateTimeSelectors,
 } from './index';
 import {
-    runCommonStateSelectorsTestScenarios,
+    generateTests,
 } from '../../../test-utils';
 import {
     timeSelectorTestScenarios,
@@ -14,7 +14,7 @@ describe(
     `commonStateTimeSelectors`,
     () => {
 
-        runCommonStateSelectorsTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

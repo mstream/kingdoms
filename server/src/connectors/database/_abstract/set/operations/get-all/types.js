@@ -25,4 +25,5 @@ export type DatabaseSetGetAll<K, V> = ( DatabaseSetGetAllArgs< K > ) =>
     Promise< $ReadOnlyArray< V >, >;
 
 export type DatabaseSetGetAllTestScenario =
-    DatabaseTestScenario< DatabaseSetGetAllArgs< string >, DatabaseSetGetAllResult< string > >;
+    DatabaseTestScenario< DatabaseSetGetAllArgs< string >,
+        DatabaseSetGetAllResult< string > >;

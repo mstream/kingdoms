@@ -16,11 +16,11 @@ import {
     errorsReducer,
 } from './index';
 import {
+    generateTests,
+} from '../../../../test-utils';
+import {
     reportErrorsTestScenarios,
 } from './_test/report-errors-test-scenarios';
-import {
-    runReducerTestScenarios,
-} from '../../../../test-utils';
 import type {
     ClientDummyAction,
 } from '../../../actions/types';
@@ -51,7 +51,7 @@ describe(
     `errorsReducer`,
     () => {
 
-        runReducerTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

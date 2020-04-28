@@ -7,7 +7,9 @@ import type {
     CommonStateUnitKey,
 } from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 
-export const activeCityViewUnitSelector: ClientStateSelector< CommonStateUnitKey, void > = (
+type Selector = ClientStateSelector< CommonStateUnitKey, void >;
+
+export const activeCityViewUnitSelector: Selector = (
     state,
 ) => {
 

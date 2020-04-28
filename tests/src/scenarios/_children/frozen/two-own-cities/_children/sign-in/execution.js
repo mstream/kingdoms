@@ -17,7 +17,8 @@ import type {
 } from '../../types';
 
 
-type Execution = ScenarioExecution< TwoOwnCitiesScenarioContext, TwoOwnCitiesScenarioContext >;
+type Execution = ScenarioExecution< TwoOwnCitiesScenarioContext,
+    TwoOwnCitiesScenarioContext >;
 
 
 export const execution: Execution

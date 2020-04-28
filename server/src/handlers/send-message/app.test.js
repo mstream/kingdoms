@@ -164,11 +164,13 @@ describe(
                     .toEqual(
                         [
                             [
-                                `connection-by-player:${ stubConfig.environment }:player1`,
+                                `connection-by-player`
+                                + `:${ stubConfig.environment }:player1`,
                                 `connection1`,
                             ],
                             [
-                                `world-by-player:${ stubConfig.environment }:player1`,
+                                `world-by-player`
+                                + `:${ stubConfig.environment }:player1`,
                                 `world1`,
                             ],
                         ].sort(),
@@ -192,7 +194,8 @@ describe(
                     .toEqual(
                         [
                             [
-                                `state-by-world:${ stubConfig.environment }:world1`,
+                                `state-by-world`
+                                + `:${ stubConfig.environment }:world1`,
                             ],
                         ],
                     );

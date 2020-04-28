@@ -56,7 +56,17 @@ export const Component = (
     return (
         <div data-testid={testIds.worldMap.statusBar} className={className}>
             <div
-                className="flex items-center p-1 text-md font-bold border-r border-gray-900">
+                className={
+                    classNames(
+                        `flex`,
+                        `items-center`,
+                        `p-1`,
+                        `text-md`,
+                        `font-bold`,
+                        `border-r`,
+                        `border-gray-900`,
+                    )
+                }>
                 {tiersSum}
             </div>
             <div>

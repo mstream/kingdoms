@@ -22,5 +22,6 @@ export type DatabaseValueGet<K, V> = ( DatabaseValueGetArgs< K > ) =>
     Promise< DatabaseValueGetResult< V > >;
 
 export type DatabaseValueGetTestScenario =
-    DatabaseTestScenario< DatabaseValueGetArgs< string >, DatabaseValueGetResult< string > >;
+    DatabaseTestScenario< DatabaseValueGetArgs< string >,
+        DatabaseValueGetResult< string > >;
 

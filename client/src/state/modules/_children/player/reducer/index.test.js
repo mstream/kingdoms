@@ -13,14 +13,14 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
+    generateTests,
+} from '../../../../test-utils';
+import {
     loadPlayerTestScenarios,
 } from './_test/load-player-test-scenarios';
 import {
     playerReducer,
 } from './index';
-import {
-    runReducerTestScenarios,
-} from '../../../../test-utils';
 import type {
     ClientDummyAction,
 } from '../../../actions/types';
@@ -53,7 +53,7 @@ describe(
     `playerReducer`,
     () => {
 
-        runReducerTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

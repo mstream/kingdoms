@@ -19,6 +19,7 @@ import {
     validateUnitType,
 } from '../../../../../common/src/validators';
 import React from 'react';
+import classNames from 'classnames';
 import type {
     CommonStateUnitKey,
 } from '../../../../../common/src/state/modules/_children/rules/reducer/types';
@@ -33,9 +34,9 @@ const serializeInputName = (
         boundaryType,
         unitType,
     }: {
-    boundaryType: BoundaryType,
-    unitType: CommonStateUnitKey,
-},
+        boundaryType: BoundaryType,
+        unitType: CommonStateUnitKey,
+    },
 ): string => {
 
     return `${ unitType }-${ boundaryType }`;
@@ -46,8 +47,8 @@ const deserializeInputName = (
     {
         inputName,
     }: {
-    inputName: string,
-},
+        inputName: string,
+    },
 ): { boundaryType: BoundaryType, unitType: CommonStateUnitKey } => {
 
     const [
@@ -204,11 +205,19 @@ export const Component = (
             const unitQuantity = attackingCity.units[ unitType ];
             const unitVisual = unitVisuals[ unitType ];
 
-            const inputClassName
-            = `m-1 text-xl cursor-text text-center bg-gray-900 border border-gray-100`;
+            const inputClassName = classNames(
+                `m-1`,
+                `text-xl`,
+                `cursor-text`,
+                `text-center`,
+                `bg-gray-900`,
+                `border`,
+                `border-gray-100`,
+            );
 
             return (
-                <div key={unitType} className="flex flex-row flex-1 p-1 my-1 mx-2">
+                <div key={unitType}
+                    className="flex flex-row flex-1 p-1 my-1 mx-2">
                     <div className="m-1">
                         <p className="text-sm text-center font-medium">
                             {numberToQuantityString(
@@ -265,7 +274,9 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.attackView.regimentTemplateForm} className="flex flex-col">
+        <div
+            data-testid={testIds.attackView.regimentTemplateForm}
+            className="flex flex-col">
             <div className="flex flex-row justify-center text-xl">Regiment</div>
             <div className="flex flex-row flex-wrap justify-start shadow-inner">
                 {unitRows}

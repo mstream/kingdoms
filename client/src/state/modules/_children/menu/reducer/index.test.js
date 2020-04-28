@@ -40,56 +40,56 @@ import {
     clientActions,
 } from '../../../actions';
 import {
-    closeAttackViewTestScenarios,
-} from './_test/close-attack-view-test-scenarios';
+    closeAttackViewScenarios,
+} from './_test/close-attack-view-scenarios';
 import {
-    closeCityViewTestScenarios,
-} from './_test/close-city-view-test-scenarios';
+    closeCityViewScenarios,
+} from './_test/close-city-view-scenarios';
 import {
     emptyClientState,
 } from '../../../../state';
 import {
+    generateTests,
+} from '../../../../test-utils';
+import {
     menuReducer,
 } from './index';
 import {
-    openAttackViewTestScenarios,
-} from './_test/open-attack-view-test-scenarios';
+    openAttackViewScenarios,
+} from './_test/open-attack-view-scenarios';
 import {
-    openCityViewTestScenarios,
-} from './_test/open-city-view-test-scenarios';
+    openCityViewScenarios,
+} from './_test/open-city-view-scenarios';
 import {
-    requestCityCreationTestScenarios,
-} from './_test/request-city-creation-test-scenarios';
+    requestCityCreationScenarios,
+} from './_test/request-city-creation-scenarios';
 import {
-    requestOrderCreationTestScenarios,
-} from './_test/request-order-creation-test-scenarios';
+    requestOrderCreationScenarios,
+} from './_test/request-order-creation-scenarios';
 import {
-    runReducerTestScenarios,
-} from '../../../../test-utils';
+    selectAttackViewAttackingCityScenarios,
+} from './_test/select-attack-view-attacking-city-scenarios';
 import {
-    selectAttackViewAttackingCityTestScenarios,
-} from './_test/select-attack-view-attacking-city-test-scenarios';
+    selectCityViewBuildingsTabScenarios,
+} from './_test/select-city-view-buildings-tab-scenarios';
 import {
-    selectCityViewBuildingsTabTestScenarios,
-} from './_test/select-city-view-buildings-tab-test-scenarios';
+    selectCityViewOrdersTabScenarios,
+} from './_test/select-city-view-orders-tab-scenarios';
 import {
-    selectCityViewOrdersTabTestScenarios,
-} from './_test/select-city-view-orders-tab-test-scenarios';
+    selectCityViewResourcesTabScenarios,
+} from './_test/select-city-view-resources-tab-scenarios';
 import {
-    selectCityViewResourcesTabTestScenarios,
-} from './_test/select-city-view-resources-tab-test-scenarios';
+    selectCityViewTabScenarios,
+} from './_test/select-city-view-tab-scenarios';
 import {
-    selectCityViewTabTestScenarios,
-} from './_test/select-city-view-tab-test-scenarios';
+    selectCityViewUnitsTabScenarios,
+} from './_test/select-city-view-units-tab-scenarios';
 import {
-    selectCityViewUnitsTabTestScenarios,
-} from './_test/select-city-view-units-tab-test-scenarios';
+    updateAttackViewMinimumDelayScenarios,
+} from './_test/update-attack-view-minimum-delay-scenarios';
 import {
-    updateAttackViewMinimumDelayTestScenarios,
-} from './_test/update-attack-view-minimum-delay-test-scenarios';
-import {
-    updateAttackViewRegimentTemplateTestScenarios,
-} from './_test/update-attack-view-regiment-template-test-scenarios';
+    updateAttackViewRegimentTemplateScenarios,
+} from './_test/update-attack-view-regiment-template-scenarios';
 import {
     updateStateTestScenarios,
 } from './_test/update-state-test-scenarios';
@@ -168,23 +168,23 @@ const stateInitializationScenario: StateInitializationScenario = {
 };
 
 const scenarios = {
-    [ CLOSE_ATTACK_VIEW ]: closeAttackViewTestScenarios,
-    [ CLOSE_CITY_VIEW ]  : closeCityViewTestScenarios,
+    [ CLOSE_ATTACK_VIEW ]: closeAttackViewScenarios,
+    [ CLOSE_CITY_VIEW ]  : closeCityViewScenarios,
     [ DUMMY ]            : [
         stateInitializationScenario,
     ],
-    [ OPEN_ATTACK_VIEW ]                    : openAttackViewTestScenarios,
-    [ OPEN_CITY_VIEW ]                      : openCityViewTestScenarios,
-    [ REQUEST_CITY_CREATION ]               : requestCityCreationTestScenarios,
-    [ REQUEST_ORDER_CREATION ]              : requestOrderCreationTestScenarios,
-    [ SELECT_ATTACK_VIEW_ATTACKING_CITY ]   : selectAttackViewAttackingCityTestScenarios,
-    [ SELECT_CITY_VIEW_BUILDINGS_TAB ]      : selectCityViewBuildingsTabTestScenarios,
-    [ SELECT_CITY_VIEW_ORDERS_TAB ]         : selectCityViewOrdersTabTestScenarios,
-    [ SELECT_CITY_VIEW_RESOURCES_TAB ]      : selectCityViewResourcesTabTestScenarios,
-    [ SELECT_CITY_VIEW_TAB ]                : selectCityViewTabTestScenarios,
-    [ SELECT_CITY_VIEW_UNITS_TAB ]          : selectCityViewUnitsTabTestScenarios,
-    [ UPDATE_ATTACK_VIEW_MINIMUM_DELAY ]    : updateAttackViewMinimumDelayTestScenarios,
-    [ UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE ]: updateAttackViewRegimentTemplateTestScenarios,
+    [ OPEN_ATTACK_VIEW ]                    : openAttackViewScenarios,
+    [ OPEN_CITY_VIEW ]                      : openCityViewScenarios,
+    [ REQUEST_CITY_CREATION ]               : requestCityCreationScenarios,
+    [ REQUEST_ORDER_CREATION ]              : requestOrderCreationScenarios,
+    [ SELECT_ATTACK_VIEW_ATTACKING_CITY ]   : selectAttackViewAttackingCityScenarios,
+    [ SELECT_CITY_VIEW_BUILDINGS_TAB ]      : selectCityViewBuildingsTabScenarios,
+    [ SELECT_CITY_VIEW_ORDERS_TAB ]         : selectCityViewOrdersTabScenarios,
+    [ SELECT_CITY_VIEW_RESOURCES_TAB ]      : selectCityViewResourcesTabScenarios,
+    [ SELECT_CITY_VIEW_TAB ]                : selectCityViewTabScenarios,
+    [ SELECT_CITY_VIEW_UNITS_TAB ]          : selectCityViewUnitsTabScenarios,
+    [ UPDATE_ATTACK_VIEW_MINIMUM_DELAY ]    : updateAttackViewMinimumDelayScenarios,
+    [ UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE ]: updateAttackViewRegimentTemplateScenarios,
     [ UPDATE_STATE ]                        : updateStateTestScenarios,
 };
 
@@ -192,7 +192,7 @@ describe(
     `menuReducer`,
     () => {
 
-        runReducerTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

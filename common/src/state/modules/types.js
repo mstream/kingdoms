@@ -31,7 +31,6 @@ import type {
     CommonStateWorld,
 } from './_children/world/reducer/types';
 
-
 export type CommonState = $ReadOnly< {
     cities: CommonStateCities,
     orders: CommonStateOrders,

@@ -21,4 +21,6 @@ export type BuildUserProfileArgs = [$ReadOnly< {
 export type BuildUserProfileResult = Promise< UserProfileResult >
 
 export type BuildUserProfile = ( ...BuildUserProfileArgs ) => BuildUserProfileResult
-export type MockBuildUserProfile = JestMockFn< BuildUserProfileArgs, BuildUserProfileResult >;
+
+export type MockBuildUserProfile =
+    JestMockFn< BuildUserProfileArgs, BuildUserProfileResult >;

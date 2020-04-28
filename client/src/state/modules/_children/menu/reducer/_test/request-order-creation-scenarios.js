@@ -22,7 +22,7 @@ import type {
 type Scenario = ClientStateMenuReducerTestScenario< ClientRequestOrderCreationAction >;
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const requestOrderCreationTestScenarios: Scenarios = [
+export const requestOrderCreationScenarios: Scenarios = [
     {
         action: clientActions.commonState.requestOrderCreation(
             {

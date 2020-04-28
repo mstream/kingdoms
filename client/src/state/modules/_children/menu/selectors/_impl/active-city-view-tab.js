@@ -7,7 +7,9 @@ import type {
     ClientStateSelector,
 } from '../../../../../types';
 
-export const activeCityViewTabSelector: ClientStateSelector< ClientStateCityViewTab, void > = (
+type Selector = ClientStateSelector< ClientStateCityViewTab, void >;
+
+export const activeCityViewTabSelector: Selector = (
     state,
 ) => {
 

@@ -16,7 +16,7 @@ import type {
 type Scenario = ClientStateMenuReducerTestScenario< ClientCloseCityViewAction >
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const closeCityViewTestScenarios: Scenarios = [
+export const closeCityViewScenarios: Scenarios = [
     {
         action                   : clientActions.menu.closeCityView(),
         expectedLocalStateCreator: (

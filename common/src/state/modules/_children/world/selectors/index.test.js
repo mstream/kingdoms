@@ -4,7 +4,7 @@ import {
     commonStateWorldSelectors,
 } from './index';
 import {
-    runCommonStateSelectorsTestScenarios,
+    generateTests,
 } from '../../../test-utils';
 import {
     worldSelectorTestScenarios,
@@ -14,7 +14,7 @@ describe(
     `commonStateWorldSelectors`,
     () => {
 
-        runCommonStateSelectorsTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

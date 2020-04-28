@@ -22,7 +22,9 @@ export type DatabaseSetRemoveArgs<K, V> = $ReadOnly< {|
     value: V,
 |} >;
 
-export type DatabaseSetRemove<K, V> = ( DatabaseSetRemoveArgs< K, V > ) => Promise< void >;
+export type DatabaseSetRemove<K, V> =
+    ( DatabaseSetRemoveArgs< K, V > ) => Promise< void >;
 
 export type DatabaseSetRemoveTestScenario =
-    DatabaseTestScenario< DatabaseSetRemoveArgs< string, string >, DatabaseSetRemoveResult >;
+    DatabaseTestScenario< DatabaseSetRemoveArgs< string, string >,
+        DatabaseSetRemoveResult >;

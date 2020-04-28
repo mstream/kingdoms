@@ -25,7 +25,7 @@ type Scenario =
 
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const updateAttackViewRegimentTemplateTestScenarios: Scenarios = [
+export const updateAttackViewRegimentTemplateScenarios: Scenarios = [
     {
         action: clientActions.menu.updateAttackViewRegimentTemplate(
             {

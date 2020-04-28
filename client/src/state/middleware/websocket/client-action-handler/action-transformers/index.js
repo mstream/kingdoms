@@ -7,113 +7,32 @@ import {
     REQUEST_ORDER_CREATION,
 } from '../../../../modules/_children/common-state/actions/types';
 import {
-    changeCityName,
-    createCity,
-    upgradeBuilding,
-} from '../../../../../../../common/src/state/modules/_children/cities/actions';
+    transformer as requestBuildingUpgradeTransformer,
+} from './_children/request-building-upgrade';
 import {
-    generateId,
-} from '../../../../../../../common/src/utils';
+    transformer as requestCityCreationTransformer,
+} from './_children/request-city-creation';
 import {
-
-    ordersActions,
-} from '../../../../../../../common/src/state/modules/_children/orders/actions';
+    transformer as requestCityNameTransformer,
+} from './_children/request-city-name-change';
+import {
+    transformer as requestOrderCreationTransformer,
+} from './_children/request-order-creation';
+import type {
+    ActionTransformer,
+} from './types';
 import type {
     ClientAction, ClientActionKey,
 } from '../../../../types';
 import type {
-    ClientRequestBuildingUpgradeAction,
-    ClientRequestCityCreationAction,
-    ClientRequestCityNameChangeAction,
-    ClientRequestOrderCreationAction,
-} from '../../../../modules/_children/common-state/actions/types';
-import type {
-    CommonChangeCityNameAction,
-    CommonCreateCityAction,
-    CommonUpgradeBuildingAction,
-} from '../../../../../../../common/src/state/modules/_children/cities/actions/types';
-import type {
-    CommonCreateScheduledAttackOrderAction,
-} from '../../../../../../../common/src/state/modules/_children/orders/actions/types';
-import type {
     CommonPlayerAction,
 } from '../../../../../../../common/src/state/types';
-
-type ActionTransformer<+A: ClientAction, +B: CommonPlayerAction> = (
-    $ReadOnly< { clientAction: A, username: string } >,
-) => B;
-
-const transformRequestBuildingUpgrade: ActionTransformer< ClientRequestBuildingUpgradeAction,
-    CommonUpgradeBuildingAction, > = (
-        {
-            clientAction, username,
-        },
-    ) => {
-
-        return upgradeBuilding(
-            {
-                ...clientAction.payload,
-                playerId: username,
-            },
-        );
-
-    };
-
-const transformRequestCityNameChange: ActionTransformer< ClientRequestCityNameChangeAction,
-    CommonChangeCityNameAction, > = (
-        {
-            clientAction, username,
-        },
-    ) => {
-
-        return changeCityName(
-            {
-                ...clientAction.payload,
-                playerId: username,
-            },
-        );
-
-    };
-
-const transformRequestCityCreation: ActionTransformer< ClientRequestCityCreationAction,
-    CommonCreateCityAction, > = (
-        {
-            clientAction, username,
-        },
-    ) => {
-
-        return createCity(
-            {
-                ...clientAction.payload,
-                cityId  : generateId(),
-                playerId: username,
-            },
-        );
-
-    };
-
-const transformRequestOrderCreation: ActionTransformer< ClientRequestOrderCreationAction,
-    CommonCreateScheduledAttackOrderAction, > = (
-        {
-            clientAction, username,
-        },
-    ) => {
-
-        return ordersActions.createScheduledAttackOrder(
-            {
-                ...clientAction.payload,
-                orderId : generateId(),
-                playerId: username,
-            },
-        );
-
-    };
 
 export const actionTransformers: {
     [ClientActionKey]: ActionTransformer< ClientAction, CommonPlayerAction >,
 } = {
-    [ REQUEST_BUILDING_UPGRADE ]: transformRequestBuildingUpgrade,
-    [ REQUEST_CITY_CREATION ]   : transformRequestCityCreation,
-    [ REQUEST_CITY_NAME_CHANGE ]: transformRequestCityNameChange,
-    [ REQUEST_ORDER_CREATION ]  : transformRequestOrderCreation,
+    [ REQUEST_BUILDING_UPGRADE ]: requestBuildingUpgradeTransformer,
+    [ REQUEST_CITY_CREATION ]   : requestCityCreationTransformer,
+    [ REQUEST_CITY_NAME_CHANGE ]: requestCityNameTransformer,
+    [ REQUEST_ORDER_CREATION ]  : requestOrderCreationTransformer,
 };

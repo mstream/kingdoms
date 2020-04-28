@@ -1,26 +1,29 @@
 // @flow
 
 import {
+    TAB_BUILDINGS, TAB_UNITS,
+} from '../types';
+import {
     clientActions,
 } from '../../../../actions';
 import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    ClientRequestCityCreationAction,
-} from '../../../common-state/actions/types';
+    ClientSelectCityViewTabAction,
+} from '../../actions/types';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientRequestCityCreationAction >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewTabAction >;
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const requestCityCreationTestScenarios: Scenarios = [
+export const selectCityViewTabScenarios: Scenarios = [
     {
-        action: clientActions.commonState.requestCityCreation(
+        action: clientActions.menu.selectCityViewTab(
             {
-                name: `Cityone`,
+                tab: TAB_UNITS,
             },
         ),
         expectedLocalStateCreator: (
@@ -31,21 +34,21 @@ export const requestCityCreationTestScenarios: Scenarios = [
 
             return {
                 ...previousLocalState,
-                newCity: {
-                    ...previousLocalState.newCity,
-                    isCityBeingCreated: true,
+                cityView: {
+                    ...previousLocalState.cityView,
+                    tab: TAB_UNITS,
                 },
             };
 
         },
-        name               : `requests city creation`,
+        name               : `selects city view tab`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
-                newCity: {
-                    ...emptyClientState.menu.newCity,
-                    isCityBeingCreated: false,
+                cityView: {
+                    ...emptyClientState.menu.cityView,
+                    tab: TAB_BUILDINGS,
                 },
             },
         },

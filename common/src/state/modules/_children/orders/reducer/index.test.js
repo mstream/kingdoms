@@ -70,6 +70,15 @@ const stateInitializationScenario: StateInitializationScenario = {
     },
 };
 
+const scenarios = {
+    [ CREATE_SCHEDULED_ATTACK_ORDER ]: createScheduledAttackOrderTestScenarios,
+    [ DUMMY ]                        : [
+        stateInitializationScenario,
+    ],
+    [ EXECUTE_TIME_STEP ]: executeTimeStepTestScenarios,
+    [ RESET_STATE ]      : resetStateTestScenarios,
+};
+
 describe(
     `ordersReducer`,
     () => {
@@ -83,14 +92,7 @@ describe(
                 },
                 reducer   : ordersReducer,
                 reducerKey: `orders`,
-                scenarios : {
-                    [ CREATE_SCHEDULED_ATTACK_ORDER ]: createScheduledAttackOrderTestScenarios,
-                    [ DUMMY ]                        : [
-                        stateInitializationScenario,
-                    ],
-                    [ EXECUTE_TIME_STEP ]: executeTimeStepTestScenarios,
-                    [ RESET_STATE ]      : resetStateTestScenarios,
-                },
+                scenarios,
             },
         );
 

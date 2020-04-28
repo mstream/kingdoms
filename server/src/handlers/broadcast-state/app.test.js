@@ -16,7 +16,7 @@ import {
     handler,
 } from './app';
 import {
-    mockGet,  mockSmembers,
+    mockGet, mockSmembers,
 } from '../../clients/redis';
 import {
     mockPostToConnection,
@@ -71,11 +71,14 @@ describe(
                     ...emptyCommonState,
                 };
 
+                const time1 = `2000-01-01T01:00:00.000Z`;
+                const time2 = `2000-01-01T02:00:00.000Z`;
+
                 const updateMessagePayload1 = serializeJson(
                     {
                         json: {
                             state  : state1,
-                            time   : `2000-01-01T01:00:00.000Z`,
+                            time   : time1,
                             worldId: `world1`,
                         },
                     },
@@ -85,7 +88,7 @@ describe(
                     {
                         json: {
                             state  : state2,
-                            time   : `2000-01-01T02:00:00.000Z`,
+                            time   : time2,
                             worldId: `world2`,
                         },
                     },
@@ -219,16 +222,20 @@ describe(
                     {
                         calls: [
                             [
-                                `connection-by-player:${ stubConfig.environment }:player1`,
+                                `connection-by-player`
+                                + `:${ stubConfig.environment }:player1`,
                             ],
                             [
-                                `connection-by-player:${ stubConfig.environment }:player2`,
+                                `connection-by-player`
+                                + `:${ stubConfig.environment }:player2`,
                             ],
                             [
-                                `connection-by-player:${ stubConfig.environment }:player3`,
+                                `connection-by-player`
+                                + `:${ stubConfig.environment }:player3`,
                             ],
                             [
-                                `connection-by-player:${ stubConfig.environment }:player4`,
+                                `connection-by-player`
+                                + `:${ stubConfig.environment }:player4`,
                             ],
                         ],
                         expect,
@@ -264,7 +271,7 @@ describe(
                                                 request: {
                                                     action: executeTimeStep(
                                                         {
-                                                            time: `2000-01-01T01:00:00.000Z`,
+                                                            time: time1,
                                                         },
                                                     ),
                                                     worldId: `world1`,
@@ -285,7 +292,7 @@ describe(
                                                 request: {
                                                     action: executeTimeStep(
                                                         {
-                                                            time: `2000-01-01T01:00:00.000Z`,
+                                                            time: time1,
                                                         },
                                                     ),
                                                     worldId: `world1`,
@@ -306,7 +313,7 @@ describe(
                                                 request: {
                                                     action: executeTimeStep(
                                                         {
-                                                            time: `2000-01-01T02:00:00.000Z`,
+                                                            time: time2,
                                                         },
                                                     ),
                                                     worldId: `world2`,
@@ -327,7 +334,7 @@ describe(
                                                 request: {
                                                     action: executeTimeStep(
                                                         {
-                                                            time: `2000-01-01T02:00:00.000Z`,
+                                                            time: time2,
                                                         },
                                                     ),
                                                     worldId: `world2`,

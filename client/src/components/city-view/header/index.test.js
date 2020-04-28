@@ -73,7 +73,7 @@ describe(
         );
 
         test(
-            `shows up with no navigation buttons when the player has only one city`,
+            `shows up with no nav buttons when the player has only one city`,
             async () => {
 
                 const state: ClientState = {
@@ -122,8 +122,6 @@ describe(
 
             },
         );
-
-        // TODO test that navigation buttons show up when the player has more than one city
 
     },
 );

@@ -31,34 +31,35 @@ export const Component = (
     }: Props,
 ) => {
 
-    const playerCitiesWithDistance: $ReadOnlyArray< CityWithDistance > = cityIdsOwnedByPlayer
-        .reduce(
-            (
-                playerCitiesWithDistance, cityId: string,
-            ) => {
+    const playerCitiesWithDistance: $ReadOnlyArray< CityWithDistance >
+        = cityIdsOwnedByPlayer
+            .reduce(
+                (
+                    playerCitiesWithDistance, cityId: string,
+                ) => {
 
-                return [
-                    ...playerCitiesWithDistance,
-                    {
-                        city    : cities[ cityId ],
-                        cityId,
-                        distance: distancesToAttackedCity[ cityId ],
-                    },
-                ];
+                    return [
+                        ...playerCitiesWithDistance,
+                        {
+                            city    : cities[ cityId ],
+                            cityId,
+                            distance: distancesToAttackedCity[ cityId ],
+                        },
+                    ];
 
-            },
-            [],
-        )
-        .sort(
-            (
-                cityWithDistance1: CityWithDistance,
-                cityWithDistance2: CityWithDistance,
-            ) => {
+                },
+                [],
+            )
+            .sort(
+                (
+                    cityWithDistance1: CityWithDistance,
+                    cityWithDistance2: CityWithDistance,
+                ) => {
 
-                return cityWithDistance1.distance - cityWithDistance2.distance;
+                    return cityWithDistance1.distance - cityWithDistance2.distance;
 
-            },
-        );
+                },
+            );
 
     const cityRows = playerCitiesWithDistance.map(
         (

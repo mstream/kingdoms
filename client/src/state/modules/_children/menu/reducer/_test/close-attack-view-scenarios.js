@@ -22,7 +22,7 @@ import type {
 type Scenario = ClientStateMenuReducerTestScenario< ClientCloseAttackViewAction >;
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const closeAttackViewTestScenarios: Scenarios = [
+export const closeAttackViewScenarios: Scenarios = [
     {
         action                   : menuActions.closeAttackView(),
         expectedLocalStateCreator: (

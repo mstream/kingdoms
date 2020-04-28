@@ -14,28 +14,32 @@ import type {
     Jest,
 } from '../../../test-utils/types';
 
+type ReducerScenario<S> = CommonStateReducerTestScenario< S, CommonAction >;
 
 export type CommonStateReducerTestScenarios<S> = {
-    [CommonActionKey]: $ReadOnlyArray< CommonStateReducerTestScenario< S, CommonAction >, >,
+    [CommonActionKey]: $ReadOnlyArray< ReducerScenario< S > >,
 };
+
+// $FlowFixMe
+type SelectorScenario = CommonStateSelectorTestScenario< any >
 
 type SelectorTestScenariosScenarios = $ReadOnly< {
 
-    // $FlowFixMe
-    [string]: $ReadOnlyArray< CommonStateSelectorTestScenario< any > >,
+    [string]: $ReadOnlyArray< SelectorScenario >,
 } >;
 
-const runReducerTestScenario = <S>( {
-    jest,
-    reducer,
-    reducerKey,
-    scenario,
-}: {
-    jest: Jest,
-    reducer: CommonStateReducer< S >,
-    reducerKey: string,
-    scenario: CommonStateReducerTestScenario< S, CommonAction >,
-}, ): void => {
+const runReducerTestScenario = <S>(
+    {
+        jest,
+        reducer,
+        reducerKey,
+        scenario,
+    }: {
+        jest: Jest,
+        reducer: CommonStateReducer< S >,
+        reducerKey: string,
+        scenario: CommonStateReducerTestScenario< S, CommonAction >,
+    }, ): void => {
 
     jest.it(
         scenario.name,
@@ -50,11 +54,12 @@ const runReducerTestScenario = <S>( {
                 scenario.previousGlobalState,
             );
 
-            const expectedReductionResult = scenario.expectedReductionResultCreator(
-                {
-                    previousLocalState,
-                },
-            );
+            const expectedReductionResult
+                = scenario.expectedReductionResultCreator(
+                    {
+                        previousLocalState,
+                    },
+                );
 
             jest.expect(
                 actual,
@@ -69,17 +74,19 @@ const runReducerTestScenario = <S>( {
 };
 
 
-export const runReducerTestScenarios = <S>( {
-    jest,
-    reducer,
-    reducerKey,
-    scenarios,
-}: {
-    jest: Jest,
-    reducer: CommonStateReducer< S >,
-    reducerKey: string,
-    scenarios: CommonStateReducerTestScenarios< S >,
-}, ): void => {
+export const runReducerTestScenarios = <S>(
+    {
+        jest,
+        reducer,
+        reducerKey,
+        scenarios,
+    }: {
+        jest: Jest,
+        reducer: CommonStateReducer< S >,
+        reducerKey: string,
+        scenarios: CommonStateReducerTestScenarios< S >,
+    },
+): void => {
 
     Object.keys(
         scenarios,
@@ -95,7 +102,8 @@ export const runReducerTestScenarios = <S>( {
 
                         scenarios[ actionKey ].forEach(
                             (
-                                scenario: CommonStateReducerTestScenario< S, CommonAction >,
+                                scenario: CommonStateReducerTestScenario< S,
+                                    CommonAction >,
                             ) => {
 
                                 runReducerTestScenario(
@@ -163,7 +171,54 @@ const runCommonStateSelectorTestScenario = (
 
 };
 
-export const runCommonStateSelectorsTestScenarios = (
+const runCommonStateSelectorTestScenarios = (
+    {
+        jest,
+        scenarios,
+        selectorKey,
+        selectors,
+    }: {
+        jest: Jest,
+
+        // $FlowFixMe
+        scenarios: $ReadOnlyArray< CommonStateSelectorTestScenario< any > >,
+        selectorKey: string,
+        selectors: CommonStateSelectors,
+    },
+): void => {
+
+    scenarios.forEach(
+        (
+            // $FlowFixMe
+            scenario: CommonStateSelectorTestScenario< any >,
+        ) => {
+
+            // $FlowFixMe
+            const selector: CommonStateSelector< any, any >
+                = selectors[ selectorKey ];
+
+            if ( selector == null ) {
+
+                throw Error(
+                    `selector '${ selectorKey }' is missing`,
+                );
+
+            }
+
+            runCommonStateSelectorTestScenario(
+                {
+                    jest,
+                    scenario,
+                    selector,
+                },
+            );
+
+        },
+    );
+
+};
+
+export const generateTests = (
     {
         jest,
         moduleSelectors,
@@ -189,32 +244,12 @@ export const runCommonStateSelectorsTestScenarios = (
 
                         const scenariosForSelector = scenarios[ selectorKey ];
 
-                        scenariosForSelector.forEach(
-                            (
-                                // $FlowFixMe
-                                scenario: CommonStateSelectorTestScenario< any >,
-                            ) => {
-
-                                // $FlowFixMe
-                                const selector: CommonStateSelector< any, any >
-                                    = moduleSelectors[ selectorKey ];
-
-                                if ( selector == null ) {
-
-                                    throw Error(
-                                        `selector '${ selectorKey }' is missing`,
-                                    );
-
-                                }
-
-                                runCommonStateSelectorTestScenario(
-                                    {
-                                        jest,
-                                        scenario,
-                                        selector,
-                                    },
-                                );
-
+                        runCommonStateSelectorTestScenarios(
+                            {
+                                jest,
+                                scenarios: scenariosForSelector,
+                                selectorKey,
+                                selectors: moduleSelectors,
                             },
                         );
 

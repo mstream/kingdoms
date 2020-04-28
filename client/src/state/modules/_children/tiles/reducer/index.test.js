@@ -10,7 +10,7 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    runReducerTestScenarios,
+    generateTests,
 } from '../../../../test-utils';
 import {
     tilesReducer,
@@ -22,7 +22,10 @@ import type {
     ClientStateTilesReducerTestScenario,
 } from './_test/types';
 
-const stateInitializationScenario: ClientStateTilesReducerTestScenario< ClientDummyAction > = {
+type StateInitializationScenario =
+    ClientStateTilesReducerTestScenario< ClientDummyAction >;
+
+const stateInitializationScenario: StateInitializationScenario = {
     action                   : clientActions.global.dummy(),
     expectedLocalStateCreator: () => {
 
@@ -46,7 +49,7 @@ describe(
     `tilesReducer`,
     () => {
 
-        runReducerTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

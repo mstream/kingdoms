@@ -32,7 +32,6 @@ import {
 } from './validation';
 import type {
     ExecuteTimeResponseRequest,
-
     ServerResponse,
 } from '../../../../common/src/types';
 import type {
@@ -165,21 +164,22 @@ const broadcastStateUpdate = async (
             connectionIdPromises,
         );
 
-        const sendStateUpdatePromises: $ReadOnlyArray< Promise< void >, > = connectionIds.map(
-            (
-                connectionId: ?string,
-            ) => {
+        const sendStateUpdatePromises: $ReadOnlyArray< Promise< void >, >
+            = connectionIds.map(
+                (
+                    connectionId: ?string,
+                ) => {
 
-                return sendStateUpdate(
-                    {
-                        connectionId,
-                        response,
-                    },
-                );
+                    return sendStateUpdate(
+                        {
+                            connectionId,
+                            response,
+                        },
+                    );
 
-            },
-            [],
-        );
+                },
+                [],
+            );
 
         await Promise.all(
             sendStateUpdatePromises,

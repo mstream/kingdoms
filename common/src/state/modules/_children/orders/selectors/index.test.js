@@ -4,17 +4,17 @@ import {
     commonStateOrdersSelectors,
 } from './index';
 import {
+    generateTests,
+} from '../../../test-utils';
+import {
     ordersSelectorTestScenarios,
 } from './_test/orders-test-scenarios';
-import {
-    runCommonStateSelectorsTestScenarios,
-} from '../../../test-utils';
 
 describe(
     `commonStateOrdersSelectors`,
     () => {
 
-        runCommonStateSelectorsTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

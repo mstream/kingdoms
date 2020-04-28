@@ -74,25 +74,28 @@ import type {
     ClientStateMenu,
 } from './types';
 
-export const menuReducer = createClientStateReducer<ClientStateMenu>(
-    {
-        actionReducers: {
-            [ CLOSE_ATTACK_VIEW ]                   : closeAttackViewMenuReducer,
-            [ CLOSE_CITY_VIEW ]                     : closeCityViewMenuReducer,
-            [ OPEN_ATTACK_VIEW ]                    : openAttackViewMenuReducer,
-            [ OPEN_CITY_VIEW ]                      : openCityViewMenuReducer,
-            [ REQUEST_CITY_CREATION ]               : requestCityCreationMenuReducer,
-            [ REQUEST_ORDER_CREATION ]              : requestOrderCreationMenuReducer,
-            [ SELECT_ATTACK_VIEW_ATTACKING_CITY ]   : selectAttackViewAttackingCityReducer,
-            [ SELECT_CITY_VIEW_BUILDINGS_TAB ]      : selectCityViewBuildingsTabMenuReducer,
-            [ SELECT_CITY_VIEW_ORDERS_TAB ]         : selectCityViewOrdersTabMenuReducer,
-            [ SELECT_CITY_VIEW_RESOURCES_TAB ]      : selectCityViewResourcesTabMenuReducer,
-            [ SELECT_CITY_VIEW_TAB ]                : selectCityViewTabMenuReducer,
-            [ SELECT_CITY_VIEW_UNITS_TAB ]          : selectCityViewUnitTabMenuReducer,
-            [ UPDATE_ATTACK_VIEW_MINIMUM_DELAY ]    : updateAttackViewMinimumDelayReducer,
-            [ UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE ]: updateAttackViewRegimentTemplateReducer,
-            [ UPDATE_STATE ]                        : updateStateMenuReducer,
+const actionReducers = {
+    [ CLOSE_ATTACK_VIEW ]                   : closeAttackViewMenuReducer,
+    [ CLOSE_CITY_VIEW ]                     : closeCityViewMenuReducer,
+    [ OPEN_ATTACK_VIEW ]                    : openAttackViewMenuReducer,
+    [ OPEN_CITY_VIEW ]                      : openCityViewMenuReducer,
+    [ REQUEST_CITY_CREATION ]               : requestCityCreationMenuReducer,
+    [ REQUEST_ORDER_CREATION ]              : requestOrderCreationMenuReducer,
+    [ SELECT_ATTACK_VIEW_ATTACKING_CITY ]   : selectAttackViewAttackingCityReducer,
+    [ SELECT_CITY_VIEW_BUILDINGS_TAB ]      : selectCityViewBuildingsTabMenuReducer,
+    [ SELECT_CITY_VIEW_ORDERS_TAB ]         : selectCityViewOrdersTabMenuReducer,
+    [ SELECT_CITY_VIEW_RESOURCES_TAB ]      : selectCityViewResourcesTabMenuReducer,
+    [ SELECT_CITY_VIEW_TAB ]                : selectCityViewTabMenuReducer,
+    [ SELECT_CITY_VIEW_UNITS_TAB ]          : selectCityViewUnitTabMenuReducer,
+    [ UPDATE_ATTACK_VIEW_MINIMUM_DELAY ]    : updateAttackViewMinimumDelayReducer,
+    [ UPDATE_ATTACK_VIEW_REGIMENT_TEMPLATE ]: updateAttackViewRegimentTemplateReducer,
+    [ UPDATE_STATE ]                        : updateStateMenuReducer,
+};
+
+export const menuReducer
+    = createClientStateReducer<ClientStateMenu>(
+        {
+            actionReducers,
+            initialState: initialClientState.menu,
         },
-        initialState: initialClientState.menu,
-    },
-);
+    );

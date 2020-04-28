@@ -13,7 +13,8 @@ import type {
     ClientStateSelectorTestScenario,
 } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ClientStateCityViewTab >, >;
+type Scenario = ClientStateSelectorTestScenario< ClientStateCityViewTab >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const activeCityViewTabSelectorTestScenarios: Scenarios = [
     {

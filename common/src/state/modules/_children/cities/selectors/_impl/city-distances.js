@@ -19,59 +19,62 @@ import type {
     CommonStateCities,
 } from '../../reducer/types';
 
-export const citiesDistancesSelector: CommonStateSelector< CitiesDistances, void >
+type Selector = CommonStateSelector< CitiesDistances, void >;
+
+export const citiesDistancesSelector: Selector
     = createSelector<CommonState,
-        void,
-        CitiesDistances,
-        CommonStateCities,
-        >(
-            citiesSelector,
-            (
+    void,
+    CitiesDistances,
+    CommonStateCities,
+    >(
+        citiesSelector,
+        (
+            cities,
+        ) => {
+
+            return Object.keys(
                 cities,
-            ) => {
+            )
+                .reduce(
+                    (
+                        citiesDistances, cityId: string,
+                    ) => {
 
-                return Object.keys(
-                    cities,
-                )
-                    .reduce(
-                        (
-                            citiesDistances, cityId: string,
-                        ) => {
+                        const distances: CityDistances = Object.keys(
+                            cities,
+                        )
+                            .reduce(
+                                (
+                                    distances, otherCityId: string,
+                                ) => {
 
-                            const distances: CityDistances = Object.keys(
-                                cities,
-                            )
-                                .reduce(
-                                    (
-                                        distances, otherCityId: string,
-                                    ) => {
+                                    const distance: number
+                                    = getDistanceBetweenVectors(
+                                        {
+                                            vector1: cities[ cityId ].location,
+                                            vector2: cities[ otherCityId ].location,
+                                        },
+                                    );
 
-                                        const distance: number = getDistanceBetweenVectors(
-                                            {
-                                                vector1: cities[ cityId ].location,
-                                                vector2: cities[ otherCityId ].location,
-                                            },
-                                        );
+                                    return {
+                                        ...distances,
+                                        [ otherCityId ]: distance,
+                                    };
 
-                                        return {
-                                            ...distances,
-                                            [ otherCityId ]: distance,
-                                        };
+                                },
+                                {
+                                },
+                            );
 
-                                    },
-                                    {
-                                    },
-                                );
+                        return {
+                            ...citiesDistances,
+                            [ cityId ]: distances,
+                        };
 
-                            return {
-                                ...citiesDistances,
-                                [ cityId ]: distances,
-                            };
+                    },
+                    {
+                    },
+                );
 
-                        },
-                        {
-                        },
-                    );
-
-            },
-        );
+        },
+    );

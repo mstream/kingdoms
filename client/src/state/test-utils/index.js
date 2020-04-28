@@ -59,17 +59,52 @@ const runReducerTestScenario = <S>( {
 
 };
 
-export const runReducerTestScenarios = <S>( {
-    jest,
-    reducer,
-    reducerKey,
-    scenarios,
-}: {
-    jest: Jest,
-    reducer: ClientStateReducer< S >,
-    reducerKey: string,
-    scenarios: ReducerScenarios< S >,
-}, ): void => {
+const runReducerTestScenarios = <S>(
+    {
+        jest,
+        reducer,
+        reducerKey,
+        scenarios,
+    }: {
+        jest: Jest,
+        reducer: ClientStateReducer< S >,
+        reducerKey: string,
+        scenarios: $ReadOnlyArray< ClientStateReducerTestScenario< S, ClientAction > >
+    },
+) => {
+
+    scenarios.forEach(
+        (
+            scenario: ClientStateReducerTestScenario< S, ClientAction >,
+        ) => {
+
+            runReducerTestScenario(
+                {
+                    jest,
+                    reducer,
+                    reducerKey,
+                    scenario,
+                },
+            );
+
+        },
+    );
+
+};
+
+export const generateTests = <S>(
+    {
+        jest,
+        reducer,
+        reducerKey,
+        scenarios,
+    }: {
+        jest: Jest,
+        reducer: ClientStateReducer< S >,
+        reducerKey: string,
+        scenarios: ReducerScenarios< S >,
+    },
+): void => {
 
     Object.keys(
         scenarios,
@@ -83,20 +118,12 @@ export const runReducerTestScenarios = <S>( {
                     actionKey,
                     () => {
 
-                        scenarios[ actionKey ].forEach(
-                            (
-                                scenario: ClientStateReducerTestScenario< S, ClientAction >,
-                            ) => {
-
-                                runReducerTestScenario(
-                                    {
-                                        jest,
-                                        reducer,
-                                        reducerKey,
-                                        scenario,
-                                    },
-                                );
-
+                        runReducerTestScenarios<S>(
+                            {
+                                jest,
+                                reducer,
+                                reducerKey,
+                                scenarios: scenarios[ actionKey ],
                             },
                         );
 

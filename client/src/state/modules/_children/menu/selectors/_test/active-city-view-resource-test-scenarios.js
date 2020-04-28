@@ -13,7 +13,8 @@ import type {
     CommonStateResourceKey,
 } from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateResourceKey >, >;
+type Scenario = ClientStateSelectorTestScenario< CommonStateResourceKey >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const activeCityViewResourceSelectorTestScenarios: Scenarios = [
     {

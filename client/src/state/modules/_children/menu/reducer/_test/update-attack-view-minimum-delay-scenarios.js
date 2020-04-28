@@ -1,28 +1,28 @@
 // @flow
 
 import {
+    clientActions,
+} from '../../../../actions';
+import {
     emptyClientState,
 } from '../../../../../state';
-import {
-    menuActions,
-} from '../../actions';
-import type {
-    ClientSelectAttackViewAttackingCityAction,
-} from '../../actions/types';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
+import type {
+    ClientUpdateAttackViewMinimumDelayAction,
+} from '../../actions/types';
 
 type Scenario =
-    ClientStateMenuReducerTestScenario< ClientSelectAttackViewAttackingCityAction >;
+    ClientStateMenuReducerTestScenario< ClientUpdateAttackViewMinimumDelayAction >;
 
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const selectAttackViewAttackingCityTestScenarios: Scenarios = [
+export const updateAttackViewMinimumDelayScenarios: Scenarios = [
     {
-        action: menuActions.selectAttackViewAttackingCity(
+        action: clientActions.menu.updateAttackViewMinimumDelay(
             {
-                cityId: `city2`,
+                minimumDelay: 60,
             },
         ),
         expectedLocalStateCreator: (
@@ -35,19 +35,19 @@ export const selectAttackViewAttackingCityTestScenarios: Scenarios = [
                 ...previousLocalState,
                 attackView: {
                     ...previousLocalState.attackView,
-                    attackingCityId: `city2`,
+                    minimumDelay: 60,
                 },
             };
 
         },
-        name               : `select attack view attacking city`,
+        name               : `updates the minimum delay`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
                 attackView: {
                     ...emptyClientState.menu.attackView,
-                    attackingCityId: `city1`,
+                    minimumDelay: 30,
                 },
             },
         },

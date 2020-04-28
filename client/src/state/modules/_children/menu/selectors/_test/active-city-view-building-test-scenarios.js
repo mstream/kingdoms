@@ -13,7 +13,8 @@ import type {
     CommonStateBuildingKey,
 } from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< CommonStateBuildingKey >, >;
+type Scenario = ClientStateSelectorTestScenario< CommonStateBuildingKey >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const activeCityViewBuildingSelectorTestScenarios: Scenarios = [
     {

@@ -4,17 +4,17 @@ import {
     commonStateSelectors,
 } from './index';
 import {
+    generateTests,
+} from '../test-utils';
+import {
     nextCitySpotSelectorTestScenarios,
 } from './_test/next-city-spot-test-scenarios';
-import {
-    runCommonStateSelectorsTestScenarios,
-} from '../test-utils';
 
 describe(
     `commonStateSelectors`,
     () => {
 
-        runCommonStateSelectorsTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

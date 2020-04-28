@@ -1,26 +1,32 @@
 // @flow
 
 import {
+    BUILDING_LUMBER_MILL,
+    BUILDING_PASTURE,
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+import {
     clientActions,
 } from '../../../../actions';
 import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    ClientSelectCityViewOrdersTabAction,
+    ClientSelectCityViewBuildingsTabAction,
 } from '../../actions/types';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewOrdersTabAction >;
+type Scenario =
+    ClientStateMenuReducerTestScenario< ClientSelectCityViewBuildingsTabAction >;
+
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const selectCityViewOrdersTabTestScenarios: Scenarios = [
+export const selectCityViewBuildingsTabScenarios: Scenarios = [
     {
-        action: clientActions.menu.selectCityViewOrdersTab(
+        action: clientActions.menu.selectCityViewBuildingsTab(
             {
-                orderId: `order1`,
+                buildingType: BUILDING_PASTURE,
             },
         ),
         expectedLocalStateCreator: (
@@ -33,19 +39,19 @@ export const selectCityViewOrdersTabTestScenarios: Scenarios = [
                 ...previousLocalState,
                 cityView: {
                     ...previousLocalState.cityView,
-                    orderId: `order1`,
+                    building: BUILDING_PASTURE,
                 },
             };
 
         },
-        name               : `selects city view order`,
+        name               : `selects city view building`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    orderId: `order2`,
+                    building: BUILDING_LUMBER_MILL,
                 },
             },
         },

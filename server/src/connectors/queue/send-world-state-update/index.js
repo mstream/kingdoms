@@ -11,9 +11,15 @@ import type {
 } from './types';
 
 
-export const sendWorldStateUpdate = async ( {
-    payload, sqs, queueUrl,
-}: { payload: WorldStateUpdatePayload, sqs: Sqs, queueUrl: string }, ): Promise< void > => {
+export const sendWorldStateUpdate = async (
+    {
+        payload, sqs, queueUrl,
+    }: {
+        payload: WorldStateUpdatePayload,
+        sqs: Sqs,
+        queueUrl: string
+    },
+): Promise< void > => {
 
     const serializedPayload: string = serializeJson(
         {

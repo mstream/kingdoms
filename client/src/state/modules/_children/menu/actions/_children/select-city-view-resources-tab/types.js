@@ -5,7 +5,7 @@ import type {
 } from '../../../../../../../../../common/src/types/actions';
 import type {
     CommonStateResourceKey,
-} from '../../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../../common/src/state/modules/_children/rules/types';
 
 export const SELECT_CITY_VIEW_RESOURCES_TAB: 'SELECT_CITY_VIEW_RESOURCES_TAB'
     = `SELECT_CITY_VIEW_RESOURCES_TAB`;

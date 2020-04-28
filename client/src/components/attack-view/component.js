@@ -146,7 +146,17 @@ export const Component = (
                     </div>
                 </div>
                 <div
-                    className="metal-bg flex flex-row justify-center w-full p-1 bg-gray-600">
+                    className={
+                        classNames(
+                            `metal-bg`,
+                            `flex`,
+                            `flex-row`,
+                            `justify-center`,
+                            `w-full`,
+                            `p-1`,
+                            `bg-gray-600`,
+                        )
+                    }>
                     <button
                         className={buttonClassName}
                         onClick={onScheduleActionClick}

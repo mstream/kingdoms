@@ -7,20 +7,20 @@ import {
     emptyClientState,
 } from '../../../../../state';
 import type {
+    ClientRequestCityCreationAction,
+} from '../../../common-state/actions/types';
+import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
-import type {
-    ClientUpdateAttackViewMinimumDelayAction,
-} from '../../actions/types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientUpdateAttackViewMinimumDelayAction >;
+type Scenario = ClientStateMenuReducerTestScenario< ClientRequestCityCreationAction >;
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const updateAttackViewMinimumDelayTestScenarios: Scenarios = [
+export const requestCityCreationScenarios: Scenarios = [
     {
-        action: clientActions.menu.updateAttackViewMinimumDelay(
+        action: clientActions.commonState.requestCityCreation(
             {
-                minimumDelay: 60,
+                name: `Cityone`,
             },
         ),
         expectedLocalStateCreator: (
@@ -31,21 +31,21 @@ export const updateAttackViewMinimumDelayTestScenarios: Scenarios = [
 
             return {
                 ...previousLocalState,
-                attackView: {
-                    ...previousLocalState.attackView,
-                    minimumDelay: 60,
+                newCity: {
+                    ...previousLocalState.newCity,
+                    isCityBeingCreated: true,
                 },
             };
 
         },
-        name               : `updates the minimum delay`,
+        name               : `requests city creation`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
-                attackView: {
-                    ...emptyClientState.menu.attackView,
-                    minimumDelay: 30,
+                newCity: {
+                    ...emptyClientState.menu.newCity,
+                    isCityBeingCreated: false,
                 },
             },
         },

@@ -1,8 +1,9 @@
 // @flow
 
 import {
-    TAB_BUILDINGS, TAB_UNITS,
-} from '../types';
+    RESOURCE_FOOD,
+    RESOURCE_WOOD,
+} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     clientActions,
 } from '../../../../actions';
@@ -10,20 +11,22 @@ import {
     emptyClientState,
 } from '../../../../../state';
 import type {
-    ClientSelectCityViewTabAction,
+    ClientSelectCityViewResourcesTabAction,
 } from '../../actions/types';
 import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewTabAction >;
+type Scenario =
+    ClientStateMenuReducerTestScenario< ClientSelectCityViewResourcesTabAction >;
+
 type Scenarios = $ReadOnlyArray< Scenario >;
 
-export const selectCityViewTabTestScenarios: Scenarios = [
+export const selectCityViewResourcesTabScenarios: Scenarios = [
     {
-        action: clientActions.menu.selectCityViewTab(
+        action: clientActions.menu.selectCityViewResourcesTab(
             {
-                tab: TAB_UNITS,
+                resourceType: RESOURCE_FOOD,
             },
         ),
         expectedLocalStateCreator: (
@@ -36,19 +39,19 @@ export const selectCityViewTabTestScenarios: Scenarios = [
                 ...previousLocalState,
                 cityView: {
                     ...previousLocalState.cityView,
-                    tab: TAB_UNITS,
+                    resource: RESOURCE_FOOD,
                 },
             };
 
         },
-        name               : `selects city view tab`,
+        name               : `select city view resource`,
         previousGlobalState: {
             ...emptyClientState,
             menu: {
                 ...emptyClientState.menu,
                 cityView: {
                     ...emptyClientState.menu.cityView,
-                    tab: TAB_BUILDINGS,
+                    resource: RESOURCE_WOOD,
                 },
             },
         },

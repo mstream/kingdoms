@@ -47,12 +47,14 @@ export const createDatabaseValueOperations = <K, V>( {
     valueSerializer: ValueSerializer< V >,
 }, ): DatabaseValueOperations< K, V > => {
 
-    const specializedCas: DatabaseValueCas< K, V > = async ( {
-        key,
-        logger,
-        redis,
-        valueTransformer,
-    }, ) => {
+    const specializedCas: DatabaseValueCas< K, V > = async (
+        {
+            key,
+            logger,
+            redis,
+            valueTransformer,
+        },
+    ) => {
 
         const serializedKey = keyCreator(
             {
@@ -72,11 +74,12 @@ export const createDatabaseValueOperations = <K, V>( {
                 },
             );
 
-            const transformedValueResult: ValueTransformationResult< V > = valueTransformer(
-                {
-                    value: deserializedValue,
-                },
-            );
+            const transformedValueResult: ValueTransformationResult< V >
+                = valueTransformer(
+                    {
+                        value: deserializedValue,
+                    },
+                );
 
             if (
                 transformedValueResult.errors.length > 0
@@ -170,11 +173,13 @@ export const createDatabaseValueOperations = <K, V>( {
 
     };
 
-    const specializedRemove: DatabaseValueRemove< K > = async ( {
-        key,
-        logger,
-        redis,
-    }, ) => {
+    const specializedRemove: DatabaseValueRemove< K > = async (
+        {
+            key,
+            logger,
+            redis,
+        },
+    ) => {
 
         const serializedKey = keyCreator(
             {
@@ -192,12 +197,14 @@ export const createDatabaseValueOperations = <K, V>( {
 
     };
 
-    const specializedSet: DatabaseValueSet< K, V > = async ( {
-        key,
-        logger,
-        redis,
-        value,
-    }, ) => {
+    const specializedSet: DatabaseValueSet< K, V > = async (
+        {
+            key,
+            logger,
+            redis,
+            value,
+        },
+    ) => {
 
         const serializedKey = keyCreator(
             {

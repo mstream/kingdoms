@@ -1,41 +1,33 @@
 // @flow
 
-import type {
-    BaseAction,
-} from '../../../../../../../common/src/types/actions';
-import type {
-    CommonState,
-} from '../../../../../../../common/src/state/modules/types';
-import type {
-    CommonStateBuildingKey,
-} from '../../../../../../../common/src/state/modules/_children/rules/reducer/types';
-import type {
-    CommonStateRegimentTemplate,
-} from '../../../../../../../common/src/state/modules/_children/orders/reducer/types';
+export {
+    REQUEST_BUILDING_UPGRADE,
+} from './_children/request-building-upgrade/types';
+export {
+    REQUEST_CITY_CREATION,
+} from './_children/request-city-creation/types';
+export {
+    REQUEST_CITY_NAME_CHANGE,
+} from './_children/request-city-name-change/types';
+export {
+    REQUEST_ORDER_CREATION,
+} from './_children/request-order-creation/types';
+export {
+    UPDATE_STATE,
+} from './_children/update-state/types';
 
-export const REQUEST_BUILDING_UPGRADE: 'REQUEST_BUILDING_UPGRADE'
-    = `REQUEST_BUILDING_UPGRADE`;
-export const REQUEST_CITY_CREATION: 'REQUEST_CITY_CREATION'
-    = `REQUEST_CITY_CREATION`;
-export const REQUEST_CITY_NAME_CHANGE: 'REQUEST_CITY_NAME_CHANGE'
-    = `REQUEST_CITY_NAME_CHANGE`;
-export const REQUEST_ORDER_CREATION: 'REQUEST_ORDER_CREATION'
-    = `REQUEST_ORDER_CREATION`;
-export const UPDATE_STATE: 'UPDATE_STATE' = `UPDATE_STATE`;
-
-export type ClientUpdateStateAction = BaseAction< typeof UPDATE_STATE,
-    $ReadOnly< { commonState: CommonState } >, >;
-export type ClientRequestBuildingUpgradeAction = BaseAction< typeof REQUEST_BUILDING_UPGRADE,
-    $ReadOnly< { cityId: string, buildingType: CommonStateBuildingKey } >, >;
-export type ClientRequestCityCreationAction = BaseAction< typeof REQUEST_CITY_CREATION,
-    $ReadOnly< { name: string } >, >;
-export type ClientRequestCityNameChangeAction = BaseAction< typeof REQUEST_CITY_NAME_CHANGE,
-    $ReadOnly< { cityId: string, name: string } >, >;
-
-export type ClientRequestOrderCreationAction = BaseAction< typeof REQUEST_ORDER_CREATION,
-    $ReadOnly< {
-        minimumDelay: number,
-        originCityId: string,
-        regimentTemplate: CommonStateRegimentTemplate,
-        targetCityId: string,
-    } >, >;
+export type {
+    ClientRequestBuildingUpgradeAction,
+} from './_children/request-building-upgrade/types';
+export type {
+    ClientRequestCityCreationAction,
+} from './_children/request-city-creation/types';
+export type {
+    ClientRequestCityNameChangeAction,
+} from './_children/request-city-name-change/types';
+export type {
+    ClientRequestOrderCreationAction,
+} from './_children/request-order-creation/types';
+export type {
+    ClientUpdateStateAction,
+} from './_children/update-state/types';

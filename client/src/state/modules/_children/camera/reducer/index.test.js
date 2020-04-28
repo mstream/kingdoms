@@ -19,11 +19,11 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
+    generateTests,
+} from '../../../../test-utils';
+import {
     moveCameraTestScenarios,
 } from './_test/move-camera-test-scenarios';
-import {
-    runReducerTestScenarios,
-} from '../../../../test-utils';
 import {
     updateStateTestScenarios,
 } from './_test/update-state-test-scenarios';
@@ -96,7 +96,7 @@ describe(
     `cameraReducer`,
     () => {
 
-        runReducerTestScenarios(
+        generateTests(
             {
                 jest: {
                     describe,

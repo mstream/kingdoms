@@ -43,7 +43,7 @@ module.exports = {
     'max-len': [
         `error`,
         {
-            code    : 95,
+            code    : 90,
             tabWidth: 4,
         },
     ],

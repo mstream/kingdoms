@@ -65,7 +65,8 @@ export const getIdTokenInfo = (
     if ( userInfo == null || userInfo[ `cognito:username` ] == null ) {
 
         logger.info(
-            `Cannot retrieve the username from the token. Redirecting to the login page...`,
+            `Cannot retrieve the username from the token. `
+            + `Redirecting to the login page...`,
         );
 
         redirectToLoginPage(

@@ -169,8 +169,10 @@ export type ActionReducers<S> = $ReadOnly< {
     [ClientActionKey]: ClientStateActionReducer< S, ClientAction >,
 } >;
 
+type ReducerScenario<S> =  ClientStateReducerTestScenario< S, ClientAction >;
+
 export type ReducerScenarios<S> = {
-    [ClientActionKey]: $ReadOnlyArray< ClientStateReducerTestScenario< S, ClientAction >, >,
+    [ClientActionKey]: $ReadOnlyArray< ReducerScenario< S > >,
 };
 
 export type SelectorScenarios = $ReadOnly< {

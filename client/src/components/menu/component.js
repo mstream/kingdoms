@@ -25,20 +25,22 @@ export const Component = (
     return (
         <div
             data-testid={testIds.menu.parent}
-            className={classNames(
-                `wood2-bg`,
-                `relative`,
-                `flex`,
-                `flex-row`,
-                `items-end`,
-                `justify-start`,
-                `h-20`,
-                `w-full`,
-                `z-10`,
-                `shadow-lg`,
-                `bg-gray-500`,
-                `text-gray-100`,
-            )}
+            className={
+                classNames(
+                    `wood2-bg`,
+                    `relative`,
+                    `flex`,
+                    `flex-row`,
+                    `items-end`,
+                    `justify-start`,
+                    `h-20`,
+                    `w-full`,
+                    `z-10`,
+                    `shadow-lg`,
+                    `bg-gray-500`,
+                    `text-gray-100`,
+                )
+            }
         >
             <div className="group ml-1 cursor-pointer">
                 <div data-testid={testIds.menu.userMenuDropdownButton}
@@ -49,10 +51,25 @@ export const Component = (
                     <i className="icofont icofont-caret-down"/>
                 </div>
                 <div
-                    className="absolute invisible group-hover:visible text-gray-100">
+                    className={
+                        classNames(
+                            `absolute`,
+                            `invisible`,
+                            `group-hover:visible`,
+                            `text-gray-100`,
+                        )
+                    }>
                     <div
                         data-testid={testIds.menu.signOutButton}
-                        className="wood2-bg p-2 cursor-pointer bg-gray-600 hover:bg-gray-400"
+                        className={
+                            classNames(
+                                `wood2-bg`,
+                                `p-2`,
+                                `cursor-pointer`,
+                                `bg-gray-600`,
+                                `hover:bg-gray-400`,
+                            )
+                        }
                         onClick={() => {
 
                             signOut();

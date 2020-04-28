@@ -5,7 +5,7 @@ import type {
 } from '../../../../../../../../../common/src/types/actions';
 import type {
     CommonStateUnitKey,
-} from '../../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../../common/src/state/modules/_children/rules/types';
 
 export const SELECT_CITY_VIEW_UNITS_TAB: 'SELECT_CITY_VIEW_UNITS_TAB'
     = `SELECT_CITY_VIEW_UNITS_TAB`;

@@ -1,60 +1,60 @@
 // @flow
 
 import {
-    attackedCitySelectorTestScenarios,
-} from './_test/attacked-city-test-scenarios';
+    attackedCityScenarios,
+} from './_test/attacked-city-scenarios';
 import {
-    attackingCitySelectorTestScenarios,
-} from './_test/attacking-city-test-scenarios';
+    attackingCityScenarios,
+} from './_test/attacking-city-scenarios';
 import {
-    cityIdsOwnedByPlayersSelectorTestScenarios,
-} from './_test/city-ids-owned-by-player-test-scenarios';
+    cityIdsOwnedByPlayersScenarios,
+} from './_test/city-ids-owned-by-player-scenarios';
 import {
     clientStateSelectors,
 } from './index';
 import {
-    currentlyViewedCitySelectorTestScenarios,
-} from './_test/currently-viewed-city-test-scenarios';
+    currentlyViewedCityScenarios,
+} from './_test/currently-viewed-city-scenarios';
 import {
-    distancesToAttackedCitySelectorTestScenarios,
-} from './_test/distances-to-attacked-city-test-scenarios';
+    distancesToAttackedCityScenarios,
+} from './_test/distances-to-attacked-city-scenarios';
 import {
-    isGameStartingSelectorTestScenarios,
-} from './_test/is-game-starting-scenarios';
-import {
-    nextCityIdTestScenarios,
-} from './_test/next-city-id-test-scenarios';
-import {
-    playerOwnsAnyCitySelectorTestScenarios,
-} from './_test/player-owns-any-city-test-scenarios';
-import {
-    previousCityIdTestScenarios,
-} from './_test/previous-city-id-test-scenarios';
-import {
-    runClientStateSelectorsTestScenarios,
+    generateSelectorTests,
 } from '../../test-utils';
 import {
-    viewedCityScheduledAttackOrdersSelectorTestScenarios,
-} from './_test/viewed-city-scheduled-attack-orders-test-scenarios';
+    isGameStartingScenarios,
+} from './_test/is-game-starting-scenarios';
+import {
+    nextCityIdScenarios,
+} from './_test/next-city-id-scenarios';
+import {
+    playerOwnsAnyCityScenarios,
+} from './_test/player-owns-any-city-scenarios';
+import {
+    previousCityIdScenarios,
+} from './_test/previous-city-id-scenarios';
+import {
+    viewedCityScheduledAttackOrdersScenarios,
+} from './_test/viewed-city-scheduled-attack-orders-scenarios';
 
 const scenarios = {
-    attackedCity                   : attackedCitySelectorTestScenarios,
-    attackingCity                  : attackingCitySelectorTestScenarios,
-    cityIdsOwnedByPlayer           : cityIdsOwnedByPlayersSelectorTestScenarios,
-    currentlyViewedCity            : currentlyViewedCitySelectorTestScenarios,
-    distancesToAttackedCity        : distancesToAttackedCitySelectorTestScenarios,
-    isGameStarting                 : isGameStartingSelectorTestScenarios,
-    nextCityId                     : nextCityIdTestScenarios,
-    playerOwnsAnyCity              : playerOwnsAnyCitySelectorTestScenarios,
-    previousCityId                 : previousCityIdTestScenarios,
-    viewedCityScheduledAttackOrders: viewedCityScheduledAttackOrdersSelectorTestScenarios,
+    attackedCity                   : attackedCityScenarios,
+    attackingCity                  : attackingCityScenarios,
+    cityIdsOwnedByPlayer           : cityIdsOwnedByPlayersScenarios,
+    currentlyViewedCity            : currentlyViewedCityScenarios,
+    distancesToAttackedCity        : distancesToAttackedCityScenarios,
+    isGameStarting                 : isGameStartingScenarios,
+    nextCityId                     : nextCityIdScenarios,
+    playerOwnsAnyCity              : playerOwnsAnyCityScenarios,
+    previousCityId                 : previousCityIdScenarios,
+    viewedCityScheduledAttackOrders: viewedCityScheduledAttackOrdersScenarios,
 };
 
 describe(
     `clientStateSelectors`,
     () => {
 
-        runClientStateSelectorsTestScenarios(
+        generateSelectorTests(
             {
                 jest: {
                     describe,
@@ -64,8 +64,6 @@ describe(
 
                 // $FlowFixMe
                 moduleSelectors: clientStateSelectors,
-
-                // $FlowFixMe
                 scenarios,
             },
         );

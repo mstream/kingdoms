@@ -37,7 +37,11 @@ export const handleUnsupportedAction = async (
         environment: string,
         logger: Logger,
         redis: Redis,
-        sendResponseBackToClient: ( { response: ServerResponse } ) => Promise< void >,
+        sendResponseBackToClient: (
+            {
+                response: ServerResponse
+            },
+        ) => Promise< void >,
         worldId: string
     },
 ) => {

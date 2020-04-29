@@ -28,6 +28,9 @@ import {
     currentlyViewedCityIdSelectorTestScenarios,
 } from './_test/currently-viewed-city-id-test-scenarios';
 import {
+    generateSelectorTests,
+} from '../../../../test-utils';
+import {
     isAnyMenuOpenSelectorTestScenarios,
 } from './_test/is-any-menu-open-test-scenarios';
 import {
@@ -51,15 +54,34 @@ import {
 import {
     regimentTemplateSelectorTestScenarios,
 } from './_test/regiment-template-test-scenarios';
-import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../test-utils';
+import type {
+    ScenariosBySelector,
+} from '../../../../types';
+
+const scenarios: ScenariosBySelector = {
+    activeCityViewBuilding: activeCityViewBuildingSelectorTestScenarios,
+    activeCityViewOrderId : activeCityViewOrderIdSelectorTestScenarios,
+    activeCityViewResource: activeCityViewResourceSelectorTestScenarios,
+    activeCityViewTab     : activeCityViewTabSelectorTestScenarios,
+    activeCityViewUnit    : activeCityViewUnitSelectorTestScenarios,
+    attackedCityId        : attackedCityIdSelectorTestScenarios,
+    attackingCityId       : attackingCityIdSelectorTestScenarios,
+    currentlyViewedCityId : currentlyViewedCityIdSelectorTestScenarios,
+    isAnyMenuOpen         : isAnyMenuOpenSelectorTestScenarios,
+    isAttackFormSubmitting: isAttackFormSubmittingSelectorTestScenarios,
+    isAttackFormValid     : isAttackFormValidSelectorTestScenarios,
+    isAttackViewMenuOpen  : isAttackViewMenuOpenSelectorTestScenarios,
+    isCityViewMenuOpen    : isCityViewMenuOpenSelectorTestScenarios,
+    isNewCityBeingCreated : isNewCityBeingCreatedSelectorTestScenarios,
+    minimumAttackDelay    : minimumAttackDelaySelectorTestScenarios,
+    regimentTemplate      : regimentTemplateSelectorTestScenarios,
+};
 
 describe(
     `clientStateMenuSelectors`,
     () => {
 
-        runClientStateSelectorsTestScenarios(
+        generateSelectorTests(
             {
                 jest: {
                     describe,
@@ -68,55 +90,7 @@ describe(
                 },
 
                 moduleSelectors: clientStateMenuSelectors,
-                scenarios      : {
-                    // $FlowFixMe
-                    activeCityViewBuilding: activeCityViewBuildingSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    activeCityViewOrderId: activeCityViewOrderIdSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    activeCityViewResource: activeCityViewResourceSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    activeCityViewTab: activeCityViewTabSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    activeCityViewUnit: activeCityViewUnitSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    attackedCityId: attackedCityIdSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    attackingCityId: attackingCityIdSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    currentlyViewedCityId: currentlyViewedCityIdSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    isAnyMenuOpen: isAnyMenuOpenSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    isAttackFormSubmitting: isAttackFormSubmittingSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    isAttackFormValid: isAttackFormValidSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    isAttackViewMenuOpen: isAttackViewMenuOpenSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    isCityViewMenuOpen: isCityViewMenuOpenSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    isNewCityBeingCreated: isNewCityBeingCreatedSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    minimumAttackDelay: minimumAttackDelaySelectorTestScenarios,
-
-                    // $FlowFixMe
-                    regimentTemplate: regimentTemplateSelectorTestScenarios,
-                },
+                scenarios,
             },
         );
 

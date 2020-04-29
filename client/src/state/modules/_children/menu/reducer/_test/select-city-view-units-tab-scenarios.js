@@ -3,7 +3,7 @@
 import {
     UNIT_CATAPULT,
     UNIT_SWORDSMAN,
-} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/types';
 import {
     clientActions,
 } from '../../../../actions';
@@ -17,7 +17,9 @@ import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientSelectCityViewUnitsTabAction >;
+type Scenario =
+    ClientStateMenuReducerTestScenario< ClientSelectCityViewUnitsTabAction >;
+
 type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const selectCityViewUnitsTabScenarios: Scenarios = [

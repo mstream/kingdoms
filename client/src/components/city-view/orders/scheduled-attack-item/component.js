@@ -16,7 +16,11 @@ import type {
 
 export const Component = (
     {
-        cities, cityId, isActive, item, time,
+        cities,
+        cityId,
+        isActive,
+        item,
+        time,
     }: Props,
 ) => {
 
@@ -75,7 +79,10 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.cityView.scheduledAttackItem} className={itemClassName}>
+        <div
+            data-testid={testIds.cityView.scheduledAttackItem}
+            className={itemClassName}
+        >
             <div className="text-sm font-medium">{header}</div>
             <div className={subheaderClassName}>{subheader}</div>
         </div>

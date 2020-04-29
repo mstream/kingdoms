@@ -13,12 +13,13 @@ import type {
     DatabaseConnectionByPlayerKey,
 } from './types';
 
-export const operations = createDatabaseValueOperations<DatabaseConnectionByPlayerKey,
-    string,
-    >(
-        {
-            keyCreator       : createKey,
-            valueDeserializer: stringValueDeserializer,
-            valueSerializer  : stringValueSerializer,
-        },
-    );
+export const operations
+    = createDatabaseValueOperations<DatabaseConnectionByPlayerKey,
+        string,
+        >(
+            {
+                keyCreator       : createKey,
+                valueDeserializer: stringValueDeserializer,
+                valueSerializer  : stringValueSerializer,
+            },
+        );

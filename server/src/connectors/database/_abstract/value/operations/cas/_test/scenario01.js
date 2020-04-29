@@ -172,5 +172,5 @@ export const scenario01: DatabaseValueCasTestScenario = {
         };
 
     },
-    name: `sets the value if value has not changed during the transformation operation`,
+    name: `sets the value if value has not changed during the operation`,
 };

@@ -8,7 +8,7 @@ import {
 } from '../../../../../state';
 import {
     emptyRegimentTemplateState,
-} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/state';
+} from '../../../../../../../../common/src/state/modules/_children/orders/reducer';
 import {
     menuActions,
 } from '../../actions';
@@ -19,7 +19,9 @@ import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientCloseAttackViewAction >;
+type Scenario =
+    ClientStateMenuReducerTestScenario< ClientCloseAttackViewAction >;
+
 type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const closeAttackViewScenarios: Scenarios = [

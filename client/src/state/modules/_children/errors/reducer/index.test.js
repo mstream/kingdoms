@@ -16,7 +16,7 @@ import {
     errorsReducer,
 } from './index';
 import {
-    generateTests,
+    generateReducerTests,
 } from '../../../../test-utils';
 import {
     reportErrorsTestScenarios,
@@ -51,7 +51,7 @@ describe(
     `errorsReducer`,
     () => {
 
-        generateTests(
+        generateReducerTests(
             {
                 jest: {
                     describe,

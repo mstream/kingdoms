@@ -3,7 +3,7 @@
 import {
     RESOURCE_FOOD,
     RESOURCE_WOOD,
-} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/types';
 import {
     clientActions,
 } from '../../../../actions';

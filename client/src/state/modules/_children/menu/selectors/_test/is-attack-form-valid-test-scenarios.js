@@ -8,7 +8,7 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
-} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/types';
 import {
     emptyClientState,
 } from '../../../../../state';
@@ -19,7 +19,8 @@ import type {
     ClientStateSelectorTestScenario,
 } from '../../../../../types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< boolean > >;
+type Scenario = ClientStateSelectorTestScenario< boolean >;
+type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const isAttackFormValidSelectorTestScenarios: Scenarios = [
     {

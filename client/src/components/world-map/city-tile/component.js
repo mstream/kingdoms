@@ -61,8 +61,13 @@ export const Component = (
             style={style}
             onClick={onClick}
         >
-            <ImageComponent image={cityImage} ratio="100%"/>
-            <CityStatusBarComponent city={city}/>
+            <ImageComponent
+                image={cityImage}
+                ratio="100%"
+            />
+            <CityStatusBarComponent
+                city={city}
+            />
         </div>
     );
 

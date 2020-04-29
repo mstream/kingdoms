@@ -2,7 +2,7 @@
 
 import {
     UNIT_PIKEMAN,
-} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/types';
 import {
     clientActions,
 } from '../../../../actions';
@@ -11,7 +11,7 @@ import {
 } from '../../../../../state';
 import {
     emptyRegimentTemplateState,
-} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/state';
+} from '../../../../../../../../common/src/state/modules/_children/orders/reducer';
 import type {
     ClientRequestOrderCreationAction,
 } from '../../../common-state/actions/types';
@@ -19,7 +19,9 @@ import type {
     ClientStateMenuReducerTestScenario,
 } from './types';
 
-type Scenario = ClientStateMenuReducerTestScenario< ClientRequestOrderCreationAction >;
+type Scenario =
+    ClientStateMenuReducerTestScenario< ClientRequestOrderCreationAction >;
+
 type Scenarios = $ReadOnlyArray< Scenario >;
 
 export const requestOrderCreationScenarios: Scenarios = [

@@ -15,7 +15,9 @@ import type {
 } from '../../../../../../types';
 
 
-type Scenario = TestScenario< TwoOwnCitiesScenarioContext, TwoOwnCitiesScenarioContext >;
+type Scenario =
+    TestScenario< TwoOwnCitiesScenarioContext, TwoOwnCitiesScenarioContext >;
+
 type Scenarios = $ReadOnlyArray< Scenario >
 
 export const scenarios: Scenarios

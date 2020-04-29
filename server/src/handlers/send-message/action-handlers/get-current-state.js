@@ -32,15 +32,19 @@ export const handleGetCurrentStateAction = async (
         sendResponseBackToClient,
         worldId,
     }: {
-            action: CommonPlayerAction,
-            connectionId: string,
-            environment: string,
-            logger: Logger,
-            playerId: string,
-            redis: Redis,
-            sendResponseBackToClient: ( { response: ServerResponse } ) => Promise< void >,
-            worldId: string
-        },
+        action: CommonPlayerAction,
+        connectionId: string,
+        environment: string,
+        logger: Logger,
+        playerId: string,
+        redis: Redis,
+        sendResponseBackToClient: (
+            {
+                response: ServerResponse
+            },
+        ) => Promise< void >,
+        worldId: string
+    },
 ) => {
 
     const getWorldStatePromise = database.stateByWorld.get(

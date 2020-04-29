@@ -20,7 +20,8 @@ import type {
     SignInScenarioContext,
 } from '../../../../types';
 
-type Execution = ScenarioExecution< SignInScenarioContext, CreateCityScenarioContext >;
+type Execution =
+    ScenarioExecution< SignInScenarioContext, CreateCityScenarioContext >;
 
 export const execution: Execution
     = async ( {

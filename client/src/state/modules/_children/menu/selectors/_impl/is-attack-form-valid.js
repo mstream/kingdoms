@@ -17,9 +17,11 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/orders/types';
 
-export const isAttackFormValidSelector: ClientStateSelector< boolean, void >
+type Selector = ClientStateSelector< boolean, void >;
+
+export const isAttackFormValidSelector: Selector
     = createSelector<ClientState,
         void,
         boolean,

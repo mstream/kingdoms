@@ -4,17 +4,21 @@ import {
     clientStateCameraSelectors,
 } from './index';
 import {
+    generateSelectorTests,
+} from '../../../../test-utils';
+import {
     geometrySelectorTestScenarios,
 } from './_test/geometry-test-scenarios';
-import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../test-utils';
+
+const scenarios = {
+    geometry: geometrySelectorTestScenarios,
+};
 
 describe(
     `cameraSelectors`,
     () => {
 
-        runClientStateSelectorsTestScenarios(
+        generateSelectorTests(
             {
                 jest: {
                     describe,
@@ -23,10 +27,7 @@ describe(
                 },
 
                 moduleSelectors: clientStateCameraSelectors,
-                scenarios      : {
-                    // $FlowFixMe
-                    geometry: geometrySelectorTestScenarios,
-                },
+                scenarios,
             },
         );
 

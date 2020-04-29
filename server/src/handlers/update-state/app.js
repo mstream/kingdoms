@@ -127,21 +127,22 @@ export const handler: ScheduledHandler = async () => {
             },
         );
 
-        const worldStateUpdatePromises: $ReadOnlyArray< Promise< void >, > = worldIds.map(
-            (
-                worldId: string,
-            ) => {
+        const worldStateUpdatePromises: $ReadOnlyArray< Promise< void >, >
+            = worldIds.map(
+                (
+                    worldId: string,
+                ) => {
 
-                return updateWorldState(
-                    {
-                        environment,
-                        time,
-                        worldId,
-                    },
-                );
+                    return updateWorldState(
+                        {
+                            environment,
+                            time,
+                            worldId,
+                        },
+                    );
 
-            },
-        );
+                },
+            );
 
         await Promise.all(
             worldStateUpdatePromises,

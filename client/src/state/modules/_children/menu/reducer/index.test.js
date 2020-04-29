@@ -10,7 +10,7 @@ import {
     UNIT_PEASANT,
     UNIT_PIKEMAN,
     UNIT_SWORDSMAN,
-} from '../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../common/src/state/modules/_children/rules/types';
 import {
     CLOSE_ATTACK_VIEW,
     CLOSE_CITY_VIEW,
@@ -49,7 +49,7 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    generateTests,
+    generateReducerTests,
 } from '../../../../test-utils';
 import {
     menuReducer,
@@ -192,7 +192,7 @@ describe(
     `menuReducer`,
     () => {
 
-        generateTests(
+        generateReducerTests(
             {
                 jest: {
                     describe,

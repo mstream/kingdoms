@@ -26,4 +26,5 @@ export type DatabaseSetAdd<K, V> = ( DatabaseSetAddArgs< K, V > ) =>
     Promise< DatabaseSetAddResult >;
 
 export type DatabaseSetAddTestScenario =
-    DatabaseTestScenario< DatabaseSetAddArgs< string, string >, DatabaseSetAddResult >;
+    DatabaseTestScenario< DatabaseSetAddArgs< string, string >,
+        DatabaseSetAddResult >;

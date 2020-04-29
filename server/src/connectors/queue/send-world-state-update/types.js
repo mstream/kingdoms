@@ -20,5 +20,6 @@ export type WorldStateUpdatePayload = $ReadOnly< {|
     worldId: string,
 |} >;
 
-export const WorldStateUpdatePayloadType = ( reify: Type< WorldStateUpdatePayload > );
+export const WorldStateUpdatePayloadType
+    = ( reify: Type< WorldStateUpdatePayload > );
 

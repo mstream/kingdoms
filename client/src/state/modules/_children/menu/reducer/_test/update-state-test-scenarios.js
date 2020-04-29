@@ -5,7 +5,7 @@ import {
 } from '../../../../actions';
 import {
     emptyCityState,
-} from '../../../../../../../../common/src/state/modules/_children/cities/reducer/state';
+} from '../../../../../../../../common/src/state/modules/_children/cities/reducer';
 import {
     emptyClientState,
 } from '../../../../../state';

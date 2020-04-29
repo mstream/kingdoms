@@ -15,7 +15,8 @@ import type {
 
 export const Component = (
     {
-        city, player,
+        city,
+        player,
     }: Props,
 ) => {
 
@@ -54,7 +55,10 @@ export const Component = (
     );
 
     return (
-        <div data-testid={testIds.worldMap.statusBar} className={className}>
+        <div
+            data-testid={testIds.worldMap.statusBar}
+            className={className}
+        >
             <div
                 className={
                     classNames(
@@ -71,7 +75,16 @@ export const Component = (
             </div>
             <div>
                 <div
-                    className="p-1 pb-0 text-sm font-normal border-b border-gray-900">
+                    className={
+                        classNames(
+                            `p-1`,
+                            `pb-0`,
+                            `text-sm`,
+                            `font-normal`,
+                            `border-b`,
+                            `border-gray-900`,
+                        )
+                    }>
                     {city.name}
                 </div>
                 <div className="p-1 pt-0 text-xs font-hairline">

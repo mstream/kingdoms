@@ -169,12 +169,17 @@ export type ActionReducers<S> = $ReadOnly< {
     [ClientActionKey]: ClientStateActionReducer< S, ClientAction >,
 } >;
 
-type ReducerScenario<S> =  ClientStateReducerTestScenario< S, ClientAction >;
+type ReducerScenario<S> = ClientStateReducerTestScenario< S, ClientAction >;
 
 export type ReducerScenarios<S> = {
     [ClientActionKey]: $ReadOnlyArray< ReducerScenario< S > >,
 };
 
-export type SelectorScenarios = $ReadOnly< {
-    [string]: $ReadOnlyArray< ClientStateSelectorTestScenario< mixed > >,
+// $FlowFixMe
+export type SelectorScenario = ClientStateSelectorTestScenario< any >;
+
+export type SelectorScenarios = $ReadOnlyArray< SelectorScenario >;
+
+export type ScenariosBySelector = $ReadOnly< {
+    [string]: SelectorScenarios,
 } >;

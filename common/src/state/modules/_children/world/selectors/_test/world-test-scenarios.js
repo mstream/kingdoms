@@ -10,7 +10,8 @@ import type {
     CommonStateWorld,
 } from '../../reducer/types';
 
-type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< CommonStateWorld >, >;
+type Scenarios =
+    $ReadOnlyArray< CommonStateSelectorTestScenario< CommonStateWorld >, >;
 
 export const worldSelectorTestScenarios: Scenarios = [
     {

@@ -13,14 +13,19 @@ import type {
 type Selector = ClientStateSelector< boolean, void >;
 
 export const playerOwnsAnyCitySelector: Selector
-    = createSelector<ClientState, void, boolean, ?$ReadOnlyArray< string >, ?string, >(
-        cityIdsOwnedByPlayerSelector,
-        (
-            cityIdsOwnedByPlayer,
-        ) => {
+    = createSelector<ClientState,
+        void,
+        boolean,
+        ?$ReadOnlyArray< string >,
+        ?string,
+        >(
+            cityIdsOwnedByPlayerSelector,
+            (
+                cityIdsOwnedByPlayer,
+            ) => {
 
-            return cityIdsOwnedByPlayer != null
+                return cityIdsOwnedByPlayer != null
                 && cityIdsOwnedByPlayer.length > 0;
 
-        },
-    );
+            },
+        );

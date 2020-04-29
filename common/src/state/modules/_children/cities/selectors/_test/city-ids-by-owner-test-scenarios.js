@@ -13,7 +13,8 @@ import type {
     CommonStateSelectorTestScenario,
 } from '../../../../types';
 
-type Scenarios = $ReadOnlyArray< CommonStateSelectorTestScenario< CityIdsByOwner >, >;
+type Scenarios =
+    $ReadOnlyArray< CommonStateSelectorTestScenario< CityIdsByOwner >, >;
 
 export const cityIdsByOwnerSelectorTestScenarios: Scenarios = [
     {

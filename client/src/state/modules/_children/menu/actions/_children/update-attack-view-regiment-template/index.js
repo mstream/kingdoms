@@ -10,7 +10,8 @@ import type {
     ClientUpdateAttackViewRegimentTemplateAction,
 } from './types';
 
-type ActionCreator = ClientActionCreator< ClientUpdateAttackViewRegimentTemplateAction >;
+type ActionCreator =
+    ClientActionCreator< ClientUpdateAttackViewRegimentTemplateAction >;
 
 export const updateAttackViewRegimentTemplate: ActionCreator = (
     payload,

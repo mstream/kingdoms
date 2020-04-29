@@ -34,24 +34,30 @@ import type {
 
 export const ERROR_ACTION_EXECUTION: 'ERROR_ACTION_EXECUTION'
     = `ERROR_ACTION_EXECUTION`;
+
+export const ERROR_OPTIMISTIC_LOCKING: 'ERROR_OPTIMISTIC_LOCKING'
+    = `ERROR_OPTIMISTIC_LOCKING`;
+
 export const ERROR_STATE_NOT_INITIALIZED: 'ERROR_STATE_NOT_INITIALIZED'
     = `ERROR_STATE_NOT_INITIALIZED`;
 
 const optimisticLockingAttempts = 3;
 
-export const sendResponse = async ( {
-    apiGateway,
-    logger,
-    redis,
-    connectionId,
-    response,
-}: {
-    apiGateway: ApiGateway,
-    logger: Logger,
-    redis: Redis,
-    connectionId: string,
-    response: ServerResponse,
-}, ): Promise< void > => {
+export const sendResponse = async (
+    {
+        apiGateway,
+        logger,
+        redis,
+        connectionId,
+        response,
+    }: {
+        apiGateway: ApiGateway,
+        logger: Logger,
+        redis: Redis,
+        connectionId: string,
+        response: ServerResponse,
+    },
+): Promise< void > => {
 
     try {
 
@@ -110,19 +116,21 @@ type ActionExecutionResult = $ReadOnly< {|
     state: CommonState,
 |} >;
 
-export const executeAction = async ( {
-    action,
-    environment,
-    logger,
-    redis,
-    worldId,
-}: {
-    action: CommonAction,
-    environment: string,
-    logger: Logger,
-    redis: Redis,
-    worldId: string,
-}, ): Promise< ActionExecutionResult > => {
+export const executeAction = async (
+    {
+        action,
+        environment,
+        logger,
+        redis,
+        worldId,
+    }: {
+        action: CommonAction,
+        environment: string,
+        logger: Logger,
+        redis: Redis,
+        worldId: string,
+    },
+): Promise< ActionExecutionResult > => {
 
     try {
 
@@ -146,8 +154,8 @@ export const executeAction = async ( {
                 {
                     value,
                 }: $ReadOnly< {|
-                value: CommonState,
-            |} >,
+                    value: CommonState,
+                |} >,
             ): $ReadOnly< {|
                 errors: $ReadOnlyArray< string >,
                 value: ?CommonState,
@@ -220,8 +228,12 @@ export const executeAction = async ( {
 
         }
 
-        throw Error(
-            `optimistic locking failed after ${ optimisticLockingAttempts } attempts`,
+        throw new verror.VError(
+            {
+                name: ERROR_OPTIMISTIC_LOCKING,
+            },
+            `optimistic locking failed `
+            + `after ${ optimisticLockingAttempts } attempts`,
         );
 
     } catch ( error ) {

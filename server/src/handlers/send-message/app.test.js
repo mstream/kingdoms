@@ -182,7 +182,8 @@ describe(
                     .toEqual(
                         [
                             [
-                                `players-by-world:${ stubConfig.environment }:world1`,
+                                `players-by-world`
+                                + `:${ stubConfig.environment }:world1`,
                                 `player1`,
                             ],
                         ],

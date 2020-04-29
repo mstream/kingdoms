@@ -4,17 +4,22 @@ import {
     clientStateTilesSelectors,
 } from './index';
 import {
-    runClientStateSelectorsTestScenarios,
+    generateSelectorTests,
 } from '../../../../test-utils';
 import {
     tilesSelectorTestScenarios,
 } from './_test/tiles-test-scenarios';
 
+
+const scenarios = {
+    tiles: tilesSelectorTestScenarios,
+};
+
 describe(
     `clientStateTilesSelectors`,
     () => {
 
-        runClientStateSelectorsTestScenarios(
+        generateSelectorTests(
             {
                 jest: {
                     describe,
@@ -23,10 +28,7 @@ describe(
                 },
 
                 moduleSelectors: clientStateTilesSelectors,
-                scenarios      : {
-                    // $FlowFixMe
-                    tiles: tilesSelectorTestScenarios,
-                },
+                scenarios,
             },
         );
 

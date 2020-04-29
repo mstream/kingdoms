@@ -16,7 +16,7 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    generateTests,
+    generateReducerTests,
 } from '../../../../test-utils';
 import {
     updateStateTestScenarios,
@@ -49,7 +49,7 @@ describe(
     `commonStateReducer`,
     () => {
 
-        generateTests(
+        generateReducerTests(
             {
                 jest: {
                     describe,

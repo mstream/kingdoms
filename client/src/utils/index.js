@@ -13,10 +13,12 @@ import type {
     Vector,
 } from '../../../common/src/vector';
 
+
 const tileSize = {
     x: 64,
     y: 64,
 };
+
 
 export const createGeometryStyle = (
     {
@@ -35,14 +37,21 @@ export const createGeometryStyle = (
 
 };
 
-export const getRefValue = <T>( {
-    ref,
-}: { ref: { current: ?T } }, ): T => {
+
+export const getRefValue = <T>(
+    {
+        ref,
+    }: {
+        ref: {
+            current: ?T
+        }
+    },
+): T => {
 
     if ( ref.current == null ) {
 
         throw Error(
-            `ref durationInMinutes not set`,
+            `ref current not set`,
         );
 
     }
@@ -50,6 +59,7 @@ export const getRefValue = <T>( {
     return ref.current;
 
 };
+
 
 export const tileVectorToPixelVector = (
     {
@@ -67,4 +77,3 @@ export const tileVectorToPixelVector = (
     );
 
 };
-

@@ -105,11 +105,29 @@ export const Component = (
                 }
             >
                 <div
-                    className="flex flex-col w-1/3 m-1 shadow-inner bg-gray-900-alpha-50">
+                    className={
+                        classNames(
+                            `flex`,
+                            `flex-col`,
+                            `w-1/3`,
+                            `m-1`,
+                            `shadow-inner`,
+                            `bg-gray-900-alpha-50`,
+                        )
+                    }>
                     {orderRowComponents}
                 </div>
                 <div
-                    className="flex flex-row w-1/3 m-1 shadow-inner bg-gray-900-alpha-50">
+                    className={
+                        classNames(
+                            `flex`,
+                            `flex-row`,
+                            `w-1/3`,
+                            `m-1`,
+                            `shadow-inner`,
+                            `bg-gray-900-alpha-50`,
+                        )
+                    }>
                     {infoComponent}
                 </div>
             </div>

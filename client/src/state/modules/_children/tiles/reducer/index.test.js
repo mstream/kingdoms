@@ -10,7 +10,7 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    generateTests,
+    generateReducerTests,
 } from '../../../../test-utils';
 import {
     tilesReducer,
@@ -49,7 +49,7 @@ describe(
     `tilesReducer`,
     () => {
 
-        generateTests(
+        generateReducerTests(
             {
                 jest: {
                     describe,

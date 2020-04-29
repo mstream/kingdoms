@@ -168,5 +168,5 @@ export const scenario02: DatabaseValueCasTestScenario = {
         };
 
     },
-    name: `returns no saved value when the value has changed since started being watched`,
+    name: `returns no saved value when the value has changed during the operation`,
 };

@@ -61,7 +61,7 @@ export const executeTimeStepTimeReducer: Reducer = (
         return failure(
             {
                 errors: [
-                    `the time from the action is not past the time from the state`,
+                    `the actions's time is not past the time from the state`,
                 ],
             },
         );

@@ -10,7 +10,8 @@ import type {
     ClientStateTiles,
 } from '../../reducer/types';
 
-type Scenarios = $ReadOnlyArray< ClientStateSelectorTestScenario< ClientStateTiles >, >;
+type Scenario = ClientStateSelectorTestScenario< ClientStateTiles >;
+type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const tilesSelectorTestScenarios: Scenarios = [
     {

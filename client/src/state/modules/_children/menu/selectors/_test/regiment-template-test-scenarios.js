@@ -2,21 +2,23 @@
 
 import {
     UNIT_PIKEMAN,
-} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/types';
 import {
     emptyClientState,
 } from '../../../../../state';
 import {
     emptyRegimentTemplateState,
-} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/state';
+} from '../../../../../../../../common/src/state/modules/_children/orders/reducer';
 import type {
     ClientStateSelectorTestScenario,
 } from '../../../../../types';
 import type {
     CommonStateRegimentTemplate,
-} from '../../../../../../../../common/src/state/modules/_children/orders/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/orders/types';
 
-type Scenario = ClientStateSelectorTestScenario< CommonStateRegimentTemplate >;
+type Scenario =
+    ClientStateSelectorTestScenario< CommonStateRegimentTemplate >;
+
 type Scenarios = $ReadOnlyArray< Scenario, >;
 
 export const regimentTemplateSelectorTestScenarios: Scenarios = [

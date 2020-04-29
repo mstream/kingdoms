@@ -1,5 +1,6 @@
 // @flow
 
+
 export type GeometryStyle = $ReadOnly< {|
     height: number,
     width: number,

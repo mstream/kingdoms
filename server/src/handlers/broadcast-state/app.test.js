@@ -247,10 +247,12 @@ describe(
                     {
                         calls: [
                             [
-                                `players-by-world:${ stubConfig.environment }:world1`,
+                                `players-by-world`
+                                + `:${ stubConfig.environment }:world1`,
                             ],
                             [
-                                `players-by-world:${ stubConfig.environment }:world2`,
+                                `players-by-world`
+                                + `:${ stubConfig.environment }:world2`,
                             ],
                         ],
                         expect,

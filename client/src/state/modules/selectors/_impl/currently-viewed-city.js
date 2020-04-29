@@ -17,7 +17,9 @@ import type {
     CommonStateCity,
 } from '../../../../../../common/src/state/modules/_children/cities/reducer/types';
 
-export const currentlyViewedCitySelector: ClientStateSelector< ?CommonStateCity, void >
+type Selector = ClientStateSelector< ?CommonStateCity, void >;
+
+export const currentlyViewedCitySelector: Selector
     = createSelector<ClientState,
         void,
         ?CommonStateCity,

@@ -5,7 +5,7 @@ import type {
 } from '../../../../../types';
 import type {
     CommonStateUnitKey,
-} from '../../../../../../../../common/src/state/modules/_children/rules/reducer/types';
+} from '../../../../../../../../common/src/state/modules/_children/rules/types';
 
 type Selector = ClientStateSelector< CommonStateUnitKey, void >;
 

@@ -4,20 +4,25 @@ import {
     clientStatePlayerSelectors,
 } from './index';
 import {
+    generateSelectorTests,
+} from '../../../../test-utils';
+import {
     isAuthenticatedSelectorTestScenarios,
 } from './_test/is-authenticated-test-scenarios';
 import {
     nameSelectorTestScenarios,
 } from './_test/name-test-scenarios';
-import {
-    runClientStateSelectorsTestScenarios,
-} from '../../../../test-utils';
+
+const scenarios = {
+    isAuthenticated: isAuthenticatedSelectorTestScenarios,
+    name           : nameSelectorTestScenarios,
+};
 
 describe(
     `clientStatePlayerSelectors`,
     () => {
 
-        runClientStateSelectorsTestScenarios(
+        generateSelectorTests(
             {
                 jest: {
                     describe,
@@ -26,13 +31,7 @@ describe(
                 },
 
                 moduleSelectors: clientStatePlayerSelectors,
-                scenarios      : {
-                    // $FlowFixMe
-                    isAuthenticated: isAuthenticatedSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    name: nameSelectorTestScenarios,
-                },
+                scenarios,
             },
         );
 

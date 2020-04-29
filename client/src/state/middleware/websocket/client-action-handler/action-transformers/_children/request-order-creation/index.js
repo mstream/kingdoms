@@ -25,7 +25,8 @@ type Transformer = ActionTransformer< ClientRequestOrderCreationAction,
 
 export const transformer: Transformer = (
     {
-        clientAction, username,
+        clientAction,
+        username,
     },
 ) => {
 

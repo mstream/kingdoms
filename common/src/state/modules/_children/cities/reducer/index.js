@@ -46,17 +46,23 @@ import type {
     CommonStateCities,
 } from './types';
 
+const actionReducers = {
+    [ ABANDON_CITY ]                 : abandonCityCitiesReducer,
+    [ CHANGE_CITY_NAME ]             : changeCityNameCitiesReducer,
+    [ CREATE_CITY ]                  : createCityCitiesReducer,
+    [ CREATE_SCHEDULED_ATTACK_ORDER ]: createScheduledAttackOrderCitiesReducer,
+    [ EXECUTE_TIME_STEP ]            : executeTimeStepCitiesReducer,
+    [ RESET_STATE ]                  : resetStateCitiesReducer,
+    [ UPGRADE_BUILDING ]             : upgradeBuildingCitiesReducer,
+};
+
 export const citiesReducer = createCommonStateReducer<CommonStateCities>(
     {
-        actionReducers: {
-            [ ABANDON_CITY ]                 : abandonCityCitiesReducer,
-            [ CHANGE_CITY_NAME ]             : changeCityNameCitiesReducer,
-            [ CREATE_CITY ]                  : createCityCitiesReducer,
-            [ CREATE_SCHEDULED_ATTACK_ORDER ]: createScheduledAttackOrderCitiesReducer,
-            [ EXECUTE_TIME_STEP ]            : executeTimeStepCitiesReducer,
-            [ RESET_STATE ]                  : resetStateCitiesReducer,
-            [ UPGRADE_BUILDING ]             : upgradeBuildingCitiesReducer,
-        },
+        actionReducers,
         initialState: initialCommonState.cities,
     },
 );
+
+export {
+    emptyCityState,
+} from './state';

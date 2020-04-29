@@ -22,5 +22,6 @@ export type DatabaseValueRemove<K> =
     ( DatabaseValueRemoveArgs< K > ) => Promise< DatabaseValueRemoveResult >;
 
 export type DatabaseValueRemoveTestScenario =
-    DatabaseTestScenario< DatabaseValueRemoveArgs< string >, DatabaseValueRemoveResult >;
+    DatabaseTestScenario< DatabaseValueRemoveArgs< string >,
+        DatabaseValueRemoveResult >;
 

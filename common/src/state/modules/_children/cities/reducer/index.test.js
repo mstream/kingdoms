@@ -19,20 +19,20 @@ import {
     RESET_STATE,
 } from '../../../../actions/types';
 import {
-    abandonCityTestScenarios,
-} from './_test/abandon-city-test-scenarios';
+    abandonCityScenarios,
+} from './_test/abandon-city-scenarios';
 import {
-    changeCityNameTestScenarios,
-} from './_test/change-city-name-test-scenarios';
+    changeCityNameScenarios,
+} from './_test/change-city-name-scenarios';
 import {
     citiesReducer,
 } from './index';
 import {
-    createCityTestScenarios,
-} from './_test/create-city-test-scenarios';
+    createCityScenarios,
+} from './_test/create-city-scenarios';
 import {
-    createOrderTestScenarios,
-} from './_test/create-order-test-scenarios';
+    createScheduledAttackOrderScenarios,
+} from './_test/create-scheduled-attack-order-scenarios';
 import {
     dummy,
 } from '../../../../actions';
@@ -40,14 +40,14 @@ import {
     emptyCommonState,
 } from '../../../state';
 import {
-    executeTimeStepTestScenarios,
-} from './_test/execute-time-step-test-scenarios';
+    executeTimestepScenarios,
+} from './_test/execute-timestep-scenarios';
 import {
     initialCommonState,
 } from '../../../../index';
 import {
-    resetStateTestScenarios,
-} from './_test/reset-state-test-scenarios';
+    resetStateScenarios,
+} from './_test/reset-state-scenarios';
 import {
     runReducerTestScenarios,
 } from '../../../test-utils';
@@ -55,8 +55,8 @@ import {
     success,
 } from '../../../utils';
 import {
-    upgradeBuildingTestScenarios,
-} from './_test/upgrade-building-test-scenarios';
+    upgradeBuildingsScenarios,
+} from './_test/upgrade-building-scenarios';
 import type {
     CommonDummyAction,
 } from '../../../../actions/types';
@@ -87,6 +87,19 @@ const stateInitializationScenario: StateInitializationScenario = {
     },
 };
 
+const scenarios = {
+    [ ABANDON_CITY ]                 : abandonCityScenarios,
+    [ CHANGE_CITY_NAME ]             : changeCityNameScenarios,
+    [ CREATE_CITY ]                  : createCityScenarios,
+    [ CREATE_SCHEDULED_ATTACK_ORDER ]: createScheduledAttackOrderScenarios,
+    [ DUMMY ]                        : [
+        stateInitializationScenario,
+    ],
+    [ EXECUTE_TIME_STEP ]: executeTimestepScenarios,
+    [ RESET_STATE ]      : resetStateScenarios,
+    [ UPGRADE_BUILDING ] : upgradeBuildingsScenarios,
+};
+
 describe(
     `citiesReducer`,
     () => {
@@ -100,18 +113,7 @@ describe(
                 },
                 reducer   : citiesReducer,
                 reducerKey: `cities`,
-                scenarios : {
-                    [ ABANDON_CITY ]                 : abandonCityTestScenarios,
-                    [ CHANGE_CITY_NAME ]             : changeCityNameTestScenarios,
-                    [ CREATE_CITY ]                  : createCityTestScenarios,
-                    [ CREATE_SCHEDULED_ATTACK_ORDER ]: createOrderTestScenarios,
-                    [ DUMMY ]                        : [
-                        stateInitializationScenario,
-                    ],
-                    [ EXECUTE_TIME_STEP ]: executeTimeStepTestScenarios,
-                    [ RESET_STATE ]      : resetStateTestScenarios,
-                    [ UPGRADE_BUILDING ] : upgradeBuildingTestScenarios,
-                },
+                scenarios,
             },
         );
 

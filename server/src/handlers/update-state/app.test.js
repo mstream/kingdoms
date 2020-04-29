@@ -253,10 +253,12 @@ describe(
                     {
                         calls: [
                             [
-                                `state-by-world:${ stubConfig.environment }:world1`,
+                                `state-by-world`
+                                + `:${ stubConfig.environment }:world1`,
                             ],
                             [
-                                `state-by-world:${ stubConfig.environment }:world2`,
+                                `state-by-world`
+                                + `:${ stubConfig.environment }:world2`,
                             ],
                         ],
                         expect,
@@ -268,10 +270,12 @@ describe(
                     {
                         calls: [
                             [
-                                `state-by-world:${ stubConfig.environment }:world1`,
+                                `state-by-world`
+                                + `:${ stubConfig.environment }:world1`,
                             ],
                             [
-                                `state-by-world:${ stubConfig.environment }:world2`,
+                                `state-by-world`
+                                + `:${ stubConfig.environment }:world2`,
                             ],
                         ],
                         expect,
@@ -294,7 +298,8 @@ describe(
                     {
                         calls: [
                             [
-                                `state-by-world:${ stubConfig.environment }:world1`,
+                                `state-by-world`
+                                + `:${ stubConfig.environment }:world1`,
                                 serializeJson(
                                     {
                                         json: updatedState1,
@@ -302,7 +307,8 @@ describe(
                                 ),
                             ],
                             [
-                                `state-by-world:${ stubConfig.environment }:world2`,
+                                `state-by-world`
+                                + `:${ stubConfig.environment }:world2`,
                                 serializeJson(
                                     {
                                         json: updatedState2,
@@ -348,7 +354,10 @@ describe(
                                             json: stateUpdateMessagePayload1,
                                         },
                                     ),
-                                    QueueUrl: stubConfig.sqs.queueUrls.worldStateUpdate,
+                                    QueueUrl: stubConfig
+                                        .sqs
+                                        .queueUrls
+                                        .worldStateUpdate,
                                 },
                             ],
                             [
@@ -358,7 +367,10 @@ describe(
                                             json: stateUpdateMessagePayload2,
                                         },
                                     ),
-                                    QueueUrl: stubConfig.sqs.queueUrls.worldStateUpdate,
+                                    QueueUrl: stubConfig
+                                        .sqs
+                                        .queueUrls
+                                        .worldStateUpdate,
                                 },
                             ],
                         ],

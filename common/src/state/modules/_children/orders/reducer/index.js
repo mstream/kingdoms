@@ -28,13 +28,22 @@ import type {
     CommonStateOrders,
 } from './types';
 
-export const ordersReducer = createCommonStateReducer<CommonStateOrders>(
-    {
-        actionReducers: {
-            [ CREATE_SCHEDULED_ATTACK_ORDER ]: createScheduledAttackOrderOrdersReducer,
-            [ EXECUTE_TIME_STEP ]            : executeTimeStepOrdersReducer,
-            [ RESET_STATE ]                  : resetStateOrdersReducer,
+const actionReducers = {
+    [ CREATE_SCHEDULED_ATTACK_ORDER ]: createScheduledAttackOrderOrdersReducer,
+    [ EXECUTE_TIME_STEP ]            : executeTimeStepOrdersReducer,
+    [ RESET_STATE ]                  : resetStateOrdersReducer,
+};
+
+export const ordersReducer
+    = createCommonStateReducer<CommonStateOrders>(
+        {
+            actionReducers,
+            initialState: initialCommonState.orders,
         },
-        initialState: initialCommonState.orders,
-    },
-);
+    );
+
+export {
+    emptyOrdersState,
+    emptyRegimentTemplateState,
+    emptyScheduledAttackOrderState,
+} from './state';

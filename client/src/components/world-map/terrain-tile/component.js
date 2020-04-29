@@ -3,6 +3,7 @@
 import {
     ImageComponent,
 } from '../../image';
+
 import {
     createGeometryStyle,
 } from '../../../utils';
@@ -37,7 +38,9 @@ export const Component = (
             className="absolute" style={style}
         >
             <ImageComponent
-                image={surfaceImages[ tile.textureIndex ]}
+                image={
+                    surfaceImages[ tile.textureIndex ]
+                }
                 ratio="100%"
             />
         </div>

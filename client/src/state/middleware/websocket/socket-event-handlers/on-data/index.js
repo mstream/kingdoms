@@ -5,10 +5,10 @@ import {
     CHANGE_CITY_NAME,
     CREATE_CITY,
     UPGRADE_BUILDING,
-} from '../../../../../../../common/src/state/modules/_children/cities/actions/types';
+} from '../../../../../../../common/src/state/modules/_children/cities/types';
 import {
     CREATE_SCHEDULED_ATTACK_ORDER,
-} from '../../../../../../../common/src/state/modules/_children/orders/actions/types';
+} from '../../../../../../../common/src/state/modules/_children/orders/types';
 import {
     DUMMY,
     GET_CURRENT_STATE,
@@ -33,10 +33,12 @@ import type {
     ServerResponse,
 } from '../../../../../../../common/src/types';
 
-type ServerResponseHandler = ( {
-                                  serverResponse: ServerResponse,
-                                  store: ClientStore,
-                              } ) => void;
+type ServerResponseHandler = (
+    {
+        serverResponse: ServerResponse,
+        store: ClientStore,
+    },
+) => void;
 
 const handleAbandonCity: ServerResponseHandler = () => {
 };

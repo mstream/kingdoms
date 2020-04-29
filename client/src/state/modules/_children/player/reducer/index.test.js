@@ -13,7 +13,7 @@ import {
     emptyClientState,
 } from '../../../../state';
 import {
-    generateTests,
+    generateReducerTests,
 } from '../../../../test-utils';
 import {
     loadPlayerTestScenarios,
@@ -53,7 +53,7 @@ describe(
     `playerReducer`,
     () => {
 
-        generateTests(
+        generateReducerTests(
             {
                 jest: {
                     describe,

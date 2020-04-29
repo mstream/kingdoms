@@ -10,14 +10,14 @@ import {
     errorsSelectorTestScenarios,
 } from './_test/errors-test-scenarios';
 import {
-    runClientStateSelectorsTestScenarios,
+    generateSelectorTests,
 } from '../../../../test-utils';
 
 describe(
     `clientStateErrorsSelectors`,
     () => {
 
-        runClientStateSelectorsTestScenarios(
+        generateSelectorTests(
             {
                 jest: {
                     describe,
@@ -27,11 +27,8 @@ describe(
 
                 moduleSelectors: clientStateErrorsSelectors,
                 scenarios      : {
-                    // $FlowFixMe
                     anyErrors: anyErrorsSelectorTestScenarios,
-
-                    // $FlowFixMe
-                    errors: errorsSelectorTestScenarios,
+                    errors   : errorsSelectorTestScenarios,
                 },
             },
         );

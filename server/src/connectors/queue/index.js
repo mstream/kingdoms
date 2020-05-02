@@ -38,8 +38,12 @@ export const createQueueConnector = (
         const queueUrl = config.sqs.queueUrls.worldStateUpdate;
 
         logger.debug(
-            `sending a world update to queue: '%s'`,
-            queueUrl,
+            {
+                interpolationValues: [
+                    queueUrl,
+                ],
+                message: `sending a world update to queue: '%s'`,
+            },
         );
 
         return await sendWorldStateUpdate(

@@ -25,8 +25,12 @@ export const execute = async ( {
 }, ): Promise< void > => {
 
     logger.debug(
-        `invoking command: %s`,
-        command,
+        {
+            interpolationValues: [
+                command,
+            ],
+            message: `invoking command: %s`,
+        },
     );
 
     try {
@@ -39,26 +43,38 @@ export const execute = async ( {
 
         if ( stdout.length > 0 ) {
 
+            const commandSummary = command.substring(
+                0,
+                commandSummaryLength,
+            );
+
             logger.debug(
-                `command '%s' execution stdout: %s`,
-                `${ command.substring(
-                    0,
-                    commandSummaryLength,
-                ) }...`,
-                stdout,
+                {
+                    interpolationValues: [
+                        `${ commandSummary }...`,
+                        stdout,
+                    ],
+                    message: `command '%s' execution stdout: %s`,
+                },
             );
 
         }
 
         if ( stderr.length > 0 ) {
 
+            const commandSummary = command.substring(
+                0,
+                commandSummaryLength,
+            );
+
             logger.debug(
-                `command '%s' execution result stderr: %s`,
-                `${ command.substring(
-                    0,
-                    commandSummaryLength,
-                ) }...`,
-                stderr,
+                {
+                    interpolationValues: [
+                        `${ commandSummary }...`,
+                        stderr,
+                    ],
+                    message: `command '%s' execution result stderr: %s`,
+                },
             );
 
         }

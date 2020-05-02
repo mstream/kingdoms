@@ -62,7 +62,10 @@ export const sendResponse = async (
     try {
 
         logger.info(
-            `sending response back to the api gateway`,
+            {
+
+                message: `sending response back to the api gateway`,
+            },
         );
 
         await sendServerResponse(
@@ -78,8 +81,12 @@ export const sendResponse = async (
         if ( error.statusCode === 410 ) {
 
             logger.info(
-                `Found stale connection, deleting: %s`,
-                connectionId,
+                {
+                    interpolationValues: [
+                        connectionId,
+                    ],
+                    message: `Found stale connection, deleting: %s`,
+                },
             );
 
             try {
@@ -92,7 +99,11 @@ export const sendResponse = async (
             } catch ( error ) {
 
                 logger.error(
-                    error.stack,
+                    {
+                        error,
+                        message: `could not delete a stale connection`,
+                    },
+
                 );
 
             }
@@ -100,7 +111,11 @@ export const sendResponse = async (
         } else {
 
             logger.error(
-                error.stack,
+                {
+                    error,
+                    message: `unexpected error`,
+                },
+
             );
 
         }
@@ -135,19 +150,29 @@ export const executeAction = async (
     try {
 
         logger.debug(
-            `executing action`,
+            {
+                message: `executing action`,
+            },
+
         );
 
         for ( let i = 0; i < optimisticLockingAttempts; i += 1 ) {
 
             logger.info(
-                `optimistic locking attempt %d/%d`,
-                i + 1,
-                optimisticLockingAttempts,
+                {
+                    interpolationValues: [
+                        i + 1,
+                        optimisticLockingAttempts,
+                    ],
+                    message: `optimistic locking attempt %d/%d`,
+                },
             );
 
             logger.debug(
-                `watching state`,
+                {
+                    message: `watching state`,
+                },
+
             );
 
             const valueTransformer = (
@@ -162,7 +187,9 @@ export const executeAction = async (
             |} > => {
 
                 logger.debug(
-                    `applying action to the state`,
+                    {
+                        message:  `applying action to the state`,
+                    },
                 );
 
                 const {
@@ -223,7 +250,10 @@ export const executeAction = async (
             }
 
             logger.info(
-                `concurrent state modification detected - retrying`,
+                {
+                    message: `concurrent state modification detected - retrying`,
+                },
+
             );
 
         }

@@ -17,8 +17,12 @@ export const get: DatabaseValueGet< string, string > = async ( {
     try {
 
         logger.debug(
-            `getting a value associated with the '%s' key`,
-            key,
+            {
+                interpolationValues:  [
+                    key,
+                ],
+                message: `getting a value associated with the '%s' key`,
+            },
         );
 
 

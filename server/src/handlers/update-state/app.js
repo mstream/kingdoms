@@ -30,56 +30,71 @@ import {
 import {
     getCurrentTime,
 } from '../../connectors/time';
-import verror from 'verror';
+import {
+    tryCatch,
+} from '../../errors';
+import type {
+    Logger,
+} from '../../../../common/src/logging/types';
 import type {
     ScheduledHandler,
 } from '../types';
 
 const config = createConfig();
+
 const logger = createLogger(
     {
         config,
     },
 );
+
 const dateProvider = createDateProvider();
+
 const queue = createQueueConnector(
     {
         config,
     },
 );
+
 const redis = createRedisClient(
     {
         config,
     },
 );
+
 const sqs = createSqsClient();
 
 
-export const ERROR_STATE_UPDATE: 'STATE_UPDATE' = `STATE_UPDATE`;
-
-const updateWorldState = async ( {
-    environment, time, worldId,
-}: {
-    environment: string,
-    time: string,
-    worldId: string
-}, ): Promise< void > => {
+const updateWorldState = async (
+    {
+        environment,
+        logger,
+        time,
+        worldId,
+    }: $ReadOnly< {|
+        environment: string,
+        logger: Logger,
+        time: string,
+        worldId: string
+    |} >,
+): Promise< void > => {
 
     try {
 
-        const actionExecutionResult = await executeAction(
-            {
-                action: executeTimeStep(
-                    {
-                        time,
-                    },
-                ),
-                environment,
-                logger,
-                redis,
-                worldId,
-            },
-        );
+        const actionExecutionResult
+            = await executeAction(
+                {
+                    action: executeTimeStep(
+                        {
+                            time,
+                        },
+                    ),
+                    environment,
+                    logger,
+                    redis,
+                    worldId,
+                },
+            );
 
         await queue.sendWorldStateUpdate(
             {
@@ -95,68 +110,73 @@ const updateWorldState = async ( {
 
     } catch ( error ) {
 
-        console.error(
-            error.stack,
+        logger.error(
+            {
+                error,
+                message: `unexpected error`,
+            },
         );
 
     }
 
 };
 
-export const handler: ScheduledHandler = async () => {
+export const handler: ScheduledHandler
+    = async () => {
 
-    try {
+        const expectedErrorNames = [];
 
-        const {
-            environment,
-        } = config;
+        const execution = async () => {
 
-        const worldIds = await database.worlds.getAll(
-            {
-                key: {
-                    environment,
-                },
-                logger,
-                redis,
-            },
-        );
+            const {
+                environment,
+            } = config;
 
-        const time = getCurrentTime(
-            {
-                dateProvider,
-            },
-        );
-
-        const worldStateUpdatePromises: $ReadOnlyArray< Promise< void >, >
-            = worldIds.map(
-                (
-                    worldId: string,
-                ) => {
-
-                    return updateWorldState(
-                        {
-                            environment,
-                            time,
-                            worldId,
-                        },
-                    );
-
+            const worldIds = await database.worlds.getAll(
+                {
+                    key: {
+                        environment,
+                    },
+                    logger,
+                    redis,
                 },
             );
 
-        await Promise.all(
-            worldStateUpdatePromises,
-        );
+            const time = getCurrentTime(
+                {
+                    dateProvider,
+                },
+            );
 
-    } catch ( error ) {
+            const worldStateUpdatePromises: $ReadOnlyArray< Promise< void >, >
+                = worldIds.map(
+                    (
+                        worldId: string,
+                    ) => {
 
-        throw verror.VError(
+                        return updateWorldState(
+                            {
+                                environment,
+                                logger,
+                                time,
+                                worldId,
+                            },
+                        );
+
+                    },
+                );
+
+            await Promise.all(
+                worldStateUpdatePromises,
+            );
+
+        };
+
+        return await tryCatch(
             {
-                cause: error,
-                name : ERROR_STATE_UPDATE,
+                execution,
+                expectedErrorNames,
             },
         );
 
-    }
-
-};
+    };

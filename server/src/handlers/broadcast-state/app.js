@@ -19,8 +19,9 @@ import {
     database,
 } from '../../connectors/database';
 
-import verror from 'verror';
-
+import {
+    errorCreators, tryCatch,
+} from '../../errors';
 import {
     executeTimeStep,
 } from '../../../../common/src/state/modules/_children/cities/actions';
@@ -41,7 +42,7 @@ import type {
     WorldStateUpdatePayload,
 } from '../../connectors/queue/send-world-state-update/types';
 
-const ERROR_STATE_BROADCAST: 'ERROR_STATE_BROADCAST' = `ERROR_STATE_BROADCAST`;
+
 const config = createConfig();
 const logger = createLogger(
     {
@@ -59,12 +60,14 @@ const redis = createRedisClient(
     },
 );
 
-const sendStateUpdate = async ( {
-    connectionId, response,
-}: $ReadOnly< {|
-    connectionId: ?string,
-    response: ServerResponse
-|} >, ): Promise< void > => {
+const sendStateUpdate = async (
+    {
+        connectionId, response,
+    }: $ReadOnly< {|
+        connectionId: ?string,
+        response: ServerResponse
+    |} >,
+): Promise< void > => {
 
     try {
 
@@ -111,8 +114,12 @@ const broadcastStateUpdate = async (
         } = update;
 
         logger.debug(
-            `broadcasting state update of world '%s'`,
-            worldId,
+            {
+                interpolationValues: [
+                    worldId,
+                ],
+                message: `broadcasting state update of world '%s'`,
+            },
         );
 
         const request: ExecuteTimeResponseRequest = {
@@ -198,11 +205,17 @@ const broadcastStateUpdate = async (
 
 export const handler: SqsHandler = async ( event, ) => {
 
-    try {
+    const expectedErrorNames = [];
+
+    const execution = async () => {
 
         logger.debug(
-            `received event: %o`,
-            event,
+            {
+                interpolationValues: [
+                    event,
+                ],
+                message: `received event: %o`,
+            },
         );
 
         const {
@@ -217,12 +230,13 @@ export const handler: SqsHandler = async ( event, ) => {
 
         if ( eventValidationResult.errors.length > 0 ) {
 
-            const errorReason = `event validation error: ${ JSON.stringify(
-                eventValidationResult.errors,
-            ) }`;
-
-            logger.warn(
-                errorReason,
+            logger.error(
+                {
+                    interpolationValues: [
+                        eventValidationResult.errors,
+                    ],
+                    message: `event validation error: %o`,
+                },
             );
 
             return;
@@ -234,8 +248,10 @@ export const handler: SqsHandler = async ( event, ) => {
 
         if ( updates == null ) {
 
-            throw Error(
-                `missing event validation result`,
+            throw errorCreators.unexpected(
+                {
+                    message: `missing updates`,
+                },
             );
 
         }
@@ -259,15 +275,13 @@ export const handler: SqsHandler = async ( event, ) => {
             broadcastStateUpdatePromises,
         );
 
-    } catch ( error ) {
+    };
 
-        throw new verror.VError(
-            {
-                cause: error,
-                name : ERROR_STATE_BROADCAST,
-            },
-        );
-
-    }
+    return await tryCatch(
+        {
+            execution,
+            expectedErrorNames,
+        },
+    );
 
 };

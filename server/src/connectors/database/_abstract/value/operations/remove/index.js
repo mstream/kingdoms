@@ -17,8 +17,12 @@ export const remove: DatabaseValueRemove< string > = async ( {
     try {
 
         logger.debug(
-            `removing a value associated with the '%s' key`,
-            key,
+            {
+                interpolationValues: [
+                    key,
+                ],
+                message: `removing a value associated with the '%s' key`,
+            },
         );
 
 

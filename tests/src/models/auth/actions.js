@@ -23,7 +23,13 @@ const signIn = async ( {
 }, ): Promise< void > => {
 
     logger.info(
-        `signing in user '${ username }' using password '${ password }'`,
+        {
+            interpolationValues: [
+                username,
+                password,
+            ],
+            message: `signing in user %s using password %s`,
+        },
     );
 
     await t.typeText(

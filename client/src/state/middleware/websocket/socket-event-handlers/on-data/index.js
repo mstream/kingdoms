@@ -102,8 +102,13 @@ export const createOnDataHandler = (
         const dataString = data.toString();
 
         logger.info(
-            `Websocket data received: %s`,
-            dataString,
+            {
+                interpolationValues: [
+                    dataString,
+                ],
+                message:  `Websocket data received: %s`,
+            },
+
         );
 
         const serverResponse: ServerResponse = parseServerResponse(
@@ -118,8 +123,12 @@ export const createOnDataHandler = (
         if ( serverResponseHandler == null ) {
 
             logger.error(
-                `unsupported response type received from server: %s`,
-                actionType,
+                {
+                    interpolationValues: [
+                        actionType,
+                    ],
+                    message: `unsupported response type received from server: %s`,
+                },
             );
 
             return;

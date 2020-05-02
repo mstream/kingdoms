@@ -1,10 +1,71 @@
 // @flow
 
-import pino from 'pino';
+import {
+    createPino,
+} from './pino';
 import verror from 'verror';
 import type {
-    Logger,
+    Log, LogError, Logger,
 } from './types';
+
+
+const createLog = (
+    {
+        level,
+        pino,
+    }: $ReadOnly< {
+
+        // $FlowFixMe
+        pino: any,
+        level: 'debug' | 'info' | 'warn',
+    } >,
+): Log => {
+
+    return (
+        {
+            interpolationValues,
+            message,
+        },
+    ) => {
+
+        pino[ level ](
+            message,
+            interpolationValues,
+        );
+
+    };
+
+};
+
+const createLogError = (
+    {
+        pino,
+    }: $ReadOnly< {
+
+        // $FlowFixMe
+        pino: any,
+    } >,
+): LogError => {
+
+    return (
+        {
+            error,
+            interpolationValues,
+            message,
+        },
+    ) => {
+
+        pino.error(
+            {
+                err: error,
+            },
+            message,
+            interpolationValues,
+        );
+
+    };
+
+};
 
 export const createLogger = (
     {
@@ -14,52 +75,37 @@ export const createLogger = (
 
     try {
 
-        return pino(
+        const pino = createPino(
             {
-                browser: {
-                    write: {
-                        debug: (
-                            o,
-                        ) => {
-
-                            console.info(
-                                o.msg,
-                            );
-
-                        },
-                        error: (
-                            o,
-                        ) => {
-
-                            console.error(
-                                o.msg,
-                            );
-
-                        },
-                        info: (
-                            o,
-                        ) => {
-
-                            console.info(
-                                o.msg,
-                            );
-
-                        },
-                        warn: (
-                            o,
-                        ) => {
-
-                            console.warn(
-                                o.msg,
-                            );
-
-                        },
-                    },
-                },
-                level      : config.loggingLevel,
-                prettyPrint: true,
+                loggingLevel: config.loggingLevel,
             },
         );
+
+        return {
+            debug: createLog(
+                {
+                    level: `debug`,
+                    pino,
+                },
+            ),
+            error: createLogError(
+                {
+                    pino,
+                },
+            ),
+            info: createLog(
+                {
+                    level: `info`,
+                    pino,
+                },
+            ),
+            warn: createLog(
+                {
+                    level: `warn`,
+                    pino,
+                },
+            ),
+        };
 
     } catch ( error ) {
 

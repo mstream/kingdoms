@@ -33,9 +33,9 @@ Parameters:
         Type: 'String'
         Default: 'nodejs12.x'
 
-    LayerArn:
-        Type: 'String'
-        Default: 'arn:aws:lambda:eu-west-1:235338379175:layer:common:1'
+    LayerVersion:
+        Type: 'Number'
+        Default: 8
 
 Resources:
 
@@ -75,7 +75,7 @@ Resources:
             MemorySize: 256
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -110,7 +110,7 @@ Resources:
             MemorySize: 256
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -153,7 +153,7 @@ Resources:
             MemorySize: 256
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -188,7 +188,7 @@ Resources:
             MemorySize: 256
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -223,7 +223,7 @@ Resources:
             MemorySize: 1024
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -260,7 +260,7 @@ Resources:
             MemorySize: 1024
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -302,7 +302,7 @@ Resources:
             MemorySize: 256
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
@@ -337,7 +337,7 @@ Resources:
             MemorySize: 256
             Runtime: 'nodejs12.x'
             Layers:
-                - !Sub '${LayerArn}'
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
             VpcConfig:
                 SecurityGroupIds:
                     -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'

@@ -11,23 +11,33 @@ import type {
 export const ERROR_DATABASE_VALUE_CAS: 'ERROR_DATABASE_VALUE_CAS'
     = `ERROR_DATABASE_VALUE_CAS`;
 
-export const cas: DatabaseValueCas< string, string > = async ( {
-    key,
-    logger,
-    redis,
-    valueTransformer,
-}, ) => {
+export const cas: DatabaseValueCas< string, string > = async (
+    {
+        key,
+        logger,
+        redis,
+        valueTransformer,
+    },
+) => {
 
     logger.debug(
-        `performing a CAS operation on value associated with the key '%s'`,
-        key,
+        {
+            interpolationValues: [
+                key,
+            ],
+            message: `performing a CAS operation on value associated with the key '%s'`,
+        },
     );
 
     try {
 
         logger.debug(
-            `watching the '%s' key...`,
-            key,
+            {
+                interpolationValues: [
+                    key,
+                ],
+                message: `watching the '%s' key...`,
+            },
         );
 
         await redis.watch(
@@ -47,8 +57,12 @@ export const cas: DatabaseValueCas< string, string > = async ( {
             if ( previousValue == null ) {
 
                 logger.debug(
-                    `unwatching the '%s' key...`,
-                    key,
+                    {
+                        interpolationValues: [
+                            key,
+                        ],
+                        message: `unwatching the '%s' key...`,
+                    },
                 );
 
                 await redis.unwatch(
@@ -120,9 +134,13 @@ export const cas: DatabaseValueCas< string, string > = async ( {
             } catch ( unwatchError ) {
 
                 logger.error(
-                    `could not unwatch the '%s' key: %s`,
-                    key,
-                    unwatchError.message,
+                    {
+                        error              : unwatchError,
+                        interpolationValues: [
+                            key,
+                        ],
+                        message: `could not unwatch the '%s' key`,
+                    },
                 );
 
             }

@@ -41,7 +41,10 @@ export const createOnConnectHandler = (
     return (): void => {
 
         logger.info(
-            `Websocket connection established`,
+            {
+                message: `Websocket connection established`,
+            },
+
         );
 
         const request: ServerRequest = {

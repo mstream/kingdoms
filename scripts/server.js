@@ -8,8 +8,7 @@ const deleteStack = (
     },
 ) => {
 
-    return `aws cloudformation delete-stack `
-        + `--stack-name ${ stackName }`;
+    return `aws cloudformation delete-stack --stack-name ${ stackName }`;
 
 };
 
@@ -19,9 +18,7 @@ const validateTemplate = (
     },
 ) => {
 
-    return `cd server && `
-        + `sam validate `
-        + `-t ${ templateName }`;
+    return `cd server && sam validate -t ${ templateName }`;
 
 };
 
@@ -42,7 +39,9 @@ const deployNetwork = (
 
 const deployPersistence = (
     {
-        networkStackName, stackName, templateName,
+        networkStackName,
+        stackName,
+        templateName,
     },
 ) => {
 
@@ -84,7 +83,9 @@ const deployService = (
 
 const destroyService = (
     {
-        bucketName, environment, stackName,
+        bucketName,
+        environment,
+        stackName,
     },
 ) => {
 
@@ -135,7 +136,7 @@ module.exports = {
         dev : `env TARGET=server NODE_ENV=dev webpack`,
         prod: `env TARGET=server NODE_ENV=prod webpack`,
     },
-    cleanOnly                 : `rimraf server/.aws-sam`,
+    cleanOnly                 : `rimraf server/.aws-sam && rimraf server/dist`,
     createOutputsDirectoryOnly: {
         dev: {
             script: `mkdir -p server/dist/dev`,

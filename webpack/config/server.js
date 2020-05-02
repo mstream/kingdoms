@@ -22,14 +22,15 @@ const createServerConfig = (
         },
     );
 
-    const circularDependencyPlugin = new CircularDependencyPlugin(
-        {
-            allowAsyncCycles: false,
-            cwd             : process.cwd(),
-            exclude         : /node_modules/,
-            failOnError     : true,
-        },
-    );
+    const circularDependencyPlugin
+        = new CircularDependencyPlugin(
+            {
+                allowAsyncCycles: false,
+                cwd             : process.cwd(),
+                exclude         : /node_modules/,
+                failOnError     : true,
+            },
+        );
 
     return {
         entry: () => {
@@ -39,8 +40,12 @@ const createServerConfig = (
         },
 
         externals: [
+            `axios`,
             `aws-sdk`,
             `ioredis`,
+            `pino`,
+            `pino-pretty`,
+            `verror`,
         ],
 
         mode,

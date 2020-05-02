@@ -37,8 +37,12 @@ const logger: Logger = createLogger(
 );
 
 logger.info(
-    `Using configuration: %o`,
-    config,
+    {
+        interpolationValues: [
+            config,
+        ],
+        message: `Using configuration: %o`,
+    },
 );
 
 const rootElement = document.getElementById(
@@ -50,7 +54,9 @@ if ( rootElement == null ) {
     const errorMessage = `no root element in the document`;
 
     logger.error(
-        errorMessage,
+        {
+            message: errorMessage,
+        },
     );
 
     throw Error(
@@ -79,7 +85,9 @@ if ( worldId == null ) {
     const errorMessage = `the location does not contain the world id`;
 
     logger.error(
-        errorMessage,
+        {
+            message: errorMessage,
+        },
     );
 
     throw Error(
@@ -91,7 +99,9 @@ if ( worldId == null ) {
 if ( tokenInfo == null ) {
 
     logger.debug(
-        `Not rendering the application as the redirection should be happening`,
+        {
+            message: `Not rendering as a redirection should be happening`,
+        },
     );
 
 } else {
@@ -107,7 +117,9 @@ if ( tokenInfo == null ) {
     );
 
     logger.debug(
-        `client store has been successfully created`,
+        {
+            message: `client store has been successfully created`,
+        },
     );
 
     ReactDOM.render(

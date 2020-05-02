@@ -35,8 +35,12 @@ export const create = async ( {
 }, ) => {
 
     logger.info(
-        `creating a world with id '%s'`,
-        id,
+        {
+            interpolationValues: [
+                id,
+            ],
+            message: `creating a world with id '%s'`,
+        },
     );
 
     const requestPayload = {

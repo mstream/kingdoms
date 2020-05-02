@@ -1,45 +1,83 @@
 // @flow
 
+import {
+    createConfig,
+} from '../../config';
+import {
+    createLogger,
+} from '../../../../common/src/logging';
+import {
+    tryCatch,
+} from '../../errors';
 import type {
     ProxyHandler,
 } from '../types';
 
-const requestExecutionError = {
+const requestExecutionErrorResponse = {
     body      : `Disconnection error.`,
     statusCode: 500,
 };
 
-const requestAccepted = {
+const requestAcceptedResponse = {
     body      : `Disconnected.`,
     statusCode: 200,
 };
 
-export const handler: ProxyHandler = async ( event, ) => {
+const config = createConfig();
 
-    try {
+const logger = createLogger(
+    {
+        config,
+    },
+);
 
-        const {
-            connectionId,
-        } = event.requestContext;
+export const handler: ProxyHandler
+    = async ( event, ) => {
 
-        if ( connectionId == null ) {
+        const expectedErrorNames = [];
 
-            throw Error(
-                `connectionId is missing`,
+        const execution = async () => {
+
+            const {
+                connectionId,
+            } = event.requestContext;
+
+            if ( connectionId == null ) {
+
+                logger.error(
+                    {
+                        message: `connectionId is missing`,
+                    },
+                );
+
+                return requestExecutionErrorResponse;
+
+            }
+
+            return requestAcceptedResponse;
+
+        };
+
+        try {
+
+            return await tryCatch(
+                {
+                    execution,
+                    expectedErrorNames,
+                },
             );
+
+        } catch ( error ) {
+
+            logger.error(
+                {
+                    error,
+                    message: error.message,
+                },
+            );
+
+            return requestExecutionErrorResponse;
 
         }
 
-    } catch ( error ) {
-
-        console.error(
-            error.stack,
-        );
-
-        return requestExecutionError;
-
-    }
-
-    return requestAccepted;
-
-};
+    };

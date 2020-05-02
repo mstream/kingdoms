@@ -58,8 +58,11 @@ export const combineScenarios = <IC: ScenarioContext, OC: ScenarioContext>(
             } catch ( error ) {
 
                 logger.error(
-                    `error during context destroying: %s`,
-                    error.stack,
+                    {
+                        error,
+                        message:  `error during context destroying`,
+                    },
+
                 );
 
             }

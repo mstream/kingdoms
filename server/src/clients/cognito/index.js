@@ -10,6 +10,9 @@ import type {
 import type {
     Config,
 } from '../../config/types';
+import type {
+    Logger,
+} from '../../../../common/src/logging/types';
 
 // $FlowFixMe
 export const mockGetJwks: JestMockFn< GetJwksArgs, GetJwksResult > = null;
@@ -17,8 +20,10 @@ export const mockGetJwks: JestMockFn< GetJwksArgs, GetJwksResult > = null;
 export const createCognitoClient = (
     {
         config,
+        logger,
     }: {
         config: Config,
+        logger: Logger,
     },
 ): Cognito => {
 
@@ -33,10 +38,18 @@ export const createCognitoClient = (
             `${ userPoolUrl }/.well-known/jwks.json`,
         );
 
-        console.info(
-            `jwt key set received from cognito: ${ JSON.stringify(
-                response.data,
-            ) }`,
+        const serializedKeyset = JSON.stringify(
+            response.data,
+        );
+
+        logger.info(
+            {
+                interpolationValues: [
+                    serializedKeyset,
+                ],
+                message: `jwt key set received from cognito: %s`,
+            }
+            ,
         );
 
         return validateJwksType(

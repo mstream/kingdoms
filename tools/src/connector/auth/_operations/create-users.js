@@ -65,8 +65,12 @@ const signUpUsers = async ( {
             } = user;
 
             logger.info(
-                `signing up user '%s'`,
-                username,
+                {
+                    interpolationValues: [
+                        username,
+                    ],
+                    message: `signing up user '%s'`,
+                },
             );
 
             return cognito.signUp(
@@ -187,9 +191,12 @@ const signUpUsers = async ( {
         ) => {
 
             logger.info(
-                `skipping user '%s' user: `
-                + `already exists`,
-                result.username,
+                {
+                    interpolationValues: [
+                        result.username,
+                    ],
+                    message: `skipping already existing '%s' user`,
+                },
             );
 
         },
@@ -203,9 +210,13 @@ const signUpUsers = async ( {
             ) => {
 
                 logger.warn(
-                    `failed to sign up '%s' user: %s`,
-                    result.username,
-                    result.error,
+                    {
+                        interpolationValues: [
+                            result.username,
+                            result.error,
+                        ],
+                        message: `failed to sign up '%s' user: %s`,
+                    },
                 );
 
             },
@@ -260,8 +271,12 @@ const confirmUsersSignUp = async ( {
         ) => {
 
             logger.info(
-                `confirming the sign up for user '%s'`,
-                username,
+                {
+                    interpolationValues: [
+                        username,
+                    ],
+                    message: `confirming the sign up for user '%s'`,
+                },
             );
 
             return cognito.adminConfirmSignUp(
@@ -336,10 +351,13 @@ const confirmUsersSignUp = async ( {
             ) => {
 
                 logger.info(
-                    `failed to confirm the sign up for `
-                    + `'%s' user: %s`,
-                    result.username,
-                    result.error,
+                    {
+                        interpolationValues: [
+                            result.username,
+                            result.error,
+                        ],
+                        message: `failed to confirm the sign up for '%s' user: %s`,
+                    },
                 );
 
             },
@@ -366,8 +384,13 @@ export const createUsers = async ( {
 }, ) => {
 
     logger.info(
-        `creating users in '%s' user pool`,
-        config.userPoolId,
+        {
+            interpolationValues: [
+                config.userPoolId,
+
+            ],
+            message: `creating users in '%s' user pool`,
+        },
     );
 
     const usernames = await signUpUsers(

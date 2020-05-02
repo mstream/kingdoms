@@ -8,17 +8,23 @@ import type {
     DatabaseSetRemove,
 } from './types';
 
-export const remove: DatabaseSetRemove< string, string > = async ( {
-    key,
-    logger,
-    redis,
-    value,
-}, ) => {
+export const remove: DatabaseSetRemove< string, string > = async (
+    {
+        key,
+        logger,
+        redis,
+        value,
+    },
+) => {
 
     logger.debug(
-        `removing value '%s' from a set associated with the '%s' key`,
-        value,
-        key,
+        {
+            interpolationValues: [
+                value,
+                key,
+            ],
+            message: `removing value '%s' from a set associated with the '%s' key`,
+        },
     );
 
     try {

@@ -1,6 +1,9 @@
 // @flow
 
 import {
+    ERROR_UNAUTHORIZED,
+} from '../../errors/types';
+import {
     buildUserProfile,
 } from '../../jwt';
 import {
@@ -9,6 +12,12 @@ import {
 import {
     createConfig,
 } from '../../config';
+import {
+    createLogger,
+} from '../../../../common/src/logging';
+import {
+    errorCreators, tryCatch,
+} from '../../errors';
 import type {
     CustomAuthorizerHandler,
     CustomAuthorizerResult,
@@ -17,14 +26,15 @@ import type {
     UserProfileResult,
 } from '../../jwt/types';
 
+
 const createAllowPolicy = (
     {
         methodArn,
         username,
-    }: {
-    methodArn: string,
-    username: string,
-},
+    }: $ReadOnly< {|
+        methodArn: string,
+        username: string,
+    |} >,
 ): CustomAuthorizerResult => {
 
     return {
@@ -43,72 +53,116 @@ const createAllowPolicy = (
 
 };
 
-const unauthorizedError = Error(
-    `Unauthorized`,
-);
-
 const config = createConfig();
-const cognito = createCognitoClient(
+
+const logger = createLogger(
     {
         config,
     },
 );
 
-export const handler: CustomAuthorizerHandler = async ( event, ) => {
+const cognito = createCognitoClient(
+    {
+        config,
+        logger,
+    },
+);
 
-    const queryParams = event.queryStringParameters;
 
-    if ( queryParams == null || queryParams.token == null ) {
+export const handler: CustomAuthorizerHandler
+    = async ( event, ) => {
 
-        console.info(
-            `authentication failed - no token provided`,
+        const expectedErrorNames = [
+            ERROR_UNAUTHORIZED,
+        ];
+
+        const execution = async () => {
+
+            const queryParams = event.queryStringParameters;
+
+            if ( queryParams == null || queryParams.token == null ) {
+
+                const errorMessage = `no token provided`;
+
+                logger.warn(
+                    {
+                        message: errorMessage,
+
+                    },
+                );
+
+                throw errorCreators.unauthorized(
+                    {
+                        message: errorMessage,
+                    },
+                );
+
+            }
+
+            const {
+                token,
+            } = queryParams;
+
+            logger.debug(
+                {
+                    interpolationValues: [
+                        token,
+                    ],
+                    message: `received token: %s`,
+                },
+            );
+
+            const userProfileResult: UserProfileResult
+                = await buildUserProfile(
+                    {
+                        cognito,
+                        token,
+                    },
+                );
+
+            if ( userProfileResult.errors.length > 0 ) {
+
+                logger.warn(
+                    {
+                        interpolationValues: [
+                            userProfileResult.errors,
+                        ],
+                        message: `authentication failed: %o`,
+                    },
+                );
+
+                throw errorCreators.unauthorized(
+                    {
+                        message: `authentication failed`,
+                    },
+                );
+
+            }
+
+            if ( userProfileResult.userProfile == null ) {
+
+                throw errorCreators.unexpected(
+                    {
+                        message: `missing user profile`,
+                    },
+                );
+
+            }
+
+            return createAllowPolicy(
+                {
+                    methodArn: event.methodArn,
+                    username : userProfileResult.userProfile.name,
+                },
+            );
+
+        };
+
+        return await tryCatch(
+            {
+                execution,
+                expectedErrorNames,
+            },
         );
 
-        throw unauthorizedError;
-
-    }
-
-    const {
-        token,
-    } = queryParams;
-
-    console.info(
-        `received token: ${ token }`,
-    );
-
-    const userProfileResult: UserProfileResult = await buildUserProfile(
-        {
-            cognito,
-            token,
-        },
-    );
-
-    if ( userProfileResult.errors.length > 0 ) {
-
-        console.info(
-            `authentication failed: ${ JSON.stringify(
-                userProfileResult.errors,
-            ) }`,
-        );
-
-        throw unauthorizedError;
-
-    }
-
-    if ( userProfileResult.userProfile == null ) {
-
-
-        throw Error(
-            `missing user profile`,
-        );
-
-    }
-
-    return createAllowPolicy(
-        {
-            methodArn: event.methodArn,
-            username : userProfileResult.userProfile.name,
-        },
-    );
-
-};
+    };

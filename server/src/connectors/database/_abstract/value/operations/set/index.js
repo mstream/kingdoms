@@ -16,9 +16,13 @@ export const set: DatabaseValueSet< string, string > = async ( {
 }, ) => {
 
     logger.debug(
-        `associating '%s' value with the key '%s'`,
-        value,
-        key,
+        {
+            interpolationValues: [
+                value,
+                key,
+            ],
+            message: `associating '%s' value with the key '%s'`,
+        },
     );
 
     try {

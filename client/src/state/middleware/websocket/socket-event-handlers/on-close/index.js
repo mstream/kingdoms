@@ -13,7 +13,9 @@ export const createOnCloseHandler = (
     return (): void => {
 
         logger.info(
-            `Websocket connection closed`,
+            {
+                message: `Websocket connection closed`,
+            },
         );
 
     };

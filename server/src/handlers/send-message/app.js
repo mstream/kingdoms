@@ -41,6 +41,9 @@ import {
     validateServerRequestEvent,
 } from './validation';
 
+import {
+    errorCreators, tryCatch,
+} from '../../errors';
 import type {
     CommonActionKey,
 } from '../../../../common/src/state/types';
@@ -79,170 +82,201 @@ const supportedActions: $ReadOnlyArray< CommonActionKey > = [
 ];
 
 
-export const handler: ProxyHandler = async ( event, ) => {
+export const handler: ProxyHandler
+    = async ( event, ) => {
 
-    logger.debug(
-        `received event: %o`,
-        event,
-    );
+        const expectedErrorNames = [];
 
-    try {
+        const execution = async () => {
 
-        const eventValidationResult = validateServerRequestEvent(
-            {
-                event,
-            },
-        );
-
-        if ( eventValidationResult.errors.length > 0 ) {
-
-            const errorReason = `event validation error: ${ JSON.stringify(
-                eventValidationResult.errors,
-            ) }`;
-
-            logger.warn(
-                errorReason,
-            );
-
-            return generateRequestRejectionResponse(
+            logger.debug(
                 {
-                    reason: errorReason,
+                    interpolationValues: [
+                        event,
+                    ],
+                    message: `received event: %o`,
                 },
             );
 
-        }
+            const eventValidationResult
+                = validateServerRequestEvent(
+                    {
+                        event,
+                    },
+                );
 
-        const eventValidationResultEvent = eventValidationResult.result;
+            if ( eventValidationResult.errors.length > 0 ) {
 
-        if ( eventValidationResultEvent == null ) {
+                const errorReason = `event validation error: ${ JSON.stringify(
+                    eventValidationResult.errors,
+                ) }`;
 
-            throw Error(
-                `missing event validation result`,
-            );
+                logger.warn(
+                    {
+                        message: errorReason,
+                    },
+                );
 
-        }
+                return generateRequestRejectionResponse(
+                    {
+                        reason: errorReason,
+                    },
+                );
 
-        const {
-            connectionId, serverRequest, username,
-        } = eventValidationResultEvent;
+            }
 
-        const {
-            action, worldId,
-        } = serverRequest;
+            const eventValidationResultEvent = eventValidationResult.result;
 
-        const {
-            playerId,
-        } = action.payload;
+            if ( eventValidationResultEvent == null ) {
 
-        if ( playerId !== username ) {
+                throw errorCreators.unexpected(
+                    {
+                        message:  `missing event`,
+                    },
+                );
 
-            const errorReason = `username '${ username }'`
-                + ` does not match the playerId '${ playerId }'`;
+            }
 
-            logger.warn(
-                errorReason,
-            );
+            const {
+                connectionId,
+                serverRequest,
+                username,
+            } = eventValidationResultEvent;
 
-            return generateRequestRejectionResponse(
+            const {
+                action, worldId,
+            } = serverRequest;
+
+            const {
+                playerId,
+            } = action.payload;
+
+            if ( playerId !== username ) {
+
+                const errorReason = `username '${ username }'`
+                    + ` does not match the playerId '${ playerId }'`;
+
+                logger.warn(
+                    {
+                        message: errorReason,
+                    },
+                );
+
+                return generateRequestRejectionResponse(
+                    {
+                        reason: errorReason,
+                    },
+                );
+
+            }
+
+            const sendResponseBackToClient = async ( {
+                response,
+            }: {
+                response: ServerResponse,
+            }, ) => {
+
+                return await sendResponse(
+                    {
+                        apiGateway,
+                        connectionId,
+                        logger,
+                        redis,
+                        response,
+                    },
+                );
+
+            };
+
+            const {
+                environment,
+            } = config;
+
+            if ( !supportedActions.includes(
+                action.type,
+            ) ) {
+
+                return await handleUnsupportedAction(
+                    {
+                        action,
+                        environment,
+                        logger,
+                        redis,
+                        sendResponseBackToClient,
+                        serverRequest,
+                        worldId,
+                    },
+                );
+
+            }
+
+            if ( action.type === GET_CURRENT_STATE ) {
+
+                return await handleGetCurrentStateAction(
+                    {
+                        action,
+                        connectionId,
+                        environment,
+                        logger,
+                        playerId,
+                        redis,
+                        sendResponseBackToClient,
+                        worldId,
+                    },
+                );
+
+            }
+
+            const actionExecutionResult = await executeAction(
                 {
-                    reason: errorReason,
-                },
-            );
-
-        }
-
-        const sendResponseBackToClient = async ( {
-            response,
-        }: {
-            response: ServerResponse,
-        }, ) => {
-
-            return await sendResponse(
-                {
-                    apiGateway,
-                    connectionId,
+                    action,
+                    environment: config.environment,
                     logger,
                     redis,
+                    worldId,
+                },
+            );
+
+            const response = {
+                ...actionExecutionResult,
+                request: serverRequest,
+            };
+
+            await sendResponseBackToClient(
+                {
                     response,
                 },
             );
 
+            return generateRequestAcceptedResponse();
+
         };
 
-        const {
-            environment,
-        } = config;
 
-        if ( !supportedActions.includes(
-            action.type,
-        ) ) {
+        try {
 
-            return await handleUnsupportedAction(
+            return await tryCatch(
                 {
-                    action,
-                    environment,
-                    logger,
-                    redis,
-                    sendResponseBackToClient,
-                    serverRequest,
-                    worldId,
+                    execution,
+                    expectedErrorNames,
+                },
+            );
+
+        } catch ( error ) {
+
+            logger.error(
+                {
+                    error,
+                    message: error.message,
+                },
+            );
+
+            return generateRequestExecutionErrorResponse(
+                {
+                    reason: error.message,
                 },
             );
 
         }
 
-        if ( action.type === GET_CURRENT_STATE ) {
-
-            return await handleGetCurrentStateAction(
-                {
-                    action,
-                    connectionId,
-                    environment,
-                    logger,
-                    playerId,
-                    redis,
-                    sendResponseBackToClient,
-                    worldId,
-                },
-            );
-
-        }
-
-        const actionExecutionResult = await executeAction(
-            {
-                action,
-                environment: config.environment,
-                logger,
-                redis,
-                worldId,
-            },
-        );
-
-        const response = {
-            ...actionExecutionResult,
-            request: serverRequest,
-        };
-
-        await sendResponseBackToClient(
-            {
-                response,
-            },
-        );
-
-        return generateRequestAcceptedResponse();
-
-    } catch ( error ) {
-
-        logger.error(
-            error.stack,
-        );
-
-        return generateRequestExecutionErrorResponse(
-            {
-                reason: `unexpected error`,
-            },
-        );
-
-    }
-
-};
+    };

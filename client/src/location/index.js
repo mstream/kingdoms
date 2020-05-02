@@ -33,7 +33,9 @@ export const getIdTokenInfo = (
     if ( typeof token !== `string` ) {
 
         logger.info(
-            `No id token found in the location`,
+            {
+                message: `No id token found in the location`,
+            },
         );
 
         redirectToLoginPage(
@@ -49,8 +51,12 @@ export const getIdTokenInfo = (
     }
 
     logger.debug(
-        `Token extracted from the location: %s`,
-        token,
+        {
+            interpolationValues: [
+                token,
+            ],
+            message: `Token extracted from the location: %s`,
+        },
     );
 
     const userInfo = jwt.decode(
@@ -58,15 +64,21 @@ export const getIdTokenInfo = (
     );
 
     logger.debug(
-        `Decoded user info: %o`,
-        userInfo,
+        {
+            interpolationValues: [
+                userInfo,
+            ],
+            message: `Decoded user info: %o`,
+        },
     );
 
     if ( userInfo == null || userInfo[ `cognito:username` ] == null ) {
 
         logger.info(
-            `Cannot retrieve the username from the token. `
-            + `Redirecting to the login page...`,
+            {
+                message: `Cannot retrieve the username from the token. `
+                    + `Redirecting to the login page...`,
+            },
         );
 
         redirectToLoginPage(
@@ -104,8 +116,12 @@ export const getWorldId = (
     const locationHashState = locationHash[ `state` ];
 
     logger.debug(
-        `State extracted from the location: %s`,
-        locationHashState,
+        {
+            interpolationValues: [
+                locationHashState,
+            ],
+            message: `State extracted from the location: %s`,
+        },
     );
 
     const state = Array.isArray(
@@ -134,11 +150,14 @@ const createAuthPageUrl = (
     },
 ): string => {
 
-    console.log(
-        `redirecting to the authentication website`,
+    logger.info(
+        {
+            message: `redirecting to the authentication website`,
+        },
     );
 
     const redirectUri = window.location.origin;
+
     const state = getWorldId(
         {
             location,
@@ -146,9 +165,10 @@ const createAuthPageUrl = (
         },
     );
 
-    const stateStr = state == null
-        ? ``
-        : `&state=${ state }`;
+    const stateStr
+        = state == null
+            ? ``
+            : `&state=${ state }`;
 
     const baseUrl = `${ config.cognitoUrl }/${ action }`;
 

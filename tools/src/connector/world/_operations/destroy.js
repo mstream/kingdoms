@@ -18,21 +18,28 @@ import type {
 } from '../../../../../common/src/logging/types';
 
 
-export const destroy = async ( {
-    config,
-    exec,
-    id,
-    logger,
-}: {
-    config: Config,
-    exec: Exec,
-    id: string,
-    logger: Logger,
-}, ) => {
+export const destroy = async (
+    {
+        config,
+        exec,
+        id,
+        logger,
+    }: $ReadOnly< {|
+        config: Config,
+        exec: Exec,
+        id: string,
+        logger: Logger,
+    |} >,
+) => {
+
 
     logger.info(
-        `deleting a world with id '%s'`,
-        id,
+        {
+            interpolationValues: [
+                id,
+            ],
+            message: `deleting a world with id '%s'`,
+        },
     );
 
     const requestPayload = {

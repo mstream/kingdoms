@@ -16,9 +16,13 @@ export const add: DatabaseSetAdd< string, string > = async ( {
 }, ) => {
 
     logger.debug(
-        `adding value '%s' to a set associated with the '%s' key`,
-        value,
-        key,
+        {
+            interpolationValues: [
+                value,
+                key,
+            ],
+            message: `adding value '%s' to a set associated with the '%s' key`,
+        },
     );
 
     try {

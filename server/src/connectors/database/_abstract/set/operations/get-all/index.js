@@ -8,15 +8,21 @@ import type {
     DatabaseSetGetAll,
 } from './types';
 
-export const getAll: DatabaseSetGetAll< string, string > = async ( {
-    key,
-    logger,
-    redis,
-}, ) => {
+export const getAll: DatabaseSetGetAll< string, string > = async (
+    {
+        key,
+        logger,
+        redis,
+    },
+) => {
 
     logger.debug(
-        `getting all values from a set associated with the '%s' key`,
-        key,
+        {
+            interpolationValues: [
+                key,
+            ],
+            message: `getting all values from a set associated with the '%s' key`,
+        },
     );
 
     try {
@@ -26,9 +32,14 @@ export const getAll: DatabaseSetGetAll< string, string > = async ( {
         );
 
         logger.debug(
-            `retrived following values from a set associated with the '%s' key: %o`,
-            key,
-            values,
+            {
+                interpolationValues: [
+                    key,
+                    values,
+                ],
+                message: `retrieved following values `
+                    + ` from a set associated with the '%s' key: %o`,
+            },
         );
 
         return values;

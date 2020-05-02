@@ -18,6 +18,9 @@ import {
     generateRequestRejectionResponse,
 } from '../util';
 import {
+    tryCatch,
+} from '../../errors';
+import {
     validateEvent,
 } from './validation';
 import type {
@@ -37,108 +40,136 @@ const redis = createRedisClient(
     },
 );
 
-export const handler: ProxyHandler = async ( event, ) => {
+export const handler: ProxyHandler
+    = async ( event, ) => {
 
-    logger.debug(
-        `received event: %o`,
-        event,
-    );
+        const expectedErrorNames = [];
 
-    const bodyValidationResult = validateEvent(
-        {
-            event,
-        },
-    );
+        const execution = async () => {
 
-    if ( bodyValidationResult.errors.length > 0 ) {
-
-        const errorReason = `body validation error: ${ JSON.stringify(
-            bodyValidationResult.errors,
-        ) }`;
-
-        logger.warn(
-            errorReason,
-        );
-
-        return generateRequestRejectionResponse(
-            {
-                reason: errorReason,
-            },
-        );
-
-    }
-
-    const bodyValidationResultBody = bodyValidationResult.result;
-
-    if ( bodyValidationResultBody == null ) {
-
-        throw Error(
-            `missing body validation result`,
-        );
-
-    }
-
-    const {
-        environment,
-    } = config;
-
-    const {
-        state,
-        worldId,
-    } = bodyValidationResultBody;
-
-    try {
-
-        logger.info(
-            `resetting state for world '%s' in '%s' environment`,
-            worldId,
-            environment,
-        );
-
-        const addWorldPromise = database.worlds.add(
-            {
-                key: {
-                    environment,
+            logger.debug(
+                {
+                    interpolationValues: [
+                        event,
+                    ],
+                    message: `received event: %o`,
                 },
-                logger,
-                redis,
-                value: worldId,
-            },
-        );
+            );
 
-        const setStatePromise = database.stateByWorld.set(
-            {
-                key: {
-                    environment,
-                    worldId,
+            const bodyValidationResult = validateEvent(
+                {
+                    event,
                 },
-                logger,
-                redis,
-                value: state,
-            },
-        );
+            );
 
-        await Promise.all(
-            [
-                addWorldPromise,
-                setStatePromise,
-            ],
-        );
+            if ( bodyValidationResult.errors.length > 0 ) {
 
-        return generateRequestAcceptedResponse();
+                const errorReason = `body validation error: ${ JSON.stringify(
+                    bodyValidationResult.errors,
+                ) }`;
 
-    } catch ( error ) {
+                logger.warn(
+                    {
+                        message: errorReason,
+                    },
+                );
 
-        logger.error(
-            error.stack,
-        );
+                return generateRequestRejectionResponse(
+                    {
+                        reason: errorReason,
+                    },
+                );
 
-        return generateRequestExecutionErrorResponse(
-            {
-                reason: `unexpected error`,
-            },
-        );
+            }
 
-    }
+            const bodyValidationResultBody = bodyValidationResult.result;
 
-};
+            if ( bodyValidationResultBody == null ) {
+
+                throw Error(
+                    `missing body validation result`,
+                );
+
+            }
+
+            const {
+                environment,
+            } = config;
+
+            const {
+                state,
+                worldId,
+            } = bodyValidationResultBody;
+
+            logger.info(
+                {
+                    interpolationValues: [
+                        worldId,
+                        environment,
+                    ],
+                    message: `resetting state for world '%s' in '%s' environment`,
+                },
+            );
+
+            const addWorldPromise = database.worlds.add(
+                {
+                    key: {
+                        environment,
+                    },
+                    logger,
+                    redis,
+                    value: worldId,
+                },
+            );
+
+            const setStatePromise = database.stateByWorld.set(
+                {
+                    key: {
+                        environment,
+                        worldId,
+                    },
+                    logger,
+                    redis,
+                    value: state,
+                },
+            );
+
+            await Promise.all(
+                [
+                    addWorldPromise,
+                    setStatePromise,
+                ],
+            );
+
+            return generateRequestAcceptedResponse();
+
+        };
+
+
+        try {
+
+            return await tryCatch(
+                {
+                    execution,
+                    expectedErrorNames,
+                },
+            );
+
+        } catch ( error ) {
+
+            logger.error(
+                {
+                    error,
+                    message: error.message,
+                },
+            );
+
+            return generateRequestExecutionErrorResponse(
+                {
+                    reason: error.message,
+                },
+            );
+
+        }
+
+    };

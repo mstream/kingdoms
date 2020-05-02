@@ -93,7 +93,12 @@ const open = async ( {
     const url = `${ config.appUrl }/${ hashParams }`;
 
     logger.info(
-        `navigating to the app page using url: ${ url }`,
+        {
+            interpolationValues: [
+                url,
+            ],
+            message: `navigating to the app page using url: %s`,
+        },
     );
 
     await t.navigateTo(

@@ -27,8 +27,12 @@ export const deleteUsers = async ( {
 }, ) => {
 
     logger.info(
-        `deleting users in '%s' user pool`,
-        config.userPoolId,
+        {
+            interpolationValues: [
+                config.userPoolId,
+            ],
+            message: `deleting users in '%s' user pool`,
+        },
     );
 
     const deleteUserPromises = usernames.map(

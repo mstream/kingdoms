@@ -206,7 +206,9 @@ export const generateRequestRejectionResponse = (
 export const generateRequestExecutionErrorResponse = (
     {
         reason,
-    }: $ReadOnly< {| reason: string |} >,
+    }: $ReadOnly< {|
+        reason: string
+    |} >,
 ): APIGatewayProxyResult => {
 
     return {

@@ -85,7 +85,10 @@ export const handleUnsupportedAction = async (
     const errorReason = `unsupported request type: ${ action.type }`;
 
     logger.warn(
-        errorReason,
+        {
+            message:        errorReason,
+
+        },
     );
 
     return generateRequestRejectionResponse(

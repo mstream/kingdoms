@@ -37,8 +37,13 @@ export const createOnErrorHandler = (
         const errorMessage = error.message;
 
         logger.error(
-            `Websocket communication error: %s`,
-            errorMessage,
+            {
+                interpolationValues:
+                    [
+                        errorMessage,
+                    ],
+                message: `Websocket communication error: %s`,
+            },
         );
 
         store.dispatch(

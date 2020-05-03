@@ -33,6 +33,10 @@ nothing
 4. get state for the world ([db/state-by-world/get](#database))
 5. send it back to the player
 
+### update-redis-metrics
+1. get all worlds
+2. emit a metric with their count
+
 ### update-state
 1. get all worlds within the environment ([db/worlds/getAll](#database))
 2. for each world

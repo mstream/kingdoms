@@ -1,15 +1,15 @@
 // @flow
 
-export type ApiGatewayPromise = () => Promise< void >;
+import type {
+    AwsSdkResult,
+} from '../types';
 
 export type PostToConnectionArgs = [$ReadOnly< {|
     ConnectionId: string,
     Data: string
 |} >];
 
-export type PostToConnectionResult = $ReadOnly< {|
-    promise: ApiGatewayPromise,
-|} >;
+export type PostToConnectionResult = AwsSdkResult< void >
 
 type PostToConnection = ( ...PostToConnectionArgs ) => PostToConnectionResult;
 

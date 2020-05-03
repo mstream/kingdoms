@@ -3,17 +3,15 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 
 Parameters:
-    NetworkStackName:
-        Type: 'String'
-
-    PersistenceStackName:
-        Type: 'String'
-
     Environment:
         Type: 'String'
         AllowedValues:
             - 'dev'
             - 'prod'
+
+    LayerVersion:
+        Type: 'Number'
+        Default: 8
 
     LoggingLevel:
         Type: 'String'
@@ -22,22 +20,44 @@ Parameters:
         Type: 'Number'
         Default: 1
 
-    StageName:
+    NetworkStackName:
         Type: 'String'
-        Default: 'Stage'
-
-    WebContentTtl:
-        Type: 'Number'
 
     NodeRuntime:
         Type: 'String'
         Default: 'nodejs12.x'
 
-    LayerVersion:
+    PersistenceStackName:
+        Type: 'String'
+
+    StageName:
+        Type: 'String'
+        Default: 'Stage'
+
+    UpdateRedisMetricsRate:
+        Type: 'String'
+        Default: 'rate(5 minutes)'
+
+    UpdateStateRate:
+        Type: 'String'
+        Default: 'rate(1 minute)'
+
+    WebContentTtl:
         Type: 'Number'
-        Default: 8
+
 
 Resources:
+
+    AllowCloudWatchPutMetricDataPolicy:
+        Type: 'AWS::IAM::ManagedPolicy'
+        Properties:
+            PolicyDocument:
+                Version: 2012-10-17
+                Statement:
+                    -   Effect: 'Allow'
+                        Resource: '*'
+                        Action:
+                            - 'cloudwatch:PutMetricData'
 
     AllowWebsocketConnectionManagementPolicy:
         Type: 'AWS::IAM::ManagedPolicy'
@@ -60,7 +80,6 @@ Resources:
                         Resource: !Sub '${WorldStateUpdateQueue.Arn}'
                         Action:
                             - 'sqs:SendMessage'
-
 
     WorldStateUpdateQueue:
         Type: 'AWS::SQS::Queue'
@@ -270,7 +289,7 @@ Resources:
                 StateUpdateScheduledEvent:
                     Type: 'Schedule'
                     Properties:
-                        Schedule: 'rate(1 minute)'
+                        Schedule: !Sub '${UpdateStateRate}'
             Environment:
                 Variables:
                     API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
@@ -290,6 +309,48 @@ Resources:
         Type: 'AWS::Logs::LogGroup'
         Properties:
             LogGroupName: '/aws/lambda/UpdateStateFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
+
+    UpdateRedisMetricsFunction:
+        Type: 'AWS::Serverless::Function'
+        DependsOn: 'UpdateRedisMetricsFunctionLogGroup'
+        Properties:
+            FunctionName: 'UpdateRedisMetricsFunction'
+            CodeUri: 'src/handlers/update-redis-metrics/'
+            Handler: 'app.handler'
+            MemorySize: 256
+            Runtime: 'nodejs12.x'
+            Layers:
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
+            VpcConfig:
+                SecurityGroupIds:
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                SubnetIds:
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+            Events:
+                StateUpdateScheduledEvent:
+                    Type: 'Schedule'
+                    Properties:
+                        Schedule: !Sub '${UpdateRedisMetricsRate}'
+            Environment:
+                Variables:
+                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+            Policies:
+                - !Sub '${AllowCloudWatchPutMetricDataPolicy}'
+
+    UpdateRedisMetricsFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/UpdateRedisMetricsFunction'
             RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     DestroyWorldFunction:

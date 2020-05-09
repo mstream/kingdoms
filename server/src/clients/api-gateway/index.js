@@ -2,11 +2,12 @@
 
 import AWS from 'aws-sdk';
 import type {
-    ApiGateway, MockPostToConnection,
-} from './types';
-import type {
     Config,
 } from '../../config/types';
+import type {
+    MockPostToConnection,
+    WebSocketApiGateway,
+} from './types';
 
 // $FlowFixMe
 export const mockPostToConnection: MockPostToConnection = null;
@@ -17,12 +18,12 @@ export const createApiGatewayClient = (
     }: {
         config: Config,
     },
-): ApiGateway => {
+): WebSocketApiGateway => {
 
     return new AWS.ApiGatewayManagementApi(
         {
             apiVersion: `2018-11-29`,
-            endpoint  : config.apiGateway.endpoint,
+            endpoint  : config.webSocketApiGateway.endpoint,
         },
     );
 

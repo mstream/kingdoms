@@ -14,10 +14,17 @@ import type {
     ElementSelectors,
 } from './types';
 
-const app: ElementSelectors< $Keys< typeof testIds.app > >
+const mainPage: ElementSelectors< $Keys< typeof testIds.mainApp > >
     = generateSelectors(
         {
-            ids: testIds.app,
+            ids: testIds.mainApp,
+        },
+    );
+
+const worldPage: ElementSelectors< $Keys< typeof testIds.worldApp > >
+    = generateSelectors(
+        {
+            ids: testIds.worldApp,
         },
     );
 
@@ -114,7 +121,6 @@ const worldMap: ElementSelectors< $Keys< typeof testIds.worldMap > >
 
 
 export const selectors = {
-    app,
     attackView,
     auth,
     changeInfo,
@@ -124,6 +130,8 @@ export const selectors = {
     gameStart,
     image,
     loader,
+    mainPage,
     menu,
     worldMap,
+    worldPage,
 };

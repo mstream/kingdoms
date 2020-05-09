@@ -1,8 +1,8 @@
 // @flow
 
 import {
-    appModel,
-} from '../../../../../../../../../../models/app';
+    worldPageModel,
+} from '../../../../../../../../../../models/app/world-page';
 
 
 import {
@@ -26,7 +26,7 @@ export const execution: Execution
         },
     ) => {
 
-        await appModel.actions.openOverviewTab(
+        await worldPageModel.actions.openOverviewTab(
             {
                 t,
             },

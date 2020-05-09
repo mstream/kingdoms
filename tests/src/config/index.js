@@ -106,9 +106,14 @@ const createConfig: () => Config = () => {
                 name: `USER_POOL_ID`,
             },
         ),
+        version: getGlobalVariable(
+            {
+                name: `VERSION`,
+            },
+        ),
         webSocketUrl: getGlobalVariable(
             {
-                name: `WEB_SOCKET_URL`,
+                name: `WEB_SOCKET_API_URL`,
             },
         ),
     };

@@ -13,7 +13,7 @@ export const getPublicKey = async ( {
     keyId: string,
 }, ): Promise< ?string > => {
 
-    console.info(
+    console.debug(
         `retrieving a public key for the key with id ${ keyId }`,
     );
 

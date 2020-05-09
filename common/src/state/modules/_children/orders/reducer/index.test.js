@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 import {
     DUMMY,
-} from '../../../../../../../client/src/state/modules/actions/types';
+} from '../../../../../../../client/src/pages/world/state/modules/actions/types';
 import {
     EXECUTE_TIME_STEP,
 } from '../../time/actions';

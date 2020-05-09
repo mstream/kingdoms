@@ -22,7 +22,7 @@ import React, {
 } from 'react';
 import type {
     ClientStateTile,
-} from '../../state/modules/_children/tiles/reducer/types';
+} from '../../pages/world/state/modules/_children/tiles/reducer/types';
 import type {
     Geometry,
 } from '../../../../common/src/geometry';

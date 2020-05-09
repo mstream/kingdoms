@@ -79,7 +79,13 @@ export const validateServerRequestEvent: ProxyEventValidator< $ReadOnly< {|
             },
         );
 
-    if ( request == null || typeof request !== `object` ) {
+    if (
+        request == null
+        || typeof request !== `object`
+        || Array.isArray(
+            request,
+        )
+    ) {
 
         return {
             errors: [

@@ -12,7 +12,7 @@ import {
 } from '../../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
-} from '../../../../state/state';
+} from '../../../../pages/world/state/state';
 import {
     emptyCommonState,
 } from '../../../../../../common/src/state/modules/state';
@@ -26,10 +26,10 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../../../state/types';
+} from '../../../../pages/world/state/types';
 import type {
     ScheduledAttackOrderInfo,
-} from '../../../../state/modules/selectors/types';
+} from '../../../../pages/world/state/modules/selectors/types';
 
 const mockStore = configureStore(
     [],

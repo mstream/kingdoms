@@ -10,19 +10,19 @@ import {
 import {
     TAB_ORDERS,
     TAB_UNITS,
-} from '../../../state/modules/_children/menu/reducer/types';
+} from '../../../pages/world/state/modules/_children/menu/reducer/types';
 import {
     UNIT_PIKEMAN,
 } from '../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     clientActions,
-} from '../../../state/modules/actions';
+} from '../../../pages/world/state/modules/actions';
 import {
     emptyCityState,
 } from '../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
-} from '../../../state/state';
+} from '../../../pages/world/state/state';
 import {
     emptyCommonState,
 } from '../../../../../common/src/state/modules/state';
@@ -40,7 +40,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../../state/types';
+} from '../../../pages/world/state/types';
 
 const mockStore = configureStore(
     [],

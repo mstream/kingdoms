@@ -6,8 +6,8 @@ import {
 } from '../../../connectors/database';
 import {
     generateRequestAcceptedResponse,
+    generateRequestRejectionResponse,
 } from '../../util';
-import verror from 'verror';
 import type {
     CommonPlayerAction,
 } from '../../../../../common/src/state/types';
@@ -107,9 +107,9 @@ export const handleGetCurrentStateAction = async (
 
     if ( state == null ) {
 
-        throw new verror.VError(
+        return generateRequestRejectionResponse(
             {
-                name: `STATE_NOT_INITIALIZED`,
+                reason: `world does not exist`,
             },
         );
 
@@ -128,6 +128,10 @@ export const handleGetCurrentStateAction = async (
         },
     );
 
-    return generateRequestAcceptedResponse();
+    return generateRequestAcceptedResponse(
+        {
+            body: `Request accepted.`,
+        },
+    );
 
 };

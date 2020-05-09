@@ -8,10 +8,10 @@ import {
 } from './execution';
 import {
     scenarios as reSignInScenarios,
-} from './_children/re-sign-in';
+} from './_children/main-page-re-sign-in';
 import {
     scenarios as signInScenarios,
-} from './_children/sign-in';
+} from './_children/main-page-sign-in';
 import type {
     NewGameScenarioContext,
 } from './types';

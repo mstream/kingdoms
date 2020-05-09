@@ -12,7 +12,7 @@ import {
 } from '../../../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     emptyClientState,
-} from '../../../../state/state';
+} from '../../../../pages/world/state/state';
 import {
     emptyRegimentTemplateState,
 } from '../../../../../../common/src/state/modules/_children/orders/reducer/state';
@@ -23,7 +23,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../../../state/types';
+} from '../../../../pages/world/state/types';
 import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../common/src/state/modules/_children/orders/reducer/types';

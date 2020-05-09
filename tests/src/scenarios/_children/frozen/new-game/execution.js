@@ -2,9 +2,6 @@
 
 
 import {
-    appModel,
-} from '../../../../models/app';
-import {
     emptyCommonState,
 } from '../../../../../../common/src/state/modules/state';
 import {
@@ -13,6 +10,9 @@ import {
 import {
     tools,
 } from '../../../../tools';
+import {
+    worldPageModel,
+} from '../../../../models/app/world-page';
 import type {
     NewGameScenarioContext,
 } from './types';
@@ -47,7 +47,7 @@ export const execution: Execution
             },
         );
 
-        await appModel.actions.open(
+        await worldPageModel.actions.openWorldPage(
             {
                 logger,
                 t,

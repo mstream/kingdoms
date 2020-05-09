@@ -1,8 +1,8 @@
 // @flow
 
 import {
-    appModel,
-} from '../../../../../../../../../../models/app';
+    worldPageModel,
+} from '../../../../../../../../../../models/app/world-page';
 
 
 import {
@@ -31,7 +31,7 @@ export const execution: Execution
             cityName2,
         } = context;
 
-        await appModel.actions.navigateToNextCity(
+        await worldPageModel.actions.navigateToNextCity(
             {
                 t,
             },

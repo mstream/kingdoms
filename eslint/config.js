@@ -17,12 +17,14 @@ module.exports = {
         `plugin:testcafe/recommended`,
     ],
     globals: {
-        Atomics          : `readonly`,
-        CLIENT_ID        : `readonly`,
-        COGNITO_URL      : `readonly`,
-        LOGGING_LEVEL    : `readonly`,
-        SharedArrayBuffer: `readonly`,
-        WEB_SOCKET_URL   : `readonly`,
+        Atomics           : `readonly`,
+        CLIENT_ID         : `readonly`,
+        COGNITO_URL       : `readonly`,
+        HTTP_API_URL      : `readonly`,
+        LOGGING_LEVEL     : `readonly`,
+        SharedArrayBuffer : `readonly`,
+        VERSION           : `readonly`,
+        WEB_SOCKET_API_URL: `readonly`,
     },
     overrides: [
         {

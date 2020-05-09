@@ -32,7 +32,7 @@ import {
 } from '../../connectors/time';
 import {
     tryCatch,
-} from '../../errors';
+} from '../../../../common/src/errors';
 import type {
     Logger,
 } from '../../../../common/src/logging/types';

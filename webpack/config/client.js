@@ -68,16 +68,31 @@ const createClientConfig = (
         },
     );
 
-    const htmlIndexPlugin = new HtmlWebPackPlugin(
+    const htmlMainPageIndexPlugin = new HtmlWebPackPlugin(
         {
+            chunks: [
+                `main`,
+            ],
             favicon : `./client/src/assets/images/favicon.ico`,
             filename: `./index.html`,
             template: `./client/src/assets/html/index.html`,
         },
     );
 
-    const htmlErrorPlugin = new HtmlWebPackPlugin(
+    const htmlWorldPageIndexPlugin = new HtmlWebPackPlugin(
         {
+            chunks: [
+                `world`,
+            ],
+            favicon : `./client/src/assets/images/favicon.ico`,
+            filename: `./world.html`,
+            template: `./client/src/assets/html/index.html`,
+        },
+    );
+
+    const htmlErrorPagePlugin = new HtmlWebPackPlugin(
+        {
+            chunks  : [],
             favicon : `./client/src/assets/images/favicon.ico`,
             filename: `./error.html`,
             template: `./client/src/assets/html/error.html`,
@@ -116,7 +131,10 @@ const createClientConfig = (
     );
 
     return {
-        entry: `./client/src/index.js`,
+        entry: {
+            main : `./client/src/pages/main/index.js`,
+            world: `./client/src/pages/world/index.js`,
+        },
 
         mode,
 
@@ -165,8 +183,9 @@ const createClientConfig = (
             definePlugin,
             purgeCssPlugin,
             miniCssExtractPlugin,
-            htmlIndexPlugin,
-            htmlErrorPlugin,
+            htmlErrorPagePlugin,
+            htmlMainPageIndexPlugin,
+            htmlWorldPageIndexPlugin,
             minimizeFontsPlugin,
             circularDependencyPlugin,
         ],

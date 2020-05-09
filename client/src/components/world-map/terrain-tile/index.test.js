@@ -9,10 +9,10 @@ import {
 } from './index';
 import {
     emptyClientState,
-} from '../../../state/state';
+} from '../../../pages/world/state/state';
 import {
     emptyClientStateTerrainTile,
-} from '../../../state/modules/_children/tiles/reducer/state';
+} from '../../../pages/world/state/modules/_children/tiles/reducer/state';
 import {
     render,
 } from '@testing-library/react';
@@ -23,10 +23,10 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../../state/types';
+} from '../../../pages/world/state/types';
 import type {
     ClientStateTile,
-} from '../../../state/modules/_children/tiles/reducer/types';
+} from '../../../pages/world/state/modules/_children/tiles/reducer/types';
 
 const mockStore = configureStore(
     [],

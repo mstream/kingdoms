@@ -2,25 +2,25 @@
 
 import {
     TAB_ORDERS,
-} from '../../../state/modules/_children/menu/reducer/types';
+} from '../../../pages/world/state/modules/_children/menu/reducer/types';
 import {
     clientActions,
-} from '../../../state/modules/actions';
+} from '../../../pages/world/state/modules/actions';
 import {
     clientStateSelectors,
-} from '../../../state/modules/selectors';
+} from '../../../pages/world/state/modules/selectors';
 import {
     connect,
 } from 'react-redux';
 import type {
     ClientAction, ClientState,
-} from '../../../state/types';
+} from '../../../pages/world/state/types';
 import type {
     Dispatch,
 } from 'redux';
 import type {
     ScheduledAttackOrderInfosById,
-} from '../../../state/modules/selectors/types';
+} from '../../../pages/world/state/modules/selectors/types';
 
 type OwnProps = $ReadOnly< {||} >;
 

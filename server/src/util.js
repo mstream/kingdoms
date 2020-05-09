@@ -11,9 +11,6 @@ import {
 } from './connectors/api';
 import verror from 'verror';
 import type {
-    ApiGateway,
-} from './clients/api-gateway/types';
-import type {
     CommonAction,
 } from '../../common/src/state/types';
 import type {
@@ -31,6 +28,10 @@ import type {
 import type {
     ServerResponse,
 } from '../../common/src/types';
+import type {
+    WebSocketApiGateway,
+} from './clients/api-gateway/types';
+
 
 export const ERROR_ACTION_EXECUTION: 'ERROR_ACTION_EXECUTION'
     = `ERROR_ACTION_EXECUTION`;
@@ -45,23 +46,23 @@ const optimisticLockingAttempts = 3;
 
 export const sendResponse = async (
     {
-        apiGateway,
+        connectionId,
         logger,
         redis,
-        connectionId,
         response,
+        webSocketApiGateway,
     }: {
-        apiGateway: ApiGateway,
+        connectionId: string,
         logger: Logger,
         redis: Redis,
-        connectionId: string,
         response: ServerResponse,
+        webSocketApiGateway: WebSocketApiGateway,
     },
 ): Promise< void > => {
 
     try {
 
-        logger.info(
+        logger.debug(
             {
 
                 message: `sending response back to the api gateway`,
@@ -70,9 +71,9 @@ export const sendResponse = async (
 
         await sendServerResponse(
             {
-                apiGateway,
                 connectionId,
                 response,
+                webSocketApiGateway,
             },
         );
 
@@ -80,7 +81,7 @@ export const sendResponse = async (
 
         if ( error.statusCode === 410 ) {
 
-            logger.info(
+            logger.debug(
                 {
                     interpolationValues: [
                         connectionId,
@@ -158,7 +159,7 @@ export const executeAction = async (
 
         for ( let i = 0; i < optimisticLockingAttempts; i += 1 ) {
 
-            logger.info(
+            logger.debug(
                 {
                     interpolationValues: [
                         i + 1,
@@ -249,7 +250,7 @@ export const executeAction = async (
 
             }
 
-            logger.info(
+            logger.debug(
                 {
                     message: `concurrent state modification detected - retrying`,
                 },

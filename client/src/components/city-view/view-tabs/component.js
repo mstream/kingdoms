@@ -6,7 +6,7 @@ import {
     TAB_OVERVIEW,
     TAB_RESOURCES,
     TAB_UNITS,
-} from '../../../state/modules/_children/menu/reducer/types';
+} from '../../../pages/world/state/modules/_children/menu/reducer/types';
 import {
     testIds,
 } from '../../../../../common/src/ui';
@@ -14,7 +14,7 @@ import React from 'react';
 import classNames from 'classnames';
 import type {
     ClientStateCityViewTab,
-} from '../../../state/modules/_children/menu/reducer/types';
+} from '../../../pages/world/state/modules/_children/menu/reducer/types';
 import type {
     Props,
 } from './props';

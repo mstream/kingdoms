@@ -2,9 +2,6 @@
 
 
 import {
-    testIds as appTestIds,
-} from './app';
-import {
     testIds as attackViewTestIds,
 } from './attack-view';
 import {
@@ -29,14 +26,22 @@ import {
     testIds as loaderTestIds,
 } from './loader';
 import {
+    testIds as mainAppTestIds,
+} from './main-app';
+import {
     testIds as menuTestIds,
 } from './menu';
+import {
+    testIds as worldAppTestIds,
+} from './world-app';
+import {
+    testIds as worldListTestIds,
+} from './world-list';
 import {
     testIds as worldMapTestIds,
 } from './world-map';
 
 export const testIds = {
-    app       : appTestIds,
     attackView: attackViewTestIds,
     changeInfo: changeInfoTestIds,
     cityView  : cityViewTestIds,
@@ -45,6 +50,9 @@ export const testIds = {
     gameStart : gameStartTestIds,
     image     : imageTestIds,
     loader    : loaderTestIds,
+    mainApp   : mainAppTestIds,
     menu      : menuTestIds,
+    worldApp  : worldAppTestIds,
+    worldList  : worldListTestIds,
     worldMap  : worldMapTestIds,
 };

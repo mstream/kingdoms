@@ -5,9 +5,6 @@ import type {
 } from './types';
 
 export const emptyConfig: Config = {
-    apiGateway: {
-        endpoint: ``,
-    },
     cognito: {
         region    : ``,
         userPoolId: ``,
@@ -22,5 +19,8 @@ export const emptyConfig: Config = {
         queueUrls: {
             worldStateUpdate: ``,
         },
+    },
+    webSocketApiGateway: {
+        endpoint: ``,
     },
 };

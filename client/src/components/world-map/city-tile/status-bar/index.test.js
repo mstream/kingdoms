@@ -16,7 +16,7 @@ import {
 } from '../../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
-} from '../../../../state/state';
+} from '../../../../pages/world/state/state';
 import {
     render,
 } from '@testing-library/react';
@@ -24,7 +24,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../../../state/types';
+} from '../../../../pages/world/state/types';
 import type {
     CommonStateCity,
 } from '../../../../../../common/src/state/modules/_children/cities/reducer/types';

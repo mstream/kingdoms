@@ -43,8 +43,9 @@ module.exports = {
     'max-len': [
         `error`,
         {
-            code    : 90,
-            tabWidth: 4,
+            code         : 90,
+            ignorePattern: ` from '\\.\\./`,
+            tabWidth     : 4,
         },
     ],
     'max-lines': [

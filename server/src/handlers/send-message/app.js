@@ -43,7 +43,7 @@ import {
 
 import {
     errorCreators, tryCatch,
-} from '../../errors';
+} from '../../../../common/src/errors';
 import type {
     CommonActionKey,
 } from '../../../../common/src/state/types';
@@ -61,7 +61,7 @@ const logger = createLogger(
     },
 );
 
-const apiGateway = createApiGatewayClient(
+const webSocketApiGateway = createApiGatewayClient(
     {
         config,
     },
@@ -178,11 +178,11 @@ export const handler: ProxyHandler
 
                 return await sendResponse(
                     {
-                        apiGateway,
                         connectionId,
                         logger,
                         redis,
                         response,
+                        webSocketApiGateway,
                     },
                 );
 
@@ -248,7 +248,11 @@ export const handler: ProxyHandler
                 },
             );
 
-            return generateRequestAcceptedResponse();
+            return generateRequestAcceptedResponse(
+                {
+                    body: `Request accepted.`,
+                },
+            );
 
         };
 

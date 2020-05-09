@@ -12,11 +12,11 @@ import {
 } from '../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
-} from '../../state/state';
+} from '../../pages/world/state/state';
 import {
     emptyClientStateCityTile,
     emptyClientStateTerrainTile,
-} from '../../state/modules/_children/tiles/reducer/state';
+} from '../../pages/world/state/modules/_children/tiles/reducer/state';
 import {
     emptyCommonState,
 } from '../../../../common/src/state/modules/state';
@@ -30,7 +30,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../state/types';
+} from '../../pages/world/state/types';
 
 const mockStore = configureStore(
     [],

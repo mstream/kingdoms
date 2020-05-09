@@ -19,7 +19,7 @@ import {
 } from '../util';
 import {
     tryCatch,
-} from '../../errors';
+} from '../../../../common/src/errors';
 import {
     validateEvent,
 } from './validation';
@@ -101,7 +101,7 @@ export const handler: ProxyHandler
                 worldId,
             } = bodyValidationResultBody;
 
-            logger.info(
+            logger.debug(
                 {
                     interpolationValues: [
                         worldId,
@@ -141,7 +141,11 @@ export const handler: ProxyHandler
                 ],
             );
 
-            return generateRequestAcceptedResponse();
+            return generateRequestAcceptedResponse(
+                {
+                    body: `Request accepted.`,
+                },
+            );
 
         };
 

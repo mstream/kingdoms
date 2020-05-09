@@ -5,14 +5,14 @@ import type {
 } from '../types';
 
 export const stubConfig: Config = {
-    apiGateway: {
-        endpoint: `apiGatewayEndpoint1`,
-    },
     cognito: {
         region    : `cognitoRegion1`,
         userPoolId: `cognitoUserPool1`,
     },
-    environment : `env1`,
+    environment   : `env1`,
+    httpApiGateway: {
+        endpoint: `httpApiGatewayEndpoint1`,
+    },
     loggingLevel: `info`,
     redis       : {
         host: `redisHost1`,
@@ -22,6 +22,9 @@ export const stubConfig: Config = {
         queueUrls: {
             worldStateUpdate: `worldStateUpdateUrl1`,
         },
+    },
+    webSocketApiGateway: {
+        endpoint: `webSocketApiGatewayEndpoint1`,
     },
 };
 

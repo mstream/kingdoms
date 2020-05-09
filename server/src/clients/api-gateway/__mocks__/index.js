@@ -1,7 +1,8 @@
 // @flow
 
 import type {
-    ApiGateway, MockPostToConnection,
+    MockPostToConnection,
+    WebSocketApiGateway,
 } from '../types';
 
 export const mockPostToConnection: MockPostToConnection = jest.fn(
@@ -22,7 +23,7 @@ export const mockPostToConnection: MockPostToConnection = jest.fn(
     },
 );
 
-export const createApiGatewayClient: () => ApiGateway = () => {
+export const createApiGatewayClient: () => WebSocketApiGateway = () => {
 
     return {
         postToConnection: mockPostToConnection,

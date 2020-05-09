@@ -2,7 +2,7 @@
 
 import {
     ERROR_UNAUTHORIZED,
-} from '../../errors/types';
+} from '../../../../common/src/errors/types';
 import {
     buildUserProfile,
 } from '../../jwt';
@@ -17,7 +17,7 @@ import {
 } from '../../../../common/src/logging';
 import {
     errorCreators, tryCatch,
-} from '../../errors';
+} from '../../../../common/src/errors';
 import type {
     CustomAuthorizerHandler,
     CustomAuthorizerResult,

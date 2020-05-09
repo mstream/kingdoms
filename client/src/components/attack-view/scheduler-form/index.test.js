@@ -17,10 +17,10 @@ import configureStore from 'redux-mock-store';
 
 import {
     emptyClientState,
-} from '../../../state/state';
+} from '../../../pages/world/state/state';
 import type {
     ClientState,
-} from '../../../state/types';
+} from '../../../pages/world/state/types';
 
 const mockStore = configureStore(
     [],

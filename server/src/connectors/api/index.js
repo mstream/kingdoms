@@ -4,18 +4,19 @@ import {
     serializeJson,
 } from '../../../../common/src/json';
 import type {
-    ApiGateway,
-} from '../../clients/api-gateway/types';
-import type {
     ServerResponse,
 } from '../../../../common/src/types';
+import type {
+    WebSocketApiGateway,
+} from '../../clients/api-gateway/types';
+
 
 export const sendServerResponse = async ( {
-    apiGateway,
+    webSocketApiGateway,
     connectionId,
     response,
 }: {
-    apiGateway: ApiGateway,
+    webSocketApiGateway: WebSocketApiGateway,
     connectionId: string,
     response: ServerResponse,
 }, ): Promise< void > => {
@@ -34,7 +35,7 @@ export const sendServerResponse = async ( {
 
     }
 
-    return await apiGateway
+    return await webSocketApiGateway
         .postToConnection(
             {
                 ConnectionId: connectionId,

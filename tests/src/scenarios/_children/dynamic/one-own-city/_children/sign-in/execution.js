@@ -2,11 +2,11 @@
 
 
 import {
-    appModel,
-} from '../../../../../../models/app';
-import {
     authModel,
 } from '../../../../../../models/auth';
+import {
+    worldPageModel,
+} from '../../../../../../models/app/world-page';
 
 
 import type {
@@ -22,15 +22,21 @@ type Execution = ScenarioExecution< OneOwnCityScenarioContext,
 
 
 export const execution: Execution
-    = async ( {
-        context, logger, t,
-    }, ) => {
+    = async (
+        {
+            context,
+            logger,
+            t,
+        },
+    ) => {
 
         const {
-            password, username, worldId,
+            password,
+            username,
+            worldId,
         } = context;
 
-        await appModel.actions.open(
+        await worldPageModel.actions.openWorldPage(
             {
                 logger,
                 t,

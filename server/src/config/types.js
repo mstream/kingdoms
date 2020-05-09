@@ -1,7 +1,7 @@
 // @flow
 
 export type Config = {
-    apiGateway: {
+    webSocketApiGateway: {
         endpoint: string,
     },
     cognito: {

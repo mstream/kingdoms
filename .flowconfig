@@ -1,5 +1,6 @@
 [ignore]
 [untyped]
+.*/node_modules/graphql/error/.*
 [include]
 [libs]
 ./flow-defs
@@ -7,6 +8,7 @@
 [options]
 exact_by_default=false
 experimental.const_params=true
+esproposal.optional_chaining=enable
 include_warnings=true
 module.name_mapper.extension='bmp' -> '<PROJECT_ROOT>/flow-stubs/empty.js'
 traces=0

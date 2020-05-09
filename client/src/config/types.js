@@ -1,8 +1,10 @@
 // @flow
 
-export type Config = {
+export type Config = $ReadOnly< {|
     clientId: string,
     cognitoUrl: string,
+    httpApiUrl: string,
     loggingLevel: string,
-    wsUrl: string,
-};
+    version: string,
+    webSocketApiUrl: string,
+|} >;

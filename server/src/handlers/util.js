@@ -181,10 +181,16 @@ export const emptyContext: Context = {
     },
 };
 
-export const generateRequestAcceptedResponse = (): APIGatewayProxyResult => {
+export const generateRequestAcceptedResponse = (
+    {
+        body,
+    }: $ReadOnly< {|
+        body: string,
+    |} >,
+): APIGatewayProxyResult => {
 
     return {
-        body      : `Request accepted.`,
+        body,
         statusCode: 200,
     };
 

@@ -35,7 +35,7 @@ export const verifyToken = (
 
     try {
 
-        console.info(
+        console.debug(
             `verifying token using public key: ${ publicKey }`,
         );
 

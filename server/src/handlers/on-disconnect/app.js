@@ -8,7 +8,7 @@ import {
 } from '../../../../common/src/logging';
 import {
     tryCatch,
-} from '../../errors';
+} from '../../../../common/src/errors';
 import type {
     ProxyHandler,
 } from '../types';

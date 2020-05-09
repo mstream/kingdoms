@@ -42,6 +42,7 @@ const createServerConfig = (
         externals: [
             `axios`,
             `aws-sdk`,
+            `graphql`,
             `ioredis`,
             `pino`,
             `pino-pretty`,

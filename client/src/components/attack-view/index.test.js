@@ -18,13 +18,13 @@ import {
 } from '../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     clientActions,
-} from '../../state/modules/actions';
+} from '../../pages/world/state/modules/actions';
 import {
     emptyCityState,
 } from '../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
     emptyClientState,
-} from '../../state/state';
+} from '../../pages/world/state/state';
 import {
     emptyCommonState,
 } from '../../../../common/src/state/modules/state';
@@ -36,7 +36,7 @@ import {
 } from '../../../../common/src/ui';
 import type {
     ClientState,
-} from '../../state/types';
+} from '../../pages/world/state/types';
 
 const mockStore = configureStore(
     [],

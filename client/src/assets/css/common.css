@@ -1,0 +1,8 @@
+@import 'tailwindcss/tailwind';
+
+@import './_children/common/background.css';
+@import './_children/common/cursor.css';
+@import './_children/common/icofont.css';
+@import './_children/common/loader.css';
+@import './_children/common/nanum-gothic-cofing.css';
+@import './_children/common/spinner.css';

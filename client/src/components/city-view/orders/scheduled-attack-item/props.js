@@ -2,13 +2,13 @@
 
 import {
     clientStateSelectors,
-} from '../../../../state/modules/selectors';
+} from '../../../../pages/world/state/modules/selectors';
 import {
     connect,
 } from 'react-redux';
 import type {
     ClientAction, ClientState,
-} from '../../../../state/types';
+} from '../../../../pages/world/state/types';
 import type {
     CommonStateCities,
 } from '../../../../../../common/src/state/modules/_children/cities/reducer/types';
@@ -17,7 +17,7 @@ import type {
 } from 'redux';
 import type {
     ScheduledAttackOrderInfo,
-} from '../../../../state/modules/selectors/types';
+} from '../../../../pages/world/state/modules/selectors/types';
 
 type OwnProps = $ReadOnly< {|
     isActive: boolean,

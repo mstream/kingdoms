@@ -1,6 +1,7 @@
 // @flow
 
 import jwt from 'jsonwebtoken';
+import parseUrl from 'url-parse';
 import queryString from 'query-string';
 import type {
     Config,
@@ -156,7 +157,7 @@ const createAuthPageUrl = (
         },
     );
 
-    const redirectUri = window.location.origin;
+    const redirectUri = `${ location.origin }${ location.pathname }`;
 
     const state = getWorldId(
         {
@@ -234,3 +235,36 @@ export const redirectToLogoutPage = (
 
 };
 
+
+export const createWorldPageUrl = (
+    {
+        location,
+        worldId,
+    }: $ReadOnly< {|
+        location: Location,
+        worldId: string,
+    |} >,
+): string => {
+
+    const url = parseUrl(
+        location.href,
+        {
+        },
+    );
+    const {
+        hash, pathname,
+    } = url;
+
+    url.set(
+        `pathname`,
+        `${ pathname }world.html`,
+    );
+
+    url.set(
+        `hash`,
+        `${ hash }&state=${ worldId }`,
+    );
+
+    return url.toString();
+
+};

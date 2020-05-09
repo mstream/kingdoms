@@ -20,7 +20,7 @@ import {
 } from '../../connectors/database';
 import {
     tryCatch,
-} from '../../errors';
+} from '../../../../common/src/errors';
 import type {
     MetricDataItem,
 } from '../../clients/cloud-watch/types';

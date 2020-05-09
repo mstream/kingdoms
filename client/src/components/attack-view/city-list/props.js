@@ -2,10 +2,10 @@
 
 import {
     clientActions,
-} from '../../../state/modules/actions';
+} from '../../../pages/world/state/modules/actions';
 import {
     clientStateSelectors,
-} from '../../../state/modules/selectors';
+} from '../../../pages/world/state/modules/selectors';
 import {
     connect,
 } from 'react-redux';
@@ -13,8 +13,9 @@ import type {
     ActionCreatorsProps, StateToProps,
 } from '../../types';
 import type {
-    ClientAction, ClientState,
-} from '../../../state/types';
+    ClientAction,
+    ClientState,
+} from '../../../pages/world/state/types';
 import type {
     Dispatch,
 } from 'redux';
@@ -61,7 +62,7 @@ const mapStateToProps = (
 const actionCreators: DispatchProps = Object.freeze(
     {
         selectAttackViewAttackingCity:
-    clientActions.menu.selectAttackViewAttackingCity,
+        clientActions.menu.selectAttackViewAttackingCity,
     },
 );
 

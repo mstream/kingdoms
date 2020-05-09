@@ -2,7 +2,7 @@
 
 import stringify from 'json-stringify-deterministic';
 
-export type Json = $ReadOnly< { [string]: mixed } >;
+export type Json = $ReadOnly< { [string]: mixed } > | $ReadOnlyArray< mixed >;
 
 export const parseJson = (
     {

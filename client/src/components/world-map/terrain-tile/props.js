@@ -8,10 +8,10 @@ import type {
 } from '../../types';
 import type {
     ClientAction, ClientState,
-} from '../../../state/types';
+} from '../../../pages/world/state/types';
 import type {
     ClientStateTile,
-} from '../../../state/modules/_children/tiles/reducer/types';
+} from '../../../pages/world/state/modules/_children/tiles/reducer/types';
 import type {
     Dispatch,
 } from 'redux';

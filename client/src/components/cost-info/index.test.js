@@ -13,7 +13,7 @@ import {
 } from '../../../../common/src/state/modules/_children/rules/reducer/types';
 import {
     emptyClientState,
-} from '../../state/state';
+} from '../../pages/world/state/state';
 import {
     emptyResourcesState,
 } from '../../../../common/src/state/modules/_children/rules/reducer/state';
@@ -24,7 +24,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../state/types';
+} from '../../pages/world/state/types';
 import type {
     CommonStateResources,
 } from '../../../../common/src/state/modules/_children/rules/reducer/types';

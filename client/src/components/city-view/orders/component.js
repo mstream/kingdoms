@@ -16,7 +16,7 @@ import type {
 } from './props';
 import type {
     ScheduledAttackOrderInfo,
-} from '../../../state/modules/selectors/types';
+} from '../../../pages/world/state/modules/selectors/types';
 
 export const Component = (
     {

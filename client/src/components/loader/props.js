@@ -2,7 +2,7 @@
 
 import {
     clientStateSelectors,
-} from '../../state/modules/selectors';
+} from '../../pages/world/state/modules/selectors';
 import {
     connect,
 } from 'react-redux';
@@ -11,7 +11,7 @@ import type {
 } from '../types';
 import type {
     ClientAction, ClientState,
-} from '../../state/types';
+} from '../../pages/world/state/types';
 import type {
     Dispatch,
 } from 'redux';

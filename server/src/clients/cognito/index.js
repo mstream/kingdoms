@@ -42,7 +42,7 @@ export const createCognitoClient = (
             response.data,
         );
 
-        logger.info(
+        logger.debug(
             {
                 interpolationValues: [
                     serializedKeyset,

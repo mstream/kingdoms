@@ -9,5 +9,6 @@ export type Config = $ReadOnly< {|
     region: string,
     resetStateFunctionName: string,
     userPoolId: string,
+    version: string,
     webSocketUrl: string,
 |} >;

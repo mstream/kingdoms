@@ -5,9 +5,6 @@ import {
     PLAYER_STATUS_PLAYING,
 } from '../../../../../../common/src/state/modules/_children/players/reducer/types';
 import {
-    appModel,
-} from '../../../../models/app';
-import {
     emptyCityState,
 } from '../../../../../../common/src/state/modules/_children/cities/reducer/state';
 import {
@@ -21,6 +18,9 @@ import {
 import {
     tools,
 } from '../../../../tools';
+import {
+    worldPageModel,
+} from '../../../../models/app/world-page';
 
 import type {
     ScenarioContext, ScenarioExecution,
@@ -94,7 +94,7 @@ export const execution: Execution
             },
         );
 
-        await appModel.actions.open(
+        await worldPageModel.actions.openWorldPage(
             {
                 logger,
                 t,

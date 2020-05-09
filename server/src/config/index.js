@@ -17,13 +17,6 @@ export const stubConfig = {
 export const createConfig = (): Config => {
 
     return {
-        apiGateway: {
-            endpoint: getEnvironmentalVariable(
-                {
-                    name: `API_GATEWAY_ENDPOINT`,
-                },
-            ),
-        },
         cognito: {
             region: getEnvironmentalVariable(
                 {
@@ -68,6 +61,13 @@ export const createConfig = (): Config => {
                     },
                 ),
             },
+        },
+        webSocketApiGateway: {
+            endpoint: getEnvironmentalVariable(
+                {
+                    name: `WEBSOCKET_API_GATEWAY_ENDPOINT`,
+                },
+            ),
         },
     };
 

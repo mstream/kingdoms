@@ -11,7 +11,7 @@ Parameters:
 
     LayerVersion:
         Type: 'Number'
-        Default: 8
+        Default: 9
 
     LoggingLevel:
         Type: 'String'
@@ -30,7 +30,7 @@ Parameters:
     PersistenceStackName:
         Type: 'String'
 
-    StageName:
+    DefaultStageName:
         Type: 'String'
         Default: 'Stage'
 
@@ -66,7 +66,7 @@ Resources:
                 Version: 2012-10-17
                 Statement:
                     -   Effect: Allow
-                        Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/*'
+                        Resource: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocketApi}/*'
                         Action:
                             - 'execute-api:ManageConnections'
 
@@ -102,7 +102,7 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -143,7 +143,7 @@ Resources:
                         BatchSize: 1
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -160,6 +160,41 @@ Resources:
         Type: 'AWS::Logs::LogGroup'
         Properties:
             LogGroupName: '/aws/lambda/BroadcastStateFunction'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
+
+    QueryApiFunction:
+        Type: 'AWS::Serverless::Function'
+        DependsOn: 'QueryApiFunctionLogGroup'
+        Properties:
+            FunctionName: 'QueryApiFunction'
+            CodeUri: 'src/handlers/query-api/'
+            Handler: 'app.handler'
+            MemorySize: 256
+            Runtime: 'nodejs12.x'
+            Layers:
+                - !Sub 'arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:common:${LayerVersion}'
+            VpcConfig:
+                SecurityGroupIds:
+                    -   Fn::ImportValue: !Sub '${PersistenceStackName}-RedisClientSecurityGroupId'
+                SubnetIds:
+                    -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
+            Environment:
+                Variables:
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
+                    COGNITO_REGION: !Sub '${AWS::Region}'
+                    COGNITO_USER_POOL_ID: !Sub '${UserPool}'
+                    ENVIRONMENT: !Sub '${Environment}'
+                    LOGGING_LEVEL: !Sub '${LoggingLevel}'
+                    REDIS_HOST:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisHost'
+                    REDIS_PORT:
+                        Fn::ImportValue: !Sub '${PersistenceStackName}-RedisPort'
+                    WORLD_STATE_UPDATE_QUEUE_URL: !Sub '${WorldStateUpdateQueue}'
+
+    QueryApiFunctionLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/QueryApiFunction'
             RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     OnConnectFunction:
@@ -180,7 +215,7 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -215,7 +250,7 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -250,7 +285,7 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -292,7 +327,7 @@ Resources:
                         Schedule: !Sub '${UpdateStateRate}'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -334,7 +369,7 @@ Resources:
                         Schedule: !Sub '${UpdateRedisMetricsRate}'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -371,7 +406,7 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -406,7 +441,7 @@ Resources:
                     -   Fn::ImportValue: !Sub '${NetworkStackName}-PrivateSubnet'
             Environment:
                 Variables:
-                    API_GATEWAY_ENDPOINT: !Sub '${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${StageName}'
+                    WEBSOCKET_API_GATEWAY_ENDPOINT: !Sub '${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${DefaultStageName}'
                     COGNITO_REGION: !Sub '${AWS::Region}'
                     COGNITO_USER_POOL_ID: !Sub '${UserPool}'
                     ENVIRONMENT: !Sub '${Environment}'
@@ -423,18 +458,28 @@ Resources:
             LogGroupName: '/aws/lambda/ResetStateFunction'
             RetentionInDays: !Sub '${LogsRetentionInDays}'
 
-    WebSocket:
+    HttpApi:
         Type: 'AWS::ApiGatewayV2::Api'
         Properties:
-            Name: 'WebSocket'
+            Name: 'HttpApi'
+            ProtocolType: 'HTTP'
+            CorsConfiguration:
+                AllowOrigins:
+                    - !Sub 'https://${WebsiteDistribution.DomainName}'
+                    - !Sub 'http://localhost:8080'
+
+    WebSocketApi:
+        Type: 'AWS::ApiGatewayV2::Api'
+        Properties:
+            Name: 'WebSocketApi'
             ProtocolType: 'WEBSOCKET'
             RouteSelectionExpression: '$request.body.message'
 
-    WebSocketAuthorizer:
+    WebSocketApiAuthorizer:
         Type: 'AWS::ApiGatewayV2::Authorizer'
         Properties:
             Name: !Sub '${AWS::StackName}'
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
             AuthorizerType: 'REQUEST'
             AuthorizerUri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${AuthenticateFunction.Arn}/invocations'
             IdentitySource:
@@ -443,17 +488,17 @@ Resources:
     AuthenticatePermission:
         Type: 'AWS::Lambda::Permission'
         DependsOn:
-            - 'WebSocket'
+            - 'WebSocketApi'
         Properties:
             Action: 'lambda:InvokeFunction'
             FunctionName: !Sub '${AuthenticateFunction}'
             Principal: 'apigateway.amazonaws.com'
-            SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocket}/authorizers/${WebSocketAuthorizer}'
+            SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${WebSocketApi}/authorizers/${WebSocketApiAuthorizer}'
 
     OnConnectPermission:
         Type: 'AWS::Lambda::Permission'
         DependsOn:
-            - 'WebSocket'
+            - 'WebSocketApi'
         Properties:
             Action: 'lambda:InvokeFunction'
             FunctionName: !Sub '${OnConnectFunction}'
@@ -462,7 +507,7 @@ Resources:
     OnDisconnectPermission:
         Type: 'AWS::Lambda::Permission'
         DependsOn:
-            - 'WebSocket'
+            - 'WebSocketApi'
         Properties:
             Action: 'lambda:InvokeFunction'
             FunctionName: !Sub '${OnDisconnectFunction}'
@@ -471,16 +516,35 @@ Resources:
     SendMessagePermission:
         Type: 'AWS::Lambda::Permission'
         DependsOn:
-            - 'WebSocket'
+            - 'WebSocketApi'
         Properties:
             Action: 'lambda:InvokeFunction'
             FunctionName: !Sub '${SendMessageFunction}'
             Principal: 'apigateway.amazonaws.com'
 
+    QueryApiPermission:
+        Type: 'AWS::Lambda::Permission'
+        DependsOn:
+            - 'HttpApi'
+        Properties:
+            Action: 'lambda:InvokeFunction'
+            FunctionName: !Sub '${QueryApiFunction}'
+            Principal: 'apigateway.amazonaws.com'
+
+    QueryApiIntegration:
+        Type: 'AWS::ApiGatewayV2::Integration'
+        Properties:
+            ApiId: !Sub '${HttpApi}'
+            Description: 'Query API Integration'
+            IntegrationType: 'AWS_PROXY'
+            IntegrationUri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${QueryApiFunction.Arn}/invocations'
+            PayloadFormatVersion: '2.0'
+
+
     ConnectIntegration:
         Type: 'AWS::ApiGatewayV2::Integration'
         Properties:
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
             Description: 'Connect Integration'
             IntegrationType: 'AWS_PROXY'
             IntegrationUri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${OnConnectFunction.Arn}/invocations'
@@ -488,7 +552,7 @@ Resources:
     DisconnectIntegration:
         Type: 'AWS::ApiGatewayV2::Integration'
         Properties:
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
             Description: 'Disconnect Integration'
             IntegrationType: 'AWS_PROXY'
             IntegrationUri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${OnDisconnectFunction.Arn}/invocations'
@@ -496,7 +560,7 @@ Resources:
     SendIntegration:
         Type: 'AWS::ApiGatewayV2::Integration'
         Properties:
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
             Description: 'Send Integration'
             IntegrationType: 'AWS_PROXY'
             IntegrationUri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${SendMessageFunction.Arn}/invocations'
@@ -504,17 +568,17 @@ Resources:
     ConnectRoute:
         Type: 'AWS::ApiGatewayV2::Route'
         Properties:
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
             RouteKey: '$connect'
             AuthorizationType: 'CUSTOM'
-            AuthorizerId: !Sub '${WebSocketAuthorizer}'
+            AuthorizerId: !Sub '${WebSocketApiAuthorizer}'
             OperationName: 'ConnectRoute'
             Target: !Sub 'integrations/${ConnectIntegration}'
 
     DisconnectRoute:
         Type: 'AWS::ApiGatewayV2::Route'
         Properties:
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
             RouteKey: '$disconnect'
             AuthorizationType: 'NONE'
             OperationName: 'DisconnectRoute'
@@ -523,28 +587,62 @@ Resources:
     SendRoute:
         Type: 'AWS::ApiGatewayV2::Route'
         Properties:
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
             RouteKey: 'sendmessage'
             AuthorizationType: 'NONE'
             OperationName: 'SendRoute'
             Target: !Sub 'integrations/${SendIntegration}'
 
-    Deployment:
+    GraphqlRoute:
+        Type: 'AWS::ApiGatewayV2::Route'
+        Properties:
+            ApiId: !Sub '${HttpApi}'
+            RouteKey: 'GET /api/graphql'
+            AuthorizationType: 'NONE'
+            Target: !Sub 'integrations/${QueryApiIntegration}'
+
+    WebSocketApiDeployment:
         Type: 'AWS::ApiGatewayV2::Deployment'
         DependsOn:
             - 'ConnectRoute'
             - 'DisconnectRoute'
             - 'SendRoute'
         Properties:
-            ApiId: !Sub '${WebSocket}'
+            ApiId: !Sub '${WebSocketApi}'
 
-    Stage:
+    HttpApiDeployment:
+        Type: 'AWS::ApiGatewayV2::Deployment'
+        DependsOn:
+            - 'GraphqlRoute'
+        Properties:
+            ApiId: !Sub '${HttpApi}'
+
+    WebSocketApiStage:
         Type: 'AWS::ApiGatewayV2::Stage'
         Properties:
-            StageName: !Sub '${StageName}'
+            StageName: !Sub '${DefaultStageName}'
             Description: 'Default stage'
-            DeploymentId: !Sub '${Deployment}'
-            ApiId: !Sub '${WebSocket}'
+            DeploymentId: !Sub '${WebSocketApiDeployment}'
+            ApiId: !Sub '${WebSocketApi}'
+
+    HttpApiStage:
+        Type: 'AWS::ApiGatewayV2::Stage'
+        Properties:
+            AccessLogSettings:
+                DestinationArn: !Sub '${HttpApiStageLogGroup.Arn}'
+                Format: '$context.requestId
+                $context.httpMethod $context.path
+                $context.status $context.error.message'
+            StageName: !Sub '${DefaultStageName}'
+            Description: 'Default stage'
+            DeploymentId: !Sub '${HttpApiDeployment}'
+            ApiId: !Sub '${HttpApi}'
+
+    HttpApiStageLogGroup:
+        Type: 'AWS::Logs::LogGroup'
+        Properties:
+            LogGroupName: '/aws/lambda/HttpApi'
+            RetentionInDays: !Sub '${LogsRetentionInDays}'
 
     WebsiteBucket:
         Type: 'AWS::S3::Bucket'
@@ -609,9 +707,11 @@ Resources:
                 - 'email'
             CallbackURLs:
                 - !Sub 'https://${WebsiteDistribution.DomainName}'
+                - !Sub 'https://${WebsiteDistribution.DomainName}/world.html'
                 - 'http://localhost:8080'
             LogoutURLs:
                 - !Sub 'https://${WebsiteDistribution.DomainName}'
+                - !Sub 'https://${WebsiteDistribution.DomainName}/world.html'
                 - 'http://localhost:8080'
             DefaultRedirectURI: !Sub 'https://${WebsiteDistribution.DomainName}'
 
@@ -622,9 +722,13 @@ Resources:
             Domain: !Sub '${Environment}-kingdoms'
 
 Outputs:
-    WebSocketUrl:
+    HttpApiUrl:
+        Description: 'The HTTP Protocol URL'
+        Value: !Sub 'https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/${HttpApiStage}'
+
+    WebSocketApiUrl:
         Description: 'The WSS Protocol URL'
-        Value: !Sub 'wss://${WebSocket}.execute-api.${AWS::Region}.amazonaws.com/${Stage}'
+        Value: !Sub 'wss://${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/${WebSocketApiStage}'
 
     WebsiteUrl:
         Description: 'The website URL'

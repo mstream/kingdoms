@@ -1,8 +1,8 @@
 // @flow
 
 import {
-    appModel,
-} from '../../../../../../../../models/app';
+    worldPageModel,
+} from '../../../../../../../../models/app/world-page';
 
 
 import {
@@ -32,7 +32,7 @@ export const execution: Execution
             cityName1,
         } = context;
 
-        await appModel.actions.openCityView(
+        await worldPageModel.actions.openCityView(
             {
                 name: cityName1,
                 t,

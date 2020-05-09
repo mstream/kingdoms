@@ -9,10 +9,10 @@ import {
 } from 'react-redux';
 import {
     TAB_OVERVIEW,
-} from '../../../state/modules/_children/menu/reducer/types';
+} from '../../../pages/world/state/modules/_children/menu/reducer/types';
 import {
     emptyClientState,
-} from '../../../state/state';
+} from '../../../pages/world/state/state';
 import {
     render,
 } from '@testing-library/react';
@@ -20,7 +20,7 @@ import React from 'react';
 import configureStore from 'redux-mock-store';
 import type {
     ClientState,
-} from '../../../state/types';
+} from '../../../pages/world/state/types';
 
 const mockStore = configureStore(
     [],

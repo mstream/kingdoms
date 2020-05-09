@@ -5,7 +5,7 @@ import {
 } from 'react-redux';
 import type {
     ClientAction, ClientState,
-} from '../../../../state/types';
+} from '../../../../pages/world/state/types';
 import type {
     CommonStateRegimentTemplate,
 } from '../../../../../../common/src/state/modules/_children/orders/reducer/types';

@@ -2,10 +2,10 @@
 
 import {
     clientActions,
-} from '../../../state/modules/actions';
+} from '../../../pages/world/state/modules/actions';
 import {
     clientStateSelectors,
-} from '../../../state/modules/selectors';
+} from '../../../pages/world/state/modules/selectors';
 import {
     connect,
 } from 'react-redux';
@@ -14,10 +14,10 @@ import type {
 } from '../../types';
 import type {
     ClientAction, ClientState,
-} from '../../../state/types';
+} from '../../../pages/world/state/types';
 import type {
     ClientStateTile,
-} from '../../../state/modules/_children/tiles/reducer/types';
+} from '../../../pages/world/state/modules/_children/tiles/reducer/types';
 import type {
     CommonStateCity,
 } from '../../../../../common/src/state/modules/_children/cities/reducer/types';

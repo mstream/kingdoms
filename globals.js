@@ -1,3 +1,7 @@
+const GitRevisionPlugin = require(
+    `git-revision-webpack-plugin`,
+);
+
 const createVariables = (
     {
         exportedVariables,
@@ -46,6 +50,11 @@ const createVariables = (
                 name: `DestroyWorldFunctionId`,
             },
         ),
+        HTTP_API_URL: getVariable(
+            {
+                name: `HttpApiUrl`,
+            },
+        ),
         LOGGING_LEVEL: loggingLevel,
         REGION       : getVariable(
             {
@@ -62,9 +71,13 @@ const createVariables = (
                 name: `UserPoolId`,
             },
         ),
-        WEB_SOCKET_URL: getVariable(
+        VERSION: JSON.stringify(
+            new GitRevisionPlugin()
+                .version(),
+        ),
+        WEB_SOCKET_API_URL: getVariable(
             {
-                name: `WebSocketUrl`,
+                name: `WebSocketApiUrl`,
             },
         ),
     };
@@ -80,7 +93,7 @@ const createDevVariables = () => {
     return createVariables(
         {
             exportedVariables,
-            loggingLevel: `warn`,
+            loggingLevel: `info`,
         },
     );
 

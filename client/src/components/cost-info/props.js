@@ -8,7 +8,7 @@ import type {
 } from '../types';
 import type {
     ClientAction, ClientState,
-} from '../../state/types';
+} from '../../pages/world/state/types';
 import type {
     CommonStateResources,
 } from '../../../../common/src/state/modules/_children/rules/reducer/types';

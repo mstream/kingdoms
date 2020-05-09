@@ -21,7 +21,7 @@ import {
 
 import {
     errorCreators, tryCatch,
-} from '../../errors';
+} from '../../../../common/src/errors';
 import {
     executeTimeStep,
 } from '../../../../common/src/state/modules/_children/cities/actions';
@@ -49,7 +49,7 @@ const logger = createLogger(
         config,
     },
 );
-const apiGateway = createApiGatewayClient(
+const webSocketApiGateway = createApiGatewayClient(
     {
         config,
     },
@@ -79,11 +79,11 @@ const sendStateUpdate = async (
 
         return sendResponse(
             {
-                apiGateway,
                 connectionId,
                 logger,
                 redis,
                 response,
+                webSocketApiGateway,
             },
         );
 

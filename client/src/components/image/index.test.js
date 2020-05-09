@@ -9,7 +9,7 @@ import {
 } from 'react-redux';
 import {
     emptyClientState,
-} from '../../state/state';
+} from '../../pages/world/state/state';
 import {
     render,
 } from '@testing-library/react';

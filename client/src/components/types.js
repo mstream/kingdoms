@@ -2,7 +2,7 @@
 
 import type {
     ClientState,
-} from '../state/types';
+} from '../pages/world/state/types';
 
 type ExtractReturn<F> = $Call< <T>( ( ...Iterable< ClientState > ) => T ) => T, F >;
 type ExtractReturnWithDispatch = <A>(

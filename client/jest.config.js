@@ -36,9 +36,11 @@ module.exports = {
     clearMocks     : true,
     collectCoverage: true,
     globals        : {
-        CLIENT_ID     : `CLIENT_ID`,
-        COGNITO_URL   : `COGNITO_URL`,
-        WEB_SOCKET_URL: `WEB_SOCKET_URL`,
+        CLIENT_ID         : `CLIENT_ID`,
+        COGNITO_URL       : `COGNITO_URL`,
+        HTTP_API_URL      : `HTTP_API_URL`,
+        VERSION           : `WEB_SOCKET_API_URL`,
+        WEB_SOCKET_API_URL: `WEB_SOCKET_API_URL`,
     },
     moduleNameMapper: {
         [ fileMockRegex ] : `<rootDir>/__mocks__/file-mock.js`,

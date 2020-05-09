@@ -2,8 +2,8 @@
 
 
 import {
-    appModel,
-} from '../../../../../../models/app';
+    worldPageModel,
+} from '../../../../../../models/app/world-page';
 
 
 import {
@@ -34,7 +34,7 @@ export const execution: Execution
             worldId,
         } = context;
 
-        await appModel.actions.open(
+        await worldPageModel.actions.openWorldPage(
             {
                 logger,
                 t,
